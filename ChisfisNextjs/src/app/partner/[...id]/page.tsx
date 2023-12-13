@@ -25,8 +25,31 @@ import dryerIcon from "@/images/dryer-icon.svg";
 import cameraIcon from "@/images/camera-icon.svg";
 import bicycleIcon from "@/images/bicycle-icon.svg";
 import HotelNearByList from "@/components/Partner/HotelNearByList";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from "@/utils/localStorageUtil";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { FcApproval } from "react-icons/fc";
+import { RxCross2 } from "react-icons/rx"
+import { useEffect, useState } from "react";
 
 const page = () => {
+
+  const pathname = usePathname()
+  setLocalStorageItem("currentPath", pathname)
+ 
+  const [showGreeting, setShowGreeting] = useState(getLocalStorageItem('showGreeting'));
+
+  useEffect(() => {
+    setShowGreeting(getLocalStorageItem('showGreeting'));
+  }, []);
+
+  const handleClick = () => {
+    removeLocalStorageItem('showGreeting');
+    setShowGreeting(null);
+  };
+
+
   const defaultProps = {
     center: {
       lat: 51.509865,
@@ -39,9 +62,31 @@ const page = () => {
     <div className="partner-details-page">
       <div className="btn-back">
         <div className="lg:container">
+          <Link href={'/partner'}>
           <button type="button">Back</button>
+          </Link>
         </div>
       </div>
+
+    { showGreeting && <>
+
+      <div className="flex w-4/5 p-4 mx-auto border rounded-xl border-[#008d00] bg-[#e9f8e9] mt-6">
+        <div className="w-8 mr-1"> <FcApproval className="h-8 w-8"/> </div>
+        <div>
+          <h2 className="font-medium">Successfully sent a proposal to Ghazal!!</h2>
+          <p className="text-sm text-[#5f6d7e] mt-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lobortis enim consectetur eu suspendisse. Malesuada ac libero odio nulla ut turpis ut scelerisque sed. Imperdiet commodo integer pellentesdsadasdasdasque quis id.</p>
+
+          <Link href={'/partner'}> 
+           <div  className="flex">
+            <button className="font-medium mt-3 cursor-pointer">Manage Listing</button> 
+           <AiOutlineArrowRight className="mt-4 ml-2 font-bold"/>                          
+          </div>
+          </Link>   
+        </div>
+        <div onClick={handleClick} className="w-4 cursor-pointer"> <RxCross2/> </div>
+      </div>
+    </>
+     }
 
       <div className="main-wrapper">
         <div className="partner-content">
@@ -207,9 +252,11 @@ const page = () => {
                   <button type="button" className="btn-message">
                     Send Message
                   </button>
+                  <Link href={'/add-partner/1'}>
                   <button type="button" className="btn-proposal">
                     Send Proposal
                   </button>
+                  </Link>
                 </div>
                 <p className="message">You won’t be charged yet</p>
               </div>

@@ -1,8 +1,11 @@
-import React from "react";
+'use client'
+
+import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import { Route } from "@/routers/types";
+import { getLocalStorageItem, setLocalStorageItem } from "@/utils/localStorageUtil";
 
 export interface CommonLayoutProps {
   children: React.ReactNode;
@@ -12,13 +15,30 @@ export interface CommonLayoutProps {
 }
 
 const CommonLayout: FC<CommonLayoutProps> = ({ children, params }) => {
+  const [nextHref, setNextHref] = useState<Route | any>(null);
   const index = Number(params.stepIndex) || 1;
+
+  const handleClick = () => {
+    if(index == 10){
+    setLocalStorageItem('showGreeting', 'greeting')    
+    }
+   }
+  
+useEffect(() => {
+  const prevUrl = getLocalStorageItem("currentPath");
+
   const nextHref = (
-    index < 10 ? `/add-partner/${index + 1}` : `/partner-details`
+    index < 10 ? `/add-partner/${index + 1}` : prevUrl
   ) as Route;
+  setNextHref(nextHref);
+
+}, []);
+
+
   const backHref = (
     index > 1 ? `/add-partner/${index - 1}` : `/add-partner/${1}`
   ) as Route;
+  
   const nextBtnText = index > 9 ? "Submit Proposal" : "Next";
   return (
     <div
@@ -31,7 +51,7 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children, params }) => {
         {/* --------------------- */}
         <div className="flex justify-between space-x-5">
           <ButtonSecondary href={backHref}> back</ButtonSecondary>
-          <ButtonPrimary href={nextHref}>
+          <ButtonPrimary onClick={handleClick} href={nextHref}>
             {nextBtnText || "Next"}
           </ButtonPrimary>
         </div>
