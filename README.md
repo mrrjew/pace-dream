@@ -6,9 +6,7 @@ This is a hotel booking website that allows our potential users to book hotels, 
 
 
 
-## Demo
-
-[Deployed Site](https://olaven-frontend.vercel.app/)
+#
 
 
 ## Tech Stack
