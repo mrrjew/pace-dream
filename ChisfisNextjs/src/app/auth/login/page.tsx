@@ -1,8 +1,8 @@
 'use client';
 import React, { FC, useState } from 'react';
 import facebookSvg from '@/images/Facebook.svg';
-import twitterSvg from '@/images/Twitter.svg';
 import googleSvg from '@/images/Google.svg';
+import appleSvg from '@/images/Apple.svg';
 import Input from '@/shared/Input';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Image from 'next/image';
@@ -13,6 +13,8 @@ import { useFacebookLogin } from '@/hooks/providers/useFacebookLogin';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from 'config/firebase';
 import axios from 'axios';
+import { useSession } from '@/hooks/useSession';
+import { useRouter } from 'next/navigation';
 
 export interface PageLoginProps {}
 
@@ -22,6 +24,10 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
   const [userDetails, setUserDetails] = useState({ email: '', password: '' });
 
+  const { setSession } = useSession();
+
+  const router = useRouter();
+
   const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
     const auth = getAuth(app);
     e.preventDefault();
@@ -30,22 +36,32 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
       const user = userCredential.user;
       const token = await user?.getIdToken();
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, {
-        token,
-        password: userDetails.password
-      });
-      console.log(response);
-    } catch (error: any) {
-      console.log(error.message);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+        {
+          email: userDetails.email,
+          password: userDetails.password,
+        }
+      );
+      const loggedInUser = response.data.data;
+      setSession(loggedInUser.token, loggedInUser, loggedInUser.user_id);
+      setTimeout(() => {
+        console.log('pushing');
+        router.push('/');
+      }, 500);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div className={`nc-PageLogin`}>
-      <div className='container mb-24 lg:mb-32'>
-        <h2 className='my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>Login</h2>
-        <div className='max-w-md mx-auto space-y-6'>
-          <div className='grid gap-3'>
+      <div className="container mb-24 lg:mb-32">
+        <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
+          Login
+        </h2>
+        <div className="max-w-md mx-auto space-y-6">
+          <div className="grid gap-3">
             <button
               className='nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]'
               onClick={() => googleLogin()}
@@ -61,6 +77,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                     <div className='w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin'></div>
                   </div>
                 ) : (
+                  'Continue with Google'
                   'Continue with Google'
                 )}
               </h3>
@@ -81,6 +98,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                   </div>
                 ) : (
                   'Continue with Facebook'
+                  'Continue with Facebook'
                 )}
               </h3>
             </button>
@@ -89,9 +107,9 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
               onClick={() => appleLogin()}
               disabled={appleLoading}>
               <Image
-                className='flex-shrink-0'
-                src={twitterSvg}
-                alt='Continue with Apple'
+                className="flex-shrink-0"
+                src={appleSvg}
+                alt="Continue with Apple"
               />
               <h3 className='flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm'>
                 {appleLoading ? (
@@ -99,6 +117,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                     <div className='w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin'></div>
                   </div>
                 ) : (
+                  'Continue with Apple'
                   'Continue with Apple'
                 )}
               </h3>

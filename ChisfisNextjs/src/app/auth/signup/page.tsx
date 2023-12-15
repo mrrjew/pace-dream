@@ -1,19 +1,21 @@
-"use client";
-import React, { FC, useState } from "react";
-import facebookSvg from "@/images/Facebook.svg";
-import twitterSvg from "@/images/Twitter.svg";
-import googleSvg from "@/images/Google.svg";
-import Input from "@/shared/Input";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import Image from "next/image";
-import Link from "next/link";
-import { useGoogleLogin } from "@/hooks/providers/useGoogleLogin";
-import { useAppleLogin } from "@/hooks/providers/useAppleLogin";
-import { useFacebookLogin } from "@/hooks/providers/useFacebookLogin";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getAuth } from "firebase/auth";
-import { app } from "config/firebase";
-import axios from "axios";
+'use client';
+import React, { FC, useState } from 'react';
+import facebookSvg from '@/images/Facebook.svg';
+import appleSvg from '@/images/Apple.svg';
+import googleSvg from '@/images/Google.svg';
+import Input from '@/shared/Input';
+import ButtonPrimary from '@/shared/ButtonPrimary';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useGoogleLogin } from '@/hooks/providers/useGoogleLogin';
+import { useAppleLogin } from '@/hooks/providers/useAppleLogin';
+import { useFacebookLogin } from '@/hooks/providers/useFacebookLogin';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
+import { app } from 'config/firebase';
+import axios from 'axios';
+import { useSession } from '@/hooks/useSession';
+import { useRouter } from 'next/navigation';
 
 export interface PageSignUpProps {}
 
@@ -21,7 +23,11 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
   const { googleLogin, isLoading: googleLoggining } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
-  const [userDetails, setUserDetails] = useState({ email: "", password: "" });
+  const [userDetails, setUserDetails] = useState({ email: '', password: '' });
+
+  const { setSession } = useSession();
+
+  const router = useRouter();
 
   const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
     const auth = getAuth(app);
@@ -34,14 +40,18 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
       );
       const user = userCredential.user;
       const token = await user?.getIdToken();
-      const response = axios.post(
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
         {
-          token,
+          email: userDetails.email,
           password: userDetails.password,
         }
       );
-      console.log(response);
+      const newUser = response.data.data;
+      setSession(newUser.token, newUser, newUser.user_id);
+      setTimeout(() => {
+        router.push('/');
+      }, 500);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +81,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                     <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                   </div>
                 ) : (
-                  "Continue with Google"
+                  'Continue with Google'
                 )}
               </h3>
             </button>
@@ -91,7 +101,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                     <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                   </div>
                 ) : (
-                  "Continue with Facebook"
+                  'Continue with Facebook'
                 )}
               </h3>
             </button>
@@ -102,7 +112,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
             >
               <Image
                 className="flex-shrink-0"
-                src={twitterSvg}
+                src={appleSvg}
                 alt="Continue with Apple"
               />
               <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
@@ -111,7 +121,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                     <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                   </div>
                 ) : (
-                  "Continue with Apple"
+                  'Continue with Apple'
                 )}
               </h3>
             </button>

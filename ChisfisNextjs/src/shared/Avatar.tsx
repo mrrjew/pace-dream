@@ -1,9 +1,9 @@
-"use client";
-import { avatarColors } from "@/contains/contants";
-import React, { FC, use } from "react";
-import avatar1 from "@/images/avatars/Image-1.png";
-import Image, { StaticImageData } from "next/image";
-import { useProfile } from "@/context";
+'use client';
+import { avatarColors } from '@/contains/contants';
+import React, { FC, use } from 'react';
+import avatar1 from '@/images/avatars/Image-1.png';
+import Image, { StaticImageData } from 'next/image';
+import { useProfile } from '@/context';
 
 export interface AvatarProps {
   containerClassName?: string;
@@ -16,20 +16,22 @@ export interface AvatarProps {
 }
 
 const Avatar: FC<AvatarProps> = ({
-  containerClassName = "ring-1 ring-white dark:ring-neutral-900",
-  sizeClass = "h-6 w-6 text-sm",
-  radius = "rounded-full",
+  containerClassName = 'ring-1 ring-white dark:ring-neutral-900',
+  sizeClass = 'h-6 w-6 text-sm',
+  radius = 'rounded-full',
   imgUrl = avatar1,
   userName,
   hasChecked,
-  hasCheckedClass = "w-4 h-4 -top-0.5 -right-0.5",
+  hasCheckedClass = 'w-4 h-4 -top-0.5 -right-0.5',
 }) => {
   const { user }: any = useProfile();
 
-  const url = user?.profilePic || "";
-  const name = userName || "John Doe";
+  const url = user?.profilePic || '';
+  const name = userName || 'John Doe';
   const _setBgColor = (name: string) => {
-    const backgroundIndex = Math.floor(name.charCodeAt(0) % avatarColors.length);
+    const backgroundIndex = Math.floor(
+      name.charCodeAt(0) % avatarColors.length
+    );
     return avatarColors[backgroundIndex];
   };
 
