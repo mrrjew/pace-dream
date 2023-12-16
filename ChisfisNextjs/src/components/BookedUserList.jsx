@@ -2,6 +2,8 @@
 
 import Heading from '@/shared/Heading';
 import React, { FC } from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 import userImg1 from '@/assets/images/userDemoImages/user1.jpg';
 import userImg2 from '@/assets/images/userDemoImages/user2.jpg';
@@ -11,8 +13,6 @@ import userImg5 from '@/assets/images/userDemoImages/user5.jpg';
 import userImg6 from '@/assets/images/userDemoImages/user6.jpg';
 import userImg7 from '@/assets/images/userDemoImages/user7.jpg';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 // Booked user Data
 const bookedUserData = [
