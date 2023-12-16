@@ -1,37 +1,31 @@
-import { Poppins } from "next/font/google";
-import SiteHeader from "./(client-components)/(Header)/SiteHeader";
-import ClientCommons from "./ClientCommons";
-import "@/fonts/line-awesome-1.3.0/css/line-awesome.css";
-import "@/styles/index.scss";
-import "rc-slider/assets/index.css";
-import Footer from "@/components/Footer";
-import FooterNav from "@/components/FooterNav";
-import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import "./globals.css";
+import { Poppins } from 'next/font/google';
+import SiteHeader from './(client-components)/(Header)/SiteHeader';
+import ClientCommons from './ClientCommons';
+import '@/fonts/line-awesome-1.3.0/css/line-awesome.css';
+import '@/styles/index.scss';
+import 'rc-slider/assets/index.css';
+import Footer from '@/components/Footer';
+import FooterNav from '@/components/FooterNav';
+import ReactQueryClientProvider from '@/components/ReactQueryClientProvider';
+import './globals.css';
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700']
 });
 
 export const metadata = {
-  title: "Olaven - The best place to find your hotel",
-  description: "The best place to find your hotel",
+  title: 'Olaven - The best place to find your hotel',
+  description: 'The best place to find your hotel'
 };
 
-export default function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: any;
-}) {
+export default function RootLayout({ children, params }: { children: React.ReactNode; params: any }) {
   return (
-    <html lang="en" className={poppins.className}>
-      <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
+    <html
+      lang='en'
+      className={poppins.className}>
+      <body className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
         <ReactQueryClientProvider>
           <ClientCommons />
           <SiteHeader />

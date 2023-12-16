@@ -11,6 +11,8 @@ import userImg5 from '@/assets/images/userDemoImages/user5.jpg';
 import userImg6 from '@/assets/images/userDemoImages/user6.jpg';
 import userImg7 from '@/assets/images/userDemoImages/user7.jpg';
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 // Booked user Data
 const bookedUserData = [
