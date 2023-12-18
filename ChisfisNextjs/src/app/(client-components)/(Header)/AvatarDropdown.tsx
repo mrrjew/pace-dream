@@ -1,25 +1,28 @@
+"use client";
+
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import Avatar from "@/shared/Avatar";
 import SwitchDarkMode2 from "@/shared/SwitchDarkMode2";
 import Link from "next/link";
-import { TbLayoutDashboard} from 'react-icons/tb'
-import { BsChat } from 'react-icons/bs'
-import { RiBuildingLine } from 'react-icons/ri'
-import { FiPieChart } from 'react-icons/fi'
-import { BsThreeDots, BsBookmark  } from 'react-icons/bs'
+import { TbLayoutDashboard } from "react-icons/tb";
+import { BsChat } from "react-icons/bs";
+import { RiBuildingLine } from "react-icons/ri";
+import { FiPieChart } from "react-icons/fi";
+import { BsThreeDots, BsBookmark } from "react-icons/bs";
+import { useProfile } from "@/context";
 
 interface Props {
   className?: string;
 }
 
 export default function AvatarDropdown({ className = "" }: Props) {
+  const [isHost, setIsHost] = useState<boolean>(false);
+  const { user }: any = useProfile();
 
-const [isHost, setIsHost] = useState<boolean>(false);
-
-const handleSwitch = () => {
-  setIsHost(!isHost);
-};
+  const handleSwitch = () => {
+    setIsHost(!isHost);
+  };
 
   return (
     <>
@@ -47,273 +50,263 @@ const handleSwitch = () => {
                       <Avatar sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">Eden Smith</h4>
-                        <p className="text-xs mt-0.5">Los Angeles, CA</p>
+                        <h4 className="font-semibold">{user?.first_name}</h4>
+                        {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
                       </div>
                     </div>
 
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
-
                     {/* ------------------ 1 --------------------- */}
-                                  
-                      {
-                        !isHost && 
-                      <> 
-                        <button onClick={handleSwitch} className="btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold ">Switch to host mode</button>   
-                       <Link
-                        href={"/account"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
-                        <div className="ml-4">
-                          <p className="text-sm font-medium ">{"My Account"}</p>
-                        </div>
-                      </Link>
-  
-                      {/* ------------------ 2 --------------------- */}
-                      <Link
-                        href={"/author"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <path
-                              d="M8 12.2H15"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeMiterlimit="10"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M8 16.2H12.38"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeMiterlimit="10"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M10 6H14C16 6 16 5 16 4C16 2 15 2 14 2H10C9 2 8 2 8 4C8 6 9 6 10 6Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeMiterlimit="10"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M16 4.02002C19.33 4.20002 21 5.43002 21 10V16C21 20 20 22 15 22H9C4 22 3 20 3 16V10C3 5.44002 4.67 4.20002 8 4.02002"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeMiterlimit="10"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
-                        <div className="ml-4">
-                          <p className="text-sm font-medium ">{"My bookings"}</p>
-                        </div>
-                      </Link>
-  
-                      {/* ------------------ 2 --------------------- */}
-                      <Link
-                        href={"/account-savelists"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <path
-                              d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
-                        <div className="ml-4">
-                          <p className="text-sm font-medium ">{"Wishlist"}</p>
-                        </div>
-                      </Link> 
+
+                    {!isHost && (
+                      <>
+                        <button
+                          onClick={handleSwitch}
+                          className="btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold "
+                        >
+                          Switch to host mode
+                        </button>
+                        <Link
+                          href={"/account"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium ">{"My Account"}</p>
+                          </div>
+                        </Link>
+
+                        {/* ------------------ 2 --------------------- */}
+                        <Link
+                          href={"/author"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path
+                                d="M8 12.2H15"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeMiterlimit="10"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M8 16.2H12.38"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeMiterlimit="10"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M10 6H14C16 6 16 5 16 4C16 2 15 2 14 2H10C9 2 8 2 8 4C8 6 9 6 10 6Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeMiterlimit="10"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M16 4.02002C19.33 4.20002 21 5.43002 21 10V16C21 20 20 22 15 22H9C4 22 3 20 3 16V10C3 5.44002 4.67 4.20002 8 4.02002"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeMiterlimit="10"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium ">{"My bookings"}</p>
+                          </div>
+                        </Link>
+
+                        {/* ------------------ 2 --------------------- */}
+                        <Link
+                          href={"/account-savelists"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path
+                                d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium ">{"Wishlist"}</p>
+                          </div>
+                        </Link>
                       </>
-                     }
+                    )}
 
+                    {/* for host mode */}
 
-                      {/* for host mode */}
+                    {isHost && (
+                      <>
+                        <button
+                          onClick={handleSwitch}
+                          className="btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold "
+                        >
+                          Switch to guest mode
+                        </button>
+                        <Link
+                          href={"/account"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-4">
+                            <p className="text-sm font-medium ">{"My Account"}</p>
+                          </div>
+                        </Link>
 
+                        {/* ------------------ Host Dashboard --------------------- */}
 
-                    {
-                      isHost && 
-                       <> 
-                         <button onClick={handleSwitch} className="btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold ">Switch to guest mode</button>   
-                       <Link
-                        href={"/account"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </div>
-                        <div className="ml-4">
-                          <p className="text-sm font-medium ">{"My Account"}</p>
-                        </div>
-                      </Link>
+                        <Link
+                          href={"/host-mode/host-dashboard"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <TbLayoutDashboard size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{"Host Dashboard"}</p>
+                          </div>
+                        </Link>
 
-                      {/* ------------------ Host Dashboard --------------------- */}
+                        {/* ------------------ Booking--------------------- */}
 
-                      <Link
-                        href={"/host-mode/host-dashboard"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <TbLayoutDashboard size={22} className="mr-2 ml-0.5" />
-                        </div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium ">{"Host Dashboard"}</p>
-                        </div>
-                      </Link> 
-                      
-                      {/* ------------------ Booking--------------------- */}
+                        <Link
+                          href={"/host-mode/booking"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <BsBookmark size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{"Booking"}</p>
+                          </div>
+                        </Link>
 
-                      <Link
-                        href={"/host-mode/booking"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <BsBookmark  size={22} className="mr-2 ml-0.5" />
-                        </div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium ">{"Booking"}</p>
-                        </div>
-                      </Link> 
-                      
-                      
-                      {/* ------------------ Inbox --------------------- */}
-                      
-                      <Link
-                        href={"/host-mode/host-inbox"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <BsChat size={22} className="mr-2 ml-0.5" />
-                        </div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium ">{"Inbox"}</p>
-                        </div>
-                      </Link> 
-                                            
-                      {/* ------------------ Space --------------------- */}
-                      
-                      <Link
-                        href={"/host-mode/host-space"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <RiBuildingLine size={22} className="mr-2 ml-0.5" />
-                        </div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium ">{"Space"}</p>
-                        </div>
-                      </Link> 
-                                                                  
-                      {/* ------------------ Business --------------------- */}
-                      
-                      <Link
-                        href={"/host-mode/host-business"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <FiPieChart size={22} className="mr-2 ml-0.5" />
-                        </div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium ">{"Business"}</p>
-                        </div>
-                      </Link> 
-                                                                                        
-                      {/* ------------------ More --------------------- */}
-                      
-                      <Link
-                        href={"/"}
-                        className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                        onClick={() => close()}
-                      >
-                        <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <BsThreeDots size={22} className="mr-2 ml-0.5" />
-                        </div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium ">{"More"}</p>
-                        </div>
-                      </Link> 
+                        {/* ------------------ Inbox --------------------- */}
 
+                        <Link
+                          href={"/host-mode/host-inbox"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <BsChat size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{"Inbox"}</p>
+                          </div>
+                        </Link>
 
+                        {/* ------------------ Space --------------------- */}
+
+                        <Link
+                          href={"/host-mode/host-space"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <RiBuildingLine size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{"Space"}</p>
+                          </div>
+                        </Link>
+
+                        {/* ------------------ Business --------------------- */}
+
+                        <Link
+                          href={"/host-mode/host-business"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <FiPieChart size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{"Business"}</p>
+                          </div>
+                        </Link>
+
+                        {/* ------------------ More --------------------- */}
+
+                        <Link
+                          href={"/"}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          onClick={() => close()}
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <BsThreeDots size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{"More"}</p>
+                          </div>
+                        </Link>
                       </>
-                    }
-
-
+                    )}
 
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
@@ -365,13 +358,7 @@ const handleSwitch = () => {
                       onClick={() => close()}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M11.97 22C17.4928 22 21.97 17.5228 21.97 12C21.97 6.47715 17.4928 2 11.97 2C6.44715 2 1.97 6.47715 1.97 12C1.97 17.5228 6.44715 22 11.97 22Z"
                             stroke="currentColor"
@@ -428,13 +415,7 @@ const handleSwitch = () => {
                       onClick={() => close()}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54"
                             stroke="currentColor"
