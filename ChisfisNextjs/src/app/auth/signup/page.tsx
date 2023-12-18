@@ -17,17 +17,28 @@ import React, { FC, useState } from 'react';
 
 export interface PageSignUpProps {}
 
+export enum SignupMethod {
+  EMAIL = 'email',
+  MOBILE = 'mobile',
+}
+
 const PageSignUp: FC<PageSignUpProps> = ({}) => {
   const { googleLogin, isLoading: googleLoggingin } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
   const [userEmail, setUserEmail] = useState('');
+  const [mobile, setMobile] = useState('');
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const { setSession } = useSession();
+  const [signupMethod, setSignupMethod] = useState<SignupMethod>(
+    SignupMethod.EMAIL
+  );
+  const [showVerifyOtp, setShowVerifyOtp] = useState(false);
+  const [otp, setOtp] = useState('');
 
   const router = useRouter();
+
+  const { setSession } = useSession();
 
   const checkEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +64,58 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
     setLoading(false);
   };
 
+  const checkMobile = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/send-otp`,
+        {
+          mobile,
+        }
+      );
+      if (response.status === 200) {
+        setShowVerifyOtp(true);
+      }
+    } catch (err) {
+      const error = err as AxiosError;
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
+  const verifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-otp`,
+        {
+          mobile,
+          otp,
+        }
+      );
+      // check if user already exists
+      if (response.data.data?.token) {
+        setSession(
+          response.data.data.token,
+          response.data.data,
+          response.data.data.user_id
+        );
+        setTimeout(() => {
+          router.push('/');
+        }, 200);
+        return;
+      }
+      if (response.status === 200) {
+        setShowSignupForm(true);
+      }
+    } catch (err) {
+      const error = err as AxiosError;
+    }
+    setLoading(false);
+  };
+
   return (
     <div className={`nc-PageSignUp  `}>
       <div className="container mb-24 lg:mb-32">
@@ -61,7 +124,11 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
         </h2>
         <div className="max-w-md mx-auto space-y-6 ">
           {showSignupForm ? (
-            <SignupForm email={userEmail} />
+            <SignupForm
+              email={userEmail}
+              mobile={mobile}
+              signupMethod={SignupMethod.MOBILE}
+            />
           ) : (
             <>
               <div className="grid gap-3">
@@ -125,6 +192,35 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                     )}
                   </h3>
                 </button>
+                {signupMethod === SignupMethod.EMAIL ? (
+                  <button
+                    className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
+                    onClick={() => setSignupMethod(SignupMethod.MOBILE)}
+                  >
+                    <Image
+                      className="flex-shrink-0"
+                      src={appleSvg}
+                      alt="Continue with Apple"
+                    />
+                    <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
+                      Continue with Mobile
+                    </h3>
+                  </button>
+                ) : (
+                  <button
+                    className="nc-will-change-transform flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]"
+                    onClick={() => setSignupMethod(SignupMethod.EMAIL)}
+                  >
+                    <Image
+                      className="flex-shrink-0"
+                      src={appleSvg}
+                      alt="Continue with Apple"
+                    />
+                    <h3 className="flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
+                      Continue with Email
+                    </h3>
+                  </button>
+                )}
               </div>
               {/* OR */}
               <div className="relative text-center">
@@ -134,29 +230,68 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                 <div className="absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800"></div>
               </div>
               {/* FORM */}
-              <form
-                className="grid grid-cols-1 gap-6"
-                action="#"
-                method="post"
-                onSubmit={checkEmail}
-              >
-                <label className="block">
-                  <span className="text-neutral-800 dark:text-neutral-200">
-                    Email address
-                  </span>
-                  <Input
-                    type="email"
-                    placeholder="example@example.com"
-                    className="mt-1"
-                    onChange={(e) => setUserEmail(e.target.value)}
-                    value={userEmail}
-                  />
-                </label>
-
-                <ButtonPrimary type="submit" loading={loading}>
-                  Continue
-                </ButtonPrimary>
-              </form>
+              {signupMethod === SignupMethod.EMAIL ? (
+                <form
+                  className="grid grid-cols-1 gap-6"
+                  action="#"
+                  method="post"
+                  onSubmit={checkEmail}
+                >
+                  <label className="block">
+                    <span className="text-neutral-800 dark:text-neutral-200">
+                      Email address
+                    </span>
+                    <Input
+                      type="email"
+                      placeholder="example@example.com"
+                      className="mt-1"
+                      onChange={(e) => setUserEmail(e.target.value)}
+                      value={userEmail}
+                    />
+                  </label>
+                  <ButtonPrimary type="submit" loading={loading}>
+                    Continue
+                  </ButtonPrimary>
+                </form>
+              ) : (
+                <form
+                  className="grid grid-cols-1 gap-6"
+                  action="#"
+                  method="post"
+                  onSubmit={showVerifyOtp ? verifyOtp : checkMobile}
+                >
+                  <label className="block">
+                    <span className="text-neutral-800 dark:text-neutral-200">
+                      Mobile Number
+                    </span>
+                    <Input
+                      type="tel"
+                      placeholder="Enter your mobile number along with country code"
+                      className="mt-1"
+                      onChange={(e) => setMobile(e.target.value)}
+                      value={mobile}
+                      disabled={showVerifyOtp}
+                    />
+                  </label>
+                  {showVerifyOtp && (
+                    <label className="block">
+                      <span className="text-neutral-800 dark:text-neutral-200">
+                        OTP
+                      </span>
+                      <Input
+                        type="tel"
+                        placeholder="Enter OTP"
+                        className="mt-1"
+                        onChange={(e) => setOtp(e.target.value)}
+                        value={otp}
+                      />
+                    </label>
+                  )}
+                  <ButtonPrimary type="submit" loading={loading}>
+                    Continue
+                  </ButtonPrimary>
+                </form>
+              )}
             </>
           )}
 

@@ -1,10 +1,11 @@
+import { SignupMethod } from '@/app/auth/signup/page';
 import { useSession } from '@/hooks/useSession';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Input from '@/shared/Input';
 import axios from 'axios';
 import { app } from 'config/firebase';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import router from 'next/router';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const PasswordMatchText = (props: {
@@ -24,16 +25,23 @@ const PasswordMatchText = (props: {
 };
 
 interface IUserDetails {
-  email: string;
+  email?: string;
   password: string;
   confirmPassword: string;
   firstName: string;
   lastName: string;
   dob: Date;
+  mobile?: string;
 }
 
-export const SignupForm: React.FC<{ email: string }> = (props: {
+export const SignupForm: React.FC<{
   email: string;
+  mobile: string;
+  signupMethod: SignupMethod;
+}> = (props: {
+  signupMethod: SignupMethod;
+  email?: string;
+  mobile?: string;
 }) => {
   const [userDetails, setUserDetails] = useState<IUserDetails>({
     email: props.email,
@@ -42,40 +50,52 @@ export const SignupForm: React.FC<{ email: string }> = (props: {
     firstName: '',
     lastName: '',
     dob: new Date(),
+    mobile: props.mobile,
   });
 
   const [loading, setLoading] = useState(false);
 
   const { setSession } = useSession();
 
+  const router = useRouter();
+
   const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
     const auth = getAuth(app);
     e.preventDefault();
     setLoading(true);
 
-    if (userDetails.password !== userDetails.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
-    if (userDetails.password.length < 6) {
-      alert('Password must be at least 8 characters');
-      return;
+    if (props.signupMethod === SignupMethod.EMAIL) {
+      if (userDetails.password !== userDetails.confirmPassword) {
+        alert('Passwords do not match');
+        setLoading(false);
+        return;
+      }
+      if (userDetails.password.length < 6) {
+        setLoading(false);
+        alert('Password must be at least 8 characters');
+        return;
+      }
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        userDetails.email,
-        userDetails.password
-      );
+      if (props.signupMethod === SignupMethod.EMAIL && userDetails.email) {
+        // Do we need to do this?
+        await createUserWithEmailAndPassword(
+          auth,
+          userDetails.email,
+          userDetails.password
+        );
+      }
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
         {
-          email: userCredential.user.email,
+          email: userDetails.email,
           password: userDetails.password,
           firstName: userDetails.firstName,
           lastName: userDetails.lastName,
           dob: userDetails.dob,
+          mobile: userDetails.mobile,
+          method: props.signupMethod,
         }
       );
       const newUser = response.data.data;
@@ -152,45 +172,51 @@ export const SignupForm: React.FC<{ email: string }> = (props: {
         </span>
         <Input
           type="email"
-          readOnly
           className="mt-1"
-          disabled
+          disabled={props.signupMethod === SignupMethod.EMAIL}
           value={userDetails.email}
-        />
-      </label>
-      <label className="block">
-        <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-          Password
-        </span>
-        <Input
-          type="password"
-          className="mt-1"
           onChange={(e) =>
-            setUserDetails({ ...userDetails, password: e.target.value })
+            setUserDetails({ ...userDetails, email: e.target.value })
           }
-          value={userDetails.password}
         />
       </label>
-      <label className="block">
-        <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-          Confirm Password
-        </span>
-        <Input
-          type="password"
-          className="mt-1"
-          onChange={(e) =>
-            setUserDetails({
-              ...userDetails,
-              confirmPassword: e.target.value,
-            })
-          }
-          value={userDetails.confirmPassword}
-        />
-        <PasswordMatchText
-          password={userDetails.password}
-          confirmPassword={userDetails.confirmPassword}
-        />
-      </label>
+      {props.signupMethod === SignupMethod.EMAIL && (
+        <>
+          <label className="block">
+            <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
+              Password
+            </span>
+            <Input
+              type="password"
+              className="mt-1"
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, password: e.target.value })
+              }
+              value={userDetails.password}
+            />
+          </label>
+          <label className="block">
+            <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
+              Confirm Password
+            </span>
+            <Input
+              type="password"
+              className="mt-1"
+              onChange={(e) =>
+                setUserDetails({
+                  ...userDetails,
+                  confirmPassword: e.target.value,
+                })
+              }
+              value={userDetails.confirmPassword}
+            />
+            <PasswordMatchText
+              password={userDetails.password}
+              confirmPassword={userDetails.confirmPassword}
+            />
+          </label>
+        </>
+      )}
       <ButtonPrimary type="submit" loading={loading}>
         Continue
       </ButtonPrimary>
