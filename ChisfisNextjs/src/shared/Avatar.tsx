@@ -1,7 +1,9 @@
+"use client";
 import { avatarColors } from "@/contains/contants";
-import React, { FC } from "react";
+import React, { FC, use } from "react";
 import avatar1 from "@/images/avatars/Image-1.png";
 import Image, { StaticImageData } from "next/image";
+import { useProfile } from "@/context";
 
 export interface AvatarProps {
   containerClassName?: string;
@@ -22,12 +24,12 @@ const Avatar: FC<AvatarProps> = ({
   hasChecked,
   hasCheckedClass = "w-4 h-4 -top-0.5 -right-0.5",
 }) => {
-  const url = imgUrl || "";
+  const { user }: any = useProfile();
+
+  const url = user?.profilePic || "";
   const name = userName || "John Doe";
   const _setBgColor = (name: string) => {
-    const backgroundIndex = Math.floor(
-      name.charCodeAt(0) % avatarColors.length
-    );
+    const backgroundIndex = Math.floor(name.charCodeAt(0) % avatarColors.length);
     return avatarColors[backgroundIndex];
   };
 
@@ -38,6 +40,8 @@ const Avatar: FC<AvatarProps> = ({
     >
       {url && (
         <Image
+          width={24}
+          height={24}
           className={`absolute inset-0 w-full h-full object-cover ${radius}`}
           src={url}
           alt={name}
