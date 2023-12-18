@@ -8,7 +8,6 @@ const isLoginRoutes = (pathname: string) => {
   return excludedRoutes.some((route) => pathname.startsWith(route));
 };
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/_next')) {
     return NextResponse.next();
@@ -31,7 +30,6 @@ export async function middleware(request: NextRequest) {
   if (checkToken.status === 200) {
     isValidToken = true;
   }
-  console.log(isValidToken);
   // if the request url contains /auth/login or /auth/signin and isValidToken is true then redirect to home page
   if (isLoginRoutes(request.nextUrl.pathname) && isValidToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl).href);
@@ -43,5 +41,10 @@ export async function middleware(request: NextRequest) {
   if (isValidToken) {
     return NextResponse.next();
   }
-  return NextResponse.redirect(new URL('/auth/login', request.nextUrl).href);
+  return NextResponse.redirect(
+    new URL(
+      `/auth/login?from=${encodeURIComponent(request.nextUrl.pathname)}`,
+      request.nextUrl
+    ).href
+  );
 }

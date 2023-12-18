@@ -1,22 +1,19 @@
 'use client';
 
-import { Popover, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { useSession } from '@/hooks/useSession';
 import Avatar from '@/shared/Avatar';
 import SwitchDarkMode2 from '@/shared/SwitchDarkMode2';
-import Link from 'next/link';
-import { TbLayoutDashboard } from 'react-icons/tb';
-import { BsChat } from 'react-icons/bs';
-import { RiBuildingLine } from 'react-icons/ri';
-import { FiPieChart } from 'react-icons/fi';
-import { BsThreeDots, BsBookmark } from 'react-icons/bs';
+import { Popover, Transition } from '@headlessui/react';
+import { app } from 'config/firebase';
 import { useProfile } from '@/context';
 import { getAuth } from 'firebase/auth';
-import { app } from 'config/firebase';
-import axios from 'axios';
-import { useSession } from '@/hooks/useSession';
-import Cookies from 'js-cookie';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Fragment, useState } from 'react';
+import { BsBookmark, BsChat, BsThreeDots } from 'react-icons/bs';
+import { FiPieChart } from 'react-icons/fi';
+import { RiBuildingLine } from 'react-icons/ri';
+import { TbLayoutDashboard } from 'react-icons/tb';
 
 interface Props {
   className?: string;
@@ -28,6 +25,30 @@ export default function AvatarDropdown({ className = '' }: Props) {
 
   const handleSwitch = () => {
     setIsHost(!isHost);
+  };
+
+  const { getSession, clearSession } = useSession();
+  const { token, userInfo } = getSession();
+
+  const handleLogout = async () => {
+    const auth = getAuth(app);
+    await auth.signOut();
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res);
+    if (res.ok) {
+      clearSession();
+      setTimeout(() => {
+        router.push('/auth/login');
+      }, 200);
+    }
   };
 
   return (

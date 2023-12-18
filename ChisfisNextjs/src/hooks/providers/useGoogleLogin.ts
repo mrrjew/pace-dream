@@ -6,11 +6,14 @@ import {
   getAuth,
   signInWithPopup,
 } from 'config/firebase';
-import Cookies from 'js-cookie';
+import Cookies, { set } from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { useSession } from '../useSession';
 
 export const useGoogleLogin = () => {
   const router = useRouter();
+  const { setSession } = useSession();
+
   const authWithGoogle = async () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
@@ -18,7 +21,6 @@ export const useGoogleLogin = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const token = await user?.getIdToken();
-      console.log(token);
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
@@ -38,18 +40,11 @@ export const useGoogleLogin = () => {
 
   const { mutate: googleLogin, isLoading } = useMutation({
     mutationFn: authWithGoogle,
-    onSuccess: (data) => {
-      Cookies.set('auth-token', data.data.token);
-      Cookies.set('user_id', data.data.id);
-      Cookies.set('user_info', JSON.stringify(data.data));
-
-      localStorage.setItem('auth-token', data.data.token);
-      localStorage.setItem('user_id', data.data.id);
-      localStorage.setItem('user_info', JSON.stringify(data.data));
-
-      setTimeout(() => {
-        router.push('/');
-      }, 500);
+    onSuccess: (result) => {
+      const { data } = result;
+      console.log(data, result);
+      setSession(data.token, data, data.user_id);
+      router.push('/');
     },
   });
 
