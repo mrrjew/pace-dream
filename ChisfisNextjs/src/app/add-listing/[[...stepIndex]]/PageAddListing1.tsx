@@ -19,7 +19,7 @@ const PageAddListing1 = ({ input, setInput, handleInputChange }: PageAddingListi
             name='propertyType'
             value={input.propertyType as string | undefined}
             onChange={handleInputChange}>
-            <option selected>-Select-</option>
+            <option value=''>-Select-</option>
             <option value='Hotel'>Hotel</option>
             <option value='Cottage'>Cottage</option>
             <option value='Villa'>Villa</option>
@@ -46,7 +46,7 @@ const PageAddListing1 = ({ input, setInput, handleInputChange }: PageAddingListi
             name='rentalForm'
             value={input.rentalForm as string | undefined}
             onChange={handleInputChange}>
-            <option value='Hotel'>Entire place</option>
+            <option value='Entire place'>Entire place</option>
             <option value='Private room'>Private room</option>
             <option value='Share room'>Share room</option>
           </Select>

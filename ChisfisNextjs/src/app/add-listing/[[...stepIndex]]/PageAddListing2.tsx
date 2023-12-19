@@ -5,7 +5,6 @@ import LocationMarker from '@/components/AnyReactComponent/LocationMarker';
 import Label from '@/components/Label';
 import GoogleMapReact from 'google-map-react';
 import React, { FC, useEffect } from 'react';
-import ButtonSecondary from '@/shared/ButtonSecondary';
 import Input from '@/shared/Input';
 import Select from '@/shared/Select';
 import FormItem from '../FormItem';
@@ -28,11 +27,7 @@ const PageAddListing2 = ({ input, setInput, handleInputChange }: PageAddingListi
             name='country'
             value={input.country as string | undefined}
             onChange={handleInputChange}>
-            <option
-              selected
-              disabled>
-              -Select-
-            </option>
+            <option value=''>-Select-</option>
             <option value='Viet Nam'>Viet Nam</option>
             <option value='Thailand'>Thailand</option>
             <option value='France'>France</option>

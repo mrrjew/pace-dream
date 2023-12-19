@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Checkbox from '@/shared/Checkbox';
 import { PageAddingListing } from '@/types/types';
+import Checkbox from '@/components/ListingComponents/Checkbox';
 
 const PageAddListing4 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
   // General Amenities list

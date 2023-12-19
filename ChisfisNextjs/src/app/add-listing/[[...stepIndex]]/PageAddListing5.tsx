@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
 import { PageAddingListing } from '@/types/types';
+import Input from '@/components/ListingComponents/Input';
 
 const PageAddListing5 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
   const [createRoleValue, setCreateRoleValue] = useState('');
