@@ -123,16 +123,25 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     if (!input.beds) return setErrorMessage('Beds Number is required!');
     if (!input.bathroom) return setErrorMessage('Bathroom Number is required!');
     if (!input.kitchen) return setErrorMessage('Kitchen Number is required!');
-    if (input?.generalAmenities?.length < 1) return setErrorMessage('Select Any General Amenities!');
-    if (input?.otherAmenities?.length < 1) return setErrorMessage('Select Any Other Amenities!');
-    if (input?.safeAmenities?.length < 1) return setErrorMessage('Select Any Safe Amenities!');
+    // if (input?.generalAmenities?.length < 1) return setErrorMessage('Select Any General Amenities!');
+    if (!Array.isArray(input?.generalAmenities) || input.generalAmenities.length < 1) {
+      return setErrorMessage('Select Any General Amenities!');
+    }
+    if (!Array.isArray(input?.otherAmenities) || input.otherAmenities.length < 1) {
+      return setErrorMessage('Select Any Other Amenities!');
+    }
+    if (!Array.isArray(input?.safeAmenities) || input.safeAmenities.length < 1) {
+      return setErrorMessage('Select Any Safe Amenities!');
+    }
     if (!input.smokingRole) return setErrorMessage('Select smoking role!');
     if (!input.petRole) return setErrorMessage('Select pet role!');
     if (!input.partyOrganizingRole) return setErrorMessage('Select Party Organizing role!');
     if (!input.cookingRole) return setErrorMessage('Select Cooking role!');
     if (!input.placeDescription) return setErrorMessage('Place Description is required!');
     if (!input.coverImage) return setErrorMessage('Cover Image is required!');
-    if (input?.placeImages?.length < 1) return setErrorMessage('Place Image is required!');
+     if (!Array.isArray(input?.placeImages) || input.placeImages.length < 1) {
+       return setErrorMessage('Place Image is required!');
+     }
     if (!input.currency) return setErrorMessage('Select a currency!');
     if (!input.basePriceMonToThu) return setErrorMessage('Set Base Price!');
     if (!input.basePriceFriToSun) return setErrorMessage('Set Base Price!');

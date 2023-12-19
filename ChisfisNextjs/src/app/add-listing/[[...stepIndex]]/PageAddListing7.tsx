@@ -92,9 +92,10 @@ const PageAddListing7 = ({ input, setInput, handleInputChange }: PageAddingListi
                     <input
                       id='file-upload-2'
                       name='placeImages'
+                     
                       onChange={(e) => {
                         const uploadedFiles = Array.from((e.target.files as FileList) || []);
-                        setInput((prevState) => ({ ...prevState, placeImages: [...input.placeImages, ...uploadedFiles] }));
+                        setInput((prevState) => ({ ...prevState, placeImages: [...(prevState.placeImages as FileList), ...uploadedFiles] }));
                       }}
                       type='file'
                       className='sr-only'

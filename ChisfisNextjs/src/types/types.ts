@@ -20,7 +20,7 @@
 // };
 
 export type formFieldInitialStateType = {
-  [key: string]: string | undefined | number | boolean | any[] | File;
+  [key: string]: string | undefined | number | boolean | any[] | File | FileList;
 };
 
 export type PageAddingListing = {

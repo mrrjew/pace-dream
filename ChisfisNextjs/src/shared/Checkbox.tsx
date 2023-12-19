@@ -7,7 +7,7 @@ export interface CheckboxProps {
   label?: string;
   subLabel?: string;
   className?: string;
-  name: string;
+  name?: string;
   defaultChecked?: boolean;
   key: number;
   input: formFieldInitialStateType;

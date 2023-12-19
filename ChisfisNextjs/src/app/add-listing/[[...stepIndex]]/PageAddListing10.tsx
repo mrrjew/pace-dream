@@ -25,7 +25,7 @@ const PageAddListing10 = ({ input, setInput, handleInputChange, setPageNumber }:
           />
         </div>
         <div className='flex items-center space-x-5 mt-8'>
-          <ButtonSecondary onClick={() => setPageNumber(1)}>
+          <ButtonSecondary onClick={() => setPageNumber && setPageNumber(1)}>
             <PencilSquareIcon className='h-5 w-5' />
             <span className='ml-3'>Edit</span>
           </ButtonSecondary>
