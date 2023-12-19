@@ -37,10 +37,10 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     generalAmenities: [],
     otherAmenities: [],
     safeAmenities: [],
-    smokingRole: '',
-    petRole: '',
-    partyOrganizingRole: '',
-    cookingRole: '',
+    smokingRole: 'Allow',
+    petRole: 'Allow',
+    partyOrganizingRole: 'Allow',
+    cookingRole: 'Allow',
     additionalRules: [],
     placeDescription: '',
     currency: '',
@@ -50,7 +50,8 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     stayNightMin: 0,
     stayNightMax: 0,
     coverImage: '',
-    placeImages: []
+    placeImages: [],
+    availabilityDate: []
   });
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -109,6 +110,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Form Validation
     if (!input.propertyType) return setErrorMessage('Select a Property Type!');
     if (!input.placeName) return setErrorMessage('Place Name is required!');
     if (!input.rentalForm) return setErrorMessage('Select a Rental Form!');
@@ -123,7 +125,6 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     if (!input.beds) return setErrorMessage('Beds Number is required!');
     if (!input.bathroom) return setErrorMessage('Bathroom Number is required!');
     if (!input.kitchen) return setErrorMessage('Kitchen Number is required!');
-    // if (input?.generalAmenities?.length < 1) return setErrorMessage('Select Any General Amenities!');
     if (!Array.isArray(input?.generalAmenities) || input.generalAmenities.length < 1) {
       return setErrorMessage('Select Any General Amenities!');
     }

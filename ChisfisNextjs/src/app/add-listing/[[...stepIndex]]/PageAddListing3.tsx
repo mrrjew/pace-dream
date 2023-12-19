@@ -1,8 +1,8 @@
-import NcInputNumber from '@/components/NcInputNumber';
 import React, { FC } from 'react';
 import Select from '@/shared/Select';
 import FormItem from '../FormItem';
 import { PageAddingListing } from '@/types/types';
+import NcInputNumber from '@/components/ListingComponents/NcInputNumber';
 
 const PageAddListing3 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
   return (
@@ -17,6 +17,7 @@ const PageAddListing3 = ({ input, setInput, handleInputChange }: PageAddingListi
             name='acreage'
             value={input.acreage as string | undefined}
             onChange={handleInputChange}>
+            <option value=''>-Select-</option>
             <option value='100'>100</option>
             <option value='200'>200</option>
             <option value='300'>300</option>

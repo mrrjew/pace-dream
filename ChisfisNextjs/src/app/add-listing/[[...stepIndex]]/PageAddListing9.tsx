@@ -2,15 +2,14 @@
 
 import DatePickerCustomDay from '@/components/DatePickerCustomDay';
 import DatePickerCustomHeaderTwoMonth from '@/components/DatePickerCustomHeaderTwoMonth';
-import NcInputNumber from '@/components/NcInputNumber';
+import NcInputNumber from '@/components/ListingComponents/NcInputNumber';
 import { PageAddingListing } from '@/types/types';
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 
 export interface PageAddListing9Props {}
 
 const PageAddListing9 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
-  const [dates, setDates] = useState<number[]>([]);
 
   return (
     <>
@@ -47,25 +46,44 @@ const PageAddListing9 = ({ input, setInput, handleInputChange }: PageAddingListi
 
       <div className='addListingDatePickerExclude'>
         <DatePicker
+          // onChange={(date) => {
+          //   let newDates = [];
+
+          //   if (!date) {
+          //     return;
+          //   }
+          //   const newTime = date.getTime();
+          //   if (input.availabilityDate.includes(newTime)) {
+          //     newDates = input.availabilityDate.filter((item) => item !== newTime);
+          //   } else {
+          //     newDates = [...input.availabilityDate, newTime];
+          //   }
+          //   setInput((prevState) => ({ ...prevState, availabilityDate: newDates }));
+          // }}
           onChange={(date) => {
-            let newDates = [];
+            let newDates: number[] = [];
 
             if (!date) {
               return;
             }
+
             const newTime = date.getTime();
-            if (dates.includes(newTime)) {
-              newDates = dates.filter((item) => item !== newTime);
+
+            // Use optional chaining to check if input.availabilityDate is defined
+            if (Array.isArray(input?.availabilityDate) && input?.availabilityDate?.includes(newTime)) {
+              newDates = input.availabilityDate.filter((item) => item !== newTime);
             } else {
-              newDates = [...dates, newTime];
+              // If input.availabilityDate is undefined, default to an empty array
+              newDates = [...(input.availabilityDate as []), newTime];
             }
-            setDates(newDates);
+
+            setInput((prevState) => ({ ...prevState, availabilityDate: newDates }));
           }}
           // selected={dates}
           minDate={new Date()}
           monthsShown={2}
           showPopperArrow={false}
-          excludeDates={dates.filter(Boolean).map((item) => new Date(item))}
+          excludeDates={Array.isArray(input?.availabilityDate) ? input?.availabilityDate.filter(Boolean)?.map((item) => new Date(item)) : []}
           inline
           renderCustomHeader={(p) => <DatePickerCustomHeaderTwoMonth {...p} />}
           renderDayContents={(day, date) => (

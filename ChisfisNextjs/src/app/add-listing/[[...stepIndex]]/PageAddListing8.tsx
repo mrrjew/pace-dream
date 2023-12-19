@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Input from '@/shared/Input';
+import Input from '@/components/ListingComponents/Input';
 import Select from '@/shared/Select';
 import FormItem from '../FormItem';
 import { PageAddingListing } from '@/types/types';
@@ -26,6 +26,7 @@ const PageAddListing8 = ({ input, setInput, handleInputChange }: PageAddingListi
             name='currency'
             value={input.currency as string}
             onChange={handleInputChange}>
+            <option value=''>-Select-</option>
             <option value='USD'>USD</option>
             <option value='VND'>VND</option>
             <option value='EURRO'>EURRO</option>

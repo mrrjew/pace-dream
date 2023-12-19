@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import Textarea from '@/shared/Textarea';
 import { PageAddingListing } from '@/types/types';
 
 const PageAddListing6 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
