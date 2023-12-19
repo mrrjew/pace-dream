@@ -18,7 +18,6 @@ import { RxCross1 } from 'react-icons/rx';
 
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined } }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const nextBtnText = pageNumber > 9 ? 'Publish listing' : 'Continue';
   const { input, setInput, handleInputChange } = useFormFields({
     propertyType: '',
     placeName: '',
@@ -93,12 +92,13 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
       break;
   }
 
-  // Continue and Back Button Handler
+  // Continue Button Handler
   const handleContinueButton = () => {
     if (pageNumber >= 10) return setPageNumber(10);
 
     setPageNumber(pageNumber + 1);
   };
+  // Back Button Handler
   const handleBackButton = () => {
     if (pageNumber <= 1) return setPageNumber(1);
 
@@ -139,9 +139,9 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     if (!input.cookingRole) return setErrorMessage('Select Cooking role!');
     if (!input.placeDescription) return setErrorMessage('Place Description is required!');
     if (!input.coverImage) return setErrorMessage('Cover Image is required!');
-     if (!Array.isArray(input?.placeImages) || input.placeImages.length < 1) {
-       return setErrorMessage('Place Image is required!');
-     }
+    if (!Array.isArray(input?.placeImages) || input.placeImages.length < 1) {
+      return setErrorMessage('Place Image is required!');
+    }
     if (!input.currency) return setErrorMessage('Select a currency!');
     if (!input.basePriceMonToThu) return setErrorMessage('Set Base Price!');
     if (!input.basePriceFriToSun) return setErrorMessage('Set Base Price!');
