@@ -1,5 +1,5 @@
-import { QueryKey, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { QueryKey, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 interface FetchConfig {
   headers?: Record<string, string>;
@@ -13,32 +13,26 @@ interface FetchParams {
   enabled?: boolean;
 }
 
-export const useFetch = ({
-  url,
-  config,
-  data,
-  queryKey,
-  enabled,
-}: FetchParams) => {
-    const fetchData = async () => {
+export const useFetch = ({ url, config, data, queryKey, enabled }: FetchParams) => {
+  const fetchData = async () => {
     try {
-        const response = await axios.get(url, config);
-        return response.data;
+      const response = await axios.get(url, config);
+      return response.data;
     } catch (error: any) {
-        console.log(error.response.data.data.error);
+      console.log(error.response.data.data.error);
     }
-    };
+  };
 
   const {
     data: responseData,
     isLoading,
     error,
     isSuccess,
-    isError,
+    isError
   } = useQuery({
     queryKey,
     queryFn: fetchData,
-    enabled,
+    enabled
   });
   return { fetchData, isLoading, error, isSuccess, isError };
 };
