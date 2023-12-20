@@ -15,6 +15,7 @@ import ButtonSecondary from '@/shared/ButtonSecondary';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import useFormFields from '@/hooks/useFormFields';
 import { RxCross1 } from 'react-icons/rx';
+import { createToast } from '@/utils/createToast';
 
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined } }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -111,44 +112,44 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     e.preventDefault();
 
     // Form Validation
-    if (!input.propertyType) return setErrorMessage('Select a Property Type!');
-    if (!input.placeName) return setErrorMessage('Place Name is required!');
-    if (!input.rentalForm) return setErrorMessage('Select a Rental Form!');
-    if (!input.country) return setErrorMessage('Select your country!');
-    if (!input.street) return setErrorMessage('Street is required!');
-    if (!input.city) return setErrorMessage('City is required!');
-    if (!input.state) return setErrorMessage('State is required!');
-    if (!input.postalCode) return setErrorMessage('Postal Code is required!');
-    if (!input.acreage) return setErrorMessage('Acreage is required!');
-    if (!input.guests) return setErrorMessage('Guests Number is required!');
-    if (!input.bedroom) return setErrorMessage('Bedroom Number is required!');
-    if (!input.beds) return setErrorMessage('Beds Number is required!');
-    if (!input.bathroom) return setErrorMessage('Bathroom Number is required!');
-    if (!input.kitchen) return setErrorMessage('Kitchen Number is required!');
+    if (!input.propertyType) return createToast('Select a Property Type!');
+    if (!input.placeName) return createToast('Place Name is required!');
+    if (!input.rentalForm) return createToast('Select a Rental Form!');
+    if (!input.country) return createToast('Select your country!');
+    if (!input.street) return createToast('Street is required!');
+    if (!input.city) return createToast('City is required!');
+    if (!input.state) return createToast('State is required!');
+    if (!input.postalCode) return createToast('Postal Code is required!');
+    if (!input.acreage) return createToast('Acreage is required!');
+    if (!input.guests) return createToast('Guests Number is required!');
+    if (!input.bedroom) return createToast('Bedroom Number is required!');
+    if (!input.beds) return createToast('Beds Number is required!');
+    if (!input.bathroom) return createToast('Bathroom Number is required!');
+    if (!input.kitchen) return createToast('Kitchen Number is required!');
     if (!Array.isArray(input?.generalAmenities) || input.generalAmenities.length < 1) {
-      return setErrorMessage('Select Any General Amenities!');
+      return createToast('Select Any General Amenities!');
     }
     if (!Array.isArray(input?.otherAmenities) || input.otherAmenities.length < 1) {
-      return setErrorMessage('Select Any Other Amenities!');
+      return createToast('Select Any Other Amenities!');
     }
     if (!Array.isArray(input?.safeAmenities) || input.safeAmenities.length < 1) {
       return setErrorMessage('Select Any Safe Amenities!');
     }
-    if (!input.smokingRole) return setErrorMessage('Select smoking role!');
-    if (!input.petRole) return setErrorMessage('Select pet role!');
-    if (!input.partyOrganizingRole) return setErrorMessage('Select Party Organizing role!');
-    if (!input.cookingRole) return setErrorMessage('Select Cooking role!');
-    if (!input.placeDescription) return setErrorMessage('Place Description is required!');
-    if (!input.coverImage) return setErrorMessage('Cover Image is required!');
+    if (!input.smokingRole) return createToast('Select smoking role!');
+    if (!input.petRole) return createToast('Select pet role!');
+    if (!input.partyOrganizingRole) return createToast('Select Party Organizing role!');
+    if (!input.cookingRole) return createToast('Select Cooking role!');
+    if (!input.placeDescription) return createToast('Place Description is required!');
+    if (!input.coverImage) return createToast('Cover Image is required!');
     if (!Array.isArray(input?.placeImages) || input.placeImages.length < 1) {
-      return setErrorMessage('Place Image is required!');
+      return createToast('Place Image is required!');
     }
-    if (!input.currency) return setErrorMessage('Select a currency!');
-    if (!input.basePriceMonToThu) return setErrorMessage('Set Base Price!');
-    if (!input.basePriceFriToSun) return setErrorMessage('Set Base Price!');
-    if (!input.longTermPriceDiscount) return setErrorMessage('Set Long Term Price Discount!');
-    if (!input.stayNightMin) return setErrorMessage('Set Stay Night Minimum number!');
-    if (!input.stayNightMax) return setErrorMessage('Set Stay Night Maximum number!');
+    if (!input.currency) return createToast('Select a currency!');
+    if (!input.basePriceMonToThu) return createToast('Set Base Price!');
+    if (!input.basePriceFriToSun) return createToast('Set Base Price!');
+    if (!input.longTermPriceDiscount) return createToast('Set Long Term Price Discount!');
+    if (!input.stayNightMin) return createToast('Set Stay Night Minimum number!');
+    if (!input.stayNightMax) return createToast('Set Stay Night Maximum number!');
   };
 
   // handle negative number now allowed
@@ -219,7 +220,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
         </div>
 
         {/* <!-- Error Alert --> */}
-        {errorMessage && (
+        {/* {errorMessage && (
           <div className='flex justify-between px-6 border py-2  rounded-xl   '>
             <p className='    text-red-500 text-base'>{errorMessage}</p>
 
@@ -228,7 +229,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
               className='text-black group-hover:text-red-500 cursor-pointer'
             />
           </div>
-        )}
+        )} */}
       </form>
     </div>
   );
