@@ -16,6 +16,8 @@ import ButtonPrimary from '@/shared/ButtonPrimary';
 import useFormFields from '@/hooks/useFormFields';
 import { RxCross1 } from 'react-icons/rx';
 import { createToast } from '@/utils/createToast';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined } }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -55,7 +57,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     availabilityDate: []
   });
   const [errorMessage, setErrorMessage] = useState('');
-
+  const router = useRouter();
   let ContentComponent = PageAddListing1;
   switch (Number(pageNumber)) {
     case 1:
@@ -108,7 +110,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
   };
 
   // Form Submit Handler
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Form Validation
@@ -150,6 +152,70 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     if (!input.longTermPriceDiscount) return createToast('Set Long Term Price Discount!');
     if (!input.stayNightMin) return createToast('Set Stay Night Minimum number!');
     if (!input.stayNightMax) return createToast('Set Stay Night Maximum number!');
+
+    // Form Data
+    const formData = new FormData();
+    formData.append('propertyType', String(input.propertyType));
+    formData.append('placeName', String(input.placeName));
+    formData.append('rentalForm', String(input.rentalForm));
+    formData.append('country', String(input.country));
+    formData.append('street', String(input.street));
+    formData.append('roomNumber', String(input.roomNumber));
+    formData.append('city', String(input.city));
+    formData.append('state', String(input.state));
+    formData.append('postalCode', String(input.postalCode));
+    formData.append('acreage', String(input.acreage));
+    formData.append('guests', String(input.guests));
+    formData.append('bedroom', String(input.bedroom));
+    formData.append('beds', String(input.beds));
+    formData.append('bathroom', String(input.bathroom));
+    formData.append('kitchen', String(input.kitchen));
+    input.generalAmenities.forEach((item) => {
+      formData.append('generalAmenities', item);
+    });
+    input.otherAmenities.forEach((item) => {
+      formData.append('otherAmenities', item);
+    });
+    input.safeAmenities.forEach((item) => {
+      formData.append('safeAmenities', item);
+    });
+    formData.append('smokingRole', String(input.smokingRole));
+    formData.append('petRole', String(input.petRole));
+    formData.append('partyOrganizingRole', String(input.partyOrganizingRole));
+    formData.append('cookingRole', String(input.cookingRole));
+    Array.isArray(input.additionalRules) &&
+      input.additionalRules.forEach((item) => {
+        formData.append('additionalRules', item);
+      });
+    formData.append('placeDescription', String(input.placeDescription));
+    formData.append('currency', String(input.currency));
+    formData.append('basePriceMonToThu', String(input.basePriceMonToThu));
+    formData.append('basePriceFriToSun', String(input.basePriceFriToSun));
+    formData.append('longTermPriceDiscount', String(input.longTermPriceDiscount));
+    formData.append('stayNightMin', String(input.stayNightMin));
+    formData.append('stayNightMax', String(input.stayNightMax));
+    Array.isArray(input?.availabilityDate) &&
+      input?.availabilityDate?.forEach((item) => {
+        formData.append('availabilityDate', item);
+      });
+
+    // Image Upload
+    input.coverImage instanceof File && formData.append('coverImage', input.coverImage);
+
+    input.placeImages.forEach((file) => {
+      formData.append('placeImages', file);
+    });
+
+    const response = await axios
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/list`, formData)
+      .then((res) => {
+        console.log(res.data);
+        router.push('/');
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+        createToast(error.response.data.message);
+      });
   };
 
   // handle negative number now allowed
