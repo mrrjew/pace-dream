@@ -5,7 +5,6 @@ import Avatar from '@/shared/Avatar';
 import SwitchDarkMode2 from '@/shared/SwitchDarkMode2';
 import { Popover, Transition } from '@headlessui/react';
 import { app } from 'config/firebase';
-import { useProfile } from '@/context';
 import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -21,7 +20,6 @@ interface Props {
 
 export default function AvatarDropdown({ className = '' }: Props) {
   const [isHost, setIsHost] = useState<boolean>(false);
-  const { user }: any = useProfile();
 
   const handleSwitch = () => {
     setIsHost(!isHost);
@@ -79,7 +77,11 @@ export default function AvatarDropdown({ className = '' }: Props) {
                       <Avatar sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">{user?.first_name}</h4>
+                        <h4 className="font-semibold">
+                          {userInfo && userInfo.first_name
+                            ? `${userInfo.first_name} ${userInfo.last_name}`
+                            : 'John Doe'}
+                        </h4>
                         {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
                       </div>
                     </div>
