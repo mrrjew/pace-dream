@@ -30,6 +30,8 @@ export default function AvatarDropdown({ className = '' }: Props) {
   const { getSession, clearSession } = useSession();
   const { token, userInfo } = getSession();
 
+  const router = useRouter();
+
   const handleLogout = async () => {
     const auth = getAuth(app);
     await auth.signOut();
