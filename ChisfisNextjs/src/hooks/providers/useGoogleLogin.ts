@@ -1,15 +1,19 @@
-import axios from "axios";
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import {
   GoogleAuthProvider,
   app,
   getAuth,
   signInWithPopup,
-} from "config/firebase";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+} from 'config/firebase';
+import Cookies, { set } from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { useSession } from '../useSession';
 
 export const useGoogleLogin = () => {
   const router = useRouter();
+  const { setSession } = useSession();
+
   const authWithGoogle = async () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
@@ -23,7 +27,7 @@ export const useGoogleLogin = () => {
         {},
         {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         }
@@ -36,14 +40,11 @@ export const useGoogleLogin = () => {
 
   const { mutate: googleLogin, isLoading } = useMutation({
     mutationFn: authWithGoogle,
-    onSuccess: (data) => {
-      localStorage.setItem("auth-token", data.data.token);
-      localStorage.setItem("user_id", data.data.id);
-      localStorage.setItem("user_info", JSON.stringify(data.data));
-
-      setTimeout(() => {
-        router.push("/");
-      }, 500);
+    onSuccess: (result) => {
+      const { data } = result;
+      console.log(data, result);
+      setSession(data.token, data, data.user_id);
+      router.push('/');
     },
   });
 
