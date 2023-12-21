@@ -25,8 +25,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { setLocalStorageItem } from '@/utils/localStorageUtil';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { CustomHourInput } from './CustomHourInput';
 
 export interface ListingStayDetailPageProps {}
+
+export type TimeSlot = {
+  hour: number;
+  minute: number;
+};
 
 const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   // time slot state
@@ -93,19 +99,42 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     );
   }
 
-  const [selectedHour, setSelectedHour] = useState(5);
-  const [hoursArray, setHoursArray] = useState(
-    Array.from({ length: 7 }, (_, i) => i + 1)
-  );
-  const nextSevenHours = () => {
-    if (hoursArray[hoursArray.length - 1] === 24) return;
-    setHoursArray((prev) => prev.map((hour) => hour + 7));
-    setSelectedHour((prev) => (prev + 7 < 24 ? prev + 7 : 23));
+  const [selectedHour, setSelectedHour] = useState(1);
+  const [hourDuration, setHourDuration] = useState<{
+    startHour: TimeSlot | null;
+    endHour: TimeSlot | null;
+  }>({ startHour: { hour: 7, minute: 0 }, endHour: { hour: 10, minute: 0 } });
+
+  const handleTimeSlotSelection = (timeSlot: TimeSlot) => {
+    if (!hourDuration.startHour && !hourDuration.endHour) {
+      setHourDuration({ ...hourDuration, startHour: timeSlot });
+    } else if (!hourDuration.endHour) {
+      setHourDuration({ ...hourDuration, endHour: timeSlot });
+    } else {
+      setHourDuration({ startHour: null, endHour: null });
+    }
   };
-  const prevSevenHours = () => {
-    if (hoursArray[0] === 1) return;
-    setHoursArray((prev) => prev.map((hour) => hour - 7));
-    setSelectedHour((prev) => (prev - 7 > 0 ? prev - 7 : 1));
+
+  const checkIfSlotIsSelected = (timeSlot: TimeSlot) => {
+    // first check with start hour
+    if (
+      hourDuration.startHour &&
+      timeSlot.hour === hourDuration.startHour.hour &&
+      timeSlot.minute === hourDuration.startHour.minute
+    ) {
+      return true;
+    }
+
+    // then check with end hour
+    if (
+      hourDuration.endHour &&
+      timeSlot.hour === hourDuration.endHour.hour &&
+      timeSlot.minute === hourDuration.endHour.minute
+    ) {
+      return true;
+    }
+
+    return false;
   };
 
   const today = new Date();
@@ -782,64 +811,39 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       <span className="text-sm text-[#868686]">Select</span>
                       <p>Duration</p>
                     </div>
-                    <div className="flex gap-2">
-                      <span
-                        className={hoursArray[0] === 1 ? 'text-[#878787]' : ''}
-                      >
-                        <FaChevronLeft
-                          onClick={prevSevenHours}
-                          className="cursor-pointer"
-                        />
-                      </span>
-                      <span
-                        className={
-                          hoursArray[hoursArray.length - 1] === 24
-                            ? 'text-[#878787]'
-                            : ''
-                        }
-                      >
-                        <FaChevronRight
-                          onClick={nextSevenHours}
-                          className="cursor-pointer"
-                        />
-                      </span>
-                    </div>
                   </div>
-                  <div className="flex mt-4">
-                    {hoursArray.map((hour) => {
-                      if (hour <= 23 && hour >= 1) {
-                        return (
-                          <div
-                            key={hour}
-                            className={`rounded-3xl border-2 p-2 mx-1 cursor-pointer transition-all ease-in-out ${
-                              hour === selectedHour
-                                ? 'bg-[#574EFA] border-[#574EFA]'
-                                : ''
-                            }`}
-                            onClick={() => setSelectedHour(hour)}
-                          >
-                            <p
-                              className={`text-lg text-center transition-all ease-in-out ${
-                                selectedHour === hour
-                                  ? 'text-white'
-                                  : 'text-[#878787] '
-                              }`}
-                            >
-                              {hour}
-                            </p>
-                            <span
-                              className={`text-xs transition-all ease-in-out ${
-                                selectedHour === hour
-                                  ? 'text-white'
-                                  : 'text-[#9B9B9B]'
-                              }`}
-                            >
-                              Hour
-                            </span>
-                          </div>
-                        );
-                      }
-                    })}
+                  <div className="flex mt-4 justify-around relative">
+                    {[1, 2, 3, 4, 12, 24].map((hour) => (
+                      <div
+                        key={hour}
+                        className={`rounded-3xl border-2 p-2 sm:mr-1 cursor-pointer transition-all ease-in-out ${
+                          hour === selectedHour
+                            ? 'bg-[#574EFA] border-[#574EFA]'
+                            : ''
+                        }`}
+                        onClick={() => setSelectedHour(hour)}
+                      >
+                        <p
+                          className={`text-sm md:text-lg text-center transition-all ease-in-out ${
+                            selectedHour === hour
+                              ? 'text-white'
+                              : 'text-[#878787] '
+                          }`}
+                        >
+                          {hour}
+                        </p>
+                        <span
+                          className={`text-[10px] sm:text-xs transition-all ease-in-out ${
+                            selectedHour === hour
+                              ? 'text-white'
+                              : 'text-[#9B9B9B]'
+                          }`}
+                        >
+                          Hour
+                        </span>
+                      </div>
+                    ))}
+                    <CustomHourInput />
                   </div>
                   <div className="mt-4">
                     <p className="text-lg">Guests</p>
@@ -875,13 +879,13 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       </span>
                     </div>
                   </div>
-                  <div className="flex mt-4">
+                  <div className="flex mt-4 justify-between">
                     {daysList.map((day, index) => {
                       if (day >= today) {
                         return (
                           <div
                             key={index}
-                            className={`rounded-3xl border-2 px-3 py-2 mx-1 cursor-pointer transition-all ease-in-out ${
+                            className={`rounded-3xl border-2 px-2 py-2 cursor-pointer transition-all ease-in-out ${
                               day === selectedDay
                                 ? 'bg-[#574EFA] border-[#574EFA]'
                                 : ''
@@ -898,7 +902,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                               {weekDays[day.getDay()]}
                             </span>
                             <p
-                              className={`text-lg text-center transition-all ease-in-out ${
+                              className={`text-xl text-center transition-all ease-in-out ${
                                 selectedDay === day
                                   ? 'text-white'
                                   : 'text-[#878787] '
@@ -914,16 +918,52 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   <div className="mt-4 w-full">
                     <p className="text-[#878787] text-sm">Select Time</p>
                     <div className="mt-4 grid grid-rows-2 grid-flow-col gap-4 w-full">
-                      <div className="rounded-full bg-[#574EFA] text-center text-white py-2">
+                      <div
+                        className={`rounded-full cursor-pointer text-center  py-2 ${
+                          checkIfSlotIsSelected({ hour: 7, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 7, minute: 0 })
+                        }
+                      >
                         <p>7:00 AM</p>
                       </div>
-                      <div className="rounded-full bg-[#F2F2F7] text-center py-2">
+                      <div
+                        className={`rounded-full cursor-pointer text-center py-2 ${
+                          checkIfSlotIsSelected({ hour: 8, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 8, minute: 0 })
+                        }
+                      >
                         <p>8:00 AM</p>
                       </div>
-                      <div className="rounded-full bg-[#F2F2F7] text-center py-2">
+                      <div
+                        className={`rounded-full cursor-pointer text-center  py-2 ${
+                          checkIfSlotIsSelected({ hour: 9, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 9, minute: 0 })
+                        }
+                      >
                         <p>9:00 AM</p>
                       </div>
-                      <div className="rounded-full bg-[#574EFA] text-center text-white py-2">
+                      <div
+                        className={`rounded-full cursor-pointer text-center py-2 ${
+                          checkIfSlotIsSelected({ hour: 10, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 10, minute: 0 })
+                        }
+                      >
                         <p>10:00 AM</p>
                       </div>
                     </div>
