@@ -123,7 +123,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
             <SignupForm
               email={userEmail}
               mobile={mobile}
-              signupMethod={SignupMethod.MOBILE}
+              signupMethod={signupMethod}
             />
           ) : (
             <>
