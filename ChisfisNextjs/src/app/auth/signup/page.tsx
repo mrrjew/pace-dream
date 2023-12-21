@@ -14,13 +14,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FC, useState } from 'react';
+import { SignupMethod } from '@/utils/types/SignupMethod';
 
 export interface PageSignUpProps {}
-
-export enum SignupMethod {
-  EMAIL = 'email',
-  MOBILE = 'mobile',
-}
 
 const PageSignUp: FC<PageSignUpProps> = ({}) => {
   const { googleLogin, isLoading: googleLoggingin } = useGoogleLogin();
