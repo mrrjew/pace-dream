@@ -31,7 +31,6 @@
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "next": "^13.4.3",
-    "next-auth": "^4.24.5",
     "primereact": "^9.6.2",
     "rc-slider": "^10.1.1",
     "react": "^18.2.0",
