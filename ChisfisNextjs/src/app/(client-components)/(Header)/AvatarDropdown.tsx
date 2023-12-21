@@ -1,27 +1,54 @@
-"use client";
+'use client';
 
-import { Popover, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import Avatar from "@/shared/Avatar";
-import SwitchDarkMode2 from "@/shared/SwitchDarkMode2";
-import Link from "next/link";
-import { TbLayoutDashboard } from "react-icons/tb";
-import { BsChat } from "react-icons/bs";
-import { RiBuildingLine } from "react-icons/ri";
-import { FiPieChart } from "react-icons/fi";
-import { BsThreeDots, BsBookmark } from "react-icons/bs";
-import { useProfile } from "@/context";
+import { useSession } from '@/hooks/useSession';
+import Avatar from '@/shared/Avatar';
+import SwitchDarkMode2 from '@/shared/SwitchDarkMode2';
+import { Popover, Transition } from '@headlessui/react';
+import { app } from 'config/firebase';
+import { getAuth } from 'firebase/auth';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Fragment, useState } from 'react';
+import { BsBookmark, BsChat, BsThreeDots } from 'react-icons/bs';
+import { FiPieChart } from 'react-icons/fi';
+import { RiBuildingLine } from 'react-icons/ri';
+import { TbLayoutDashboard } from 'react-icons/tb';
 
 interface Props {
   className?: string;
 }
 
-export default function AvatarDropdown({ className = "" }: Props) {
+export default function AvatarDropdown({ className = '' }: Props) {
   const [isHost, setIsHost] = useState<boolean>(false);
-  const { user }: any = useProfile();
 
   const handleSwitch = () => {
     setIsHost(!isHost);
+  };
+
+  const { getSession, clearSession } = useSession();
+  const { token, userInfo } = getSession();
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const auth = getAuth(app);
+    await auth.signOut();
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res);
+    if (res.ok) {
+      clearSession();
+      setTimeout(() => {
+        router.push('/auth/login');
+      }, 200);
+    }
   };
 
   return (
@@ -50,7 +77,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       <Avatar sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold">{user?.first_name}</h4>
+                        <h4 className="font-semibold">
+                          {userInfo && userInfo.first_name
+                            ? `${userInfo.first_name} ${userInfo.last_name}`
+                            : 'John Doe'}
+                        </h4>
                         {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
                       </div>
                     </div>
@@ -68,7 +99,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           Switch to host mode
                         </button>
                         <Link
-                          href={"/account"}
+                          href={'/account'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -97,18 +128,25 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             </svg>
                           </div>
                           <div className="ml-4">
-                            <p className="text-sm font-medium ">{"My Account"}</p>
+                            <p className="text-sm font-medium ">
+                              {'My Account'}
+                            </p>
                           </div>
                         </Link>
 
                         {/* ------------------ 2 --------------------- */}
                         <Link
-                          href={"/author"}
+                          href={'/author'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                            >
                               <path
                                 d="M8 12.2H15"
                                 stroke="currentColor"
@@ -144,18 +182,25 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             </svg>
                           </div>
                           <div className="ml-4">
-                            <p className="text-sm font-medium ">{"My bookings"}</p>
+                            <p className="text-sm font-medium ">
+                              {'My bookings'}
+                            </p>
                           </div>
                         </Link>
 
                         {/* ------------------ 2 --------------------- */}
                         <Link
-                          href={"/account-savelists"}
+                          href={'/account-savelists'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                            >
                               <path
                                 d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
                                 stroke="currentColor"
@@ -166,7 +211,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             </svg>
                           </div>
                           <div className="ml-4">
-                            <p className="text-sm font-medium ">{"Wishlist"}</p>
+                            <p className="text-sm font-medium ">{'Wishlist'}</p>
                           </div>
                         </Link>
                       </>
@@ -183,7 +228,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           Switch to guest mode
                         </button>
                         <Link
-                          href={"/account"}
+                          href={'/account'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -212,29 +257,36 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             </svg>
                           </div>
                           <div className="ml-4">
-                            <p className="text-sm font-medium ">{"My Account"}</p>
+                            <p className="text-sm font-medium ">
+                              {'My Account'}
+                            </p>
                           </div>
                         </Link>
 
                         {/* ------------------ Host Dashboard --------------------- */}
 
                         <Link
-                          href={"/host-mode/host-dashboard"}
+                          href={'/host-mode/host-dashboard'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                            <TbLayoutDashboard size={22} className="mr-2 ml-0.5" />
+                            <TbLayoutDashboard
+                              size={22}
+                              className="mr-2 ml-0.5"
+                            />
                           </div>
                           <div className="ml-2">
-                            <p className="text-sm font-medium ">{"Host Dashboard"}</p>
+                            <p className="text-sm font-medium ">
+                              {'Host Dashboard'}
+                            </p>
                           </div>
                         </Link>
 
                         {/* ------------------ Booking--------------------- */}
 
                         <Link
-                          href={"/host-mode/booking"}
+                          href={'/host-mode/booking'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -242,14 +294,14 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             <BsBookmark size={22} className="mr-2 ml-0.5" />
                           </div>
                           <div className="ml-2">
-                            <p className="text-sm font-medium ">{"Booking"}</p>
+                            <p className="text-sm font-medium ">{'Booking'}</p>
                           </div>
                         </Link>
 
                         {/* ------------------ Inbox --------------------- */}
 
                         <Link
-                          href={"/host-mode/host-inbox"}
+                          href={'/host-mode/host-inbox'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -257,14 +309,14 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             <BsChat size={22} className="mr-2 ml-0.5" />
                           </div>
                           <div className="ml-2">
-                            <p className="text-sm font-medium ">{"Inbox"}</p>
+                            <p className="text-sm font-medium ">{'Inbox'}</p>
                           </div>
                         </Link>
 
                         {/* ------------------ Space --------------------- */}
 
                         <Link
-                          href={"/host-mode/host-space"}
+                          href={'/host-mode/host-space'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -272,14 +324,14 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             <RiBuildingLine size={22} className="mr-2 ml-0.5" />
                           </div>
                           <div className="ml-2">
-                            <p className="text-sm font-medium ">{"Space"}</p>
+                            <p className="text-sm font-medium ">{'Space'}</p>
                           </div>
                         </Link>
 
                         {/* ------------------ Business --------------------- */}
 
                         <Link
-                          href={"/host-mode/host-business"}
+                          href={'/host-mode/host-business'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -287,14 +339,14 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             <FiPieChart size={22} className="mr-2 ml-0.5" />
                           </div>
                           <div className="ml-2">
-                            <p className="text-sm font-medium ">{"Business"}</p>
+                            <p className="text-sm font-medium ">{'Business'}</p>
                           </div>
                         </Link>
 
                         {/* ------------------ More --------------------- */}
 
                         <Link
-                          href={"/"}
+                          href={'/'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                           onClick={() => close()}
                         >
@@ -302,7 +354,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             <BsThreeDots size={22} className="mr-2 ml-0.5" />
                           </div>
                           <div className="ml-2">
-                            <p className="text-sm font-medium ">{"More"}</p>
+                            <p className="text-sm font-medium ">{'More'}</p>
                           </div>
                         </Link>
                       </>
@@ -345,7 +397,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </svg>
                         </div>
                         <div className="ml-4">
-                          <p className="text-sm font-medium ">{"Dark theme"}</p>
+                          <p className="text-sm font-medium ">{'Dark theme'}</p>
                         </div>
                       </div>
                       <SwitchDarkMode2 />
@@ -353,12 +405,18 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      href={"/#"}
+                      href={'/#'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path
                             d="M11.97 22C17.4928 22 21.97 17.5228 21.97 12C21.97 6.47715 17.4928 2 11.97 2C6.44715 2 1.97 6.47715 1.97 12C1.97 17.5228 6.44715 22 11.97 22Z"
                             stroke="currentColor"
@@ -404,18 +462,24 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         </svg>
                       </div>
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Help"}</p>
+                        <p className="text-sm font-medium ">{'Help'}</p>
                       </div>
                     </Link>
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      href={"/#"}
+                      href={'/#'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path
                             d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54"
                             stroke="currentColor"
@@ -439,8 +503,8 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           />
                         </svg>
                       </div>
-                      <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Log out"}</p>
+                      <div className="ml-4" onClick={handleLogout}>
+                        <p className="text-sm font-medium ">{'Log out'}</p>
                       </div>
                     </Link>
                   </div>

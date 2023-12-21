@@ -1,37 +1,45 @@
-"use client";
+'use client';
 
-import React, { FC, Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { ArrowRightIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
-import CommentListing from "@/components/CommentListing";
-import FiveStartIconForRate from "@/components/FiveStartIconForRate";
-import StartRating from "@/components/StartRating";
-import Avatar from "@/shared/Avatar";
-import Badge from "@/shared/Badge";
-import ButtonCircle from "@/shared/ButtonCircle";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import ButtonSecondary from "@/shared/ButtonSecondary";
-import ButtonClose from "@/shared/ButtonClose";
-import Input from "@/shared/Input";
-import LikeSaveBtns from "@/components/LikeSaveBtns";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { Amenities_demos, PHOTOS } from "./constant";
-import StayDatesRangeInput from "./StayDatesRangeInput";
-import GuestsInput from "./GuestsInput";
-import SectionDateRange from "../SectionDateRange";
-import { Route } from "next";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
-import { setLocalStorageItem } from "@/utils/localStorageUtil";
+import React, { FC, Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { ArrowRightIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
+import CommentListing from '@/components/CommentListing';
+import FiveStartIconForRate from '@/components/FiveStartIconForRate';
+import StartRating from '@/components/StartRating';
+import Avatar from '@/shared/Avatar';
+import Badge from '@/shared/Badge';
+import ButtonCircle from '@/shared/ButtonCircle';
+import ButtonPrimary from '@/shared/ButtonPrimary';
+import ButtonSecondary from '@/shared/ButtonSecondary';
+import ButtonClose from '@/shared/ButtonClose';
+import Input from '@/shared/Input';
+import LikeSaveBtns from '@/components/LikeSaveBtns';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { Amenities_demos, PHOTOS } from './constant';
+import StayDatesRangeInput from './StayDatesRangeInput';
+import GuestsInput from './GuestsInput';
+import SectionDateRange from '../SectionDateRange';
+import { Route } from 'next';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { setLocalStorageItem } from '@/utils/localStorageUtil';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { CustomHourInput } from './CustomHourInput';
 
 export interface ListingStayDetailPageProps {}
 
-const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
+export type TimeSlot = {
+  hour: number;
+  minute: number;
+};
 
+const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   // time slot state
 
-  const [selectedTimeSlots, setSelectedTimeSlots] = useState<{ [day: string]: string[] }>({});
+  const [selectedTimeSlots, setSelectedTimeSlots] = useState<{
+    [day: string]: string[];
+  }>({});
 
   // Function to toggle a time slot's selection for a specific day
 
@@ -51,7 +59,6 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     return (selectedTimeSlots[day] || []).includes(timeSlot);
   };
 
-
   //  Date value state
 
   const [startDate, setStartDate] = useState<Date | any>(new Date());
@@ -59,30 +66,109 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   const timeDifference = endDate - startDate;
   const numberOfDays = timeDifference / (1000 * 60 * 60 * 24);
-  setLocalStorageItem("bookedDay", numberOfDays.toString() || '')
+  setLocalStorageItem('bookedDay', numberOfDays.toString() || '');
 
   // Guest value state
-  
+
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(0);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(0);
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(0);
 
   let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
 
-  const [isDay, setIsDay] = useState("Day")
+  const [isDay, setIsDay] = useState('Day');
 
-  const handleDayHourToggle = (clickedItem:string) => {
-    setIsDay(clickedItem)
+  const handleDayHourToggle = (clickedItem: string) => {
+    setIsDay(clickedItem);
+  };
+
+  let headingComponent: React.JSX.Element;
+  if (isDay === 'Day') {
+    headingComponent = (
+      <h3 className="text-2xl font-semibold">
+        {' '}
+        $75 <span className="font-normal"> / Night</span>{' '}
+      </h3>
+    );
+  } else if (isDay === 'Hour') {
+    headingComponent = (
+      <h3 className="text-2xl font-semibold">
+        {' '}
+        $5 <span className="font-normal"> / hour</span>{' '}
+      </h3>
+    );
   }
 
+  const [selectedHour, setSelectedHour] = useState(1);
+  const [hourDuration, setHourDuration] = useState<{
+    startHour: TimeSlot | null;
+    endHour: TimeSlot | null;
+  }>({ startHour: { hour: 7, minute: 0 }, endHour: { hour: 10, minute: 0 } });
 
-  let headingComponent: React.JSX.Element
-      if (isDay === "Day") {
-      headingComponent =  <h3 className="text-2xl font-semibold"> $75 <span className="font-normal"> / Night</span>{" "}</h3>
-    } else if (isDay === "Hour"){
-      headingComponent =  <h3 className="text-2xl font-semibold"> $5 <span className="font-normal"> / hour</span>{" "}</h3>
+  const handleTimeSlotSelection = (timeSlot: TimeSlot) => {
+    if (!hourDuration.startHour && !hourDuration.endHour) {
+      setHourDuration({ ...hourDuration, startHour: timeSlot });
+    } else if (!hourDuration.endHour) {
+      setHourDuration({ ...hourDuration, endHour: timeSlot });
+    } else {
+      setHourDuration({ startHour: null, endHour: null });
     }
-  
+  };
+
+  const checkIfSlotIsSelected = (timeSlot: TimeSlot) => {
+    // first check with start hour
+    if (
+      hourDuration.startHour &&
+      timeSlot.hour === hourDuration.startHour.hour &&
+      timeSlot.minute === hourDuration.startHour.minute
+    ) {
+      return true;
+    }
+
+    // then check with end hour
+    if (
+      hourDuration.endHour &&
+      timeSlot.hour === hourDuration.endHour.hour &&
+      timeSlot.minute === hourDuration.endHour.minute
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const daysArray = Array.from({ length: 7 }, (_, i) => {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    return date;
+  });
+
+  const [daysList, setDaysList] = useState(daysArray);
+  const [selectedDay, setSelectedDay] = useState(daysList[1]);
+
+  const getNextSevenDays = () => {
+    const nextSevenDays = daysList.map((day) => {
+      const date = new Date(day);
+      date.setDate(day.getDate() + 7);
+      return date;
+    });
+    setDaysList(nextSevenDays);
+  };
+
+  const getPrevSevenDaysUntilToday = () => {
+    if (daysList[0] <= today) return;
+    const prevSevenDays = daysList.map((day) => {
+      const date = new Date(day);
+      date.setDate(day.getDate() - 7);
+      return date;
+    });
+    setDaysList(prevSevenDays.filter((day) => day >= today));
+  };
+
+  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const thisPathname = usePathname();
   const router = useRouter();
@@ -111,102 +197,102 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   const bookingTimeSlots = [
     {
-      dayName: "Monday",
-      date: "21",
+      dayName: 'Monday',
+      date: '21',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
     {
-      dayName: "Tuesday",
-      date: "22",
+      dayName: 'Tuesday',
+      date: '22',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
     {
-      dayName: "Wednesday",
-      date: "23",
+      dayName: 'Wednesday',
+      date: '23',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
     {
-      dayName: "Thursday",
-      date: "24",
+      dayName: 'Thursday',
+      date: '24',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
     {
-      dayName: "Friday",
-      date: "25",
+      dayName: 'Friday',
+      date: '25',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
     {
-      dayName: "Saturday",
-      date: "26",
+      dayName: 'Saturday',
+      date: '26',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
 
     {
-      dayName: "Sunday",
-      date: "27",
+      dayName: 'Sunday',
+      date: '27',
       dayTimeSlots: [
-        "7:00 AM",
-        "7:30 AM",
-        "8:00 AM",
-        "8:30 AM",
-        "9:00 AM",
-        "9:30 AM",
-        "10:00 AM",
-        "10:30 AM",
+        '7:00 AM',
+        '7:30 AM',
+        '8:00 AM',
+        '8:30 AM',
+        '9:00 AM',
+        '9:30 AM',
+        '10:00 AM',
+        '10:30 AM',
       ],
     },
   ];
@@ -239,7 +325,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <div className="flex items-center">
           <Avatar hasChecked sizeClass="h-10 w-10" radius="rounded-full" />
           <span className="ml-2.5 text-neutral-500 dark:text-neutral-400">
-            Hosted by{" "}
+            Hosted by{' '}
             <span className="text-neutral-900 dark:text-neutral-200 font-medium">
               Kevin Francis
             </span>
@@ -681,316 +767,472 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const renderSidebar = () => {
     return (
       <div className="listingSectionSidebar__wrap shadow-xl">
-            <Tabs>
-                <div className="card">
-                  <div className="card-body">
-                    {headingComponent}
-                    <div className="mt-5">
-                      <TabList>
-                        <div className="border-card border rounded-full flex gap-2 w-[138px] h-[44px] p-[1px]">
-                          <Tab className=" px-4 py-2 rounded-full text-[#49556D] text-[15px] font-[600]">
-                            <button  onClick={() => handleDayHourToggle("Hour")}>Hour</button>
-                          </Tab>
-                          <Tab className="text-[#49556D] text-[15px] font-[600] px-4 py-2 rounded-full  ">
-                            <button  onClick={() => handleDayHourToggle("Day")}>Day</button>
-                          </Tab>
-                        </div>
-                      </TabList>
+        <Tabs
+          selectedTabClassName="text-white bg-[#574EFA]"
+          selectedIndex={isDay === 'Hour' ? 0 : 1}
+        >
+          <div className="card">
+            <div className="card-body">
+              {headingComponent}
+              <div className="mt-5">
+                <TabList className="border-0">
+                  <div className="border-card border rounded-full flex w-full h-[44px]">
+                    <Tab
+                      className={` py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${
+                        isDay === 'Day' ? 'bg-[#F8F9FB]' : ''
+                      }`}
+                    >
+                      <button
+                        onClick={() => handleDayHourToggle('Hour')}
+                        className="w-full text-center"
+                      >
+                        Hour
+                      </button>
+                    </Tab>
+                    <Tab
+                      className={`py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${
+                        isDay === 'Hour' ? 'bg-[#F8F9FB]' : ''
+                      }`}
+                    >
+                      <button
+                        onClick={() => handleDayHourToggle('Day')}
+                        className="text-center w-full"
+                      >
+                        Day
+                      </button>
+                    </Tab>
+                  </div>
+                </TabList>
 
-                      {/* hour tab pannel  */}
-                      <TabPanel>
-                        <p className="text-[#272D37] text-sm font-[500] mt-4">
-                          Select Duration
-                        </p>
-                        <select className="select border border-card focus:outline-none lg:w-full w-[50vw] rounded-full mt-3 mb-[10px]  max-w-xs">
-                          <option disabled selected>
-                            1 hour
-                          </option>
-                          <option>1 hour 30 minutes</option>
-                          <option>2 hours</option>
-                          <option>2 hours 30 minutes</option>
-                          <option>3 hours</option>
-                          <option>3 hours 30 minutes</option>
-                          <option>4 hours</option>
-                          <option>4 hours 30 minutes</option>
-                          <option>5 hours</option>
-                          <option>5 hours 30 minutes</option>
-                        </select>
-                        <button onClick={openPopup} className="text-[#574EFA] text-sm font-medium flex left-0 cursor-pointer">
-                          See available time slots
-                        </button>
-
-                        <div>
-                          <GuestsInput
-                                  guestAdultsInputValue={guestAdultsInputValue}
-                                  setGuestAdultsInputValue={setGuestAdultsInputValue}
-                                  guestChildrenInputValue={guestChildrenInputValue}
-                                  setGuestChildrenInputValue={setGuestChildrenInputValue}
-                                  guestInfantsInputValue={guestInfantsInputValue}
-                                  setGuestInfantsInputValue={setGuestInfantsInputValue}
-                                  />
-                        </div>
-
-                        <div className="mt-4">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p>$75 x {numberOfDays} nights</p>
-                              </div>
-                              <div>
-                                <p>${75 * numberOfDays}</p>
-                              </div>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p>Cleaning fees</p>
-                              </div>
-                              <div>
-                                <p>$0</p>
-                              </div>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p>Weekly discount</p>
-                              </div>
-                              <div>
-                                <p className="text-[#10B981]">-$0</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="border border-light-primary my-4"></div>
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="font-semibold">Total</p>
-                            </div>
-                            <div>
-                              {numberOfDays && <p className="font-semibold">$ {75 * numberOfDays} </p>}
-                            </div>
-                          </div>
-
-                        {isSeeMoreDetailsOpen && (
-                          <div className="fixed top-28 lg:left-40 w-3/4 h-[80%] flex justify-center items-center shadow-2xl bg-opacity-50 z-50 ">
-                            <div className="lg:overflow-hidden overflow-auto bg-white rounded-lg p-6 pt-3 my-5 max-w-[1293px] lg:h-[1034px] w-full  h-auto  max-h-full py-10 mx-4 relative">
-                              <button
-                                onClick={closePopup}
-                                className="absolute lg:top-9 lg:right-10 top-1 right-4 border-2 font-bold text-black h-8 w-8 flex justify-center items-center bg-gray-200 rounded-full p-1"
-                              >
-                                &#10005;
-                              </button>
-                              <div className="">
-                                <div className="select-area grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-start">
-                                  <div>
-                                    <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
-                                      Select Duration
-                                    </p>
-                                    <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
-                                      {" "}
-                                      <option disabled selected>
-                                       1 Hour
-                                      </option>
-                                      <option>1 hour 30 minutes</option>
-                                      <option>2 hours</option>
-                                      <option>2 hours 30 minutes</option>
-                                      <option>3 hours</option>
-                                      <option>3 hours 30 minutes</option>
-                                      <option>4 hours</option>
-                                      <option>4 hours 30 minutes</option>
-                                      <option>5 hours</option>
-                                      <option>5 hours 30 minutes</option>
-                                    </select>
-                                  </div>
-
-                                  <div>
-                                    <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
-                                      Year
-                                    </p>
-                                    <select className="w-[206px] select border border-card focus:outline-none rounded-full mt-2 mb-4  max-w-xs">
-                                      {" "}
-                                      <option disabled selected>
-                                        2023
-                                      </option>
-                                      <option>2023</option>
-                                      <option>2024</option>
-                                      <option>2025</option>
-                                      <option>2026</option>
-                                      <option>2027</option>
-                                    </select>
-                                  </div>
-
-                                  <div>
-                                    <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
-                                      Month
-                                    </p>
-                                    <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
-                                      {" "}
-                                      <option disabled selected>
-                                        Month
-                                      </option>
-                                      <option>January</option>
-                                      <option>February</option>
-                                      <option>March</option>
-                                      <option>April</option>
-                                      <option>May</option>
-                                      <option>June</option>
-                                      <option>July</option>
-                                      <option>August</option>
-                                      <option>September</option>
-                                      <option>October</option>
-                                      <option>November</option>
-                                      <option>December</option>
-                                    </select>
-                                  </div>
-
-                                  <div>
-                                    <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
-                                      Week
-                                    </p>
-                                    <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
-                                      {" "}
-                                      <option disabled selected>
-                                        Week
-                                      </option>
-                                      <option>Week</option>
-                                      <option>21st - 27st</option>
-                                      <option>31st - 37st</option>
-                                      <option>41st - 47st</option>
-                                      <option>51st - 57st</option>
-                                      <option>11st - 17st</option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="flex justify-between overflow-auto mt-5 lg:gap-1 md:gap-4 gap-7">
-                                {bookingTimeSlots.map((bookingTime, idx) => {
-                                  return (
-                                    <div key={idx} className="">
-                                      <div className="text-center">
-                                        <div className="lg:border-t-8 border-[#685df8] lg:rounded-xl lg:bg-[#ECEBFF] text-[#473bf0] lg:text-[14px] font-semibold lg:py-1 flex lg:flex-col flex-row text-[14px] lg:px-7 lg:mb- mb-2">
-                                          <h1 className="">
-                                            {bookingTime.dayName}
-                                          </h1>
-                                          <p className=" lg:text-center text-left">
-                                            {bookingTime.date}
-                                          </p>
-                                        </div>
-                                        <div className="flex flex-col">
-                                          {bookingTime.dayTimeSlots.map(
-                                            (dayTime, idx) => {
-                                              return (
-                                                <div
-                                                  className="text-center flex mb-1"
-                                                  key={idx}
-                                                >
-                                                  <button
-                                                    className={`block lg:mt-3 mt-4 mx-auto text-[16px] font-medium ${
-                                                      isTimeSlotSelected(bookingTime.dayName, dayTime) ? "text-[#4845f7]" : "text-[#929292]"
-                                                    } lg:bg-transparent lg:border-none lg:px-0 lg:py-0 bg-[#F2F2F7] rounded-full lg:min-w-0 min-w-[110px] py-2 px-3`}
-                                                    onClick={() => toggleTimeSlotSelection(bookingTime.dayName, dayTime)}
-                                                  >
-                                                    {dayTime}
-                                                  </button>
-                                                </div>
-                                              );
-                                            }
-                                          )}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-
-                              <div>
-                                <div className="lg:flex hidden mt-4 h-[10px] mx-6 rounded-full bg-gradient-to-b from-[#827BFF] to-[#DDDBFF]"></div>
-                                <div className="lg:flex block justify-between items-center mt-3 ">
-                                  <div className="lg:flex gap-7 items-center  mx-6 hidden">
-                                    <button className="text-[16px] font-medium text-purple">
-                                      Available times
-                                    </button>
-                                    <button className="text-[16px] font-medium text-[#ABABBB]">
-                                      Booked times
-                                    </button>
-                                  </div>
-
-                                  <div className="gap-4 lg:flex">
-                                    <button onClick={closePopup} className="bg-[#F3F2FF] px-5 py-3  font-semibold text-black text-sm rounded-full lg:flex hidden">
-                                      Back
-                                    </button>
-                                    <button className="bg-[#414df3] px-5 py-3 font-semibold text-white text-sm rounded-full w-full">
-                                      Book time
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                  </TabPanel>
-
-
-                      {/* day tab pannel  */}
-                      <TabPanel>
-                        <div className="mt-3">
-                            <StayDatesRangeInput   
-                             startDate={startDate}
-                             endDate={endDate}
-                             setStartDate={setStartDate}
-                             setEndDate={setEndDate}/>
-
-                          <div className="mt-2">
-                              <GuestsInput
-                                      guestAdultsInputValue={guestAdultsInputValue}
-                                      setGuestAdultsInputValue={setGuestAdultsInputValue}
-                                      guestChildrenInputValue={guestChildrenInputValue}
-                                      setGuestChildrenInputValue={setGuestChildrenInputValue}
-                                      guestInfantsInputValue={guestInfantsInputValue}
-                                      setGuestInfantsInputValue={setGuestInfantsInputValue}
-                                      />
-                          </div>
-
-                          <div className="mt-4">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p>$75 x {numberOfDays} nights</p>
-                              </div>
-                              <div>
-                                <p>${75 * numberOfDays}</p>
-                              </div>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p>Cleaning fees</p>
-                              </div>
-                              <div>
-                                <p>$0</p>
-                              </div>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p>Weekly discount</p>
-                              </div>
-                              <div>
-                                <p className="text-[#10B981]">-$0</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="border border-light-primary my-4"></div>
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="font-semibold">Total</p>
-                            </div>
-                            <div>
-                              {numberOfDays && <p className="font-semibold">$ {75 * numberOfDays} </p>}
-                            </div>
-                          </div>
-                        </div>
-                      </TabPanel>
+                {/* hour tab pannel  */}
+                <TabPanel>
+                  <div className="flex justify-between items-center mt-4">
+                    <div>
+                      <span className="text-sm text-[#868686]">Select</span>
+                      <p>Duration</p>
                     </div>
                   </div>
-                </div>
-              
-          </Tabs>
-        <ButtonPrimary href={"/checkout"}>Send Proposal</ButtonPrimary>
+                  <div className="flex mt-4 justify-around relative">
+                    {[1, 2, 3, 4, 12, 24].map((hour) => (
+                      <div
+                        key={hour}
+                        className={`rounded-3xl border-2 p-2 sm:mr-1 cursor-pointer transition-all ease-in-out ${
+                          hour === selectedHour
+                            ? 'bg-[#574EFA] border-[#574EFA]'
+                            : ''
+                        }`}
+                        onClick={() => setSelectedHour(hour)}
+                      >
+                        <p
+                          className={`text-sm md:text-lg text-center transition-all ease-in-out ${
+                            selectedHour === hour
+                              ? 'text-white'
+                              : 'text-[#878787] '
+                          }`}
+                        >
+                          {hour}
+                        </p>
+                        <span
+                          className={`text-[10px] sm:text-xs transition-all ease-in-out ${
+                            selectedHour === hour
+                              ? 'text-white'
+                              : 'text-[#9B9B9B]'
+                          }`}
+                        >
+                          Hour
+                        </span>
+                      </div>
+                    ))}
+                    <CustomHourInput />
+                  </div>
+                  <div className="mt-4">
+                    <p className="text-lg">Guests</p>
+                    <GuestsInput
+                      className="mt-4"
+                      guestAdultsInputValue={guestAdultsInputValue}
+                      setGuestAdultsInputValue={setGuestAdultsInputValue}
+                      guestChildrenInputValue={guestChildrenInputValue}
+                      setGuestChildrenInputValue={setGuestChildrenInputValue}
+                      guestInfantsInputValue={guestInfantsInputValue}
+                      setGuestInfantsInputValue={setGuestInfantsInputValue}
+                    />
+                  </div>
+
+                  <div className="flex justify-between items-center mt-4">
+                    <div>
+                      <span className="text-sm text-[#868686]">Select</span>
+                      <p>Day</p>
+                    </div>
+                    <div className="flex gap-2">
+                      {/* //TODO: disable prev and next button after few switches - think of when */}
+                      <span className="">
+                        <FaChevronLeft
+                          onClick={getPrevSevenDaysUntilToday}
+                          className="cursor-pointer"
+                        />
+                      </span>
+                      <span className="">
+                        <FaChevronRight
+                          onClick={getNextSevenDays}
+                          className="cursor-pointer"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex mt-4 justify-between">
+                    {daysList.map((day, index) => {
+                      if (day >= today) {
+                        return (
+                          <div
+                            key={index}
+                            className={`rounded-3xl border-2 px-2 py-2 cursor-pointer transition-all ease-in-out ${
+                              day === selectedDay
+                                ? 'bg-[#574EFA] border-[#574EFA]'
+                                : ''
+                            }`}
+                            onClick={() => setSelectedDay(day)}
+                          >
+                            <span
+                              className={`text-xs transition-all ease-in-out ${
+                                selectedDay === day
+                                  ? 'text-white'
+                                  : 'text-[#9B9B9B]'
+                              }`}
+                            >
+                              {weekDays[day.getDay()]}
+                            </span>
+                            <p
+                              className={`text-xl text-center transition-all ease-in-out ${
+                                selectedDay === day
+                                  ? 'text-white'
+                                  : 'text-[#878787] '
+                              }`}
+                            >
+                              {day.getDate()}
+                            </p>
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
+                  <div className="mt-4 w-full">
+                    <p className="text-[#878787] text-sm">Select Time</p>
+                    <div className="mt-4 grid grid-rows-2 grid-flow-col gap-4 w-full">
+                      <div
+                        className={`rounded-full cursor-pointer text-center  py-2 ${
+                          checkIfSlotIsSelected({ hour: 7, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 7, minute: 0 })
+                        }
+                      >
+                        <p>7:00 AM</p>
+                      </div>
+                      <div
+                        className={`rounded-full cursor-pointer text-center py-2 ${
+                          checkIfSlotIsSelected({ hour: 8, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 8, minute: 0 })
+                        }
+                      >
+                        <p>8:00 AM</p>
+                      </div>
+                      <div
+                        className={`rounded-full cursor-pointer text-center  py-2 ${
+                          checkIfSlotIsSelected({ hour: 9, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 9, minute: 0 })
+                        }
+                      >
+                        <p>9:00 AM</p>
+                      </div>
+                      <div
+                        className={`rounded-full cursor-pointer text-center py-2 ${
+                          checkIfSlotIsSelected({ hour: 10, minute: 0 })
+                            ? 'bg-[#574EFA] text-white'
+                            : 'bg-[#F2F2F7]'
+                        }`}
+                        onClick={() =>
+                          handleTimeSlotSelection({ hour: 10, minute: 0 })
+                        }
+                      >
+                        <p>10:00 AM</p>
+                      </div>
+                    </div>
+                    <div
+                      className="mt-6 cursor-pointer"
+                      onClick={() => setIsSeeMoreDetailsOpen(true)}
+                    >
+                      <p className="text-lg text-center">View More...</p>
+                    </div>
+                  </div>
+
+                  <ButtonPrimary href={'/checkout'} className="w-full mt-4">
+                    Send Proposal
+                  </ButtonPrimary>
+
+                  <p className="mt-4 text-[#9DA1AB] text-sm text-center">
+                    You won't be charged yet
+                  </p>
+
+                  <div className="flex justify-between items-center mt-4">
+                    <p>$5 x 2 hours</p>
+                    <p>$10</p>
+                  </div>
+                  <hr className="mt-4" />
+                  <div className="flex justify-between items-center mt-4">
+                    <p>Total</p>
+                    <p>$10</p>
+                  </div>
+
+                  {isSeeMoreDetailsOpen && (
+                    <div className="fixed top-28 lg:left-40 w-3/4 h-[80%] flex justify-center items-center shadow-2xl bg-opacity-50 z-50 ">
+                      <div className="lg:overflow-hidden overflow-auto bg-white rounded-lg p-6 pt-3 my-5 max-w-[1293px] lg:h-[1034px] w-full  h-auto  max-h-full py-10 mx-4 relative">
+                        <button
+                          onClick={closePopup}
+                          className="absolute lg:top-9 lg:right-10 top-1 right-4 border-2 font-bold text-black h-8 w-8 flex justify-center items-center bg-gray-200 rounded-full p-1"
+                        >
+                          &#10005;
+                        </button>
+                        <div className="">
+                          <div className="select-area grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 justify-start">
+                            <div>
+                              <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
+                                Select Duration
+                              </p>
+                              <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
+                                {' '}
+                                <option disabled selected>
+                                  1 Hour
+                                </option>
+                                <option>1 hour 30 minutes</option>
+                                <option>2 hours</option>
+                                <option>2 hours 30 minutes</option>
+                                <option>3 hours</option>
+                                <option>3 hours 30 minutes</option>
+                                <option>4 hours</option>
+                                <option>4 hours 30 minutes</option>
+                                <option>5 hours</option>
+                                <option>5 hours 30 minutes</option>
+                              </select>
+                            </div>
+
+                            <div>
+                              <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
+                                Year
+                              </p>
+                              <select className="w-[206px] select border border-card focus:outline-none rounded-full mt-2 mb-4  max-w-xs">
+                                {' '}
+                                <option disabled selected>
+                                  2023
+                                </option>
+                                <option>2023</option>
+                                <option>2024</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
+                              </select>
+                            </div>
+
+                            <div>
+                              <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
+                                Month
+                              </p>
+                              <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
+                                {' '}
+                                <option disabled selected>
+                                  Month
+                                </option>
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                              </select>
+                            </div>
+
+                            <div>
+                              <p className="ml-2 mb-1 text-[#272D37] text-[16px] font-medium">
+                                Week
+                              </p>
+                              <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
+                                {' '}
+                                <option disabled selected>
+                                  Week
+                                </option>
+                                <option>Week</option>
+                                <option>21st - 27st</option>
+                                <option>31st - 37st</option>
+                                <option>41st - 47st</option>
+                                <option>51st - 57st</option>
+                                <option>11st - 17st</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between overflow-auto mt-5 lg:gap-1 md:gap-4 gap-7">
+                          {bookingTimeSlots.map((bookingTime, idx) => {
+                            return (
+                              <div key={idx} className="">
+                                <div className="text-center">
+                                  <div className="lg:border-t-8 border-[#685df8] lg:rounded-xl lg:bg-[#ECEBFF] text-[#473bf0] lg:text-[14px] font-semibold lg:py-1 flex lg:flex-col flex-row text-[14px] lg:px-7 lg:mb- mb-2">
+                                    <h1 className="">{bookingTime.dayName}</h1>
+                                    <p className=" lg:text-center text-left">
+                                      {bookingTime.date}
+                                    </p>
+                                  </div>
+                                  <div className="flex flex-col">
+                                    {bookingTime.dayTimeSlots.map(
+                                      (dayTime, idx) => {
+                                        return (
+                                          <div
+                                            className="text-center flex mb-1"
+                                            key={idx}
+                                          >
+                                            <button
+                                              className={`block lg:mt-3 mt-4 mx-auto text-[16px] font-medium ${
+                                                isTimeSlotSelected(
+                                                  bookingTime.dayName,
+                                                  dayTime
+                                                )
+                                                  ? 'text-[#4845f7]'
+                                                  : 'text-[#929292]'
+                                              } lg:bg-transparent lg:border-none lg:px-0 lg:py-0 bg-[#F2F2F7] rounded-full lg:min-w-0 min-w-[110px] py-2 px-3`}
+                                              onClick={() =>
+                                                toggleTimeSlotSelection(
+                                                  bookingTime.dayName,
+                                                  dayTime
+                                                )
+                                              }
+                                            >
+                                              {dayTime}
+                                            </button>
+                                          </div>
+                                        );
+                                      }
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        <div>
+                          <div className="lg:flex hidden mt-4 h-[10px] mx-6 rounded-full bg-gradient-to-b from-[#827BFF] to-[#DDDBFF]"></div>
+                          <div className="lg:flex block justify-between items-center mt-3 ">
+                            <div className="lg:flex gap-7 items-center  mx-6 hidden">
+                              <button className="text-[16px] font-medium text-purple">
+                                Available times
+                              </button>
+                              <button className="text-[16px] font-medium text-[#ABABBB]">
+                                Booked times
+                              </button>
+                            </div>
+
+                            <div className="gap-4 lg:flex">
+                              <button
+                                onClick={closePopup}
+                                className="bg-[#F3F2FF] px-5 py-3  font-semibold text-black text-sm rounded-full lg:flex hidden"
+                              >
+                                Back
+                              </button>
+                              <button className="bg-[#414df3] px-5 py-3 font-semibold text-white text-sm rounded-full w-full">
+                                Book time
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </TabPanel>
+
+                {/* day tab pannel  */}
+                <TabPanel>
+                  <div className="mt-3">
+                    <StayDatesRangeInput
+                      startDate={startDate}
+                      endDate={endDate}
+                      setStartDate={setStartDate}
+                      setEndDate={setEndDate}
+                    />
+
+                    <div className="mt-2">
+                      <GuestsInput
+                        guestAdultsInputValue={guestAdultsInputValue}
+                        setGuestAdultsInputValue={setGuestAdultsInputValue}
+                        guestChildrenInputValue={guestChildrenInputValue}
+                        setGuestChildrenInputValue={setGuestChildrenInputValue}
+                        guestInfantsInputValue={guestInfantsInputValue}
+                        setGuestInfantsInputValue={setGuestInfantsInputValue}
+                      />
+                    </div>
+
+                    <div className="mt-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p>$75 x {numberOfDays} nights</p>
+                        </div>
+                        <div>
+                          <p>${75 * numberOfDays}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p>Cleaning fees</p>
+                        </div>
+                        <div>
+                          <p>$0</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p>Weekly discount</p>
+                        </div>
+                        <div>
+                          <p className="text-[#10B981]">-$0</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border border-light-primary my-4"></div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-semibold">Total</p>
+                      </div>
+                      <div>
+                        {numberOfDays && (
+                          <p className="font-semibold">
+                            $ {75 * numberOfDays}{' '}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <ButtonPrimary href={'/checkout'} className="w-full">
+                    Send Proposal
+                  </ButtonPrimary>
+                </TabPanel>
+              </div>
+            </div>
+          </div>
+        </Tabs>
       </div>
     );
   };
@@ -1017,14 +1259,14 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             <div
               key={index}
               className={`relative rounded-md sm:rounded-xl overflow-hidden ${
-                index >= 3 ? "hidden sm:block" : ""
+                index >= 3 ? 'hidden sm:block' : ''
               }`}
             >
               <div className="aspect-w-4 aspect-h-3 sm:aspect-w-6 sm:aspect-h-5">
                 <Image
                   fill
                   className="object-cover rounded-md sm:rounded-xl "
-                  src={item || ""}
+                  src={item || ''}
                   alt=""
                   sizes="400px"
                 />
@@ -1067,7 +1309,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
         {/* SIDEBAR */}
         <div className="flex-grow mt-14 lg:mt-0">
-          <div className="sticky top-28">{renderSidebar()}</div>
+          <div className="top-28">{renderSidebar()}</div>
         </div>
       </main>
     </div>
