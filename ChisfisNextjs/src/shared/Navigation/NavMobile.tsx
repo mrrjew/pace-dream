@@ -1,17 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import ButtonClose from "@/shared/ButtonClose";
-import Logo from "@/shared/Logo";
-import { Disclosure } from "@headlessui/react";
-import { NavItemType } from "./NavigationItem";
-import { NAVIGATION_DEMO } from "@/data/navigation";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import SocialsList from "@/shared/SocialsList";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import SwitchDarkMode from "@/shared/SwitchDarkMode";
-import Link from "next/link";
-import LangDropdown from "@/app/(client-components)/(Header)/LangDropdown";
+import { NAVIGATION_DEMO } from '@/data/navigation';
+import ButtonClose from '@/shared/ButtonClose';
+import ButtonPrimary from '@/shared/ButtonPrimary';
+import Logo from '@/shared/Logo';
+import SocialsList from '@/shared/SocialsList';
+import SwitchDarkMode from '@/shared/SwitchDarkMode';
+import { Disclosure } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
+import React from 'react';
+import { NavItemType } from './NavigationItem';
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -34,7 +33,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
               className="flex px-4 text-neutral-900 dark:text-neutral-200 text-sm font-medium rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 mt-0.5"
             >
               <span
-                className={`py-2.5 pr-3 ${!i.children ? "block w-full" : ""}`}
+                className={`py-2.5 pr-3 ${!i.children ? 'block w-full' : ''}`}
               >
                 {i.name}
               </span>
@@ -78,7 +77,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
           }}
         >
           <span
-            className={`py-2.5 pr-3 ${!item.children ? "block w-full" : ""}`}
+            className={`py-2.5 pr-3 ${!item.children ? 'block w-full' : ''}`}
           >
             {item.name}
           </span>
@@ -136,11 +135,6 @@ const NavMobile: React.FC<NavMobileProps> = ({
         >
           <ButtonPrimary>Get Template</ButtonPrimary>
         </a>
-
-        <LangDropdown
-          className="flex"
-          panelClassName="z-10 w-screen max-w-[280px] px-4 mb-3 right-3 bottom-full sm:px-0"
-        />
       </div>
     </div>
   );
