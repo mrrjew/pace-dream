@@ -11,7 +11,8 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const sendVerificationEmail = async () => {
+  const sendVerificationEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
     try {
       const response = await axios.post(
