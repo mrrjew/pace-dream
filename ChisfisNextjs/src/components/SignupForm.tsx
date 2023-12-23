@@ -8,7 +8,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const PasswordMatchText = (props: {
+export const PasswordMatchText = (props: {
   password: string;
   confirmPassword: string;
 }) => {
