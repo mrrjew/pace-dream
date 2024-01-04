@@ -245,7 +245,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                 <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
                   Password
                   <Link
-                    href="/auth/login"
+                    href="/auth/forgot-password"
                     className="text-sm underline font-medium"
                   >
                     Forgot password?
