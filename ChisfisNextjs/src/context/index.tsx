@@ -1,5 +1,4 @@
 'use client';
-import { getLocalStorageItem } from '@/utils/localStorageUtil';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -17,7 +16,10 @@ const UserProvider = ({ children }: any) => {
   const token = Cookies.get('auth-token');
 
   const [userState, setUserState] = useState(user);
-  console.log('userState', userState);
+
+  const clearUser = () => {
+    setUserState(null);
+  };
 
   const updateProfile = async (data: any) => {
     axios
@@ -47,7 +49,6 @@ const UserProvider = ({ children }: any) => {
       }
     );
     const data = await response.json();
-    console.log('data', data);
     setUserState(data.data);
   };
 
@@ -61,6 +62,7 @@ const UserProvider = ({ children }: any) => {
     user: userState,
     updateProfile,
     getUser,
+    clearUser,
   };
 
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
