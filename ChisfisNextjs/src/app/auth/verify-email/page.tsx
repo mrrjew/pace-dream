@@ -3,7 +3,8 @@
 import { PasswordMatchText } from '@/components/SignupForm';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Input from '@/shared/Input';
-import axios from 'axios';
+import { Loader } from '@/shared/Loader';
+import axios, { AxiosError } from 'axios';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -46,9 +47,9 @@ export default function VerifyEmailPage() {
     <div className="container mb-24 mt-24 lg:mb-32">
       <div className="max-w-md mx-auto space-y-6">
         {loading ? (
-          <span className="block text-center">Loading</span>
+          <Loader />
         ) : error ? (
-          <span className="block text-center">{error}</span>
+          <span className="block text-center text-neutral-300">{error}</span>
         ) : (
           <ResetPasswordForm email={email} />
         )}
@@ -64,9 +65,11 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
   }>({ password: '', confirmPassword: '' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState('');
+  const [error, setError] = useState('');
 
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError('');
     setLoading(true);
     if (
       resetPassword &&
@@ -85,8 +88,13 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
         setResult('success');
       }
     } catch (error) {
-      console.log(error);
-      setResult('failed');
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 403) {
+          setError(error.response.data.error);
+        } else {
+          setError("Cloudn't reset password. Please try again");
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -103,8 +111,6 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
         Log in
       </Link>
     </div>
-  ) : result && result === 'failed' ? (
-    <div>Failed to change password</div>
   ) : (
     <>
       <h2 className="my-10 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
@@ -152,6 +158,11 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
             confirmPassword={resetPassword.confirmPassword}
           />
         </label>
+        {error && (
+          <span className="block text-center text-sm text-red-400 dark:text-neutral-300">
+            {error}
+          </span>
+        )}
 
         <ButtonPrimary type="submit" loading={loading}>
           Continue

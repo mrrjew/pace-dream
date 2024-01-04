@@ -328,7 +328,7 @@ const VerifyEmailModal = ({ email }: { email: string }) => {
             <form onSubmit={verifyCode} className="max-w-md ">
               <label className="block">
                 <span className="text-neutral-800 dark:text-neutral-200">
-                  Verification Code
+                  A verification code is sent to your registered email address.
                 </span>
                 <Input
                   type="number"

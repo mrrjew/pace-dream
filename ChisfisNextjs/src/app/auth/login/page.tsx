@@ -39,11 +39,17 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
 
   const router = useRouter();
 
+  const setAndClearError = (error: string) => {
+    setError(error);
+    setTimeout(() => {
+      setError('');
+    }, 3000);
+  };
+
   const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     const auth = getAuth(app);
     e.preventDefault();
-    setError('');
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -72,14 +78,14 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
           error.code === 'auth/wrong-password' ||
           error.code === 'auth/user-not-found'
         ) {
-          setError('Invalid email or password');
+          setAndClearError('Invalid email or password');
         }
       } else if (error instanceof AxiosError) {
         if (error.response?.data?.error) {
-          setError(error.response.data.error);
+          setAndClearError(error.response.data.error);
         }
       } else {
-        setError('Something went wrong');
+        setAndClearError('Something went wrong');
       }
     } finally {
       setLoading(false);
@@ -88,7 +94,6 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
 
   const checkMobile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
     try {
       const response = await axios.post(
@@ -130,12 +135,12 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
         }, 200);
         return;
       } else {
-        setError('Phone number does not exist. Please register first');
+        setAndClearError('Phone number does not exist. Please register first');
       }
     } catch (err) {
       const error = err as AxiosError;
       console.log(error);
-      setError('Invalid OTP');
+      setAndClearError('Invalid OTP');
     }
     setLoading(false);
   };
@@ -290,7 +295,9 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                   {error}
                 </span>
               )}
-              <ButtonPrimary type="submit">Continue</ButtonPrimary>
+              <ButtonPrimary type="submit" loading={loading}>
+                Continue
+              </ButtonPrimary>
             </form>
           ) : (
             <form
