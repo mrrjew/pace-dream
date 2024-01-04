@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FC, useState } from 'react';
 import { SignupMethod } from '@/utils/types/SignupMethod';
+import { MobileInput } from '@/components/MobileInput';
 
 export interface PageSignUpProps {}
 
@@ -67,7 +68,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/send-otp`,
         {
-          mobile,
+          mobile: `+${mobile}`,
         }
       );
       if (response.status === 200) {
@@ -87,7 +88,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-otp`,
         {
-          mobile,
+          mobile: `+${mobile}`,
           otp,
         }
       );
@@ -123,7 +124,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
           {showSignupForm ? (
             <SignupForm
               email={userEmail}
-              mobile={mobile}
+              mobile={`+${mobile}`}
               signupMethod={signupMethod}
             />
           ) : (
@@ -261,13 +262,10 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                     <span className="text-neutral-800 dark:text-neutral-200">
                       Mobile Number
                     </span>
-                    <Input
-                      type="tel"
-                      placeholder="Enter your mobile number along with country code"
-                      className="mt-1"
-                      onChange={(e) => setMobile(e.target.value)}
-                      value={mobile}
-                      disabled={showVerifyOtp}
+                    <MobileInput
+                      phone={mobile}
+                      country="us"
+                      onChange={setMobile}
                     />
                   </label>
                   {showVerifyOtp && (

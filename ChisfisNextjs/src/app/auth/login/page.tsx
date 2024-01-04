@@ -16,6 +16,8 @@ import axios, { AxiosError } from 'axios';
 import { useSession } from '@/hooks/useSession';
 import { useRouter } from 'next/navigation';
 import { SignupMethod } from '@/utils/types/SignupMethod';
+import { FirebaseError } from 'firebase/app';
+import { MobileInput } from '@/components/MobileInput';
 
 export interface PageLoginProps {}
 
@@ -31,14 +33,17 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
   const [loginMethod, setLoginMethod] = useState<SignupMethod>(
     SignupMethod.EMAIL
   );
+  const [error, setError] = useState('');
 
   const { setSession } = useSession();
 
   const router = useRouter();
 
   const loginUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     const auth = getAuth(app);
     e.preventDefault();
+    setError('');
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -58,22 +63,38 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
       const loggedInUser = response.data.data;
       setSession(loggedInUser.token, loggedInUser, loggedInUser.user_id);
       setTimeout(() => {
-        console.log('pushing');
         router.push('/');
       }, 500);
     } catch (error) {
-      console.log(error);
+      if (error instanceof FirebaseError) {
+        console.log(error.code);
+        if (
+          error.code === 'auth/wrong-password' ||
+          error.code === 'auth/user-not-found'
+        ) {
+          setError('Invalid email or password');
+        }
+      } else if (error instanceof AxiosError) {
+        if (error.response?.data?.error) {
+          setError(error.response.data.error);
+        }
+      } else {
+        setError('Something went wrong');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   const checkMobile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError('');
     setLoading(true);
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/send-otp`,
         {
-          mobile,
+          mobile: `+${mobile}`,
         }
       );
       if (response.status === 200) {
@@ -93,7 +114,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-otp`,
         {
-          mobile,
+          mobile: `+${mobile}`,
           otp,
         }
       );
@@ -108,9 +129,13 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
           router.push('/');
         }, 200);
         return;
+      } else {
+        setError('Phone number does not exist. Please register first');
       }
     } catch (err) {
       const error = err as AxiosError;
+      console.log(error);
+      setError('Invalid OTP');
     }
     setLoading(false);
   };
@@ -260,6 +285,11 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                   value={userDetails.password}
                 />
               </label>
+              {error && (
+                <span className="block text-center text-sm text-red-400 dark:text-neutral-300">
+                  {error}
+                </span>
+              )}
               <ButtonPrimary type="submit">Continue</ButtonPrimary>
             </form>
           ) : (
@@ -273,28 +303,28 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                 <span className="text-neutral-800 dark:text-neutral-200">
                   Mobile Number
                 </span>
-                <Input
-                  type="tel"
-                  placeholder="Enter your mobile number along with country code"
-                  className="mt-1"
-                  onChange={(e) => setMobile(e.target.value)}
-                  value={mobile}
-                  disabled={showVerifyOtp}
-                />
+                <MobileInput country="us" phone={mobile} onChange={setMobile} />
               </label>
               {showVerifyOtp && (
-                <label className="block">
-                  <span className="text-neutral-800 dark:text-neutral-200">
-                    OTP
-                  </span>
-                  <Input
-                    type="tel"
-                    placeholder="Enter OTP"
-                    className="mt-1"
-                    onChange={(e) => setOtp(e.target.value)}
-                    value={otp}
-                  />
-                </label>
+                <>
+                  <label className="block">
+                    <span className="text-neutral-800 dark:text-neutral-200">
+                      OTP
+                    </span>
+                    <Input
+                      type="tel"
+                      placeholder="Enter OTP"
+                      className="mt-1"
+                      onChange={(e) => setOtp(e.target.value)}
+                      value={otp}
+                    />
+                  </label>
+                  {error && (
+                    <span className="block text-center text-sm text-red-400 dark:text-neutral-300">
+                      {error}
+                    </span>
+                  )}
+                </>
               )}
               <ButtonPrimary type="submit" loading={loading}>
                 Continue

@@ -1,5 +1,6 @@
 'use client';
 
+import { useProfile } from '@/context';
 import { useSession } from '@/hooks/useSession';
 import Avatar from '@/shared/Avatar';
 import SwitchDarkMode2 from '@/shared/SwitchDarkMode2';
@@ -26,6 +27,7 @@ export default function AvatarDropdown({ className = '' }: Props) {
   };
 
   const { getSession, clearSession } = useSession();
+  const { clearUser }: any = useProfile();
   const { token, userInfo } = getSession();
 
   const router = useRouter();
@@ -38,10 +40,10 @@ export default function AvatarDropdown({ className = '' }: Props) {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    });
-    console.log(res);
+    );
     if (res.ok) {
       clearSession();
+      clearUser();
       setTimeout(() => {
         router.push('/auth/login');
       }, 200);
