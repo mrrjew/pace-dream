@@ -1,28 +1,30 @@
 'use client';
 import { getLocalStorageItem } from '@/utils/localStorageUtil';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const UserContext = createContext({
   user: null,
-  setUser: null
+  setUser: null,
 });
 
 const useProfile = () => useContext(UserContext);
 
 const UserProvider = ({ children }: any) => {
-  const userdata = getLocalStorageItem('user_info');
+  const userdata = Cookies.get('user_info');
   const user = userdata ? JSON.parse(userdata) : null;
-  const token = getLocalStorageItem('auth-token');
+  const token = Cookies.get('auth-token');
 
   const [userState, setUserState] = useState(user);
+  console.log('userState', userState);
 
   const updateProfile = async (data: any) => {
     axios
-      .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`, data, {
+      .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/profile`, data, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => {
         setUserState(res.data.data);
@@ -34,14 +36,18 @@ const UserProvider = ({ children }: any) => {
   };
 
   const getUser = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/profile`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/profile`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       }
-    });
+    );
     const data = await response.json();
+    console.log('data', data);
     setUserState(data.data);
   };
 
@@ -54,7 +60,7 @@ const UserProvider = ({ children }: any) => {
   const values: any = {
     user: userState,
     updateProfile,
-    getUser
+    getUser,
   };
 
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>;

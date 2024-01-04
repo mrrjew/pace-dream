@@ -108,6 +108,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
       }
     } catch (err) {
       const error = err as AxiosError;
+      console.log(error);
     }
     setLoading(false);
   };
@@ -275,7 +276,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                         OTP
                       </span>
                       <Input
-                        type="tel"
+                        type="number"
                         placeholder="Enter OTP"
                         className="mt-1"
                         onChange={(e) => setOtp(e.target.value)}
