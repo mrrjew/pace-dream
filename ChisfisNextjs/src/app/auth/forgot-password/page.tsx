@@ -55,13 +55,14 @@ export default function ForgotPasswordPage() {
                 </span>
                 <Input
                   type="email"
-                  placeholder="New Password"
+                  placeholder="Email Address"
                   className="mt-1"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </label>
+
               <ButtonPrimary type="submit" loading={loading}>
                 Continue
               </ButtonPrimary>

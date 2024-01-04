@@ -21,7 +21,7 @@ export default function VerifyEmailPage() {
       return;
     }
     verifyToken(token);
-  });
+  }, []);
 
   const verifyToken = async (token: string) => {
     setLoading(true);

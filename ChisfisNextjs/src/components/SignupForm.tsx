@@ -100,6 +100,7 @@ export const SignupForm: React.FC<{
       );
       const newUser = response.data.data;
       setSession(newUser.token, newUser, newUser.user_id);
+
       setTimeout(() => {
         router.push('/');
       }, 500);
