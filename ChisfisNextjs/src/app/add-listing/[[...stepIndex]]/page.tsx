@@ -58,6 +58,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
   });
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
+  const [loading, setIsLoading] = useState(false);
   let ContentComponent = PageAddListing1;
   switch (Number(pageNumber)) {
     case 1:
@@ -153,6 +154,8 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     if (!input.stayNightMin) return createToast('Set Stay Night Minimum number!');
     if (!input.stayNightMax) return createToast('Set Stay Night Maximum number!');
 
+    setIsLoading(true);
+
     // Form Data
     const formData = new FormData();
     formData.append('propertyType', String(input.propertyType));
@@ -210,10 +213,15 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
       .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/list`, formData)
       .then((res) => {
         console.log(res.data);
+        setIsLoading(false);
+        createToast(res.data.message, 'success');
+
         router.push('/');
       })
       .catch((error) => {
         console.log(error.response.data.message);
+        setIsLoading(false);
+
         createToast(error.response.data.message);
       });
   };
@@ -274,7 +282,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
             <button
               type='submit'
               className='nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  '>
-              Publish listing
+              {loading ? 'Loading...' : 'Publish listing'}
             </button>
           ) : (
             <ButtonPrimary
