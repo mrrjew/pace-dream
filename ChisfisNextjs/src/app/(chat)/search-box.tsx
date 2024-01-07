@@ -5,14 +5,14 @@ export const SearchBox: React.FC<{}> = () => {
   return (
     <div className="mb-4 relative">
       <MagnifyingGlassIcon
-        className="absolute top-2 left-2 text-gray-500"
+        className="absolute top-3 left-3 text-gray-500 mr-2"
         width={18}
         height={18}
       />
       <input
         type="text"
         placeholder="Search contacts"
-        className="w-full pl-8 pr-2 py-1 border-none rounded-md shadow-lg"
+        className="w-full px-4 py-2 border rounded-full shadow-lg border-gray-200 outline-none pl-10"
       />
     </div>
   );

@@ -66,21 +66,21 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
     { message: "Temporary message from Yourself", sender: "me" },
     { message: "Temporary message from Another User", sender: "other" },
     { message: "Temporary message from Yourself", sender: "me" },
-    { message: "Temporary message from Another User", sender: "other" },
+    { message: "Temporary message from Another User hqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqjkjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh", sender: "other" },
     { message: "Temporary message from Yourself", sender: "me" },
     { message: "Temporary message from Another User", sender: "other" },
     { message: "Temporary message from Yourself", sender: "me" },
     { message: "Temporary message from Another User", sender: "other" },
-    { message: "Temporary message from Yourself", sender: "me" },
+    { message: "Temporary message from Yourself aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ddddddddddddddddddddddddddddddddddddddddd", sender: "me" },
     { message: "Temporary message from Another User", sender: "other" },
     { message: "Temporary message from Yourself", sender: "me" },
   ];
 
   const renderSection = () => {
     return (
-      <div className="flex justify-between w-70 h-screen p-4 m-10 mt-5 rounded-lg shadow-lg border border-black">
-        <div className="w-1/3 rounded-md border-purple-500 p-4 overflow-y-auto scrollbar-hide">
-          <h2 className="text-lg font-semibold mb-2">Inbox</h2>
+      <div className="flex justify-between w-70 h-screen lg:h-[90vh]">
+        <div className="w-1/4 rounded-md border-purple-500 p-4 overflow-y-auto scrollbar-hide">
+          <h2 className="text-lg mb-2">Inbox</h2>
 
           <SearchBox />
           <div>
@@ -89,16 +89,16 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
         </div>
 
         {/* Chat */}
-        <div className="w-2/3  flex flex-col border-l">
+        <div className="w-3/4  flex flex-col border-l">
           {/* Top Section (Fixed) */}
-          <div className="flex items-center border-b mb-4 p-2">
+          <div className="flex items-center border-b mb-4 p-2 bg-[#FAFBFC]">
             <img
               src={selectedContact.profilePicture}
               alt={selectedContact.name}
               className="w-12 h-12 rounded-md mr-4"
             />
             <div>
-              <div className="font-semibold text-lg">
+              <div className="text-lg">
                 {selectedContact.name}
               </div>
             </div>
@@ -110,7 +110,7 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
           </div>
 
           {/* Bottom Section (Fixed) */}
-          <div className="flex items-center border-t p-4 mt-4">
+          <div className="flex items-center border-t p-4 mt-4 bg-[#FAFBFC]">
             <input
               type="text"
               placeholder="Type your message..."
