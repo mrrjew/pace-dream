@@ -1,4 +1,4 @@
-import { SignupMethod } from '@/utils/types/SignupMethod';
+import { SignupMethod } from '@/types/SignupMethod';
 import { useSession } from '@/hooks/useSession';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Input from '@/shared/Input';

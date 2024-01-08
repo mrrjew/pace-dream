@@ -6,7 +6,7 @@ const isAuthRelatedRoutes = (pathname: string) => {
   return pathname.startsWith('/auth');
 };
 
-const routeRequiringAuth = ['/account'];
+const routeRequiringAuth = ['/account', '/inbox'];
 
 const checkRouteRequiresAuth = (pathname: string) => {
   return routeRequiringAuth.some((route) => pathname.startsWith(route));
@@ -17,7 +17,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  //TODO: uncomment this code when it is known which pages to block
   const cookies = request.cookies;
   const authToken = cookies.get('auth-token')?.value;
 

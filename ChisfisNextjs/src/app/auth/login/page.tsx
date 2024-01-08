@@ -15,7 +15,7 @@ import { app } from 'config/firebase';
 import axios, { AxiosError } from 'axios';
 import { useSession } from '@/hooks/useSession';
 import { useRouter } from 'next/navigation';
-import { SignupMethod } from '@/utils/types/SignupMethod';
+import { SignupMethod } from '@/types/SignupMethod';
 import { FirebaseError } from 'firebase/app';
 import { MobileInput } from '@/components/MobileInput';
 
