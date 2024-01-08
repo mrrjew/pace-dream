@@ -14,7 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FC, useState } from 'react';
-import { SignupMethod } from '@/utils/types/SignupMethod';
+import { SignupMethod } from '@/types/SignupMethod';
 import { MobileInput } from '@/components/MobileInput';
 
 export interface PageSignUpProps {}
