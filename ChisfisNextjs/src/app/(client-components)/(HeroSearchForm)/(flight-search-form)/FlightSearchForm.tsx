@@ -183,8 +183,8 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
             dropOffLocationType === "Male"
-              ? "bg-black shadow-black/10 shadow-lg text-white"
-              : "border border-neutral-300 dark:border-neutral-700"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
           }`}
           onClick={(e) => setDropOffLocationType("Male")}
         >
@@ -193,15 +193,13 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
             dropOffLocationType === "Female"
-              ? "bg-black text-white shadow-black/10 shadow-lg"
-              : "border border-neutral-300 dark:border-neutral-700"
+              ? "bg-violet text-white shadow-black/10 shadow-lg"
+              : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
           }`}
           onClick={(e) => setDropOffLocationType("Female")}
         >
           Female
         </div>
-
-        <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8 mr-2 my-1 sm:mr-3"></div>
       </div>
     );
   };

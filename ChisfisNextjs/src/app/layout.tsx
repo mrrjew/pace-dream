@@ -14,6 +14,7 @@ import Head from 'next/head';
 const poppins = Poppins({
   subsets: ['latin'],
   display: 'swap',
+  adjustFontFallback: false,
   weight: ['300', '400', '500', '600', '700']
 });
 
@@ -28,7 +29,7 @@ export default function RootLayout({ children, params }: { children: React.React
       lang='en'
       className={poppins.className}>
       <body className='bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200'>
-        <ReactQueryClientProvider>
+        <ReactQueryClientProvider children={undefined}>
           <UserProvider>
             <ClientCommons />
             <SiteHeader />

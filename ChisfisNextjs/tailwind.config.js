@@ -46,6 +46,7 @@ module.exports = {
                 image: "4px 10px 10px rgba(0, 0, 0, 0.10)",
             },
             colors: {
+                'violet': "#632DF8",
                 primary: {
                     50: customColors("--c-primary-50"),
                     100: customColors("--c-primary-100"),

@@ -28,7 +28,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
     return (
       
       <div className="flex flex-row space-between items-center">
-      <div className=" py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap border-b border-neutral-100 dark:border-neutral-700">
+      {/* <div className=" py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap border-b border-neutral-100 dark:border-neutral-700">
         
         {
           options.map( ( option, index ) => { 
@@ -50,7 +50,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
       </div>
       <div className="mr-[1rem]">
         <span className="py-1.5 px-4 flex items-center text-sm cursor-pointer mr-2 my-1 sm:mr-3">selected { dropOffLocationType.length }/{ options.length }</span>
-      </div>
+      </div> */}
       </div>
     );
   };
