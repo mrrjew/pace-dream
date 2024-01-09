@@ -5,6 +5,7 @@ export interface Conversation {
   name: string;
   isGroupChat: boolean;
   users: User[];
+  latestMessage?: Message;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -48,6 +49,9 @@ export const DbResponseToConversation = (conversation: any): Conversation => {
     name: conversation.name,
     isGroupChat: conversation.isGroupChat,
     users: conversation.users.map((user: any) => DbResponseToUser(user)),
+    latestMessage: conversation.latestMessage
+      ? DbResponseToMessage(conversation.latestMessage)
+      : undefined,
     createdAt: new Date(conversation.createdAt),
     updatedAt: new Date(conversation.updatedAt),
   };

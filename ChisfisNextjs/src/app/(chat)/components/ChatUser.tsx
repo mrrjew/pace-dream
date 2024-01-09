@@ -41,7 +41,7 @@ export const ChatUser: React.FC<IChatUserProps> = ({
           <span className="text-xs text-neutral-500">10:00 PM</span>
         </div>
         <span className="mt-1 text-sm text-neutral-600 w-full">
-          Lorem ipsum dolor sit amet consec adipisicing elit...
+          {conversation.latestMessage?.message.substring(0, 50)}
         </span>
       </div>
     </div>

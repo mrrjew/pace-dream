@@ -1,22 +1,20 @@
 'use client';
 
 import Avatar from '@/shared/Avatar';
-import { FaRegStar } from 'react-icons/fa';
-import { IoIosAttach, IoIosMore } from 'react-icons/io';
+import { Message } from '@/types/chat';
+import { clientAuthAxios } from '@/utils/clientAxios';
+import { Fragment, useState } from 'react';
+import { IoIosAttach, IoIosSend } from 'react-icons/io';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { MessageBox } from './MessageBox';
-import { useState } from 'react';
-import { clientAuthAxios } from '@/utils/clientAxios';
-import { IoIosSend } from 'react-icons/io';
-import { Message } from '@/types/chat';
 
-interface IMessageRoomProps {
+interface IBodyProps {
   initialMessages: Message[];
 }
 
-export const MessageRoom: React.FC<IMessageRoomProps> = ({
-  initialMessages,
-}: IMessageRoomProps) => {
+export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+
   const [inputMessage, setInputMessage] = useState('');
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,7 +24,7 @@ export const MessageRoom: React.FC<IMessageRoomProps> = ({
 
   const sendMessage = async () => {
     try {
-      const res = await clientAuthAxios().post('/message/send', {
+      await clientAuthAxios().post('/message/send', {
         chatId: '659c25a820a194a56e32e6c6',
         message: inputMessage,
       });
@@ -37,24 +35,9 @@ export const MessageRoom: React.FC<IMessageRoomProps> = ({
   };
 
   return (
-    <div className="h-full relative flex flex-col">
-      <div className="py-4 px-8 bg-[#FAFBFC] flex justify-between w-full items-center shadow-sm absolute inset-x-0">
-        <div className="flex items-center">
-          <Avatar sizeClass="h-12 w-12" />
-          <p className="font-medium ml-2">John Doe</p>
-        </div>
-        <div className="flex">
-          <div className="w-10 h-10 p-2.5 rounded-full border-1 border-[#DAE0E6] bg-white shadow">
-            <FaRegStar className="w-full h-full" />
-          </div>
-          <div className="w-10 h-10 p-2.5 rounded-full border-1 border-[#DAE0E6] ml-4 bg-white shadow">
-            <IoIosMore className="w-full h-full" />
-          </div>
-        </div>
-      </div>
+    <Fragment>
       <div className="overflow-y-auto flex flex-col justify-end flex-1 h-full px-4 py-20">
-        {/* Message container */}
-        {initialMessages.map((message) => (
+        {messages.map((message) => (
           <MessageBox message={message} />
         ))}
       </div>
@@ -82,6 +65,6 @@ export const MessageRoom: React.FC<IMessageRoomProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
