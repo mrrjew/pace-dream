@@ -4,6 +4,7 @@ import { useSession } from '@/hooks/useSession';
 import Avatar from '@/shared/Avatar';
 import { Conversation } from '@/types/chat';
 import { useRouter } from 'next/navigation';
+import { useMemo } from 'react';
 
 interface IChatUserProps {
   conversation: Conversation;
@@ -27,6 +28,12 @@ export const ChatUser: React.FC<IChatUserProps> = ({
     router.push(`/inbox/${conversation.id}`);
   };
 
+  const latestMessageSender = useMemo(() => {
+    return conversation.latestMessage?.sender.id === userId
+      ? 'You'
+      : conversation.latestMessage?.sender.firstName;
+  }, [conversation]);
+
   return (
     <div
       className="p-4 flex hover:bg-[#F8F9FB] transition cursor-pointer"
@@ -40,9 +47,16 @@ export const ChatUser: React.FC<IChatUserProps> = ({
           <p className="font-medium">{name}</p>
           <span className="text-xs text-neutral-500">10:00 PM</span>
         </div>
-        <span className="mt-1 text-sm text-neutral-600 w-full">
-          Lorem ipsum dolor sit amet consec adipisicing elit...
-        </span>
+        {conversation.latestMessage ? (
+          <span className="mt-1 text-sm text-neutral-600 w-full">
+            {latestMessageSender}:{' '}
+            {conversation.latestMessage?.message.substring(0, 50)}
+          </span>
+        ) : (
+          <span className="mt-1 text-sm text-neutral-600 w-full">
+            Start Conversation
+          </span>
+        )}
       </div>
     </div>
   );
