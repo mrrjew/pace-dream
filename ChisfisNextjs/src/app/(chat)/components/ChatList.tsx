@@ -1,9 +1,11 @@
 'use client';
 
-import { Conversation } from '@/types/chat';
+import { Conversation, DbResponseToConversation } from '@/types/chat';
 import { ChatUser } from './ChatUser';
 import { IoSearchOutline } from 'react-icons/io5';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { pusherClient } from '@/utils/pusher';
+import { useSession } from '@/hooks/useSession';
 
 const SearchBox: React.FC<{}> = () => {
   return (
@@ -28,6 +30,52 @@ export const ChatList: React.FC<IChatListProps> = ({
 }: IChatListProps) => {
   const [conversations, setConversations] =
     useState<Conversation[]>(initialConversations);
+
+  const { getSession } = useSession();
+  const { userId } = getSession();
+
+  useEffect(() => {
+    if (!userId) return;
+    pusherClient.subscribe(userId!);
+
+    const updateHandler = (dbChat: any) => {
+      const chat = DbResponseToConversation(dbChat);
+      const chatExists = conversations.find((conv) => conv.id === chat.id);
+      if (chatExists) {
+        setConversations((prevConversations) =>
+          prevConversations.map((conv) => {
+            if (conv.id === chat.id) {
+              return {
+                ...conv,
+                latestMessage: chat.latestMessage,
+              };
+            }
+            return conv;
+          })
+        );
+      } else {
+        setConversations((prevConversations) => [chat, ...prevConversations]);
+      }
+    };
+
+    pusherClient.bind('conversation:update', updateHandler);
+
+    return () => {
+      pusherClient.unsubscribe(userId!);
+      pusherClient.unbind('conversation:update', updateHandler);
+    };
+  }, [userId]);
+
+  const sortedConversations = useMemo(() => {
+    return conversations.sort((a, b) => {
+      if (!a.latestMessage || !b.latestMessage) return 0;
+      return (
+        new Date(b.latestMessage.createdAt).getTime() -
+        new Date(a.latestMessage.createdAt).getTime()
+      );
+    });
+  }, [conversations]);
+
   return (
     <>
       <h2 className="ml-4 text-lg mt-2">All Messages</h2>
@@ -35,7 +83,7 @@ export const ChatList: React.FC<IChatListProps> = ({
         <SearchBox />
       </div>
       <div className="flex-1 overflow-y-auto flex flex-col">
-        {conversations.map((conversation) => (
+        {sortedConversations.map((conversation) => (
           <ChatUser conversation={conversation} key={conversation.id} />
         ))}
       </div>

@@ -1,9 +1,20 @@
 'use client';
 
+import useConversation from '@/hooks/useConversation';
+import { useSession } from '@/hooks/useSession';
 import Avatar from '@/shared/Avatar';
-import { Message } from '@/types/chat';
+import {
+  DbResponseToMessage,
+  InboxMessage,
+  Message,
+  MessageStatus,
+  MessageType,
+  SendingMessage,
+} from '@/types/chat';
 import { clientAuthAxios } from '@/utils/clientAxios';
-import { Fragment, useState } from 'react';
+import { pusherClient } from '@/utils/pusher';
+import { find } from 'lodash';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { IoIosAttach, IoIosSend } from 'react-icons/io';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { MessageBox } from './MessageBox';
@@ -13,34 +24,70 @@ interface IBodyProps {
 }
 
 export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<InboxMessage[]>(initialMessages);
 
   const [inputMessage, setInputMessage] = useState('');
 
+  const bottomRef = useRef<HTMLDivElement>(null);
+
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await sendMessage();
+    if (!inputMessage) return;
+    setMessages((prevMessages) => {
+      const newMessage: SendingMessage = {
+        id: new Date().toISOString(),
+        message: inputMessage,
+        sender: { id: userId! },
+        createdAt: new Date(),
+        conversationId: conversationId!,
+        status: MessageStatus.SENDING,
+        type: MessageType.TEXT,
+      };
+      return [...prevMessages, newMessage];
+    });
+    bottomRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
+    setInputMessage('');
   };
 
-  const sendMessage = async () => {
-    try {
-      await clientAuthAxios().post('/message/send', {
-        chatId: '659c25a820a194a56e32e6c6',
-        message: inputMessage,
+  const { getSession } = useSession();
+  const { userId } = getSession();
+
+  const { conversationId } = useConversation();
+
+  useEffect(() => {
+    pusherClient.subscribe(conversationId);
+    bottomRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
+
+    const messageHandler = (message: any) => {
+      const newMessage = DbResponseToMessage(message);
+      setMessages((prevMessages) => {
+        if (find(prevMessages, { id: newMessage.id })) return prevMessages;
+        if (newMessage.sender.id === userId) return prevMessages;
+        return [...prevMessages, newMessage];
       });
-      setInputMessage('');
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    };
+
+    pusherClient.bind('message:new', messageHandler);
+
+    return () => {
+      pusherClient.unsubscribe(conversationId);
+      pusherClient.unbind('message:new', messageHandler);
+    };
+  }, [conversationId]);
 
   return (
     <Fragment>
-      <div className="overflow-y-auto flex flex-col justify-end flex-1 h-full px-4 py-20">
+      <div className="overflow-y-auto flex flex-col h-full px-4 py-20">
+        <div className="flex-1"></div>
         {messages.map((message) => (
-          <MessageBox message={message} />
+          <MessageBox message={message} key={message.id} />
         ))}
       </div>
+      <div className="pt-16" ref={bottomRef} />
       <div className="py-4 px-8 bg-[#FAFBFC] flex w-full items-center absolute inset-x-0 bottom-0">
         <div className="flex items-center">
           <Avatar sizeClass="h-12 w-12" />
@@ -50,7 +97,7 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
             <input
               type="text"
               placeholder="Write your message here..."
-              className="w-full outline-none text-sm text-gray-500 ml-1 bg-transparent border-none focus:outline-none flex-1"
+              className="w-full outline-none text-sm text-gray-500 ml-1 bg-transparent border-none focus:outline-none focus:border-none flex-1"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
             />

@@ -28,7 +28,7 @@ export const Header: React.FC<IHeaderProps> = ({
   }, [otherUser, conversation.isGroupChat, conversation.name]);
 
   return (
-    <div className="py-4 px-8 bg-[#FAFBFC] flex justify-between w-full items-center shadow-sm absolute inset-x-0">
+    <div className="py-4 px-8 bg-[#FAFBFC] flex justify-between w-full items-center shadow-sm absolute inset-x-0 z-10">
       <div className="flex items-center">
         <Avatar sizeClass="h-12 w-12" />
         <p className="font-medium ml-2">{chatName}</p>

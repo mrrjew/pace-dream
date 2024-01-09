@@ -10,36 +10,58 @@ export interface Conversation {
   updatedAt: Date;
 }
 
-export enum MessageTypeEnum {
+export enum MessageType {
   TEXT = 'TEXT',
   IMAGE = 'IMAGE',
   VIDEO = 'VIDEO',
   FILE = 'FILE',
 }
 
+export enum MessageStatus {
+  SENDING = 'SENDING',
+  SENT = 'SENT',
+  // RECEIVED = 'RECEIVED',
+  // READ = 'READ',
+}
+export interface SendingMessage {
+  id: string;
+  message: string;
+  type: MessageType;
+  conversationId: string;
+  sender: { id: string };
+  createdAt: Date;
+  status: MessageStatus;
+}
 export interface Message {
   id: string;
   sender: User;
   conversationId: string;
   message: string;
   readyBy?: User[];
-  type: MessageTypeEnum;
+  type: MessageType;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export const MessageTypeTextToEnum = (type: string): MessageTypeEnum => {
+export type InboxMessage = Message | SendingMessage;
+
+export const isSendingMessage = (
+  message: InboxMessage
+): message is SendingMessage => {
+  return (message as SendingMessage).status !== undefined;
+};
+export const MessageTypeTextToEnum = (type: string): MessageType => {
   switch (type) {
     case 'text':
-      return MessageTypeEnum.TEXT;
+      return MessageType.TEXT;
     case 'image':
-      return MessageTypeEnum.IMAGE;
+      return MessageType.IMAGE;
     case 'file':
-      return MessageTypeEnum.FILE;
+      return MessageType.FILE;
     case 'video':
-      return MessageTypeEnum.VIDEO;
+      return MessageType.VIDEO;
     default:
-      return MessageTypeEnum.TEXT;
+      return MessageType.TEXT;
   }
 };
 
