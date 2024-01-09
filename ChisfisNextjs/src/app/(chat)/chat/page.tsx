@@ -78,11 +78,11 @@ const ChatPage: FC<ChatPageProps> = ({}) => {
 
   const renderSection = () => {
     return (
-      <div className="flex justify-between w-70 h-screen lg:h-[90vh]">
+      <div className="flex justify-between  lg:h-[90vh]">
         <div className="w-1/4 rounded-md border-purple-500 p-4 overflow-y-auto scrollbar-hide">
           <h2 className="text-lg mb-2">Inbox</h2>
 
-          <SearchBox />
+          {/* <SearchBox /> */}
           <div>
             <ContactsList contacts={contacts} />
           </div>
