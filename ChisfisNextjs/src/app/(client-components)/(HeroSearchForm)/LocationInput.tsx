@@ -80,7 +80,7 @@ const LocationInput: FC<LocationInputProps> = ({
               className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
             >
               <span className="block text-neutral-400">
-                <ClockIcon className="h-4 sm:h-6 w-4 sm:w-6" />
+                
               </span>
               <span className=" block font-medium text-neutral-700 dark:text-neutral-200">
                 {item}
@@ -126,9 +126,6 @@ const LocationInput: FC<LocationInputProps> = ({
           showPopover ? "nc-hero-field-focused" : ""
         }`}
       >
-        <div className="text-neutral-300 dark:text-neutral-400">
-          <MapPinIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-        </div>
         <div className="flex-grow">
           <input
             className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
@@ -140,7 +137,7 @@ const LocationInput: FC<LocationInputProps> = ({
             }}
             ref={inputRef}
           />
-          <span className="block mt-0.5 text-sm text-neutral-400 font-light ">
+          <span className="block mt-0.5 rounded-2xl text-sm text-neutral-400 font-light border p-2 pl-4">
             <span className="line-clamp-1">{!!value ? placeHolder : desc}</span>
           </span>
           {value && showPopover && (

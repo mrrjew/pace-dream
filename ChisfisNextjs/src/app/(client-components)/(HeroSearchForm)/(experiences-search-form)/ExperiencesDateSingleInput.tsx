@@ -19,41 +19,20 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
   fieldClassName = "[ nc-hero-field-padding ]",
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/03/01")
+    new Date()
   );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/03/16"));
-
-  const onChangeDate = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
 
   const renderInput = () => {
     return (
-      <>
-        <div className="text-neutral-300 dark:text-neutral-400">
-          <CalendarIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-        </div>
-        <div className="flex-grow text-left">
-          <span className="block xl:text-lg font-semibold">
-            {startDate?.toLocaleDateString("en-US", {
-              month: "short",
-              day: "2-digit",
-            }) || "Date"}
-            {endDate
-              ? " - " +
-                endDate?.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "2-digit",
-                })
-              : ""}
-          </span>
-          <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-            {startDate ? "Date" : `Add dates`}
-          </span>
-        </div>
-      </>
+      <div className="flex-grow text-left">
+        <span className="block xl:text-lg font-semibold">
+          From
+        </span>
+        <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-black leading-none font-light">
+          {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
+          <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 ml-4 text-black" />
+        </span>
+      </div>
     );
   };
 
@@ -71,7 +50,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
             >
               {renderInput()}
               {startDate && open && (
-                <ClearDataButton onClick={() => onChangeDate([null, null])} />
+                <ClearDataButton onClick={() => setStartDate(null)} />
               )}
             </Popover.Button>
 
@@ -92,10 +71,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-neutral-800 p-8">
                   <DatePicker
                     selected={startDate}
-                    onChange={onChangeDate}
-                    startDate={startDate}
-                    endDate={endDate}
-                    selectsRange
+                    onChange={(date: Date) => setStartDate(date)}
                     monthsShown={2}
                     showPopperArrow={false}
                     inline

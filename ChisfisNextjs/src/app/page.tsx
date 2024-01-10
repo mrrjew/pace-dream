@@ -146,7 +146,7 @@ function PageHome() {
         {/* SECTION 1 */}
         <SectionSliderNewCategories categories={DEMO_CATS} />
 
-        <SectionOurFeatures />
+        <SectionOurFeatures className='-ml-24 -mr-24 bg-neutral-100'/>
 
         <SectionGridFeaturePlaces cardType='card2' />
 

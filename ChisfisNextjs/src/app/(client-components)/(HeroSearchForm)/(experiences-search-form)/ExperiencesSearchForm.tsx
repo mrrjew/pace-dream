@@ -60,9 +60,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
         {renderRadioBtn()}
         <div className="flex flex-1 rounded-full">
           <LocationInput className="flex-[1.5]" />
-          <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8"></div>
           <ExperiencesDateSingleInput className="flex-1" />
-          <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8"></div>
           <GuestsInput
             className="flex-1"
             buttonSubmitHref="/listing-experiences"

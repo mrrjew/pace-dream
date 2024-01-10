@@ -15,7 +15,7 @@ const SectionHero: FC<SectionHeroProps> = ({ className = "" }) => {
     >
       <div className="flex flex-col lg:flex-row lg:items-center">
         <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-8 sm:space-y-10 pb-14 lg:pb-64 xl:pr-14 lg:mr-10 xl:mr-0">
-          <h2 className="font-semibold text-2xl md:text-3xl xl:text-4xl !leading-[114%] ">
+          <h2 className="font-semibold text-2xl md:text-3xl xl:text-4xl !leading-[114%] mt-20 ">
             Explore your PaceDream Book hotels, Car and more with ease!
           </h2>
           <ButtonPrimary href="/listing-stay-map" sizeClass="px-5 py-4 sm:px-7">
