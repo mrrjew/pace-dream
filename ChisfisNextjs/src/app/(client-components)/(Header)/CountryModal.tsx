@@ -1,17 +1,8 @@
 import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Flags from "country-flag-icons/react/3x2";
 
-interface TopLanguage {
-    country: string;
-    language: string;
-    script: string;
-    flag: string;
-    code: string;
-    flagComponent?: any;
-    }
 
-const topLanguages: TopLanguage[] = [
+const topLanguages = [
     { country: "China", language: "Mandarin Chinese", script: "中文", flag: "🇨🇳", code: "CN" },
     { country: "Spain", language: "Spanish", script: "Español", flag: "🇪🇸", code: "ES" },
     { country: "United States", language: "English", script: "English", flag: "🇺🇸", code: "US" },
@@ -44,17 +35,11 @@ const topLanguages: TopLanguage[] = [
     { country: "Cambodia", language: "Khmer", script: "ភាសាខ្មែរ", flag: "🇰🇭", code: "KH" },
     { country: "Iraq", language: "Kurdish", script: "Kurdî", flag: "🇭🇺", code: "IQ" },
   ];
-  
+
 
   const CountryModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: any }) => {
     const cancelButtonRef = useRef(null);
-    for(let i=0; i<topLanguages.length; i++){
-        const Flag = Flags[topLanguages[i].code];
-        topLanguages[i].flagComponent = <Flag />
-    }
 
-
-  
     return (
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-20" initialFocus={cancelButtonRef} onClose={onClose}>
@@ -69,7 +54,7 @@ const topLanguages: TopLanguage[] = [
           >
             <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
-  
+
           <div className="fixed inset-0 z-20 w-screen overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <Transition.Child
@@ -91,7 +76,7 @@ const topLanguages: TopLanguage[] = [
                   </button>
                   <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      
+
                       <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                         <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
                           Select Currency
@@ -103,15 +88,13 @@ const topLanguages: TopLanguage[] = [
                     </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3">
-                    <div className="grid grid-cols-4 gap-4 items-center">
+                    <div className="grid grid-cols-4 gap-4">
                       {topLanguages.map((language, index) => (
                         <button key={index} className="btn" onClick={() => onClose(language)}>
-                          <div className="flex items-center">
-                          <div className="h-8 w-8 pt-1 pr-3 rounded-full">
-                             {language.flagComponent}
+                          <div>
+                            {language.flag} {language.country}
                           </div>
                           <div>{language.script}</div>
-                          </div>
                         </button>
                       ))}
                     </div>
