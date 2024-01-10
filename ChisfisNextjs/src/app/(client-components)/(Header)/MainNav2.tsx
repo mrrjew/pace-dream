@@ -2,13 +2,14 @@ import { Route } from '@/routers/types';
 import Logo from '@/shared/Logo';
 import MenuBar from '@/shared/MenuBar';
 import Link from 'next/link';
-import { FC } from 'react';
+import React, { FC, useState} from 'react';
 import HeroSearchForm2MobileFactory from '../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory';
 import AvatarDropdown from './AvatarDropdown';
-import DropdownTravelers from './DropdownTravelers';
 import NotifyDropdown from './NotifyDropdown';
 import Image from 'next/image';
 import usaImg from '@/images/country/usa.png';
+import CurrencyModal from './CurrencyModal';
+import CountryModal from './CountryModal';
 
 export interface MainNav2Props {
   className?: string;
@@ -17,7 +18,29 @@ export interface MainNav2Props {
 const btnStyle =
   'group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative';
 
+ 
+
+
+  
 const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
+  const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
+  const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
+
+  const openModalCurrency = () => {
+    setIsModalOpenCurrency(true);
+  };
+
+  const openModalCountry = () => {
+    setIsModalOpenCountry(true);
+  };
+
+  const closeModalCurrency = () => {
+    setIsModalOpenCurrency(false);
+  };
+
+  const closeModalCountry = () => {
+    setIsModalOpenCountry(false);
+  };
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
       <div className='px-4 h-20 lg:container flex justify-between'>
@@ -25,8 +48,8 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
           <Logo className='w-32 self-center' />
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'></div> */}
           <div className='hidden lg:flex  justify-end '>
-            <button className={`${btnStyle}`}>USD</button>
-            <button className={`${btnStyle}`}>
+            <button className={`${btnStyle}`} onClick={openModalCurrency}>USD</button>
+            <button className={`${btnStyle}`} onClick={openModalCountry}>
               <Image
                 src={usaImg}
                 className='w-6 h-6 rounded-full'
@@ -73,6 +96,9 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
           </div>
         </div>
       </div>
+      <CurrencyModal isOpen={isModalOpenCurrency} onClose={closeModalCurrency} />
+      <CountryModal isOpen={isModalOpenCountry} onClose={closeModalCountry} />
+
     </div>
   );
 };
