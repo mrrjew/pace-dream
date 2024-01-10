@@ -1,8 +1,17 @@
 import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import Flags from "country-flag-icons/react/3x2";
 
+interface TopLanguage {
+    country: string;
+    language: string;
+    script: string;
+    flag: string;
+    code: string;
+    flagComponent?: any;
+    }
 
-const topLanguages = [
+const topLanguages: TopLanguage[] = [
     { country: "China", language: "Mandarin Chinese", script: "中文", flag: "🇨🇳", code: "CN" },
     { country: "Spain", language: "Spanish", script: "Español", flag: "🇪🇸", code: "ES" },
     { country: "United States", language: "English", script: "English", flag: "🇺🇸", code: "US" },
@@ -39,6 +48,12 @@ const topLanguages = [
 
   const CountryModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: any }) => {
     const cancelButtonRef = useRef(null);
+    for(let i=0; i<topLanguages.length; i++){
+        const Flag = Flags[topLanguages[i].code];
+        topLanguages[i].flagComponent = <Flag />
+    }
+
+
   
     return (
       <Transition.Root show={isOpen} as={Fragment}>
@@ -88,13 +103,15 @@ const topLanguages = [
                     </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3">
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-4 gap-4 items-center">
                       {topLanguages.map((language, index) => (
                         <button key={index} className="btn" onClick={() => onClose(language)}>
-                          <div>
-                            {language.flag} {language.country}
+                          <div className="flex items-center">
+                          <div className="h-8 w-8 pt-1 pr-3 rounded-full">
+                             {language.flagComponent}
                           </div>
                           <div>{language.script}</div>
+                          </div>
                         </button>
                       ))}
                     </div>
