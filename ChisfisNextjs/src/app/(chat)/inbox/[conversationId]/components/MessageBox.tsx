@@ -3,7 +3,13 @@
 import useConversation from '@/hooks/useConversation';
 import { useSession } from '@/hooks/useSession';
 import Avatar from '@/shared/Avatar';
-import { InboxMessage, MessageStatus, isSendingMessage } from '@/types/chat';
+import {
+  InboxMessage,
+  MessageStatus,
+  MessageType,
+  SendingMessage,
+  isSendingMessage,
+} from '@/types/chat';
 import { clientAuthAxios } from '@/utils/clientAxios';
 import { useEffect, useMemo, useState } from 'react';
 import Moment from 'react-moment';
@@ -23,7 +29,7 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
 
   const { conversationId } = useConversation();
 
-  const sendMessage = async () => {
+  const sendMessage = async (message: SendingMessage) => {
     try {
       await clientAuthAxios().post('/message/send', {
         chatId: conversationId,
@@ -38,10 +44,32 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
     }
   };
 
+  const sendImage = async (message: SendingMessage) => {
+    if (message.type !== MessageType.IMAGE || !message.file) return;
+    try {
+      console.log(message);
+      const formData = new FormData();
+      formData.append('chatId', conversationId);
+      formData.append('message', message.message);
+      formData.append('image', message.file!);
+      const res = await clientAuthAxios().post('/message/send', formData);
+      // setLocalMessage((prevMessage) => ({
+      //   ...prevMessage,
+      //   status: MessageStatus.SENT,
+      // }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     if (isSendingMessage(localMessage)) {
       if (localMessage.status === MessageStatus.SENDING) {
-        sendMessage();
+        if (localMessage.type === MessageType.TEXT) {
+          sendMessage(localMessage);
+        } else if (localMessage.type === MessageType.IMAGE) {
+          sendImage(localMessage);
+        }
       }
     }
   }, []);

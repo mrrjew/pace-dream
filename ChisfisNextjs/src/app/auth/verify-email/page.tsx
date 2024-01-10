@@ -1,6 +1,6 @@
 'use client';
 
-import { PasswordMatchText } from '@/components/SignupForm';
+import { PasswordMatchText } from '@/app/auth/components/SignupForm';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import Input from '@/shared/Input';
 import { Loader } from '@/shared/Loader';
