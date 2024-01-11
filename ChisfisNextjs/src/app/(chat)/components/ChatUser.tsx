@@ -5,6 +5,7 @@ import Avatar from '@/shared/Avatar';
 import { Conversation } from '@/types/chat';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
+import { MessageDate } from '../inbox/[conversationId]/components/MessageDate';
 
 interface IChatUserProps {
   conversation: Conversation;
@@ -45,7 +46,9 @@ export const ChatUser: React.FC<IChatUserProps> = ({
       <div className="flex flex-1 flex-col">
         <div className="flex justify-between">
           <p className="font-medium">{name}</p>
-          <span className="text-xs text-neutral-500">10:00 PM</span>
+          {conversation.latestMessage && (
+            <MessageDate date={conversation.latestMessage.createdAt} />
+          )}
         </div>
         {conversation.latestMessage ? (
           <span className="mt-1 text-sm text-neutral-600 w-full">

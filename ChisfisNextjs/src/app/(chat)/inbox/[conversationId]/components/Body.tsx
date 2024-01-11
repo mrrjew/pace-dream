@@ -74,7 +74,7 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
     images.forEach((image) => {
       const newMessage: SendingMessage = {
         id: new Date().toISOString(),
-        message: '',
+        message: 'Sent an image',
         sender: { id: userId! },
         createdAt: new Date(),
         conversationId: conversationId!,
