@@ -10,7 +10,7 @@ import SideBar from "@/components/SideBar";
 import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
 import "./globals.css";
 import UserProvider from "@/context";
-import Head from "next/head";
+
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,6 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
   params: any;
 }) {
+  
+  
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
@@ -37,9 +39,11 @@ export default function RootLayout({
           <UserProvider>
             <ClientCommons />
             <SiteHeader />
-            <div className="flex">
-              <SideBar />
-              {children}
+            <div className='flex overflow-x-hidden max-w-screen'>
+              <SideBar/>
+              <div className='flex-1'>
+                {children}
+              </div>
             </div>
             <FooterNav />
             <Footer />
