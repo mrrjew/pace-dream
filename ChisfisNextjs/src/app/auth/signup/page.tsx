@@ -1,5 +1,5 @@
 'use client';
-import { SignupForm } from '@/components/SignupForm';
+import { SignupForm } from '@/app/auth/components/SignupForm';
 import { useAppleLogin } from '@/hooks/providers/useAppleLogin';
 import { useFacebookLogin } from '@/hooks/providers/useFacebookLogin';
 import { useGoogleLogin } from '@/hooks/providers/useGoogleLogin';

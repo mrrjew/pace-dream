@@ -29,6 +29,7 @@ export interface SendingMessage {
   type: MessageType;
   conversationId: string;
   sender: { id: string };
+  file?: File;
   createdAt: Date;
   status: MessageStatus;
 }
@@ -37,6 +38,7 @@ export interface Message {
   sender: User;
   conversationId: string;
   message: string;
+  url?: string;
   readyBy?: User[];
   type: MessageType;
   createdAt: Date;
@@ -90,6 +92,7 @@ export const DbResponseToMessage = (message: any): Message => {
         ? message.readBy.map((user: any) => DbResponseToUser(user))
         : [],
     type: MessageTypeTextToEnum(message.type),
+    url: message.url,
     createdAt: new Date(message.createdAt),
     updatedAt: new Date(message.updatedAt),
   };
