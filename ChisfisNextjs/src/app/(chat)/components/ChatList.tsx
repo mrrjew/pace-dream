@@ -58,11 +58,22 @@ export const ChatList: React.FC<IChatListProps> = ({
       }
     };
 
+    const newHandler = (dbChat: any) => {
+      const chat = DbResponseToConversation(dbChat);
+      const chatExists = conversations.find((conv) => conv.id === chat.id);
+      if (!chatExists) {
+        setConversations((prevConversations) => [chat, ...prevConversations]);
+      }
+    };
+
     pusherClient.bind('conversation:update', updateHandler);
+
+    pusherClient.bind('conversation:new', newHandler);
 
     return () => {
       pusherClient.unsubscribe(userId!);
       pusherClient.unbind('conversation:update', updateHandler);
+      pusherClient.unbind('conversation:new', newHandler);
     };
   }, [userId]);
 

@@ -127,7 +127,6 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
           <MessageBox message={message} key={message.id} />
         ))}
       </div>
-      <div className="pt-16" ref={bottomRef} />
       <div className="py-4 px-8 bg-[#FAFBFC] flex w-full items-center absolute inset-x-0 bottom-0">
         <div className="flex items-center">
           <Avatar sizeClass="h-12 w-12" />
