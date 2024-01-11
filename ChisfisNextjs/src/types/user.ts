@@ -7,7 +7,6 @@ export interface User {
 }
 
 export const DbResponseToUser = (user: any): User => {
-  console.log(user);
   return {
     id: user._id,
     firstName: user.first_name,
