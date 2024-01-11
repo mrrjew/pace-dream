@@ -170,7 +170,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   if (!numberOfItems) return null;
 
   return (
-    <div className={`nc-SectionSliderNewCategories ${className}`}>
+    <div className={`nc-SectionSliderNewCategories pr-24 pl-24 ${className}`}>
       <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
         {heading}
       </Heading>
@@ -187,7 +187,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
               className="ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 ml-[95%] text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
         />}
           {categories.length > currentIndex + numberOfItems ? (
             <NextBtn
@@ -195,7 +195,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
               className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
         />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul

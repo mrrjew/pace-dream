@@ -1,6 +1,6 @@
 import BackgroundSection from "@/components/BackgroundSection";
 import BgGlassmorphism from "@/components/BgGlassmorphism";
-import SectionGridAuthorBox from "@/components/SectionGridAuthorBox";
+import SectionGridAuthorBox from "@/components/SectionSliderAuthorBox";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
 import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import heroRightImage from "@/images/hero-right-car.png";

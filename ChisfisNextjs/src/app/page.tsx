@@ -8,12 +8,14 @@ import BackgroundSection from '@/components/BackgroundSection';
 import SectionGridFeaturePlaces from '@/components/SectionGridFeaturePlaces';
 import SectionHowItWork from '@/components/SectionHowItWork';
 import SectionSubscribe2 from '@/components/SectionSubscribe2';
-import SectionGridAuthorBox from '@/components/SectionGridAuthorBox';
+import SectionSliderAuthorBox from '@/components/SectionSliderAuthorBox';
 import SectionGridCategoryBox from '@/components/SectionGridCategoryBox';
 import SectionBecomeAnAuthor from '@/components/SectionBecomeAnAuthor';
 import SectionVideos from '@/components/SectionVideos';
 import SectionClientSay from '@/components/SectionClientSay';
 import BookedUserList from '@/components/BookedUserList';
+import SectionDiscoverPerfectRoomStay from '@/components/SectionDiscoverPerfectRoomStay';
+import SectionSubscribe from '@/components/SectionSubscribe';
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -137,66 +139,47 @@ function PageHome() {
   return (
     <main className='nc-PageHome relative overflow-hidden'>
       {/* GLASSMOPHIN */}
-      <BgGlassmorphism />
-
+      {/* <BgGlassmorphism /> */}
+          
       <div className='container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28'>
         {/* SECTION HERO */}
-        <SectionHero className='pt-10 lg:pt-16 lg:pb-16' />
-
+        <div className='relative pb-16'>
+          <BackgroundSection className='bg-neutral-50 dark:bg-black/20' />
+          <SectionHero className='pt-10 lg:pt-16 lg:pb-16' />
+        </div>
         {/* SECTION 1 */}
-        <SectionSliderNewCategories categories={DEMO_CATS} />
-
-        <SectionOurFeatures className='-ml-24 -mr-24 bg-neutral-100'/>
-
-        <SectionGridFeaturePlaces cardType='card2' />
-
-        {/* User Booked List SECTION */}
         <div className='relative py-16'>
-          <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
-
-          <BookedUserList />
+          <BackgroundSection className='bg-white; dark:bg-black/20' />
+          <SectionSliderNewCategories categories={DEMO_CATS} />
         </div>
 
-        <SectionHowItWork />
+        <div className='relative'>
+          <BackgroundSection className='bg-neutral-50 dark:bg-black/20' />
+          <SectionOurFeatures/>
+          <SectionGridFeaturePlaces cardType='card2'/>
+          <SectionDiscoverPerfectRoomStay cardType='card2'/>
+        </div>
+
+        <SectionSliderAuthorBox />
+
+        {/* <SectionHowItWork /> */}
 
         <div className='relative py-16'>
-          <BackgroundSection className='bg-orange-50 dark:bg-black/20' />
+          <BackgroundSection className='bg-neutral-50 dark:bg-black/20' />
           <SectionSliderNewCategories
-            categories={DEMO_CATS_2}
-            categoryCardType='card4'
-            itemPerRow={4}
-            heading='Suggestions for discovery'
-            subHeading='Popular places to stay that Chisfis recommends for you'
-            sliderStyle='style2'
-          />
-        </div>
-
-        <SectionSubscribe2 />
-
-        <div className='relative py-16'>
-          <BackgroundSection className='bg-orange-50 dark:bg-black dark:bg-opacity-20 ' />
-          <SectionGridAuthorBox />
-        </div>
-
-        <SectionGridCategoryBox />
-
-        <div className='relative py-16'>
-          <BackgroundSection />
-          <SectionBecomeAnAuthor />
-        </div>
-
-        <SectionSliderNewCategories
           heading='Explore by types of stays'
           subHeading='Explore houses based on 10 types of stays'
           categoryCardType='card5'
           itemPerRow={5}
         />
-
-        <SectionVideos />
+        </div>
+        
+        <SectionBecomeAnAuthor />
 
         <div className='relative py-16'>
           <BackgroundSection />
           <SectionClientSay />
+          <SectionSubscribe />
         </div>
       </div>
     </main>
