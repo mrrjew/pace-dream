@@ -12,7 +12,12 @@ export const useThemeMode = () => {
     // if (!localStorage.theme) {
     //   localStorage.theme = "dark";
     // }
-    //
+
+    //forcing light mode
+    if (!localStorage.theme) {
+      localStorage.theme = "light";
+    }
+
     if (localStorage.theme === "dark") {
       toDark();
     } else {
