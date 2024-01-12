@@ -6,7 +6,6 @@ import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import Footer from "@/components/Footer";
 import FooterNav from "@/components/FooterNav";
-import SideBar from "@/components/SideBar";
 import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
 import "./globals.css";
 import UserProvider from "@/context";
@@ -39,12 +38,7 @@ export default function RootLayout({
           <UserProvider>
             <ClientCommons />
             <SiteHeader />
-            <div className='flex overflow-x-hidden max-w-screen'>
-              <SideBar/>
-              <div className='flex-1'>
-                {children}
-              </div>
-            </div>
+            {children}
             <FooterNav />
             <Footer />
           </UserProvider>
