@@ -12,9 +12,10 @@ import UserProvider from "@/context";
 
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  subsets: ['latin'],
+  display: 'swap',
+  adjustFontFallback: false,
+  weight: ['300', '400', '500', '600', '700']
 });
 
 export const metadata = {

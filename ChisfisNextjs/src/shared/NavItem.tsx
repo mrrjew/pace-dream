@@ -14,7 +14,6 @@ export interface NavItemProps {
 
 const NavItem: FC<NavItemProps> = ({
   className = "px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize",
-  radius = "rounded-full",
   children,
   onClick = () => {},
   isActive = false,
@@ -24,10 +23,10 @@ const NavItem: FC<NavItemProps> = ({
     <li className="nc-NavItem relative" data-nc-id="NavItem">
       {renderX && renderX}
       <button
-        className={`block !leading-none font-medium whitespace-nowrap ${className} ${radius} ${
+        className={`block !leading-none font-medium whitespace-nowrap ${className} ${
           isActive
-            ? "bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900"
-            : "text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+            ? "text-violet border-b-2 border-violet pb-8"
+            : "text-neutral-500 hover:text-violet dark:hover:text-violet pb-8"
         } ${twFocusClass()}`}
         onClick={() => {
           onClick && onClick();
