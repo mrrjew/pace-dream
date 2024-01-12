@@ -14,7 +14,6 @@ export interface SectionGridFeaturePlacesProps {
   stayListings?: StayDataType[];
   gridClass?: string;
   heading?: ReactNode;
-  subHeading?: ReactNode;
   headingIsCenter?: boolean;
   tabs?: string[];
   cardType?: "card1" | "card2";
@@ -23,8 +22,7 @@ export interface SectionGridFeaturePlacesProps {
 const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Featured places to stay",
-  subHeading = "Popular places to stay that Chisfis recommends for you",
+  heading = "Featured places",
   headingIsCenter,
   tabs = ["New York", "Tokyo", "Paris", "London"],
   cardType = "card2",
@@ -47,10 +45,9 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   };
 
   return (
-    <div className="nc-SectionGridFeaturePlaces relative">
+    <div className="nc-SectionGridFeaturePlaces pr-24 pl-24 relative">
       <HeaderFilter
         tabActive={"New York"}
-        subHeading={subHeading}
         tabs={tabs}
         heading={heading}
       />
@@ -60,7 +57,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
         {stayListings.map((stay) => renderCard(stay))}
       </div>
       <div className="flex mt-16 justify-center items-center">
-        <ButtonPrimary loading>Show me more</ButtonPrimary>
+        <ButtonPrimary>Show more</ButtonPrimary>
       </div>
     </div>
   );

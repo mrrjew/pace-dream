@@ -3,34 +3,43 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "./StayDatesRangeInput";
 
-export type TypeDropOffLocationType = "Early Check-In" | "Late Check-Out" | "";
+export type TypeDropOffLocationType = "Hotel" | "Long term" | "Short term";
 const StaySearchForm: FC<{}> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
-    useState<TypeDropOffLocationType>("Early Check-In");
+    useState<TypeDropOffLocationType>("Hotel");
   const renderRadioBtn = () => {
     return (
       <div className=" py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap border-b border-neutral-100 dark:border-neutral-700">
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "Early Check-In"
-              ? "bg-black shadow-black/10 shadow-lg text-white"
-              : "border border-neutral-300 dark:border-neutral-700"
+            dropOffLocationType === "Hotel"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("Early Check-In")}
+          onClick={(e) => setDropOffLocationType("Hotel")}
         >
-          Early Check-In
+          Hotel
         </div>
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "Late Check-Out"
-              ? "bg-black text-white shadow-black/10 shadow-lg"
-              : "border border-neutral-300 dark:border-neutral-700"
+            dropOffLocationType === "Long term"
+              ? "bg-violet text-white shadow-black/10 shadow-lg"
+              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("Late Check-Out")}
+          onClick={(e) => setDropOffLocationType("Long term")}
         >
-          Late Check-Out
+          Long term
         </div>
-        <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8 mr-2 my-1 sm:mr-3"></div>
+        <div
+        className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+          dropOffLocationType === "Short term"
+            ? "bg-violet text-white shadow-black/10 shadow-lg"
+            : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+        }`}
+        onClick={(e) => setDropOffLocationType("Short term")}
+      >
+        Short term
+      </div>
       </div>
     );
   };
@@ -40,10 +49,8 @@ const StaySearchForm: FC<{}> = ({}) => {
         {renderRadioBtn()}
         <div className="flex flex-1 rounded-full">
           <LocationInput className="flex-[1.5]" />
-          <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8"></div>
           <StayDatesRangeInput className="flex-1" />
-          <div className="self-center border-r border-slate-200 dark:border-slate-700 h-8"></div>
-          <GuestsInput className="flex-1" />
+          <GuestsInput className="flex-[1.5]" />
         </div>
       </form>
     );

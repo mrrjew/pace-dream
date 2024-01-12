@@ -5,7 +5,7 @@ import SectionOurFeatures from "@/components/SectionOurFeatures";
 import SectionHowItWork from "@/components/SectionHowItWork";
 import BackgroundSection from "@/components/BackgroundSection";
 import { TaxonomyType } from "@/data/types";
-import SectionGridAuthorBox from "@/components/SectionGridAuthorBox";
+import SectionGridAuthorBox from "@/components/SectionSliderAuthorBox";
 //
 import logo1 from "@/images/logos/nomal/1.png";
 import logo1Dark from "@/images/logos/dark/1.png";

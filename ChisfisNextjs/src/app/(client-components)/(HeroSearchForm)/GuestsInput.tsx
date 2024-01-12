@@ -62,15 +62,14 @@ const GuestsInput: FC<GuestsInputProps> = ({
             <Popover.Button
               className={`relative z-10 flex-1 flex text-left items-center ${fieldClassName} space-x-3 focus:outline-none`}
             >
-              <div className="text-neutral-300 dark:text-neutral-400">
-                <UserPlusIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-              </div>
+ 
               <div className="flex-grow">
                 <span className="block xl:text-lg font-semibold">
-                  {totalGuests || ""} Guests
+                  Guests
                 </span>
-                <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-                  {totalGuests ? "Guests" : "Add guests"}
+                <span className="flex flex-row border p-2 pl-4 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+                  Add your guests
+                  <UserPlusIcon className="w-4 h-4 lg:w-5 lg:h-5 text-black ml-4" />
                 </span>
               </div>
 

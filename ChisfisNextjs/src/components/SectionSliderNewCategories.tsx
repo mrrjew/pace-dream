@@ -105,7 +105,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   className = "",
   itemClassName = "",
   categories = DEMO_CATS,
-  itemPerRow = 5,
+  itemPerRow = 4,
   categoryCardType = "card3",
   sliderStyle = "style1",
 }) => {
@@ -170,7 +170,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   if (!numberOfItems) return null;
 
   return (
-    <div className={`nc-SectionSliderNewCategories ${className}`}>
+    <div className={`nc-SectionSliderNewCategories pr-24 pl-24 ${className}`}>
       <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
         {heading}
       </Heading>
@@ -181,6 +181,22 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
+        {currentIndex ? (
+            <PrevBtn
+              onClick={() => changeItemId(currentIndex - 1)}
+              className="ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+            />
+          ) : <PrevBtn
+          className="bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
+        />}
+          {categories.length > currentIndex + numberOfItems ? (
+            <NextBtn
+              onClick={() => changeItemId(currentIndex + 1)}
+              className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+            />
+          ) : <NextBtn
+          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+        />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -209,22 +225,6 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
               </AnimatePresence>
             </motion.ul>
           </div>
-
-          {currentIndex ? (
-            <PrevBtn
-              style={{ transform: "translate3d(0, 0, 0)" }}
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="w-9 h-9 xl:w-12 xl:h-12 text-lg absolute -left-3 xl:-left-6 top-1/3 -translate-y-1/2 z-[1]"
-            />
-          ) : null}
-
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              style={{ transform: "translate3d(0, 0, 0)" }}
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="w-9 h-9 xl:w-12 xl:h-12 text-lg absolute -right-3 xl:-right-6 top-1/3 -translate-y-1/2 z-[1]"
-            />
-          ) : null}
         </div>
       </MotionConfig>
     </div>
