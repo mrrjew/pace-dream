@@ -10,6 +10,7 @@ import Image from 'next/image';
 import usaImg from '@/images/country/usa.png';
 import CurrencyModal from './CurrencyModal';
 import CountryModal from './CountryModal';
+import { IoMenu } from "react-icons/io5";
 
 export interface MainNav2Props {
   className?: string;
@@ -43,7 +44,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
   };
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
-      <div className='px-4 h-20 lg:container flex justify-between'>
+      <div className='px-4 h-16 lg:container flex justify-between'>
         <div className='hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10'>
           <Logo className='w-32 self-center' />
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'></div> */}
@@ -74,10 +75,9 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
           </div>
         </div>
 
-        <div className='self-center lg:hidden flex-[3] max-w-lg !mx-auto md:px-3'>
-          <HeroSearchForm2MobileFactory />
-
-          
+        <div className='self-center justify-between lg:hidden flex flex-[3] max-w-lg !mx-auto md:px-3'>
+          <h2>img</h2>
+          <IoMenu size={32} />
         </div>
 
         <div className='hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100'>
