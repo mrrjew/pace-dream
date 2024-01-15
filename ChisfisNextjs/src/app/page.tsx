@@ -163,41 +163,44 @@ function PageHome() {
         </div>
         {/* SECTION 1 */}
         <div className="relative py-16">
-          <BackgroundSection className="bg-white; " />
-          <SectionSliderNewCategories categories={DEMO_CATS} />
+          <BackgroundSection className="bg-white " />
+          <SectionSliderNewCategories  />
         </div>
 
-        <div className="relative">
-          <BackgroundSection className="bg-neutral-50 " />
-          <SectionOurFeatures />
-          <SectionGridFeaturePlaces cardType="card2" />
-          <SectionDiscoverPerfectRoomStay cardType="card2" />
-        </div>
-
-        <SectionSliderAuthorBox />
-
-        {/* <SectionHowItWork /> */}
-
-        <div className="relative py-16">
-          <BackgroundSection className="bg-neutral-50" />
-          <SectionSliderNewCategories
-            heading="Explore by types of stays"
-            subHeading="Explore houses based on 10 types of stays"
-            categoryCardType="card5"
-            itemPerRow={5}
-          />
-        </div>
-
-        <SectionBecomeAnAuthor />
-
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionClientSay />
-          <SectionSubscribe />
-        </div>
       </div>
     </main>
   );
 }
 
 export default PageHome;
+
+{/*
+<div className="relative">
+<BackgroundSection className="bg-neutral-50 " />
+<SectionOurFeatures />
+<SectionGridFeaturePlaces cardType="card2" />
+<SectionDiscoverPerfectRoomStay cardType="card2" />
+</div>
+
+<SectionSliderAuthorBox />
+
+{/* <SectionHowItWork /> 
+
+<div className="relative py-16">
+<BackgroundSection className="bg-neutral-50" />
+<SectionSliderNewCategories
+  heading="Explore by types of stays"
+  subHeading="Explore houses based on 10 types of stays"
+  categoryCardType="card5"
+  itemPerRow={5}
+/>
+</div>
+
+<SectionBecomeAnAuthor />
+
+<div className="relative py-16">
+<BackgroundSection />
+<SectionClientSay />
+<SectionSubscribe />
+</div>
+   */}

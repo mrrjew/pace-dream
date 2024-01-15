@@ -112,7 +112,6 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [numberOfItems, setNumberOfitem] = useState(0);
-
   const windowWidth = useWindowSize().width;
   useEffect(() => {
     if (windowWidth < 320) {
@@ -170,7 +169,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   if (!numberOfItems) return null;
 
   return (
-    <div className={`nc-SectionSliderNewCategories pr-24 pl-24 ${className}`}>
+    <div className={` md:px-24 `}>
       <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
         {heading}
       </Heading>
@@ -205,7 +204,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
               <AnimatePresence initial={false} custom={direction}>
                 {categories.map((item, indx) => (
                   <motion.li
-                    className={`relative inline-block px-2 xl:px-4 ${itemClassName}`}
+                    className={`relative md:inline-block px-2 xl:px-4 ${itemClassName} `}
                     custom={direction}
                     initial={{
                       x: `${(currentIndex - 1) * -100}%`,
