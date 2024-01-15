@@ -28,7 +28,7 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {
         />
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
+        <SectionSubscribe2  />
       </div>
     </div>
   );

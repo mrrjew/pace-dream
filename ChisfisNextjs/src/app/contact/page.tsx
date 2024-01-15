@@ -86,7 +86,7 @@ const PageContact: FC<PageContactProps> = ({}) => {
 
       {/* OTHER SECTIONS */}
       <div className="container">
-        <SectionSubscribe2 className="pb-24 lg:pb-32" />
+        <SectionSubscribe2  />
       </div>
     </div>
   );

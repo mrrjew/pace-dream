@@ -33,7 +33,7 @@ const BlogPage: React.FC = () => {
         <SectionLatestPosts className="py-16 lg:py-28" />
 
         {/* === SECTION 1 === */}
-        <SectionSubscribe2 className="pb-16 lg:pb-28" />
+        <SectionSubscribe2 />
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </div>
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
+        <SectionSubscribe2 />
 
         {/* SECTION */}
         <div className="relative py-16 mb-24 lg:mb-28">
