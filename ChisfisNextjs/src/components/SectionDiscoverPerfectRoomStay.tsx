@@ -101,7 +101,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
   };
 
   return (
-    <div className={`nc-SectionDiscoverPerfectRoomStay pr-24 pl-24 pb-20`}>
+    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 pb-20`}>
       <HeaderFilter
         tabActive={"All"}
         tabs={tabs}
@@ -139,7 +139,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
               <AnimatePresence initial={false} custom={direction}>
                 {stayListings.map((item, indx) => (
                   <motion.li
-                    className={`relative inline-block px-4 xl:px-4 truncate`}
+                    className={`relative md:inline-block px-4 xl:px-4 truncate`}
                     custom={direction}
                     initial={{
                       x: `${(currentIndex - 1) * -100}%`,

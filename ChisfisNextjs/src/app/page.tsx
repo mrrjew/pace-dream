@@ -164,9 +164,16 @@ function PageHome() {
         {/* SECTION 1 */}
         <div className="relative py-16">
           <BackgroundSection className="bg-white " />
-          <SectionSliderNewCategories  />
+          <SectionSliderNewCategories />
         </div>
-
+       {/* Discover Perfect Room Stay */}
+        <div className="relative">
+          <BackgroundSection className="bg-neutral-50 " />
+          <SectionOurFeatures />
+                    {/* Featured places */}
+          <SectionGridFeaturePlaces cardType="card2" />
+          <SectionDiscoverPerfectRoomStay cardType="card2" />
+        </div>
       </div>
     </main>
   );
@@ -174,7 +181,8 @@ function PageHome() {
 
 export default PageHome;
 
-{/*
+{
+  /*
 <div className="relative">
 <BackgroundSection className="bg-neutral-50 " />
 <SectionOurFeatures />
@@ -203,4 +211,5 @@ export default PageHome;
 <SectionClientSay />
 <SectionSubscribe />
 </div>
-   */}
+   */
+}

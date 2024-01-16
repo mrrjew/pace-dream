@@ -45,7 +45,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   };
 
   return (
-    <div className="nc-SectionGridFeaturePlaces pr-24 pl-24 relative">
+    <div className="nc-SectionGridFeaturePlaces md:pr-24 md:pl-24 relative">
       <HeaderFilter
         tabActive={"New York"}
         tabs={tabs}
@@ -56,7 +56,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       >
         {stayListings.map((stay) => renderCard(stay))}
       </div>
-      <div className="flex mt-16 justify-center items-center">
+      <div className="flex my-16 justify-center items-center">
         <ButtonPrimary>Show more</ButtonPrimary>
       </div>
     </div>
