@@ -12,7 +12,7 @@ export interface SectionHeroProps {
 const SectionHero: FC<SectionHeroProps> = () => {
   return (
     <section
-      className={`nc-SectionHero flex flex-col-reverse lg:flex-col xl:ml-24 xl:mr-24 mt-20 `}
+      className={`nc-SectionHero flex flex-col-reverse lg:flex-col xl:pl-24 xl:pr-24 pt-20 `}
     >
       <article className="flex flex-col lg:flex-row lg:items-center z-10">
         <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-8 sm:space-y-10 pb-14 lg:pb-64 xl:pr-14 lg:mr-10 xl:mr-0">
