@@ -166,11 +166,11 @@ function PageHome() {
           <BackgroundSection className="bg-white " />
           <SectionSliderNewCategories />
         </div>
-       {/* Discover Perfect Room Stay */}
+        {/* Discover Perfect Room Stay */}
         <div className="relative">
           <BackgroundSection className="bg-neutral-50 " />
           <SectionOurFeatures />
-                    {/* Featured places */}
+          {/* Featured places */}
           <SectionGridFeaturePlaces cardType="card2" />
           <SectionDiscoverPerfectRoomStay cardType="card2" />
         </div>
