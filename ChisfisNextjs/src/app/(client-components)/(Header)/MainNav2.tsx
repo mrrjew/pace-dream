@@ -10,8 +10,7 @@ import Image from "next/image";
 import usaImg from "@/images/country/usa.png";
 import CurrencyModal from "./CurrencyModal";
 import CountryModal from "./CountryModal";
-import { IoMenu } from "react-icons/io5";
-import LogoMobile from "@/images/paceDreamLogo-light.png";
+import NavbarMobile from "./NavbarMobile";
 export interface MainNav2Props {
   className?: string;
 }
@@ -39,9 +38,9 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
     setIsModalOpenCountry(false);
   };
   return (
-    <div className={`MainNav2 relative z-10 ${className}`}>
-      <div className="px-4 h-16 lg:container flex justify-between">
-        <div className="hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10">
+    <header className={`MainNav2 relative z-10 ${className}`}>
+      <section className="px-4 h-16 lg:container flex justify-between">
+        <article className="hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10">
           <Logo className="w-32 self-center" />
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'></div> */}
           <div className="hidden lg:flex  justify-end ">
@@ -68,12 +67,11 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
               </svg>
             </button>
           </div>
-        </div>
+        </article>
 
-        <div className="self-center items-center justify-between lg:hidden flex flex-[3] max-w-lg !mx-auto md:px-3">
-          <Image src={LogoMobile} alt="logo" />
-          <IoMenu size={44} color="#000" className="rounded-full bg-[#F2F2F7] p-2" />
-        </div>
+
+        <NavbarMobile />
+       
 
         <div className="hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
           <div className="hidden lg:flex space-x-1">
@@ -93,13 +91,13 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             <MenuBar />
           </div>
         </div>
-      </div>
+      </section>
       <CurrencyModal
         isOpen={isModalOpenCurrency}
         onClose={closeModalCurrency}
       />
       <CountryModal isOpen={isModalOpenCountry} onClose={closeModalCountry} />
-    </div>
+    </header>
   );
 };
 
