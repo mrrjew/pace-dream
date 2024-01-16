@@ -101,7 +101,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
   };
 
   return (
-    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 pb-20`}>
+    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20`}>
       <HeaderFilter
         tabActive={"All"}
         tabs={tabs}

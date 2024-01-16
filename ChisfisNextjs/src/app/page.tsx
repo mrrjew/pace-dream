@@ -170,6 +170,7 @@ function PageHome() {
         <div className="relative">
           <BackgroundSection className="bg-neutral-50 " />
           <SectionOurFeatures />
+          
           {/* Featured places */}
           <SectionGridFeaturePlaces cardType="card2" />
           <SectionDiscoverPerfectRoomStay cardType="card2" />

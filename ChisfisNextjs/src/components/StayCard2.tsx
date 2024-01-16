@@ -54,20 +54,21 @@ const StayCard2: FC<StayCard2Props> = ({
   };
 
   const renderContent = () => {
+  
     return (
       <div className={size === "default" ? "mt-3 space-y-3" : "mt-2 space-y-2"}>
         <div className="space-y-2">
           <span className="text-sm text-neutral-500 dark:text-neutral-400">
             {listingCategory.name} · {bedrooms} beds
           </span>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
             {isAds && <Badge name="ADS" color="green" />}
             <h2
-              className={`font-semibold capitalize text-neutral-900 dark:text-white ${
-                size === "default" ? "text-base" : "text-base"
+              className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${
+                size === "default" && "text-base"
               }`}
             >
-              <span className="line-clamp-1">{title}</span>
+              <span className="line-clamp-1 truncate">{title}</span>
             </h2>
           </div>
           <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
