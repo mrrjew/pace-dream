@@ -1,20 +1,20 @@
-import imagePng from "@/images/hero-right2.png";
-import Image, { StaticImageData } from "next/image";
-import { FC, ReactNode } from "react";
+import imagePng from '@/images/hero-right2.png';
+import Image, { StaticImageData } from 'next/image';
+import { FC, ReactNode } from 'react';
 import HeroSearchForm, {
   SearchTab,
-} from "../(client-components)/(HeroSearchForm)/HeroSearchForm";
+} from '../(client-components)/(HeroSearchForm)/HeroSearchForm';
 
 export interface SectionHeroArchivePageProps {
   className?: string;
   listingType?: ReactNode;
-  currentPage: "Stays" | "Hourly" | "Find Roommate";
+  currentPage: 'Stays' | 'Hourly' | 'Find Roommate';
   currentTab: SearchTab;
   rightImage?: StaticImageData;
 }
 
 const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
-  className = "",
+  className = '',
   listingType,
   currentPage,
   currentTab,
@@ -57,7 +57,7 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
 
       <div className="hidden lg:flow-root w-full">
         <div className="z-10 lg:-mt-40 xl:-mt-56 w-full">
-          <HeroSearchForm currentPage={currentPage} currentTab={currentTab} />
+          <HeroSearchForm currentPage="Room Stays" currentTab={currentTab} />
         </div>
       </div>
     </div>

@@ -13,9 +13,9 @@ import {
 import { clientAuthAxios } from '@/utils/clientAxios';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
-import Moment from 'react-moment';
-import { MessageDate } from './MessageDate';
 import { IoMdRefresh } from 'react-icons/io';
+import { MdDownload } from 'react-icons/md';
+import { MessageDate } from './MessageDate';
 
 interface IMessageContainerProps {
   message: InboxMessage;
@@ -38,7 +38,11 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
   const { conversationId } = useConversation();
 
   const url = useMemo(() => {
-    if (message.type === MessageType.IMAGE) {
+    if (
+      message.type === MessageType.IMAGE ||
+      message.type === MessageType.FILE ||
+      message.type === MessageType.VIDEO
+    ) {
       return isSendingMessage(localMessage)
         ? URL.createObjectURL(localMessage.file!)
         : localMessage.url;
@@ -66,15 +70,23 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
     }
   };
 
-  const sendImage = async (message: SendingMessage) => {
-    if (message.type !== MessageType.IMAGE || !message.file) return;
+  const sendFile = async (message: SendingMessage) => {
+    if (!message.file) return;
     setSending(true);
     setError(false);
     try {
       const formData = new FormData();
       formData.append('chatId', conversationId);
       formData.append('message', message.message);
-      formData.append('images', message.file!);
+      if (message.type === MessageType.IMAGE) {
+        formData.append('images', message.file!);
+      }
+      if (message.type === MessageType.FILE) {
+        formData.append('files', message.file!);
+      }
+      if (message.type === MessageType.VIDEO) {
+        formData.append('video', message.file!);
+      }
       formData.append('type', message.type);
       const res = await clientAuthAxios().post('/message/send', formData);
       setLocalMessage((prevMessage) => ({
@@ -94,8 +106,8 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
       if (localMessage.status === MessageStatus.SENDING) {
         if (localMessage.type === MessageType.TEXT) {
           sendMessage(localMessage);
-        } else if (localMessage.type === MessageType.IMAGE) {
-          sendImage(localMessage);
+        } else {
+          sendFile(localMessage);
         }
       }
     }
@@ -124,9 +136,9 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
             self
               ? 'bg-[#632DF8] text-white rounded-br-none'
               : 'bg-white border-[1px] border-[#EAEBF0] rounded-bl-none'
-          } ${url ? 'px-2.5' : 'px-4'}`}
+          } ${url && message.type === MessageType.IMAGE ? 'px-2.5' : 'px-4'}`}
         >
-          {url ? (
+          {url && message.type === MessageType.IMAGE ? (
             <div className="h-auto w-[350px] md:w-[450px]">
               <Image
                 src={url!}
@@ -136,6 +148,16 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
                 sizes="100vw"
                 className="w-full h-full"
               />
+            </div>
+          ) : message.type === MessageType.FILE ||
+            message.type === MessageType.VIDEO ? (
+            <div className="h-16 flex items-center gap-2 bg-[#F9F8FB] rounded-lg text-neutral-700 px-2.5">
+              {!self && (
+                <a className="cursor-pointer" href={url} target="_blank">
+                  <MdDownload />
+                </a>
+              )}
+              <p className="flex-1">{message.message}</p>
             </div>
           ) : (
             <p className="text-sm">{message.message}</p>

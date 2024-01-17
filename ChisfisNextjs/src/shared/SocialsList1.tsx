@@ -6,10 +6,26 @@ export interface SocialsList1Props {
 }
 
 const socials: SocialType[] = [
-  { name: "Facebook", icon: "lab la-facebook-square", href: "#" },
-  { name: "Twitter", icon: "lab la-twitter", href: "#" },
-  { name: "Youtube", icon: "lab la-youtube", href: "#" },
-  { name: "Instagram", icon: "lab la-instagram", href: "#" },
+  {
+    name: "Facebook",
+    icon: "lab la-facebook-square",
+    href: "https://www.facebook.com/profile.php?id=61554764998573",
+  },
+  {
+    name: "Twitter",
+    icon: "lab la-twitter",
+    href: "https://twitter.com/PaceDream_",
+  },
+  {
+    name: "Youtube",
+    icon: "lab la-youtube",
+    href: "https://www.youtube.com/channel/UCqj0k3Sy-2o1UVqNEKOMrhA",
+  },
+  {
+    name: "Instagram",
+    icon: "lab la-instagram",
+    href: "https://www.instagram.com/pacedream_official/",
+  },
 ];
 
 const SocialsList1: FC<SocialsList1Props> = ({ className = "space-y-2.5" }) => {
