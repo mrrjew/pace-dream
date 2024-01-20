@@ -1,10 +1,10 @@
-import React from "react";
-import { DEMO_POSTS } from "@/data/posts";
-import SectionAds from "./SectionAds";
-import SectionMagazine5 from "./SectionMagazine5";
-import SectionLatestPosts from "./SectionLatestPosts";
-import BgGlassmorphism from "@/components/BgGlassmorphism";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
+import React from 'react';
+import { DEMO_POSTS } from '@/data/posts';
+import SectionAds from './SectionAds';
+import SectionMagazine5 from './SectionMagazine5';
+import SectionLatestPosts from './SectionLatestPosts';
+import BgGlassmorphism from '@/components/BgGlassmorphism';
+import SectionSubscribe2 from '@/components/SectionSubscribe2';
 
 // DEMO DATA
 const POSTS = DEMO_POSTS;

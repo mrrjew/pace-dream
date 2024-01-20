@@ -6,7 +6,6 @@ import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import Footer from "@/components/Footer";
 import FooterNav from "@/components/FooterNav";
-import SideBar from "@/components/SideBar";
 import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
 import "./globals.css";
 import UserProvider from "@/context";

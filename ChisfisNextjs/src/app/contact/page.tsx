@@ -1,25 +1,25 @@
-import React, { FC } from "react";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
-import SocialsList from "@/shared/SocialsList";
-import Label from "@/components/Label";
-import Input from "@/shared/Input";
-import Textarea from "@/shared/Textarea";
-import ButtonPrimary from "@/shared/ButtonPrimary";
+import React, { FC } from 'react';
+import SectionSubscribe2 from '@/components/SectionSubscribe2';
+import SocialsList from '@/shared/SocialsList';
+import Label from '@/components/Label';
+import Input from '@/shared/Input';
+import Textarea from '@/shared/Textarea';
+import ButtonPrimary from '@/shared/ButtonPrimary';
 
 export interface PageContactProps {}
 
 const info = [
   {
-    title: "🗺 ADDRESS",
-    desc: "Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter",
+    title: '🗺 ADDRESS',
+    desc: 'Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter',
   },
   {
-    title: "💌 EMAIL",
-    desc: "nc.example@example.com",
+    title: '💌 EMAIL',
+    desc: 'nc.example@example.com',
   },
   {
-    title: "☎ PHONE",
-    desc: "000-123-456-7890",
+    title: '☎ PHONE',
+    desc: '000-123-456-7890',
   },
 ];
 
