@@ -1,11 +1,11 @@
-import BackgroundSection from "@/components/BackgroundSection";
-import BgGlassmorphism from "@/components/BgGlassmorphism";
-import SectionGridAuthorBox from "@/components/SectionSliderAuthorBox";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
-import heroRightImage from "@/images/hero-right-car.png";
-import { ReactNode } from "react";
-import SectionHeroArchivePage from "../(server-components)/SectionHeroArchivePage";
+import BackgroundSection from '@/components/BackgroundSection';
+import BgGlassmorphism from '@/components/BgGlassmorphism';
+import SectionGridAuthorBox from '@/components/SectionSliderAuthorBox';
+import SectionSliderNewCategories from '@/components/SectionSliderNewCategories';
+import SectionSubscribe2 from '@/components/SectionSubscribe2';
+import heroRightImage from '@/images/hero-right-car.png';
+import { ReactNode } from 'react';
+import SectionHeroArchivePage from '../(server-components)/SectionHeroArchivePage';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <SectionHeroArchivePage
           rightImage={heroRightImage}
           currentPage="Hourly"
-          currentTab="Hourly"
+          currentTab="Room Stays"
           listingType={
             <>
               <i className="text-2xl las la-car"></i>

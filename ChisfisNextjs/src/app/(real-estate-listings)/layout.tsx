@@ -1,9 +1,9 @@
-import BackgroundSection from "@/components/BackgroundSection";
-import SectionGridAuthorBox from "@/components/SectionSliderAuthorBox";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
-import React, { ReactNode } from "react";
-import SectionHero2ArchivePage from "../(server-components)/SectionHero2ArchivePage";
+import BackgroundSection from '@/components/BackgroundSection';
+import SectionGridAuthorBox from '@/components/SectionSliderAuthorBox';
+import SectionSliderNewCategories from '@/components/SectionSliderNewCategories';
+import SectionSubscribe2 from '@/components/SectionSubscribe2';
+import React, { ReactNode } from 'react';
+import SectionHero2ArchivePage from '../(server-components)/SectionHero2ArchivePage';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
