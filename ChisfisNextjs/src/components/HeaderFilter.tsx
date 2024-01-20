@@ -36,7 +36,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
   return (
     <div className="flex flex-col mb-8 relative">
       <Heading desc={subHeading}>{heading}</Heading>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between -mt-10">
         <Nav
           className="sm:space-x-2"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base hiddenScrollbar"

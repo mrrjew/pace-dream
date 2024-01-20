@@ -13,6 +13,7 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
+import HeaderFilterDiscover from "./HeaderFilterDiscover";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -104,7 +105,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
 
   return (
     <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20 ${className}`}>
-      <HeaderFilter
+      <HeaderFilterDiscover
         tabActive={"All"}
         tabs={tabs}
         heading={heading}
@@ -117,22 +118,24 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
+        <div className="-mt-20 mb-20">
         {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[93%] md:ml-[90%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[93%] md:ml-[90%] text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
         />}
           {stayListings.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
         />}
+        </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}

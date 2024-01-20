@@ -1,10 +1,10 @@
 import React, { FC, ReactNode } from "react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import HeaderFilter from "./HeaderFilter";
 import StayCard from "./StayCard";
 import StayCard2 from "./StayCard2";
+import ButtonShowMore from "@/shared/ButtonShowMore";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -59,7 +59,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
         {stayListings.map((stay) => renderCard(stay))}
       </div>
       <div className="flex my-16 justify-center items-center">
-        <ButtonPrimary>Show more</ButtonPrimary>
+        <ButtonShowMore>Show more</ButtonShowMore>
       </div>
     </div>
   );

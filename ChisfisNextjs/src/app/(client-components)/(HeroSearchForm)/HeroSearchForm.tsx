@@ -25,7 +25,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   const renderTab = () => {
     return (
       <div className="ml-2">
-        <ul className="ml-4 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+        <ul className="ml-4 md:ml-8 mt-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (

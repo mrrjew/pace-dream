@@ -162,7 +162,7 @@ function PageHome() {
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
         {/* SECTION HERO */}
         <div className="relative pb-16">
-          <BackgroundSection className="bg-neutral-50 " />
+          <BackgroundSection className="bg-[#F6F4F6] " />
           <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
         </div>
         {/* SECTION 1 */}
@@ -177,46 +177,46 @@ function PageHome() {
           itemPerRow={4}
         />
         </div>
-        {/* Discover Perfect Room Stay */}
         <div className="relative">
-          <BackgroundSection className="bg-neutral-50 max-w-[400px] md:max-w-[100%]" />
+          <BackgroundSection className="bg-[#F6F4F6] md:max-w-[100%]" />
           <SectionOurFeatures />
-          
-          {/* Featured places */}
-          <SectionSliderFeaturePlaces  
-          className="md:hidden block"
-          itemPerRow={1}
-          />
-          <SectionGridFeaturePlaces cardType="card2" className="md:block hidden md:mt-16" />
-        
-          <SectionDiscoverPerfectRoomStay cardType="card2" className="md:block hidden" />
+          <div className="relative pt-12">
+            <BackgroundSection className="bg-[#FAFAFA] md:max-w-[100%]" />
+            <SectionSliderFeaturePlaces  
+            className="md:hidden block"
+            itemPerRow={1}
+            />
+            <SectionGridFeaturePlaces cardType="card2" className="md:block hidden md:mt-16" />
+            <SectionDiscoverPerfectRoomStay cardType="card2" className="md:block hidden" />
+            <div className="relative pt-16">
+              <BackgroundSection className="bg-[white] md:max-w-[100%]" />
+              <SectionSliderAuthorBox className="md:block hidden"
+              itemPerRow={5}/>
+              <SectionSliderAuthorBoxMobile className="md:hidden block"
+              itemPerRow={1}/>
+              <div className="relative mt-16">
+                <BackgroundSection className="bg-neutral-50" />
+                <SectionSliderNewCategories
+                className="md:block hidden"
+                  heading="Explore by types of stays"
+                  subHeading="Explore houses based on 10 types of stays"
+                  itemPerRow={5}
+                />
+                <SectionSliderNewCategoriesMobile
+                className="md:hidden block"
+                  heading="Explore by types of stays"
+                  subHeading="Explore houses based on 10 types of stays"
+                  itemPerRow={1}
+                />
+                <div className="relative py-16 mb-0">
+                  <BackgroundSection className="bg-white" />
+                  <SectionBecomeAnAuthor />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <SectionSliderAuthorBox className="md:block hidden"
-          itemPerRow={5}/>
-        <SectionSliderAuthorBoxMobile className="md:hidden block"
-          itemPerRow={1}/>
-
-        {/* <SectionHowItWork /> */} 
-
-        <div className="relative py-16">
-        <BackgroundSection className="bg-neutral-50" />
-        <SectionSliderNewCategories
-        className="md:block hidden"
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
-          itemPerRow={5}
-        />
-        <SectionSliderNewCategoriesMobile
-        className="md:hidden block"
-          heading="Explore by types of stays"
-          subHeading="Explore houses based on 10 types of stays"
-          itemPerRow={1}
-        />
-        </div>
-
-        <SectionBecomeAnAuthor />
-
-        <div className="relative py-16">
+        <div className="relative pb-8">
         <BackgroundSection />
         <SectionClientSay className="md:block hidden" itemPerRow={3} />
         <SectionClientSayMobile className="block md:hidden" itemPerRow={1} />
