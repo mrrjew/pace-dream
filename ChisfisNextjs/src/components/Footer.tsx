@@ -20,7 +20,7 @@ const widgetMenus: WidgetFooterMenu[] = [
       { href: "#", label: "Your Space" },
       { href: "#", label: "Roommate" },
       { href: "#", label: "Gift Card" },
-      { href: "#", label: "Experiences" },
+      { href: "#", label: "Experience" },
     ],
   },
   {
