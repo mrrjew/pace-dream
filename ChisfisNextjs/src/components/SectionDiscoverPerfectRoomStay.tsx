@@ -19,6 +19,7 @@ const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 
 //
 export interface SectionDiscoverPerfectRoomStayProps {
+  className?: string;
   stayListings?: StayDataType[];
   heading?: ReactNode;
   subHeading?: ReactNode;
@@ -30,6 +31,7 @@ export interface SectionDiscoverPerfectRoomStayProps {
 }
 
 const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = ({
+  className = "",
   stayListings = DEMO_DATA,
   heading = "Discover Perfect Room Stay",
   subHeading = "Popular Long term Stay & Short term Stay places to recommends for you",
@@ -101,7 +103,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
   };
 
   return (
-    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20`}>
+    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20 ${className}`}>
       <HeaderFilter
         tabActive={"All"}
         tabs={tabs}
@@ -118,10 +120,10 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
         {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="xl:ml-[93%] md:ml-[90%] font-black text-black text-lg -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 text-neutral-100 xl:ml-[93%] md:ml-[90%] text-lg -translate-y-1/2 z-[1]"
         />}
           {stayListings.length > currentIndex + numberOfItems ? (
             <NextBtn

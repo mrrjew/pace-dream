@@ -55,21 +55,21 @@ const GuestsInput: FC<GuestsInputProps> = ({
       {({ open }) => (
         <>
           <div
-            className={`flex-1 z-10 flex items-center focus:outline-none ${
+            className={`flex-col w-full md:flex-row md:flex-1 flex items-center p-2 focus:outline-none mb-8 md:mb-0${
               open ? "nc-hero-field-focused" : ""
             }`}
           >
             <Popover.Button
-              className={`relative z-10 flex-1 flex text-left items-center ${fieldClassName} space-x-3 focus:outline-none`}
+              className={`lg:w-full md:w-[75%] w-full p-2 relative z-10 flex-1 flex text-left items-center ${fieldClassName} space-x-3 focus:outline-none`}
             >
  
               <div className="flex-grow">
-                <span className="block xl:text-lg font-semibold">
+                <span className="block xl:text-lg font-normal text-black md:font-semibold">
                   Guests
                 </span>
-                <span className="flex flex-row border p-2 pl-4 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+                <span className="flex flex-row border p-3 md:w-32 lg:w-44 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
                   Add your guests
-                  <UserPlusIcon className="w-4 h-4 lg:w-5 lg:h-5 text-black ml-4" />
+                  <UserPlusIcon className="w-4 h-4 lg:w-5 lg:h-5 hidden md:flex text-black ml-4" />
                 </span>
               </div>
 
@@ -86,7 +86,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
 
             {/* BUTTON SUBMIT OF FORM */}
             {hasButtonSubmit && (
-              <div className="pr-2 xl:pr-4">
+              <div className="pr-2 xl:pr-4 w-[90%] md:pt-3 mt-2">
                 <ButtonSubmit href={buttonSubmitHref} />
               </div>
             )}

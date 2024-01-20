@@ -17,7 +17,7 @@ const SectionOurFeatures: FC<SectionOurFeaturesProps> = ({
 }) => {
   return (
     <div
-      className={`md:pr-24 md:pl-48 nc-SectionOurFeatures relative flex flex-col items-center ${
+      className={`lg:pr-24 lg:pl-48 nc-SectionOurFeatures relative flex flex-col w-max-[630px] w-[90vw] md:max-w-[100%] md:w-[100%] items-center ${
         type === "type1" ? "lg:flex-row" : "lg:flex-row-reverse"
       } ${className}`}
       data-nc-id="SectionOurFeatures"
@@ -28,6 +28,9 @@ const SectionOurFeatures: FC<SectionOurFeaturesProps> = ({
         <ButtonPrimary href="/listing-stay-map" sizeClass="my-10 px-5 py-4 sm:px-7">
             Discover Roommate
         </ButtonPrimary>
+      </div>
+      <div>
+        <Image src={rightImg} alt="img"></Image>
       </div>
     
     </div>

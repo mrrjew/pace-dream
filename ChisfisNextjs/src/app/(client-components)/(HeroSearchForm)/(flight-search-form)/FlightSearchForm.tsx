@@ -179,7 +179,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
 
   const renderRadioBtn = () => {
     return (
-      <div className=" py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap border-b border-neutral-100 dark:border-neutral-700">
+      <div className="py-5 -mt-4 -mb-4 [ nc-hero-field-padding ] flex flex-row flex-wrap">
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
             dropOffLocationType === "Male"
@@ -208,7 +208,12 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
     return (
       <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
         {renderRadioBtn()}
-        <div className="flex flex-1 rounded-full">
+        <div className="ml-4 mt-4 md:hidden">
+          <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
+            Explore your PaceDream Book hotels, Car and more with ease!
+          </h2>
+        </div>
+        <div className="flex flex-col flex-1 md:flex-row rounded-full">
           <LocationInput className="flex-[1.5]" />
           <StayDatesRangeInput className="flex-1" />
           <GuestsInput className="flex-[1.5]" />

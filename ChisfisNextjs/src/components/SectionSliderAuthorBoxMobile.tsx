@@ -14,23 +14,23 @@ import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
 import WidgetCategories from "@/app/blog/WidgetCategories";
 
-export interface SectionSliderAuthorProps {
+export interface SectionSliderAuthorMobileProps {
   className?: string;
   itemClassName?: string;
   boxCard?: "box1" | "box2";
   authors?: AuthorType[];
-  itemPerRow?: 1 | 5;
+  itemPerRow?: 1;
   sliderStyle?: "style1" | "style2";
 }
 
 const DEMO_DATA = DEMO_AUTHORS.filter((_, i) => i < 10);
 
-const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
+const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
   className = "",
   itemClassName = "",
   authors = DEMO_DATA,
   boxCard = "box1",
-  itemPerRow = 5,
+  itemPerRow = 1,
   sliderStyle = "style1",
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -106,28 +106,28 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
         {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[93%] md:ml-[90%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="hidden md:inline p-0.5 ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[93%] md:ml-[90%] text-lg -translate-y-1/2 z-[1]"
+          className="hidden md:inline bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
         />}
           {authors.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="hidden md:inline ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="hidden md:inline ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
         />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
-              className="relative whitespace-nowrap -mx-2 xl:-mx-4"
+              className="relative whitespace-nowrap -mx-2 xl:-mx-4 w-max-[630px] w-[90vw]"
             >
               <AnimatePresence initial={false} custom={direction}>
                 {authors.map((item, indx) => (
                   <motion.li
-                    className={`relative mr-[1px] max-w-[420px] md:mr-0px inline-block px-2 xl:px-4 ${itemClassName} `}
+                    className={`relative mr-[1px] inline-block px-2 xl:px-4 ${itemClassName} `}
                     custom={direction}
                     initial={{
                       x: `${(currentIndex - 1) * -100}%`,
@@ -138,13 +138,13 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
                     variants={variants(200, 1)}
                     key={indx}
                     style={{
-                      width: `calc(1/${numberOfItems} * 100%)`,
+                      width: `100%`,
                     }}
                   >
                     {renderCard(item)}
                   </motion.li>
                 ))}
-                <div className="relative ml-[188px] mt-4">
+                <div className="relative mt-4 max-w-[630px] w-[95vw] flex flex-row-reverse justify-center">
                 {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
@@ -171,4 +171,4 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
   );
 };
 
-export default SectionSliderAuthorBox;
+export default SectionSliderAuthorBoxMobile;

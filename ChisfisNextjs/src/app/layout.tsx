@@ -41,9 +41,9 @@ export default function RootLayout({
             <ClientCommons />
             <SiteHeader />
             <div className='flex overflow-x-hidden max-w-screen'>
-              <div className="hidden md:block" >
+              {/* <div className="hidden md:block" >
               <SideBar/>
-              </div>
+              </div> */}
               <div className='flex-1'>
                 {children}
               </div>

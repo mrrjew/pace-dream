@@ -16,6 +16,10 @@ import SectionClientSay from "@/components/SectionClientSay";
 import BookedUserList from "@/components/BookedUserList";
 import SectionDiscoverPerfectRoomStay from "@/components/SectionDiscoverPerfectRoomStay";
 import SectionSubscribe from "@/components/SectionSubscribe";
+import SectionSliderFeaturePlaces from "@/components/SectionSliderFeaturePlaces";
+import SectionClientSayMobile from "@/components/SectionClientSayMobile";
+import SectionSliderAuthorBoxMobile from "@/components/SectionSliderAuthorBoxMobile";
+import SectionSliderNewCategoriesMobile from "@/components/SectionSliderNewCategoriesMobile";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -164,16 +168,59 @@ function PageHome() {
         {/* SECTION 1 */}
         <div className="relative py-16">
           <BackgroundSection className="bg-white " />
-          <SectionSliderNewCategories />
+          <SectionSliderNewCategoriesMobile  
+          className="md:hidden block"
+          itemPerRow={1}
+          />
+          <SectionSliderNewCategories
+          className="md:block hidden"
+          itemPerRow={4}
+        />
         </div>
         {/* Discover Perfect Room Stay */}
         <div className="relative">
-          <BackgroundSection className="bg-neutral-50 " />
+          <BackgroundSection className="bg-neutral-50 max-w-[400px] md:max-w-[100%]" />
           <SectionOurFeatures />
           
           {/* Featured places */}
-          <SectionGridFeaturePlaces cardType="card2" />
-          <SectionDiscoverPerfectRoomStay cardType="card2" />
+          <SectionSliderFeaturePlaces  
+          className="md:hidden block"
+          itemPerRow={1}
+          />
+          <SectionGridFeaturePlaces cardType="card2" className="md:block hidden md:mt-16" />
+        
+          <SectionDiscoverPerfectRoomStay cardType="card2" className="md:block hidden" />
+        </div>
+        <SectionSliderAuthorBox className="md:block hidden"
+          itemPerRow={5}/>
+        <SectionSliderAuthorBoxMobile className="md:hidden block"
+          itemPerRow={1}/>
+
+        {/* <SectionHowItWork /> */} 
+
+        <div className="relative py-16">
+        <BackgroundSection className="bg-neutral-50" />
+        <SectionSliderNewCategories
+        className="md:block hidden"
+          heading="Explore by types of stays"
+          subHeading="Explore houses based on 10 types of stays"
+          itemPerRow={5}
+        />
+        <SectionSliderNewCategoriesMobile
+        className="md:hidden block"
+          heading="Explore by types of stays"
+          subHeading="Explore houses based on 10 types of stays"
+          itemPerRow={1}
+        />
+        </div>
+
+        <SectionBecomeAnAuthor />
+
+        <div className="relative py-16">
+        <BackgroundSection />
+        <SectionClientSay className="md:block hidden" itemPerRow={3} />
+        <SectionClientSayMobile className="block md:hidden" itemPerRow={1} />
+        <SectionSubscribe />
         </div>
       </div>
     </main>
@@ -182,35 +229,4 @@ function PageHome() {
 
 export default PageHome;
 
-{
-  /*
-<div className="relative">
-<BackgroundSection className="bg-neutral-50 " />
-<SectionOurFeatures />
-<SectionGridFeaturePlaces cardType="card2" />
-<SectionDiscoverPerfectRoomStay cardType="card2" />
-</div>
 
-<SectionSliderAuthorBox />
-
-{/* <SectionHowItWork /> 
-
-<div className="relative py-16">
-<BackgroundSection className="bg-neutral-50" />
-<SectionSliderNewCategories
-  heading="Explore by types of stays"
-  subHeading="Explore houses based on 10 types of stays"
-  categoryCardType="card5"
-  itemPerRow={5}
-/>
-</div>
-
-<SectionBecomeAnAuthor />
-
-<div className="relative py-16">
-<BackgroundSection />
-<SectionClientSay />
-<SectionSubscribe />
-</div>
-   */
-}

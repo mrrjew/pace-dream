@@ -15,7 +15,7 @@ export interface LocationInputProps {
 const LocationInput: FC<LocationInputProps> = ({
   autoFocus = false,
   placeHolder = "Location",
-  desc = "Where are you going?",
+  desc = "Minamiuonuma, Niigata ?",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
 }) => {
@@ -64,7 +64,7 @@ const LocationInput: FC<LocationInputProps> = ({
   const renderRecentSearches = () => {
     return (
       <>
-        <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800 dark:text-neutral-100">
+        <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800">
           Recent searches
         </h3>
         <div className="mt-2">
@@ -77,7 +77,7 @@ const LocationInput: FC<LocationInputProps> = ({
             <span
               onClick={() => handleSelectLocation(item)}
               key={item}
-              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
+              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 cursor-pointer"
             >
               <span className="block text-neutral-400">
                 
@@ -128,7 +128,7 @@ const LocationInput: FC<LocationInputProps> = ({
       >
         <div className="flex-grow">
           <input
-            className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
+            className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none xl:text-lg font-normal md:font-semibold placeholder-black truncate`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}

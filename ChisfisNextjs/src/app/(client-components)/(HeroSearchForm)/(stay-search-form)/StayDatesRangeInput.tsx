@@ -32,10 +32,10 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   const renderInput = () => {
     return (
         <div className="flex-grow text-left">
-          <span className="block xl:text-lg font-semibold">
+          <span className="block xl:text-lg font-normal text-black md:font-semibold">
             From
           </span>
-          <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-black leading-none font-light">
+          <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-neutral-400 md:text-black leading-none font-light">
             {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
             <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 ml-4 text-black" />
           </span>
@@ -46,10 +46,10 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   const renderOutput = () => {
     return(
       <div className="flex-grow text-left">
-      <span className="block xl:text-lg font-semibold">
+      <span className="block xl:text-lg font-normal text-black md:font-semibold">
         Until
       </span>
-      <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-black leading-none font-light">
+      <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-neutral-400 md:text-black leading-none font-light">
         {endDate ? endDate?.toLocaleDateString("en-US") : `Add dates`}
         <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 ml-4 text-black" />
       </span>
