@@ -2,7 +2,6 @@
 
 import CardAuthorBox from "@/components/CardAuthorBox";
 import CardAuthorBox2 from "@/components/CardAuthorBox2";
-import Heading from "@/shared/Heading";
 import { DEMO_AUTHORS } from "@/data/authors";
 import { AuthorType } from "@/data/types";
 import React, { FC, useEffect, useState } from "react";
@@ -13,6 +12,7 @@ import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
 import WidgetCategories from "@/app/blog/WidgetCategories";
+import Heading4 from "@/shared/Heading4";
 
 export interface SectionSliderAuthorProps {
   className?: string;
@@ -78,14 +78,14 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
     trackMouse: true,
   });
 
-  const renderCard = (item: AuthorType) => {
+  const renderCard = (item: AuthorType, indx:any) => {
     switch (boxCard) {
       case "box1":
-        return <CardAuthorBox author={item} />;
+        return <CardAuthorBox author={item} index={indx+1}/>;
       case "box2":
         return <CardAuthorBox2 author={item} />;
       default:
-        return <CardAuthorBox2 author={item} />;
+        return <CardAuthorBox author={item} />;
     }
   };
   if (!numberOfItems) return null;
@@ -93,9 +93,11 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
     <div
       className={`md:px-24 ${className} inline-block`}
     >
-      <Heading desc="Rating based on customer reviews" isCenter={sliderStyle === "style2"}>
-        Top 10 author of the month
-      </Heading>
+      <div className="flex justify-center">
+        <Heading4 desc="Rating based on customer reviews" isCenter={sliderStyle === "style2"}>
+          Top 10 author of the month
+        </Heading4>
+      </div>
       <MotionConfig
         transition={{
           x: { type: "spring", stiffness: 300, damping: 30 },
@@ -103,22 +105,6 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[93%] md:ml-[90%] font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[93%] md:ml-[90%] text-lg -translate-y-1/2 z-[1]"
-        />}
-          {authors.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -141,29 +127,23 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
                       width: `calc(1/${numberOfItems} * 100%)`,
                     }}
                   >
-                    {renderCard(item)}
+                    {renderCard(item, indx)}
                   </motion.li>
                 ))}
-                <div className="relative ml-[188px] mt-4">
-                {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
-          {authors.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
-        </div>
-              </AnimatePresence>
-            </motion.ul>
+          </AnimatePresence>
+          </motion.ul>
+          <div className="flex items-center justify-center space-x-2 mt-10">
+                {authors.map((item, i) => (
+                  i  % (numberOfItems + 1) === 0 ?
+                  <button
+                    className={`w-2 h-2 rounded-full ${
+                      i  === currentIndex ? "bg-black/70 w-2.5 h-2.5" : "bg-black/10 "
+                    }`}
+                    onClick={() => changeItemId(i)}
+                    key={i}
+                  />: null
+                ))}
+              </div>
           </div>
         </div>
       </MotionConfig>

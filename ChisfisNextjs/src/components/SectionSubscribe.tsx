@@ -4,7 +4,7 @@ import Input from "@/shared/Input";
 
 const SectionSubscribe = () => {
     return(
-    <div className={`nc-SectionClientSay flex flex-col max-w-[630px] w-[95vw] md:max-w-[100%] mt-10 bg-violet relative items-center border rounded-2xl p-8 lg:mr-52`}>
+    <div className={`nc-SectionClientSay flex flex-col max-w-[630px] w-[95vw] md:max-w-[65%] mt-10 bg-violet relative ml-auto mr-auto items-center border rounded-2xl p-8`}>
         <h2 className="text-white font-semibold text-4xl">Join our newsletter</h2>
         <span className="block text-xs text-center mt-5 text-white dark:text-white max-w-[45%] md:max-w-[100%]">
           Read and share new perspectives on just about any topic. Everyone’s

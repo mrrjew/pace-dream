@@ -151,9 +151,10 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
 
   return (
     <div className={`nc-SectionClientSay max-w-[100%] inline-block relative ${className} `}>
-      <Heading desc="" isCenter>
-        Good news from far away
-      </Heading>
+      <h1 className="flex justify-center font-bold text-3xl text-black">
+        Good news form far away
+      </h1>
+        
       <div className="relative md:mb-16 max-w-full mx-auto lg:pl-24 lg:pr-24">
         
         <div className={`mt-12 lg:mt-16 relative `}>
@@ -192,7 +193,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
                   <div className="absolute bottom-0 left-0 flex items-center space-x-2 text-lg mt-2 text-neutral-400">
                     <Image className="-mb-4 ml-4 h-12 w-12" src={item.img} alt="" />
                     <div className="flex flex-col mb-4">
-                      <span className="mt-8 text-xl text-black font-semibold">
+                      <span className="mt-8 text-lg text-black font-semibold">
                         {item.clientName}
                       </span>
                       <span className="text-sm">
@@ -209,7 +210,7 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
                   i  % (numberOfItems + 1) === 0 ?
                   <button
                     className={`w-2 h-2 rounded-full ${
-                      i  === index ? "bg-black/70" : "bg-black/10 "
+                      i  === index ? "bg-black/70 w-2.5 h-2.5" : "bg-black/10 "
                     }`}
                     onClick={() => changeItemId(i)}
                     key={i}

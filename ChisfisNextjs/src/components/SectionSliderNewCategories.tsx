@@ -101,7 +101,7 @@ const DEMO_CATS: TaxonomyType[] = [
 
 const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   heading = "Suggestions for discovery",
-  subHeading = "Popular places to recommends for you",
+  subHeading = "Popular places to stay that Chisfis recommends for you",
   className = "",
   itemClassName = "",
   categories = DEMO_CATS,
@@ -169,8 +169,8 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   if (!numberOfItems) return null;
 
   return (
-    <div className={` md:px-24 ${className} inline-block`}>
-      <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
+    <div className={` md:px-24 ${className} lg:mb-16 lg:pt-16 inline-block`}>
+      <Heading desc={subHeading}>
         {heading}
       </Heading>
       <MotionConfig
@@ -180,22 +180,24 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
+          <div className="-mt-20 mb-20">
         {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[93%] md:ml-[90%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[93%] md:ml-[90%] text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
         />}
           {categories.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
         />}
+        </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
