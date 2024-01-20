@@ -20,7 +20,7 @@ export interface SectionSliderNewCategoriesProps {
   subHeading?: string;
   categories?: TaxonomyType[];
   categoryCardType?: "card3" | "card4" | "card5";
-  itemPerRow?: 4 | 5;
+  itemPerRow?: 1 | 4 | 5;
   sliderStyle?: "style1" | "style2";
 }
 
@@ -112,7 +112,6 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [numberOfItems, setNumberOfitem] = useState(0);
-
   const windowWidth = useWindowSize().width;
   useEffect(() => {
     if (windowWidth < 320) {
@@ -170,7 +169,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   if (!numberOfItems) return null;
 
   return (
-    <div className={`nc-SectionSliderNewCategories pr-24 pl-24 ${className}`}>
+    <div className={` md:px-24 ${className} inline-block`}>
       <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
         {heading}
       </Heading>
@@ -184,10 +183,10 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
         {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="xl:ml-[93%] md:ml-[90%] font-black text-black text-lg -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 text-neutral-100 xl:ml-[93%] md:ml-[90%] text-lg -translate-y-1/2 z-[1]"
         />}
           {categories.length > currentIndex + numberOfItems ? (
             <NextBtn
@@ -205,23 +204,41 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
               <AnimatePresence initial={false} custom={direction}>
                 {categories.map((item, indx) => (
                   <motion.li
-                    className={`relative inline-block px-2 xl:px-4 ${itemClassName}`}
+                    className={`relative md:mr-0px inline-block px-2 xl:px-4 ${itemClassName} `}
                     custom={direction}
                     initial={{
-                      x: `${(currentIndex - 1) * -100}%`,
+                      x: `${(currentIndex - 1) * - 100}%`,
                     }}
                     animate={{
-                      x: `${currentIndex * -100}%`,
+                      x: `${currentIndex * - 100}%`,
                     }}
                     variants={variants(200, 1)}
                     key={indx}
                     style={{
-                      width: `calc(1/${numberOfItems} * 100%)`,
+                      width: `25%`,
                     }}
                   >
                     {renderCard(item)}
                   </motion.li>
                 ))}
+                <div className="relative ml-[188px] mt-4">
+                {currentIndex ? (
+            <PrevBtn
+              onClick={() => changeItemId(currentIndex - 1)}
+              className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
+            />
+          ) : <PrevBtn
+          className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+        />}
+          {categories.length > currentIndex + numberOfItems ? (
+            <NextBtn
+              onClick={() => changeItemId(currentIndex + 1)}
+              className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+            />
+          ) : <NextBtn
+          className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+        />}
+        </div>
               </AnimatePresence>
             </motion.ul>
           </div>

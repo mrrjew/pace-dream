@@ -39,7 +39,14 @@ export default function RootLayout({
           <UserProvider>
             <ClientCommons />
             <SiteHeader />
-            {children}
+            <div className='flex overflow-x-hidden max-w-screen'>
+              {/* <div className="hidden md:block" >
+              <SideBar/>
+              </div> */}
+              <div className='flex-1'>
+                {children}
+              </div>
+            </div>
             <FooterNav />
             <Footer />
           </UserProvider>

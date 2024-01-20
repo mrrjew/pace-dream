@@ -11,6 +11,7 @@ const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 
 //
 export interface SectionGridFeaturePlacesProps {
+  className?: string;
   stayListings?: StayDataType[];
   gridClass?: string;
   heading?: ReactNode;
@@ -20,6 +21,7 @@ export interface SectionGridFeaturePlacesProps {
 }
 
 const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
+  className = "",
   stayListings = DEMO_DATA,
   gridClass = "",
   heading = "Featured places",
@@ -45,7 +47,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   };
 
   return (
-    <div className="nc-SectionGridFeaturePlaces pr-24 pl-24 relative">
+    <div className={`nc-SectionGridFeaturePlaces md:pr-24 md:pl-24 relative ${className}`} >
       <HeaderFilter
         tabActive={"New York"}
         tabs={tabs}
@@ -56,7 +58,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       >
         {stayListings.map((stay) => renderCard(stay))}
       </div>
-      <div className="flex mt-16 justify-center items-center">
+      <div className="flex my-16 justify-center items-center">
         <ButtonPrimary>Show more</ButtonPrimary>
       </div>
     </div>

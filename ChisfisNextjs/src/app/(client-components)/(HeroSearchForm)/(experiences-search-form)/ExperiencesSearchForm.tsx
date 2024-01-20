@@ -56,9 +56,14 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
   };
   const renderForm = () => {
     return (
-      <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
+      <form className="w-full relative rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
         {renderRadioBtn()}
-        <div className="flex flex-1 rounded-full">
+        <div className="ml-4 mt-4 md:hidden">
+          <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
+            Explore your PaceDream Book hotels, Car and more with ease!
+          </h2>
+        </div>
+        <div className="flex flex-col flex-1 md:flex-row rounded-full">
           <LocationInput className="flex-[1.5]" />
           <ExperiencesDateSingleInput className="flex-1" />
           <GuestsInput

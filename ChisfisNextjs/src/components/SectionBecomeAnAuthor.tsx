@@ -16,18 +16,17 @@ const SectionBecomeAnAuthor: FC<SectionBecomeAnAuthorProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SectionBecomeAnAuthor relative flex flex-col lg:flex-row items-center pl-24 pr-24 ${className}`}
-      data-nc-id="SectionBecomeAnAuthor"
+      className={`w-max-[630px] w-[90vw] md:max-w-[100%] md:w-[100%] md:flex flex flex-col-reverse md:flex-col lg:flex-row items-center md:pl-24 md:pr-24 ${className}`}
     >
-      <div className="flex-shrink-0 mb-16 lg:mb-0 lg:mr-10 lg:w-2/5">
+      <div className="relative flex-shrink-0 mb-16 lg:mb-0 lg:mr-10 lg:w-2/5 mt-4 md:mt-0 mr-8">
         <Image alt="" src={rightImg} className="rounded-full relative h-[22rem] w-[22rem]" />
-        <Image alt="" src={rightImg} className="absolute top-36 left-64 h-56 w-56" />
+        <Image alt="" src={rightImg} className="hidden md:block absolute top-36 left-[150px] h-56 w-56" />
       </div>
       <div className="flex-grow">
-      <h2 className="font-bold text-3xl sm:text-4xl mt-6 sm:mt-11">
+      <h2 className="font-bold text-4xl md:text-3xl mt-6 ">
           Why did you choose us?
-        </h2>
-        <span className="block text-lg max-w-[80%] mt-6 text-neutral-500 dark:text-neutral-400">
+      </h2>
+      <span className="block text-lg max-w-[80%] mt-6 text-neutral-500 dark:text-neutral-400">
           Accompanying us, you have a trip full of experiences. With Chisfis,
           booking accommodation, resort villas, hotels, private houses,
           apartments... becomes fast, convenient and easy.

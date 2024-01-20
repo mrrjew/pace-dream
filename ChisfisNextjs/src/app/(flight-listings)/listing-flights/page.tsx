@@ -27,7 +27,8 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {
         />
 
         {/* SECTION */}
-        <SectionSubscribe2 />
+        <SectionSubscribe2  />
+
       </div>
     </div>
   );
