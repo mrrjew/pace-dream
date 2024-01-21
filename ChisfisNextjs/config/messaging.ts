@@ -18,7 +18,7 @@ export async function saveMessagingDeviceToken() {
   if (fcmToken) {
     localStorage.setItem("fcmToken", fcmToken);
     axios.post(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/notification/device`,
+      `${process.env.IC_BACKEND_URL}/notification/device`,
       {
         fcmToken,
       },

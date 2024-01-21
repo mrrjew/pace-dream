@@ -101,7 +101,7 @@ const DEMO_CATS: TaxonomyType[] = [
 
 const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
   heading = "Suggestions for discovery",
-  subHeading = "Popular places to recommends for you",
+  subHeading = "Popular places to stay that Chisfis recommends for you",
   className = "",
   itemClassName = "",
   categories = DEMO_CATS,
@@ -170,7 +170,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
 
   return (
     <div className={` md:px-24 ${className} inline-block`}>
-      <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
+      <Heading desc={subHeading} isCenter={sliderStyle === "style2"} className="w-[75vw] mb-8">
         {heading}
       </Heading>
       <MotionConfig
@@ -180,22 +180,6 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="hidden md:inline p-0.5 ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="hidden md:inline bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
-        />}
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="hidden md:inline ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="hidden md:inline ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -221,22 +205,22 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
                     {renderCard(item)}
                   </motion.li>
                 ))}
-                <div className="relative mt-4 max-w-[630px] w-[95vw] flex flex-row-reverse justify-center">
+                <div className="w-[95vw] mt-8 flex justify-center">
                 {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
+              className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
         />}
           {categories.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
         />}
         </div>
               </AnimatePresence>

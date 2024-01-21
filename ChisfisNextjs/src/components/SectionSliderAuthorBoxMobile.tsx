@@ -81,7 +81,7 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
   const renderCard = (item: AuthorType) => {
     switch (boxCard) {
       case "box1":
-        return <CardAuthorBox author={item} />;
+        return <CardAuthorBox author={item} className="border-[#F0ECFC]"/>;
       case "box2":
         return <CardAuthorBox2 author={item} />;
       default:
@@ -91,9 +91,9 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
   if (!numberOfItems) return null;
   return (
     <div
-      className={`md:px-24 ${className} inline-block`}
+      className={`md:px-24 ${className} inline-block w-[95vw]`}
     >
-      <Heading desc="Rating based on customer reviews" isCenter={sliderStyle === "style2"}>
+      <Heading desc="Rating based on customer reviews" isCenter={sliderStyle === "style2"} className="w-[95vw] text-center mb-16">
         Top 10 author of the month
       </Heading>
       <MotionConfig
@@ -103,26 +103,10 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="hidden md:inline p-0.5 ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="hidden md:inline bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
-        />}
-          {authors.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="hidden md:inline ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="hidden md:inline ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
-              className="relative whitespace-nowrap -mx-2 xl:-mx-4 w-max-[630px] w-[90vw]"
+              className="relative whitespace-nowrap -mx-2 xl:-mx-4 w-max-[100vw] w-[95vw]"
             >
               <AnimatePresence initial={false} custom={direction}>
                 {authors.map((item, indx) => (
@@ -138,28 +122,28 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
                     variants={variants(200, 1)}
                     key={indx}
                     style={{
-                      width: `100%`,
+                      width: `95vw`,
                     }}
                   >
                     {renderCard(item)}
                   </motion.li>
                 ))}
-                <div className="relative mt-4 max-w-[630px] w-[95vw] flex flex-row-reverse justify-center">
+                <div className="w-[95vw] mt-8 flex justify-center">
                 {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
+              className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
         />}
           {authors.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
         />}
         </div>
               </AnimatePresence>

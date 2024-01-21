@@ -55,7 +55,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
       {({ open }) => (
         <>
           <div
-            className={`flex-col w-full md:flex-row md:flex-1 flex items-center p-2 focus:outline-none mb-8 md:mb-0${
+            className={`flex-col w-full md:flex-row md:-ml-10 lg:ml-0 md:flex-1 flex items-center p-2 focus:outline-none mb-8 md:mb-0${
               open ? "nc-hero-field-focused" : ""
             }`}
           >
@@ -67,9 +67,9 @@ const GuestsInput: FC<GuestsInputProps> = ({
                 <span className="block xl:text-lg font-normal text-black md:font-semibold">
                   Guests
                 </span>
-                <span className="flex flex-row border p-3 md:w-32 lg:w-44 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+                <span className="flex flex-row border p-2 md:p-3 w-full md:w-32 lg:w-32 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
                   Add your guests
-                  <UserPlusIcon className="w-4 h-4 lg:w-5 lg:h-5 hidden md:flex text-black ml-4" />
+                  <UserPlusIcon className="w-4 h-4 lg:w-5 lg:h-5 md:flex text-black ml-4" />
                 </span>
               </div>
 

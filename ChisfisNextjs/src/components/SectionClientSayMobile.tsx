@@ -9,9 +9,6 @@ import clientSay3 from "@/images/clientSay3.png";
 import clientSay4 from "@/images/clientSay4.png";
 import clientSay5 from "@/images/clientSay5.png";
 import clientSay6 from "@/images/clientSay6.png";
-import quotationImg from "@/images/quotation.png";
-import quotationImg2 from "@/images/quotation2.png";
-import { MapPinIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
 import { useSwipeable } from "react-swipeable";
@@ -150,9 +147,9 @@ const SectionClientSayMobile: FC<SectionClientSayMobileProps> = ({
   });
 
   return (
-    <div className={`nc-SectionClientSay w-max-[630px] w-[90vw] inline-block relative ${className} `}>
+    <div className={`nc-SectionClientSay w-max-[95vw] w-[90vw] inline-block relative ${className} `}>
       <Heading desc="" isCenter>
-        Good news from far away
+        Good news form far away
       </Heading>
       <div className="relative md:mb-16 max-w-full mx-auto">
         <div className={`mt-12 lg:mt-16 relative `}>
@@ -165,12 +162,12 @@ const SectionClientSayMobile: FC<SectionClientSayMobileProps> = ({
             <div className={`relative pl-4 pr-4 flow-root overflow-hidden rounded-xl`} {...handlers}>
             <motion.ul
               initial={false}
-              className="relative whitespace-nowrap w-max-[630px] w-[90vw]"
+              className="relative whitespace-nowrap w-max-[100vw] w-[95vw]"
             >
               <AnimatePresence initial={false} custom={direction} >
                 {data.map((item, indx) => (
                   <motion.li
-                    className={`relative mr-[99vw] h-60 max-w-[630px] w-[90vw] max-h-60 inline-block px-2 xl:px-4 bg-white border rounded-2xl border-neutral-200`}
+                    className={`relative mr-[99vw] pr-2 h-60 max-w-[95vw] w-[80vw] max-h-60 inline-block px-2 xl:px-4 bg-white border rounded-2xl border-neutral-200`}
                     custom={direction}
                     initial={{
                       x: `${((index + indx) % data.length) * -105}%`,
@@ -181,14 +178,13 @@ const SectionClientSayMobile: FC<SectionClientSayMobileProps> = ({
                     variants={variants(200, 1)}
                     key={indx}
                     style={{
-                      width: `100%`,
+                      width: `90vw`,
                     }}
                   >
                   <span className="block text-xs mt-4 text-pretty text-[#757575]">
                     {item.content}
                   </span>
-                  
-                  <div className="w-max-[630px] w-[90vw] absolute bottom-0 left-0 flex items-center space-x-2 text-lg mt-2 text-neutral-400">
+                  <div className="w-max-[95vw] w-[80vw] absolute bottom-0 left-0 flex items-center space-x-2 text-lg mt-2 text-neutral-400">
                     <Image className="-mb-4 ml-4 h-12 w-12" src={item.img} alt="" />
                     <div className="flex flex-col mb-4">
                       <span className="mt-8 text-xl text-black font-semibold">

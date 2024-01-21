@@ -161,12 +161,12 @@ function PageHome() {
 
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
         {/* SECTION HERO */}
-        <div className="relative pb-16">
-          <BackgroundSection className="bg-[#F6F4F6] " />
+        <div className={`relative pb-6 -ml-16 md:ml-0 bg-[url('../images/backgroundMobile.png')] bg-no-repeat bg-cover md:bg-none`}>
+          <BackgroundSection className="bg-[#F6F4F6]" />
           <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
         </div>
         {/* SECTION 1 */}
-        <div className="relative py-16">
+        <div className="relative py-2 md:py-16">
           <BackgroundSection className="bg-white " />
           <SectionSliderNewCategoriesMobile  
           className="md:hidden block"
@@ -188,13 +188,13 @@ function PageHome() {
             />
             <SectionGridFeaturePlaces cardType="card2" className="md:block hidden md:mt-16" />
             <SectionDiscoverPerfectRoomStay cardType="card2" className="md:block hidden" />
-            <div className="relative pt-16">
+            <div className="relative pt-16 md:mb-4">
               <BackgroundSection className="bg-[white] md:max-w-[100%]" />
               <SectionSliderAuthorBox className="md:block hidden"
               itemPerRow={5}/>
               <SectionSliderAuthorBoxMobile className="md:hidden block"
               itemPerRow={1}/>
-              <div className="relative mt-16">
+              <div className="relative mt-16 md:mt-32 md:pt-8">
                 <BackgroundSection className="bg-neutral-50" />
                 <SectionSliderNewCategories
                 className="md:block hidden"
@@ -208,7 +208,7 @@ function PageHome() {
                   subHeading="Explore houses based on 10 types of stays"
                   itemPerRow={1}
                 />
-                <div className="relative py-16 mb-0">
+                <div className="relative md:py-16 mb-0">
                   <BackgroundSection className="bg-white" />
                   <SectionBecomeAnAuthor />
                 </div>

@@ -106,7 +106,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
 
   return (
     <div className={` md:px-24 ${className} inline-block`}>
-      <Heading desc={subHeading} isCenter={sliderStyle === "style2"}>
+      <Heading desc={subHeading} isCenter={sliderStyle === "style2"} className="w-[80vw] mb-8">
         {heading}
       </Heading>
       <ul className="ml-4 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
@@ -134,7 +134,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
           const active = tab === tabActive;
           if(i === 0){
             return(
-              <div className={` md:w-[100px] w-[70px] h-0.5 ${
+              <div className={` md:w-[100px] w-[75px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
@@ -146,7 +146,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
             )
           } else if(i === 2){
             return(
-              <div className={` md:w-[140px] w-[55px] h-0.5 ${
+              <div className={` md:w-[140px] w-[70px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
@@ -164,22 +164,6 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="hidden md:inline p-0.5 ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="hidden md:inline bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
-        />}
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="hidden md:inline ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="hidden md:inline ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -205,22 +189,22 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
                     {renderCard(item)}
                   </motion.li>
                 ))}
-                <div className="relative mt-4 max-w-[630px] w-[95vw] flex flex-row-reverse justify-center">
+                <div className="w-[95vw] mt-8 flex justify-center">
                 {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
+              className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
         />}
           {categories.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
         />}
         </div>
               </AnimatePresence>

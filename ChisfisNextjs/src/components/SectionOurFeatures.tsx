@@ -17,7 +17,7 @@ const SectionOurFeatures: FC<SectionOurFeaturesProps> = ({
 }) => {
   return (
     <div
-      className={`lg:pr-8 lg:pl-24 nc-SectionOurFeatures relative flex flex-col w-max-[630px] w-[90vw] md:max-w-[100%] md:w-[100%] items-center ${
+      className={`lg:pr-8 pb-8 lg:pl-24 nc-SectionOurFeatures relative flex flex-col w-max-[90vw] w-[90vw] md:max-w-[100%] md:w-[100%] items-center ${
         type === "type1" ? "lg:flex-row" : "lg:flex-row-reverse"
       } ${className}`}
       data-nc-id="SectionOurFeatures"

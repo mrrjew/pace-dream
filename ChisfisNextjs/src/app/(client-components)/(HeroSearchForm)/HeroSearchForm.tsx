@@ -24,8 +24,17 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   const renderTab = () => {
     return (
-      <div className="ml-2">
-        <ul className="ml-4 md:ml-8 mt-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+      <div className="ml-2 flex md:block justify-center w-[90vw]">
+        <select className="rounded-2xl border border-gray-200 md:hidden w-[80vw] text-black">
+          {tabs.map((tab) => {
+            return(
+              <option>
+                {tab}
+              </option>
+            )
+          })}
+        </select>
+        <ul className="ml-4 md:ml-8 mt-4 md:mt-8 md:flex hidden space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
@@ -45,18 +54,18 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
           })}
         </ul>
         <ul className="ml-2 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-        <div className="flex justify-center items-center" >
+        <div className="md:flex justify-center items-center hidden " >
         {tabs.map((tab, i) => {
           const active = tab === tabActive;
           if(i === 0){
             return(
-              <div className={` lg:w-[100px] md:w-[90px] w-[80px] h-0.5 ${
+              <div className={` lg:w-[100px] md:w-[90px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
           } else if(i === 1){
             return(
-              <div className={` lg:w-[85px] md:w-[75px] w-[65px] h-0.5 ${
+              <div className={` lg:w-[85px] md:w-[75px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
@@ -68,7 +77,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           } else if(i === 3){
             return(
-              <div className={` lg:w-[115px] md:w-[100px] w-[85px] h-0.5 ${
+              <div className={` lg:w-[115px] md:w-[100px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
@@ -100,7 +109,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   return (
     <div
-      className={`nc-HeroSearchForm mr-8 max-w-[400px] w-full md:max-w-full py-5 lg:py-0 ${className}`}
+      className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 max-w-[90vw] w-[90vw] md:max-w-full py-5 lg:py-0 ${className}`}
     >
       {renderTab()}
       {renderForm()}
