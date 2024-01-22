@@ -5,13 +5,14 @@ import ExperiencesSearchForm from "./(experiences-search-form)/ExperiencesSearch
 import FlightSearchForm from "./(flight-search-form)/FlightSearchForm";
 import StaySearchForm from "./(stay-search-form)/StaySearchForm";
 import HourlySearchForm from "./(hourly-search-form)/HourlySearchForm";
+import MinutesSearchForm from "./(minutes-search-form)/MinutesSearchForm";
 
-export type SearchTab =  "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays";
+export type SearchTab =  "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Hourly Rental Space" | "Hourly Rental Gear" | "Last Minutes";
 
 export interface HeroSearchFormProps {
   className?: string;
   currentTab?: SearchTab;
-  currentPage?: "Room Stays" | "Find Roommate" | "Experiences" | "Hourly" | "Stays";
+  currentPage?: "Room Stays" | "Find Roommate" | "Experiences" | "Hourly" | "Stays" | "Hourly Rental Space" | "Hourly Rental Gear" | "Last Minutes";
 }
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({
@@ -19,28 +20,32 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   currentTab = "Room Stays",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Room Stays", "Hourly", "Find Roommate", "Experiences"];
+  const tabs: SearchTab[] = ["Room Stays", "Hourly Rental Space" , "Hourly Rental Gear" , "Find Roommate" , "Experiences" , "Last Minutes"];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
     return (
-      <div className="ml-2 flex md:block justify-center w-[90vw]">
-        <select className="rounded-2xl border border-gray-200 md:hidden w-[80vw] text-black">
+      <div className="ml-2 flex md:block justify-center">
+        <select className="rounded-2xl border border-gray-200 md:hidden w-[80vw] text-black" 
+        value={tabActive}
+        onChange={(e) => setTabActive(e.target.value as SearchTab)}>
           {tabs.map((tab) => {
             return(
-              <option>
+              <option 
+              value={tab}
+              key={tab}>
                 {tab}
               </option>
             )
           })}
         </select>
-        <ul className="ml-4 md:ml-8 mt-4 md:mt-8 md:flex hidden space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+        <ul className="ml-4 md:ml-8 mt-4 md:mt-8 md:flex hidden space-x-5 sm:space-x-5 lg:space-x-8 xl:space-x-11 overflow-x-auto hiddenScrollbar">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
               <li
                 onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 flex items-center cursor-pointer text-xs md:text-sm font-medium ${
+                className={`flex-shrink-0 flex items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${
                   active
                     ? "text-violet pb-8"
                     : "text-neutral-500 hover:text-violet pb-8"
@@ -59,30 +64,40 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
           const active = tab === tabActive;
           if(i === 0){
             return(
-              <div className={` lg:w-[100px] md:w-[90px] h-0.5 ${
+              <div className={` xl:w-[105px] lg:w-[88px] md:w-[80px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
           } else if(i === 1){
             return(
-              <div className={` lg:w-[85px] md:w-[75px] h-0.5 ${
+              <div className={` xl:w-[190px] lg:w-[155px] md:w-[145px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
           } else if(i === 2){
             return(
-              <div className={` lg:w-[140px] md:w-[130px] w-[100px] h-0.5 ${
+              <div className={` xl:w-[175px] lg:w-[145px] md:w-[130px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
           } else if(i === 3){
             return(
-              <div className={` lg:w-[115px] md:w-[100px] h-0.5 ${
+              <div className={` xl:w-[155px] lg:w-[125px] md:w-[120px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
-          } else{
-            return null
+          } else if(i === 4){
+            return(
+              <div className={` xl:w-[130px] lg:w-[110px] md:w-[90px] h-0.5 ${
+                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+              }`} />
+            )
+          } else if(i === 5){
+            return(
+              <div className={` xl:w-[125px] lg:w-[100px] md:w-[90px] h-0.5 ${
+                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+              }`} />
+            )
           }
           })
         }
@@ -100,8 +115,12 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
         return <ExperiencesSearchForm />;
       case "Find Roommate":
         return <FlightSearchForm />;
-      case "Hourly": 
+      case "Hourly Rental Space": 
         return <HourlySearchForm />;
+      case "Hourly Rental Gear": 
+        return <HourlySearchForm />;
+      case "Last Minutes":
+        return <MinutesSearchForm />;
       default:
         return null;
     }

@@ -27,7 +27,7 @@ const SectionHero: FC<SectionHeroProps> = () => {
         <Image alt="" src={imagePng} className="h-[26rem] w-[32rem] lg:h-[24rem] lg:w-[30rem]" />
       </div>
       </article>
-      <div className="md:block w-max-[95vw] w-[93vw] xl:w-[70vw] lg:w-[80vw] flex md:pt-0 z-10 mb-12 ml-16 md:ml-0 lg:mb-0 md:mt-8 lg:-mt-16 md:max-w-full border-grey border bg-white rounded-2xl">
+      <div className="md:block w-max-[95vw] w-[93vw] xl:w-[80vw] lg:w-[90vw] flex md:pt-0 z-10 mb-12 ml-16 md:ml-0 lg:mb-0 md:mt-8 lg:-mt-16 md:max-w-full border-grey border bg-white rounded-2xl">
         <HeroSearchForm  />
       </div>
     </section>

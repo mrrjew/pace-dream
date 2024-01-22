@@ -3,28 +3,44 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 
-export type TypeDropOffLocationHourlyType = "Any type" | "Sports and Recreation Equipment" | "Professional Equipment" | "Tools and Machinery" | "Gym and Fitness" | "Bicycles" | "Sky camping gear" | "Fishing equipment" | "Kayaks";
-const tabs: TypeDropOffLocationHourlyType[] = ["Any type" , "Sports and Recreation Equipment" , "Professional Equipment" , "Tools and Machinery" , "Gym and Fitness" , "Bicycles" , "Sky camping gear" , "Fishing equipment" , "Kayaks"]
-const HourlySearchForm: FC<{}> = ({}) => {
+export type TypeDropOffLocationMinutesType = "40 minutes" | "30 minutes" | "20 minutes" ;
+const MinutesSearchForm: FC<{}> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
-    useState<TypeDropOffLocationHourlyType>("Any type");
+    useState<TypeDropOffLocationMinutesType>("40 minutes");
   const renderRadioBtn = () => {
     return (
       <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
-        {tabs.map((tab) =>{
-        return(
-          <div
+        {}
+        <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === tab
+            dropOffLocationType === "40 minutes"
               ? "bg-violet shadow-black/10 shadow-lg text-white"
               : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType(tab)}
+          onClick={(e) => setDropOffLocationType("40 minutes")}
         >
-          {tab}
+            40 minutes
         </div>
-        )}
-        )}
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === "30 minutes"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+          }`}
+          onClick={(e) => setDropOffLocationType("30 minutes")}
+        >
+          30 minutes
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === "20 minutes"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+          }`}
+          onClick={(e) => setDropOffLocationType("20 minutes")}
+        >
+          20 minutes
+        </div>
       </div>
     );
   };
@@ -49,4 +65,4 @@ const HourlySearchForm: FC<{}> = ({}) => {
   return renderForm();
 };
 
-export default HourlySearchForm;
+export default MinutesSearchForm;
