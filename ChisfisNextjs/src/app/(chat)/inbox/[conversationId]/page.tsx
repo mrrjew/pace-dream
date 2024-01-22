@@ -34,7 +34,7 @@ export default async function MessageBoxPage({ params }: { params: IParams }) {
     );
 
   return (
-    <div className="hidden lg:col-span-9 lg:block lg:border-l-2 lg:border-[#DAE0E6] h-full relative overflow-y-hidden">
+    <div className="col-span-12 lg:col-span-9 lg:border-l-2 lg:border-[#DAE0E6] h-full relative overflow-y-hidden">
       <div className="h-full relative">
         <Header conversation={conversation} />
         <Body initialMessages={initialMessages} />
