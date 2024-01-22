@@ -6,6 +6,7 @@ import { IoSearchOutline } from 'react-icons/io5';
 import { useEffect, useMemo, useState } from 'react';
 import { pusherClient } from '@/utils/pusher';
 import { useSession } from '@/hooks/useSession';
+import useConversation from '@/hooks/useConversation';
 
 const SearchBox: React.FC<{}> = () => {
   return (
@@ -33,6 +34,8 @@ export const ChatList: React.FC<IChatListProps> = ({
 
   const { getSession } = useSession();
   const { userId } = getSession();
+
+  const { conversationId } = useConversation();
 
   useEffect(() => {
     if (!userId) return;
@@ -88,7 +91,11 @@ export const ChatList: React.FC<IChatListProps> = ({
   }, [conversations]);
 
   return (
-    <>
+    <div
+      className={`col-span-12 lg:col-span-3 h-full overflow-y-auto ${
+        conversationId ? 'hidden' : ''
+      }`}
+    >
       <h2 className="ml-4 text-lg mt-2">All Messages</h2>
       <div className="my-2 px-4">
         <SearchBox />
@@ -98,6 +105,6 @@ export const ChatList: React.FC<IChatListProps> = ({
           <ChatUser conversation={conversation} key={conversation.id} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
