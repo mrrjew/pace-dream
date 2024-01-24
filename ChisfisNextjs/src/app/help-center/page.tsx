@@ -11,7 +11,7 @@ const HelpCenterLayout = () => {
     setSelected(label);
   };
   return (
-    <div className="ml-28" >
+    <div className="lg:ml-28 mx-4">
       <div className="pt-7 pb-7">
         <p className="flex gap-2">
           Help center
@@ -34,11 +34,7 @@ const HelpCenterLayout = () => {
           {selected}
         </p>
       </div>
-      <div className="flex">
-        <HelpCenterSideBar selected={selected} onSelect={handleOptionSelect} />
-        <HelpCenterPage selected={selected} />
-      </div>
-      <div className="flex mt-[60px] mr-[213px]">
+      <div className="flex lg:gap-4 lg:flex-row flex-col">
         <HelpCenterSideBar selected={selected} onSelect={handleOptionSelect} />
         <HelpCenterPage selected={selected} />
       </div>
