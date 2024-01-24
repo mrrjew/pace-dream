@@ -37,7 +37,7 @@ const SupportPage = () => {
             </ul>
         </div>
         <div>
-            <p className="text-[34px]">Exploring PaceDream Partner hub</p>
+            <p className="text-[34px] lg:leading-none leading-10">Exploring PaceDream Partner hub</p>
             <p className="text-[#5f6d7e] mt-4">Agoda Partner Hub was created to provide extensive resources to our partners.</p>
             <ul className="mt-5 ml-5 text-[#5f6d7e] list-disc" >
                 <li>Search for the topic you are interested in using keywords here.</li>
@@ -49,7 +49,7 @@ const SupportPage = () => {
             <Image src={suportImg1} alt="support" height={243} width={720} className="mt-5" />
         </div>
         <div>
-            <p className="text-[34px]">Exploring PaceDream Partner hub</p>
+            <p className="text-[34px] lg:leading-none leading-10">Exploring PaceDream Partner hub</p>
             <p className="text-[#5f6d7e] mt-4">If you need assistance with YCS, payment, your property listing, or rate calculations, you can send us a message by following the steps below:</p>
             <ul className="mt-5 ml-5 text-[#5f6d7e] list-decimal" >
                 <li>Login to YCS.</li>

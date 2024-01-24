@@ -5,7 +5,7 @@ import SupportPage from "./SupportPage";
 
 const HelpCenterPage: React.FC<{ selected: string }> = ({ selected }) => {
   return (
-    <div className="pb-30">
+    <div className="pb-30 lg:mt-0 mt-8 lg:w-full w-96">
       {selected === "Contact Us" && <ContactUsPage />}
       {selected === "Contacting us for support" && <SupportPage />}
       {selected === "Where you can reach us" && <ReachUsPage />}
