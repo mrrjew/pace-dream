@@ -82,7 +82,7 @@ const LocationInput: FC<LocationInputProps> = ({
               <span className="block text-neutral-400">
                 
               </span>
-              <span className=" block font-medium text-neutral-700 dark:text-neutral-200">
+              <span className="block font-medium text-neutral-700">
                 {item}
               </span>
             </span>
@@ -104,12 +104,12 @@ const LocationInput: FC<LocationInputProps> = ({
           <span
             onClick={() => handleSelectLocation(item)}
             key={item}
-            className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
+            className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 cursor-pointer"
           >
             <span className="block text-neutral-400">
               <ClockIcon className="h-4 w-4 sm:h-6 sm:w-6" />
             </span>
-            <span className="block font-medium text-neutral-700 dark:text-neutral-200">
+            <span className="block font-medium text-neutral-700">
               {item}
             </span>
           </span>
@@ -119,10 +119,10 @@ const LocationInput: FC<LocationInputProps> = ({
   };
 
   return (
-    <div className={`relative flex ${className}`} ref={containerRef}>
+    <div className={`relative flex ${className} mt-4`} ref={containerRef}>
       <div
         onClick={() => setShowPopover(true)}
-        className={`flex z-10 flex-1 relative [ nc-hero-field-padding ] flex-shrink-0 items-center space-x-3 cursor-pointer focus:outline-none text-left  ${
+        className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left  ${
           showPopover ? "nc-hero-field-focused" : ""
         }`}
       >
@@ -137,9 +137,9 @@ const LocationInput: FC<LocationInputProps> = ({
             }}
             ref={inputRef}
           />
-          <span className="block mt-0.5 rounded-2xl text-sm text-neutral-400 font-light border p-2 pl-4">
-            <span className="line-clamp-1">{!!value ? placeHolder : desc}</span>
-          </span>
+            <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1">
+              {!!value ? placeHolder : desc}
+            </span>
           {value && showPopover && (
             <ClearDataButton
               onClick={() => {
@@ -152,12 +152,12 @@ const LocationInput: FC<LocationInputProps> = ({
 
       {showPopover && (
         <div
-          className={`h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 bg-white dark:bg-neutral-800 ${divHideVerticalLineClass}`}
+          className={`h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 bg-white ${divHideVerticalLineClass}`}
         ></div>
       )}
 
       {showPopover && (
-        <div className="absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white dark:bg-neutral-800 top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
+        <div className="absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
           {value ? renderSearchValue() : renderRecentSearches()}
         </div>
       )}

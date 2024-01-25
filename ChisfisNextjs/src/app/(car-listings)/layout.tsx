@@ -16,7 +16,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <div className="container pt-10 pb-24 lg:pt-16 lg:pb-28">
         <SectionHeroArchivePage
           rightImage={heroRightImage}
-          currentPage="Hourly"
+          currentPage="Room Stays"
           currentTab="Room Stays"
           listingType={
             <>
