@@ -6,12 +6,14 @@ import LocationInput from '../(client-components)/(HeroSearchForm)/LocationInput
 import StayDatesRangeInput from '../(client-components)/(HeroSearchForm)/(stay-search-form)/StayDatesRangeInput';
 import GuestsInput from '../(client-components)/(HeroSearchForm)/GuestsInput';
 import ExperiencesDateSingleInput from '../(client-components)/(HeroSearchForm)/(experiences-search-form)/ExperiencesDateSingleInput';
+import { StaticImageData } from 'next/image';
 
 export interface SectionHeroArchivePageProps {
   className?: string;
   listingType?: ReactNode;
   currentPage: 'Room Stays' | 'Hourly Rental Space' | 'Hourly Rental Gear' | 'Find Roommate' | 'Experiences' | 'Last Minutes';
   currentTab: SearchTab;
+  rightImage?: StaticImageData;
 }
 
 const renderForm = (currentPage: String) => {
