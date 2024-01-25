@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import NcInputNumber from "@/components/NcInputNumber";
 import ButtonPrimary from "@/shared/ButtonPrimary";
@@ -9,6 +9,10 @@ import ButtonClose from "@/shared/ButtonClose";
 import Checkbox from "@/shared/Checkbox";
 import Slider from "rc-slider";
 import convertNumbThousand from "@/utils/convertNumbThousand";
+
+interface TabFiltersProps {
+  setMap: Dispatch<SetStateAction<boolean>>;
+}
 
 // DEMO DATA
 const typeOfPaces = [
@@ -67,7 +71,33 @@ const moreFilter3 = [
 
 const moreFilter4 = [{ name: " Pets allowed" }, { name: "Smoking allowed" }];
 
-const TabFilters = () => {
+type TypeDropOffLocationHourlyType = "Free Cancelation" | "Pet Lover" | "Single" | "Couples" | "Dancer" | "Foot Baller" | "Student" | "Professional";
+const tabs: TypeDropOffLocationHourlyType[] = ["Free Cancelation" , "Pet Lover" , "Single" , "Couples" , "Dancer" , "Foot Baller" , "Student" , "Professional"]
+  const renderRadioBtn = () => {
+    const [dropOffLocationType, setDropOffLocationType] = useState<TypeDropOffLocationHourlyType>();
+    return (
+      <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
+        {tabs.map((tab) =>{
+        return(
+          <div
+          className={`py-1.5 xl:px-2 lg:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === tab
+              ? "bg-violet shadow-black/10 shadow-lg text-white "
+              : "border bg-white text-black border-neutral-300"
+          }`}
+          onClick={(e) => setDropOffLocationType(tab)}
+        >
+          {tab}
+        </div>
+        )}
+        )}
+      </div>
+    );
+  };
+
+
+
+const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   const [isOpenMoreFilter, setisOpenMoreFilter] = useState(false);
   const [isOpenMoreFilterMobile, setisOpenMoreFilterMobile] = useState(false);
   const [rangePrices, setRangePrices] = useState([0, 1000]);
@@ -78,6 +108,14 @@ const TabFilters = () => {
   //
   const closeModalMoreFilterMobile = () => setisOpenMoreFilterMobile(false);
   const openModalMoreFilterMobile = () => setisOpenMoreFilterMobile(true);
+  const [map, localSetMap] = useState(true)
+
+  const handleMapToggle = () => {
+    localSetMap(!map);
+    setMap(!map);
+  };
+
+  
 
   const renderXClear = () => {
     return (
@@ -98,117 +136,13 @@ const TabFilters = () => {
     );
   };
 
-  const renderTabsTypeOfPlace = () => {
-    return (
-      <Popover className="relative">
-        {({ open, close }) => (
-          <>
-            <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none ${
-                open ? "!border-primary-500 " : ""
-              }`}
-            >
-              <span>Type of place</span>
-              <i className="las la-angle-down ml-2"></i>
-            </Popover.Button>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-200"
-              enterFrom="opacity-0 translate-y-1"
-              enterTo="opacity-100 translate-y-0"
-              leave="transition ease-in duration-150"
-              leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1"
-            >
-              <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md">
-                <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
-                  <div className="relative flex flex-col px-5 py-6 space-y-5">
-                    {typeOfPaces.map((item) => (
-                      <div key={item.name} className="">
-                        <Checkbox
-                          name={item.name}
-                          label={item.name}
-                          subLabel={item.description}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="p-5 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
-                    <ButtonThird onClick={close} sizeClass="px-4 py-2 sm:px-5">
-                      Clear
-                    </ButtonThird>
-                    <ButtonPrimary
-                      onClick={close}
-                      sizeClass="px-4 py-2 sm:px-5"
-                    >
-                      Apply
-                    </ButtonPrimary>
-                  </div>
-                </div>
-              </Popover.Panel>
-            </Transition>
-          </>
-        )}
-      </Popover>
-    );
-  };
-
-  const renderTabsRoomAndBeds = () => {
-    return (
-      <Popover className="relative">
-        {({ open, close }) => (
-          <>
-            <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-6000 focus:outline-none ${
-                open ? "!border-primary-500 " : ""
-              }`}
-            >
-              <span>Rooms of Beds</span>
-              <i className="las la-angle-down ml-2"></i>
-            </Popover.Button>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-200"
-              enterFrom="opacity-0 translate-y-1"
-              enterTo="opacity-100 translate-y-0"
-              leave="transition ease-in duration-150"
-              leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1"
-            >
-              <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 lg:max-w-md">
-                <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900   border border-neutral-200 dark:border-neutral-700">
-                  <div className="relative flex flex-col px-5 py-6 space-y-5">
-                    <NcInputNumber label="Beds" max={10} />
-                    <NcInputNumber label="Bedrooms" max={10} />
-                    <NcInputNumber label="Bathrooms" max={10} />
-                  </div>
-                  <div className="p-5 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
-                    <ButtonThird onClick={close} sizeClass="px-4 py-2 sm:px-5">
-                      Clear
-                    </ButtonThird>
-                    <ButtonPrimary
-                      onClick={close}
-                      sizeClass="px-4 py-2 sm:px-5"
-                    >
-                      Apply
-                    </ButtonPrimary>
-                  </div>
-                </div>
-              </Popover.Panel>
-            </Transition>
-          </>
-        )}
-      </Popover>
-    );
-  };
-
   const renderTabsPriceRage = () => {
     return (
-      <Popover className="relative">
+      <Popover className="relative -mr-8">
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none `}
+              className={`flex items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none `}
             >
               <span>
                 {`$${convertNumbThousand(
@@ -227,7 +161,7 @@ const TabFilters = () => {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute z-10 w-screen max-w-sm px-4 mt-3 left-0 sm:px-0 ">
-                <div className="overflow-hidden rounded-2xl shadow-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
+                <div className="overflow-hidden rounded-2xl shadow-xl bg-white border border-neutral-200">
                   <div className="relative flex flex-col px-5 py-6 space-y-8">
                     <div className="space-y-5">
                       <span className="font-medium">Price per day</span>
@@ -349,7 +283,7 @@ const TabFilters = () => {
     return (
       <div>
         <div
-          className={`flex items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
+          className={`flex -ml-10 items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilter}
         >
           <span>More filters (3)</span>
@@ -391,8 +325,8 @@ const TabFilters = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <div className="inline-flex flex-col w-full max-w-4xl text-left align-middle transition-all transform overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:text-neutral-100 shadow-xl h-full">
-                  <div className="relative flex-shrink-0 px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 text-center">
+                <div className="inline-flex flex-col w-full max-w-4xl text-left align-middle transition-all transform overflow-hidden rounded-2xl bg-white shadow-xl h-full">
+                  <div className="relative flex-shrink-0 px-6 py-4 border-b border-neutral-200 text-center">
                     <Dialog.Title
                       as="h3"
                       className="text-lg font-medium leading-6 text-gray-900"
@@ -405,7 +339,7 @@ const TabFilters = () => {
                   </div>
 
                   <div className="flex-grow overflow-y-auto">
-                    <div className="px-10 divide-y divide-neutral-200 dark:divide-neutral-800">
+                    <div className="px-10 divide-y divide-neutral-200">
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Amenities</h3>
                         <div className="mt-6 relative ">
@@ -433,7 +367,7 @@ const TabFilters = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 flex-shrink-0 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
+                  <div className="p-6 flex-shrink-0 bg-neutral-50 flex items-center justify-between">
                     <ButtonThird
                       onClick={closeModalMoreFilter}
                       sizeClass="px-4 py-2 sm:px-5"
@@ -460,7 +394,7 @@ const TabFilters = () => {
     return (
       <div>
         <div
-          className={`flex lg:hidden items-center justify-center px-4 py-2 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
+          className={`flex lg:hidden items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilterMobile}
         >
           <span>More filters (3)</span>
@@ -483,7 +417,7 @@ const TabFilters = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40 dark:bg-opacity-60" />
+                <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
               </Transition.Child>
 
               {/* This element is to trick the browser into centering the modal contents. */}
@@ -662,12 +596,21 @@ const TabFilters = () => {
   };
 
   return (
-    <div className="flex lg:space-x-4">
-      <div className="hidden lg:flex space-x-4">
-        {renderTabsTypeOfPlace()}
+    <div className="flex space-x-2">
+      <div className="hidden md:flex justify-center items-center space-x-2 w-[90vw]">
         {renderTabsPriceRage()}
-        {renderTabsRoomAndBeds()}
+        {renderRadioBtn()}
         {renderTabMoreFilter()}
+        <div
+          className={`py-1.5 xl:px-2 lg:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 mr-8 ${
+          map === true
+              ? "bg-violet shadow-black/10 shadow-lg text-white "
+              : "border bg-white text-black border-neutral-300"
+          }`}
+          onClick={handleMapToggle}
+        >
+          Show in map
+        </div>
       </div>
       {renderTabMoreFilterMobile()}
     </div>

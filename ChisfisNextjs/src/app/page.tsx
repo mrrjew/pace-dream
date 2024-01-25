@@ -1,19 +1,13 @@
 import React from "react";
 import SectionHero from "@/app/(server-components)/SectionHero";
-import BgGlassmorphism from "@/components/BgGlassmorphism";
 import { TaxonomyType } from "@/data/types";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
 import SectionOurFeatures from "@/components/SectionOurFeatures";
 import BackgroundSection from "@/components/BackgroundSection";
 import SectionGridFeaturePlaces from "@/components/SectionGridFeaturePlaces";
-import SectionHowItWork from "@/components/SectionHowItWork";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import SectionSliderAuthorBox from "@/components/SectionSliderAuthorBox";
-import SectionGridCategoryBox from "@/components/SectionGridCategoryBox";
 import SectionBecomeAnAuthor from "@/components/SectionBecomeAnAuthor";
-import SectionVideos from "@/components/SectionVideos";
 import SectionClientSay from "@/components/SectionClientSay";
-import BookedUserList from "@/components/BookedUserList";
 import SectionDiscoverPerfectRoomStay from "@/components/SectionDiscoverPerfectRoomStay";
 import SectionSubscribe from "@/components/SectionSubscribe";
 import SectionSliderFeaturePlaces from "@/components/SectionSliderFeaturePlaces";
@@ -156,11 +150,7 @@ const DEMO_CATS_2: TaxonomyType[] = [
 function PageHome() {
   return (
     <main className="nc-PageHome relative overflow-hidden">
-      {/* GLASSMOPHIN */}
-      {/* <BgGlassmorphism /> */}
-
       <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
-        {/* SECTION HERO */}
         <div className={`relative pb-6 -ml-16 md:ml-0 bg-[url('../images/backgroundMobile.png')] bg-no-repeat bg-cover md:bg-none`}>
           <BackgroundSection className="bg-[#F6F4F6]" />
           <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />

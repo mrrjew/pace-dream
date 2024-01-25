@@ -1,3 +1,5 @@
+"use client"
+
 import { FC, useState } from "react";
 import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
@@ -82,7 +84,7 @@ const StaySearchForm: FC<{}> = ({}) => {
             Explore your PaceDream Book hotels, Car and more with ease!
           </h2>
         </div>
-        <div className="flex flex-col flex-1 md:flex-row rounded-full">
+        <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
           <LocationInput className="flex-[1.5]" />
           <StayDatesRangeInput className="flex-1" />
           <GuestsInput className="flex-[1.5]" />

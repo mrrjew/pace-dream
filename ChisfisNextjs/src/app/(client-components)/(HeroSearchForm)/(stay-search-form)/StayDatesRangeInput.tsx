@@ -15,7 +15,7 @@ export interface StayDatesRangeInputProps {
 
 const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   className = "[ lg:nc-flex-2 ]",
-  fieldClassName = "[ nc-hero-field-padding ]",
+  fieldClassName = "",
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
     new Date("2023/02/06")
@@ -31,13 +31,13 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   const renderInput = () => {
     return (
-        <div className="flex-grow text-left">
+        <div className="flex-grow text-left max-md:mt-4">
           <span className="block xl:text-lg font-normal text-black md:font-semibold">
             From
           </span>
-          <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-neutral-400 md:text-black leading-none font-light">
+          <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
             {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
-            <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 ml-4 text-black" />
+            <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 xl:w-3 xl:h-3 ml-4 text-black" />
           </span>
         </div>
     );
@@ -45,13 +45,13 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   const renderOutput = () => {
     return(
-      <div className="flex-grow text-left">
+      <div className="flex-grow text-left max-md:mt-4">
       <span className="block xl:text-lg font-normal text-black md:font-semibold">
         Until
       </span>
-      <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-neutral-400 md:text-black leading-none font-light">
+      <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
         {endDate ? endDate?.toLocaleDateString("en-US") : `Add dates`}
-        <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 ml-4 text-black" />
+        <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 xl:w-3 xl:h-3 ml-4 text-black" />
       </span>
     </div>
     )
@@ -63,7 +63,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
-              className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
+              className={`flex-1 z-10 flex relative ${fieldClassName} pr-4 pl-4 md:pl-7 items-center space-x-1 focus:outline-none ${
                 open ? "nc-hero-field-focused" : ""
               }`}
             >
@@ -74,7 +74,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
             </Popover.Button>
 
             {open && (
-              <div className="h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white dark:bg-neutral-800"></div>
+              <div className="h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
             )}
 
             <Transition
@@ -124,7 +124,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
-              className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
+              className={`flex-1 z-10 flex relative ${fieldClassName} pl-4 md:pl-0 items-center space-x-3 focus:outline-none ${
                 open ? "nc-hero-field-focused" : ""
               }`}
             >

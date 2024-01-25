@@ -9,36 +9,10 @@ import SectionHeroArchivePage from '../(server-components)/SectionHeroArchivePag
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className={`nc-ListingStayPage relative `}>
-      <BgGlassmorphism />
-
-      {/* SECTION HERO */}
-      <div className="container pt-10 pb-24 lg:pt-16 lg:pb-28">
-        <SectionHeroArchivePage currentPage="Stays" currentTab="Room Stays" />
+      <div className="mb-14 mt-14 flex justify-center max-w-[100vw]">
+        <SectionHeroArchivePage currentPage="Room Stays" currentTab="Room Stays" />
       </div>
-
       {children}
-
-      <div className="container overflow-hidden">
-        {/* SECTION 1 */}
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionSliderNewCategories
-            heading="Explore by types of stays"
-            subHeading="Explore houses based on 10 types of stays"
-            categoryCardType="card5"
-            itemPerRow={5}
-            sliderStyle="style2"
-          />
-        </div>
-
-        {/* SECTION */}
-        <SectionSubscribe2  />
-        {/* SECTION */}
-        <div className="relative py-16 mb-24 lg:mb-28">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
-        </div>
-      </div>
     </div>
   );
 };

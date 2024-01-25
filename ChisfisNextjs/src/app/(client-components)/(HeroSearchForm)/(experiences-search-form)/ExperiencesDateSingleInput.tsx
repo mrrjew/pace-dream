@@ -16,7 +16,7 @@ export interface ExperiencesDateSingleInputProps {
 
 const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
   className = "",
-  fieldClassName = "[ nc-hero-field-padding ]",
+  fieldClassName = "",
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
     new Date()
@@ -24,13 +24,13 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
 
   const renderInput = () => {
     return (
-      <div className="flex-grow text-left">
-        <span className="block font-normal text-black xl:text-lg md:font-semibold">
+      <div className="flex-grow text-left max-md:mt-4">
+        <span className="block xl:text-lg font-normal text-black md:font-semibold">
           From
         </span>
-        <span className="flex flex-row border items-center justify-between p-2 pl-4 rounded-2xl mt-1 text-sm text-gray-400 md:text-black leading-none font-light">
+        <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
           {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
-          <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 ml-4 text-black" />
+          <CalendarIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 ml-4 text-black" />
         </span>
       </div>
     );
@@ -44,7 +44,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
-              className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
+              className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left  ${
                 open ? "nc-hero-field-focused" : ""
               }`}
             >

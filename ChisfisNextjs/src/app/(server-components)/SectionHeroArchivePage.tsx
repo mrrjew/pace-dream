@@ -1,64 +1,66 @@
-import imagePng from '@/images/hero-right2.png';
-import Image, { StaticImageData } from 'next/image';
 import { FC, ReactNode } from 'react';
-import HeroSearchForm, {
+import {
   SearchTab,
 } from '../(client-components)/(HeroSearchForm)/HeroSearchForm';
+import LocationInput from '../(client-components)/(HeroSearchForm)/LocationInput';
+import StayDatesRangeInput from '../(client-components)/(HeroSearchForm)/(stay-search-form)/StayDatesRangeInput';
+import GuestsInput from '../(client-components)/(HeroSearchForm)/GuestsInput';
+import ExperiencesDateSingleInput from '../(client-components)/(HeroSearchForm)/(experiences-search-form)/ExperiencesDateSingleInput';
 
 export interface SectionHeroArchivePageProps {
   className?: string;
   listingType?: ReactNode;
-  currentPage: 'Stays' | 'Hourly' | 'Find Roommate';
+  currentPage: 'Room Stays' | 'Hourly Rental Space' | 'Hourly Rental Gear' | 'Find Roommate' | 'Experiences' | 'Last Minutes';
   currentTab: SearchTab;
-  rightImage?: StaticImageData;
 }
+
+const renderForm = (currentPage: String) => {
+  const commonInputs = (
+    <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
+      <LocationInput className="flex-[1.5]" />
+      <StayDatesRangeInput className="flex-1" />
+      <GuestsInput className="flex-[1.5]" />
+    </div>
+  );
+
+  switch (currentPage) {
+    case "Room Stays":
+    case "Find Roommate":
+    case "Hourly Rental Space":
+    case "Hourly Rental Gear":
+    case "Last Minutes":
+      return commonInputs;
+
+    case "Experiences":
+      return (
+        <div className="flex flex-col items-baseline flex-1 md:flex-row  rounded-full">
+          <LocationInput className="flex-[1.5]" />
+          <ExperiencesDateSingleInput className="flex-1" />
+          <GuestsInput className="flex-1" buttonSubmitHref="/listing-experiences" />
+        </div>
+      );
+
+    default:
+      return null;
+  }
+};
 
 const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
   className = '',
   listingType,
   currentPage,
   currentTab,
-  rightImage = imagePng,
 }) => {
+  
   return (
     <div
-      className={`nc-SectionHeroArchivePage flex flex-col relative ${className}`}
-      data-nc-id="SectionHeroArchivePage"
+      className={`nc-SectionHeroArchivePage max-w-[70vw] w-[70vw] xl:w-[70vw] lg:w-[70vw] flex flex-col justify-center md:pt-0 z-10 mb-12 ml-16 md:ml-0 lg:mb-0 md:max-w-full border-grey border bg-white rounded-2xl ${className}`}
     >
-      <div className="flex flex-col lg:flex-row lg:items-center">
-        <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-6 lg:space-y-10 pb-14 lg:pb-64 xl:pb-80 xl:pr-14 lg:mr-10 xl:mr-0">
-          <h2 className="font-medium text-4xl md:text-5xl xl:text-7xl leading-[110%]">
-            Tokyo, Jappan
-          </h2>
-          <div className="flex items-center text-base md:text-lg text-neutral-500 dark:text-neutral-400">
-            <i className="text-2xl las la-map-marked"></i>
-            <span className="ml-2.5">Jappan </span>
-            <span className="mx-5"></span>
-            {listingType ? (
-              listingType
-            ) : (
-              <>
-                <i className="text-2xl las la-home"></i>
-                <span className="ml-2.5">112 properties</span>
-              </>
-            )}
-          </div>
-        </div>
-        <div className="flex-grow">
-          <Image
-            className="w-full"
-            src={rightImage}
-            alt="hero"
-            priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-          />
-        </div>
+      <div className='pt-6 pl-5'>
+        <span className="ml-2.5">186 Results Found</span>
       </div>
-
-      <div className="hidden lg:flow-root w-full">
-        <div className="z-10 lg:-mt-40 xl:-mt-56 w-full">
-          <HeroSearchForm currentPage="Room Stays" currentTab={currentTab} />
-        </div>
+      <div className="z-10 w-full">
+        {renderForm(currentPage)}
       </div>
     </div>
   );
