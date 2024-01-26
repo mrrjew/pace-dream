@@ -380,11 +380,19 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
     return (
       <div>
         <div
-          className={`flex -ml-10 items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
+          className={`flex py-1 xl:px-2 lg:px-1
+          xl:-ml-8 my-1 sm:mr-3 text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilter}
         >
-          <span>More filters ({countCheckedFiltersMoreFilter})</span>
-          {renderXClear(clearAllFilters)}
+          {countCheckedFiltersMoreFilter !== 0 ? (
+          <>
+            <span>More filters ({countCheckedFiltersMoreFilter})</span>
+            {renderXClear(clearAllFilters)}
+          </>
+          ) : (
+            <span>More filters</span>
+          )
+        }
         </div>
 
         <Transition appear show={isOpenMoreFilter} as={Fragment}>
