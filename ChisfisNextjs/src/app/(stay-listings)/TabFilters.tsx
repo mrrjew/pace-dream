@@ -14,6 +14,11 @@ interface TabFiltersProps {
   setMap: Dispatch<SetStateAction<boolean>>;
 }
 
+interface Filter {
+  name: string;
+  defaultChecked?: boolean;
+}
+
 // DEMO DATA
 const typeOfPaces = [
   {
@@ -34,42 +39,6 @@ const typeOfPaces = [
     description: "Stay in a shared space, like a common room",
   },
 ];
-
-const moreFilter1 = [
-  { name: "Kitchen", defaultChecked: true },
-  { name: "Air conditioning", defaultChecked: true },
-  { name: "Heating" },
-  { name: "Dryer" },
-  { name: "Washer" },
-  { name: "Wifi" },
-  { name: "Indoor fireplace" },
-  { name: "Breakfast" },
-  { name: "Hair dryer" },
-  { name: " Dedicated workspace" },
-];
-
-const moreFilter2 = [
-  { name: " Free parking on premise" },
-  { name: "Hot tub" },
-  { name: "Gym" },
-  { name: " Pool" },
-  { name: " EV charger" },
-];
-
-const moreFilter3 = [
-  { name: " House" },
-  { name: "Bed and breakfast" },
-  { name: "Apartment", defaultChecked: true },
-  { name: " Boutique hotel" },
-  { name: " Bungalow" },
-  { name: " Chalet", defaultChecked: true },
-  { name: " Condominium", defaultChecked: true },
-  { name: " Cottage" },
-  { name: " Guest suite" },
-  { name: " Guesthouse" },
-];
-
-const moreFilter4 = [{ name: " Pets allowed" }, { name: "Smoking allowed" }];
 
 type TypeDropOffLocationHourlyType = "Free Cancelation" | "Pet Lover" | "Single" | "Couples" | "Dancer" | "Foot Baller" | "Student" | "Professional";
 const tabs: TypeDropOffLocationHourlyType[] = ["Free Cancelation" , "Pet Lover" , "Single" , "Couples" , "Dancer" , "Foot Baller" , "Student" , "Professional"]
@@ -100,7 +69,7 @@ const tabs: TypeDropOffLocationHourlyType[] = ["Free Cancelation" , "Pet Lover" 
 const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   const [isOpenMoreFilter, setisOpenMoreFilter] = useState(false);
   const [isOpenMoreFilterMobile, setisOpenMoreFilterMobile] = useState(false);
-  const [rangePrices, setRangePrices] = useState([0, 1000]);
+  const [rangePrices, setRangePrices] = useState([0, 0]);
 
   //
   const closeModalMoreFilter = () => setisOpenMoreFilter(false);
@@ -117,9 +86,9 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
 
   
 
-  const renderXClear = () => {
+  const renderXClear = (f: any) => {
     return (
-      <span className="w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center ml-3 cursor-pointer">
+      <span onClick={() => { close; f() }} className="w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center ml-3 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-3 w-3"
@@ -137,19 +106,29 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   };
 
   const renderTabsPriceRage = () => {
+    const clearPrices = () => {
+      setRangePrices([0, 0]);
+    }
     return (
       <Popover className="relative -mr-8">
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none `}
+              className={`flex items-center justify-center py-1 xl:px-2 lg:px-1
+              mr-2 my-1 sm:mr-3 text-sm rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none `}
             >
               <span>
-                {`$${convertNumbThousand(
-                  rangePrices[0]
-                )} - $${convertNumbThousand(rangePrices[1])}`}{" "}
+                {rangePrices[1] !== null && rangePrices[1] !== 0 ? (
+                `$${convertNumbThousand(rangePrices[0])} - $${convertNumbThousand(rangePrices[1])}`
+                ) : (
+                  "Price"
+                )}
               </span>
-              {renderXClear()}
+              {rangePrices[1] !== null && rangePrices[1] !== 0 ? (
+                renderXClear(clearPrices)
+              ) : (
+                null
+              )}
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -226,7 +205,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                     </div>
                   </div>
                   <div className="p-5 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
-                    <ButtonThird onClick={close} sizeClass="px-4 py-2 sm:px-5">
+                    <ButtonThird onClick={() => { close; clearPrices() }} sizeClass="px-4 py-2 sm:px-5">
                       Clear
                     </ButtonThird>
                     <ButtonPrimary
@@ -279,15 +258,141 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
     );
   };
 
-  const renderTabMoreFilter = () => {
+  const renderTabMoreFilter = () => { 
+    const toggleDefaultChecked = (index: number, filterSet: number) => {
+      let updatedFilters;
+      
+      switch (filterSet) {
+        case 1:
+          updatedFilters = [...moreFilter1];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter1(updatedFilters);
+          break;
+        case 2:
+          updatedFilters = [...moreFilter2];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter2(updatedFilters);
+          break;
+        case 3:
+          updatedFilters = [...moreFilter3];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter3(updatedFilters);
+          break;
+        case 4:
+          updatedFilters = [...moreFilter4];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter4(updatedFilters);
+          break;
+        default:
+          break;
+      }
+    };
+
+    const [moreFilter1 , setMoreFilter1] = useState([
+      { name: "Kitchen", defaultChecked: false },
+      { name: "Air conditioning", defaultChecked: false },
+      { name: "Heating", defaultChecked: false },
+      { name: "Dryer", defaultChecked: false },
+      { name: "Washer", defaultChecked: false },
+      { name: "Wifi", defaultChecked: false },
+      { name: "Indoor fireplace", defaultChecked: false },
+      { name: "Breakfast", defaultChecked: false },
+      { name: "Hair dryer", defaultChecked: false },
+      { name: " Dedicated workspace", defaultChecked: false },
+    ])
+    
+    const [moreFilter2, setMoreFilter2] = useState([
+      { name: " Free parking on premise", defaultChecked: false  },
+      { name: "Hot tub", defaultChecked: false  },
+      { name: "Gym", defaultChecked: false  },
+      { name: " Pool", defaultChecked: false  },
+      { name: " EV charger", defaultChecked: false  },
+    ])
+
+    const [moreFilter3, setMoreFilter3] = useState([
+      { name: " House", defaultChecked: false  },
+      { name: "Bed and breakfast", defaultChecked: false  },
+      { name: "Apartment", defaultChecked: false },
+      { name: " Boutique hotel", defaultChecked: false  },
+      { name: " Bungalow", defaultChecked: false  },
+      { name: " Chalet", defaultChecked: false },
+      { name: " Condominium", defaultChecked: false },
+      { name: " Cottage", defaultChecked: false  },
+      { name: " Guest suite", defaultChecked: false  },
+      { name: " Guesthouse", defaultChecked: false  },
+    ])
+
+    const [moreFilter4, setMoreFilter4] = useState([
+      { name: " Pets allowed", defaultChecked: false  }, 
+      { name: "Smoking allowed", defaultChecked: false  },
+    ])
+
+    const countCheckedFilters = (filterArray: Filter[]) => {
+      return filterArray.filter(item => item.defaultChecked === true).length;
+    };
+
+    const clearAllFilters = () => {
+      setMoreFilter1((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setMoreFilter2((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setMoreFilter3((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setMoreFilter4((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+    };
+  
+    const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1) + countCheckedFilters(moreFilter2) + countCheckedFilters(moreFilter3) + countCheckedFilters(moreFilter4);
+  
+    const renderMoreFilterItemDeskopt = (
+      data: {
+        name: string;
+        defaultChecked?: boolean;
+      }[],
+      filterSet: number
+    ) => {
+      const list1 = data.filter((_, i) => i < data.length / 2);
+      const list2 = data.filter((_, i) => i >= data.length / 2);
+      return (
+        <div className="grid grid-cols-2 gap-8">
+          <div className="flex flex-col space-y-5">
+            {list1.map((item, index) => (
+              <Checkbox
+                key={item.name}
+                name={item.name}
+                label={item.name}
+                defaultChecked={item.defaultChecked}
+                onChange={() => toggleDefaultChecked(index, filterSet)}
+              />
+            ))}
+          </div>
+          <div className="flex flex-col space-y-5">
+            {list2.map((item, index) => (
+              <Checkbox
+                key={item.name}
+                name={item.name}
+                label={item.name}
+                defaultChecked={item.defaultChecked}
+                onChange={() => toggleDefaultChecked(list1.length + index, filterSet)}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    };
+
     return (
       <div>
         <div
-          className={`flex -ml-10 items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
+          className={`flex py-1 xl:px-2 lg:px-1
+          xl:-ml-8 my-1 sm:mr-3 text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilter}
         >
-          <span>More filters (3)</span>
-          {renderXClear()}
+          {countCheckedFiltersMoreFilter !== 0 ? (
+          <>
+            <span>More filters ({countCheckedFiltersMoreFilter})</span>
+            {renderXClear(clearAllFilters)}
+          </>
+          ) : (
+            <span>More filters</span>
+          )
+        }
         </div>
 
         <Transition appear show={isOpenMoreFilter} as={Fragment}>
@@ -343,25 +448,25 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Amenities</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter1)}
+                          {renderMoreFilterItemDeskopt(moreFilter1, 1)}
                         </div>
                       </div>
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Facilities</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter2)}
+                          {renderMoreFilterItemDeskopt(moreFilter2, 2)}
                         </div>
                       </div>
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Property type</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter3)}
+                          {renderMoreFilterItemDeskopt(moreFilter3, 3)}
                         </div>
                       </div>
                       <div className="py-7">
                         <h3 className="text-xl font-medium">House rules</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter4)}
+                          {renderMoreFilterItemDeskopt(moreFilter4, 4)}
                         </div>
                       </div>
                     </div>
@@ -369,7 +474,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
 
                   <div className="p-6 flex-shrink-0 bg-neutral-50 flex items-center justify-between">
                     <ButtonThird
-                      onClick={closeModalMoreFilter}
+                      onClick={() => {closeModalMoreFilter; clearAllFilters();}}
                       sizeClass="px-4 py-2 sm:px-5"
                     >
                       Clear
@@ -391,14 +496,131 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   };
 
   const renderTabMoreFilterMobile = () => {
+    const toggleDefaultChecked = (index: number, filterSet: number) => {
+      let updatedFilters;
+      
+      switch (filterSet) {
+        case 1:
+          updatedFilters = [...moreFilter1];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter1(updatedFilters);
+          break;
+        case 2:
+          updatedFilters = [...moreFilter2];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter2(updatedFilters);
+          break;
+        case 3:
+          updatedFilters = [...moreFilter3];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter3(updatedFilters);
+          break;
+        case 4:
+          updatedFilters = [...moreFilter4];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter4(updatedFilters);
+          break;
+        default:
+          break;
+      }
+    };
+
+    const [moreFilter1 , setMoreFilter1] = useState([
+      { name: "Kitchen", defaultChecked: false },
+      { name: "Air conditioning", defaultChecked: false },
+      { name: "Heating", defaultChecked: false },
+      { name: "Dryer", defaultChecked: false },
+      { name: "Washer", defaultChecked: false },
+      { name: "Wifi", defaultChecked: false },
+      { name: "Indoor fireplace", defaultChecked: false },
+      { name: "Breakfast", defaultChecked: false },
+      { name: "Hair dryer", defaultChecked: false },
+      { name: " Dedicated workspace", defaultChecked: false },
+    ])
+    
+    const [moreFilter2, setMoreFilter2] = useState([
+      { name: " Free parking on premise", defaultChecked: false  },
+      { name: "Hot tub", defaultChecked: false  },
+      { name: "Gym", defaultChecked: false  },
+      { name: " Pool", defaultChecked: false  },
+      { name: " EV charger", defaultChecked: false  },
+    ])
+
+    const [moreFilter3, setMoreFilter3] = useState([
+      { name: " House", defaultChecked: false  },
+      { name: "Bed and breakfast", defaultChecked: false  },
+      { name: "Apartment", defaultChecked: false },
+      { name: " Boutique hotel", defaultChecked: false  },
+      { name: " Bungalow", defaultChecked: false  },
+      { name: " Chalet", defaultChecked: false },
+      { name: " Condominium", defaultChecked: false },
+      { name: " Cottage", defaultChecked: false  },
+      { name: " Guest suite", defaultChecked: false  },
+      { name: " Guesthouse", defaultChecked: false  },
+    ])
+
+    const [moreFilter4, setMoreFilter4] = useState([
+      { name: " Pets allowed", defaultChecked: false  }, 
+      { name: "Smoking allowed", defaultChecked: false  },
+    ])
+
+    const countCheckedFilters = (filterArray: Filter[]) => {
+      return filterArray.filter(item => item.defaultChecked === true).length;
+    };
+
+    const clearAllFilters = () => {
+      setMoreFilter1((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setMoreFilter2((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setMoreFilter3((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setMoreFilter4((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+    };
+  
+    const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1) + countCheckedFilters(moreFilter2) + countCheckedFilters(moreFilter3) + countCheckedFilters(moreFilter4);
+  
+    const renderMoreFilterItemMobile = (
+      data: {
+        name: string;
+        defaultChecked?: boolean;
+      }[],
+      filterSet: number
+    ) => {
+      const list1 = data.filter((_, i) => i < data.length / 2);
+      const list2 = data.filter((_, i) => i >= data.length / 2);
+      return (
+        <div className="grid grid-cols-2 gap-8">
+          <div className="flex flex-col space-y-5">
+            {list1.map((item, index) => (
+              <Checkbox
+                key={item.name}
+                name={item.name}
+                label={item.name}
+                defaultChecked={item.defaultChecked}
+                onChange={() => toggleDefaultChecked(index, filterSet)}
+              />
+            ))}
+          </div>
+          <div className="flex flex-col space-y-5">
+            {list2.map((item, index) => (
+              <Checkbox
+                key={item.name}
+                name={item.name}
+                label={item.name}
+                defaultChecked={item.defaultChecked}
+                onChange={() => toggleDefaultChecked(list1.length + index, filterSet)}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    };
     return (
       <div>
         <div
           className={`flex lg:hidden items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilterMobile}
         >
-          <span>More filters (3)</span>
-          {renderXClear()}
+          <span>More filters ({countCheckedFiltersMoreFilter})</span>
+          {renderXClear(clearAllFilters)}
         </div>
 
         <Transition appear show={isOpenMoreFilterMobile} as={Fragment}>
@@ -542,7 +764,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Amenities</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter1)}
+                          {renderMoreFilterItemMobile(moreFilter1, 1)}
                         </div>
                       </div>
 
@@ -550,7 +772,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Facilities</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter2)}
+                          {renderMoreFilterItemMobile(moreFilter2, 2)}
                         </div>
                       </div>
 
@@ -558,7 +780,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                       <div className="py-7">
                         <h3 className="text-xl font-medium">Property type</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter3)}
+                          {renderMoreFilterItemMobile(moreFilter3, 3)}
                         </div>
                       </div>
 
@@ -566,7 +788,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                       <div className="py-7">
                         <h3 className="text-xl font-medium">House rules</h3>
                         <div className="mt-6 relative ">
-                          {renderMoreFilterItem(moreFilter4)}
+                          {renderMoreFilterItemMobile(moreFilter4, 4)}
                         </div>
                       </div>
                     </div>
