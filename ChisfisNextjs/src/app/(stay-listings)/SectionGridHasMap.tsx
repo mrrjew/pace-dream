@@ -2,6 +2,7 @@
 
 import React, { FC, useState } from "react";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
+import SectionSliderGridHasMap from "@/components/SectionSliderGridHasMap";
 import GoogleMapReact from "google-map-react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import ButtonClose from "@/shared/ButtonClose";
@@ -19,21 +20,23 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   return (
       <div className="relative flex min-h-screen">
         <div className="min-h-screen w-full md:w-[90vw]">
-          <div className="mb-8 lg:mb-11 md:w-[90vw] flex">
+          <div className="mb-8 lg:mb-11 md:w-[90vw] w-[98vw] flex ml-5 md:ml-0">
             <TabFilters setMap={setMap}/>
           </div>
-          <div className={`flex flex-row w-[90vw] ${map ? 'h-[92vw]' : 'h-full'} `}>
-            <div className={`grid grid-cols-1 ${map ? 'sm:grid-cols-2' : 'sm:grid-cols-4'} gap-x-5 2xl:gap-x-6 gap-y-8 ${map ? 'max-w-[45vw]' : 'max-w-[90vw]'} ${map ? 'overflow-y-auto' : 'overflow-y-hidden'}`}>
+          <div className={`hidden md:flex flex-row w-[90vw] ${map ? 'h-[92vw]' : 'h-full'} `}>
+            <div className={`hidden md:grid grid-cols-1 ${map ? 'sm:grid-cols-2' : 'sm:grid-cols-4'} gap-x-5 2xl:gap-x-6 gap-y-8 ${map ? 'max-w-[45vw]' : 'max-w-[90vw]'} ${map ? 'overflow-y-auto scrollbar-webkit scrollbar-thin' : 'overflow-y-hidden'}`}>
               {DEMO_STAYS.map((item) => (
                 <div
                   key={item.id}
                   onMouseEnter={() => setCurrentHoverID((_) => item.id)}
                   onMouseLeave={() => setCurrentHoverID((_) => -1)}
+                  className="pr-4"
                 >
                   <StayCard2 data={item} />
                 </div>
               ))}
-            </div> 
+            </div>
+            
           {!showFullMapFixed && (
             <div
               className={`flex md:hidden items-center justify-center fixed bottom-16 md:bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-neutral-900 text-white shadow-2xl rounded-full z-30 space-x-3 text-sm cursor-pointer`}
@@ -75,6 +78,29 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
             </GoogleMapReact>
           </div>
         </div>
+      </div>
+      <div className={`flex flex-col md:hidden ${map ? 'sm:grid-cols-2' : 'sm:grid-cols-4'}`}>
+        <SectionSliderGridHasMap/>
+        <div className={`w-[100vw] h-[100vw] rounded-md overflow-hidden mt-4 ${!map && 'hidden'}`}>
+            <GoogleMapReact
+              defaultZoom={12}
+              defaultCenter={DEMO_STAYS[0].map}
+              bootstrapURLKeys={{
+                key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
+              }}
+              yesIWantToUseGoogleMapApiInternals
+            >
+              {DEMO_STAYS.map((item) => (
+                <AnyReactComponent
+                  isSelected={currentHoverID === item.id}
+                  key={item.id}
+                  lat={item.map.lat}
+                  lng={item.map.lng}
+                  listing={item}
+                />
+              ))}
+            </GoogleMapReact>
+          </div>
       </div>
     </div>
   </div>

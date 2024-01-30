@@ -10,6 +10,7 @@ export interface LocationInputProps {
   className?: string;
   divHideVerticalLineClass?: string;
   autoFocus?: boolean;
+  inputs?: string;
 }
 
 const LocationInput: FC<LocationInputProps> = ({
@@ -18,6 +19,7 @@ const LocationInput: FC<LocationInputProps> = ({
   desc = "Minamiuonuma, Niigata ?",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
+  inputs = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -137,7 +139,7 @@ const LocationInput: FC<LocationInputProps> = ({
             }}
             ref={inputRef}
           />
-            <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1">
+            <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}>
               {!!value ? placeHolder : desc}
             </span>
           {value && showPopover && (

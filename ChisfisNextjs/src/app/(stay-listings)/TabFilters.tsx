@@ -45,11 +45,11 @@ const tabs: TypeDropOffLocationHourlyType[] = ["Free Cancelation" , "Pet Lover" 
   const renderRadioBtn = () => {
     const [dropOffLocationType, setDropOffLocationType] = useState<TypeDropOffLocationHourlyType>();
     return (
-      <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
+      <div className="py-5 pl-4 flex flex-row flex-wrap max-[906px]:hidden">
         {tabs.map((tab) =>{
         return(
           <div
-          className={`py-1.5 xl:px-2 lg:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+          className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
             dropOffLocationType === tab
               ? "bg-violet shadow-black/10 shadow-lg text-white "
               : "border bg-white text-black border-neutral-300"
@@ -84,7 +84,21 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
     setMap(!map);
   };
 
-  
+  const renderFilterSvg = () => {
+    return(
+    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none" className="mr-2">
+      <path d="M9.6163 0.625H1.38407C0.82725 0.625 0.548396 1.29821 0.942124 1.69194L4.06712 4.81694C4.18433 4.93415 4.25018 5.09312 4.25018 5.25888V7.8125C4.25018 8.00922 4.3428 8.19447 4.50018 8.3125L6.25018 9.625C6.45619 9.77951 6.75018 9.63251 6.75018 9.375V5.25888C6.75018 5.09312 6.81603 4.93415 6.93324 4.81694L10.0582 1.69194C10.452 1.29821 10.1731 0.625 9.6163 0.625Z" stroke="#272D37" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    )
+  }
+
+  const renderMapSvg = () => {
+    return(
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none" className="mr-2">
+        <path d="M8 7.16577V17.1658M13 3.83244V13.8324M4.36682 4.13812L6.93303 6.27663C7.5511 6.79169 8.4489 6.79169 9.06697 6.27663L11.933 3.88825C12.5511 3.37319 13.4489 3.37319 14.067 3.88825L17.4003 6.66603C17.7803 6.98269 18 7.45176 18 7.9464V16.2199C18 16.9264 17.176 17.3124 16.6332 16.8601L14.067 14.7216C13.4489 14.2065 12.5511 14.2065 11.933 14.7216L9.06697 17.11C8.4489 17.625 7.5511 17.625 6.93303 17.11L3.59969 14.3322C3.2197 14.0155 3 13.5464 3 13.0518V4.77831C3 4.07178 3.82405 3.68581 4.36682 4.13812Z" stroke={map === true ? "white " : "black"} stroke-width="1.67" stroke-linecap="round"/>
+      </svg>
+    )
+  }
 
   const renderXClear = (f: any) => {
     return (
@@ -110,19 +124,22 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
       setRangePrices([0, 0]);
     }
     return (
-      <Popover className="relative -mr-8">
+      <Popover className="relative min-[907px]:-mr-8">
         {({ open, close }) => (
           <>
             <Popover.Button
-              className={`flex items-center justify-center py-1 xl:px-2 lg:px-1
-              mr-2 my-1 sm:mr-3 text-sm rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none `}
+              className={`flex items-center justify-center py-1.5 md:py-0.5 xl:px-2 md:px-1 px-4
+              my-1 xl:mr-12 sm:mr-3 text-sm rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none `}
             >
-              <span>
+              <span className="md:py-1.5 lg:px-2 flex flex-row">
                 {rangePrices[1] !== null && rangePrices[1] !== 0 ? (
                 `$${convertNumbThousand(rangePrices[0])} - $${convertNumbThousand(rangePrices[1])}`
                 ) : (
                   "Price"
                 )}
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none" className="ml-1">
+                  <path d="M15.5 8.83398L11.0893 13.2447C10.7638 13.5702 10.2362 13.5702 9.91074 13.2447L5.5 8.83398" stroke="#272D37" stroke-width="1.67" stroke-linecap="round"/>
+                </svg>
               </span>
               {rangePrices[1] !== null && rangePrices[1] !== 0 ? (
                 renderXClear(clearPrices)
@@ -380,17 +397,17 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
     return (
       <div>
         <div
-          className={`flex py-1 xl:px-2 lg:px-1
-          xl:-ml-8 my-1 sm:mr-3 text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
+          className={`md:flex hidden py-1.5 lg:px-2 md:px-1
+          md:-ml-2 my-1 xl:mr-3 md:text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilter}
         >
           {countCheckedFiltersMoreFilter !== 0 ? (
           <>
-            <span>More filters ({countCheckedFiltersMoreFilter})</span>
+            <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter ({countCheckedFiltersMoreFilter})</span>
             {renderXClear(clearAllFilters)}
           </>
           ) : (
-            <span>More filters</span>
+            <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter </span>
           )
         }
         </div>
@@ -616,11 +633,18 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
     return (
       <div>
         <div
-          className={`flex lg:hidden items-center justify-center px-2 py-0.5 text-sm rounded-full border border-primary-500 bg-primary-50 text-primary-700 focus:outline-none cursor-pointer`}
+          className={`flex flex-row md:hidden text-sm py-1.5 max-md:mx-2 md:py-[1px] px-4 my-1 rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
           onClick={openModalMoreFilterMobile}
         >
-          <span>More filters ({countCheckedFiltersMoreFilter})</span>
-          {renderXClear(clearAllFilters)}
+          {countCheckedFiltersMoreFilter !== 0 ? (
+          <>
+            <span className="flex flex-row items-center text-sm">{renderFilterSvg()}Filter ({countCheckedFiltersMoreFilter})</span>
+            {renderXClear(clearAllFilters)}
+          </>
+          ) : (
+            <span className="flex flex-row items-center text-sm">{renderFilterSvg()}Filter</span>
+          )
+        }
         </div>
 
         <Transition appear show={isOpenMoreFilterMobile} as={Fragment}>
@@ -818,23 +842,36 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   };
 
   return (
-    <div className="flex space-x-2">
-      <div className="hidden md:flex justify-center items-center space-x-2 w-[90vw]">
+    <div className="flex space-x-2 md:mt-0 mt-4 justify-start">
+      <div className="hidden md:flex justify-start items-center lg:ml-8 space-x-2 w-[90vw]">
         {renderTabsPriceRage()}
         {renderRadioBtn()}
         {renderTabMoreFilter()}
         <div
-          className={`py-1.5 xl:px-2 lg:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 mr-8 ${
+          className={`py-1.5 md:py-2 lg:px-2.5 flex items-center rounded-full font-medium cursor-pointer text-sm my-1 mr-8 ${
           map === true
               ? "bg-violet shadow-black/10 shadow-lg text-white "
               : "border bg-white text-black border-neutral-300"
           }`}
           onClick={handleMapToggle}
         >
-          Show in map
+        {renderMapSvg()}  Show in map
         </div>
       </div>
-      {renderTabMoreFilterMobile()}
+      <div className="flex md:hidden">
+        {renderTabsPriceRage()}
+        {renderTabMoreFilterMobile()}
+        <div
+            className={`py-1 px-4 text-sm md:hidden flex items-center rounded-full font-medium cursor-pointer my-1 ${
+            map === true
+                ? "bg-violet shadow-black/10 shadow-lg text-white "
+                : "border bg-white text-black border-neutral-300"
+            }`}
+            onClick={handleMapToggle}
+          >
+          {renderMapSvg()}  Show in map
+          </div>
+        </div>
     </div>
   );
 };
