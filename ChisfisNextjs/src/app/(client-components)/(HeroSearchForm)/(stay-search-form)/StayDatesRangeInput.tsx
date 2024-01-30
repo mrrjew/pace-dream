@@ -11,11 +11,15 @@ import ClearDataButton from "../ClearDataButton";
 export interface StayDatesRangeInputProps {
   className?: string;
   fieldClassName?: string;
+  dates?: string;
+  inputs?: string;
 }
 
 const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
-  className = "[ lg:nc-flex-2 ]",
+  className = "",
   fieldClassName = "",
+  dates = "",
+  inputs= "",
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
     new Date("2023/02/06")
@@ -35,7 +39,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
           <span className="block xl:text-lg font-normal text-black md:font-semibold">
             From
           </span>
-          <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+          <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full ${dates} md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
             {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
             <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 xl:w-3 xl:h-3 ml-4 text-black" />
           </span>
@@ -49,7 +53,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
       <span className="block xl:text-lg font-normal text-black md:font-semibold">
         Until
       </span>
-      <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+      <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full ${dates} md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
         {endDate ? endDate?.toLocaleDateString("en-US") : `Add dates`}
         <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 xl:w-3 xl:h-3 ml-4 text-black" />
       </span>

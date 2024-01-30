@@ -15,6 +15,7 @@ export interface GuestsInputProps {
   className?: string;
   buttonSubmitHref?: PathName;
   hasButtonSubmit?: boolean;
+  inputs?: string;
 }
 
 const GuestsInput: FC<GuestsInputProps> = ({
@@ -22,6 +23,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
   className = "[ nc-flex-1 ]",
   buttonSubmitHref = "/listing-stay-map",
   hasButtonSubmit = true,
+  inputs= "",
 }) => {
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
@@ -63,7 +65,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
                 <span className="block xl:text-lg font-normal text-left text-black md:font-semibold">
                   Guests
                 </span>
-                <span className="flex flex-row max-md:w-[85vw] border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+                <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
                   Add your guests
                   <UserPlusIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 md:flex text-black ml-4" />
                 </span>
