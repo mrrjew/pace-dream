@@ -2,9 +2,9 @@ import BackgroundSection from "@/components/BackgroundSection";
 import BgGlassmorphism from "@/components/BgGlassmorphism";
 import SectionGridAuthorBox from "@/components/SectionSliderAuthorBox";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import React, { ReactNode } from "react";
 import SectionHeroArchivePage from "../(server-components)/SectionHeroArchivePage";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
       {/* SECTION HERO */}
       <div className="container pt-10 pb-24 lg:pt-16 lg:pb-28">
-        <SectionHeroArchivePage currentPage="Stays" currentTab="Stays" />
+        <SectionHeroArchivePage currentPage="Room Stays" currentTab="Room Stays" />
       </div>
 
       {children}
@@ -32,7 +32,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         </div>
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
+        <SectionSubscribe className="py-24 lg:py-28" />
 
         {/* SECTION */}
         <div className="relative py-16 mb-24 lg:mb-28">

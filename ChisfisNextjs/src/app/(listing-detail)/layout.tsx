@@ -11,6 +11,7 @@ import { imageGallery as listingStayImageGallery } from "./listing-stay-detail/c
 import { imageGallery as listingCarImageGallery } from "./listing-car-detail/constant";
 import { imageGallery as listingExperienceImageGallery } from "./listing-experiences-detail/constant";
 import { Route } from "next";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 const DetailtLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -60,7 +61,7 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
             sliderStyle="style2"
           />
         </div>
-        <SectionSubscribe2 className="pt-24 lg:pt-32" />
+        <SectionSubscribe className="pt-24 lg:pt-32" />
       </div>
 
       {/* STICKY FOOTER MOBILE */}

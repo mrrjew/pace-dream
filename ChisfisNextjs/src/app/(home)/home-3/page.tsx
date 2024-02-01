@@ -8,6 +8,7 @@ import SectionGridCategoryBox from "@/components/SectionGridCategoryBox";
 import SectionHero3 from "@/app/(server-components)/SectionHero3";
 import CardCategory6 from "@/components/CardCategory6";
 import SectionGridFeaturePlaces from "@/components/SectionGridFeaturePlaces";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 const DEMO_CATS_2: TaxonomyType[] = [
   {
@@ -95,7 +96,7 @@ function PageHome3() {
         <SectionGridFeaturePlaces />
 
         {/* SECTION */}
-        <SectionSubscribe2 />
+        <SectionSubscribe />
       </div>
     </main>
   );

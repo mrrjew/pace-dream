@@ -4,6 +4,7 @@ import SectionSliderNewCategories from "@/components/SectionSliderNewCategories"
 import SectionSubscribe2 from "@/components/SectionSubscribe2";
 import React, { FC } from "react";
 import SectionGridFilterCard from "../SectionGridFilterCard";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 export interface ListingFlightsPageProps {}
 
@@ -28,7 +29,7 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {
         />
 
         {/* SECTION */}
-        <SectionSubscribe2 className="py-24 lg:py-28" />
+        <SectionSubscribe className="py-24 lg:py-28" />
       </div>
     </div>
   );

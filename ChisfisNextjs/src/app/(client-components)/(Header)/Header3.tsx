@@ -29,12 +29,12 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
   const [showHeroSearch, setShowHeroSearch] =
     useState<StaySearchFormFields | null>();
   //
-  const [currentTab, setCurrentTab] = useState<SearchTab>("Stays");
+  const [currentTab, setCurrentTab] = useState<SearchTab>("Room Stays");
 
   //
   useOutsideAlerter(headerInnerRef, () => {
     setShowHeroSearch(null);
-    setCurrentTab("Stays");
+    setCurrentTab("Room Stays");
   });
 
   let pathname = usePathname();
