@@ -34,6 +34,7 @@ import SectionGridFeatureProperty from "../SectionGridFeatureProperty";
 import SectionDowloadApp from "../SectionDowloadApp";
 import SectionHero2 from "@/app/(server-components)/SectionHero2";
 import Image from "next/image";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 const DEMO_CATS_2: TaxonomyType[] = [
   {
@@ -186,7 +187,7 @@ function PageHome2() {
           itemPerRow={5}
         />
 
-        <SectionSubscribe2 />
+        <SectionSubscribe />
       </div>
     </main>
   );

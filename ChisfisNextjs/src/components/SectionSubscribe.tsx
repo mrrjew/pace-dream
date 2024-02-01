@@ -1,10 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import ButtonCircle from "@/shared/ButtonCircle";
 import Input from "@/shared/Input";
 
-const SectionSubscribe = () => {
+export interface SectionSubscribe {
+    className?: string
+}
+
+const SectionSubscribe: FC<SectionSubscribe> = ({
+    className = ""
+}) => {
     return(
-    <div className={`nc-SectionSubscribe z-10 flex flex-col max-w-[95vw] w-[95vw] md:max-w-[65%] mt-10 bg-violet relative md:ml-auto md:mr-auto items-center border rounded-2xl p-8`}>
+    <div className={`nc-SectionSubscribe ${className} z-10 flex flex-col max-w-[95vw] w-[95vw] md:max-w-[65%] mt-10 bg-violet relative md:ml-auto md:mr-auto items-center border rounded-2xl p-8`}>
         <h2 className="text-white font-semibold text-4xl text-center">Join our newsletter</h2>
         <span className="block md:text-xs text-center mt-5 text-white text-base w-[75vw] md:max-w-[100%]">
           Read and share new perspectives on just about any topic. Everyone’s
