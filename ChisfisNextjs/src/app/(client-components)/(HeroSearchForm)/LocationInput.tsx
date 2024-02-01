@@ -134,7 +134,7 @@ const LocationInput: FC<LocationInputProps> = ({
               {desc}
             </span>
             <input
-              className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[11px] md:p-[7px] ${input ? input : 'max-lg:w-[10vw]'} xl:p-[7px] w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
+              className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : 'max-lg:w-[10vw]'} xl:p-[5px] w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
               placeholder={placeHolder}
               value={value}
               autoFocus={showPopover}
