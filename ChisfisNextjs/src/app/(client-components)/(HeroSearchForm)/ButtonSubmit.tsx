@@ -3,13 +3,16 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 interface Props {
-  href?: PathName;
+  href?: PathName | string ;
+  as?: string
 }
 
-const ButtonSubmit: FC<Props> = ({ href = "/listing-stay-map" }) => {
+const ButtonSubmit: FC<Props> = ({ href = "/listing-stay-map/[id]", as = "/listing-stay-map/1" }) => {
+  const urlObject = typeof href === "string" ? { pathname: href } : href;
   return (
     <Link
-      href={href}
+      href={urlObject}
+      as={as}
       type="button"
       className="h-14 md:h-8 md:w-8 xl:h-8 w-full xl:w-8 rounded-full bg-primary-6000 hover:bg-primary-700 flex items-center justify-center text-neutral-50 focus:outline-none"
     >
