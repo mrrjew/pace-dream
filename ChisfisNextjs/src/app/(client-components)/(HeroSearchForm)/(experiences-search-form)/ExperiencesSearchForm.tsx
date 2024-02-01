@@ -58,22 +58,24 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
   };
   const renderForm = () => {
     return (
-      <form className="w-full relative">
-        {renderRadioBtn()}
-        <div className="ml-4 mt-4 md:hidden">
-          <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
-            Explore your PaceDream Book hotels, Car and more with ease!
-          </h2>
-        </div>
-        <div className="flex flex-col flex-1 md:flex-row items-baseline rounded-full md:mt-4">
-          <LocationInput className="flex-[1.5]" />
-          <ExperiencesDateSingleInput className="flex-1" />
-          <GuestsInput
-            className="flex-1"
-            buttonSubmitHref="/listing-experiences"
-          />
-        </div>
-      </form>
+      <div className="pb-8">
+        <form className="w-full relative">
+          {renderRadioBtn()}
+          <div className="ml-4 mt-4 md:hidden">
+            <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
+              Explore your PaceDream Book hotels, Car and more with ease!
+            </h2>
+          </div>
+          <div className="flex flex-col flex-1 md:flex-row items-baseline rounded-full md:mt-4">
+            <LocationInput className="flex-[1.5]" input="max-lg:w-[22vw]"/>
+            <ExperiencesDateSingleInput className="flex-1" />
+            <GuestsInput
+              className="flex-1"
+              buttonSubmitHref="/listing-experiences"
+            />
+          </div>
+        </form>
+      </div>
     );
   };
 

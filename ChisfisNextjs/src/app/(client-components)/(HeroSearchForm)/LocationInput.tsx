@@ -11,15 +11,17 @@ export interface LocationInputProps {
   divHideVerticalLineClass?: string;
   autoFocus?: boolean;
   inputs?: string;
+  input?: string;
 }
 
 const LocationInput: FC<LocationInputProps> = ({
   autoFocus = false,
-  placeHolder = "Location",
-  desc = "Minamiuonuma, Niigata ?",
+  desc = "Location",
+  placeHolder = "Minamiuonuma, Niigata ?",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
   inputs = "",
+  input = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -79,7 +81,7 @@ const LocationInput: FC<LocationInputProps> = ({
             <span
               onClick={() => handleSelectLocation(item)}
               key={item}
-              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 cursor-pointer"
+              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 cursor-pointer"
             >
               <span className="block text-neutral-400">
                 
@@ -124,24 +126,23 @@ const LocationInput: FC<LocationInputProps> = ({
     <div className={`relative flex ${className} mt-4`} ref={containerRef}>
       <div
         onClick={() => setShowPopover(true)}
-        className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left  ${
-          showPopover ? "nc-hero-field-focused" : ""
-        }`}
+        className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-0 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
       >
-        <div className="flex-grow">
-          <input
-            className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none xl:text-lg font-normal md:font-semibold placeholder-black truncate`}
-            placeholder={placeHolder}
-            value={value}
-            autoFocus={showPopover}
-            onChange={(e) => {
-              setValue(e.currentTarget.value);
-            }}
-            ref={inputRef}
-          />
-            <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}>
-              {!!value ? placeHolder : desc}
+        <div className="flex-grow ">
+          
+            <span className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none xl:text-lg font-normal md:font-semibold placeholder-black truncate`}>
+              {desc}
             </span>
+            <input
+              className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[11px] md:p-[7px] ${input ? input : 'max-lg:w-[10vw]'} xl:p-[7px] w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
+              placeholder={placeHolder}
+              value={value}
+              autoFocus={showPopover}
+              onChange={(e) => {
+                setValue(e.currentTarget.value);
+              }}
+              ref={inputRef}
+            />
           {value && showPopover && (
             <ClearDataButton
               onClick={() => {
@@ -159,7 +160,7 @@ const LocationInput: FC<LocationInputProps> = ({
       )}
 
       {showPopover && (
-        <div className="absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
+        <div className="absolute left-0 border border-gray-200 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
           {value ? renderSearchValue() : renderRecentSearches()}
         </div>
       )}
