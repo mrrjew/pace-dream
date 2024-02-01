@@ -15,9 +15,10 @@ const CardCategoryBox1: FC<CardCategoryBox1Props> = ({
   taxonomy,
 }) => {
   const { count, name, thumbnail, href = "/" } = taxonomy;
+  const urlObject = typeof href === "string" ? { pathname: href } : href;
   return (
     <Link
-      href={href}
+      href={urlObject}
       className={`nc-CardCategoryBox1 relative flex items-center p-3 sm:p-6 [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ]  ${className}`}
     >
       <Badge

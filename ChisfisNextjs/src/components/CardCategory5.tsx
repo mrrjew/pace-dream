@@ -14,9 +14,10 @@ const CardCategory5: FC<CardCategory5Props> = ({
   taxonomy,
 }) => {
   const { count, name, href = "/", thumbnail } = taxonomy;
+  const urlObject = typeof href === "string" ? { pathname: href } : href;
   return (
     <Link
-      href={href}
+      href={urlObject}
       className={`nc-CardCategory5 flex flex-col ${className}`}
       data-nc-id="CardCategory5"
     >

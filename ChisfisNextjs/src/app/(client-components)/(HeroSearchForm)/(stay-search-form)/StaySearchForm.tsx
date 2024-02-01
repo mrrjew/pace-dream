@@ -88,7 +88,7 @@ const StaySearchForm: FC<{}> = ({}) => {
           <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
             <LocationInput className="flex-[1.5]" />
             <StayDatesRangeInput className="flex-1" />
-            <GuestsInput className="flex-[1.5]" />
+            <GuestsInput className="flex-[1.5]" buttonSubmitHref="/listing-stay-map/1"/>
           </div>
         </form>
       </div>

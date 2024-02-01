@@ -1,6 +1,6 @@
 "use client";
 
-import { Route } from "@/routers/types";
+import { PathName, Route } from "@/routers/types";
 import Link from "next/link";
 import React, { ButtonHTMLAttributes, FC } from "react";
 
@@ -9,11 +9,10 @@ export interface ButtonProps {
   translate?: string;
   sizeClass?: string;
   fontSize?: string;
-  //
   loading?: boolean;
   disabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  href?: Route<string>;
+  href?: Route<string> | string | PathName | undefined;
   targetBlank?: boolean;
   onClick?: () => void;
   children?: React.ReactNode;
@@ -33,7 +32,7 @@ const Button: FC<ButtonProps> = ({
   onClick = () => {},
 }) => {
   const CLASSES = `nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors ${fontSize} ${sizeClass} ${translate} ${className} `;
-
+  const urlObject = typeof href === "string" ? { pathname: href } : (href as unknown as Route<string>);
   const _renderLoading = () => {
     return (
       <svg
@@ -62,7 +61,7 @@ const Button: FC<ButtonProps> = ({
   if (!!href) {
     return (
       <Link
-        href={href}
+        href={urlObject}
         target={targetBlank ? "_blank" : undefined}
         className={`${CLASSES} `}
         onClick={onClick}
