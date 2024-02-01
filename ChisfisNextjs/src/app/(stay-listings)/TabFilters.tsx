@@ -1,14 +1,15 @@
 "use client";
 
 import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import NcInputNumber from "@/components/NcInputNumber";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import ButtonThird from "@/shared/ButtonThird";
 import ButtonClose from "@/shared/ButtonClose";
 import Checkbox from "@/shared/Checkbox";
-import Slider from "rc-slider";
+import Slider, { SliderProps } from "rc-slider";
 import convertNumbThousand from "@/utils/convertNumbThousand";
+import { SvgAir, SvgBBQ, SvgExercise, SvgFire, SvgParking, SvgPatio, SvgPatioAir, SvgPool, SvgShower, SvgTub, SvgTv, SvgWashing, SvgWifi, SvgWorkspaces } from "@/shared/TabFilterSvgs";
 
 interface TabFiltersProps {
   setMap: Dispatch<SetStateAction<boolean>>;
@@ -17,6 +18,7 @@ interface TabFiltersProps {
 interface Filter {
   name: string;
   defaultChecked?: boolean;
+  svg?: () => JSX.Element;
 }
 
 // DEMO DATA
@@ -102,7 +104,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
 
   const renderXClear = (f: any) => {
     return (
-      <span onClick={() => { close; f() }} className="w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center ml-3 cursor-pointer">
+      <span onClick={() => { close; f(); }} className="w-4 h-4 rounded-full bg-primary-500 text-white flex items-center justify-center ml-3 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-3 w-3"
@@ -163,7 +165,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                       <span className="font-medium">Price per day</span>
                       <Slider
                         range
-                        className="text-red-400"
+                        className="text-red-400 "
                         min={0}
                         max={2000}
                         defaultValue={[rangePrices[0], rangePrices[1]]}
@@ -242,10 +244,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   };
 
   const renderMoreFilterItem = (
-    data: {
-      name: string;
-      defaultChecked?: boolean;
-    }[]
+    data: Filter[]
   ) => {
     const list1 = data.filter((_, i) => i < data.length / 2);
     const list2 = data.filter((_, i) => i >= data.length / 2);
@@ -278,70 +277,35 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   const renderTabMoreFilter = () => { 
     const toggleDefaultChecked = (index: number, filterSet: number) => {
       let updatedFilters;
-      
       switch (filterSet) {
         case 1:
           updatedFilters = [...moreFilter1];
           updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
           setMoreFilter1(updatedFilters);
           break;
-        case 2:
-          updatedFilters = [...moreFilter2];
-          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
-          setMoreFilter2(updatedFilters);
-          break;
-        case 3:
-          updatedFilters = [...moreFilter3];
-          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
-          setMoreFilter3(updatedFilters);
-          break;
-        case 4:
-          updatedFilters = [...moreFilter4];
-          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
-          setMoreFilter4(updatedFilters);
-          break;
         default:
+          updatedFilters = [...moreFilter1];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter1(updatedFilters);
           break;
       }
     };
 
     const [moreFilter1 , setMoreFilter1] = useState([
-      { name: "Kitchen", defaultChecked: false },
-      { name: "Air conditioning", defaultChecked: false },
-      { name: "Heating", defaultChecked: false },
-      { name: "Dryer", defaultChecked: false },
-      { name: "Washer", defaultChecked: false },
-      { name: "Wifi", defaultChecked: false },
-      { name: "Indoor fireplace", defaultChecked: false },
-      { name: "Breakfast", defaultChecked: false },
-      { name: "Hair dryer", defaultChecked: false },
-      { name: " Dedicated workspace", defaultChecked: false },
-    ])
-    
-    const [moreFilter2, setMoreFilter2] = useState([
-      { name: " Free parking on premise", defaultChecked: false  },
-      { name: "Hot tub", defaultChecked: false  },
-      { name: "Gym", defaultChecked: false  },
-      { name: " Pool", defaultChecked: false  },
-      { name: " EV charger", defaultChecked: false  },
-    ])
-
-    const [moreFilter3, setMoreFilter3] = useState([
-      { name: " House", defaultChecked: false  },
-      { name: "Bed and breakfast", defaultChecked: false  },
-      { name: "Apartment", defaultChecked: false },
-      { name: " Boutique hotel", defaultChecked: false  },
-      { name: " Bungalow", defaultChecked: false  },
-      { name: " Chalet", defaultChecked: false },
-      { name: " Condominium", defaultChecked: false },
-      { name: " Cottage", defaultChecked: false  },
-      { name: " Guest suite", defaultChecked: false  },
-      { name: " Guesthouse", defaultChecked: false  },
-    ])
-
-    const [moreFilter4, setMoreFilter4] = useState([
-      { name: " Pets allowed", defaultChecked: false  }, 
-      { name: "Smoking allowed", defaultChecked: false  },
+      { name: "Free parking on premise", defaultChecked: false , svg: SvgParking },
+      { name: "TV", defaultChecked: false, svg: SvgTv },
+      { name: "Wifi", defaultChecked: false, svg: SvgWifi },
+      { name: "Dedicated workspace", defaultChecked: false, svg: SvgWorkspaces },
+      { name: "Air conditioning", defaultChecked: false, svg: SvgAir },
+      { name: "Washing Machine", defaultChecked: false, svg: SvgWashing },
+      { name: "Exercise Equipment", defaultChecked: false, svg: SvgExercise },
+      { name: "Patio", defaultChecked: false, svg: SvgPatio },
+      { name: "BBQ grill", defaultChecked: false, svg: SvgBBQ },
+      { name: "Outdoor shower", defaultChecked: false, svg: SvgShower },
+      { name: "Pool", defaultChecked: false, svg: SvgPool },
+      { name: "Hot tub", defaultChecked: false , svg: SvgTub },
+      { name: "Patio", defaultChecked: false , svg: SvgPatioAir },
+      { name: "Fire Fit", defaultChecked: false , svg: SvgFire },
     ])
 
     const countCheckedFilters = (filterArray: Filter[]) => {
@@ -350,12 +314,19 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
 
     const clearAllFilters = () => {
       setMoreFilter1((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
-      setMoreFilter2((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
-      setMoreFilter3((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
-      setMoreFilter4((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setFilters(0)
     };
+
+    const clearFilter = () => {
+      setFilters(0)
+    }
   
-    const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1) + countCheckedFilters(moreFilter2) + countCheckedFilters(moreFilter3) + countCheckedFilters(moreFilter4);
+    const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1);
+    const [dayOrHourly, setDayOrHourly] = useState(false)
+    const [rangePricesDay, setRangePricesDay] = useState([0, 0])
+    const [rangePricesHourly, setRangePricesHourly] = useState([0, 0])
+    const [filters, setFilters] = useState(0)
+    const [filterPrices, setFilterPrices] = useState("")
   
     const renderMoreFilterItemDeskopt = (
       data: {
@@ -364,221 +335,258 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
       }[],
       filterSet: number
     ) => {
-      const list1 = data.filter((_, i) => i < data.length / 2);
-      const list2 = data.filter((_, i) => i >= data.length / 2);
-      return (
-        <div className="grid grid-cols-2 gap-8">
-          <div className="flex flex-col space-y-5">
-            {list1.map((item, index) => (
-              <Checkbox
-                key={item.name}
-                name={item.name}
-                label={item.name}
-                defaultChecked={item.defaultChecked}
-                onChange={() => toggleDefaultChecked(index, filterSet)}
-              />
-            ))}
-          </div>
-          <div className="flex flex-col space-y-5">
-            {list2.map((item, index) => (
-              <Checkbox
-                key={item.name}
-                name={item.name}
-                label={item.name}
-                defaultChecked={item.defaultChecked}
-                onChange={() => toggleDefaultChecked(list1.length + index, filterSet)}
-              />
-            ))}
-          </div>
-        </div>
-      );
-    };
-
     return (
-      <div>
-        <div
-          className={`md:flex hidden py-1.5 lg:px-2 md:px-1
-          md:-ml-2 my-1 xl:mr-3 md:text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
-          onClick={openModalMoreFilter}
+      <div className="py-5 pl-4 flex flex-row flex-wrap">
+        {moreFilter1.map((tab, index) =>{
+        return(
+          <div
+          className={`py-2.5 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
+            tab.defaultChecked === true
+              ? "bg-violet shadow-black/10 shadow-lg text-white "
+              : "border bg-white text-black border-neutral-300"
+          }`}
+          onClick={(e) => toggleDefaultChecked(index, filterSet)}
         >
-          {countCheckedFiltersMoreFilter !== 0 ? (
-          <>
-            <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter ({countCheckedFiltersMoreFilter})</span>
-            {renderXClear(clearAllFilters)}
-          </>
-          ) : (
-            <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter </span>
-          )
-        }
+          {tab.svg()}{tab.name}
         </div>
-
-        <Transition appear show={isOpenMoreFilter} as={Fragment}>
-          <Dialog
-            as="div"
-            className="fixed inset-0 z-50 overflow-y-auto"
-            onClose={closeModalMoreFilter}
-          >
-            <div className="min-h-screen text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40 dark:bg-opacity-60" />
-              </Transition.Child>
-
-              {/* This element is to trick the browser into centering the modal contents. */}
-              <span
-                className="inline-block h-screen align-middle"
-                aria-hidden="true"
-              >
-                &#8203;
-              </span>
-              <Transition.Child
-                className="inline-block py-8 px-2 h-screen w-full max-w-4xl"
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <div className="inline-flex flex-col w-full max-w-4xl text-left align-middle transition-all transform overflow-hidden rounded-2xl bg-white shadow-xl h-full">
-                  <div className="relative flex-shrink-0 px-6 py-4 border-b border-neutral-200 text-center">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-lg font-medium leading-6 text-gray-900"
-                    >
-                      More filters
-                    </Dialog.Title>
-                    <span className="absolute left-3 top-3">
-                      <ButtonClose onClick={closeModalMoreFilter} />
-                    </span>
-                  </div>
-
-                  <div className="flex-grow overflow-y-auto">
-                    <div className="px-10 divide-y divide-neutral-200">
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Amenities</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemDeskopt(moreFilter1, 1)}
-                        </div>
-                      </div>
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Facilities</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemDeskopt(moreFilter2, 2)}
-                        </div>
-                      </div>
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Property type</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemDeskopt(moreFilter3, 3)}
-                        </div>
-                      </div>
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">House rules</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemDeskopt(moreFilter4, 4)}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex-shrink-0 bg-neutral-50 flex items-center justify-between">
-                    <ButtonThird
-                      onClick={() => {closeModalMoreFilter; clearAllFilters();}}
-                      sizeClass="px-4 py-2 sm:px-5"
-                    >
-                      Clear
-                    </ButtonThird>
-                    <ButtonPrimary
-                      onClick={closeModalMoreFilter}
-                      sizeClass="px-4 py-2 sm:px-5"
-                    >
-                      Apply
-                    </ButtonPrimary>
-                  </div>
-                </div>
-              </Transition.Child>
-            </div>
-          </Dialog>
-        </Transition>
+        )}
+        )}
       </div>
     );
   };
 
-  const renderTabMoreFilterMobile = () => {
+    return (
+      <div>
+        <Popover className={`flex relative`}>
+        {({ open, close }) => ( 
+          <>
+          <Popover.Button
+            className={`md:flex hidden py-1.5 lg:px-2 md:px-1
+            md:-ml-2 my-1 xl:mr-3 md:text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer" : ""
+            }`}
+          >
+              {filters !== 0 ? (
+              <>
+                <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter ({filters})</span>
+                {renderXClear(clearAllFilters)}
+              </>
+              ) : (
+                <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter </span>
+              )
+            }
+            </Popover.Button>
+          {open && (
+            <div className="h-8 hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
+          )}
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
+          >
+            <Popover.Panel className="absolute min-[907px]:right-0 z-10 w-full min-[908px]:min-w-[35vw] max-[907px]:min-w-[55vw] max-w-sm bg-white border border-gray-200 top-full mt-3 rounded-xl shadow-xl">
+              <div className="border-b border-gray-200 py-3 pl-8">
+                <h1>
+                  Filter
+                </h1>
+                <span className="absolute right-3 top-2">
+                  <ButtonClose onClick={() => {close(); clearAllFilters();}} />
+                </span>
+              </div>   
+              <div className="flex-grow overflow-y-auto px-4">
+                <div className="py-7">
+                <h3 className="text-sm text-[#919BA7] font-normal ml-2">Pricing Limit</h3>
+                  <div className="mt-2 relative">
+                    <div className="flex mb-2 ml-4">
+                      <div
+                        className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                        dayOrHourly === false
+                        ? "bg-violet shadow-black/10 shadow-lg text-white "
+                        : "border bg-white text-black border-neutral-300"
+                        }`}
+                        onClick={(e) => setDayOrHourly(!dayOrHourly)}
+                        >
+                        Day Basis
+                      </div>
+                      <div
+                        className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                        dayOrHourly === true
+                        ? "bg-violet shadow-black/10 shadow-lg text-white "
+                        : "border bg-white text-black border-neutral-300"
+                        }`}
+                        onClick={(e) => setDayOrHourly(!dayOrHourly)}
+                      >
+                        Hourly Basis
+                      </div>
+                    </div>
+                    <div className="relative flex flex-col space-y-8">
+                      <div className="space-y-5 px-4">
+                        <Slider
+                          range
+                          className="text-black flex flex-row"
+                          min={0}
+                          max={2000}
+                          defaultValue={[0, 1000]}
+                          value={dayOrHourly ? rangePricesHourly : rangePricesDay}
+                          allowCross={false}
+                          styles={{
+                            track: { background: '#574EFA' },
+                            handle: { background: '#574EFA', opacity: 1, border: '1px solid white' },
+                          }}
+                          onChange={(e) => ( dayOrHourly === false ? setRangePricesDay(e as number[]) : setRangePricesHourly(e as number[]) )}
+                        />
+                      </div>
+                      <div className="flex justify-between space-x-5 ml-2">
+                        <div>
+                          <label
+                            htmlFor="minPrice"
+                            className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                          >
+                            Min price
+                          </label>
+                          <div className="mt-1 relative rounded-md">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                              <span className="text-neutral-500 sm:text-sm">
+                                $
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              name="minPrice"
+                              disabled
+                              id="minPrice"
+                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
+                              value={dayOrHourly === false ? rangePricesDay[0] : rangePricesHourly[0]}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="maxPrice"
+                            className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                          >
+                            Max price
+                          </label>
+                          <div className="mt-1 relative rounded-md">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                              <span className="text-neutral-500 sm:text-sm">
+                                $
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              disabled
+                              name="maxPrice"
+                              id="maxPrice"
+                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
+                              value={dayOrHourly === false ? rangePricesDay[1] : rangePricesHourly[1]}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-sm text-[#919BA7] font-normal ml-2">Pricing</h3>
+                <div className="flex ml-4">
+                  <div
+                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    filterPrices === "Highest Price"
+                    ? "bg-violet shadow-black/10 shadow-lg text-white "
+                    : "border bg-white text-black border-neutral-300"
+                    }`}
+                    onClick={(e) => setFilterPrices("Highest Price")}
+                  >
+                    Highest Price
+                  </div>
+                  <div
+                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    filterPrices === "Lowest Price"
+                    ? "bg-violet shadow-black/10 shadow-lg text-white "
+                    : "border bg-white text-black border-neutral-300"
+                    }`}
+                    onClick={(e) => setFilterPrices("Lowest Price")}
+                  >
+                    Lowest Price
+                  </div>
+                  <div
+                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    filterPrices === "Recommended"
+                    ? "bg-violet shadow-black/10 shadow-lg text-white "
+                    : "border bg-white text-black border-neutral-300"
+                    }`}
+                    onClick={(e) => setFilterPrices("Recommended")}
+                  >
+                    Recommended
+                  </div>
+                </div>
+                <div className="divide-y divide-neutral-200">
+                  <div className="py-7">
+                    <h3 className="text-sm text-[#919BA7] font-normal ml-2">Any standout amenities?</h3>
+                    <div className="relative ">
+                      {renderMoreFilterItemDeskopt(moreFilter1, 1)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 sm:p-6 flex-shrink-0 border-t border-gray-200 flex items-center justify-between">
+                <ButtonThird
+                  onClick={() => {clearAllFilters(); close();}}
+                  sizeClass="px-4 py-2 sm:px-5"
+                >
+                  Clear
+                </ButtonThird>
+                <ButtonPrimary
+                  onClick={() => {close(); setFilters(countCheckedFiltersMoreFilter)}}
+                  sizeClass="px-4 py-2 sm:px-5"
+                >
+                  Apply
+                </ButtonPrimary>
+              </div>
+            </Popover.Panel>
+          </Transition> 
+        </>
+      )}
+        </Popover>
+      </div>
+    );
+  };
+
+  const renderTabMoreFilterMobile = () => { 
     const toggleDefaultChecked = (index: number, filterSet: number) => {
       let updatedFilters;
-      
       switch (filterSet) {
         case 1:
           updatedFilters = [...moreFilter1];
           updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
           setMoreFilter1(updatedFilters);
           break;
-        case 2:
-          updatedFilters = [...moreFilter2];
-          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
-          setMoreFilter2(updatedFilters);
-          break;
-        case 3:
-          updatedFilters = [...moreFilter3];
-          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
-          setMoreFilter3(updatedFilters);
-          break;
-        case 4:
-          updatedFilters = [...moreFilter4];
-          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
-          setMoreFilter4(updatedFilters);
-          break;
         default:
+          updatedFilters = [...moreFilter1];
+          updatedFilters[index].defaultChecked = !updatedFilters[index].defaultChecked;
+          setMoreFilter1(updatedFilters);
           break;
       }
     };
 
     const [moreFilter1 , setMoreFilter1] = useState([
-      { name: "Kitchen", defaultChecked: false },
-      { name: "Air conditioning", defaultChecked: false },
-      { name: "Heating", defaultChecked: false },
-      { name: "Dryer", defaultChecked: false },
-      { name: "Washer", defaultChecked: false },
-      { name: "Wifi", defaultChecked: false },
-      { name: "Indoor fireplace", defaultChecked: false },
-      { name: "Breakfast", defaultChecked: false },
-      { name: "Hair dryer", defaultChecked: false },
-      { name: " Dedicated workspace", defaultChecked: false },
-    ])
-    
-    const [moreFilter2, setMoreFilter2] = useState([
-      { name: " Free parking on premise", defaultChecked: false  },
-      { name: "Hot tub", defaultChecked: false  },
-      { name: "Gym", defaultChecked: false  },
-      { name: " Pool", defaultChecked: false  },
-      { name: " EV charger", defaultChecked: false  },
-    ])
-
-    const [moreFilter3, setMoreFilter3] = useState([
-      { name: " House", defaultChecked: false  },
-      { name: "Bed and breakfast", defaultChecked: false  },
-      { name: "Apartment", defaultChecked: false },
-      { name: " Boutique hotel", defaultChecked: false  },
-      { name: " Bungalow", defaultChecked: false  },
-      { name: " Chalet", defaultChecked: false },
-      { name: " Condominium", defaultChecked: false },
-      { name: " Cottage", defaultChecked: false  },
-      { name: " Guest suite", defaultChecked: false  },
-      { name: " Guesthouse", defaultChecked: false  },
-    ])
-
-    const [moreFilter4, setMoreFilter4] = useState([
-      { name: " Pets allowed", defaultChecked: false  }, 
-      { name: "Smoking allowed", defaultChecked: false  },
+      { name: "Free parking on premise", defaultChecked: false , svg: SvgParking },
+      { name: "TV", defaultChecked: false, svg: SvgTv },
+      { name: "Wifi", defaultChecked: false, svg: SvgWifi },
+      { name: "Dedicated workspace", defaultChecked: false, svg: SvgWorkspaces },
+      { name: "Air conditioning", defaultChecked: false, svg: SvgAir },
+      { name: "Washing Machine", defaultChecked: false, svg: SvgWashing },
+      { name: "Exercise Equipment", defaultChecked: false, svg: SvgExercise },
+      { name: "Patio", defaultChecked: false, svg: SvgPatio },
+      { name: "BBQ grill", defaultChecked: false, svg: SvgBBQ },
+      { name: "Outdoor shower", defaultChecked: false, svg: SvgShower },
+      { name: "Pool", defaultChecked: false, svg: SvgPool },
+      { name: "Hot tub", defaultChecked: false , svg: SvgTub },
+      { name: "Patio", defaultChecked: false , svg: SvgPatioAir },
+      { name: "Fire Fit", defaultChecked: false , svg: SvgFire },
     ])
 
     const countCheckedFilters = (filterArray: Filter[]) => {
@@ -587,256 +595,243 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
 
     const clearAllFilters = () => {
       setMoreFilter1((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
-      setMoreFilter2((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
-      setMoreFilter3((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
-      setMoreFilter4((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
+      setFilters(0)
     };
+
+    const clearFilter = () => {
+      setFilters(0)
+    }
   
-    const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1) + countCheckedFilters(moreFilter2) + countCheckedFilters(moreFilter3) + countCheckedFilters(moreFilter4);
+    const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1);
+    const [dayOrHourly, setDayOrHourly] = useState(false)
+    const [rangePricesDay, setRangePricesDay] = useState([0, 0])
+    const [rangePricesHourly, setRangePricesHourly] = useState([0, 0])
+    const [filters, setFilters] = useState(0)
+    const [filterPrices, setFilterPrices] = useState("")
   
-    const renderMoreFilterItemMobile = (
+    const renderMoreFilterItemDeskopt = (
       data: {
         name: string;
         defaultChecked?: boolean;
       }[],
       filterSet: number
     ) => {
-      const list1 = data.filter((_, i) => i < data.length / 2);
-      const list2 = data.filter((_, i) => i >= data.length / 2);
-      return (
-        <div className="grid grid-cols-2 gap-8">
-          <div className="flex flex-col space-y-5">
-            {list1.map((item, index) => (
-              <Checkbox
-                key={item.name}
-                name={item.name}
-                label={item.name}
-                defaultChecked={item.defaultChecked}
-                onChange={() => toggleDefaultChecked(index, filterSet)}
-              />
-            ))}
-          </div>
-          <div className="flex flex-col space-y-5">
-            {list2.map((item, index) => (
-              <Checkbox
-                key={item.name}
-                name={item.name}
-                label={item.name}
-                defaultChecked={item.defaultChecked}
-                onChange={() => toggleDefaultChecked(list1.length + index, filterSet)}
-              />
-            ))}
-          </div>
+    return (
+      <div className="py-5 pl-4 flex flex-row flex-wrap">
+        {moreFilter1.map((tab, index) =>{
+        return(
+          <div
+          className={`py-2.5 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
+            tab.defaultChecked === true
+              ? "bg-violet shadow-black/10 shadow-lg text-white "
+              : "border bg-white text-black border-neutral-300"
+          }`}
+          onClick={(e) => toggleDefaultChecked(index, filterSet)}
+        >
+          {tab.svg()}{tab.name}
         </div>
-      );
-    };
+        )}
+        )}
+      </div>
+    );
+  };
+
     return (
       <div>
-        <div
-          className={`flex flex-row md:hidden text-sm py-1.5 max-md:mx-2 md:py-[1px] px-4 my-1 rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer`}
-          onClick={openModalMoreFilterMobile}
-        >
-          {countCheckedFiltersMoreFilter !== 0 ? (
+        <Popover className={`flex relative`}>
+        {({ open, close }) => ( 
           <>
-            <span className="flex flex-row items-center text-sm">{renderFilterSvg()}Filter ({countCheckedFiltersMoreFilter})</span>
-            {renderXClear(clearAllFilters)}
-          </>
-          ) : (
-            <span className="flex flex-row items-center text-sm">{renderFilterSvg()}Filter</span>
-          )
-        }
-        </div>
-
-        <Transition appear show={isOpenMoreFilterMobile} as={Fragment}>
-          <Dialog
-            as="div"
-            className="fixed inset-0 z-50 overflow-y-auto"
-            onClose={closeModalMoreFilterMobile}
+          <Popover.Button
+            className={`flex py-1.5 lg:px-2 md:px-1
+            md:-ml-2 my-1 xl:mr-3 md:text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer" : ""
+            }`}
           >
-            <div className="min-h-screen text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
-              </Transition.Child>
-
-              {/* This element is to trick the browser into centering the modal contents. */}
-              <span
-                className="inline-block h-screen align-middle"
-                aria-hidden="true"
-              >
-                &#8203;
-              </span>
-              <Transition.Child
-                className="inline-block py-8 px-2 h-screen w-full max-w-4xl"
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <div className="inline-flex flex-col w-full max-w-4xl text-left align-middle transition-all transform overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 dark:text-neutral-100 shadow-xl h-full">
-                  <div className="relative flex-shrink-0 px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 text-center">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-lg font-medium leading-6 text-gray-900"
-                    >
-                      More filters
-                    </Dialog.Title>
-                    <span className="absolute left-3 top-3">
-                      <ButtonClose onClick={closeModalMoreFilterMobile} />
-                    </span>
-                  </div>
-
-                  <div className="flex-grow overflow-y-auto">
-                    <div className="px-4 sm:px-6 divide-y divide-neutral-200 dark:divide-neutral-800">
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Type of place</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItem(typeOfPaces)}
-                        </div>
+              {filters !== 0 ? (
+              <>
+                <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter ({filters})</span>
+                {renderXClear(clearAllFilters)}
+              </>
+              ) : (
+                <span className="flex flex-row items-center lg:px-2">{renderFilterSvg()}Filter </span>
+              )
+            }
+            </Popover.Button>
+          {open && (
+            <div className="h-8 hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
+          )}
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
+          >
+            <Popover.Panel className="absolute min-[907px]:right-0 min-[460px]:left-[-18vw] min-[435px]:left-[-20vw] min-[362px]:left-[-24vw] left-[-27vw] z-10 w-full min-w-[80vw] sm:min-w-[55vw] bg-white border border-gray-200 top-full mt-3 rounded-xl shadow-xl">
+              <div className="border-b border-gray-200 py-3 pl-8">
+                <h1>
+                  Filter
+                </h1>
+                <span className="absolute right-3 top-2">
+                  <ButtonClose onClick={() => {close(); clearAllFilters();}} />
+                </span>
+              </div>   
+              <div className="flex-grow overflow-y-auto px-4">
+                <div className="py-7">
+                <h3 className="text-sm text-[#919BA7] font-normal ml-2">Pricing Limit</h3>
+                  <div className="mt-2 relative">
+                    <div className="flex mb-2 ml-4">
+                      <div
+                        className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                        dayOrHourly === false
+                        ? "bg-violet shadow-black/10 shadow-lg text-white "
+                        : "border bg-white text-black border-neutral-300"
+                        }`}
+                        onClick={(e) => setDayOrHourly(!dayOrHourly)}
+                        >
+                        Day Basis
                       </div>
-
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Range Prices</h3>
-                        <div className="mt-6 relative ">
-                          <div className="relative flex flex-col space-y-8">
-                            <div className="space-y-5">
-                              <Slider
-                                range
-                                className="text-red-400"
-                                min={0}
-                                max={2000}
-                                defaultValue={[0, 1000]}
-                                allowCross={false}
-                                onChange={(e) => setRangePrices(e as number[])}
-                              />
+                      <div
+                        className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                        dayOrHourly === true
+                        ? "bg-violet shadow-black/10 shadow-lg text-white "
+                        : "border bg-white text-black border-neutral-300"
+                        }`}
+                        onClick={(e) => setDayOrHourly(!dayOrHourly)}
+                      >
+                        Hourly Basis
+                      </div>
+                    </div>
+                    <div className="relative flex flex-col space-y-8">
+                      <div className="space-y-5 px-4">
+                        <Slider
+                          range
+                          className="text-black flex flex-row"
+                          min={0}
+                          max={2000}
+                          defaultValue={[0, 1000]}
+                          value={dayOrHourly ? rangePricesHourly : rangePricesDay}
+                          allowCross={false}
+                          styles={{
+                            track: { background: '#574EFA' },
+                            handle: { background: '#574EFA', opacity: 1, border: '1px solid white' },
+                          }}
+                          onChange={(e) => ( dayOrHourly === false ? setRangePricesDay(e as number[]) : setRangePricesHourly(e as number[]) )}
+                        />
+                      </div>
+                      <div className="flex justify-between space-x-5 ml-2">
+                        <div>
+                          <label
+                            htmlFor="minPrice"
+                            className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                          >
+                            Min price
+                          </label>
+                          <div className="mt-1 relative rounded-md">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                              <span className="text-neutral-500 sm:text-sm">
+                                $
+                              </span>
                             </div>
-
-                            <div className="flex justify-between space-x-5">
-                              <div>
-                                <label
-                                  htmlFor="minPrice"
-                                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
-                                >
-                                  Min price
-                                </label>
-                                <div className="mt-1 relative rounded-md">
-                                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span className="text-neutral-500 sm:text-sm">
-                                      $
-                                    </span>
-                                  </div>
-                                  <input
-                                    type="text"
-                                    name="minPrice"
-                                    disabled
-                                    id="minPrice"
-                                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
-                                    value={rangePrices[0]}
-                                  />
-                                </div>
-                              </div>
-                              <div>
-                                <label
-                                  htmlFor="maxPrice"
-                                  className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
-                                >
-                                  Max price
-                                </label>
-                                <div className="mt-1 relative rounded-md">
-                                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <span className="text-neutral-500 sm:text-sm">
-                                      $
-                                    </span>
-                                  </div>
-                                  <input
-                                    type="text"
-                                    disabled
-                                    name="maxPrice"
-                                    id="maxPrice"
-                                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
-                                    value={rangePrices[1]}
-                                  />
-                                </div>
-                              </div>
-                            </div>
+                            <input
+                              type="text"
+                              name="minPrice"
+                              disabled
+                              id="minPrice"
+                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
+                              value={dayOrHourly === false ? rangePricesDay[0] : rangePricesHourly[0]}
+                            />
                           </div>
                         </div>
-                      </div>
-
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Rooms and beds</h3>
-                        <div className="mt-6 relative flex flex-col space-y-5">
-                          <NcInputNumber label="Beds" max={10} />
-                          <NcInputNumber label="Bedrooms" max={10} />
-                          <NcInputNumber label="Bathrooms" max={10} />
-                        </div>
-                      </div>
-
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Amenities</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemMobile(moreFilter1, 1)}
-                        </div>
-                      </div>
-
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Facilities</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemMobile(moreFilter2, 2)}
-                        </div>
-                      </div>
-
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">Property type</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemMobile(moreFilter3, 3)}
-                        </div>
-                      </div>
-
-                      {/* ---- */}
-                      <div className="py-7">
-                        <h3 className="text-xl font-medium">House rules</h3>
-                        <div className="mt-6 relative ">
-                          {renderMoreFilterItemMobile(moreFilter4, 4)}
+                        <div>
+                          <label
+                            htmlFor="maxPrice"
+                            className="block text-sm font-medium text-neutral-700"
+                          >
+                            Max price
+                          </label>
+                          <div className="mt-1 relative rounded-md">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                              <span className="text-neutral-500 sm:text-sm">
+                                $
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              disabled
+                              name="maxPrice"
+                              id="maxPrice"
+                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-3 sm:text-sm border-neutral-200 rounded-full text-neutral-900"
+                              value={dayOrHourly === false ? rangePricesDay[1] : rangePricesHourly[1]}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <div className="p-4 sm:p-6 flex-shrink-0 bg-neutral-50 dark:bg-neutral-900 dark:border-t dark:border-neutral-800 flex items-center justify-between">
-                    <ButtonThird
-                      onClick={closeModalMoreFilterMobile}
-                      sizeClass="px-4 py-2 sm:px-5"
-                    >
-                      Clear
-                    </ButtonThird>
-                    <ButtonPrimary
-                      onClick={closeModalMoreFilterMobile}
-                      sizeClass="px-4 py-2 sm:px-5"
-                    >
-                      Apply
-                    </ButtonPrimary>
+                </div>
+                <h3 className="text-sm text-[#919BA7] font-normal ml-2">Pricing</h3>
+                <div className="flex ml-4">
+                  <div
+                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    filterPrices === "Highest Price"
+                    ? "bg-violet shadow-black/10 shadow-lg text-white "
+                    : "border bg-white text-black border-neutral-300"
+                    }`}
+                    onClick={(e) => setFilterPrices("Highest Price")}
+                  >
+                    Highest Price
+                  </div>
+                  <div
+                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    filterPrices === "Lowest Price"
+                    ? "bg-violet shadow-black/10 shadow-lg text-white "
+                    : "border bg-white text-black border-neutral-300"
+                    }`}
+                    onClick={(e) => setFilterPrices("Lowest Price")}
+                  >
+                    Lowest Price
+                  </div>
+                  <div
+                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    filterPrices === "Recommended"
+                    ? "bg-violet shadow-black/10 shadow-lg text-white "
+                    : "border bg-white text-black border-neutral-300"
+                    }`}
+                    onClick={(e) => setFilterPrices("Recommended")}
+                  >
+                    Recommended
                   </div>
                 </div>
-              </Transition.Child>
-            </div>
-          </Dialog>
-        </Transition>
+                <div className="divide-y divide-neutral-200">
+                  <div className="py-7">
+                    <h3 className="text-sm text-[#919BA7] font-normal ml-2">Any standout amenities?</h3>
+                    <div className="relative ">
+                      {renderMoreFilterItemDeskopt(moreFilter1, 1)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 sm:p-6 flex-shrink-0 border-t border-gray-200 flex items-center justify-between">
+                <ButtonThird
+                  onClick={() => {clearAllFilters(); close();}}
+                  sizeClass="px-4 py-2 sm:px-5"
+                >
+                  Clear
+                </ButtonThird>
+                <ButtonPrimary
+                  onClick={() => {close(); setFilters(countCheckedFiltersMoreFilter)}}
+                  sizeClass="px-4 py-2 sm:px-5"
+                >
+                  Apply
+                </ButtonPrimary>
+              </div>
+            </Popover.Panel>
+          </Transition> 
+        </>
+      )}
+        </Popover>
       </div>
     );
   };
