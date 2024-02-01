@@ -57,15 +57,13 @@ const GuestsInput: FC<GuestsInputProps> = ({
       {({ open }) => (
         <>
           <Popover.Button
-            className={`flex z-10 flex-1 flex-col md:flex-row pb-8 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left  ${
-              open ? "nc-hero-field-focused" : ""
-            }`}
+            className={`flex z-10 flex-1 flex-col md:flex-row relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
           >
               <div className="flex-grow max-md:mt-4 md:mr-4">
                 <span className="block xl:text-lg font-normal text-left text-black md:font-semibold">
                   Guests
                 </span>
-                <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+                <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
                   Add your guests
                   <UserPlusIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 md:flex text-black ml-4" />
                 </span>
@@ -86,7 +84,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
             )}
             </Popover.Button>
           {open && (
-            <div className="h-8 hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
+            <div className="h-8  hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
           )}
           <Transition
             as={Fragment}
@@ -97,7 +95,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute right-0 z-10 w-full sm:min-w-[340px] max-w-sm bg-white top-full mt-3 py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
+            <Popover.Panel className="absolute mt-3 right-0 z-10 w-full border border-gray-200 sm:min-w-[340px] max-w-sm bg-white top-full py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
               <NcInputNumber
                 className="w-full"
                 defaultValue={guestAdultsInputValue}

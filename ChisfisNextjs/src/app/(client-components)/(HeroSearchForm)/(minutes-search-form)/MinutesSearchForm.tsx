@@ -48,19 +48,21 @@ const MinutesSearchForm: FC<{}> = ({}) => {
   };
   const renderForm = () => {
     return (
-      <form className="w-full relative mt-8">
-        {renderRadioBtn()}
-        <div className="ml-4 mt-4 md:hidden">
-          <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
-            Explore your PaceDream Book hotels, Car and more with ease!
-          </h2>
-        </div>
-        <div className="flex flex-col items-baseline flex-1 md:flex-row rounded-full">
-          <LocationInput className="flex-[1.5]" />
-          <StayDatesRangeInput className="flex-1" />
-          <GuestsInput className="flex-[1.5]" />
-        </div>
-      </form>
+      <div className="pb-8">
+        <form className="w-full relative mt-8">
+          {renderRadioBtn()}
+          <div className="ml-4 mt-4 md:hidden">
+            <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
+              Explore your PaceDream Book hotels, Car and more with ease!
+            </h2>
+          </div>
+          <div className="flex flex-col items-baseline flex-1 md:flex-row rounded-full">
+            <LocationInput className="flex-[1.5]" />
+            <StayDatesRangeInput className="flex-1" />
+            <GuestsInput className="flex-[1.5]" />
+          </div>
+        </form>
+      </div>
     );
   };
 
