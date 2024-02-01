@@ -13,12 +13,14 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
+import HeaderFilterDiscover from "./HeaderFilterDiscover";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 
 //
 export interface SectionDiscoverPerfectRoomStayProps {
+  className?: string;
   stayListings?: StayDataType[];
   heading?: ReactNode;
   subHeading?: ReactNode;
@@ -30,6 +32,7 @@ export interface SectionDiscoverPerfectRoomStayProps {
 }
 
 const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = ({
+  className = "",
   stayListings = DEMO_DATA,
   heading = "Discover Perfect Room Stay",
   subHeading = "Popular Long term Stay & Short term Stay places to recommends for you",
@@ -101,8 +104,8 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
   };
 
   return (
-    <div className={`nc-SectionDiscoverPerfectRoomStay pr-24 pl-24 pb-20`}>
-      <HeaderFilter
+    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20 ${className}`}>
+      <HeaderFilterDiscover
         tabActive={"All"}
         tabs={tabs}
         heading={heading}
@@ -115,22 +118,24 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
+        <div className="-mt-20 mb-20">
         {currentIndex ? (
             <PrevBtn
               onClick={() => changeItemId(currentIndex - 1)}
-              className="ml-[93%] font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 ml-[93%] text-lg -translate-y-1/2 z-[1]"
+          className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
         />}
           {stayListings.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+              className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
             />
           ) : <NextBtn
-          className="ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
         />}
+        </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -139,7 +144,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
               <AnimatePresence initial={false} custom={direction}>
                 {stayListings.map((item, indx) => (
                   <motion.li
-                    className={`relative inline-block px-4 xl:px-4 truncate`}
+                    className={`relative md:inline-block px-4 xl:px-4 truncate`}
                     custom={direction}
                     initial={{
                       x: `${(currentIndex - 1) * -100}%`,

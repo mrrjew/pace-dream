@@ -15,13 +15,15 @@ export interface GuestsInputProps {
   className?: string;
   buttonSubmitHref?: PathName;
   hasButtonSubmit?: boolean;
+  inputs?: string;
 }
 
 const GuestsInput: FC<GuestsInputProps> = ({
-  fieldClassName = "[ nc-hero-field-padding ]",
+  fieldClassName = "",
   className = "[ nc-flex-1 ]",
   buttonSubmitHref = "/listing-stay-map",
   hasButtonSubmit = true,
+  inputs= "",
 }) => {
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
@@ -54,25 +56,20 @@ const GuestsInput: FC<GuestsInputProps> = ({
     <Popover className={`flex relative ${className}`}>
       {({ open }) => (
         <>
-          <div
-            className={`flex-1 z-10 flex items-center focus:outline-none ${
+          <Popover.Button
+            className={`flex z-10 flex-1 flex-col md:flex-row pb-8 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left  ${
               open ? "nc-hero-field-focused" : ""
             }`}
           >
-            <Popover.Button
-              className={`relative z-10 flex-1 flex text-left items-center ${fieldClassName} space-x-3 focus:outline-none`}
-            >
- 
-              <div className="flex-grow">
-                <span className="block xl:text-lg font-semibold">
+              <div className="flex-grow max-md:mt-4 md:mr-4">
+                <span className="block xl:text-lg font-normal text-left text-black md:font-semibold">
                   Guests
                 </span>
-                <span className="flex flex-row border p-2 pl-4 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light">
+                <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
                   Add your guests
-                  <UserPlusIcon className="w-4 h-4 lg:w-5 lg:h-5 text-black ml-4" />
+                  <UserPlusIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 md:flex text-black ml-4" />
                 </span>
               </div>
-
               {!!totalGuests && open && (
                 <ClearDataButton
                   onClick={() => {
@@ -82,18 +79,14 @@ const GuestsInput: FC<GuestsInputProps> = ({
                   }}
                 />
               )}
-            </Popover.Button>
-
-            {/* BUTTON SUBMIT OF FORM */}
-            {hasButtonSubmit && (
-              <div className="pr-2 xl:pr-4">
-                <ButtonSubmit href={buttonSubmitHref} />
+              {hasButtonSubmit && (
+              <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
+                <ButtonSubmit href={buttonSubmitHref}/>
               </div>
             )}
-          </div>
-
+            </Popover.Button>
           {open && (
-            <div className="h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 -left-0.5 right-0.5 bg-white dark:bg-neutral-800"></div>
+            <div className="h-8 hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
           )}
           <Transition
             as={Fragment}
@@ -104,7 +97,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute right-0 z-10 w-full sm:min-w-[340px] max-w-sm bg-white dark:bg-neutral-800 top-full mt-3 py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
+            <Popover.Panel className="absolute right-0 z-10 w-full sm:min-w-[340px] max-w-sm bg-white top-full mt-3 py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
               <NcInputNumber
                 className="w-full"
                 defaultValue={guestAdultsInputValue}

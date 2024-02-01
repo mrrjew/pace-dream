@@ -1,24 +1,56 @@
+"use client"
+
 import { FC, useState } from "react";
 import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "./StayDatesRangeInput";
 
-export type TypeDropOffLocationType = "Hotel" | "Long term" | "Short term";
+export type TypeDropOffLocationType = "Anytime" | "Any type" | "Hostel" |"Guesthouse" | "Long term" | "Short term";
 const StaySearchForm: FC<{}> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
-    useState<TypeDropOffLocationType>("Hotel");
+    useState<TypeDropOffLocationType>("Anytime");
   const renderRadioBtn = () => {
     return (
-      <div className=" py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap border-b border-neutral-100 dark:border-neutral-700">
+      <div className="py-5 -mt-4 md:-mb-4 [ nc-hero-field-padding ] overflow-auto flex flex-wrap ounded-[40px]">
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "Hotel"
+            dropOffLocationType === "Anytime"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "border bg-neutral-100 text-black border-neutral-300"
+          }`}
+          onClick={(e) => setDropOffLocationType("Anytime")}
+        >
+          Anytime
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === "Any type"
               ? "bg-violet shadow-black/10 shadow-lg text-white"
               : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("Hotel")}
+          onClick={(e) => setDropOffLocationType("Any type")}
         >
-          Hotel
+          Any type
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === "Hostel"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+          }`}
+          onClick={(e) => setDropOffLocationType("Hostel")}
+        >
+          Hostel
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === "Guesthouse"
+              ? "bg-violet shadow-black/10 shadow-lg text-white"
+              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+          }`}
+          onClick={(e) => setDropOffLocationType("Guesthouse")}
+        >
+          Guesthouse
         </div>
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
@@ -34,7 +66,7 @@ const StaySearchForm: FC<{}> = ({}) => {
         className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
           dropOffLocationType === "Short term"
             ? "bg-violet text-white shadow-black/10 shadow-lg"
-            : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+            : "border bg-neutral-100 text-black border-neutral-300"
         }`}
         onClick={(e) => setDropOffLocationType("Short term")}
       >
@@ -45,9 +77,14 @@ const StaySearchForm: FC<{}> = ({}) => {
   };
   const renderForm = () => {
     return (
-      <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
+      <form className="md:w-full md:relative block mt-8 ">
         {renderRadioBtn()}
-        <div className="flex flex-1 rounded-full">
+        <div className="ml-4 mt-4 md:hidden">
+          <h2 className="text-left font-semibold md:hidden text-3xl">
+            Explore your PaceDream Book hotels, Car and more with ease!
+          </h2>
+        </div>
+        <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
           <LocationInput className="flex-[1.5]" />
           <StayDatesRangeInput className="flex-1" />
           <GuestsInput className="flex-[1.5]" />

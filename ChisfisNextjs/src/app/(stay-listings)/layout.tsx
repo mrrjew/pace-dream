@@ -1,45 +1,13 @@
-import BackgroundSection from "@/components/BackgroundSection";
-import BgGlassmorphism from "@/components/BgGlassmorphism";
-import SectionGridAuthorBox from "@/components/SectionSliderAuthorBox";
-import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
-import React, { ReactNode } from "react";
-import SectionHeroArchivePage from "../(server-components)/SectionHeroArchivePage";
-import SectionSubscribe from "@/components/SectionSubscribe";
+import React, { ReactNode } from 'react';
+import SectionHeroArchivePage from '../(server-components)/SectionHeroArchivePage';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className={`nc-ListingStayPage relative `}>
-      <BgGlassmorphism />
-
-      {/* SECTION HERO */}
-      <div className="container pt-10 pb-24 lg:pt-16 lg:pb-28">
-        <SectionHeroArchivePage currentPage="Room Stays" currentTab="Room Stays" />
+    <div className={`nc-ListingStayPage relative`}>
+      <div className="md:pb-14 pt-10 pb-2 md:pt-14 flex justify-center max-w-[100vw] bg-center bg-no-repeat bg-cover bg-mobile md:bg-rectangle">
+        <SectionHeroArchivePage currentPage="Experiences" currentTab="Experiences"/>
       </div>
-
       {children}
-
-      <div className="container overflow-hidden">
-        {/* SECTION 1 */}
-        <div className="relative py-16">
-          <BackgroundSection />
-          <SectionSliderNewCategories
-            heading="Explore by types of stays"
-            subHeading="Explore houses based on 10 types of stays"
-            categoryCardType="card5"
-            itemPerRow={5}
-            sliderStyle="style2"
-          />
-        </div>
-
-        {/* SECTION */}
-        <SectionSubscribe className="py-24 lg:py-28" />
-
-        {/* SECTION */}
-        <div className="relative py-16 mb-24 lg:mb-28">
-          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-          <SectionGridAuthorBox />
-        </div>
-      </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import BackgroundSection from "@/components/BackgroundSection";
 import ListingImageGallery from "@/components/listing-image-gallery/ListingImageGallery";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
@@ -17,22 +16,22 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const thisPathname = usePathname();
   const searchParams = useSearchParams();
-  const modal = searchParams?.get("modal");
+  const modal = searchParams?.get('modal');
 
   const handleCloseModalImageGallery = () => {
     let params = new URLSearchParams(document.location.search);
-    params.delete("modal");
+    params.delete('modal');
     router.push(`${thisPathname}/?${params.toString()}` as Route);
   };
 
   const getImageGalleryListing = () => {
-    if (thisPathname?.includes("/listing-stay-detail")) {
+    if (thisPathname?.includes('/listing-stay-detail')) {
       return listingStayImageGallery;
     }
-    if (thisPathname?.includes("/listing-car-detail")) {
+    if (thisPathname?.includes('/listing-car-detail')) {
       return listingCarImageGallery;
     }
-    if (thisPathname?.includes("/listing-experiences-detail")) {
+    if (thisPathname?.includes('/listing-experiences-detail')) {
       return listingExperienceImageGallery;
     }
 
@@ -42,7 +41,7 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="ListingDetailPage">
       <ListingImageGallery
-        isShowModal={modal === "PHOTO_TOUR_SCROLLABLE"}
+        isShowModal={modal === 'PHOTO_TOUR_SCROLLABLE'}
         onClose={handleCloseModalImageGallery}
         images={getImageGalleryListing()}
       />

@@ -19,11 +19,11 @@ const CardAuthorBox2: FC<CardAuthorBox2Props> = ({
   return (
     <Link
       href={href}
-      className={`nc-CardAuthorBox2 flex flex-col overflow-hidden bg-white dark:bg-neutral-900 rounded-3xl hover:shadow-xl transition-shadow ${className}`}
+      className={`nc-CardAuthorBox2 flex flex-col overflow-hidden bg-white rounded-3xl hover:shadow-xl transition-shadow ${className}`}
       data-nc-id="CardAuthorBox2"
     >
       <div className="relative flex-shrink-0 ">
-        <div className="flex aspect-w-7 aspect-h-3 md:aspect-h-4 w-full h-0">
+        <div className="flex aspect-w-7 aspect-h-3 md:aspect-h-4 max-w-[200px] md:w-full h-0">
           <Image
             fill
             alt=""
@@ -40,7 +40,7 @@ const CardAuthorBox2: FC<CardAuthorBox2Props> = ({
       </div>
       <div className="pt-[1px] px-6 text-center flex flex-col items-center relative -translate-y-7">
         <svg
-          className="h-12 text-white dark:text-neutral-900 dark:group-hover:text-neutral-800"
+          className="h-12 text-white dark:text-neutral-900"
           viewBox="0 0 135 54"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

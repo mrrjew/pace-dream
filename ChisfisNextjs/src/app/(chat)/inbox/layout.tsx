@@ -14,9 +14,8 @@ export default async function InboxPageLayout({
 
   return (
     <div className="grid grid-cols-12 h-screen lg:h-[90vh]">
-      <div className="col-span-12 lg:col-span-3 h-full overflow-y-auto">
-        <ChatList initialConversations={conversation} />
-      </div>
+      <ChatList initialConversations={conversation} />
+
       {children}
     </div>
   );

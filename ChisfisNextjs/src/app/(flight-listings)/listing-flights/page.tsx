@@ -6,6 +6,7 @@ import React, { FC } from "react";
 import SectionGridFilterCard from "../SectionGridFilterCard";
 import SectionSubscribe from "@/components/SectionSubscribe";
 
+
 export interface ListingFlightsPageProps {}
 
 const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {
@@ -15,7 +16,6 @@ const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {
 
       <div className="container relative">
         {/* SECTION HERO */}
-        
 
         {/* SECTION */}
         <SectionGridFilterCard className="pb-24 lg:pb-28" />

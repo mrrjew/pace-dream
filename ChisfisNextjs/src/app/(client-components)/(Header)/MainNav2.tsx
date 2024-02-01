@@ -10,19 +10,15 @@ import Image from 'next/image';
 import usaImg from '@/images/country/usa.png';
 import CurrencyModal from './NewCurrencyModal';
 import LanguageModal from './LanguageModal';
-
+import CountryModal from "./CountryModal";
+import NavbarMobile from "./NavbarMobile";
 export interface MainNav2Props {
   className?: string;
 }
 
 const btnStyle =
-  'group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative';
-
-
-
-
-
-const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
+  "group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative";
+const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
   const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
 
@@ -42,19 +38,17 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
     setIsModalOpenCountry(false);
   };
   return (
-    <div className={`MainNav2 relative z-10 ${className}`}>
-      <div className='px-4 h-20 lg:container flex justify-between'>
-        <div className='hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10'>
-          <Logo className='w-32 self-center' />
+    <header className={`MainNav2 relative z-10 ${className}`}>
+      <section className="px-4 h-16 lg:container flex justify-between">
+        <article className="hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10">
+          <Logo className="w-32 self-center" />
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'></div> */}
-          <div className='hidden lg:flex  justify-end '>
-            <button className={`${btnStyle}`} onClick={openModalCurrency}>USD</button>
+          <div className="hidden lg:flex  justify-end ">
+            <button className={`${btnStyle}`} onClick={openModalCurrency}>
+              USD
+            </button>
             <button className={`${btnStyle}`} onClick={openModalCountry}>
-              <Image
-                src={usaImg}
-                className='w-6 h-6 rounded-full'
-                alt='usa'
-              />
+              <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
             </button>
             {/* <Link href={"/help-center" as Route<string> } > */}
             <Link href={"/help-center" as Route<string>} className={`${btnStyle} mr-8`}>
@@ -62,9 +56,11 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
                 viewBox='0 0 24 24'
+
                 strokeWidth={1.5}
-                stroke='currentColor'
-                className='w-6 h-6'>
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
                 <path
                   strokeLinecap='round'
                   strokeLinejoin='round'
@@ -91,24 +87,25 @@ const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
               </button>
             </Link> */}
           </div>
-        </div>
+        </article>
 
-        <div className='self-center lg:hidden flex-[3] max-w-lg !mx-auto md:px-3'>
-          <HeroSearchForm2MobileFactory />
-        </div>
 
-        <div className='hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100'>
-          <div className='hidden lg:flex space-x-1'>
+        <NavbarMobile />
+       
+
+        <div className="hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
+          <div className="hidden lg:flex space-x-1">
             <Link
-              href={'/add-listing' as Route<string>}
-              className='self-center text-opacity-90 group px-4 py-2 border border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+              href={"/add-listing" as Route<string>}
+              className="self-center text-opacity-90 group px-4 py-2 border border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
               List your property
             </Link>
 
             <NotifyDropdown />
             <AvatarDropdown />
           </div>
-          <div className='flex space-x-2 lg:hidden'>
+          <div className="flex space-x-2 lg:hidden">
             <NotifyDropdown />
             <AvatarDropdown />
             <MenuBar />
