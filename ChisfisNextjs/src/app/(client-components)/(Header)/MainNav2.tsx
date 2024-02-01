@@ -1,14 +1,15 @@
-import { Route } from "@/routers/types";
-import Logo from "@/shared/Logo";
-import MenuBar from "@/shared/MenuBar";
-import Link from "next/link";
-import React, { FC, useState } from "react";
-import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
-import AvatarDropdown from "./AvatarDropdown";
-import NotifyDropdown from "./NotifyDropdown";
-import Image from "next/image";
-import usaImg from "@/images/country/usa.png";
-import CurrencyModal from "./CurrencyModal";
+import { Route } from '@/routers/types';
+import Logo from '@/shared/Logo';
+import MenuBar from '@/shared/MenuBar';
+import Link from 'next/link';
+import React, { FC, useState } from 'react';
+import HeroSearchForm2MobileFactory from '../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory';
+import AvatarDropdown from './AvatarDropdown';
+import NotifyDropdown from './NotifyDropdown';
+import Image from 'next/image';
+import usaImg from '@/images/country/usa.png';
+import CurrencyModal from './NewCurrencyModal';
+import LanguageModal from './LanguageModal';
 import CountryModal from "./CountryModal";
 import NavbarMobile from "./NavbarMobile";
 export interface MainNav2Props {
@@ -17,7 +18,6 @@ export interface MainNav2Props {
 
 const btnStyle =
   "group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative";
-
 const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
   const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
@@ -42,7 +42,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
       <section className="px-4 h-16 lg:container flex justify-between">
         <article className="hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10">
           <Logo className="w-32 self-center" />
-          {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'></div> */}
+          {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'> */}
           <div className="hidden lg:flex  justify-end ">
             <button className={`${btnStyle}`} onClick={openModalCurrency}>
               USD
@@ -51,8 +51,8 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
               <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
             </button>
             {/* <Link href={"/help-center" as Route<string> } > */}
-              <Link href={"/help-center" as Route<string>} className={`${btnStyle} mr-8`}>
-                <svg
+            <Link href={"/help-center" as Route<string>} className={`${btnStyle} mr-8`}>
+              <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
                 viewBox='0 0 24 24'
@@ -65,9 +65,9 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
                   strokeLinecap='round'
                   strokeLinejoin='round'
                   d='M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z'
-                  />
-                </svg>
-              </Link>
+                />
+              </svg>
+            </Link>
             {/* </Link> */}
             {/* <Link href={"/help-center" as Route<string> } >
               <button className={`${btnStyle} mr-8`}>
@@ -112,11 +112,8 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           </div>
         </div>
       </section>
-      <CurrencyModal
-        isOpen={isModalOpenCurrency}
-        onClose={closeModalCurrency}
-      />
-      <CountryModal isOpen={isModalOpenCountry} onClose={closeModalCountry} />
+      <CurrencyModal isOpen={isModalOpenCurrency} onClose={closeModalCurrency} />
+      <LanguageModal isOpen={isModalOpenCountry} onClose={closeModalCountry} />
     </header>
   );
 };

@@ -7,6 +7,7 @@ import BgGlassmorphism from "@/components/BgGlassmorphism";
 import BackgroundSection from "@/components/BackgroundSection";
 import SectionClientSay from "@/components/SectionClientSay";
 import SectionSubscribe2 from "@/components/SectionSubscribe2";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 export interface PageAboutProps {}
 
@@ -32,7 +33,7 @@ const PageAbout: FC<PageAboutProps> = ({}) => {
 
         <SectionStatistic />
 
-        <SectionSubscribe2 />
+        <SectionSubscribe />
       </div>
     </div>
   );

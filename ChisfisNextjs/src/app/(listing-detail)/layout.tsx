@@ -1,16 +1,16 @@
 'use client';
-
-import BackgroundSection from '@/components/BackgroundSection';
-import ListingImageGallery from '@/components/listing-image-gallery/ListingImageGallery';
-import SectionSliderNewCategories from '@/components/SectionSliderNewCategories';
-import SectionSubscribe2 from '@/components/SectionSubscribe2';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { ReactNode } from 'react';
-import MobileFooterSticky from './(components)/MobileFooterSticky';
-import { imageGallery as listingStayImageGallery } from './listing-stay-detail/constant';
-import { imageGallery as listingCarImageGallery } from './listing-car-detail/constant';
-import { imageGallery as listingExperienceImageGallery } from './listing-experiences-detail/constant';
-import { Route } from 'next';
+import BackgroundSection from "@/components/BackgroundSection";
+import ListingImageGallery from "@/components/listing-image-gallery/ListingImageGallery";
+import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
+import SectionSubscribe2 from "@/components/SectionSubscribe2";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { ReactNode } from "react";
+import MobileFooterSticky from "./(components)/MobileFooterSticky";
+import { imageGallery as listingStayImageGallery } from "./listing-stay-detail/constant";
+import { imageGallery as listingCarImageGallery } from "./listing-car-detail/constant";
+import { imageGallery as listingExperienceImageGallery } from "./listing-experiences-detail/constant";
+import { Route } from "next";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 const DetailtLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -60,7 +60,7 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
             sliderStyle="style2"
           />
         </div>
-        <SectionSubscribe2  />
+        <SectionSubscribe className="pt-24 lg:pt-32" />
       </div>
 
       {/* STICKY FOOTER MOBILE */}

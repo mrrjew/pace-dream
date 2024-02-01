@@ -30,7 +30,6 @@ const Header3: FC<Header3Props> = ({ className = '' }) => {
     useState<StaySearchFormFields | null>();
   //
   const [currentTab, setCurrentTab] = useState<SearchTab>('Room Stays');
-
   //
   useOutsideAlerter(headerInnerRef, () => {
     setShowHeroSearch(null);
