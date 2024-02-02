@@ -30,7 +30,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
         <span className="block xl:text-lg font-normal text-black md:font-semibold">
           From
         </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border lg:py-2 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
           {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
           <CalendarIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 ml-4 text-black" />
         </span>
@@ -46,7 +46,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
-              className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 lg:py-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
+              className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 lg:py-0 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
             >
               {renderInput()}
               {startDate && open && (

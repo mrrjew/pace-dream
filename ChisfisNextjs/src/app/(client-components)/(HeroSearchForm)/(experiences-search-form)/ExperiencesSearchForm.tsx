@@ -71,7 +71,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
             <ExperiencesDateSingleInput className="flex-1" />
             <GuestsInput
               className="flex-1"
-              buttonSubmitHref="/listing-experiences"
+              buttonSubmitHref="/listing-stay-map/2"
             />
           </div>
         </form>

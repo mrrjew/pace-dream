@@ -11,17 +11,17 @@ import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { GuestsObject } from "../type";
 
 export interface GuestsInputProps {
-  fieldClassName?: string;
+  currentTab?: string;
   className?: string;
-  buttonSubmitHref?: PathName;
+  buttonSubmitHref?: PathName | string;
   hasButtonSubmit?: boolean;
   inputs?: string;
 }
 
 const GuestsInput: FC<GuestsInputProps> = ({
-  fieldClassName = "",
+  currentTab = "Room Stays",
   className = "[ nc-flex-1 ]",
-  buttonSubmitHref = "/listing-stay-map",
+  buttonSubmitHref = '/listing-stay-map/1',
   hasButtonSubmit = true,
   inputs= "",
 }) => {
@@ -79,7 +79,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
               )}
               {hasButtonSubmit && (
               <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
-                <ButtonSubmit href={buttonSubmitHref}/>
+                <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref}/>
               </div>
             )}
             </Popover.Button>

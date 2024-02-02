@@ -56,7 +56,7 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
   
   return (
     <div
-      className={`max-w-[95vw] md:w-[85vw] w-[92vw] xl:w-[70vw] lg:w-[80vw] flex flex-col justify-center md:pt-0 z-10 mb-12 md:ml-0 lg:mb-0 md:max-w-full border-grey border bg-white rounded-2xl`}
+      className={`max-w-[95vw] pb-6 md:w-[85vw] w-[92vw] xl:w-[70vw] lg:w-[80vw] flex flex-col justify-center md:pt-0 z-10 mb-12 md:ml-0 lg:mb-0 md:max-w-full border-grey border bg-white rounded-2xl`}
     >
       <div className='pt-6 md:pl-5'>
         <span className="md:ml-2.5 ml-4 font-semibold text-lg">186 Results Found</span>
