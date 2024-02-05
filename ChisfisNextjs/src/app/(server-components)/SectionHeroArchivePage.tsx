@@ -18,10 +18,10 @@ export interface SectionHeroArchivePageProps {
 
 const renderForm = (currentPage: String) => {
   const commonInputs = (
-    <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
-      <LocationInput className="flex-[1.5]" />
-      <StayDatesRangeInput className="flex-1" />
-      <GuestsInput className="flex-[1.5]" />
+    <div className="flex flex-col items-baseline md:flex-row overflow-hidden">
+      <LocationInput className="flex-[1.5] pr-4"/>
+      <StayDatesRangeInput className="flex-1" dates="md:w-[100%]"/>
+      <GuestsInput className="lg:flex-[1.5]"/>
     </div>
   );
 
@@ -35,10 +35,10 @@ const renderForm = (currentPage: String) => {
 
     case "Experiences":
       return (
-        <div className="flex flex-col items-baseline flex-1 md:flex-row  rounded-full">
-          <LocationInput className="flex-[1.5]" />
-          <ExperiencesDateSingleInput className="flex-1" />
-          <GuestsInput className="flex-1" buttonSubmitHref="/listing-experiences" />
+        <div className="flex flex-col items-baseline flex-1 md:flex-row rounded-full">
+          <LocationInput className="flex-[1.5] pr-4"/>
+          <ExperiencesDateSingleInput className="flex-1"/>
+          <GuestsInput className="lg:flex-1 md:flex-[1.5]" buttonSubmitHref="/listing-experiences" />
         </div>
       );
 
@@ -56,14 +56,12 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
   
   return (
     <div
-      className={`nc-SectionHeroArchivePage max-w-[70vw] w-[70vw] xl:w-[70vw] lg:w-[70vw] flex flex-col justify-center md:pt-0 z-10 mb-12 ml-16 md:ml-0 lg:mb-0 md:max-w-full border-grey border bg-white rounded-2xl ${className} `}
+      className={`max-w-[95vw] pb-6 md:w-[85vw] w-[92vw] xl:w-[70vw] lg:w-[80vw] flex flex-col justify-center md:pt-0 z-10 mb-12 md:ml-0 lg:mb-0 md:max-w-full border-grey border bg-white rounded-2xl`}
     >
-      <div className='pt-6 pl-5'>
-        <span className="ml-2.5">186 Results Found</span>
+      <div className='pt-6 md:pl-5'>
+        <span className="md:ml-2.5 ml-4 font-semibold text-lg">186 Results Found</span>
       </div>
-      <div className="z-10 w-full">
-        {renderForm(currentPage)}
-      </div>
+      {renderForm(currentPage)}
     </div>
   );
 };

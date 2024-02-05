@@ -1,5 +1,6 @@
 import { Route } from "@/routers/types";
 import { StaticImageData } from "next/image";
+import { PathName } from "@/routers/types";
 
 //  ######  CustomLink  ######## //
 export interface CustomLink {
@@ -12,7 +13,7 @@ export interface CustomLink {
 export interface TaxonomyType {
   id: string | number;
   name: string;
-  href: Route<string>;
+  href: Route<string> | string | PathName;
   count?: number;
   thumbnail?: string;
   desc?: string;
