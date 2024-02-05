@@ -4,7 +4,7 @@ import Image from "next/image";
 import GoogleMapReact from "google-map-react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
-
+import __partners from "@/data/jsons/__partners.json";
 import avatar from "@/images/avatars/Image-1.png";
 import statusIcon from "@/images/status-icon.svg";
 import shareIcon from "@/images/share-icon.svg";
@@ -27,28 +27,49 @@ import bicycleIcon from "@/images/bicycle-icon.svg";
 import HotelNearByList from "@/components/Partner/HotelNearByList";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from "@/utils/localStorageUtil";
+import {
+  getLocalStorageItem,
+  removeLocalStorageItem,
+  setLocalStorageItem,
+} from "@/utils/localStorageUtil";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
-import { RxCross2 } from "react-icons/rx"
-import { useEffect, useState } from "react";
+import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState, Fragment } from "react";
 
-const page = () => {
+const page = ({ params }: any) => {
+  const { id } = params;
+  const partnerId = id.toString();
 
-  const pathname = usePathname()
-  setLocalStorageItem("currentPath", pathname)
- 
-  const [showGreeting, setShowGreeting] = useState(getLocalStorageItem('showGreeting'));
+  const partnerData = __partners.find((item: any) => item.id === +partnerId);
+
+  const {
+    name = "",
+    location = "",
+    description = "",
+    partnerImage = [],
+    minimumPrice = 0,
+    maximumPrice = 0,
+    amenities = [],
+    map = {},
+    looking_for_partner_location = [],
+  } = partnerData || {};
+
+  const pathname = usePathname();
+  setLocalStorageItem("currentPath", pathname);
+
+  const [showGreeting, setShowGreeting] = useState(
+    getLocalStorageItem("showGreeting")
+  );
 
   useEffect(() => {
-    setShowGreeting(getLocalStorageItem('showGreeting'));
+    setShowGreeting(getLocalStorageItem("showGreeting"));
   }, []);
 
   const handleClick = () => {
-    removeLocalStorageItem('showGreeting');
+    removeLocalStorageItem("showGreeting");
     setShowGreeting(null);
   };
-
 
   const defaultProps = {
     center: {
@@ -58,35 +79,60 @@ const page = () => {
     zoom: 12,
   };
 
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <div className="partner-details-page">
       <div className="btn-back">
         <div className="lg:container">
-          <Link href={'/partner'}>
-          <button type="button">Back</button>
+          <Link href={"/partner"}>
+            <button type="button">Back</button>
           </Link>
         </div>
       </div>
 
-    { showGreeting && <>
+      {showGreeting && (
+        <>
+          <div className="flex w-4/5 p-4 mx-auto border rounded-xl border-[#008d00] bg-[#e9f8e9] mt-6">
+            <div className="w-8 mr-1">
+              {" "}
+              <FcApproval className="h-8 w-8" />{" "}
+            </div>
+            <div>
+              <h2 className="font-medium">
+                Successfully sent a proposal to Ghazal!!
+              </h2>
+              <p className="text-sm text-[#5f6d7e] mt-1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Lobortis enim consectetur eu suspendisse. Malesuada ac libero
+                odio nulla ut turpis ut scelerisque sed. Imperdiet commodo
+                integer pellentesdsadasdasdasque quis id.
+              </p>
 
-      <div className="flex w-4/5 p-4 mx-auto border rounded-xl border-[#008d00] bg-[#e9f8e9] mt-6">
-        <div className="w-8 mr-1"> <FcApproval className="h-8 w-8"/> </div>
-        <div>
-          <h2 className="font-medium">Successfully sent a proposal to Ghazal!!</h2>
-          <p className="text-sm text-[#5f6d7e] mt-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lobortis enim consectetur eu suspendisse. Malesuada ac libero odio nulla ut turpis ut scelerisque sed. Imperdiet commodo integer pellentesdsadasdasdasque quis id.</p>
-
-          <Link href={'/partner'}> 
-           <div  className="flex">
-            <button className="font-medium mt-3 cursor-pointer">Manage Listing</button> 
-           <AiOutlineArrowRight className="mt-4 ml-2 font-bold"/>                          
+              <Link href={"/partner"}>
+                <div className="flex">
+                  <button className="font-medium mt-3 cursor-pointer">
+                    Manage Listing
+                  </button>
+                  <AiOutlineArrowRight className="mt-4 ml-2 font-bold" />
+                </div>
+              </Link>
+            </div>
+            <div onClick={handleClick} className="w-4 cursor-pointer">
+              {" "}
+              <RxCross2 />{" "}
+            </div>
           </div>
-          </Link>   
-        </div>
-        <div onClick={handleClick} className="w-4 cursor-pointer"> <RxCross2/> </div>
-      </div>
-    </>
-     }
+        </>
+      )}
 
       <div className="main-wrapper">
         <div className="partner-content">
@@ -97,7 +143,7 @@ const page = () => {
                 <Image src={statusIcon} width={16} height={16} alt="verified" />
                 <span>Identity verified</span>
               </p>
-              <h2 className="name">John Ghazal</h2>
+              <h2 className="name">{name}</h2>
             </div>
           </div>
 
@@ -118,10 +164,10 @@ const page = () => {
         </div>
 
         <div className="image-wrapper">
-          <Image src={partnerImage1} width={632} height={536} alt="image" />
-          <Image src={partnerImage2} width={308} height={260} alt="image" />
-          <Image src={partnerImage3} width={308} height={260} alt="image" />
-          <Image src={partnerImage4} width={632} height={260} alt="image" />
+          <Image src={partnerImage[0]} width={632} height={536} alt="image" />
+          <Image src={partnerImage[1]} width={308} height={260} alt="image" />
+          <Image src={partnerImage[2]} width={308} height={260} alt="image" />
+          <Image src={partnerImage[3]} width={632} height={260} alt="image" />
         </div>
 
         <div className="container">
@@ -146,16 +192,7 @@ const page = () => {
                 <p className="date">
                   Available From : <span>24, April 2023</span>
                 </p>
-                <p className="content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                  minim veniam, quis nostrud exercitation ullamco laboris nisi
-                  ut aliquip ex ea commodo consequat.
-                </p>
+                <p className="content">{description}</p>
                 <button type="button" className="btn-show-more">
                   Show more
                 </button>
@@ -165,7 +202,19 @@ const page = () => {
                 <h3 className="title">Amenities Looking for</h3>
 
                 <div className="amenities-list">
-                  <div className="amenities-list__item">
+                  {amenities.slice(0, 10).map((item: any) => (
+                    <div className="amenities-list__item">
+                      <Image
+                        src={gardenViewIcon}
+                        width={32}
+                        height={32}
+                        alt="icon"
+                        className="item-image"
+                      />
+                      <p className="item-name">{item}</p>
+                    </div>
+                  ))}
+                  {/* <div className="amenities-list__item">
                     <Image
                       src={gardenViewIcon}
                       width={32}
@@ -176,11 +225,23 @@ const page = () => {
                     <p className="item-name">Garden View</p>
                   </div>
                   <div className="amenities-list__item">
-                    <Image src={wifiIcon} width={32} height={32} alt="icon" className="item-image" />
+                    <Image
+                      src={wifiIcon}
+                      width={32}
+                      height={32}
+                      alt="icon"
+                      className="item-image"
+                    />
                     <p className="item-name">Free Wifi</p>
                   </div>
                   <div className="amenities-list__item">
-                    <Image src={washerIcon} width={32} height={32} alt="icon" className="item-image" />
+                    <Image
+                      src={washerIcon}
+                      width={32}
+                      height={32}
+                      alt="icon"
+                      className="item-image"
+                    />
                     <p className="item-name">Free Washer</p>
                   </div>
                   <div className="amenities-list__item">
@@ -214,15 +275,33 @@ const page = () => {
                     <p className="item-name">Kitchen</p>
                   </div>
                   <div className="amenities-list__item">
-                    <Image src={petsIcon} width={32} height={32} alt="icon" className="item-image" />
+                    <Image
+                      src={petsIcon}
+                      width={32}
+                      height={32}
+                      alt="icon"
+                      className="item-image"
+                    />
                     <p className="item-name">Pets Allowed</p>
                   </div>
                   <div className="amenities-list__item">
-                    <Image src={dryerIcon} width={32} height={32} alt="icon" className="item-image" />
+                    <Image
+                      src={dryerIcon}
+                      width={32}
+                      height={32}
+                      alt="icon"
+                      className="item-image"
+                    />
                     <p className="item-name">Dryer</p>
                   </div>
                   <div className="amenities-list__item">
-                    <Image src={cameraIcon} width={32} height={32} alt="icon" className="item-image" />
+                    <Image
+                      src={cameraIcon}
+                      width={32}
+                      height={32}
+                      alt="icon"
+                      className="item-image"
+                    />
                     <p className="item-name">Security cameras on property</p>
                   </div>
                   <div className="amenities-list__item">
@@ -234,28 +313,36 @@ const page = () => {
                       className="item-image"
                     />
                     <p className="item-name">Bicycle</p>
-                  </div>
+                  </div> */}
                 </div>
 
-                <button type="button" className="btn-show-more">
-                  Show more amenities
+                <button
+                  onClick={openModal}
+                  type="button"
+                  className="btn-show-more"
+                >
+                  Show all {amenities.length} amenities
                 </button>
+                
               </div>
             </div>
 
             <div className="details-content__action">
               <div className="submit-action">
                 <p className="cost">
-                  <span>$75-$90</span> / night
+                  <span>
+                    ${minimumPrice}-${maximumPrice}
+                  </span>{" "}
+                  / night
                 </p>
                 <div className="btn-wrapper">
                   <button type="button" className="btn-message">
                     Send Message
                   </button>
-                  <Link href={'/add-partner/1'}>
-                  <button type="button" className="btn-proposal">
-                    Send Proposal
-                  </button>
+                  <Link href={"/add-partner/1"}>
+                    <button type="button" className="btn-proposal">
+                      Send Proposal
+                    </button>
                   </Link>
                 </div>
                 <p className="message">You won’t be charged yet</p>
@@ -272,21 +359,11 @@ const page = () => {
             <h3 className="title">Where he's looking for the partner?</h3>
 
             <div className="btn-wrapper">
-              <button type="button" className="btn-location">
-                Bristol
-              </button>
-              <button type="button" className="btn-location">
-                Bath
-              </button>
-              <button type="button" className="btn-location">
-                London
-              </button>
-              <button type="button" className="btn-location">
-                England
-              </button>
-              <button type="button" className="btn-location">
-                Near UWE
-              </button>
+              {looking_for_partner_location.map((item: any) => (
+                <button type="button" className="btn-location">
+                  {item}
+                </button>
+              ))}
             </div>
 
             <div className="map">
