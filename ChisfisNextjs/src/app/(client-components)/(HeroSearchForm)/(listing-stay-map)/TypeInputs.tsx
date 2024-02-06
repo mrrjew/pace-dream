@@ -23,11 +23,11 @@ const TypeInputs: FC<TypeInputsProps> = ({
 
   const renderInput = () => {
     return (
-        <div className="flex-grow text-left max-md:mt-4 max-md:ml-2 md:mr-4">
+        <div className="flex-grow text-left max-md:mt-4 max-md:ml-4 md:mr-4">
           <span className="block xl:text-lg font-normal text-black md:font-semibold">
             Type
           </span>
-          <span className={`flex flex-row border p-2 md:p-1.5 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+          <span className={`flex flex-row border p-2 max-md:w-[85vw] md:p-1.5 lg:p-2.5 xl:p-1.5 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
             Male
           </span>
         </div>
@@ -36,8 +36,8 @@ const TypeInputs: FC<TypeInputsProps> = ({
 
   const renderOutput = () => {
     return(
-        <div className="flex-grow text-left max-md:mt-4 max-md:ml-4">
-            <span className={`flex flex-row border p-2 md:p-1.5 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+        <div className="flex-grow text-left max-md:mt-2 max-md:ml-4">
+            <span className={`flex flex-row border p-2 max-md:w-[85vw] md:p-1.5 lg:p-2.5 xl:p-1.5 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
                 Female
             </span>
         </div>
@@ -45,10 +45,10 @@ const TypeInputs: FC<TypeInputsProps> = ({
   }
 
   return (
-    <div className="flex items-end">
+    <div className="flex md:items-end max-md:flex-col max-md:w-[90vw]">
       {renderInput()}
       {renderOutput()}
-        <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
+        <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 max-md:m-auto max-md:mt-6 mt-2">
             <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref}/>
         </div>
     </div>

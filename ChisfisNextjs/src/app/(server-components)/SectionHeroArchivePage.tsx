@@ -38,7 +38,7 @@ const renderForm = (currentPage: String) => {
     case "Last Minutes":
       return (
         <div className="flex flex-col items-baseline md:flex-row rounded-full">
-          <LocationInput className="flex pr-4" typeInput='md:w-[33%]'/>
+          <LocationInput className="flex pr-4" typeInput='md:w-[45%]'/>
           <Budgets className="flex"/>
           <TypeInputs className="flex"/>
         </div>
@@ -59,9 +59,9 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
   let vw;
 
   if (currentPage === 'Room Stays') {
-    className = 'md:w-[85vw] w-[92vw] xl:w-[70vw] lg:w-[80vw]';
+    vw = 'md:w-[85vw] w-[92vw] xl:w-[70vw] lg:w-[80vw]';
   } else {
-    className = 'md:w-[80vw] w-[92vw] xl:w-[70vw] lg:w-[75vw]';
+    vw = 'md:w-[80vw] w-[92vw] xl:w-[60vw] lg:w-[60vw]';
   }
   
   return (
