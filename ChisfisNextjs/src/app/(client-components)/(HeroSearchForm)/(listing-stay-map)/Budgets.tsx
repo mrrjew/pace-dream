@@ -23,7 +23,7 @@ const Budgets: FC<BudgetsProps> = ({
           <span className="block xl:text-lg font-normal text-black md:font-semibold">
             Budget
           </span>
-          <span className={`flex flex-row border p-2 md:p-1.5 lg:p-2.5 max-md:w-[85vw] xl:p-1.5 w-full ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+          <span className={`flex flex-row border p-2 md:p-2 lg:p-3 max-md:w-[85vw] xl:p-2 w-full ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
             Minimum
           </span>
         </div>
@@ -33,7 +33,7 @@ const Budgets: FC<BudgetsProps> = ({
   const renderOutput = () => {
     return(
         <div className="flex-grow text-left max-md:mt-1 max-md:ml-4">
-            <span className={`flex flex-row border p-2 md:p-1.5 max-md:w-[85vw] lg:p-2.5 xl:p-1.5 w-full ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+            <span className={`flex flex-row border p-2 md:p-2 max-md:w-[85vw] lg:p-3 xl:p-2 w-full ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
                 Maximum
             </span>
         </div>
