@@ -27,7 +27,7 @@ const TypeInputs: FC<TypeInputsProps> = ({
           <span className="block xl:text-lg font-normal text-black md:font-semibold">
             Type
           </span>
-          <span className={`flex flex-row border p-2 max-md:w-[85vw] md:p-1.5 lg:p-2.5 xl:p-1.5 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+          <span className={`flex flex-row border p-2 max-md:w-[85vw] md:p-2 lg:p-3 xl:p-2 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
             Male
           </span>
         </div>
@@ -37,7 +37,7 @@ const TypeInputs: FC<TypeInputsProps> = ({
   const renderOutput = () => {
     return(
         <div className="flex-grow text-left max-md:mt-2 max-md:ml-4">
-            <span className={`flex flex-row border p-2 max-md:w-[85vw] md:p-1.5 lg:p-2.5 xl:p-1.5 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
+            <span className={`flex flex-row border p-2 max-md:w-[85vw] md:p-2 lg:p-3 xl:p-2 ${dates} rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
                 Female
             </span>
         </div>
