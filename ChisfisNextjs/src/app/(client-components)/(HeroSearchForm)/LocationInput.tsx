@@ -12,6 +12,7 @@ export interface LocationInputProps {
   autoFocus?: boolean;
   inputs?: string;
   input?: string;
+  typeInput?: string;
 }
 
 const LocationInput: FC<LocationInputProps> = ({
@@ -22,6 +23,7 @@ const LocationInput: FC<LocationInputProps> = ({
   divHideVerticalLineClass = "left-10 -right-0.5",
   inputs = "",
   input = "",
+  typeInput = ""
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -123,7 +125,7 @@ const LocationInput: FC<LocationInputProps> = ({
   };
 
   return (
-    <div className={`relative flex ${className} mt-4`} ref={containerRef}>
+    <div className={`relative flex ${className} ${typeInput} mt-4`} ref={containerRef}>
       <div
         onClick={() => setShowPopover(true)}
         className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-0 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
@@ -134,7 +136,7 @@ const LocationInput: FC<LocationInputProps> = ({
               {desc}
             </span>
             <input
-              className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : 'max-lg:w-[10vw]'} xl:p-[5px] w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
+              className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'}  border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : 'max-lg:w-[10vw]'} xl:p-[5px] w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
               placeholder={placeHolder}
               value={value}
               autoFocus={showPopover}
