@@ -11,6 +11,7 @@ import notificationSvg from "@/images/notification-icon.svg";
 import mapSvg from "@/images/map.svg";
 import __partners from "../../data/jsons/__partners.json";
 import PartnerList from "@/components/Partner/PartnerList";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 const page = () => {
   const [searchKey, setSearchKey] = useState<string>("");
@@ -102,27 +103,8 @@ const page = () => {
 
       <div className="content-wrapper mt- lg:mt-0">
         <PartnerList partners={__partners} searchKey={searchKey} />
-
-        <div className="mt-16 bg-[#574EFA] font-[Inter] hidden lg:block">
-          <div className="py-16 px-[116px] lg:container">
-            <p className="uppercase text-[14px] text-white font-semibold">
-              1% OF THE INDUSTRY
-            </p>
-            <p className="mt-2 text-[32px] text-white font-semibold leading-10">
-              Welcome to your room sharing platform that which You can find
-              places and stay with hotels and home-stays ranked by travellers.
-              What fun could we have more than having roommate with similar
-              interest.
-            </p>
-            <button
-              type="button"
-              className="mt-8 w-[119px] h-[46px] bg-white text-purple-600 text-[15px] rounded-full font-semibold hover:bg-purple-600 hover:text-white transition duration-300"
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
       </div>
+      <SectionSubscribe className="mt-16 mb-16" />
     </div>
   );
 };

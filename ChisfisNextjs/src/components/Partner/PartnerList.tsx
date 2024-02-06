@@ -35,7 +35,7 @@ const PartnerList = ({ partners, searchKey }: PartnerListProps) => {
                 src={item.imageUrl}
                 width={296}
                 height={285}
-                className="w-full"
+                className="w-fit"
                 alt="partner"
               />
               <div className="partner-list__item-content">
@@ -52,7 +52,9 @@ const PartnerList = ({ partners, searchKey }: PartnerListProps) => {
           ))}
       </div>
       {filteredPartners.length === 0 && (
-        <p className="my-5 text-base text-slate-600 text-center">No partners found</p>
+        <p className="my-5 text-base text-slate-600 text-center">
+          No partners found
+        </p>
       )}
       {filteredPartners.length > 0 && (
         <button type="button" className="btn-load-more">
