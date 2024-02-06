@@ -5,6 +5,12 @@ import SocialsList1 from "@/shared/SocialsList1";
 import { CustomLink } from "@/data/types";
 import React from "react";
 import FooterNav from "./FooterNav";
+import Image from "next/image";
+import PlayStore from "../images/download/google-play-store-badge-en.svg"
+import Apple from "../images/download/download-on-the-app-store-apple-logo-svgrepo-com.svg"
+import Facebook from "../images/logos/Facebook.svg"
+import Google from "../images/logos/Google.svg"
+import Instagram from "../images/logos/Instagram.svg"
 
 export interface WidgetFooterMenu {
   id: string;
@@ -39,21 +45,13 @@ const widgetMenus: WidgetFooterMenu[] = [
       { href: "#", label: "Carrers" },
     ],
   },
-  {
-    id: "4",
-    title: "MobileApp",
-    menus: [
-      { href: "#", label: "Download On The AppStore" },
-      { href: "#", label: "Download On The PlayStore" },
-    ],
-  },
 ];
 
 const Footer: React.FC = () => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm bg-white">
-        <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">
+        <h2 className="font-bold text-black">
           {menu.title}
         </h2>
         <ul className="mt-5 space-y-4">
@@ -61,7 +59,7 @@ const Footer: React.FC = () => {
             <li key={index}>
               <a
                 key={index}
-                className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
+                className="text-neutral-400 dark:text-neutral-300 hover:text-black"
                 href={item.href}
               >
                 {item.label}
@@ -74,23 +72,51 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="bg-white">
       <FooterNav />
-
-      <div className="nc-Footer relative bg-white py-24 lg:py-28 border-t border-neutral-200 dark:border-neutral-700">
-        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
-          <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
-            <div className="col-span-2 md:col-span-1">
-              <Logo />
-            </div>
-            <div className="col-span-2 flex items-center md:col-span-3">
-              <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" />
-            </div>
-          </div>
+      <div className="nc-Footer relative bg-white pt-24 lg:pt-24 pb-16 border-t border-neutral-200">
+        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 justify-items-end">
           {widgetMenus.map(renderWidgetMenuItem)}
+            <div className="col-span-2 md:col-span-1">
+              <h2 className="font-bold text-black">
+                MobileApp
+              </h2>
+              <div className="relative md:w-[120px] md:h-[35px] md:mt-4 md:mb-2">
+                <Image src={Apple} alt="Download on the AppStore" layout="fill" objectFit="cover"/>
+              </div>
+              <Image src={PlayStore} alt="Get it on Google Play" width={120} height={35}/>
+            </div>
+            {/* <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" /> */}
+          </div>
+        </div>
+        <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between">
+          <div className="flex">
+            <h2 className="text-neutral-400">
+              © 2023 PaceDream. All Rights Reserved.
+            </h2> 
+            <h2 className="text-neutral-400 mx-2">
+              Terms.
+            </h2>
+            <h2 className="text-neutral-400 mr-2">
+              Sitemap.
+            </h2>
+            <h2 className="text-neutral-400">
+              Privacy
+            </h2>
+          </div>
+          <div className="flex">
+            <a href="https://www.facebook.com/profile.php?id=61554764998573">
+              <Image src={Facebook} alt="Facebook" width={24}/>
+            </a>
+            <a href="#">
+              <Image src={Google} alt="Google" width={24} className="mx-4"/>
+            </a>
+            <a href="https://www.instagram.com/pacedream_official/">
+              <Image src={Instagram} alt="Instagram" width={24}/>
+            </a>
+          </div>
         </div>
       </div>
-    </>
   );
 };
 

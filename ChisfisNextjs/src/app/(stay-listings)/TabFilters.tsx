@@ -1,13 +1,11 @@
 "use client";
 
 import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
-import NcInputNumber from "@/components/NcInputNumber";
+import { Popover, Transition } from "@headlessui/react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import ButtonThird from "@/shared/ButtonThird";
 import ButtonClose from "@/shared/ButtonClose";
-import Checkbox from "@/shared/Checkbox";
-import Slider, { SliderProps } from "rc-slider";
+import Slider from "rc-slider";
 import convertNumbThousand from "@/utils/convertNumbThousand";
 import { SvgAir, SvgBBQ, SvgExercise, SvgFire, SvgParking, SvgPatio, SvgPatioAir, SvgPool, SvgShower, SvgTub, SvgTv, SvgWashing, SvgWifi, SvgWorkspaces } from "@/shared/TabFilterSvgs";
 
@@ -20,27 +18,6 @@ interface Filter {
   defaultChecked?: boolean;
   svg?: () => JSX.Element;
 }
-
-// DEMO DATA
-const typeOfPaces = [
-  {
-    name: "Entire place",
-    description: "Have a place to yourself",
-  },
-  {
-    name: "Private room",
-    description: "Have your own room and share some common spaces",
-  },
-  {
-    name: "Hotel room",
-    description:
-      "Have a private or shared room in a boutique hotel, hostel, and more",
-  },
-  {
-    name: "Shared room",
-    description: "Stay in a shared space, like a common room",
-  },
-];
 
 type TypeDropOffLocationHourlyType = "Free Cancelation" | "Pet Lover" | "Single" | "Couples" | "Dancer" | "Foot Baller" | "Student" | "Professional";
 const tabs: TypeDropOffLocationHourlyType[] = ["Free Cancelation" , "Pet Lover" , "Single" , "Couples" , "Dancer" , "Foot Baller" , "Student" , "Professional"]
@@ -69,16 +46,7 @@ const tabs: TypeDropOffLocationHourlyType[] = ["Free Cancelation" , "Pet Lover" 
 
 
 const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
-  const [isOpenMoreFilter, setisOpenMoreFilter] = useState(false);
-  const [isOpenMoreFilterMobile, setisOpenMoreFilterMobile] = useState(false);
   const [rangePrices, setRangePrices] = useState([0, 0]);
-
-  //
-  const closeModalMoreFilter = () => setisOpenMoreFilter(false);
-  const openModalMoreFilter = () => setisOpenMoreFilter(true);
-  //
-  const closeModalMoreFilterMobile = () => setisOpenMoreFilterMobile(false);
-  const openModalMoreFilterMobile = () => setisOpenMoreFilterMobile(true);
   const [map, localSetMap] = useState(true)
 
   const handleMapToggle = () => {
@@ -243,37 +211,6 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
     );
   };
 
-  const renderMoreFilterItem = (
-    data: Filter[]
-  ) => {
-    const list1 = data.filter((_, i) => i < data.length / 2);
-    const list2 = data.filter((_, i) => i >= data.length / 2);
-    return (
-      <div className="grid grid-cols-2 gap-8">
-        <div className="flex flex-col space-y-5">
-          {list1.map((item) => (
-            <Checkbox
-              key={item.name}
-              name={item.name}
-              label={item.name}
-              defaultChecked={!!item.defaultChecked}
-            />
-          ))}
-        </div>
-        <div className="flex flex-col space-y-5">
-          {list2.map((item) => (
-            <Checkbox
-              key={item.name}
-              name={item.name}
-              label={item.name}
-              defaultChecked={!!item.defaultChecked}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  };
-
   const renderTabMoreFilter = () => { 
     const toggleDefaultChecked = (index: number, filterSet: number) => {
       let updatedFilters;
@@ -316,10 +253,6 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
       setMoreFilter1((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
       setFilters(0)
     };
-
-    const clearFilter = () => {
-      setFilters(0)
-    }
   
     const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1);
     const [dayOrHourly, setDayOrHourly] = useState(false)
@@ -597,10 +530,6 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
       setMoreFilter1((prevFilters) => prevFilters.map((filter) => ({ ...filter, defaultChecked: false })));
       setFilters(0)
     };
-
-    const clearFilter = () => {
-      setFilters(0)
-    }
   
     const countCheckedFiltersMoreFilter = countCheckedFilters(moreFilter1);
     const [dayOrHourly, setDayOrHourly] = useState(false)
@@ -621,7 +550,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
         {moreFilter1.map((tab, index) =>{
         return(
           <div
-          className={`py-2.5 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
+          className={`py-2.5 mx-1 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
             tab.defaultChecked === true
               ? "bg-violet shadow-black/10 shadow-lg text-white "
               : "border bg-white text-black border-neutral-300"
@@ -637,12 +566,12 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
   };
 
     return (
-      <div>
+      <div className="mx-2">
         <Popover className={`flex relative`}>
         {({ open, close }) => ( 
           <>
           <Popover.Button
-            className={`flex py-1.5 lg:px-2 md:px-1
+            className={`flex py-[5px] px-2 lg:px-2 md:px-1
             md:-ml-2 my-1 xl:mr-3 md:text-[12px] rounded-full border border-neutral-300 bg-white text-black font-medium focus:outline-none cursor-pointer" : ""
             }`}
           >
@@ -683,7 +612,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                   <div className="mt-2 relative">
                     <div className="flex mb-2 ml-4">
                       <div
-                        className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                        className={`py-2.5 px-2 mx-2 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
                         dayOrHourly === false
                         ? "bg-violet shadow-black/10 shadow-lg text-white "
                         : "border bg-white text-black border-neutral-300"
@@ -693,7 +622,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                         Day Basis
                       </div>
                       <div
-                        className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                        className={`py-2.5 px-2 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
                         dayOrHourly === true
                         ? "bg-violet shadow-black/10 shadow-lg text-white "
                         : "border bg-white text-black border-neutral-300"
@@ -774,7 +703,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                 <h3 className="text-sm text-[#919BA7] font-normal ml-2">Pricing</h3>
                 <div className="flex ml-4">
                   <div
-                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    className={`py-2.5 px-2 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
                     filterPrices === "Highest Price"
                     ? "bg-violet shadow-black/10 shadow-lg text-white "
                     : "border bg-white text-black border-neutral-300"
@@ -784,7 +713,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                     Highest Price
                   </div>
                   <div
-                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    className={`py-2.5 px-2 mx-2 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
                     filterPrices === "Lowest Price"
                     ? "bg-violet shadow-black/10 shadow-lg text-white "
                     : "border bg-white text-black border-neutral-300"
@@ -794,7 +723,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({setMap}) => {
                     Lowest Price
                   </div>
                   <div
-                    className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
+                    className={`py-2.5 px-2 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
                     filterPrices === "Recommended"
                     ? "bg-violet shadow-black/10 shadow-lg text-white "
                     : "border bg-white text-black border-neutral-300"
