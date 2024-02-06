@@ -74,14 +74,14 @@ const Footer: React.FC = () => {
   return (
     <div className="bg-white">
       <FooterNav />
-      <div className="nc-Footer relative bg-white pt-24 lg:pt-24 pb-16 border-t border-neutral-200">
-        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 justify-items-end">
+      <div className="nc-Footer relative bg-white pt-24 lg:pt-24 pb-16 border-t border-neutral-200 max-md:ml-9">
+        <div className="container grid grid-cols-2 gap-y-10 gap-x-2 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 md:justify-items-end">
           {widgetMenus.map(renderWidgetMenuItem)}
-            <div className="col-span-2 md:col-span-1">
+            <div className="md:col-span-1">
               <h2 className="font-bold text-black">
                 MobileApp
               </h2>
-              <div className="relative md:w-[120px] md:h-[35px] md:mt-4 md:mb-2">
+              <div className="relative w-[120px] h-[35px] md:w-[120px] md:h-[35px] md:mt-4 md:mb-2 my-2">
                 <Image src={Apple} alt="Download on the AppStore" layout="fill" objectFit="cover"/>
               </div>
               <Image src={PlayStore} alt="Get it on Google Play" width={120} height={35}/>
@@ -89,22 +89,24 @@ const Footer: React.FC = () => {
             {/* <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" /> */}
           </div>
         </div>
-        <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between">
-          <div className="flex">
+        <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between max-md:flex-col">
+          <div className="flex md:flex-row flex-col max-md:ml-8 max-md:mb-8">
             <h2 className="text-neutral-400">
               © 2023 PaceDream. All Rights Reserved.
             </h2> 
-            <h2 className="text-neutral-400 mx-2">
-              Terms.
-            </h2>
-            <h2 className="text-neutral-400 mr-2">
-              Sitemap.
-            </h2>
-            <h2 className="text-neutral-400">
-              Privacy
-            </h2>
+            <div className="flex">
+              <h2 className="text-neutral-400 mx-2">
+                Terms.
+              </h2>
+              <h2 className="text-neutral-400 mr-2">
+                Sitemap.
+              </h2>
+              <h2 className="text-neutral-400">
+                Privacy
+              </h2>
+            </div>
           </div>
-          <div className="flex">
+          <div className="flex max-md:pb-12 max-md:ml-9">
             <a href="https://www.facebook.com/profile.php?id=61554764998573">
               <Image src={Facebook} alt="Facebook" width={24}/>
             </a>
