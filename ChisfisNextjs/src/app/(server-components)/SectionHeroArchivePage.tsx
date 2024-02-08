@@ -13,7 +13,7 @@ import { StaticImageData } from 'next/image';
 export interface SectionHeroArchivePageProps {
   className?: string;
   listingType?: ReactNode;
-  currentPage: 'Room Stays' | 'Hourly Rental Space' | 'Hourly Rental Gear' | 'Find Roommate' | 'Experiences' | 'Last Minutes';
+  currentPage: "Room Stays" | "Experiences" | "Find Roommate" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
   currentTab: SearchTab;
   rightImage?: StaticImageData;
 }
