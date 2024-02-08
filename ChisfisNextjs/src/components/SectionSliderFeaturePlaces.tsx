@@ -10,10 +10,7 @@ import { variants } from "@/utils/animationVariants";
 import { useWindowSize } from "react-use";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import HeaderFilter from "./HeaderFilter";
 import StayCard from "./StayCard";
-import StayCard2 from "./StayCard2";
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 18);
 export type Tab =  "New York" | "Tokio" | "London"
@@ -31,7 +28,7 @@ export interface SectionSliderFeaturePlacesProps {
 }
 
 const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
-  heading = "Featured Places to Stay",
+  heading = "Hourly Places",
   subHeading = "Popular places to recommends for you",
   className = "",
   itemClassName = "",

@@ -27,9 +27,9 @@ const LocationInput: FC<LocationInputProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [value, setValue] = useState("");
   const [showPopover, setShowPopover] = useState(autoFocus);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
     setShowPopover(autoFocus);
@@ -67,6 +67,20 @@ const LocationInput: FC<LocationInputProps> = ({
     setShowPopover(false);
   };
 
+  const handleInputChange = (e:any) => {
+    const inputValue = e.currentTarget.value;
+    setValue(inputValue);
+    const filteredSuggestions = [
+      "Hamptons, Suffolk County, NY",
+      "Las Vegas, NV, United States",
+      "Ueno, Taito, Tokyo",
+      "Ikebukuro, Toshima, Tokyo",
+    ].filter((place) =>
+      place.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setSuggestions(filteredSuggestions);
+  }
+
   const renderRecentSearches = () => {
     return (
       <>
@@ -98,15 +112,12 @@ const LocationInput: FC<LocationInputProps> = ({
     );
   };
 
+  
+
   const renderSearchValue = () => {
     return (
       <>
-        {[
-          "Ha Noi, Viet Nam",
-          "San Diego, CA",
-          "Humboldt Park, Chicago, IL",
-          "Bangor, Northern Ireland",
-        ].map((item) => (
+        {suggestions.map((item) => (
           <span
             onClick={() => handleSelectLocation(item)}
             key={item}
@@ -141,7 +152,7 @@ const LocationInput: FC<LocationInputProps> = ({
               value={value}
               autoFocus={showPopover}
               onChange={(e) => {
-                setValue(e.currentTarget.value);
+                handleInputChange(e);
               }}
               ref={inputRef}
             />

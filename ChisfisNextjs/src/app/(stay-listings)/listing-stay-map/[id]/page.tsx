@@ -12,7 +12,7 @@ export interface ListingStayMapPageProps {}
 const ListingStayMapPage: FC<ListingStayMapPageProps> = ({}) => {
   const { id } = useParams()
   console.log(id);
-  let room: "Room Stays" | "Experiences" | "Find Roommate" | "Hourly Rental Space" | "Hourly Rental Gear" | "Last Minutes" = 'Room Stays';
+  let room: "Room Stays" | "Experiences" | "Find Roommate" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes" = 'Room Stays';
   switch (id) {
     case "1":
       room  = 'Room Stays'
@@ -24,10 +24,13 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({}) => {
       room = 'Find Roommate'
       break;
     case "4": 
-      room = 'Hourly Rental Space'
+      room = 'Hourly Rental Gear'
       break;
     case "5":
       room = 'Last Minutes'
+      break;
+    case "6":
+      room = 'Time-Based'
       break;
     default:
       room = 'Room Stays'

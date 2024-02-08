@@ -100,7 +100,7 @@ const DEMO_CATS: TaxonomyType[] = [
 ];
 
 const SectionSliderNewCategoriesMobile: FC<SectionSliderNewCategoriesMobileProps> = ({
-  heading = "Suggestions for discovery",
+  heading = "Suggestions for Hourly Rooms",
   subHeading = "Popular places to stay that Chisfis recommends for you",
   className = "",
   itemClassName = "",

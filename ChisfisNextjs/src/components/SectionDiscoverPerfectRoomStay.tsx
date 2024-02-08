@@ -34,7 +34,7 @@ export interface SectionDiscoverPerfectRoomStayProps {
 const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = ({
   className = "",
   stayListings = DEMO_DATA,
-  heading = "Discover Perfect Room Stay",
+  heading = "Last-Minute Deals for Hotels and Flights",
   subHeading = "Popular Long term Stay & Short term Stay places to recommends for you",
   headingIsCenter,
   itemPerRow = 4,

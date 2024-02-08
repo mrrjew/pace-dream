@@ -24,7 +24,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   className = "",
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Featured places",
+  heading = "Hourly Places",
   headingIsCenter,
   tabs = ["New York", "Tokyo", "Paris", "London"],
   cardType = "card2",

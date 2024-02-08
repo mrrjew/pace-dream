@@ -5,11 +5,11 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 
-export type TypeDropOffLocationHourlyType = "Any type" | "Event Spaces" | "Workspaces" | "Creative Spaces" | "Wellness and Fitness Spaces" | "Leisure and Recreational Spaces" | "Educational Spaces" | "Outdoor Spaces" | "Specialty Spaces";
-const tabs: TypeDropOffLocationHourlyType[] = ["Any type" , "Event Spaces" , "Workspaces" , "Creative Spaces" , "Wellness and Fitness Spaces" , "Leisure and Recreational Spaces" , "Educational Spaces" , "Outdoor Spaces" , "Specialty Spaces"]
-const HourlySearchForm: FC<{}> = ({}) => {
+export type TypeDropOffLocationTimeBased = "Any type" | "Sports and Recreation Equipment" | "Professional Equipment" | "Tools and Machinery" | "Water Sports Gear" | "Fitness Equipment" | "Musical Instruments" | "Tech Gadgets" | "Party and Event Gear";
+const tabs: TypeDropOffLocationTimeBased[] = ["Any type" , "Sports and Recreation Equipment" , "Professional Equipment" , "Tools and Machinery" , "Water Sports Gear" , "Fitness Equipment" , "Musical Instruments" , "Tech Gadgets" , "Party and Event Gear"]
+const TimeBasedForm: FC<{}> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
-    useState<TypeDropOffLocationHourlyType>("Any type");
+    useState<TypeDropOffLocationTimeBased>("Any type");
   const renderRadioBtn = () => {
     return (
       <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
@@ -53,4 +53,4 @@ const HourlySearchForm: FC<{}> = ({}) => {
   return renderForm();
 };
 
-export default HourlySearchForm;
+export default TimeBasedForm;
