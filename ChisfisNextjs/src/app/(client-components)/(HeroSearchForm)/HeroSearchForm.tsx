@@ -6,13 +6,14 @@ import FlightSearchForm from "./(flight-search-form)/FlightSearchForm";
 import StaySearchForm from "./(stay-search-form)/StaySearchForm";
 import HourlySearchForm from "./(hourly-search-form)/HourlySearchForm";
 import MinutesSearchForm from "./(minutes-search-form)/MinutesSearchForm";
+import TimeBasedForm from "./(hourly-search-form)/TimeBasedForm"
 
-export type SearchTab =  "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Hourly Rental Space" | "Hourly Rental Gear" | "Last Minutes";
+export type SearchTab =  "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
 
 export interface HeroSearchFormProps {
   className?: string;
   currentTab?: SearchTab;
-  currentPage?: "Room Stays" | "Find Roommate" | "Experiences" | "Hourly" | "Stays" | "Hourly Rental Space" | "Hourly Rental Gear" | "Last Minutes";
+  currentPage?: "Room Stays" | "Find Roommate" | "Experiences" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
 }
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({
@@ -20,7 +21,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   currentTab = "Room Stays",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Room Stays", "Hourly Rental Space" , "Hourly Rental Gear" , "Find Roommate" , "Experiences" , "Last Minutes"];
+  const tabs: SearchTab[] = ["Room Stays", "Time-Based" , "Hourly Rental Gear" , "Find Roommate" , "Experiences" , "Last Minutes"];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
@@ -70,7 +71,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           } else if(i === 1){
             return(
-              <div className={` xl:w-[190px] lg:w-[155px] md:w-[145px] h-0.5 ${
+              <div className={` xl:w-[120px] lg:w-[95px] md:w-[90px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
@@ -115,8 +116,8 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
         return <ExperiencesSearchForm />;
       case "Find Roommate":
         return <FlightSearchForm />;
-      case "Hourly Rental Space": 
-        return <HourlySearchForm />;
+      case "Time-Based": 
+        return <TimeBasedForm />;
       case "Hourly Rental Gear": 
         return <HourlySearchForm />;
       case "Last Minutes":

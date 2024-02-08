@@ -26,7 +26,7 @@ const flightClass = [
   },
 ];
 
-export type TypeDropOffLocationType = "Male" | "Female" | "";
+export type TypeDropOffLocationType = "Male" | "Female" | "Any Gender";
 
 const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
@@ -199,6 +199,16 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
           onClick={(e) => setDropOffLocationType("Female")}
         >
           Female
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+            dropOffLocationType === "Any Gender"
+              ? "bg-violet text-white shadow-black/10 shadow-lg"
+              : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+          }`}
+          onClick={(e) => setDropOffLocationType("Any Gender")}
+        >
+          Any Gender
         </div>
       </div>
     );
