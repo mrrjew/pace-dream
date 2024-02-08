@@ -39,17 +39,22 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <div className="ListingDetailPage">
+    <div>
+      {children}
+    </div>
+  );
+};
+    /* <div className="ListingDetailPage bg-white">
       <ListingImageGallery
         isShowModal={modal === 'PHOTO_TOUR_SCROLLABLE'}
         onClose={handleCloseModalImageGallery}
         images={getImageGalleryListing()}
-      />
+      /> */
 
-      <div className="container ListingDetailPage__content">{children}</div>
+      
 
-      {/* OTHER SECTION */}
-      <div className="container py-24 lg:py-32">
+      /* OTHER SECTION */
+      /* <div className="container py-24 lg:py-32">
         <div className="relative py-16">
           <BackgroundSection />
           <SectionSliderNewCategories
@@ -61,12 +66,11 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
           />
         </div>
         <SectionSubscribe className="pt-24 lg:pt-32" />
-      </div>
+      </div> */
 
-      {/* STICKY FOOTER MOBILE */}
-      <MobileFooterSticky />
-    </div>
-  );
-};
+      /* STICKY FOOTER MOBILE */
+      /* <MobileFooterSticky />
+    </div> */
+  
 
 export default DetailtLayout;
