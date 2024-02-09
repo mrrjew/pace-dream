@@ -1,12 +1,31 @@
-"use client"
+"use client";
 
 import React, { FC, useState } from "react";
 import LocationInput from "../LocationInput";
 import GuestsInput from "../GuestsInput";
 import ExperiencesDateSingleInput from "./ExperiencesDateSingleInput";
 
-export type TypeDropOffLocationExperience = "Any type" | "City Tours" | "Adventure Activities" | "Tools and Machinery" | "Art and Culture" | "Entertainment" | "Food and Drinks" | "Sports" | "Sightseeing";
-const tabs: TypeDropOffLocationExperience[] = ["Any type" , "City Tours" , "Adventure Activities" , "Tools and Machinery" , "Art and Culture" , "Entertainment" , "Food and Drinks" , "Sports" , "Sightseeing"]
+export type TypeDropOffLocationExperience =
+  | "Any type"
+  | "City Tours"
+  | "Adventure Activities"
+  | "Tools and Machinery"
+  | "Art and Culture"
+  | "Entertainment"
+  | "Food and Drinks"
+  | "Sports"
+  | "Sightseeing";
+const tabs: TypeDropOffLocationExperience[] = [
+  "Any type",
+  "City Tours",
+  "Adventure Activities",
+  "Tools and Machinery",
+  "Art and Culture",
+  "Entertainment",
+  "Food and Drinks",
+  "Sports",
+  "Sightseeing",
+];
 
 export interface ExperiencesSearchFormProps {}
 
@@ -14,23 +33,23 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
     useState<TypeDropOffLocationExperience>("Any type");
 
-    const renderRadioBtn = () => {
+  const renderRadioBtn = () => {
     return (
       <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
-        {tabs.map((tab) =>{
-        return(
-          <div
-          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === tab
-              ? "bg-violet shadow-black/10 shadow-lg text-white"
-              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
-          }`}
-          onClick={(e) => setDropOffLocationType(tab)}
-        >
-          {tab}
-        </div>
-        )}
-        )}
+        {tabs.map((tab) => {
+          return (
+            <div
+              className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
+                dropOffLocationType === tab
+                  ? "bg-violet shadow-black/10 shadow-lg text-white"
+                  : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+              }`}
+              onClick={(e) => setDropOffLocationType(tab)}
+            >
+              {tab}
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -45,7 +64,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({}) => {
             </h2>
           </div>
           <div className="flex flex-col flex-1 md:flex-row items-baseline rounded-full md:mt-4">
-            <LocationInput className="flex-[1.5]" input="max-lg:w-[22vw]"/>
+            <LocationInput className="flex-[1.5]" input="max-lg:w-[22vw]" />
             <ExperiencesDateSingleInput className="flex-1" />
             <GuestsInput
               className="flex-1"
