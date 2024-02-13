@@ -1,23 +1,23 @@
-'use client';
-import React, { FC, useState } from 'react';
-import facebookSvg from '@/images/Facebook.svg';
-import googleSvg from '@/images/Google.svg';
-import appleSvg from '@/images/Apple.svg';
-import Input from '@/shared/Input';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useGoogleLogin } from '@/hooks/providers/useGoogleLogin';
-import { useAppleLogin } from '@/hooks/providers/useAppleLogin';
-import { useFacebookLogin } from '@/hooks/providers/useFacebookLogin';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from 'config/firebase';
-import axios, { AxiosError } from 'axios';
-import { useSession } from '@/hooks/useSession';
-import { useRouter } from 'next/navigation';
-import { SignupMethod } from '@/types/SignupMethod';
-import { FirebaseError } from 'firebase/app';
-import { MobileInput } from '@/components/MobileInput';
+"use client";
+import React, { FC, useState } from "react";
+import facebookSvg from "@/images/Facebook.svg";
+import googleSvg from "@/images/Google.svg";
+import appleSvg from "@/images/Apple.svg";
+import Input from "@/shared/Input";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Image from "next/image";
+import Link from "next/link";
+import { useGoogleLogin } from "@/hooks/providers/useGoogleLogin";
+import { useAppleLogin } from "@/hooks/providers/useAppleLogin";
+import { useFacebookLogin } from "@/hooks/providers/useFacebookLogin";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from "config/firebase";
+import axios, { AxiosError } from "axios";
+import { useSession } from "@/hooks/useSession";
+import { useRouter } from "next/navigation";
+import { SignupMethod } from "@/types/SignupMethod";
+import { FirebaseError } from "firebase/app";
+import { MobileInput } from "@/components/MobileInput";
 
 export interface PageLoginProps {}
 
@@ -25,15 +25,15 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
   const { googleLogin, isLoading: googleLoggining } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
-  const [userDetails, setUserDetails] = useState({ email: '', password: '' });
+  const [userDetails, setUserDetails] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const [mobile, setMobile] = useState('');
-  const [otp, setOtp] = useState('');
+  const [mobile, setMobile] = useState("");
+  const [otp, setOtp] = useState("");
   const [showVerifyOtp, setShowVerifyOtp] = useState(false);
   const [loginMethod, setLoginMethod] = useState<SignupMethod>(
     SignupMethod.EMAIL
   );
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const { setSession } = useSession();
 
@@ -42,7 +42,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
   const setAndClearError = (error: string) => {
     setError(error);
     setTimeout(() => {
-      setError('');
+      setError("");
     }, 3000);
   };
 
@@ -69,23 +69,23 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
       const loggedInUser = response.data.data;
       setSession(loggedInUser.token, loggedInUser, loggedInUser.user_id);
       setTimeout(() => {
-        router.push('/');
+        router.push("/");
       }, 500);
     } catch (error) {
       if (error instanceof FirebaseError) {
         console.log(error.code);
         if (
-          error.code === 'auth/wrong-password' ||
-          error.code === 'auth/user-not-found'
+          error.code === "auth/wrong-password" ||
+          error.code === "auth/user-not-found"
         ) {
-          setAndClearError('Invalid email or password');
+          setAndClearError("Invalid email or password");
         }
       } else if (error instanceof AxiosError) {
         if (error.response?.data?.error) {
           setAndClearError(error.response.data.error);
         }
       } else {
-        setAndClearError('Something went wrong');
+        setAndClearError("Something went wrong");
       }
     } finally {
       setLoading(false);
@@ -131,16 +131,16 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
           response.data.data.user_id
         );
         setTimeout(() => {
-          router.push('/');
+          router.push("/");
         }, 200);
         return;
       } else {
-        setAndClearError('Phone number does not exist. Please register first');
+        setAndClearError("Phone number does not exist. Please register first");
       }
     } catch (err) {
       const error = err as AxiosError;
       console.log(error);
-      setAndClearError('Invalid OTP');
+      setAndClearError("Invalid OTP");
     }
     setLoading(false);
   };
@@ -152,8 +152,8 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
           Login
         </h2>
         <div className="max-w-md mx-auto space-y-6">
-        {/* FORM */}
-        {loginMethod === SignupMethod.EMAIL ? (
+          {/* FORM */}
+          {loginMethod === SignupMethod.EMAIL ? (
             <form
               className="grid grid-cols-1 gap-6"
               onSubmit={loginUser}
@@ -186,14 +186,14 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                   value={userDetails.password}
                 />
                 <Link
-                    href="/auth/forgot-password"
-                    className="text-sm underline font-medium"
-                  >
-                    Forgot password?
+                  href="/auth/forgot-password"
+                  className="text-sm underline font-medium"
+                >
+                  Forgot password?
                 </Link>
               </label>
               {error && (
-                <span className="block text-center text-sm text-red-400 dark:text-neutral-300">
+                <span className="block -mt-4 text-sm text-red-400 dark:text-neutral-300">
                   {error}
                 </span>
               )}
@@ -272,7 +272,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                     <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                   </div>
                 ) : (
-                  'Continue with Google'
+                  "Continue with Google"
                 )}
               </h3>
             </button>
@@ -292,7 +292,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                     <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                   </div>
                 ) : (
-                  'Continue with Facebook'
+                  "Continue with Facebook"
                 )}
               </h3>
             </button>
@@ -312,7 +312,7 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
                     <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                   </div>
                 ) : (
-                  'Continue with Apple'
+                  "Continue with Apple"
                 )}
               </h3>
             </button>

@@ -24,7 +24,7 @@ const SectionSubscribe: FC<SectionSubscribe> = ({ className = "" }) => {
             type="email"
             required
             placeholder="Enter your email"
-            className="mb-2 max-md:w-[80vw] md:mb-0 rounded-full bg-violet md:mr-4 border text-white border-white placeholder-white"
+            className="mb-2 max-md:w-[80vw] md:mb-0 rounded-full focus:border-white focus:text-white bg-violet md:mr-4 border text-white border-white placeholder-white"
           />
           <button
             type="submit"
