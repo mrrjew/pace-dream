@@ -71,7 +71,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           } else if(i === 1){
             return(
-              <div className={` xl:w-[120px] lg:w-[95px] md:w-[90px] h-0.5 ${
+              <div className={` xl:w-[140px] lg:w-[115px] md:w-[108px] h-0.5 ${
                 active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
               }`} />
             )
