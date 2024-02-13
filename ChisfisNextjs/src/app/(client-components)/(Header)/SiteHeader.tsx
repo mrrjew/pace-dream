@@ -23,7 +23,7 @@ let OPTIONS = {
   threshold: 1.0
 };
 let OBSERVER: IntersectionObserver | null = null;
-const PAGES_HIDE_HEADER_BORDER: PathName[] = ['/home-3', '/listing-car-detail', '/listing-experiences-detail', '/listing-stay-detail'];
+const PAGES_HIDE_HEADER_BORDER: PathName[] = ['/home-3', '/listing-car-detail', '/listing-experiences-detail'];
 
 const SiteHeader = () => {
   const anchorRef = useRef<HTMLDivElement>(null);
