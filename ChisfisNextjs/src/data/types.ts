@@ -64,6 +64,7 @@ export type TwMainColor =
 
 //
 export interface StayDataType {
+  authorId: string | number;
   id: string | number;
   author: AuthorType;
   date: string;
@@ -77,7 +78,8 @@ export interface StayDataType {
   reviewCount: number;
   like: boolean;
   galleryImgs: (StaticImageData | string)[];
-  price: string;
+  priceDay: string;
+  priceHour: string;
   listingCategory: TaxonomyType;
   maxGuests: number;
   bedrooms: number;

@@ -56,7 +56,7 @@ export default function AvatarDropdown({ className = '' }: Props) {
   return (
     <>
       <Popover className={`AvatarDropdown relative flex ${className}`}>
-        {({ open, close }) => (
+        {({ open }) => (
           <>
             <Popover.Button
               className={`self-center w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
@@ -103,7 +103,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/account'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <svg
@@ -140,7 +139,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/author'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <svg
@@ -194,7 +192,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/account-savelists'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <svg
@@ -232,7 +229,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/account'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <svg
@@ -270,7 +266,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/host-mode/host-dashboard'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <TbLayoutDashboard
@@ -290,7 +285,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/host-mode/booking'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <BsBookmark size={22} className="mr-2 ml-0.5" />
@@ -305,7 +299,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/host-mode/host-inbox'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <BsChat size={22} className="mr-2 ml-0.5" />
@@ -320,7 +313,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/host-mode/host-space'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <RiBuildingLine size={22} className="mr-2 ml-0.5" />
@@ -335,7 +327,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/host-mode/host-business'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <FiPieChart size={22} className="mr-2 ml-0.5" />
@@ -350,7 +341,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                         <Link
                           href={'/'}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                          onClick={() => close()}
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                             <BsThreeDots size={22} className="mr-2 ml-0.5" />
@@ -408,7 +398,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                     <Link
                       href={'/#'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      onClick={() => close()}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                         <svg
@@ -471,7 +460,6 @@ export default function AvatarDropdown({ className = '' }: Props) {
                     <Link
                       href={'/#'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      onClick={() => close()}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                         <svg

@@ -45,7 +45,7 @@ const StayCard2: FC<StayCard2Props> = ({
           ratioClass="aspect-w-12 aspect-h-11"
           galleryImgs={galleryImgs}
           imageClass="rounded-lg"
-          href={href}
+          href={`/listing-stay-detail/${id}`}
         />
         <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
         {saleOff && <SaleOffBadge className="absolute left-3 top-3" />}
@@ -118,7 +118,7 @@ const StayCard2: FC<StayCard2Props> = ({
   return (
     <div className={`nc-StayCard2 group relative ${className}`}>
       {renderSliderGallery()}
-      <Link href={href}>{renderContent()}</Link>
+      <Link href={`/listing-stay-detail/${id}`}>{renderContent()}</Link>
     </div>
   );
 };

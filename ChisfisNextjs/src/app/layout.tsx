@@ -30,21 +30,21 @@ export default function RootLayout({
   children: React.ReactNode;
   params: any;
 }) {
-  
-  
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-[#F6F4F6] text-base text-neutral-900">
         <ReactQueryClientProvider>
           <UserProvider>
             <ClientCommons />
-            <SiteHeader />
-            <div className='flex overflow-x-hidden max-w-screen'>
-              {/* <div className="hidden md:block" >
-              <SideBar/>
-              </div> */}
-              <div className='flex-1'>
-                {children}
+            <div>
+            <SiteHeader /> 
+              <div className='flex overflow-x-hidden max-w-screen'>
+                {/* <div className="hidden md:block" >
+                <SideBar/>
+                </div> */}
+                <div className='flex-1'>
+                  {children}
+                </div>
               </div>
             </div>
             <FooterNav />
