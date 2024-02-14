@@ -10,6 +10,7 @@ import TabFilters from "./TabFilters";
 import StayCard2 from "@/components/StayCard2";
 import { useSearchParams } from "next/navigation";
 import FlightCard2 from "@/components/FlightCard2";
+import { LastDataType, StayDataType } from "@/data/types";
 
 
 export interface SectionGridHasMapProps {}
@@ -21,33 +22,27 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const searchParams = useSearchParams()
   const terms = searchParams.get('term')
   
-
-  let filteredListings;
+  let DEMO_STAYS: StayDataType[] | LastDataType[] ;
   switch (terms) {
     case "long":
-      filteredListings = DEMO_STAY_LISTINGS.filter(listing => listing.term === "long");
+      DEMO_STAYS = DEMO_STAY_LISTINGS.filter(listing => listing.term === "long").filter((_, i) => i < 12);
       break;
     case "short":
-      filteredListings = DEMO_STAY_LISTINGS.filter(listing => listing.term === "short");
+      DEMO_STAYS = DEMO_STAY_LISTINGS.filter(listing => listing.term === "short").filter((_, i) => i < 12);
       break;
     case "40":
-      filteredListings = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 40);
+      DEMO_STAYS = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 40).filter((_, i) => i < 12);
       break;
     case "30":
-      filteredListings = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 30);
+      DEMO_STAYS = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 30).filter((_, i) => i < 12);
       break;
     case "20":
-      filteredListings = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 20);
+      DEMO_STAYS = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 20).filter((_, i) => i < 12);
       break;
     default:
+      DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
       break;
   }
-  let DEMO_STAYS;
-    if(filteredListings === undefined){
-      DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
-    } else {
-      DEMO_STAYS = filteredListings.filter((_, i) => i < 12);
-    }
   
   return (
       <div className="relative flex min-h-screen">
