@@ -19,7 +19,7 @@ export interface TaxonomyType {
   desc?: string;
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";
-  listingType?: "stay" | "experiences" | "car";
+  listingType?: "stay" | "experiences" | "car" | "last minutes";
 }
 
 export interface AuthorType {
@@ -70,6 +70,49 @@ export interface StayDataType {
   date: string;
   href: Route<string>;
   title: string;
+  term?: string;
+  shared?: string;
+  featuredImage: StaticImageData | string;
+  commentCount: number;
+  viewCount: number;
+  address: string;
+  reviewStart: number;
+  reviewCount: number;
+  like: boolean;
+  galleryImgs: (StaticImageData | string)[];
+  price: string;
+  priceDay: string;
+  priceHour: string;
+  listingCategory: TaxonomyType;
+  maxGuests: number;
+  bedrooms: number;
+  bathrooms: number;
+  saleOff?: string | null;
+  isAds: boolean | null;
+  map: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface FlightDataType {
+  id: string | number;
+  price: string;
+  saleOff: string;
+  airlines: {
+    logo: string;
+    name: string;
+  }
+}
+
+export interface LastDataType {
+  authorId: string | number;
+  id: string | number;
+  author: AuthorType;
+  date: string;
+  href: Route<string>;
+  title: string;
+  lastMinute: number;
   featuredImage: StaticImageData | string;
   commentCount: number;
   viewCount: number;

@@ -1,6 +1,7 @@
 import __taxonomies from "./jsons/__taxonomies.json";
 import __stayTaxonomies from "./jsons/__stayTaxonomies.json";
 import __experiencesTaxonomies from "./jsons/__experiencesTaxonomies.json";
+import __lastMinutesTaxonomies from "./jsons/__lastMinutesTaxonomies.json"
 import { TaxonomyType } from "./types";
 import { Route } from "@/routers/types";
 
@@ -16,7 +17,12 @@ const DEMO_TAGS: TaxonomyType[] = __taxonomies.map((item) => ({
   href: item.href as Route,
 }));
 
-//
+const DEMO_LAST_CATEGORIES: TaxonomyType[] = __lastMinutesTaxonomies.map((item) => ({
+  ...item,
+  taxonomy: "category",
+  listingType: "last minutes",
+  href: item.href as Route,
+}))
 
 const DEMO_STAY_CATEGORIES: TaxonomyType[] = __stayTaxonomies.map((item) => ({
   ...item,
@@ -39,4 +45,5 @@ export {
   DEMO_TAGS,
   DEMO_STAY_CATEGORIES,
   DEMO_EXPERIENCES_CATEGORIES,
+  DEMO_LAST_CATEGORIES
 };

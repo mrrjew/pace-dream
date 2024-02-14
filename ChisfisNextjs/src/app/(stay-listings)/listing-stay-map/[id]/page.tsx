@@ -2,14 +2,13 @@
 
 import React, { FC } from "react";
 import SectionGridHasMap from "../../SectionGridHasMap";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import SectionHeroArchivePage from "@/app/(server-components)/SectionHeroArchivePage";
 import { PathName } from "@/routers/types";
 
 
-export interface ListingStayMapPageProps {}
 
-const ListingStayMapPage: FC<ListingStayMapPageProps> = ({}) => {
+const ListingStayMapPage = () => {
   const { id } = useParams()
   console.log(id);
   let room: "Room Stays" | "Experiences" | "Find Roommate" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes" = 'Room Stays';
@@ -42,7 +41,7 @@ const ListingStayMapPage: FC<ListingStayMapPageProps> = ({}) => {
           <SectionHeroArchivePage currentPage={room} currentTab={room} />
         </div>
       <div className="pb-24 lg:pb-28 md:ml-16">
-        <SectionGridHasMap />
+        <SectionGridHasMap/>
       </div>
     </>
   );
