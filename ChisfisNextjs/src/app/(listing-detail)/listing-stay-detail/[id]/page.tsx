@@ -85,7 +85,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   const timeDifference = endDate - startDate;
   const numberOfDays = timeDifference / (1000 * 60 * 60 * 24);
-  setLocalStorageItem('bookedDay', numberOfDays.toString() || '');
+  setLocalStorageItem("bookedDay", numberOfDays.toString() || "");
 
   // Guest value state
 
@@ -95,7 +95,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   let [isOpenModalAmenities, setIsOpenModalAmenities] = useState(false);
 
-  const [isDay, setIsDay] = useState('Day');
+  const [isDay, setIsDay] = useState("Day");
 
   const handleDayHourToggle = (clickedItem: string) => {
     setIsDay(clickedItem);
@@ -210,7 +210,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     setDaysList(prevSevenDays.filter((day) => day >= today));
   };
 
-  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const thisPathname = usePathname();
   const router = useRouter();
@@ -243,102 +243,102 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   const bookingTimeSlots = [
     {
-      dayName: 'Monday',
-      date: '21',
+      dayName: "Monday",
+      date: "21",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
     {
-      dayName: 'Tuesday',
-      date: '22',
+      dayName: "Tuesday",
+      date: "22",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
     {
-      dayName: 'Wednesday',
-      date: '23',
+      dayName: "Wednesday",
+      date: "23",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
     {
-      dayName: 'Thursday',
-      date: '24',
+      dayName: "Thursday",
+      date: "24",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
     {
-      dayName: 'Friday',
-      date: '25',
+      dayName: "Friday",
+      date: "25",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
     {
-      dayName: 'Saturday',
-      date: '26',
+      dayName: "Saturday",
+      date: "26",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
 
     {
-      dayName: 'Sunday',
-      date: '27',
+      dayName: "Sunday",
+      date: "27",
       dayTimeSlots: [
-        '7:00 AM',
-        '7:30 AM',
-        '8:00 AM',
-        '8:30 AM',
-        '9:00 AM',
-        '9:30 AM',
-        '10:00 AM',
-        '10:30 AM',
+        "7:00 AM",
+        "7:30 AM",
+        "8:00 AM",
+        "8:30 AM",
+        "9:00 AM",
+        "9:30 AM",
+        "10:00 AM",
+        "10:30 AM",
       ],
     },
   ];
@@ -346,8 +346,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const renderSection1 = () => {
     return (
       <div className="min-sm:!space-y-6">
-        <div className='max-sm:hidden py-6 border-y border-gray-200'>
-          <button className='bg-white border rounded-full py-2 px-4 border-gray-200 ml-20' onClick={handleGoBack}>Back</button>
+        <div className="max-sm:hidden py-6 border-y border-gray-200">
+          <Link href="/listing-stay">
+            <button
+              className="bg-white border rounded-full py-2 px-4 border-gray-200 ml-20"
+              onClick={handleGoBack}
+            >
+              Back
+            </button>
+          </Link>
         </div>
         <div className="max-sm:pt-4 pt-4 flex justify-between items-center ml-4 sm:ml-20">
           <Badge name="Wooden house" />
@@ -360,7 +367,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             <span className="text-gray-500"> Tokyo, Jappan</span>
             <LikeSaveBtns />
           </div>
-        </div> 
+        </div>
       </div>
     );
   };
@@ -375,13 +382,14 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             accommodation, an outdoor swimming pool, a bar, a shared lounge, a
             garden and barbecue facilities. Complimentary WiFi is provided.
             There is a private bathroom with bidet in all units, along with a
-            hairdryer and free toiletries.
-            The Symphony 9 Tam Coc offers a terrace. Both a bicycle rental
-            service and a car rental service are available at the accommodation,
-            while cycling can be enjoyed nearby.
+            hairdryer and free toiletries. The Symphony 9 Tam Coc offers a
+            terrace. Both a bicycle rental service and a car rental service are
+            available at the accommodation, while cycling can be enjoyed nearby.
           </span>
         </div>
-        <button className='mt-4 border rounded-full border-gray-200 px-4 py-2'>Show more</button>
+        <button className="mt-4 border rounded-full border-gray-200 px-4 py-2">
+          Show more
+        </button>
       </div>
     );
   };
@@ -398,7 +406,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             </div>
           ))}
         </div>
-        <div className='mt-4'>
+        <div className="mt-4">
           <ButtonSecondary onClick={openModalAmenities}>
             Show more amenities
           </ButtonSecondary>
@@ -484,7 +492,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     return (
       <div>
         <div className="flex items-center justify-between space-x-4">
-          <div className='flex'>
+          <div className="flex">
             <Avatar
               hasChecked
               hasCheckedClass="w-4 h-4 -top-0.5 right-0.5"
@@ -493,23 +501,31 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             />
             <div>
               <div className="mt-1.5 ml-4 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
-                <Image src={Verificaty} alt='verificaty' width={16}></Image>
+                <Image src={Verificaty} alt="verificaty" width={16}></Image>
                 <h2>Identify Verified</h2>
               </div>
               <a className="block text-xl font-black ml-4" href="/author">
-                Hosted By {filteredAuthors[0].firstName + ' ' + filteredAuthors[0].lastName}
+                Hosted By{" "}
+                {filteredAuthors[0].firstName +
+                  " " +
+                  filteredAuthors[0].lastName}
               </a>
             </div>
-          </div>   
-        <div>
-          <ButtonSecondary href="/author" className='font-semibold'>View profile</ButtonSecondary>
+          </div>
+          <div>
+            <ButtonSecondary href="/author" className="font-semibold">
+              View profile
+            </ButtonSecondary>
+          </div>
+        </div>
+        <div className="flex min-sm:w-[40vw] w-[90vw]">
+          <Image src={Protect} alt="Protect" width={24}></Image>
+          <h2 className="mt-4 ml-4">
+            To protect your payment, never transfer money or communicate outside
+            of the Airbnb website or app
+          </h2>
         </div>
       </div>
-      <div className='flex min-sm:w-[40vw] w-[90vw]'>
-        <Image src={Protect} alt="Protect" width={24}></Image>
-        <h2 className='mt-4 ml-4'>To protect your payment, never transfer money or communicate outside of the Airbnb website or app</h2>
-      </div>
-    </div>
     );
   };
 
@@ -517,14 +533,12 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     return (
       <div>
         <div className="flex items-center">
-        <StarIcon
-            className={`text-yellow-500 w-6 h-6`}
-          />
-         <h2 className='text-2xl font-bold'>5.0</h2>
-         <div className='ml-2 mb-1 flex'>
-          <Image src={Dot} alt="dot" width={4}></Image>
-          <h2 className='text-lg font-semibold ml-1'>12 Reviews</h2>
-         </div>
+          <StarIcon className={`text-yellow-500 w-6 h-6`} />
+          <h2 className="text-2xl font-bold">5.0</h2>
+          <div className="ml-2 mb-1 flex">
+            <Image src={Dot} alt="dot" width={4}></Image>
+            <h2 className="text-lg font-semibold ml-1">12 Reviews</h2>
+          </div>
         </div>
         <div className="grid sm:grid-cols-3 sm:gap-8">
           <Comment className="py-8" />
@@ -532,15 +546,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           <Comment className="py-8 max-sm:hidden" />
         </div>
         <div className="pb-8 pt-4">
-            <ButtonSecondary>Show more reviews</ButtonSecondary>
-          </div>
+          <ButtonSecondary>Show more reviews</ButtonSecondary>
+        </div>
       </div>
     );
   };
 
   const renderSection7 = () => {
     return (
-      <div className='my-14'>
+      <div className="my-14">
         <h2 className="text-2xl font-semibold">Where you’ll be</h2>
         <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3 ring-1 ring-black/10 rounded-xl z-0 mt-6">
           <div className="rounded-xl overflow-hidden z-0">
@@ -554,11 +568,17 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             ></iframe>
           </div>
         </div>
-        <div className='mt-6'>
+        <div className="mt-6">
           <h2>
-            Very dynamic and appreciated district by the people of Bordeaux thanks to rue St James and place Fernand Lafargue. Home to many historical monuments such as the Grosse Cloche, the Porte de Bourgogne and the Porte Cailhau, and cultural sites such as the Aquitaine Museum.
+            Very dynamic and appreciated district by the people of Bordeaux
+            thanks to rue St James and place Fernand Lafargue. Home to many
+            historical monuments such as the Grosse Cloche, the Porte de
+            Bourgogne and the Porte Cailhau, and cultural sites such as the
+            Aquitaine Museum.
           </h2>
-          <button className='my-4 border rounded-full border-gray-200 px-4 py-2'>Show more</button>
+          <button className="my-4 border rounded-full border-gray-200 px-4 py-2">
+            Show more
+          </button>
         </div>
       </div>
     );
@@ -569,7 +589,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       <div className="listingSectionSidebar__wrap shadow-xl">
         <Tabs
           selectedTabClassName="text-white bg-[#574EFA]"
-          selectedIndex={isDay === 'Hour' ? 0 : 1}
+          selectedIndex={isDay === "Hour" ? 0 : 1}
         >
           <div className="card">
             <div className="card-body">
@@ -579,11 +599,11 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   <div className="border-card border rounded-full flex w-full h-[44px]">
                     <Tab
                       className={` py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${
-                        isDay === 'Day' ? 'bg-[#F8F9FB]' : ''
+                        isDay === "Day" ? "bg-[#F8F9FB]" : ""
                       }`}
                     >
                       <button
-                        onClick={() => handleDayHourToggle('Hour')}
+                        onClick={() => handleDayHourToggle("Hour")}
                         className="w-full text-center"
                       >
                         Hour
@@ -591,11 +611,11 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     </Tab>
                     <Tab
                       className={`py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${
-                        isDay === 'Hour' ? 'bg-[#F8F9FB]' : ''
+                        isDay === "Hour" ? "bg-[#F8F9FB]" : ""
                       }`}
                     >
                       <button
-                        onClick={() => handleDayHourToggle('Day')}
+                        onClick={() => handleDayHourToggle("Day")}
                         className="text-center w-full"
                       >
                         Day
@@ -618,16 +638,16 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         key={hour}
                         className={`rounded-3xl border-2 p-2 sm:mr-1 cursor-pointer transition-all ease-in-out ${
                           hour === selectedHour
-                            ? 'bg-[#574EFA] border-[#574EFA]'
-                            : ''
+                            ? "bg-[#574EFA] border-[#574EFA]"
+                            : ""
                         }`}
                         onClick={() => setSelectedHour(hour)}
                       >
                         <p
                           className={`text-sm md:text-lg text-center transition-all ease-in-out ${
                             selectedHour === hour
-                              ? 'text-white'
-                              : 'text-[#878787] '
+                              ? "text-white"
+                              : "text-[#878787] "
                           }`}
                         >
                           {hour}
@@ -635,8 +655,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         <span
                           className={`text-[10px] sm:text-xs transition-all ease-in-out ${
                             selectedHour === hour
-                              ? 'text-white'
-                              : 'text-[#9B9B9B]'
+                              ? "text-white"
+                              : "text-[#9B9B9B]"
                           }`}
                         >
                           Hour
@@ -687,16 +707,16 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                             key={index}
                             className={`rounded-3xl border-2 px-2 py-2 cursor-pointer transition-all ease-in-out ${
                               day === selectedDay
-                                ? 'bg-[#574EFA] border-[#574EFA]'
-                                : ''
+                                ? "bg-[#574EFA] border-[#574EFA]"
+                                : ""
                             }`}
                             onClick={() => setSelectedDay(day)}
                           >
                             <span
                               className={`text-xs transition-all ease-in-out ${
                                 selectedDay === day
-                                  ? 'text-white'
-                                  : 'text-[#9B9B9B]'
+                                  ? "text-white"
+                                  : "text-[#9B9B9B]"
                               }`}
                             >
                               {weekDays[day.getDay()]}
@@ -704,8 +724,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                             <p
                               className={`text-xl text-center transition-all ease-in-out ${
                                 selectedDay === day
-                                  ? 'text-white'
-                                  : 'text-[#878787] '
+                                  ? "text-white"
+                                  : "text-[#878787] "
                               }`}
                             >
                               {day.getDate()}
@@ -721,8 +741,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       <div
                         className={`rounded-full cursor-pointer text-center  py-2 ${
                           checkIfSlotIsSelected({ hour: 7, minute: 0 })
-                            ? 'bg-[#574EFA] text-white'
-                            : 'bg-[#F2F2F7]'
+                            ? "bg-[#574EFA] text-white"
+                            : "bg-[#F2F2F7]"
                         }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 7, minute: 0 })
@@ -733,8 +753,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       <div
                         className={`rounded-full cursor-pointer text-center py-2 ${
                           checkIfSlotIsSelected({ hour: 8, minute: 0 })
-                            ? 'bg-[#574EFA] text-white'
-                            : 'bg-[#F2F2F7]'
+                            ? "bg-[#574EFA] text-white"
+                            : "bg-[#F2F2F7]"
                         }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 8, minute: 0 })
@@ -745,8 +765,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       <div
                         className={`rounded-full cursor-pointer text-center  py-2 ${
                           checkIfSlotIsSelected({ hour: 9, minute: 0 })
-                            ? 'bg-[#574EFA] text-white'
-                            : 'bg-[#F2F2F7]'
+                            ? "bg-[#574EFA] text-white"
+                            : "bg-[#F2F2F7]"
                         }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 9, minute: 0 })
@@ -757,8 +777,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       <div
                         className={`rounded-full cursor-pointer text-center py-2 ${
                           checkIfSlotIsSelected({ hour: 10, minute: 0 })
-                            ? 'bg-[#574EFA] text-white'
-                            : 'bg-[#F2F2F7]'
+                            ? "bg-[#574EFA] text-white"
+                            : "bg-[#F2F2F7]"
                         }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 10, minute: 0 })
@@ -775,7 +795,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     </div>
                   </div>
 
-                  <ButtonPrimary href={'/checkout'} className="w-full mt-4">
+                  <ButtonPrimary href={"/checkout"} className="w-full mt-4">
                     Send Proposal
                   </ButtonPrimary>
 
@@ -808,7 +828,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                 Select Duration
                               </p>
                               <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
-                                {' '}
+                                {" "}
                                 <option disabled selected>
                                   1 Hour
                                 </option>
@@ -829,7 +849,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                 Year
                               </p>
                               <select className="w-[206px] select border border-card focus:outline-none rounded-full mt-2 mb-4  max-w-xs">
-                                {' '}
+                                {" "}
                                 <option disabled selected>
                                   2023
                                 </option>
@@ -846,7 +866,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                 Month
                               </p>
                               <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
-                                {' '}
+                                {" "}
                                 <option disabled selected>
                                   Month
                                 </option>
@@ -870,7 +890,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                 Week
                               </p>
                               <select className="select border border-card focus:outline-none w-[206px] rounded-full mt-2 mb-4  max-w-xs">
-                                {' '}
+                                {" "}
                                 <option disabled selected>
                                   Week
                                 </option>
@@ -910,8 +930,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                                   bookingTime.dayName,
                                                   dayTime
                                                 )
-                                                  ? 'text-[#4845f7]'
-                                                  : 'text-[#929292]'
+                                                  ? "text-[#4845f7]"
+                                                  : "text-[#929292]"
                                               } lg:bg-transparent lg:border-none lg:px-0 lg:py-0 bg-[#F2F2F7] rounded-full lg:min-w-0 min-w-[110px] py-2 px-3`}
                                               onClick={() =>
                                                 toggleTimeSlotSelection(
@@ -1024,7 +1044,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       </div>
                     </div>
                   </div>
-                  <ButtonPrimary href={'/checkout'} className="w-full">
+                  <ButtonPrimary href={"/checkout"} className="w-full">
                     Send Proposal
                   </ButtonPrimary>
                 </TabPanel>
@@ -1039,36 +1059,36 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   return (
     <div className="bg-white w-full sm:w-[100vw]">
       {/*  HEADER */}
-      <header> 
-        {renderSection1()}
-      </header>
-        <div className="rounded-md sm:rounded-xl sm:mx-20 mx-4">
-          <div className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2">
-            <div
-              className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer"
-              onClick={handleOpenModalImageGallery}
-            >
-              <Image
-                fill
-                className="object-cover rounded-md sm:rounded-xl"
-                src={filteredData[0].featuredImage}
-                alt=""
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
-            </div>
-            {filteredData[0].galleryImgs.filter((_, i) => i >= 0 && i < 4).map((item, index) => (
+      <header>{renderSection1()}</header>
+      <div className="rounded-md sm:rounded-xl sm:mx-20 mx-4">
+        <div className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2">
+          <div
+            className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer"
+            onClick={handleOpenModalImageGallery}
+          >
+            <Image
+              fill
+              className="object-cover rounded-md sm:rounded-xl"
+              src={filteredData[0].featuredImage}
+              alt=""
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
+          </div>
+          {filteredData[0].galleryImgs
+            .filter((_, i) => i >= 0 && i < 4)
+            .map((item, index) => (
               <div
                 key={index}
                 className={`relative rounded-md sm:rounded-xl overflow-hidden ${
-                  index >= 3 ? 'hidden sm:block' : ''
+                  index >= 3 ? "hidden sm:block" : ""
                 }`}
               >
                 <div className="aspect-w-4 aspect-h-3 sm:aspect-w-6 sm:aspect-h-5">
                   <Image
                     fill
                     className="object-cover rounded-md sm:rounded-xl "
-                    src={item || ''}
+                    src={item || ""}
                     alt=""
                     sizes="400px"
                   />
@@ -1081,17 +1101,17 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                 />
               </div>
             ))}
-            <button
-              className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-neutral-100 text-neutral-500 hover:bg-neutral-200 z-10"
-              onClick={handleOpenModalImageGallery}
-            >
-              <Squares2X2Icon className="w-5 h-5" />
-              <span className="ml-2 text-neutral-800 text-sm font-medium">
-                Show all photos
-              </span>
-            </button>
-          </div>
+          <button
+            className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-neutral-100 text-neutral-500 hover:bg-neutral-200 z-10"
+            onClick={handleOpenModalImageGallery}
+          >
+            <Squares2X2Icon className="w-5 h-5" />
+            <span className="ml-2 text-neutral-800 text-sm font-medium">
+              Show all photos
+            </span>
+          </button>
         </div>
+      </div>
 
       {/* MAIN */}
       <main className=" relative z-10 mt-11 flex flex-col lg:flex-row sm:mx-20 mx-4">
@@ -1099,36 +1119,40 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pr-10 ">
           {renderSection5()}
           {renderSection2()}
-          {renderSection3()}          
-          
+          {renderSection3()}
         </div>
         <div className="flex-grow mt-14 lg:mt-0">
           <div className="top-28">{renderSidebar()}</div>
         </div>
-        
       </main>
-      <div className='sm:mx-20 mx-4'>
+      <div className="sm:mx-20 mx-4">
         {renderSection7()}
         {renderSection6()}
       </div>
-      <div className='bg-[#F9F9F9] pb-12'>
-        <div className='sm:mx-20 mx-4 pt-16'>
-          <div className='flex justify-between items-center mb-12'>
-            <div className='w-[60%]'>
-              <h2 className='text-black font-bold text-2xl mb-4'>
+      <div className="bg-[#F9F9F9] pb-12">
+        <div className="sm:mx-20 mx-4 pt-16">
+          <div className="flex justify-between items-center mb-12">
+            <div className="w-[60%]">
+              <h2 className="text-black font-bold text-2xl mb-4">
                 Nearby Hotels
               </h2>
-              <h2 className='text-[#757575]'>
-                You can find places and stay with hotels and home-stays ranked by travellers. What fun could we have more than having roommate with similar interest.
+              <h2 className="text-[#757575]">
+                You can find places and stay with hotels and home-stays ranked
+                by travellers. What fun could we have more than having roommate
+                with similar interest.
               </h2>
             </div>
             <div>
-              <Link href={'/listing-stay-map/1' as Route<string>}>
-                <button className='border rounded-full bg-white font-medium border-gray-200 px-4 py-2'>Show more</button>
+              <Link href={"/listing-stay-map/1" as Route<string>}>
+                <button className="border rounded-full bg-white font-medium border-gray-200 px-4 py-2">
+                  Show more
+                </button>
               </Link>
             </div>
           </div>
-          <div className={`hidden sm:mx-20 mx-4 sm:grid sm:grid-cols-4 gap-x-8 2xl:gap-x-6 gap-y-8 `}>
+          <div
+            className={`hidden sm:mx-20 mx-4 sm:grid sm:grid-cols-4 gap-x-8 2xl:gap-x-6 gap-y-8 `}
+          >
             {DEMO_STAYS.map((item) => (
               <div
                 key={item.id}
@@ -1136,18 +1160,20 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                 onMouseLeave={() => setCurrentHoverID((_) => -1)}
                 className="p-1 bg-white rounded-xl"
               >
-                <StayCard2 data={item}/>
+                <StayCard2 data={item} />
               </div>
             ))}
           </div>
-          <div className={`grid sm:hidden grid-cols-1 sm:mx-20 mx-4 sm:grid-cols-4`}>
+          <div
+            className={`grid grid-cols-1 sm:mx-20 mx-4 sm:grid-cols-4`}
+          >
             <div
               key={DEMO_STAYS[0].id}
               onMouseEnter={() => setCurrentHoverID((_) => DEMO_STAYS[0].id)}
               onMouseLeave={() => setCurrentHoverID((_) => -1)}
               className="bg-white rounded-xl"
             >
-              <StayCard2 data={DEMO_STAYS[0]}/>
+              <StayCard2 data={DEMO_STAYS[0]} />
             </div>
           </div>
         </div>
