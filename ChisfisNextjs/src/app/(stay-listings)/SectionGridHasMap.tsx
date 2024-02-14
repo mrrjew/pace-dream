@@ -4,19 +4,51 @@ import React, { FC, useState } from "react";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
 import SectionSliderGridHasMap from "@/components/SectionSliderGridHasMap";
 import GoogleMapReact from "google-map-react";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
+import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS } from "@/data/listings";
 import ButtonClose from "@/shared/ButtonClose";
 import TabFilters from "./TabFilters";
 import StayCard2 from "@/components/StayCard2";
+import { useSearchParams } from "next/navigation";
+import FlightCard2 from "@/components/FlightCard2";
 
-const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
+
 export interface SectionGridHasMapProps {}
 
 const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
   const [showFullMapFixed, setShowFullMapFixed] = useState(false);
   const [map, setMap] = useState(true);
+  const searchParams = useSearchParams()
+  const terms = searchParams.get('term')
+  
 
+  let filteredListings;
+  switch (terms) {
+    case "long":
+      filteredListings = DEMO_STAY_LISTINGS.filter(listing => listing.term === "long");
+      break;
+    case "short":
+      filteredListings = DEMO_STAY_LISTINGS.filter(listing => listing.term === "short");
+      break;
+    case "40":
+      filteredListings = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 40);
+      break;
+    case "30":
+      filteredListings = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 30);
+      break;
+    case "20":
+      filteredListings = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 20);
+      break;
+    default:
+      break;
+  }
+  let DEMO_STAYS;
+    if(filteredListings === undefined){
+      DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
+    } else {
+      DEMO_STAYS = filteredListings.filter((_, i) => i < 12);
+    }
+  
   return (
       <div className="relative flex min-h-screen">
         <div className="min-h-screen w-full md:w-[90vw]">
@@ -24,19 +56,26 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
             <TabFilters setMap={setMap}/>
           </div>
           <div className={`hidden md:flex flex-row w-[90vw] ${map ? 'h-[92vw]' : 'h-full'} `}>
-            <div className={`hidden md:grid grid-cols-1 ${map ? 'sm:grid-cols-2' : 'sm:grid-cols-4'} gap-x-5 2xl:gap-x-6 gap-y-8 ${map ? 'max-w-[45vw]' : 'max-w-[90vw]'} ${map ? 'overflow-y-auto scrollbar-webkit scrollbar-thin' : 'overflow-y-hidden'}`}>
-              {DEMO_STAYS.map((item) => (
-                <div
-                  key={item.id}
-                  onMouseEnter={() => setCurrentHoverID((_) => item.id)}
-                  onMouseLeave={() => setCurrentHoverID((_) => -1)}
-                  className="pr-4"
-                >
-                  <StayCard2 data={item} />
-                </div>
-              ))}
-            </div>
-            
+          <div className={`hidden md:grid grid-cols-1 ${map ? 'sm:grid-cols-2' : 'sm:grid-cols-4'} gap-x-5 2xl:gap-x-6 gap-y-8 ${map ? 'max-w-[45vw]' : 'max-w-[90vw]'} ${map ? 'overflow-y-auto scrollbar-webkit scrollbar-thin' : 'overflow-y-hidden'}`}>
+            {DEMO_STAYS.map((item) => (
+              <div key={item.id} onMouseEnter={() => setCurrentHoverID(item.id)} onMouseLeave={() => setCurrentHoverID(-1)} className="pr-4">
+                {terms === 'long' || terms === 'short' ? (
+                  <StayCard2 data={item} term={terms} />
+                ) : (
+                  <>
+                    {terms === '40' || terms === '30' || terms === '20' ? (
+                      <>
+                        <StayCard2 data={item} term={terms} />
+                        <FlightCard2 data={DEMO_FLIGHT_LISTINGS.find(i => i.id === item.id)} term={terms} />
+                      </>
+                    ) : (
+                      <StayCard2 data={item} />
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
           {!showFullMapFixed && (
             <div
               className={`flex md:hidden items-center justify-center fixed bottom-16 md:bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-neutral-900 text-white shadow-2xl rounded-full z-30 space-x-3 text-sm cursor-pointer`}

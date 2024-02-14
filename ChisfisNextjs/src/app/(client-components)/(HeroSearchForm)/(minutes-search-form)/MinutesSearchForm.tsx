@@ -5,41 +5,41 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 
-export type TypeDropOffLocationMinutesType = "40 minutes" | "30 minutes" | "20 minutes" ;
+export type TypeDropOffLocationMinutesType = "40" | "30" | "20" ;
 const MinutesSearchForm: FC<{}> = ({}) => {
   const [dropOffLocationType, setDropOffLocationType] =
-    useState<TypeDropOffLocationMinutesType>("40 minutes");
+    useState<TypeDropOffLocationMinutesType>("40");
   const renderRadioBtn = () => {
     return (
       <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
         {}
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "40 minutes"
+            dropOffLocationType === "40"
               ? "bg-violet shadow-black/10 shadow-lg text-white"
               : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("40 minutes")}
+          onClick={(e) => setDropOffLocationType("40")}
         >
             40 minutes
         </div>
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "30 minutes"
+            dropOffLocationType === "30"
               ? "bg-violet shadow-black/10 shadow-lg text-white"
               : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("30 minutes")}
+          onClick={(e) => setDropOffLocationType("30")}
         >
           30 minutes
         </div>
         <div
           className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "20 minutes"
+            dropOffLocationType === "20"
               ? "bg-violet shadow-black/10 shadow-lg text-white"
               : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
           }`}
-          onClick={(e) => setDropOffLocationType("20 minutes")}
+          onClick={(e) => setDropOffLocationType("20")}
         >
           20 minutes
         </div>
@@ -59,7 +59,7 @@ const MinutesSearchForm: FC<{}> = ({}) => {
           <div className="flex flex-col items-baseline flex-1 md:flex-row rounded-full">
             <LocationInput className="flex-[1.5]" />
             <StayDatesRangeInput className="flex-1" />
-            <GuestsInput className="flex-[1.5]" buttonSubmitHref="/listing-stay-map/5"/>
+            <GuestsInput className="flex-[1.5]" buttonSubmitHref={`/listing-stay-map/5?term=${dropOffLocationType}`}/>
           </div>
         </form>
       </div>

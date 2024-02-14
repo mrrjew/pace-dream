@@ -6,6 +6,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 17,
     "title": "Best Western Cedars Hotel ",
+    "term": "long",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1268871/pexels-photo-1268871.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -36,6 +38,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 9,
     "title": "Bell by Greene King Inns ",
+    "term": "short",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/6434634/pexels-photo-6434634.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -66,6 +70,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 11,
     "title": "Half Moon, Sherborne by Marston's Inns ",
+    "term": "long",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/4186560/pexels-photo-4186560.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -96,6 +102,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 6,
     "title": "White Horse Hotel by Greene King Inns ",
+    "term": "short",
+    "shared": "3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/2290738/pexels-photo-2290738.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -126,6 +134,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 11,
     "title": "Ship and Castle Hotel ",
+    "term": "long",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/261327/pexels-photo-261327.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -156,6 +166,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 7,
     "title": "The Windmill Family & Commercial Hotel ",
+    "term": "short",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -186,6 +198,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 20,
     "title": "Unicorn, Gunthorpe by Marston's Inns ",
+    "term": "long",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/3068519/pexels-photo-3068519.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -216,6 +230,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 10,
     "title": "Holiday Inn Express Ramsgate Minster, an IHG Hotel ",
+    "term": "short",
+    "shared": "3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/2343466/pexels-photo-2343466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -246,6 +262,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 8,
     "title": "OYO Sunrise Hotel ",
+    "term": "long",
+    "shared": "4",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1571469/pexels-photo-1571469.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -276,6 +294,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 1,
     "title": "The Bridge House; BW Signature Collection ",
+    "term": "short",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/3935315/pexels-photo-3935315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -306,6 +326,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 19,
     "title": "Hartford Hall on School Lane ",
+    "term": "long",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1428348/pexels-photo-1428348.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -336,6 +358,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 4,
     "title": "Red Lion, Wigan by Marston's Inns ",
+    "term": "short",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -366,6 +390,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 6,
     "title": "Swan, Thatcham by Marston's Inns ",
+    "term": "long",
+    "shared": "4",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/4665034/pexels-photo-4665034.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -396,6 +422,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 13,
     "title": "Stonehouse Court Hotel - A Bespoke Hotel ",
+    "term": "short",
+    "shared": "3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1652423/pexels-photo-1652423.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -413,7 +441,7 @@
     "priceDay": "$36",
     "priceHour": "$5",
     "maxGuests": 6,
-    "bedrooms": 2,
+    "bedrooms": 6,
     "bathrooms": 5,
     "saleOff": null,
     "isAds": null,
@@ -426,6 +454,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 18,
     "title": "The Ethorpe Hotel by Greene King Inns ",
+    "term": "long",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
@@ -456,6 +486,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 19,
     "title": "Tumbling Weir Hotel ",
+    "term": "short",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/3773582/pexels-photo-3773582.png?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -486,6 +518,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 9,
     "title": "Saracens Head Hotel by Greene King Inns ",
+    "term": "long",
+    "shared": "3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/3741314/pexels-photo-3741314.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -516,6 +550,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 19,
     "title": "The Chantry ",
+    "term": "short",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1454806/pexels-photo-1454806.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -546,6 +582,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 13,
     "title": "Littledean House Hotel ",
+    "term": "long",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/3935326/pexels-photo-3935326.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -576,6 +614,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 3,
     "title": "Original White Hart, Ringwood by Marston's Inns ",
+    "term": "short",
+    "shared": "3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/6527028/pexels-photo-6527028.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -606,6 +646,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 2,
     "title": "The Bell Hotel ",
+    "term": "long",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/1539777/pexels-photo-1539777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -636,6 +678,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 14,
     "title": "Harper's Steakhouse Southampton ",
+    "term": "short",
+    "shared": "1",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/6238683/pexels-photo-6238683.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -666,6 +710,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 10,
     "title": "Strawberry Bank Hotel ",
+    "term": "long",
+    "shared": "3",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/2029673/pexels-photo-2029673.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -696,6 +742,8 @@
     "href": "/listing-stay-detail",
     "listingCategoryId": 5,
     "title": "OYO Honeycroft Lodge ",
+    "term": "short",
+    "shared": "2",
     "featuredImage": "https://images.pexels.com/photos/5191371/pexels-photo-5191371.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "galleryImgs": [
       "https://images.pexels.com/photos/4112557/pexels-photo-4112557.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",

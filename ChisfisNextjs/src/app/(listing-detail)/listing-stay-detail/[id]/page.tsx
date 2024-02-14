@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, Fragment, useState } from 'react';
+import React, { FC, Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Squares2X2Icon } from '@heroicons/react/24/outline';
 import Comment from '@/components/Comment';
@@ -11,7 +11,7 @@ import ButtonSecondary from '@/shared/ButtonSecondary';
 import ButtonClose from '@/shared/ButtonClose';
 import LikeSaveBtns from '@/components/LikeSaveBtns';
 import Image from 'next/image';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Amenities_demos, PHOTOS } from './constant';
 import StayDatesRangeInput from './StayDatesRangeInput';
 import GuestsInput from './GuestsInput';
@@ -46,7 +46,9 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const priceDayNumber = parseFloat(filteredData[0].priceDay.replace('$', ''));
   const priceHourNumber = parseFloat(filteredData[0].priceHour.replace('$', ''));
   const filteredAuthors = DEMO_AUTHORS.filter(item => item.id === filteredData[0].authorId)
-
+  const searchParams = useSearchParams()
+  const terms = searchParams.get('term')
+  
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<{
     [day: string]: string[];
   }>({});
@@ -61,7 +63,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       return { ...prevSelectedTimeSlots, [day]: updatedSlots };
     });
   };
-
+  let sharedNumber: number;
+  let sharedExpensesDayNumber: number;
+  let sharedExpensesHourNumber: number;
+  if(filteredData[0].shared !== undefined){
+  sharedNumber = parseInt(filteredData[0].shared , 10)
+  sharedNumber = sharedNumber + 1
+  sharedExpensesDayNumber = Math.round(priceDayNumber / sharedNumber);
+  sharedExpensesHourNumber = Math.round(priceHourNumber / sharedNumber);
+}
   // Function to check if a time slot is selected for a specific day
 
   const isTimeSlotSelected = (day: string, timeSlot: string) => {
@@ -93,19 +103,42 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   let headingComponent: React.JSX.Element;
   if (isDay === 'Day') {
-    headingComponent = (
+    if(terms === "long" || terms === "short"){
+      if(filteredData[0].shared !== undefined && filteredData[0].priceDay !== undefined && filteredData[0].priceHour !== undefined){
+        let priceDayNum = parseInt(filteredData[0].priceDay.replace("$", ""), 10);
+        let sharedNum = parseInt(filteredData[0].shared , 10)
+        sharedNum = sharedNum + 1
+        headingComponent = (
+        <h3 className="text-2xl font-semibold">
+        ${Math.round(priceDayNum / sharedNum)} <span className="font-normal text-base"> / Night whit shared expenses</span>
+        </h3>)
+      }
+    } else {
+      headingComponent = (
       <h3 className="text-2xl font-semibold">
-        {' '}
-        {filteredData[0].priceDay} <span className="font-normal"> / Night</span>{' '}
+        {filteredData[0].priceDay} <span className="font-normal"> / Night</span>
       </h3>
     );
+    }
   } else if (isDay === 'Hour') {
-    headingComponent = (
-      <h3 className="text-2xl font-semibold">
-        {' '}
-        {filteredData[0].priceHour} <span className="font-normal"> / hour</span>{' '}
-      </h3>
-    );
+    if(terms === "long" || terms === "short"){
+      if(filteredData[0].shared !== undefined && filteredData[0].priceDay !== undefined && filteredData[0].priceHour !== undefined){
+        let priceHourNum = parseInt(filteredData[0].priceHour.replace("$", ""), 10); 
+        let sharedNum = parseInt(filteredData[0].shared , 10)
+        sharedNum = sharedNum + 1
+        headingComponent = (
+        <h3 className="text-2xl font-semibold">
+        ${Math.round(priceHourNum / sharedNum)} <span className="font-normal text-base"> / Hour whit shared expenses</span>
+        </h3>)
+      }
+    } else {
+        headingComponent = (
+        <h3 className="text-2xl font-semibold">
+          {' '}
+          {filteredData[0].priceHour} <span className="font-normal"> / Hour</span>{' '}
+        </h3>
+      );
+    }
   }
 
   const [selectedHour, setSelectedHour] = useState(1);
@@ -316,7 +349,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <div className='max-sm:hidden py-6 border-y border-gray-200'>
           <button className='bg-white border rounded-full py-2 px-4 border-gray-200 ml-20' onClick={handleGoBack}>Back</button>
         </div>
-        <div className="max-sm:pt-4 flex justify-between items-center ml-4 sm:ml-20">
+        <div className="max-sm:pt-4 pt-4 flex justify-between items-center ml-4 sm:ml-20">
           <Badge name="Wooden house" />
         </div>
         <div>
@@ -540,7 +573,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         >
           <div className="card">
             <div className="card-body">
-              {headingComponent}
+            {headingComponent}
               <div className="mt-5">
                 <TabList className="border-0">
                   <div className="border-card border rounded-full flex w-full h-[44px]">
@@ -751,15 +784,14 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   </p>
 
                   <div className="flex justify-between items-center mt-4">
-                    <p>{filteredData[0].priceHour} x {selectedHour} hours</p>
-                    <p>${priceHourNumber * selectedHour}</p>
+                    <p>{terms === 'long' || terms === 'short' ?  sharedExpensesHourNumber + ' x ' + selectedHour + ' hours' : filteredData[0].priceHour + ' x ' + selectedHour + ' hours'}</p>
+                    <p>{terms === 'long' || terms === 'short' ? '$' + (sharedExpensesHourNumber * selectedHour) : '$' + (priceHourNumber * selectedHour)}</p>
                   </div>
                   <hr className="mt-4" />
                   <div className="flex justify-between items-center mt-4">
                     <p>Total</p>
-                    <p>${priceHourNumber * selectedHour}</p>
+                    <p>{terms === 'long' || terms === 'short' ? '$' + (sharedExpensesHourNumber * selectedHour) : '$' + (priceHourNumber * selectedHour)}</p>
                   </div>
-
                   {isSeeMoreDetailsOpen && (
                     <div className="fixed top-28 lg:left-40 w-3/4 h-[80%] flex justify-center items-center shadow-2xl bg-opacity-50 z-50 ">
                       <div className="lg:overflow-hidden overflow-auto bg-white rounded-lg p-6 pt-3 my-5 max-w-[1293px] lg:h-[1034px] w-full  h-auto  max-h-full py-10 mx-4 relative">
@@ -955,10 +987,10 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     <div className="mt-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p>{filteredData[0].priceDay} x {numberOfDays} nights</p>
+                          <p>{terms === 'long' || terms === 'short' ?  sharedExpensesDayNumber + ' x ' + numberOfDays + ' nights' : filteredData[0].priceDay + ' x ' + numberOfDays + ' nights'}</p>
                         </div>
                         <div>
-                          <p>${priceDayNumber * numberOfDays}</p>
+                          <p>{terms === 'long' || terms === 'short' ? '$' + (sharedExpensesDayNumber * numberOfDays) : '$' + (priceDayNumber * numberOfDays)}</p>
                         </div>
                       </div>
                       <div className="flex items-center justify-between">
@@ -986,7 +1018,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       <div>
                         {numberOfDays && (
                           <p className="font-semibold">
-                            $ {priceDayNumber * numberOfDays}{' '}
+                            {terms === 'long' || terms === 'short' ? '$' + (sharedExpensesDayNumber * numberOfDays) : '$' + (priceDayNumber * numberOfDays)}
                           </p>
                         )}
                       </div>
@@ -1005,7 +1037,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   };
 
   return (
-    <div className="bg-white w-full">
+    <div className="bg-white w-full sm:w-[100vw]">
       {/*  HEADER */}
       <header> 
         {renderSection1()}
@@ -1108,7 +1140,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
               </div>
             ))}
           </div>
-          <div className={`grid grid-cols-1 sm:mx-20 mx-4 sm:grid sm:grid-cols-4`}>
+          <div className={`grid sm:hidden grid-cols-1 sm:mx-20 mx-4 sm:grid-cols-4`}>
             <div
               key={DEMO_STAYS[0].id}
               onMouseEnter={() => setCurrentHoverID((_) => DEMO_STAYS[0].id)}

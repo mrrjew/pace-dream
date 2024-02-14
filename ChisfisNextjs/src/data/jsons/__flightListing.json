@@ -1,0 +1,92 @@
+[
+    {
+      "id": "1",
+      "price": "$4,100",
+      "saleOff": "40% off",
+      "airlines": {
+        "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+        "name": "Korean Air"
+      }
+    },
+    {
+        "id": "2",
+        "price": "$3,380",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "3",
+        "price": "$2,380",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+            "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "4",
+        "price": "$4,100",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+            "name": "Korean Air"
+      }
+    },
+    {
+        "id": "5",
+        "price": "$3,380",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "6",
+        "price": "$4,100",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+            "name": "Korean Air"
+      }
+    },
+    {
+        "id": "7",
+        "price": "$3,380",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "8",
+        "price": "$4,100",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+            "name": "Korean Air"
+      }
+    },
+    {
+        "id": "9",
+        "price": "$4,100",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+            "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "10",
+        "price": "$4,100",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    }
+  ]
