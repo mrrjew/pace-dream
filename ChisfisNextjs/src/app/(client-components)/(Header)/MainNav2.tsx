@@ -51,7 +51,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
               <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
             </button>
             {/* <Link href={"/help-center" as Route<string> } > */}
-            <Link href={"/help-center" as Route<string>} className={`${btnStyle} mr-8`}>
+            <Link href={"/about-us" as Route<string>} className={`${btnStyle} mr-8`}>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -91,7 +91,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
 
 
         <NavbarMobile />
-       
+
 
         <div className="hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
           <div className="hidden lg:flex space-x-1">
