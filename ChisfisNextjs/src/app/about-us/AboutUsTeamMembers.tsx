@@ -56,7 +56,7 @@ const AboutUsTeamMembers = () => {
               <p className="mt-4 lg:text-xl text-lg font-medium">
                 {member.name}
               </p>
-              <p className="mt-2 lg:text-lg text-lg font-medium text-[#632DF8]">
+              <p className="mt-2 lg:text-lg text-base font-medium text-[#632DF8]">
                 {member.role}
               </p>
               <p className="mt-2 text-center">{member.desc}</p>
@@ -69,7 +69,7 @@ const AboutUsTeamMembers = () => {
           </div>
         ))}
       </div>
-      
+
     </div>
   );
 };
