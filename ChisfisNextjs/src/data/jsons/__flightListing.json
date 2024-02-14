@@ -64,7 +64,7 @@
     },
     {
         "id": "8",
-        "price": "$4,100",
+        "price": "$2,980",
         "saleOff": "40% off",
         "airlines": {
             "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
@@ -73,7 +73,7 @@
     },
     {
         "id": "9",
-        "price": "$4,100",
+        "price": "$3,380",
         "saleOff": "40% off",
         "airlines": {
             "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
@@ -82,11 +82,137 @@
     },
     {
         "id": "10",
-        "price": "$4,100",
+        "price": "$3,790",
         "saleOff": "40% off",
         "airlines": {
             "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
             "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "11",
+        "price": "$4,400",
+        "saleOff": "40% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+          "name": "Korean Air"
+      }
+    },
+    {
+        "id": "12",
+        "price": "$2,900",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "13",
+        "price": "$4,400",
+        "saleOff": "35% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+          "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "14",
+        "price": "$3,600",
+        "saleOff": "60% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+          "name": "Korean Air"
+      }
+    },
+    {
+        "id": "15",
+        "price": "$4,400",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "16",
+        "price": "$3,800",
+        "saleOff": "45% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+          "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "17",
+        "price": "$4,300",
+        "saleOff": "40% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+            "name": "Korean Air"
+      }
+    },
+    {
+        "id": "18",
+        "price": "$4,400",
+        "saleOff": "45% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "19",
+        "price": "$4,200",
+        "saleOff": "60% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+          "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "20",
+        "price": "$3,400",
+        "saleOff": "55% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+          "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "21",
+        "price": "$3,600",
+        "saleOff": "30% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+          "name": "Korean Air"
+      }
+    },
+    {
+        "id": "22",
+        "price": "$3,900",
+        "saleOff": "35% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png",
+            "name": "Singapore Airlines"
+      }
+    },
+    {
+        "id": "23",
+        "price": "$3,800",
+        "saleOff": "45% off",
+        "airlines": {
+          "logo": "https://www.gstatic.com/flights/airline_logos/70px/multi.png",
+          "name": "Philippine Airlines"
+      }
+    },
+    {
+        "id": "24",
+        "price": "$4,500",
+        "saleOff": "50% off",
+        "airlines": {
+            "logo": "https://www.gstatic.com/flights/airline_logos/70px/KE.png",
+            "name": "Korean Air"
       }
     }
   ]

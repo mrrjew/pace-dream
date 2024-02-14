@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "Garden",
+    "name": "Sports and Recreation Equipment",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/2363814/pexels-photo-2363814.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 13,
@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "name": "Jewelry",
+    "name": "Professional Equipment",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/7932264/pexels-photo-7932264.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 16,
@@ -17,7 +17,7 @@
   },
   {
     "id": 3,
-    "name": "Industrial",
+    "name": "Tools and Machinery",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/1858406/pexels-photo-1858406.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 15,
@@ -25,7 +25,7 @@
   },
   {
     "id": 4,
-    "name": "Tools",
+    "name": "Water Sports Gear",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/4352244/pexels-photo-4352244.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 21,
@@ -33,7 +33,7 @@
   },
   {
     "id": 5,
-    "name": "Automotive",
+    "name": "Fitness Equipment",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/2395249/pexels-photo-2395249.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 16,
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "name": "Toys",
+    "name": "Musical Instruments",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 25,
@@ -49,7 +49,7 @@
   },
   {
     "id": 7,
-    "name": "Outdoors",
+    "name": "Tech Gadgets",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/7195344/pexels-photo-7195344.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 14,
@@ -57,7 +57,7 @@
   },
   {
     "id": 8,
-    "name": "Health",
+    "name": "Party and Event Gear",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/7195270/pexels-photo-7195270.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 4,
@@ -65,7 +65,7 @@
   },
   {
     "id": 9,
-    "name": "Electronics",
+    "name": "Event Spaces",
     "href": "/",
     "thumbnail": "https://images.pexels.com/photos/7195208/pexels-photo-7195208.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "count": 7,
@@ -73,7 +73,7 @@
   },
   {
     "id": 10,
-    "name": "Industrial",
+    "name": "Workspaces",
     "href": "/",
     "thumbnail": "x",
     "count": 26,
@@ -81,7 +81,7 @@
   },
   {
     "id": 11,
-    "name": "Health",
+    "name": "Creative Spaces",
     "href": "/",
     "thumbnail": "x",
     "count": 20,
@@ -89,7 +89,7 @@
   },
   {
     "id": 12,
-    "name": "Toys",
+    "name": "Wellness and Fitness Spaces",
     "href": "/",
     "thumbnail": "x",
     "count": 22,
@@ -97,14 +97,14 @@
   },
   {
     "id": 13,
-    "name": "Sports",
+    "name": "Leisure and Recreational Spaces",
     "href": "/",
     "thumbnail": "x",
     "color": "green"
   },
   {
     "id": 14,
-    "name": "Automotive",
+    "name": "Educational Spaces",
     "href": "/",
     "thumbnail": "x",
     "count": 9,
@@ -112,7 +112,7 @@
   },
   {
     "id": 15,
-    "name": "Computers",
+    "name": "Outdoor Spaces",
     "href": "/",
     "thumbnail": "x",
     "count": 26,
@@ -120,7 +120,7 @@
   },
   {
     "id": 16,
-    "name": "Design",
+    "name": "Specialty Spaces",
     "href": "/",
     "thumbnail": "x",
     "count": 15,
