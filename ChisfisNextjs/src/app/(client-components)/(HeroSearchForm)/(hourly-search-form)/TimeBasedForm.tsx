@@ -43,7 +43,7 @@ const TimeBasedForm: FC<{}> = ({}) => {
           <div className="flex flex-col items-baseline flex-1 md:flex-row rounded-full">
             <LocationInput className="flex-[1.5]" />
             <StayDatesRangeInput className="flex-1" />
-            <GuestsInput className="flex-[1.5]" buttonSubmitHref="/listing-stay-map/4"/>
+            <GuestsInput className="flex-[1.5]" buttonSubmitHref={`/listing-stay-map/4?term=Hourly&option=${dropOffLocationType}`}/>
           </div>
         </form>
       </div>

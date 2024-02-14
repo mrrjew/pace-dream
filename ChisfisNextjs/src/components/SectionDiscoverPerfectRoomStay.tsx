@@ -1,10 +1,10 @@
 "use client"
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
-import { StayDataType } from "@/data/types";
+import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS } from "@/data/listings";
+import { StayDataType, FlightDataType, LastDataType } from "@/data/types";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import HeaderFilter from "./HeaderFilter";
-import StayCard from "./StayCard";
+import FlightCard from "./FlightCard";
 import StayCard2 from "./StayCard2";
 import { useWindowSize } from "react-use";
 import { useSwipeable } from "react-swipeable";
@@ -16,12 +16,12 @@ import { variants } from "@/utils/animationVariants";
 import HeaderFilterDiscover from "./HeaderFilterDiscover";
 
 // OTHER DEMO WILL PASS PROPS
-const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
-
+/* const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8); */
+let DEMO_LAST: LastDataType[] = DEMO_LAST_LISTINGS.filter((_, i) => i < 8);
 //
 export interface SectionDiscoverPerfectRoomStayProps {
   className?: string;
-  stayListings?: StayDataType[];
+  stayListings?: LastDataType[];
   heading?: ReactNode;
   subHeading?: ReactNode;
   headingIsCenter?: boolean;
@@ -33,12 +33,12 @@ export interface SectionDiscoverPerfectRoomStayProps {
 
 const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = ({
   className = "",
-  stayListings = DEMO_DATA,
+  stayListings = DEMO_LAST,
   heading = "Last-Minute Deals for Hotels and Flights",
-  subHeading = "Popular Long term Stay & Short term Stay places to recommends for you",
+  subHeading = "Explore Exclusive Last-Minute Deals on Hotels and Flights",
   headingIsCenter,
   itemPerRow = 4,
-  tabs = ["All", "Hotel", "Long term Stay", "Short term Stay"],
+  tabs = ["All", "Hotel", "Flight"],
   cardType = "card2",
   sliderStyle= "style1"
 }) => {
@@ -86,22 +86,6 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
     },
     trackMouse: true,
   });
-  const renderCard = (stay: StayDataType) => {
-    let CardName = StayCard;
-    switch (cardType) {
-      case "card1":
-        CardName = StayCard;
-        break;
-      case "card2":
-        CardName = StayCard2;
-        break;
-
-      default:
-        CardName = StayCard;
-    }
-    if (!numberOfItems) return null;
-    return <CardName key={stay.id} data={stay} />;
-  };
 
   return (
     <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20 ${className}`}>
@@ -158,7 +142,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
                       width: `calc(1/${numberOfItems} * 100%)`,
                     }}
                   >
-                    {renderCard(item)}
+                    <StayCard2 key={item.id} data={item} />
                   </motion.li>
                 ))}
               </AnimatePresence>
@@ -166,21 +150,6 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
           </div>
         </div>
       </MotionConfig>
-      {/* <div className="nc-SectionDiscoverPerfectRoomStay pr-24 pl-24 relative">
-      <HeaderFilter
-        tabActive={"All"}
-        tabs={tabs}
-        heading={heading}
-        subHeading={subHeading}
-      />
-      <div
-        className={`grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4`}
-      >
-        {stayListings.map((stay, i) => (
-  (i + 1) % 2 === 0 ? renderCard(stay) : null
-))}
-      </div>
-    </div> */}
     </div>
     
   );

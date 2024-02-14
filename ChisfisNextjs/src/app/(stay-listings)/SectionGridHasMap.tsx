@@ -4,13 +4,13 @@ import React, { FC, useState } from "react";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
 import SectionSliderGridHasMap from "@/components/SectionSliderGridHasMap";
 import GoogleMapReact from "google-map-react";
-import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS } from "@/data/listings";
+import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS, DEMO_TIMEBASED_LISTINGS } from "@/data/listings";
 import ButtonClose from "@/shared/ButtonClose";
 import TabFilters from "./TabFilters";
 import StayCard2 from "@/components/StayCard2";
 import { useSearchParams } from "next/navigation";
 import FlightCard2 from "@/components/FlightCard2";
-import { LastDataType, StayDataType } from "@/data/types";
+import { LastDataType, StayDataType, TimeBasedDataType } from "@/data/types";
 
 
 export interface SectionGridHasMapProps {}
@@ -20,9 +20,10 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const [showFullMapFixed, setShowFullMapFixed] = useState(false);
   const [map, setMap] = useState(true);
   const searchParams = useSearchParams()
+  const option = searchParams.get('option')
   const terms = searchParams.get('term')
   
-  let DEMO_STAYS: StayDataType[] | LastDataType[] ;
+  let DEMO_STAYS: StayDataType[] | LastDataType[] | TimeBasedDataType[];
   switch (terms) {
     case "long":
       DEMO_STAYS = DEMO_STAY_LISTINGS.filter(listing => listing.term === "long").filter((_, i) => i < 12);
@@ -39,10 +40,15 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
     case "20":
       DEMO_STAYS = DEMO_LAST_LISTINGS.filter(listing => listing.lastMinute === 20).filter((_, i) => i < 12);
       break;
+    case "Hourly":
+      DEMO_STAYS = DEMO_TIMEBASED_LISTINGS.filter((e) => e.listingCategory.name === option).filter((_, i) => i < 12);
+      break;
     default:
       DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
       break;
   }
+
+  console.log(DEMO_STAYS)
   
   return (
       <div className="relative flex min-h-screen">
