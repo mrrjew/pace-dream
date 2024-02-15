@@ -2,7 +2,8 @@
 
 import { ContactUsSchema } from "@/components/AccountSetting/Schemas/AccountSettingSchema";
 import { useFormik } from "formik";
-
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 const initialValues = {
   firstname: "",
   lastname: "",
@@ -12,6 +13,7 @@ const initialValues = {
 };
 
 const ContactUsForm = () => {
+  const form = useRef<HTMLFormElement | null>(null);
   const {
     values,
     errors,
@@ -23,8 +25,27 @@ const ContactUsForm = () => {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ContactUsSchema,
-    onSubmit: (values) => {},
+    onSubmit: (values) => { },
   });
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    if (form.current) {
+      emailjs
+        .sendForm('service_a14dsnc', 'template_k0m5snj', form.current, '4itbfBdegtJAhQS1i')
+        .then(
+          (result: any) => {
+            console.log('SUCCESS!', result.text);
+          },
+          (error: any) => {
+            console.log('FAILED...', error.text);
+          }
+        );
+
+      resetForm();
+    }
+  };
   return (
     <>
       <div className="mt-12 lg:px-36 px-4 mx-auto text-center">
@@ -34,8 +55,11 @@ const ContactUsForm = () => {
           We'd love to hear from you. Please fill out this form.
         </p>
       </div>
+
+
       <form
-        onSubmit={handleSubmit}
+        onSubmit={sendEmail}
+        ref={form}
         className="mt-12 mb-20 lg:px-36 px-4 mx-auto"
       >
         <div className="flex lg:flex-row flex-col gap-6">
