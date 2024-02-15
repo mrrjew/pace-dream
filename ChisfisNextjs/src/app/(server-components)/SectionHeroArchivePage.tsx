@@ -33,7 +33,7 @@ const renderForm = (currentPage: String) => {
 
     case "Experiences":
     case "Find Roommate":
-    case "Hourly Rental Space":
+    case "Time-Based":
     case "Hourly Rental Gear":
     case "Last Minutes":
       return (
