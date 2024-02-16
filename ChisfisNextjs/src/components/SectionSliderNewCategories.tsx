@@ -100,7 +100,7 @@ const DEMO_CATS: TaxonomyType[] = [
 ];
 
 const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
-  heading = "Suggestions for Hourly Rooms",
+  heading = "Handpicked Suggestions",
   subHeading = "Popular places to stay that Chisfis recommends for you",
   className = "",
   itemClassName = "",
@@ -181,23 +181,23 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
       >
         <div className={`relative flow-root`} {...handlers}>
           <div className="-mt-20 mb-20">
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
-        />}
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-        />}
-        </div>
+            {currentIndex ? (
+              <PrevBtn
+                onClick={() => changeItemId(currentIndex - 1)}
+                className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl border-2  -translate-y-1/2 z-[1]"
+              />
+            ) : <PrevBtn
+              className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl border-2 border-neutral-100 -translate-y-1/2 z-[1]"
+            />}
+            {categories.length > currentIndex + numberOfItems ? (
+              <NextBtn
+                onClick={() => changeItemId(currentIndex + 1)}
+                className="ml-8 order-first font-black text-black text-xl border-2 -translate-y-1/2 z-[1]"
+              />
+            ) : <NextBtn
+              className="ml-8 bg-neutral-100 text-neutral-100 text-xl border-2 -translate-y-1/2 z-[1]"
+            />}
+          </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -224,23 +224,23 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
                   </motion.li>
                 ))}
                 <div className="relative ml-[188px] mt-4">
-                {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-        />}
-        </div>
+                  {currentIndex ? (
+                    <PrevBtn
+                      onClick={() => changeItemId(currentIndex - 1)}
+                      className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
+                    />
+                  ) : <PrevBtn
+                    className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+                  />}
+                  {categories.length > currentIndex + numberOfItems ? (
+                    <NextBtn
+                      onClick={() => changeItemId(currentIndex + 1)}
+                      className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
+                    />
+                  ) : <NextBtn
+                    className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
+                  />}
+                </div>
               </AnimatePresence>
             </motion.ul>
           </div>
