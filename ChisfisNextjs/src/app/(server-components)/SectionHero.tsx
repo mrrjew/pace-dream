@@ -1,3 +1,4 @@
+"use client"
 import React, { FC } from "react";
 import imagePng from "@/images/img-header.png";
 import rightImgDemo from "@/images/BecomeAnAuthorImg.png";
@@ -10,6 +11,9 @@ export interface SectionHeroProps {
 }
 
 const SectionHero: FC<SectionHeroProps> = () => {
+  const handleButtonClick = () => {
+    window.scrollBy({ top: 1000, behavior: 'smooth' });
+  };
   return (
     <section
       className={`nc-SectionHero flex flex-col-reverse md:flex-col md:pt-44 lg:pt-20 lg:pl-24 lg:pr-24 pt-20 md:max-w-[100%]`}
@@ -19,16 +23,16 @@ const SectionHero: FC<SectionHeroProps> = () => {
           <h2 className="lg:font-extrabold font-semibold text-xl md:text-3xl lg:text-4xl lg:pr-12">
             Explore your PaceDream Book hotels, Car and more with ease!
           </h2>
-          <ButtonPrimary href="/listing-stay-map" sizeClass="bg-violet px-5 py-4 sm:px-7 ">
+          <ButtonPrimary onClick={handleButtonClick} sizeClass="bg-violet px-5 py-4 sm:px-7 ">
             Start your search
           </ButtonPrimary>
         </div>
         <div className="flex-shrink-0 mb-16 md:-mt-28 md:mb-0 md:mr-10 md:w-1/2">
-        <Image alt="" src={imagePng} className="h-[26rem] w-[32rem] lg:h-[24rem] lg:w-[30rem]" />
-      </div>
+          <Image alt="" src={imagePng} className="h-[26rem] w-[32rem] lg:h-[24rem] lg:w-[30rem]" />
+        </div>
       </article>
       <div className="md:block w-max-[95vw] w-[93vw] xl:w-[80vw] lg:w-[90vw] flex md:pt-0 z-10 mb-12 ml-16 md:ml-0 lg:mb-0 md:mt-8 lg:-mt-16 md:max-w-full border-grey border bg-white rounded-2xl">
-        <HeroSearchForm  />
+        <HeroSearchForm />
       </div>
     </section>
   );

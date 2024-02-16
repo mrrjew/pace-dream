@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import SectionHero from "@/app/(server-components)/SectionHero";
 import { TaxonomyType } from "@/data/types";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
@@ -14,43 +14,43 @@ import SectionSliderFeaturePlaces from "@/components/SectionSliderFeaturePlaces"
 import SectionClientSayMobile from "@/components/SectionClientSayMobile";
 import SectionSliderAuthorBoxMobile from "@/components/SectionSliderAuthorBoxMobile";
 import SectionSliderNewCategoriesMobile from "@/components/SectionSliderNewCategoriesMobile";
+import adventure from "@/images/adventure.jpg"
+import roomStaysImg from "@/images/room-stays.jpg"
+import timeBasedImg from "@/images/wellness-fitness.jpg"
+import musicalInstrumentsImg from "@/images/musicalInstruments.jpg"
 
 const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
     href: "/listing-stay-map",
-    name: "New Yourk",
+    name: "Room Stays",
     taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/64271/queen-of-liberty-statue-of-liberty-new-york-liberty-statue-64271.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    count: 1882,
+    thumbnail: roomStaysImg.src,
   },
   {
     id: "2",
     href: "/listing-stay-map",
-    name: "Singapore",
+    name: "Time Based",
     taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/7740160/pexels-photo-7740160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    count: 1145,
+    thumbnail: timeBasedImg.src,
   },
   {
     id: "3",
     href: "/listing-stay-map",
-    name: "Paris",
+    name: "Hourly Rental Gears",
     taxonomy: "category",
-    count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    count: 4578,
+    thumbnail: musicalInstrumentsImg.src,
   },
   {
     id: "4",
     href: "/listing-stay-map",
-    name: "London",
+    name: "Experiences",
     taxonomy: "category",
     count: 188288,
-    thumbnail:
-      "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    thumbnail: adventure.src,
   },
   {
     id: "5",
