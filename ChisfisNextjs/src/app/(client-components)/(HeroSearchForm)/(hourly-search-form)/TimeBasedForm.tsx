@@ -5,27 +5,29 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 
-export type TypeDropOffLocationTimeBased = "Any type" | "Sports and Recreation Equipment" | "Professional Equipment" | "Tools and Machinery" | "Water Sports Gear" | "Fitness Equipment" | "Musical Instruments" | "Tech Gadgets" | "Party and Event Gear";
-const tabs: TypeDropOffLocationTimeBased[] = ["Any type" , "Sports and Recreation Equipment" , "Professional Equipment" , "Tools and Machinery" , "Water Sports Gear" , "Fitness Equipment" , "Musical Instruments" , "Tech Gadgets" , "Party and Event Gear"]
-const TimeBasedForm: FC<{}> = ({}) => {
+export type TypeDropOffLocationTimeBased = "Any type" | "Event Spaces" | "Workspaces" | "Creative Spaces" | "Wellness and Fitness Spaces" | "Leisure and Recreational Spaces" | "Educational Spaces" | "Outdoor Spaces" | "Specialty Spaces" | "Restrooms" | "Parking Spaces" | "EV Charging Stations" | "Storage Locker";
+const tabs: TypeDropOffLocationTimeBased[] = ["Any type", "Event Spaces", "Workspaces", "Creative Spaces", "Wellness and Fitness Spaces", "Leisure and Recreational Spaces", "Educational Spaces", "Outdoor Spaces", "Specialty Spaces", "Restrooms", "Parking Spaces", "EV Charging Stations", "Storage Locker"]
+
+
+const TimeBasedForm: FC<{}> = ({ }) => {
   const [dropOffLocationType, setDropOffLocationType] =
     useState<TypeDropOffLocationTimeBased>("Any type");
   const renderRadioBtn = () => {
     return (
       <div className="-mt-4 -mb-4 py-5 [ nc-hero-field-padding ] flex flex-row flex-wrap">
-        {tabs.map((tab) =>{
-        return(
-          <div
-          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === tab
-              ? "bg-violet shadow-black/10 shadow-lg text-white"
-              : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
-          }`}
-          onClick={(e) => setDropOffLocationType(tab)}
-        >
-          {tab}
-        </div>
-        )}
+        {tabs.map((tab) => {
+          return (
+            <div
+              className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationType === tab
+                ? "bg-violet shadow-black/10 shadow-lg text-white"
+                : "border bg-neutral-100 text-black border-neutral-300 dark:border-neutral-700"
+                }`}
+              onClick={(e) => setDropOffLocationType(tab)}
+            >
+              {tab}
+            </div>
+          )
+        }
         )}
       </div>
     );
@@ -43,7 +45,7 @@ const TimeBasedForm: FC<{}> = ({}) => {
           <div className="flex flex-col items-baseline flex-1 md:flex-row rounded-full">
             <LocationInput className="flex-[1.5]" />
             <StayDatesRangeInput className="flex-1" />
-            <GuestsInput className="flex-[1.5]" buttonSubmitHref={`/listing-stay-map/4?term=Hourly&option=${dropOffLocationType}`}/>
+            <GuestsInput className="flex-[1.5]" buttonSubmitHref={`/listing-stay-map/4?term=Hourly&option=${dropOffLocationType}`} />
           </div>
         </form>
       </div>
