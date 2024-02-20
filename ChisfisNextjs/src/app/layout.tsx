@@ -19,7 +19,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Olaven - The best place to find your hotel",
+  title: "PaceDream - The best place to find your hotel",
   description: "The best place to find your hotel",
 };
 
