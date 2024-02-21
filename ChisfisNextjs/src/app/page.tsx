@@ -18,6 +18,7 @@ import adventure from "@/images/adventure.jpg"
 import roomStaysImg from "@/images/room-stays.jpg"
 import timeBasedImg from "@/images/wellness-fitness.jpg"
 import musicalInstrumentsImg from "@/images/musicalInstruments.jpg"
+import FrequentlyAskedQuestion from "@/components/FrequentlyAskedQuestions";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -221,6 +222,9 @@ function PageHome() {
           {/* <SectionClientSay className="md:block hidden" itemPerRow={3} />
         <SectionClientSayMobile className="block md:hidden" itemPerRow={1} /> */}
           <SectionSubscribe />
+        </div>
+        <div>
+          <FrequentlyAskedQuestion />
         </div>
       </div>
     </main>

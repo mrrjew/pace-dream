@@ -2,14 +2,14 @@
 
 import NcInputNumber from "@/components/NcInputNumber";
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import ChevronDownIcon from "@heroicons/react/24/solid/ChevronDownIcon";
 import { FC, Fragment, useState } from "react";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 import { GuestsObject } from "../../type";
 import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 
-export interface FlightSearchFormProps {}
+export interface FlightSearchFormProps { }
 
 const flightClass = [
   {
@@ -26,11 +26,13 @@ const flightClass = [
   },
 ];
 
-export type TypeDropOffLocationType = "Male" | "Female" | "Any Gender";
+export type TypeDropOffLocationType = "Male Only" | "Female Only" | "Any Gender";
 
-const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
-  const [dropOffLocationType, setDropOffLocationType] =
-    useState<TypeDropOffLocationType>("Male");
+const FlightSearchForm: FC<FlightSearchFormProps> = ({ }) => {
+  const [dropOffLocationTypeLongTerm, setDropOffLocationTypeLongTerm] =
+    useState<TypeDropOffLocationType | null>(null);
+  const [dropOffLocationTypeShortTerm, setDropOffLocationTypeShortTerm] =
+    useState<TypeDropOffLocationType | null>(null);
   const [flightClassState, setFlightClassState] = useState("Economy");
 
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
@@ -73,9 +75,8 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
             >
               <span>{`${totalGuests || ""} Guests`}</span>
               <ChevronDownIcon
-                className={`${
-                  open ? "" : "text-opacity-70"
-                } ml-2 h-4 w-4 group-hover:text-opacity-80 transition ease-in-out duration-150`}
+                className={`${open ? "" : "text-opacity-70"
+                  } ml-2 h-4 w-4 group-hover:text-opacity-80 transition ease-in-out duration-150`}
                 aria-hidden="true"
               />
             </Popover.Button>
@@ -135,9 +136,8 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
             >
               <span>{`${flightClassState}`}</span>
               <ChevronDownIcon
-                className={`${
-                  open ? "" : "text-opacity-70"
-                } ml-2 h-4 w-4 group-hover:text-opacity-80 transition ease-in-out duration-150`}
+                className={`${open ? "" : "text-opacity-70"
+                  } ml-2 h-4 w-4 group-hover:text-opacity-80 transition ease-in-out duration-150`}
                 aria-hidden="true"
               />
             </Popover.Button>
@@ -177,40 +177,72 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
     );
   };
 
-  const renderRadioBtn = () => {
+  const renderRadioBtnLongTerm = () => {
     return (
-      <div className="py-5 -mt-4 -mb-4 [ nc-hero-field-padding ] flex flex-row flex-wrap">
+      <div className="py-5 -mt-4 -mb-8 [ nc-hero-field-padding ] items-center flex flex-row flex-wrap">
+        <span className="mr-4 text-sm font-semibold">Long-Term Stay:</span>
         <div
-          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "Male"
-              ? "bg-violet shadow-black/10 shadow-lg text-white"
-              : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
-          }`}
-          onClick={(e) => setDropOffLocationType("Male")}
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationTypeLongTerm === "Male Only"
+            ? "bg-violet shadow-black/10 shadow-lg text-white"
+            : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+            }`}
+          onClick={(e) => setDropOffLocationTypeLongTerm("Male Only")}
         >
-          Male
+          Male Only
         </div>
         <div
-          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "Female"
-              ? "bg-violet text-white shadow-black/10 shadow-lg"
-              : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
-          }`}
-          onClick={(e) => setDropOffLocationType("Female")}
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationTypeLongTerm === "Female Only"
+            ? "bg-violet text-white shadow-black/10 shadow-lg"
+            : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+            }`}
+          onClick={(e) => setDropOffLocationTypeLongTerm("Female Only")}
         >
-          Female
+          Female Only
         </div>
         <div
-          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
-            dropOffLocationType === "Any Gender"
-              ? "bg-violet text-white shadow-black/10 shadow-lg"
-              : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
-          }`}
-          onClick={(e) => setDropOffLocationType("Any Gender")}
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationTypeLongTerm === "Any Gender"
+            ? "bg-violet text-white shadow-black/10 shadow-lg"
+            : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+            }`}
+          onClick={(e) => setDropOffLocationTypeLongTerm("Any Gender")}
         >
           Any Gender
         </div>
       </div>
+    );
+  };
+  const renderRadioBtnShortTerm = () => {
+    return (
+      <div className="py-5 -mt-4 -mb-8 [ nc-hero-field-padding ] items-center flex flex-row flex-wrap">
+        <span className="mr-4 text-sm font-semibold">Short-Term Stay:</span>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationTypeShortTerm === "Male Only"
+            ? "bg-violet shadow-black/10 shadow-lg text-white"
+            : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+            }`}
+          onClick={(e) => setDropOffLocationTypeShortTerm("Male Only")}
+        >
+          Male Only
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationTypeShortTerm === "Female Only"
+            ? "bg-violet text-white shadow-black/10 shadow-lg"
+            : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+            }`}
+          onClick={(e) => setDropOffLocationTypeShortTerm("Female Only")}
+        >
+          Female Only
+        </div>
+        <div
+          className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${dropOffLocationTypeShortTerm === "Any Gender"
+            ? "bg-violet text-white shadow-black/10 shadow-lg"
+            : "bg-neutral-100 border border-neutral-300 dark:border-neutral-700"
+            }`}
+          onClick={(e) => setDropOffLocationTypeShortTerm("Any Gender")}
+        >
+          Any Gender
+        </div>
+      </div >
     );
   };
 
@@ -218,7 +250,8 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({}) => {
     return (
       <div className="pb-8">
         <form className="w-full relative mt-8">
-          {renderRadioBtn()}
+          {renderRadioBtnLongTerm()}
+          {renderRadioBtnShortTerm()}
           <div className="ml-4 mt-4 md:hidden">
             <h2 className="max-w-[75%] text-left font-semibold md:hidden text-3xl">
               Explore your PaceDream Book hotels, Car and more with ease!
