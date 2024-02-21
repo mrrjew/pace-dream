@@ -21,7 +21,7 @@ import 'react-tabs/style/react-tabs.css';
 import { setLocalStorageItem } from '@/utils/localStorageUtil';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { CustomHourInput } from './CustomHourInput';
-import  Verificaty  from '../../../../images/svg/Status Icon.svg'
+import Verificaty from '../../../../images/svg/Status Icon.svg'
 import Protect from '../../../../images/svg/Protect.svg'
 import { StarIcon } from '@heroicons/react/24/solid';
 import Dot from '../../../../images/svg/Dot.svg'
@@ -32,14 +32,14 @@ import Link from 'next/link';
 
 const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 4);
 
-export interface ListingStayDetailPageProps {}
+export interface ListingStayDetailPageProps { }
 
 export type TimeSlot = {
   hour: number;
   minute: number;
 };
 
-const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
+const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({ }) => {
   // time slot state
   const { id } = useParams()
   const filteredData = DEMO_STAY_LISTINGS.filter(item => item.id === id);
@@ -48,7 +48,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const filteredAuthors = DEMO_AUTHORS.filter(item => item.id === filteredData[0].authorId)
   const searchParams = useSearchParams()
   const terms = searchParams.get('term')
-  
+
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<{
     [day: string]: string[];
   }>({});
@@ -66,12 +66,12 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   let sharedNumber: number;
   let sharedExpensesDayNumber: number;
   let sharedExpensesHourNumber: number;
-  if(filteredData[0].shared !== undefined){
-  sharedNumber = parseInt(filteredData[0].shared , 10)
-  sharedNumber = sharedNumber + 1
-  sharedExpensesDayNumber = Math.round(priceDayNumber / sharedNumber);
-  sharedExpensesHourNumber = Math.round(priceHourNumber / sharedNumber);
-}
+  if (filteredData[0].shared !== undefined) {
+    sharedNumber = parseInt(filteredData[0].shared, 10)
+    sharedNumber = sharedNumber + 1
+    sharedExpensesDayNumber = Math.round(priceDayNumber / sharedNumber);
+    sharedExpensesHourNumber = Math.round(priceHourNumber / sharedNumber);
+  }
   // Function to check if a time slot is selected for a specific day
 
   const isTimeSlotSelected = (day: string, timeSlot: string) => {
@@ -103,36 +103,36 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
 
   let headingComponent: React.JSX.Element;
   if (isDay === 'Day') {
-    if(terms === "long" || terms === "short"){
-      if(filteredData[0].shared !== undefined && filteredData[0].priceDay !== undefined && filteredData[0].priceHour !== undefined){
+    if (terms === "long" || terms === "short") {
+      if (filteredData[0].shared !== undefined && filteredData[0].priceDay !== undefined && filteredData[0].priceHour !== undefined) {
         let priceDayNum = parseInt(filteredData[0].priceDay.replace("$", ""), 10);
-        let sharedNum = parseInt(filteredData[0].shared , 10)
+        let sharedNum = parseInt(filteredData[0].shared, 10)
         sharedNum = sharedNum + 1
         headingComponent = (
-        <h3 className="text-2xl font-semibold">
-        ${Math.round(priceDayNum / sharedNum)} <span className="font-normal text-base"> / Night whit shared expenses</span>
-        </h3>)
+          <h3 className="text-2xl font-semibold">
+            ${Math.round(priceDayNum / sharedNum)} <span className="font-normal text-base"> / Night whit shared expenses</span>
+          </h3>)
       }
     } else {
       headingComponent = (
-      <h3 className="text-2xl font-semibold">
-        {filteredData[0].priceDay} <span className="font-normal"> / Night</span>
-      </h3>
-    );
+        <h3 className="text-2xl font-semibold">
+          {filteredData[0].priceDay} <span className="font-normal"> / Night</span>
+        </h3>
+      );
     }
   } else if (isDay === 'Hour') {
-    if(terms === "long" || terms === "short"){
-      if(filteredData[0].shared !== undefined && filteredData[0].priceDay !== undefined && filteredData[0].priceHour !== undefined){
-        let priceHourNum = parseInt(filteredData[0].priceHour.replace("$", ""), 10); 
-        let sharedNum = parseInt(filteredData[0].shared , 10)
+    if (terms === "long" || terms === "short") {
+      if (filteredData[0].shared !== undefined && filteredData[0].priceDay !== undefined && filteredData[0].priceHour !== undefined) {
+        let priceHourNum = parseInt(filteredData[0].priceHour.replace("$", ""), 10);
+        let sharedNum = parseInt(filteredData[0].shared, 10)
         sharedNum = sharedNum + 1
         headingComponent = (
-        <h3 className="text-2xl font-semibold">
-        ${Math.round(priceHourNum / sharedNum)} <span className="font-normal text-base"> / Hour whit shared expenses</span>
-        </h3>)
+          <h3 className="text-2xl font-semibold">
+            ${Math.round(priceHourNum / sharedNum)} <span className="font-normal text-base"> / Hour whit shared expenses</span>
+          </h3>)
       }
     } else {
-        headingComponent = (
+      headingComponent = (
         <h3 className="text-2xl font-semibold">
           {' '}
           {filteredData[0].priceHour} <span className="font-normal"> / Hour</span>{' '}
@@ -564,7 +564,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY&q=Eiffel+Tower,Paris+France"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999781829875!2d2.2920969260003203!3d48.85821455071963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sin!4v1708333221439!5m2!1sen!2sin"
             ></iframe>
           </div>
         </div>
@@ -593,14 +593,13 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         >
           <div className="card">
             <div className="card-body">
-            {headingComponent}
+              {headingComponent}
               <div className="mt-5">
                 <TabList className="border-0">
                   <div className="border-card border rounded-full flex w-full h-[44px]">
                     <Tab
-                      className={` py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${
-                        isDay === "Day" ? "bg-[#F8F9FB]" : ""
-                      }`}
+                      className={` py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${isDay === "Day" ? "bg-[#F8F9FB]" : ""
+                        }`}
                     >
                       <button
                         onClick={() => handleDayHourToggle("Hour")}
@@ -610,9 +609,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                       </button>
                     </Tab>
                     <Tab
-                      className={`py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${
-                        isDay === "Hour" ? "bg-[#F8F9FB]" : ""
-                      }`}
+                      className={`py-2 rounded-full text-[#49556D]  text-[15px] font-[600] flex-1 ${isDay === "Hour" ? "bg-[#F8F9FB]" : ""
+                        }`}
                     >
                       <button
                         onClick={() => handleDayHourToggle("Day")}
@@ -636,28 +634,25 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     {[1, 2, 3, 4, 12, 24].map((hour) => (
                       <div
                         key={hour}
-                        className={`rounded-3xl border-2 p-2 sm:mr-1 cursor-pointer transition-all ease-in-out ${
-                          hour === selectedHour
+                        className={`rounded-3xl border-2 p-2 sm:mr-1 cursor-pointer transition-all ease-in-out ${hour === selectedHour
                             ? "bg-[#574EFA] border-[#574EFA]"
                             : ""
-                        }`}
+                          }`}
                         onClick={() => setSelectedHour(hour)}
                       >
                         <p
-                          className={`text-sm md:text-lg text-center transition-all ease-in-out ${
-                            selectedHour === hour
+                          className={`text-sm md:text-lg text-center transition-all ease-in-out ${selectedHour === hour
                               ? "text-white"
                               : "text-[#878787] "
-                          }`}
+                            }`}
                         >
                           {hour}
                         </p>
                         <span
-                          className={`text-[10px] sm:text-xs transition-all ease-in-out ${
-                            selectedHour === hour
+                          className={`text-[10px] sm:text-xs transition-all ease-in-out ${selectedHour === hour
                               ? "text-white"
                               : "text-[#9B9B9B]"
-                          }`}
+                            }`}
                         >
                           Hour
                         </span>
@@ -705,28 +700,25 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         return (
                           <div
                             key={index}
-                            className={`rounded-3xl border-2 px-2 py-2 cursor-pointer transition-all ease-in-out ${
-                              day === selectedDay
+                            className={`rounded-3xl border-2 px-2 py-2 cursor-pointer transition-all ease-in-out ${day === selectedDay
                                 ? "bg-[#574EFA] border-[#574EFA]"
                                 : ""
-                            }`}
+                              }`}
                             onClick={() => setSelectedDay(day)}
                           >
                             <span
-                              className={`text-xs transition-all ease-in-out ${
-                                selectedDay === day
+                              className={`text-xs transition-all ease-in-out ${selectedDay === day
                                   ? "text-white"
                                   : "text-[#9B9B9B]"
-                              }`}
+                                }`}
                             >
                               {weekDays[day.getDay()]}
                             </span>
                             <p
-                              className={`text-xl text-center transition-all ease-in-out ${
-                                selectedDay === day
+                              className={`text-xl text-center transition-all ease-in-out ${selectedDay === day
                                   ? "text-white"
                                   : "text-[#878787] "
-                              }`}
+                                }`}
                             >
                               {day.getDate()}
                             </p>
@@ -739,11 +731,10 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     <p className="text-[#878787] text-sm">Select Time</p>
                     <div className="mt-4 grid grid-rows-2 grid-flow-col gap-4 w-full">
                       <div
-                        className={`rounded-full cursor-pointer text-center  py-2 ${
-                          checkIfSlotIsSelected({ hour: 7, minute: 0 })
+                        className={`rounded-full cursor-pointer text-center  py-2 ${checkIfSlotIsSelected({ hour: 7, minute: 0 })
                             ? "bg-[#574EFA] text-white"
                             : "bg-[#F2F2F7]"
-                        }`}
+                          }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 7, minute: 0 })
                         }
@@ -751,11 +742,10 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         <p>7:00 AM</p>
                       </div>
                       <div
-                        className={`rounded-full cursor-pointer text-center py-2 ${
-                          checkIfSlotIsSelected({ hour: 8, minute: 0 })
+                        className={`rounded-full cursor-pointer text-center py-2 ${checkIfSlotIsSelected({ hour: 8, minute: 0 })
                             ? "bg-[#574EFA] text-white"
                             : "bg-[#F2F2F7]"
-                        }`}
+                          }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 8, minute: 0 })
                         }
@@ -763,11 +753,10 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         <p>8:00 AM</p>
                       </div>
                       <div
-                        className={`rounded-full cursor-pointer text-center  py-2 ${
-                          checkIfSlotIsSelected({ hour: 9, minute: 0 })
+                        className={`rounded-full cursor-pointer text-center  py-2 ${checkIfSlotIsSelected({ hour: 9, minute: 0 })
                             ? "bg-[#574EFA] text-white"
                             : "bg-[#F2F2F7]"
-                        }`}
+                          }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 9, minute: 0 })
                         }
@@ -775,11 +764,10 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                         <p>9:00 AM</p>
                       </div>
                       <div
-                        className={`rounded-full cursor-pointer text-center py-2 ${
-                          checkIfSlotIsSelected({ hour: 10, minute: 0 })
+                        className={`rounded-full cursor-pointer text-center py-2 ${checkIfSlotIsSelected({ hour: 10, minute: 0 })
                             ? "bg-[#574EFA] text-white"
                             : "bg-[#F2F2F7]"
-                        }`}
+                          }`}
                         onClick={() =>
                           handleTimeSlotSelection({ hour: 10, minute: 0 })
                         }
@@ -804,7 +792,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   </p>
 
                   <div className="flex justify-between items-center mt-4">
-                    <p>{terms === 'long' || terms === 'short' ?  sharedExpensesHourNumber + ' x ' + selectedHour + ' hours' : filteredData[0].priceHour + ' x ' + selectedHour + ' hours'}</p>
+                    <p>{terms === 'long' || terms === 'short' ? sharedExpensesHourNumber + ' x ' + selectedHour + ' hours' : filteredData[0].priceHour + ' x ' + selectedHour + ' hours'}</p>
                     <p>{terms === 'long' || terms === 'short' ? '$' + (sharedExpensesHourNumber * selectedHour) : '$' + (priceHourNumber * selectedHour)}</p>
                   </div>
                   <hr className="mt-4" />
@@ -925,14 +913,13 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                             key={idx}
                                           >
                                             <button
-                                              className={`block lg:mt-3 mt-4 mx-auto text-[16px] font-medium ${
-                                                isTimeSlotSelected(
-                                                  bookingTime.dayName,
-                                                  dayTime
-                                                )
+                                              className={`block lg:mt-3 mt-4 mx-auto text-[16px] font-medium ${isTimeSlotSelected(
+                                                bookingTime.dayName,
+                                                dayTime
+                                              )
                                                   ? "text-[#4845f7]"
                                                   : "text-[#929292]"
-                                              } lg:bg-transparent lg:border-none lg:px-0 lg:py-0 bg-[#F2F2F7] rounded-full lg:min-w-0 min-w-[110px] py-2 px-3`}
+                                                } lg:bg-transparent lg:border-none lg:px-0 lg:py-0 bg-[#F2F2F7] rounded-full lg:min-w-0 min-w-[110px] py-2 px-3`}
                                               onClick={() =>
                                                 toggleTimeSlotSelection(
                                                   bookingTime.dayName,
@@ -1007,7 +994,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     <div className="mt-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p>{terms === 'long' || terms === 'short' ?  sharedExpensesDayNumber + ' x ' + numberOfDays + ' nights' : filteredData[0].priceDay + ' x ' + numberOfDays + ' nights'}</p>
+                          <p>{terms === 'long' || terms === 'short' ? sharedExpensesDayNumber + ' x ' + numberOfDays + ' nights' : filteredData[0].priceDay + ' x ' + numberOfDays + ' nights'}</p>
                         </div>
                         <div>
                           <p>{terms === 'long' || terms === 'short' ? '$' + (sharedExpensesDayNumber * numberOfDays) : '$' + (priceDayNumber * numberOfDays)}</p>
@@ -1080,9 +1067,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             .map((item, index) => (
               <div
                 key={index}
-                className={`relative rounded-md sm:rounded-xl overflow-hidden ${
-                  index >= 3 ? "hidden sm:block" : ""
-                }`}
+                className={`relative rounded-md sm:rounded-xl overflow-hidden ${index >= 3 ? "hidden sm:block" : ""
+                  }`}
               >
                 <div className="aspect-w-4 aspect-h-3 sm:aspect-w-6 sm:aspect-h-5">
                   <Image
