@@ -80,14 +80,14 @@ export const SignupForm: React.FC<{
     try {
       if (props.signupMethod === SignupMethod.EMAIL && userDetails.email) {
         // Do we need to do this?
-        await createUserWithEmailAndPassword(
-          auth,
-          userDetails.email,
-          userDetails.password
-        );
+        // await createUserWithEmailAndPassword(
+        //   auth,
+        //   userDetails.email,
+        //   userDetails.password
+        // );
       }
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup/email`,
         {
           email: userDetails.email,
           password: userDetails.password,

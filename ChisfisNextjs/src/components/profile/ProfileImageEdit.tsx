@@ -3,13 +3,13 @@ import { useProfile } from "@/context";
 import Avatar from "@/shared/Avatar";
 
 const ProfileImageEdit = () => {
-  const { user, updateProfile }: any = useProfile();
+  const { user, updateProfilePhoto }: any = useProfile();
 
   const onSubmit = (e: any) => {
     console.log(e.currentTarget.files);
     const fromData = new FormData();
-    fromData.append("image", e.currentTarget.files[0]);
-    updateProfile(fromData);
+    fromData.append("profilePic", e.currentTarget.files[0]);
+    updateProfilePhoto(fromData);
   };
 
   return (

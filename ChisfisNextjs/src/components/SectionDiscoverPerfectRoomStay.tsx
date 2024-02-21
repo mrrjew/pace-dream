@@ -1,6 +1,6 @@
 "use client"
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS } from "@/data/listings";
+import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS } from "@/data/listings";
 import { StayDataType, FlightDataType, LastDataType } from "@/data/types";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import HeaderFilter from "./HeaderFilter";

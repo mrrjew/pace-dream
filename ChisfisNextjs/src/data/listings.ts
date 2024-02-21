@@ -77,11 +77,6 @@ const DEMO_TIMEBASED_LISTINGS = __timeBasedListing.map((post, index):TimeBasedDa
   }
 })
 
-// const DEMO_FLIGHT_LISTINGS = __flightListing.map((post, index):FlightDataType => {
-//   return {
-//     ...post
-//   }
-// })
 const DEMO_FLIGHT_LISTINGS = __flightListing.map((post, index):any => {
   return {
     ...post
