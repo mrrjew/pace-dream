@@ -34,7 +34,6 @@ export async function middleware(request: NextRequest) {
   if (checkToken.status === 200) {
     isValidToken = true;
   }
-
   if (isAuthRelatedRoutes(request.nextUrl.pathname) && isValidToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl).href);
   }
