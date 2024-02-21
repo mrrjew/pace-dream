@@ -21,9 +21,26 @@ const UserProvider = ({ children }: any) => {
     setUserState(null);
   };
 
-  const updateProfile = async (data: any) => {
-    axios
-      .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/profile`, data, {
+  const updateProfile = async (data: FormData) => {
+    const datafromform={
+      first_name:data.get('first_name'),
+      last_name:data.get('last_name'),
+      mobile:data.get('mobile'),
+      gender:data.get('gender'),
+      email:data.get('email'),
+      dob:data.get('dob'),
+      about:data.get('about'),
+    }
+    const filteredData = Object.fromEntries(
+      Object.entries(datafromform).filter(([key, value]) => value !== undefined)
+    );
+
+    if (Object.keys(filteredData).length === 0) {
+      console.log('No data to update.'); // Optional: Log a message if no data is present
+      return;
+    }
+   await  axios
+      .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/edit/basic-info`, filteredData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,6 +53,26 @@ const UserProvider = ({ children }: any) => {
         console.log(err);
       });
   };
+
+  const updateProfilePhoto=async(data:FormData)=>{
+    // const datafromform={
+    //   profilePic:data.get('image')
+    // }
+ 
+    await axios
+      .put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/edit/profile-pic`,data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        // setUserState(res.data.data);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const getUser = async () => {
     const response = await fetch(
@@ -60,6 +97,7 @@ const UserProvider = ({ children }: any) => {
 
   const values: any = {
     user: userState,
+    updateProfilePhoto,
     updateProfile,
     getUser,
     clearUser,

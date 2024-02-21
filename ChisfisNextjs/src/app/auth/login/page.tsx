@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import facebookSvg from "@/images/Facebook.svg";
 import googleSvg from "@/images/Google.svg";
 import appleSvg from "@/images/Apple.svg";
@@ -51,16 +51,16 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
     const auth = getAuth(app);
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        userDetails.email,
-        userDetails.password
-      );
-      const user = userCredential.user;
-      const token = await user?.getIdToken();
+      // const userCredential = await signInWithEmailAndPassword(
+      //   auth,
+      //   userDetails.email,
+      //   userDetails.password
+      // );
+      // const user = userCredential.user;
+      // const token = await user?.getIdToken();
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login/email`,
         {
           email: userDetails.email,
           password: userDetails.password,
