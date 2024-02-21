@@ -66,7 +66,7 @@ const UserProvider = ({ children }: any) => {
         },
       })
       .then((res) => {
-        // setUserState(res.data.data);
+        setUserState(res.data.data)
         console.log(res);
       })
       .catch((err) => {

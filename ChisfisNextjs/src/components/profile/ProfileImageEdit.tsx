@@ -8,7 +8,7 @@ const ProfileImageEdit = () => {
   const onSubmit = (e: any) => {
     console.log(e.currentTarget.files);
     const fromData = new FormData();
-    fromData.append("image", e.currentTarget.files[0]);
+    fromData.append("profilePic", e.currentTarget.files[0]);
     updateProfile(fromData);
   };
 
