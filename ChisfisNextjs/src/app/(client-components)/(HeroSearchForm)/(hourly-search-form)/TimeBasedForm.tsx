@@ -5,8 +5,8 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 
-export type TypeDropOffLocationTimeBased = "Any type" | "Event Spaces" | "Workspaces" | "Creative Spaces" | "Wellness and Fitness Spaces" | "Leisure and Recreational Spaces" | "Educational Spaces" | "Outdoor Spaces" | "Specialty Spaces" | "Restrooms" | "Parking Spaces" | "EV Charging Stations" | "Storage Locker";
-const tabs: TypeDropOffLocationTimeBased[] = ["Any type", "Event Spaces", "Workspaces", "Creative Spaces", "Wellness and Fitness Spaces", "Leisure and Recreational Spaces", "Educational Spaces", "Outdoor Spaces", "Specialty Spaces", "Restrooms", "Parking Spaces", "EV Charging Stations", "Storage Locker"]
+export type TypeDropOffLocationTimeBased = "Any type" | "Event Spaces" | "Workspaces" | "Creative Spaces" | "Wellness and Fitness Spaces" | "Leisure and Recreational Spaces" | "Educational Spaces" | "Outdoor Spaces" | "Specialty Spaces" | "Restrooms" | "Parking Spaces" | "EV Charging Stations" | "Storage Locker" | "Room" | "Storage" | "Parking" | "EV Parking" | "Restroom";
+const tabs: TypeDropOffLocationTimeBased[] = ["Any type", "Event Spaces", "Workspaces", "Creative Spaces", "Wellness and Fitness Spaces", "Leisure and Recreational Spaces", "Educational Spaces", "Outdoor Spaces", "Specialty Spaces", "Room", "Storage", "Parking", "EV Parking", "Restroom"]
 
 
 const TimeBasedForm: FC<{}> = ({ }) => {
