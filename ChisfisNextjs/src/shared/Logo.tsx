@@ -1,5 +1,5 @@
-import logoImg from '@/images/Fav Icon.svg';
-import logoLightImg from '@/images/Fav Icon.svg';
+import logoImg from '@/images/paceDreamLogo-light.png';
+import logoLightImg from '@/images/paceDreamLogo-light.png';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import React from 'react';
