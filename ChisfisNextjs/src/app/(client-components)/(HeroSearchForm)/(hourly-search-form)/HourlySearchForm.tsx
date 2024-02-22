@@ -5,8 +5,8 @@ import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "../(stay-search-form)/StayDatesRangeInput";
 
-export type TypeDropOffLocationHourlyType = "Any type" | "Sports and Recreation Equipment" | "Professional Equipment" | "Tools and Machinery" | "Water Sports Gear" | "Fitness Equipment" | "Musical Instruments" | "Tech Gadgets" | "Party and Event Gear";
-const tabs: TypeDropOffLocationHourlyType[] = ["Any type", "Sports and Recreation Equipment", "Professional Equipment", "Tools and Machinery", "Water Sports Gear", "Fitness Equipment", "Musical Instruments", "Tech Gadgets", "Party and Event Gear"]
+export type TypeDropOffLocationHourlyType = "Any type" | "Sports and Recreation Equipment" | "Professional Equipment" | "Tools and Machinery" | "Water Sports Gear" | "Fitness Equipment" | "Musical Instruments" | "Tech Gadgets" | "Party and Event Gear" | "Photography/Videography Equipment" | "Fashion";
+const tabs: TypeDropOffLocationHourlyType[] = ["Any type", "Sports and Recreation Equipment", "Professional Equipment", "Tools and Machinery", "Water Sports Gear", "Fitness Equipment", "Musical Instruments", "Tech Gadgets", "Party and Event Gear", "Photography/Videography Equipment", "Fashion"]
 
 
 const HourlySearchForm: FC<{}> = ({ }) => {
