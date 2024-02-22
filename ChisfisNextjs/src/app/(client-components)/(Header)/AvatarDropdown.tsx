@@ -49,7 +49,7 @@ export default function AvatarDropdown({ className = '' }: Props) {
       clearUser();
       setTimeout(() => {
         router.push('/auth/login');
-      }, 200);
+      }, 20);
     }
   };
 

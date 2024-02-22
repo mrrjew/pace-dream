@@ -20,8 +20,8 @@ const SectionHero: FC<SectionHeroProps> = () => {
     >
       <article className="md:flex flex-col md:flex-row hidden md:items-center z-10">
         <div className="flex-shrink-0 md:w-1/2 flex flex-col justify-center items-start space-y-8 sm:space-y-10 pb-14 lg:pb-64 xl:pr-14 lg:mr-8 xl:mr-0">
-          <h2 className="lg:font-semibold font-semibold text-xl md:text-5xl lg:text-5xl lg:pr-12">
-            Explore your PaceDream Book hotels, Car and more with ease!
+          <h2 className="lg:font-semibold font-semibold text-bold md:text-3xl lg:text-4xl lg:pr-12">
+          Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
           </h2>
           <ButtonPrimary onClick={handleButtonClick} sizeClass="bg-violet px-5 py-4 sm:px-7 ">
             Start your search
