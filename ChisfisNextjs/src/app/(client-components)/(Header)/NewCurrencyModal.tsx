@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react';
 
 export const suggestedFor = [
     {
-        currencytitle: 'U.S. Dollar',
+        currencytitle: 'United States Dollar',
         name: 'USD',
         active: true,
     },
@@ -36,13 +36,8 @@ export const suggestedFor = [
 
 export const allCurrencies = [
     {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
-        curencytitle: 'Propertys Currency',
-        name: '$',
+        curencytitle: 'United States Dollar',
+        name: 'USD',
         active: true,
     },
     {
@@ -81,11 +76,6 @@ export const allCurrencies = [
         active: true,
     },
     {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
         curencytitle: 'Chilean Peso',
         name: 'CLP',
         active: true,
@@ -101,200 +91,11 @@ export const allCurrencies = [
         active: true,
     },
     {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
+        curencytitle: 'Czech Koruna',
+        name: 'CZK',
         active: true,
-    },
-    {
-        curencytitle: 'Propertys Currency',
-        name: '$',
-        active: true,
-    },
-    {
-        curencytitle: 'Argentina Peso',
-        name: 'ARS',
-        active: true,
-    },
-    {
-        curencytitle: 'Australian Dollar',
-        name: 'AUD',
-        active: true,
-    },
-    {
-        curencytitle: 'Azerbaijani Manat',
-        name: 'AZN',
-        active: true,
-    },
-    {
-        curencytitle: 'Bahraini Dinar',
-        name: 'BHD',
-        active: true,
-    },
-    {
-        curencytitle: 'Brazilian Real',
-        name: 'BRL',
-        active: true,
-    },
-    {
-        curencytitle: 'Bulgarain Lev',
-        name: 'BGN',
-        active: true,
-    },
-    {
-        curencytitle: 'Canadian Dollar',
-        name: 'CAD',
-        active: true,
-    },
-    {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
-        curencytitle: 'Chilean Peso',
-        name: 'CLP',
-        active: true,
-    },
-    {
-        curencytitle: 'Chinese Yuan',
-        name: 'CNY',
-        active: true,
-    },
-    {
-        curencytitle: 'Colombian Peso',
-        name: 'COP',
-        active: true,
-    },
-    {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
-        curencytitle: 'Propertys Currency',
-        name: '$',
-        active: true,
-    },
-    {
-        curencytitle: 'Argentina Peso',
-        name: 'ARS',
-        active: true,
-    },
-    {
-        curencytitle: 'Australian Dollar',
-        name: 'AUD',
-        active: true,
-    },
-    {
-        curencytitle: 'Azerbaijani Manat',
-        name: 'AZN',
-        active: true,
-    },
-    {
-        curencytitle: 'Bahraini Dinar',
-        name: 'BHD',
-        active: true,
-    },
-    {
-        curencytitle: 'Brazilian Real',
-        name: 'BRL',
-        active: true,
-    },
-    {
-        curencytitle: 'Bulgarain Lev',
-        name: 'BGN',
-        active: true,
-    },
-    {
-        curencytitle: 'Canadian Dollar',
-        name: 'CAD',
-        active: true,
-    },
-    {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
-        curencytitle: 'Chilean Peso',
-        name: 'CLP',
-        active: true,
-    },
-    {
-        curencytitle: 'Chinese Yuan',
-        name: 'CNY',
-        active: true,
-    },
-    {
-        curencytitle: 'Colombian Peso',
-        name: 'COP',
-        active: true,
-    },
-    {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
-        curencytitle: 'Propertys Currency',
-        name: '$',
-        active: true,
-    },
-    {
-        curencytitle: 'Argentina Peso',
-        name: 'ARS',
-        active: true,
-    },
-    {
-        curencytitle: 'Australian Dollar',
-        name: 'AUD',
-        active: true,
-    },
-    {
-        curencytitle: 'Azerbaijani Manat',
-        name: 'AZN',
-        active: true,
-    },
-    {
-        curencytitle: 'Bahraini Dinar',
-        name: 'BHD',
-        active: true,
-    },
-    {
-        curencytitle: 'Brazilian Real',
-        name: 'BRL',
-        active: true,
-    },
-    {
-        curencytitle: 'Bulgarain Lev',
-        name: 'BGN',
-        active: true,
-    },
-    {
-        curencytitle: 'Canadian Dollar',
-        name: 'CAD',
-        active: true,
-    },
-    {
-        curencytitle: 'Indian Rupee',
-        name: 'INR',
-        active: true,
-    },
-    {
-        curencytitle: 'Chilean Peso',
-        name: 'CLP',
-        active: true,
-    },
-    {
-        curencytitle: 'Chinese Yuan',
-        name: 'CNY',
-        active: true,
-    },
-    {
-        curencytitle: 'Colombian Peso',
-        name: 'COP',
-        active: true,
-    },
+    }
+
 ];
 
 export default function CurrencyModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
