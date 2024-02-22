@@ -4,6 +4,7 @@ import { IoMenu } from "react-icons/io5";
 import LogoMobile from "@/images/paceDreamLogo-light.png";
 import { useState } from "react";
 
+
 export default function NavbarMobile() {
   const [switchMenu, setSwitchMenu] = useState(false);
   const handlerSwitchMenu = () => setSwitchMenu(!switchMenu);

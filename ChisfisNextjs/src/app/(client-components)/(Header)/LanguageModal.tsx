@@ -151,7 +151,7 @@ export default function LanguageModal({ isOpen, onClose }: { isOpen: boolean; on
                             <div className='my-[4px] w-full mr-[8px] flex justify-between items-center'>
                               <div className='flex justify-between items-center gap-3'>
                                 {item.image && (
-                                  <div className='w-6 h-6 rounded-full overflow-hidden min-w-6 h-auto'>
+                                  <div className='w-6 h-6 rounded-full overflow-hidden min-w-6'>
                                     <img
                                       src={item.image}
                                       alt={item.name}

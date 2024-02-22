@@ -82,7 +82,7 @@ const StaySearchForm: FC<{}> = ({}) => {
           {renderRadioBtn()}
           <div className="ml-4 mt-4 md:hidden">
             <h2 className="text-left font-semibold md:hidden text-3xl">
-              Explore your PaceDream Book hotels, Car and more with ease!
+            Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
             </h2>
           </div>
           <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
