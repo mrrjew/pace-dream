@@ -9,8 +9,8 @@ import Avatar from '@/shared/Avatar';
 
 const CollapsibleMenu = () => {
   return (
-    <div className="fixed inset-0 h-72  w-full mt-[67px] bg-opacity-75 z-50 flex justify-end">
-      <div className="flex flex-col h-ful rounded-md border-black mx-1 w-full px-36 bg-white shadow-xl">
+    <div className="fixed inset-0 h-72  w-full mt-[67px]  bg-opacity-75 z-50 flex justify-end">
+      <div className="flex flex-col h-ful rounded-md border-black mx-1 -mb-8 w-full px-36 bg-white shadow-xl">
         {/* Add your menu items here */}
         <div className="flex items-center mt-6 space-x-3 pb-4 border-b-2 ">
           <Avatar sizeClass="w-12 h-12" />
