@@ -2,6 +2,8 @@ import { Route } from '@/routers/types';
 import Logo from '@/shared/Logo';
 import MenuBar from '@/shared/MenuBar';
 import Link from 'next/link';
+import { useProfile } from '@/context';
+import { useSession } from '@/hooks/useSession';
 import React, { FC, useState } from 'react';
 import HeroSearchForm2MobileFactory from '../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory';
 import AvatarDropdown from './AvatarDropdown';
@@ -12,6 +14,8 @@ import CurrencyModal from './NewCurrencyModal';
 import LanguageModal from './LanguageModal';
 import CountryModal from "./CountryModal";
 import NavbarMobile from "./NavbarMobile";
+import Button from '@/shared/Button';
+
 export interface MainNav2Props {
   className?: string;
 }
@@ -21,6 +25,12 @@ const btnStyle =
 const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
   const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
+
+  const { getSession, clearSession } = useSession();
+  const { clearUser }: any = useProfile();
+  const { token, userInfo } = getSession();
+
+  
 
   const openModalCurrency = () => {
     setIsModalOpenCurrency(true);
@@ -41,7 +51,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
     <header className={`MainNav2 relative z-10 ${className}`}>
       <section className="px-4 h-16 lg:container flex justify-between">
         <article className="hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10">
-          <Logo className="w-32 self-center" />
+          <Logo className="w-34  self-center" />
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'> */}
           <div className="hidden lg:flex  justify-end ">
             <button className={`${btnStyle}`} onClick={openModalCurrency}>
@@ -95,12 +105,21 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
 
         <div className="hidden md:flex flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
           <div className="hidden lg:flex space-x-1">
+          {token ? (
             <Link
-              href={"/add-listing" as Route<string>}
+              href={'/add-listing' as Route<String>}
               className="self-center text-opacity-90 group px-4 py-2 border border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
               List your property
             </Link>
+          ) : (
+            <Link
+              href={'/auth/login'}
+              className="self-center text-opacity-90 group px-4 py-2 border border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              List your property
+            </Link>
+          )}
 
             <NotifyDropdown />
             <AvatarDropdown />

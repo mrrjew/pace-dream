@@ -21,13 +21,13 @@ const Logo: React.FC<LogoProps> = ({
       className={`ttnc-logo inline-block text-primary-6000 focus:outline-none focus:ring-0 ${className}`}
     >
       {img ? (
-        <Image className="max-h-12 dark:hidden" src={img} alt="Logo" />
+        <Image className="h-[52px] dark:hidden" src={img} alt="Logo" />
       ) : (
         'Logo Here'
       )}
       {imgLight && (
         <Image
-          className="hidden max-h-12 dark:block"
+          className="hidden h-[52px] dark:block"
           src={imgLight}
           alt="Logo-Light"
         />

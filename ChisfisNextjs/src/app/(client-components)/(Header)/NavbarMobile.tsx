@@ -206,6 +206,7 @@ const CollapsibleMenu = () => {
   );
 };
 
+
 export default function NavbarMobile() {
   const [switchMenu, setSwitchMenu] = useState(false);
   const handlerSwitchMenu = () => setSwitchMenu(!switchMenu);

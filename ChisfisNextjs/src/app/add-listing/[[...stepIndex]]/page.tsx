@@ -17,10 +17,14 @@ import useFormFields from '@/hooks/useFormFields';
 import { RxCross1 } from 'react-icons/rx';
 import { createToast } from '@/utils/createToast';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined } }) => {
   const [pageNumber, setPageNumber] = useState(1);
+  const userdata = Cookies.get('user_info');
+  const user = userdata ? JSON.parse(userdata) : null;
+  const token = Cookies.get('auth-token');
   const { input, setInput, handleInputChange } = useFormFields({
     propertyType: '',
     placeName: '',
@@ -210,7 +214,11 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     });
 
     const response = await axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/list`, formData)
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/property/add`, formData,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setIsLoading(false);
