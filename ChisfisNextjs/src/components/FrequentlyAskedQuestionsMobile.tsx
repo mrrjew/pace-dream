@@ -2,7 +2,7 @@
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 
-const faq1 = [
+const faq = [
     {
         question: "How does the Roommate Feature work?",
         answer: "The Roommate Feature is designed to make it easier for users to find roommates and split the cost of accommodations. Users can choose between two scenarios:\n\nPre-Booked Split: Where one user books and pays for a room and then finds another user to split the cost.\n\nWishlist Collaboration: Where a user expresses interest in a room but hasn't booked or paid yet, and then matches with another user to book the room together, splitting the cost equally."
@@ -19,9 +19,6 @@ const faq1 = [
         question: "How do Last-Minute Deals work?",
         answer: "Our Last-Minute Deals provide users with access to discounted flight tickets and hotel rates available for last-minute bookings. This feature aims to help users save on travel costs and enjoy spontaneous trips with great deals."
     },
-]
-
-const faq2 = [
     {
         question: "Is it necessary to log in to book hotels or access Last-Minute Deals?",
         answer: "No, users can book hotels and access Last-Minute Deals without logging in. Our goal is to offer convenience and quick access to these features for all users."
@@ -41,58 +38,35 @@ const faq2 = [
 ]
 
 
-const FrequentlyAskedQuestion = () => {
+const FrequentlyAskedQuestionsMobile = () => {
     return (
-        <>
-            <div className="md:block hidden">
-                <p className='font-semibold text-5xl text-center mb-8' >Frequently asked questions</p>
-                <div className="w-4/5 mx-auto px-4 -mb-10 flex ">
-                    <div className="mx-auto rounded-2xl p-2 w-1/2">
-                        {faq1.map((item) => (
-                            <Disclosure key={item.question} >
-                                {({ open }) => (
-                                    <div className='flex flex-col items-center border border-r-0 border-l-0 border-b-[0.5px] py-2 '>
-                                        <Disclosure.Button className="flex w-full h-20 items-center justify-between rounded-lg  px-4 py-4 text-left text-lg font-medium text-black  focus:outline-none focus-visible:ring focus-visible:ring-blue-500/75">
-                                            <span className='w-11/12'>{item.question}</span>
-                                            <ChevronUpIcon
-                                                className={`${open ? 'rotate-180 transform' : ''
-                                                    } h-5 w-5 text-balck font-semibold mt-1 `}
-                                            />
-                                        </Disclosure.Button>
-                                        <Disclosure.Panel className={`px-4 pb-2 pt-2 text-base font-medium text-gray-600 ${open ? 'block' : 'hidden'}`}>
-                                            {item.answer}
-                                        </Disclosure.Panel>
-                                    </div>
-                                )}
-                            </Disclosure>
-                        ))}
+        <div className="md:hidden block w-96  mx-2">
+            <div className="w-full py-2">
+                <p className='text-center mb-8 font-semibold text-4xl'>Frequently asked questions</p>
+                <div className="mx-auto w-full max-w-md rounded-2xl p-2">
+                    {faq.map((item) => (
+                        <Disclosure key={item.question}>
+                            {({ open }) => (
+                                <div className=' border-2 border-r-0 border-l-0 border-b-[0.5px]'>
+                                    <Disclosure.Button className="flex items-center h-20 w-full justify-between rounded-lg px-4 py-2 text-left text-base font-medium text-black  focus:outline-none focus-visible:ring ">
+                                        <span className='w-11/12' >{item.question}</span>
+                                        <ChevronUpIcon
+                                            className={`${open ? 'rotate-180 transform' : ''
+                                                } h-5 w-5 text-black`}
+                                        />
+                                    </Disclosure.Button>
+                                    <Disclosure.Panel className="px-4 pb-2 pt-4 text-base text-gray-800">
+                                        {item.answer}
+                                    </Disclosure.Panel>
+                                </div>
+                            )}
+                        </Disclosure>
+                    ))}
 
-                    </div>
-                    <div className="mx-auto rounded-2xl p-2 w-1/2">
-                        {faq2.map((item) => (
-                            <Disclosure key={item.question}>
-                                {({ open }) => (
-                                    <div className='flex flex-col items-center border border-r-0 border-l-0 py-2'>
-                                        <Disclosure.Button className="flex w-full h-20 items-center justify-between rounded-lg  px-4 py-4 text-left text-lg font-medium text-black  focus:outline-none focus-visible:ring focus-visible:ring-blue-500/75">
-                                            <span className='w-11/12'>{item.question}</span>
-                                            <ChevronUpIcon
-                                                className={`${open ? 'rotate-180 transform' : ''
-                                                    } h-5 w-5 text-balck font-semibold mt-1 `}
-                                            />
-                                        </Disclosure.Button>
-                                        <Disclosure.Panel className={`px-4 pb-2 pt-2 text-base font-medium text-gray-600 ${open ? 'block' : 'hidden'}`}>
-                                            {item.answer}
-                                        </Disclosure.Panel>
-                                    </div>
-                                )}
-                            </Disclosure>
-                        ))}
-
-                    </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
-export default FrequentlyAskedQuestion
+export default FrequentlyAskedQuestionsMobile

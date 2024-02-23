@@ -19,6 +19,7 @@ import roomStaysImg from "@/images/room-stays.jpg"
 import timeBasedImg from "@/images/wellness-fitness.jpg"
 import musicalInstrumentsImg from "@/images/musicalInstruments.jpg"
 import FrequentlyAskedQuestion from "@/components/FrequentlyAskedQuestions";
+import FrequentlyAskedQuestionsMobile from "@/components/FrequentlyAskedQuestionsMobile";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -225,6 +226,7 @@ function PageHome() {
         </div>
         <div>
           <FrequentlyAskedQuestion />
+          <FrequentlyAskedQuestionsMobile />
         </div>
       </div>
     </main>
