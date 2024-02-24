@@ -4,7 +4,7 @@ import MenuBar from '@/shared/MenuBar';
 import Link from 'next/link';
 import { useProfile } from '@/context';
 import { useSession } from '@/hooks/useSession';
-import React, { FC, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import HeroSearchForm2MobileFactory from '../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory';
 import AvatarDropdown from './AvatarDropdown';
 import NotifyDropdown from './NotifyDropdown';
@@ -29,8 +29,14 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   const { getSession, clearSession } = useSession();
   const { clearUser }: any = useProfile();
   const { token, userInfo } = getSession();
+  const [currency, setCurrency] = useState<string | null>('USD');
 
-  
+  useEffect(() => {
+    if(typeof window !== "undefined" && window.localStorage){
+      let localCurrency = localStorage.getItem("currency");
+      setCurrency(localCurrency);
+    }
+  }, []);
 
   const openModalCurrency = () => {
     setIsModalOpenCurrency(true);
@@ -42,10 +48,12 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
 
   const closeModalCurrency = () => {
     setIsModalOpenCurrency(false);
+    window.location.reload();
   };
 
   const closeModalCountry = () => {
     setIsModalOpenCountry(false);
+    window.location.reload();
   };
   return (
     <header className={`MainNav2 relative z-10 ${className}`}>
@@ -55,7 +63,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'> */}
           <div className="hidden lg:flex  justify-end ">
             <button className={`${btnStyle}`} onClick={openModalCurrency}>
-              USD
+              {currency}
             </button>
             <button className={`${btnStyle}`} onClick={openModalCountry}>
               <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
