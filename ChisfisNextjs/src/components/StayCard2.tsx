@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+"use client"
+import React, { FC, useState, useEffect, useMemo } from "react";
 import GallerySlider from "@/components/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
@@ -7,6 +8,7 @@ import BtnLikeIcon from "@/components/BtnLikeIcon";
 import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
 import Link from "next/link";
+import {getStoredCurrency} from "@/utils/localStorageUtil";
 
 export interface StayCard2Props {
   className?: string;
@@ -23,6 +25,87 @@ const StayCard2: FC<StayCard2Props> = ({
   data = DEMO_DATA,
   term = ""
 }) => {
+
+
+  const [rates, setRates] = useState<Record<string, number>>({});
+  const [ratesFetched, setRatesFetched] = useState(false);
+  const currency = getStoredCurrency();
+
+  const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
+
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    const getRates = async () => {
+      try {
+        const storedRatesString = localStorage.getItem('exchangeRates');
+        if (storedRatesString) {
+          const storedRates = JSON.parse(storedRatesString);
+          const { timestamp, data } = storedRates;
+
+          const currentTime = new Date().getTime();
+          const timeDifference = currentTime - timestamp;
+          const hoursDifference = timeDifference / (1000 * 3600);
+
+          if (hoursDifference < 24) {
+            setRates(data);
+            setRatesFetched(true);
+            return;
+          }
+        }
+
+        const response = await fetch(process.env.NEXT_PUBLIC_EXCHANGE_RATE_API_KEY!).then((res) => res.json());
+
+        if (response.result === 'success') {
+          const currentRates = response.conversion_rates;
+
+          const currentTime = new Date().getTime();
+          const newRatesData = { timestamp: currentTime, data: currentRates };
+          localStorage.setItem('exchangeRates', JSON.stringify(newRatesData));
+
+          setRates(currentRates);
+          setRatesFetched(true);
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
+    };
+
+    if (!ratesFetched) {
+      getRates().then(r => r);
+    }
+  }, [ratesFetched, key]);
+
+  useEffect(() => {
+    setKey((prevKey) => prevKey + 1);
+  }, []);
+
+  const convert = useMemo(() => {
+    return (amount: number, toCurrency: string) => {
+      const rate = rates[toCurrency];
+      setConvertedAmount(Math.round(amount * rate));
+      return Math.round(amount * rate);
+    };
+  }, [rates]);
+
+
+  useEffect(() => {
+    if (ratesFetched) {
+      const amountNum = parseInt(data.price.replace("$", ""), 10);
+      const convertedAmountValue = convert(amountNum, currency);
+      setConvertedAmount(convertedAmountValue);
+    }
+  }, [ratesFetched, data, convert, currency]);
+
+
+  const convertedAmountStringWithCurrency = useMemo(() => {
+    if (convertedAmount !== null) {
+      return `${currency} ${convertedAmount}`;
+    }
+    return data.price;
+  }, [convertedAmount, currency]);
+
+
   const {
     galleryImgs,
     listingCategory,
@@ -62,8 +145,8 @@ const StayCard2: FC<StayCard2Props> = ({
     let priceNum;
     let sharedNum;
     if(term === "long" || term === "short"){
-        if(shared !== undefined && price !== undefined){
-        priceNum = parseInt(price.replace("$", ""), 10); 
+        if(shared !== undefined && convertedAmountStringWithCurrency !== undefined){
+        priceNum = parseInt(convertedAmountStringWithCurrency.replace("$", ""), 10);
         sharedNum = parseInt(shared , 10)
         sharedNum = sharedNum + 1
       }
@@ -114,7 +197,7 @@ const StayCard2: FC<StayCard2Props> = ({
         {term === 'long' || term === 'short' ? (
           <div>
             <span className="text-base font-semibold line-through">
-              {price}
+              {convertedAmountStringWithCurrency}
               {` `}
               {size === "default" && (
                 <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
@@ -129,7 +212,7 @@ const StayCard2: FC<StayCard2Props> = ({
           </div>
         ) : (
           <span className="text-base font-semibold">
-            {price}
+            {convertedAmountStringWithCurrency}
             {` `}
             {size === "default" && (
               <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">

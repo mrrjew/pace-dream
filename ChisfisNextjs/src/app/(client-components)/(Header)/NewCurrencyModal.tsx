@@ -104,10 +104,12 @@ export default function CurrencyModal({ isOpen, onClose }: { isOpen: boolean; on
 
     function toggleActiveSuggestedCurrency(index: any) {
         setSuggestedCurrencies({ index: String(index) });
+        localStorage.setItem('currency', suggestedFor[index].name)
     }
 
     function toggleActiveAllCurrency(index: any) {
         setAllCurrenciesList({ index: String(index) });
+        localStorage.setItem('currency', allCurrencies[index].name)
     }
 
     return (
