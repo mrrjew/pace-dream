@@ -48,7 +48,10 @@ const widgetMenus: WidgetFooterMenu[] = [
 ];
 
 const Footer: React.FC = () => {
+  const date=new Date();
+  const year=date.getFullYear();
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
+   
     return (
       <div key={index} className="text-sm bg-white">
         <h2 className="font-bold text-black">
@@ -72,6 +75,7 @@ const Footer: React.FC = () => {
   };
 
   return (
+    
     <div className="bg-white">
       <FooterNav />
       <div className="nc-Footer relative bg-white pt-24 lg:pt-24 pb-16 border-t border-neutral-200 max-md:ml-9">
@@ -92,7 +96,7 @@ const Footer: React.FC = () => {
       <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between max-md:flex-col">
         <div className="flex md:flex-row flex-col max-md:ml-8 max-md:mb-8">
           <h2 className="text-neutral-400">
-            © 2023 PaceDream. All Rights Reserved.
+            © {year} PaceDream. All Rights Reserved.
           </h2>
           <div className="flex">
             <h2 className="text-neutral-400 mx-2">

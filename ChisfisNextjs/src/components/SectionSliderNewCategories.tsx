@@ -27,7 +27,7 @@ export interface SectionSliderNewCategoriesProps {
 const DEMO_CATS: TaxonomyType[] = [
   {
     id: "1",
-    href: "/listing-stay-map",
+    href: "/nature-house",
     name: "Nature House",
     taxonomy: "category",
     count: 17288,
@@ -36,7 +36,7 @@ const DEMO_CATS: TaxonomyType[] = [
   },
   {
     id: "2",
-    href: "/listing-stay-map",
+    href: "/wooden-house",
     name: "Wooden house",
     taxonomy: "category",
     count: 2118,
@@ -45,7 +45,7 @@ const DEMO_CATS: TaxonomyType[] = [
   },
   {
     id: "3",
-    href: "/listing-stay-map",
+    href: "/house-boat",
     name: "Houseboat",
     taxonomy: "category",
     count: 36612,
@@ -54,7 +54,7 @@ const DEMO_CATS: TaxonomyType[] = [
   },
   {
     id: "4",
-    href: "/listing-stay-map",
+    href: "/farm-house",
     name: "Farm House",
     taxonomy: "category",
     count: 18188,

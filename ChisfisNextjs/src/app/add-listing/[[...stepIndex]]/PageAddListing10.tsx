@@ -6,8 +6,10 @@ import ButtonSecondary from '@/shared/ButtonSecondary';
 import { EyeIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import { Route } from '@/routers/types';
 import { PageAddingListing } from '@/types/types';
+import useFormFields from '@/hooks/useFormFields';
 
 const PageAddListing10 = ({ input, setInput, handleInputChange, setPageNumber }: PageAddingListing) => {
+  
   return (
     <>
       <div>
@@ -19,6 +21,7 @@ const PageAddListing10 = ({ input, setInput, handleInputChange, setPageNumber }:
       <div>
         <h3 className='text-lg font-semibold'>This is your listing</h3>
         <div className='max-w-xs'>
+          <h1>{!input.propertyType}</h1>
           <StayCard
             className='mt-8'
             data={{ ...DEMO_STAY_LISTINGS[0], reviewStart: 0 }}
