@@ -44,49 +44,51 @@ const faq2 = [
 const FrequentlyAskedQuestion = () => {
     return (
         <>
-            <p className='font-semibold text-5xl text-center mb-8' >Frequently asked questions</p>
-            <div className="w-4/5 mx-auto px-4 -mb-10 flex ">
-                <div className="mx-auto rounded-2xl p-2 w-1/2">
-                    {faq1.map((item) => (
-                        <Disclosure key={item.question} >
-                            {({ open }) => (
-                                <div className='flex flex-col items-center border border-r-0 border-l-0 border-b-[0.5px] py-2 '>
-                                    <Disclosure.Button className="flex w-full h-20 items-center justify-between rounded-lg  px-4 py-4 text-left text-lg font-medium text-black  focus:outline-none focus-visible:ring focus-visible:ring-blue-500/75">
-                                        <span className='w-11/12'>{item.question}</span>
-                                        <ChevronUpIcon
-                                            className={`${open ? 'rotate-180 transform' : ''
-                                                } h-5 w-5 text-balck font-semibold mt-1 `}
-                                        />
-                                    </Disclosure.Button>
-                                    <Disclosure.Panel className={`px-4 pb-2 pt-2 text-base font-medium text-gray-600 ${open ? 'block' : 'hidden'}`}>
-                                        {item.answer}
-                                    </Disclosure.Panel>
-                                </div>
-                            )}
-                        </Disclosure>
-                    ))}
+            <div className="md:block hidden">
+                <p className='font-semibold text-5xl text-center mb-8' >Frequently asked questions</p>
+                <div className="w-4/5 mx-auto px-4 -mb-10 flex ">
+                    <div className="mx-auto rounded-2xl p-2 w-1/2">
+                        {faq1.map((item) => (
+                            <Disclosure key={item.question} >
+                                {({ open }) => (
+                                    <div className='flex flex-col items-center border border-r-0 border-l-0 border-b-[0.5px] py-2 '>
+                                        <Disclosure.Button className="flex w-full h-20 items-center justify-between rounded-lg  px-4 py-4 text-left text-lg font-medium text-black  focus:outline-none focus-visible:ring focus-visible:ring-blue-500/75">
+                                            <span className='w-11/12'>{item.question}</span>
+                                            <ChevronUpIcon
+                                                className={`${open ? 'rotate-180 transform' : ''
+                                                    } h-5 w-5 text-balck font-semibold mt-1 `}
+                                            />
+                                        </Disclosure.Button>
+                                        <Disclosure.Panel className={`px-4 pb-2 pt-2 text-base font-medium text-gray-600 ${open ? 'block' : 'hidden'}`}>
+                                            {item.answer}
+                                        </Disclosure.Panel>
+                                    </div>
+                                )}
+                            </Disclosure>
+                        ))}
 
-                </div>
-                <div className="mx-auto rounded-2xl p-2 w-1/2">
-                    {faq2.map((item) => (
-                        <Disclosure key={item.question}>
-                            {({ open }) => (
-                                <div className='flex flex-col items-center border border-r-0 border-l-0 py-2'>
-                                    <Disclosure.Button className="flex w-full h-20 items-center justify-between rounded-lg  px-4 py-4 text-left text-lg font-medium text-black  focus:outline-none focus-visible:ring focus-visible:ring-blue-500/75">
-                                        <span className='w-11/12'>{item.question}</span>
-                                        <ChevronUpIcon
-                                            className={`${open ? 'rotate-180 transform' : ''
-                                                } h-5 w-5 text-balck font-semibold mt-1 `}
-                                        />
-                                    </Disclosure.Button>
-                                    <Disclosure.Panel className={`px-4 pb-2 pt-2 text-base font-medium text-gray-600 ${open ? 'block' : 'hidden'}`}>
-                                        {item.answer}
-                                    </Disclosure.Panel>
-                                </div>
-                            )}
-                        </Disclosure>
-                    ))}
+                    </div>
+                    <div className="mx-auto rounded-2xl p-2 w-1/2">
+                        {faq2.map((item) => (
+                            <Disclosure key={item.question}>
+                                {({ open }) => (
+                                    <div className='flex flex-col items-center border border-r-0 border-l-0 py-2'>
+                                        <Disclosure.Button className="flex w-full h-20 items-center justify-between rounded-lg  px-4 py-4 text-left text-lg font-medium text-black  focus:outline-none focus-visible:ring focus-visible:ring-blue-500/75">
+                                            <span className='w-11/12'>{item.question}</span>
+                                            <ChevronUpIcon
+                                                className={`${open ? 'rotate-180 transform' : ''
+                                                    } h-5 w-5 text-balck font-semibold mt-1 `}
+                                            />
+                                        </Disclosure.Button>
+                                        <Disclosure.Panel className={`px-4 pb-2 pt-2 text-base font-medium text-gray-600 ${open ? 'block' : 'hidden'}`}>
+                                            {item.answer}
+                                        </Disclosure.Panel>
+                                    </div>
+                                )}
+                            </Disclosure>
+                        ))}
 
+                    </div>
                 </div>
             </div>
         </>
