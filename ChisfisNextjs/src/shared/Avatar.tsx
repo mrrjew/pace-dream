@@ -10,7 +10,7 @@ export interface AvatarProps {
   sizeClass?: string;
   radius?: string;
   imgUrl?: string | StaticImageData;
-  first_name?: string;
+  userName?: string;
   hasChecked?: boolean;
   hasCheckedClass?: string;
 }
@@ -20,7 +20,7 @@ const Avatar: FC<AvatarProps> = ({
   sizeClass = 'h-6 w-6 text-sm',
   radius = 'rounded-full',
   imgUrl = avatar1,
-  first_name,
+  userName,
   hasChecked,
   hasCheckedClass = 'w-4 h-4 -top-0.5 -right-0.5',
 }) => {
