@@ -19,6 +19,7 @@
 //   safeAmenities?: string[];
 // };
 
+
 export type formFieldInitialStateType = {
   [key: string]: string | undefined | number | boolean | any[] | File | FileList;
 };

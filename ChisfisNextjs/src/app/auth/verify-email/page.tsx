@@ -17,6 +17,7 @@ export default function VerifyEmailPage() {
 
   useEffect(() => {
     const token = query.get('token');
+    console.log(token)
     if (!token) {
       setError("Cloudn't verify email. Please try again");
       return;
@@ -25,7 +26,6 @@ export default function VerifyEmailPage() {
   }, []);
 
   const verifyToken = async (token: string) => {
-    console.log("hello world")
     setLoading(true);
     try {
       const response = await axios.post(
@@ -60,6 +60,8 @@ export default function VerifyEmailPage() {
 }
 
 const ResetPasswordForm = ({ email }: { email: string }) => {
+  const query = useSearchParams();
+  const token = query.get('token');
   const [resetPassword, setResetPassword] = useState<{
     password: string;
     confirmPassword: string;
@@ -69,6 +71,7 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
   const [error, setError] = useState('');
 
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
     setError('');
     setLoading(true);
@@ -81,9 +84,13 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
       return;
     }
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password`,
-        { email, password: resetPassword.password }
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/update/password`,
+        {  currentPassword: resetPassword.password,newPassword:resetPassword.confirmPassword },{
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
       );
       if (response.status === 200) {
         setResult('success');
