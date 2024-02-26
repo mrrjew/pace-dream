@@ -1,6 +1,6 @@
 'use client';
 import { avatarColors } from '@/contains/contants';
-import React, { FC, use } from 'react';
+import React, {FC, use, useEffect, useState} from 'react';
 import avatar1 from '@/images/avatars/Image-1.png';
 import Image, { StaticImageData } from 'next/image';
 import { useProfile } from '@/context';
@@ -26,8 +26,22 @@ const Avatar: FC<AvatarProps> = ({
 }) => {
   const { user }: any = useProfile();
 
-  const url = user?.profilePic || '';
-  const name = user?.first_name|| 'John Doe';
+
+  // const url = user?.profilePic || '';
+  // const name = user?.first_name|| 'John Doe';
+
+  const [url, setUrl] = useState<string | StaticImageData | undefined>('');
+    const [name, setName] = useState<string>('John Doe');
+
+    useEffect(() => {
+      if(user){
+        setUrl(user?.profilePic);
+        setName(user?.first_name);
+      }
+    }, [user]);
+
+
+
   const _setBgColor = (name: string) => {
     const backgroundIndex = Math.floor(
       name.charCodeAt(0) % avatarColors.length
