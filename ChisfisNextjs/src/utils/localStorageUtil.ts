@@ -17,3 +17,11 @@ export const setLocalStorageItem = (key: string, value: string): void => {
       localStorage.removeItem(key);
     }
   };
+
+export const getStoredCurrency = (): string => {
+  if (typeof window !== 'undefined') {
+    const storedCurrency = localStorage.getItem('currency');
+    return storedCurrency ?? 'USD';
+  }
+  return 'USD';
+};

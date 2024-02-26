@@ -1,4 +1,7 @@
 import React, { FC } from 'react';
+import Input from '@/shared/Input';
+import Select from '@/shared/Select';
+import FormItem from '../FormItem';
 import { PageAddingListing } from '@/types/types';
 
 const PageAddListing6 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
@@ -17,6 +20,29 @@ const PageAddListing6 = ({ input, setInput, handleInputChange }: PageAddingListi
         rows={14}
         placeholder='Type Place Description...'
       />
+      <div>
+      <h2 className='text-2xl font-semibold'>Parking</h2>
+      </div>
+       <FormItem
+          label='Parking Availability'>
+          <Select
+            name='availability'
+            value={input.availability as any}
+            onChange={handleInputChange}>
+            <option value=''>-Select-</option>
+            <option value='Yes'>Yes</option>
+            <option value='No'>No</option>
+          </Select>
+        </FormItem>
+        <FormItem
+          label='Parking capacity'>
+          <Input
+            name='capacity'
+            value={input.capacity as number | undefined}
+            onChange={handleInputChange}
+            placeholder='Parking capacity'
+          />
+        </FormItem>
     </>
   );
 };

@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/forgot-password`,
         { email, method: 'custom_email' }
       );
@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="container mb-24 mt-24 lg:mb-32">
+    <div className="container mt-24 h-[90vh]">
       <div className="max-w-md mx-auto space-y-6">
         <span className="text-red block text-center">{error}</span>
         {success ? (
