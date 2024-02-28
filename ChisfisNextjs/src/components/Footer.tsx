@@ -252,21 +252,26 @@
 // };
 
 // export default Footer;
+"use client";
 import Link from "next/link";
 import Logo from "@/shared/Logo";
 export default function Component() {
   return (
-    <footer className="bg-white text-gray-600">
-      <div className="container mx-auto px-6 py-10 md:flex md:justify-between md:items-center">
+    <footer className="bg-white text-gray-600 min-h-[20rem] border border-transparent">
+      <div className="px-[1rem] md:px-[0.5rem] sm:w-[95%] container min-h-[12rem] mx-auto lg:px-6 my-10 md:flex md:justify-between md:items-start">
         <div className="mb-6 md:mb-0 md:w-full lg:w-1/4">
           <h2 className="text-lg font-semibold text-gray-700">About the company</h2>
           <p className="mt-4 text-sm text-gray-500">A Large group Product based company launched in North America.</p>
           <div className="flex items-center mt-4 text-gray-700">
-            <PhoneIcon className="h-5 w-5" color='#5527D7'/>
+            <div className="h-7 w-7 rounded-[4rem] flex justify-center items-center border-2 border-[#5527D7] cursor-pointer">
+              <PhoneIcon className="h-4 w-4" color='#5527D7'/>
+            </div>
             <span className="ml-3 text-sm">979-968-89787</span>
           </div>
           <div className="flex items-center mt-2 text-gray-700">
-            <LocateIcon className="h-5 w-5" color='#5527D7'/>
+            <div className="h-7 w-7 rounded-[4rem] flex justify-center items-center border-2 border-[#5527D7] cursor-pointer">
+                <LocateIcon className="h-4 w-4" color='#5527D7'/>
+            </div>
             <span className="ml-3 text-sm">California, USA</span>
           </div>
         </div>
@@ -366,11 +371,11 @@ export default function Component() {
             </ul>
           </nav>
         </div>
-        <div className="text-gray-700 md:w-full lg:w-1/4">
+        <div className="text-gray-700 md:w-full lg:w-1/4 pt-[3rem]">
           <div>
-            <Logo className="w-full"/>
+            <Logo className="w-full ml-7"/>
           </div>
-          <div className="flex mt-4 space-x-4">
+          <div className="flex mt-[2rem] justify-center gap-4">
             <Link className="text-gray-500 hover:text-purple-600" href="#">
               <FacebookIcon className="h-5 w-5" color='#5527D7'/>
             </Link>
@@ -564,6 +569,5 @@ function YoutubeIcon(props:any) {
       <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
       <path d="m10 15 5-3-5-3z" />
     </svg>
-  )
-}
+  )}
 

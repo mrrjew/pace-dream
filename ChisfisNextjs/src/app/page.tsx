@@ -20,6 +20,7 @@ import timeBasedImg from "@/images/wellness-fitness.jpg"
 import musicalInstrumentsImg from "@/images/musicalInstruments.jpg"
 import FrequentlyAskedQuestion from "@/components/FrequentlyAskedQuestions";
 import FrequentlyAskedQuestionsMobile from "@/components/FrequentlyAskedQuestionsMobile";
+import BrowseByDestination from "@/components/BrowseByDestination";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -160,7 +161,8 @@ function PageHome() {
           <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
         </div>
         {/* SECTION 1 */}
-        <div className="relative py-2 md:py-16">
+       
+        {/* <div className="relative py-2 md:py-16">
           <BackgroundSection className="bg-white " />
           <SectionSliderNewCategoriesMobile
             className="md:hidden block"
@@ -172,31 +174,38 @@ function PageHome() {
             itemPerRow={4}
             categories={DEMO_CATS}
           />
+        </div> */}
+        <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
+          <BrowseByDestination />
         </div>
-        <div className="relative">
-          <BackgroundSection className="bg-[#F6F4F6] md:max-w-[100%]" />
-          <SectionOurFeatures />
-          <div className="relative pt-12">
-            <BackgroundSection className="bg-[#FAFAFA] md:max-w-[100%]" />
+        {/* <div className="relative"> */}
+          {/* <SectionOurFeatures /> */}
+        
+
             <SectionSliderFeaturePlaces
               className="md:hidden block"
               itemPerRow={1}
             />
+            {/* </div> */}
+            <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
             <SectionGridFeaturePlaces
               cardType="card2"
               className="md:block hidden md:mt-16"
             />
+            </div>
+            <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
             <SectionDiscoverPerfectRoomStay
               cardType="card2"
               className="md:block hidden"
             />
-            <div className="relative pt-16 md:mb-4">
+            </div>
+            
+            {/* <div className="relative pt-16 md:mb-4"> */}
               {/*<BackgroundSection className="bg-[white] md:max-w-[100%]" />
-               <SectionSliderAuthorBox className="md:block hidden"
-              itemPerRow={5}/>
+              
               <SectionSliderAuthorBoxMobile className="md:hidden block"
               itemPerRow={1}/> */}
-              <div className="relative md:pt-8">
+              {/* <div className="relative md:pt-8">
                 <BackgroundSection className="bg-neutral-50" />
                 <SectionSliderNewCategories
                   className="md:block hidden"
@@ -214,10 +223,11 @@ function PageHome() {
                   <BackgroundSection className="bg-white" />
                   <SectionBecomeAnAuthor />
                 </div>
-              </div>
+              </div> */}
             </div>
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
+        
         <div className="relative pb-8">
           <BackgroundSection />
           {/* <SectionClientSay className="md:block hidden" itemPerRow={3} />
@@ -225,10 +235,10 @@ function PageHome() {
           <SectionSubscribe />
         </div>
         <div>
-          <FrequentlyAskedQuestion />
-          <FrequentlyAskedQuestionsMobile />
+          {/* <FrequentlyAskedQuestion />
+          <FrequentlyAskedQuestionsMobile /> */}
         </div>
-      </div>
+   
     </main>
   );
 }

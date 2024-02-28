@@ -14,6 +14,8 @@ import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
 import HeaderFilterDiscover from "./HeaderFilterDiscover";
+import ButtonShowMore from "@/shared/ButtonShowMore";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 // OTHER DEMO WILL PASS PROPS
 /* const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8); */
@@ -34,11 +36,11 @@ export interface SectionDiscoverPerfectRoomStayProps {
 const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = ({
   className = "",
   stayListings = DEMO_LAST,
-  heading = "Last-Minute Deals for Hotels and Flights",
-  subHeading = "Explore Exclusive Last-Minute Deals on Hotels and Flights",
+  heading = "Hourly Rental Gear",
+  // subHeading = "Explore Exclusive Last-Minute Deals on Hotels and Flights",
   headingIsCenter,
   itemPerRow = 4,
-  tabs = ["All", "Hotel", "Flight"],
+  tabs = ["Tech Gadgets", "Musical Instruments","Photography", "Fashion"],
   cardType = "card2",
   sliderStyle= "style1"
 }) => {
@@ -88,12 +90,12 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
   });
 
   return (
-    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24 md:pb-20 ${className}`}>
+    <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24  ${className}`}>
       <HeaderFilterDiscover
-        tabActive={"All"}
+        tabActive={"Tech Gadgets"}
         tabs={tabs}
         heading={heading}
-        subHeading={subHeading}
+        // subHeading={subHeading}
       />
       <MotionConfig
         transition={{
@@ -142,14 +144,20 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
                       width: `calc(1/${numberOfItems} * 100%)`,
                     }}
                   >
-                    <StayCard2 key={item.id} data={item} />
+                    
+                <StayCard2 className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border " key={item.id} data={item} />
+
                   </motion.li>
                 ))}
               </AnimatePresence>
             </motion.ul>
           </div>
+
         </div>
       </MotionConfig>
+      <div className="flex my-16 justify-center items-center">
+        <ButtonShowMore>view more</ButtonShowMore>
+      </div>
     </div>
     
   );

@@ -24,9 +24,9 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   className = "",
   stayListings = DEMO_DATA,
   gridClass = "",
-  heading = "Hourly Places",
+  heading = "Time Based",
   headingIsCenter,
-  tabs = ["New York", "Tokyo", "Paris", "London"],
+  tabs = ["Room", "Parking", "EV Parking", "Restroom"],
   cardType = "card2",
 }) => {
   const renderCard = (stay: StayDataType) => {
@@ -43,13 +43,13 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
         CardName = StayCard;
     }
 
-    return <CardName key={stay.id} data={stay} />;
+    return <CardName className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border"key={stay.id} data={stay} />;
   };
 
   return (
     <div className={`nc-SectionGridFeaturePlaces md:pr-24 md:pl-24 relative ${className}`} >
       <HeaderFilter
-        tabActive={"New York"}
+        tabActive={"Room"}
         tabs={tabs}
         heading={heading}
       />
@@ -58,9 +58,9 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       >
         {stayListings.map((stay) => renderCard(stay))}
       </div>
-      <div className="flex my-16 justify-center items-center">
+      {/* <div className="flex my-16 justify-center items-center">
         <ButtonShowMore>Show more</ButtonShowMore>
-      </div>
+      </div> */}
     </div>
   );
 };
