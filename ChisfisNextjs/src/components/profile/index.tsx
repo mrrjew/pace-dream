@@ -58,7 +58,7 @@ const validationSchema = Yup.object({
 
 const ProfileForm = () => {
   const { user, updateProfile, getUser }: any = useProfile();
-  console.log('user', user);
+  // console.log('user', user);
   const onSubmit = (values: any) => {
     const fromData = new FormData();
     fromData.append('first_name', values.first_name);
@@ -108,6 +108,7 @@ const ProfileForm = () => {
             name="first_name"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           />
           {touched.first_name && errors.first_name ? (
             <p className="py-3 pt-1 text-red-600 text-sm ">
@@ -123,6 +124,7 @@ const ProfileForm = () => {
             name="last_name"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           />
           {touched.last_name && errors.last_name ? (
             <p className="py-3 pt-1 text-red-600 text-sm ">
@@ -139,6 +141,7 @@ const ProfileForm = () => {
             name="gender"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           >
             <option value={''}>Select</option>
             <option value="Male">Male</option>
@@ -159,6 +162,7 @@ const ProfileForm = () => {
             readOnly
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           />
           {touched.email && errors.email ? (
             <p className="py-3 pt-1 text-red-600 text-sm">{errors.email}</p>
@@ -189,6 +193,7 @@ const ProfileForm = () => {
             name="dob"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           />
           {touched.dob && errors.dob ? (
             <p className="py-3 pt-1 text-red-600 text-sm">{errors.dob}</p>
@@ -204,6 +209,7 @@ const ProfileForm = () => {
             name="mobile"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           />
           {touched.mobile && errors.mobile ? (
             <p className="py-3 pt-1 text-red-600 text-sm">{errors.mobile}</p>
@@ -218,6 +224,7 @@ const ProfileForm = () => {
             name="about"
             onChange={handleChange}
             onBlur={handleBlur}
+            required
           />
           {touched.about && errors.about ? (
             <p className="py-3 pt-1 text-red-600 text-sm">{errors.about}</p>
