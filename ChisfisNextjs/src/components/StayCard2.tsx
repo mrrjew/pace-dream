@@ -1,5 +1,4 @@
-"use client"
-import React, { FC, useState, useEffect, useMemo } from "react";
+import React, { FC } from "react";
 import GallerySlider from "@/components/GallerySlider";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
@@ -7,8 +6,8 @@ import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
+// import use from ""
 import Link from "next/link";
-import {getStoredCurrency} from "@/utils/localStorageUtil";
 
 export interface StayCard2Props {
   className?: string;
@@ -23,89 +22,8 @@ const StayCard2: FC<StayCard2Props> = ({
   size = "default",
   className = "",
   data = DEMO_DATA,
-  term = ""
+  term = "",
 }) => {
-
-
-  const [rates, setRates] = useState<Record<string, number>>({});
-  const [ratesFetched, setRatesFetched] = useState(false);
-  const currency = getStoredCurrency();
-
-  const [convertedAmount, setConvertedAmount] = useState<number | null>(null);
-
-  const [key, setKey] = useState(0);
-
-  useEffect(() => {
-    const getRates = async () => {
-      try {
-        const storedRatesString = localStorage.getItem('exchangeRates');
-        if (storedRatesString) {
-          const storedRates = JSON.parse(storedRatesString);
-          const { timestamp, data } = storedRates;
-
-          const currentTime = new Date().getTime();
-          const timeDifference = currentTime - timestamp;
-          const hoursDifference = timeDifference / (1000 * 3600);
-
-          if (hoursDifference < 24) {
-            setRates(data);
-            setRatesFetched(true);
-            return;
-          }
-        }
-
-        const response = await fetch(process.env.NEXT_PUBLIC_EXCHANGE_RATE_API_KEY!).then((res) => res.json());
-
-        if (response.result === 'success') {
-          const currentRates = response.conversion_rates;
-
-          const currentTime = new Date().getTime();
-          const newRatesData = { timestamp: currentTime, data: currentRates };
-          localStorage.setItem('exchangeRates', JSON.stringify(newRatesData));
-
-          setRates(currentRates);
-          setRatesFetched(true);
-        }
-      } catch (error) {
-        console.log('Error:', error);
-      }
-    };
-
-    if (!ratesFetched) {
-      getRates().then(r => r);
-    }
-  }, [ratesFetched, key]);
-
-  useEffect(() => {
-    setKey((prevKey) => prevKey + 1);
-  }, []);
-
-  const convert = useMemo(() => {
-    return (amount: number, toCurrency: string) => {
-      const rate = rates[toCurrency];
-      setConvertedAmount(Math.round(amount * rate));
-      return Math.round(amount * rate);
-    };
-  }, [rates]);
-
-
-  useEffect(() => {
-    if (ratesFetched) {
-      const amountNum = parseInt(data.price.replace("$", ""), 10);
-      const convertedAmountValue = convert(amountNum, currency);
-      setConvertedAmount(convertedAmountValue);
-    }
-  }, [ratesFetched, data, convert, currency]);
-
-
-  const convertedAmountStringWithCurrency = useMemo(() => {
-    if (convertedAmount !== null) {
-      return `${currency} ${convertedAmount}`;
-    }
-    return data.price;
-  }, [convertedAmount, currency]);
-
-
   const {
     galleryImgs,
     listingCategory,
@@ -124,8 +42,11 @@ const StayCard2: FC<StayCard2Props> = ({
   } = data;
 
   const renderSliderGallery = () => {
-    
     return (
+      // <>
+      // {/* <img src="/Map.png" alt="" /> */}
+      // <p>sjhbdvjvdh</p>
+      // </>
       <div className="relative md:w-full w-[82vw]">
         <Link href={`/listing-stay-detail/${id}?term=${term}`}>
           <GallerySlider
@@ -134,8 +55,13 @@ const StayCard2: FC<StayCard2Props> = ({
             galleryImgs={galleryImgs}
             imageClass="rounded-lg"
           />
-          <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
-          {saleOff && <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />}
+          <BtnLikeIcon
+            isLiked={like}
+            className="absolute right-3 top-3 z-[1]"
+          />
+          {saleOff && (
+            <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />
+          )}
         </Link>
       </div>
     );
@@ -144,18 +70,73 @@ const StayCard2: FC<StayCard2Props> = ({
   const renderContent = () => {
     let priceNum;
     let sharedNum;
-    if(term === "long" || term === "short"){
-        if(shared !== undefined && convertedAmountStringWithCurrency !== undefined){
-        priceNum = parseInt(convertedAmountStringWithCurrency.replace("$", ""), 10);
-        sharedNum = parseInt(shared , 10)
-        sharedNum = sharedNum + 1
+    if (term === "long" || term === "short") {
+      if (shared !== undefined && price !== undefined) {
+        priceNum = parseInt(price.replace("$", ""), 10);
+        sharedNum = parseInt(shared, 10);
+        sharedNum = sharedNum + 1;
       }
     }
     return (
+      // <>
+
+      // <p>jhvdsjsjdh</p>
+      // </>
+
       <div className={size === "default" ? "mt-3 space-y-3" : "mt-2 space-y-2"}>
+        <div className="flex justify-between items-center">
+          {term === "long" || term === "short" ? (
+            <div>
+              <span className="text-base font-semibold line-through">
+                {price}
+                {` `}
+                {size === "default" && (
+                  <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                    /hour
+                  </span>
+                )}
+              </span>
+              {priceNum && sharedNum ? (
+                <span className="text-base font-semibold">
+                  {" "}
+                  ${Math.round(priceNum / sharedNum)}
+                  {` `}
+                  <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                    /person
+                  </span>
+                </span>
+              ) : (
+                ""
+              )}
+            </div>
+          ) : (
+            <span className="text-base font-semibold">
+              {price}
+              {` `}
+              {size === "default" && (
+                <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                  /hour
+                </span>
+              )}
+            </span>
+          )}
+          {
+            <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
+              <p className="text-[14px] font-[600]">Stock</p>
+              <div className=" w-3 h-3 rounded-full bg-green-700">
+
+              </div>
+            </div>
+          }
+        </div>
+
+
         <div className="space-y-2">
           <span className="text-sm text-neutral-500">
-            {listingCategory.name} · {bedrooms} beds {term === 'long' || term === 'short' ? '· ' + shared + ' beds occupied' : ''}
+            {listingCategory.name} · {bedrooms} beds{" "}
+            {term === "long" || term === "short"
+              ? "· " + shared + " beds occupied"
+              : ""}
           </span>
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
             {isAds && <Badge name="ADS" color="green" />}
@@ -193,38 +174,9 @@ const StayCard2: FC<StayCard2Props> = ({
           </div>
         </div>
         <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
-        <div className="flex justify-between items-center">
-        {term === 'long' || term === 'short' ? (
-          <div>
-            <span className="text-base font-semibold line-through">
-              {convertedAmountStringWithCurrency}
-              {` `}
-              {size === "default" && (
-                <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                  /night
-                </span>
-              )}
-            </span>
-            {priceNum && sharedNum ? (<span className="text-base font-semibold"> ${Math.round(priceNum / sharedNum)}{` `}<span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                  /person
-                </span></span>) : ''}
-            
-          </div>
-        ) : (
-          <span className="text-base font-semibold">
-            {convertedAmountStringWithCurrency}
-            {` `}
-            {size === "default" && (
-              <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                /night
-              </span>
-            )}
-          </span>
-        )}
-          {!!reviewStart && (
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
-          )}
-        </div>
+        <button className=" bg-[#5527D7] text-white text-[16px] font-[400] rounded-[8px] flex justify-center items-center w-full py-2 px-4">
+          Rent Now
+        </button>
       </div>
     );
   };
@@ -232,7 +184,9 @@ const StayCard2: FC<StayCard2Props> = ({
   return (
     <div className={`nc-StayCard2 group relative ${className}`}>
       {renderSliderGallery()}
-      <Link href={`/listing-stay-detail/${id}?term=${term}`}>{renderContent()}</Link>
+      <Link href={`/listing-stay-detail/${id}?term=${term}`}>
+        {renderContent()}
+      </Link>
     </div>
   );
 };

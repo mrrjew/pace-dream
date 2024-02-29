@@ -4,6 +4,7 @@ import __lastMinutesListing from "./jsons/__lastMinutesListing.json"
 import __experiencesListing from "./jsons/__experiencesListing.json";
 import __flightListing from "./jsons/__flightListing.json"
 import __timeBasedListing from "./jsons/__timeBasedListing.json"
+import _hourlyRental from "./jsons/_hourlyRental.json"
 import {
   DEMO_STAY_CATEGORIES,
   DEMO_EXPERIENCES_CATEGORIES,
@@ -98,6 +99,22 @@ const DEMO_LAST_LISTINGS = __lastMinutesListing.map((post, index): LastDataType 
   };
 })
 
+
+const DEMO_RENTAL_LISTING = _hourlyRental.map((post, index): any => {
+  const category = DEMO_LAST_CATEGORIES.filter(
+    (taxonomy) => taxonomy.id === post.listingCategoryId
+  )[0];
+  return {
+    ...post,
+    id: `${index}`,
+    saleOff: !index ? "-20% today" : post.saleOff,
+    isAds: !index ? true : post.isAds,
+    author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
+    listingCategory: category,
+    href: post.href as Route,
+  };
+})
+
 const DEMO_EXPERIENCES_LISTINGS = __experiencesListing.map(
   (post, index): ExperiencesDataType => {
     //  ##########  GET CATEGORY BY CAT ID ######## //
@@ -135,4 +152,4 @@ const DEMO_CAR_LISTINGS = __carsListing.map((post, index): CarDataType => {
   };
 });
 
-export { DEMO_STAY_LISTINGS, DEMO_EXPERIENCES_LISTINGS, DEMO_CAR_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS, DEMO_TIMEBASED_LISTINGS };
+export {DEMO_RENTAL_LISTING, DEMO_STAY_LISTINGS, DEMO_EXPERIENCES_LISTINGS, DEMO_CAR_LISTINGS, DEMO_LAST_LISTINGS, DEMO_FLIGHT_LISTINGS, DEMO_TIMEBASED_LISTINGS };
