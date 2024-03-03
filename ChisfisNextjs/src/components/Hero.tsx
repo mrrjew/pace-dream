@@ -11,7 +11,7 @@ import Vector from "@/images/Vector.png"
 const Hero = () => {
     return (
         <div className="flex justify-center lg:gap-16 gap-2 md:flex-row flex-col-reverse text mx-auto bg-white md:py-20 py-8" >
-            <div className="relative lg:mx-0 md:w-[550px] w-screen ml-4  ">
+            <div className="relative lg:mx-0 md:w-[550px] w-screen ml-4">
                 <Image src={arrowBg} alt="arrowBg" className="h-20 w-60 object-contain absolute md:top-28 top-20 right-2 md:-right-10 " />
                 <Image src={ellipse} alt="ellipse" className="object-contain absolute -left-40 -top-14 " />
                 <p className="md:block hidden text-4xl font-semibold">
