@@ -161,7 +161,7 @@ function PageHome() {
           <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
         </div>
         {/* SECTION 1 */}
-       
+
         {/* <div className="relative py-2 md:py-16">
           <BackgroundSection className="bg-white " />
           <SectionSliderNewCategoriesMobile
@@ -179,33 +179,33 @@ function PageHome() {
           <BrowseByDestination />
         </div>
         {/* <div className="relative"> */}
-          {/* <SectionOurFeatures /> */}
-        
+        {/* <SectionOurFeatures /> */}
 
-            <SectionSliderFeaturePlaces
-              className="md:hidden block"
-              itemPerRow={1}
-            />
-            {/* </div> */}
-            <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
-            <SectionGridFeaturePlaces
-              cardType="card2"
-              className="md:block hidden md:mt-16"
-            />
-            </div>
-            <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
-            <SectionDiscoverPerfectRoomStay
-              cardType="card2"
-              className="md:block hidden"
-            />
-            </div>
-            
-            {/* <div className="relative pt-16 md:mb-4"> */}
-              {/*<BackgroundSection className="bg-[white] md:max-w-[100%]" />
+
+        <SectionSliderFeaturePlaces
+          className="md:hidden block"
+          itemPerRow={1}
+        />
+        {/* </div> */}
+        <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
+          <SectionGridFeaturePlaces
+            cardType="card2"
+            className="md:block hidden md:mt-16"
+          />
+        </div>
+        <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
+          <SectionDiscoverPerfectRoomStay
+            cardType="card2"
+            className="md:block hidden"
+          />
+        </div>
+
+        {/* <div className="relative pt-16 md:mb-4"> */}
+        {/*<BackgroundSection className="bg-[white] md:max-w-[100%]" />
               
               <SectionSliderAuthorBoxMobile className="md:hidden block"
               itemPerRow={1}/> */}
-              {/* <div className="relative md:pt-8">
+        {/* <div className="relative md:pt-8">
                 <BackgroundSection className="bg-neutral-50" />
                 <SectionSliderNewCategories
                   className="md:block hidden"
@@ -224,21 +224,21 @@ function PageHome() {
                   <SectionBecomeAnAuthor />
                 </div>
               </div> */}
-            </div>
-          {/* </div> */}
-        {/* </div> */}
-        
-        <div className="relative pb-8">
-          <BackgroundSection />
-          {/* <SectionClientSay className="md:block hidden" itemPerRow={3} />
+      </div>
+      {/* </div> */}
+      {/* </div> */}
+
+      <div className="relative pb-8">
+        <BackgroundSection />
+        {/* <SectionClientSay className="md:block hidden" itemPerRow={3} />
         <SectionClientSayMobile className="block md:hidden" itemPerRow={1} /> */}
-          <SectionSubscribe />
-        </div>
-        <div>
-          {/* <FrequentlyAskedQuestion />
+        <SectionSubscribe />
+      </div>
+      <div>
+        {/* <FrequentlyAskedQuestion />
           <FrequentlyAskedQuestionsMobile /> */}
-        </div>
-   
+      </div>
+
     </main>
   );
 }
