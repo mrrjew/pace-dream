@@ -23,7 +23,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
   className = "[ nc-flex-1 ]",
   buttonSubmitHref = '/listing-stay-map/1',
   hasButtonSubmit = true,
-  inputs= "",
+  inputs = "",
 }) => {
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
@@ -59,30 +59,30 @@ const GuestsInput: FC<GuestsInputProps> = ({
           <Popover.Button
             className={`flex z-10 flex-1 flex-col md:flex-row relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
           >
-              <div className="flex-grow max-md:mt-4 md:mr-4">
-                <span className="block xl:text-lg font-normal text-left text-black md:font-semibold">
-                  Guests
-                </span>
-                <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
-                  Add your guests
-                  <UserPlusIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 md:flex text-black ml-4" />
-                </span>
-              </div>
-              {!!totalGuests && open && (
-                <ClearDataButton
-                  onClick={() => {
-                    setGuestAdultsInputValue(0);
-                    setGuestChildrenInputValue(0);
-                    setGuestInfantsInputValue(0);
-                  }}
-                />
-              )}
-              {hasButtonSubmit && (
+            <div className="flex-grow max-md:mt-4 md:mr-4">
+              <span className="block xl:text-lg font-normal text-left text-black md:font-semibold">
+                Guests
+              </span>
+              <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-lg h-11 mt-1 text-base text-neutral-400 items-center justify-between leading-none font-light`}>
+                Add Guests
+                <UserPlusIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex text-gray-500 ml-4" />
+              </span>
+            </div>
+            {!!totalGuests && open && (
+              <ClearDataButton
+                onClick={() => {
+                  setGuestAdultsInputValue(0);
+                  setGuestChildrenInputValue(0);
+                  setGuestInfantsInputValue(0);
+                }}
+              />
+            )}
+            {hasButtonSubmit && (
               <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
-                <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref}/>
+                <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref} />
               </div>
             )}
-            </Popover.Button>
+          </Popover.Button>
           {open && (
             <div className="h-8  hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
           )}

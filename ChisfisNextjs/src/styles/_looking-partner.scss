@@ -63,7 +63,7 @@
     @apply flex gap-4 sm:gap-6 lg:gap-8 items-center flex-wrap font-[Inter];
 
     &__item {
-      @apply basis-full sm:basis-[calc(50%-16px)] lg:basis-[calc(25%-24px)] bg-white border border-[#DAE0E6] rounded-lg hover:shadow-md transition duration-300;
+      @apply basis-full sm:basis-[calc(50%-16px)] lg:basis-[calc(25%-24px)] bg-white border-[#DAE0E6] rounded-lg hover:shadow-md transition duration-300;
 
       &-content {
         @apply m-4;

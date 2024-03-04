@@ -47,9 +47,9 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         <span className="block xl:text-lg font-normal text-black md:font-semibold">
           From
         </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full ${dates} md:w-36 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
-          {selectedRange[0] ? selectedRange[0]?.toLocaleDateString("en-US") : `Add dates`}
-          <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 xl:w-3 xl:h-3 ml-4 text-black" />
+        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full ${dates} md:w-36 lg:w-40 rounded-lg mt-1 text-base h-11 text-neutral-400 items-center justify-between leading-none font-light`}>
+          {selectedRange[0] ? selectedRange[0]?.toLocaleDateString("en-US") : `Arrival Date`}
+          <CalendarIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 ml-4 text-gray-500" />
         </span>
       </div>
     );
@@ -61,9 +61,9 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         <span className="block xl:text-lg font-normal text-black md:font-semibold">
           Until
         </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full ${dates} md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}>
-          {selectedRange[1] ? selectedRange[1]?.toLocaleDateString("en-US") : `Add dates`}
-          <CalendarIcon className="w-3 h-3 lg:w-5 lg:h-5 xl:w-3 xl:h-3 ml-4 text-black" />
+        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border p-2 md:p-2 w-full ${dates} md:w-48 lg:w-48 rounded-lg mt-1 text-base h-11 text-neutral-400 items-center justify-between leading-none font-light`}>
+          {selectedRange[1] ? selectedRange[1]?.toLocaleDateString("en-US") : `Departure Date`}
+          <CalendarIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 ml-4 text-gray-500" />
         </span>
       </div>
     )
