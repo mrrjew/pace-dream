@@ -323,7 +323,7 @@ const page = ({ params }: any) => {
                 >
                   Show all {amenities.length} amenities
                 </button>
-                
+
               </div>
             </div>
 
@@ -339,7 +339,7 @@ const page = ({ params }: any) => {
                   <button type="button" className="btn-message">
                     Send Message
                   </button>
-                  <Link href={"/add-partner/1"}>
+                  <Link href={"/checkout"}>
                     <button type="button" className="btn-proposal">
                       Send Proposal
                     </button>

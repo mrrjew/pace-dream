@@ -21,9 +21,9 @@ export interface SectionHeroArchivePageProps {
 const renderForm = (currentPage: String) => {
   const commonInputs = (
     <div className="flex flex-col items-baseline md:flex-row overflow-hidden">
-      <LocationInput className="flex-[1.5] pr-4"/>
-      <StayDatesRangeInput className="flex-1" dates="md:w-[100%]"/>
-      <GuestsInput className="lg:flex-[1.5]" buttonSubmitHref="/listing-experiences"/>
+      <LocationInput className="flex-[1.5] pr-4" />
+      <StayDatesRangeInput className="flex-1" dates="md:w-[100%]" />
+      <GuestsInput className="lg:flex-[1.5]" buttonSubmitHref="/listing-experiences" />
     </div>
   );
 
@@ -38,9 +38,9 @@ const renderForm = (currentPage: String) => {
     case "Last Minutes":
       return (
         <div className="flex flex-col items-baseline md:flex-row rounded-full">
-          <LocationInput className="flex pr-4" typeInput='md:w-[45%]'/>
-          <Budgets className="flex"/>
-          <TypeInputs className="flex"/>
+          <LocationInput className="flex pr-4" typeInput='md:w-[45%]' />
+          <Budgets className="flex" />
+          <TypeInputs className="flex" />
         </div>
       );
 
@@ -63,13 +63,13 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
   } else {
     vw = 'md:w-[80vw] w-[92vw] xl:w-[60vw] lg:w-[60vw]';
   }
-  
+
   return (
     <div
       className={`max-w-[95vw] pb-6 ${vw} flex flex-col justify-center md:pt-0 z-10 mb-12 md:ml-0 lg:mb-0 md:max-w-full border-grey border bg-white rounded-2xl`}
     >
       <div className='pt-6 md:pl-5'>
-        <span className="md:ml-2.5 ml-4 font-semibold text-lg">186 Results Found</span>
+        <span className="md:ml-2.5 ml-4 font-semibold text-lg mb-8">186 Results Found</span>
       </div>
       {renderForm(currentPage)}
     </div>

@@ -10,7 +10,7 @@ import TimeBasedForm from "./(hourly-search-form)/TimeBasedForm"
 import Input from "@/shared/Input";
 import Button from "@/shared/Button";
 
-export type SearchTab =  "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
+export type SearchTab = "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
 
 export interface HeroSearchFormProps {
   className?: string;
@@ -23,20 +23,20 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   currentTab = "Room Stays",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Room Stays", "Time-Based" , "Hourly Rental Gear" , "Find Roommate" , "Experiences" , "Last Minutes"];
+  const tabs: SearchTab[] = ["Room Stays", "Time-Based", "Hourly Rental Gear", "Find Roommate", "Experiences", "Last Minutes"];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
     return (
       <div className="ml-2 flex md:block   justify-center">
-        <select className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-black" 
-        value={tabActive}
-        onChange={(e) => setTabActive(e.target.value as SearchTab)}>
+        <select className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-black"
+          value={tabActive}
+          onChange={(e) => setTabActive(e.target.value as SearchTab)}>
           {tabs.map((tab) => {
-            return(
-              <option 
-              value={tab}
-              key={tab}>
+            return (
+              <option
+                value={tab}
+                key={tab}>
                 {tab}
               </option>
             )
@@ -48,15 +48,14 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             return (
               <li
                 onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 flex items-center   cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${
-                  active
-                    ? "text-violet pb-8"
-                    : "text-neutral-500 hover:text-violet pb-8"
-                } `}
+                className={`flex-shrink-0 flex items-center   cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
+                  ? "text-violet pb-8"
+                  : "text-neutral-500 hover:text-violet pb-8"
+                  } `}
                 key={tab}
               >
                 <span>{tab}</span>
-                
+
               </li>
             );
           })}
@@ -82,49 +81,43 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 })}
         </div> */}
         <ul className="ml-2 md:ml-8    w-full flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-        <div className="md:flex justify-center  items-center hidden " >
-        {tabs.map((tab, i) => {
-          const active = tab === tabActive;
-          if(i === 0){
-            return(
-              <div className={` xl:w-[105px] lg:w-[88px] md:w-[80px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 1){
-            return(
-              <div className={` xl:w-[170px]  lg:w-[115px] md:w-[108px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 2){
-            return(
-              <div className={` xl:w-[225px] lg:w-[145px] md:w-[130px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 3){
-            return(
-              <div className={` xl:w-[195px] lg:w-[125px] md:w-[120px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 4){
-            return(
-              <div className={` xl:w-[150px] lg:w-[110px] md:w-[90px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 5){
-            return(
-              <div className={` xl:w-[155px] lg:w-[100px] md:w-[90px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          }
-          })
-        }
-        </div>
+          <div className="md:flex justify-center  items-center hidden " >
+            {tabs.map((tab, i) => {
+              const active = tab === tabActive;
+              if (i === 0) {
+                return (
+                  <div className={` xl:w-[105px] lg:w-[88px] md:w-[80px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                    }`} />
+                )
+              } else if (i === 1) {
+                return (
+                  <div className={` xl:w-[170px]  lg:w-[115px] md:w-[108px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                    }`} />
+                )
+              } else if (i === 2) {
+                return (
+                  <div className={` xl:w-[225px] lg:w-[145px] md:w-[130px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                    }`} />
+                )
+              } else if (i === 3) {
+                return (
+                  <div className={` xl:w-[195px] lg:w-[125px] md:w-[120px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                    }`} />
+                )
+              } else if (i === 4) {
+                return (
+                  <div className={` xl:w-[150px] lg:w-[110px] md:w-[90px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                    }`} />
+                )
+              } else if (i === 5) {
+                return (
+                  <div className={` xl:w-[155px] lg:w-[100px] md:w-[90px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                    }`} />
+                )
+              }
+            })
+            }
+          </div>
         </ul>
       </div>
     );
@@ -138,9 +131,9 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
         return <ExperiencesSearchForm />;
       case "Find Roommate":
         return <FlightSearchForm />;
-      case "Time-Based": 
+      case "Time-Based":
         return <TimeBasedForm />;
-      case "Hourly Rental Gear": 
+      case "Hourly Rental Gear":
         return <HourlySearchForm />;
       case "Last Minutes":
         return <MinutesSearchForm />;
@@ -154,36 +147,12 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
       className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 max-w-[90vw] w-[90vw] md:max-w-full py-5 lg:py-0 ${className}`}
     >
       {renderTab()}
-      {/* {renderForm()} */}
-      <>
-      <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 py-4 mt-3">
-      <div className="flex justify-between items-center space-x-4 bg-white p-4 rounded-lg shadow-md">
-        <div className="flex items-center space-x-2">
-          <MapPinIcon className="h-6 w-6 text-gray-500" />
-          <Input placeholder="Select Location" />
-        </div>
-        <div className="flex items-center space-x-2">
-          <CalendarIcon className="h-6 w-6 text-gray-500" />
-          <Input placeholder="Arrival Date" />
-        </div>
-        <div className="flex items-center space-x-2">
-          <CalendarIcon className="h-6 w-6 text-gray-500" />
-          <Input placeholder="Departure Date" />
-        </div>
-        <div className="flex items-center space-x-2">
-          <UserPlusIcon className="h-6 w-6 text-gray-500" />
-          <Input placeholder="Add Guests" />
-        </div>
-        <Button className="p-2 rounded-full bg-purple-600 text-white" >
-          <SearchIcon className="h-6 w-6" />
-        </Button>
-      </div>
-    </div>
-      </>
+      {renderForm()}
+
     </div>
   );
 };
-function CalendarIcon(props:any) {
+function CalendarIcon(props: any) {
   return (
     <svg
       {...props}
@@ -206,7 +175,7 @@ function CalendarIcon(props:any) {
 }
 
 
-function MapPinIcon(props:any) {
+function MapPinIcon(props: any) {
   return (
     <svg
       {...props}
@@ -227,7 +196,7 @@ function MapPinIcon(props:any) {
 }
 
 
-function SearchIcon(props:any) {
+function SearchIcon(props: any) {
   return (
     <svg
       {...props}
@@ -248,7 +217,7 @@ function SearchIcon(props:any) {
 }
 
 
-function UserPlusIcon(props:any) {
+function UserPlusIcon(props: any) {
   return (
     <svg
       {...props}

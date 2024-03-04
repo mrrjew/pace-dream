@@ -29,14 +29,14 @@ const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   const selectedStartDate = getLocalStorageItem("startedDate");
   const initialStartDate = selectedStartDate ? new Date(selectedStartDate) : null;
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
-  
-  
+
+
   const selectedEndDate: string | null = getLocalStorageItem("endedDate");
   const initialEndDate: Date | null = selectedEndDate ? new Date(selectedEndDate) : null;
   const [endDate, setEndDate] = useState<Date | null>(initialEndDate);
-  
-let total = getLocalStorageItem("totalGuest")
-let bookedDay: any = getLocalStorageItem("bookedDay")
+
+  let total = getLocalStorageItem("totalGuest")
+  let bookedDay: any = getLocalStorageItem("bookedDay")
 
   const renderSidebar = () => {
     return (
@@ -48,7 +48,8 @@ let bookedDay: any = getLocalStorageItem("bookedDay")
                 alt=""
                 fill
                 sizes="200px"
-                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                src="https://images.pexels.com/photos/7128962/pexels-photo-7128962.jpeg"
+                className="object-cover"
               />
             </div>
           </div>
@@ -142,7 +143,7 @@ let bookedDay: any = getLocalStorageItem("bookedDay")
                     <span className="text-sm text-neutral-400">Guests</span>
                     <span className="mt-1.5 text-lg font-semibold">
                       <span className="line-clamp-1">
-                        { total } Guests
+                        {total} Guests
                       </span>
                     </span>
                   </div>
@@ -163,11 +164,10 @@ let bookedDay: any = getLocalStorageItem("bookedDay")
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${
-                        selected
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-full focus:outline-none ${selected
                           ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
                           : "text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
+                        }`}
                     >
                       Paypal
                     </button>
@@ -176,11 +176,10 @@ let bookedDay: any = getLocalStorageItem("bookedDay")
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
-                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${
-                        selected
+                      className={`px-4 py-1.5 sm:px-6 sm:py-2.5  rounded-full flex items-center justify-center focus:outline-none  ${selected
                           ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
                           : " text-neutral-6000 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      }`}
+                        }`}
                     >
                       <span className="mr-2.5">Credit card</span>
                       <Image className="w-8" src={visaPng} alt="visa" />

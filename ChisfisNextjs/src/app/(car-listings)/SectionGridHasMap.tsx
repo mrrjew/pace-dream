@@ -13,7 +13,7 @@ import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent"
 
 const DEMO_CARS = DEMO_CAR_LISTINGS.filter((_, i) => i < 12);
 
-export interface SectionGridHasMapProps {}
+export interface SectionGridHasMapProps { }
 
 const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
@@ -63,9 +63,8 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
 
         {/* MAPPPPP */}
         <div
-          className={`xl:flex-grow xl:static xl:block ${
-            showFullMapFixed ? "fixed inset-0 z-50" : "hidden"
-          }`}
+          className={`xl:flex-grow xl:static xl:block ${showFullMapFixed ? "fixed inset-0 z-50" : "hidden"
+            }`}
         >
           {showFullMapFixed && (
             <ButtonClose
@@ -90,7 +89,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
               }}
               yesIWantToUseGoogleMapApiInternals
               defaultZoom={12}
-              defaultCenter={DEMO_CARS[0].map}
+              defaultCenter={{ "lat": 55.2094559, "lng": 61.5594641 }}
             >
               {DEMO_CARS.map((item) => (
                 <AnyReactComponent

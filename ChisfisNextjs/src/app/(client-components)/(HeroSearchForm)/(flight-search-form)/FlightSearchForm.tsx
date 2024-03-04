@@ -257,7 +257,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ }) => {
               Explore your PaceDream Book hotels, Car and more with ease!
             </h2>
           </div>
-          <div className="flex flex-col flex-1 items-baseline md:flex-row rounded-full">
+          <div className="flex flex-col flex-1 mx-8 mt-8 py-4 border items-center gap-4 md:flex-row rounded-lg">
             <LocationInput className="flex-[1.5]" />
             <StayDatesRangeInput className="flex-1" />
             <GuestsInput className="flex-[1.5]" buttonSubmitHref="/listing-stay-map/3" />
