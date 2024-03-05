@@ -79,7 +79,7 @@ const StaySearchForm: FC<{}> = ({ }) => {
               Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
             </h2>
           </div>
-          <div className="flex flex-col flex-1 mx-8 mt-8 py-4 border items-center gap-4 md:flex-row rounded-lg">
+          <div className="flex flex-col flex-1 mx-8 mt-8 py-4 md:border items-center gap-4 md:flex-row rounded-lg">
             <LocationInput className="" />
             <StayDatesRangeInput className="" />
             <GuestsInput className="" buttonSubmitHref={`/listing-stay-map/1?term=${dropOffLocationType}`} />

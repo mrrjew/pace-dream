@@ -28,12 +28,8 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   const handleChange = (date: [Date | null, Date | null], event: React.SyntheticEvent<any, Event> | undefined) => {
     setSelectedRange(date);
     console.log(selectedRange)
-    // date es un array con la fecha de inicio en la posición 0 y la fecha de fin en la posición 1
     const [startDate, endDate] = date;
-    // Aquí puedes hacer lo que necesites con startDate y endDate
   };
-
-  //
 
   const onChangeDate = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
@@ -71,7 +67,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   return (
     <>
-      <Popover className={`StayDatesRangeInput z-10 relative flex ${className}`}>
+      <Popover className={`StayDatesRangeInput z-50 relative flex ${className}`}>
         {({ open }) => (
           <>
             <Popover.Button
@@ -96,7 +92,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-full z-10 mt-3 top-full w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+              <Popover.Panel className="absolute left-full z-50 mt-3 top-full w-screen max-w-sm  bg-white -translate-x-96  md:-translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
                   <DatePicker
                     onChange={handleChange}
@@ -119,7 +115,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
           </>
         )}
       </Popover>
-      <Popover className={`StayDatesRangeInput z-10 relative flex ${className}`}>
+      <Popover className={`StayDatesRangeInput z-49 relative flex ${className}`}>
         {({ open }) => (
           <>
             <Popover.Button
@@ -144,7 +140,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-full z-10 mt-3 top-full w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
+              <Popover.Panel className="absolute left-full z-50 mt-3 top-full w-screen max-w-sm -translate-x-96  md:-translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
                   <DatePicker
                     onChange={handleChange}
