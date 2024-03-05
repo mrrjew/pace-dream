@@ -21,6 +21,7 @@ import musicalInstrumentsImg from "@/images/musicalInstruments.jpg"
 import FrequentlyAskedQuestion from "@/components/FrequentlyAskedQuestions";
 import FrequentlyAskedQuestionsMobile from "@/components/FrequentlyAskedQuestionsMobile";
 import BrowseByDestination from "@/components/BrowseByDestination";
+import Hero from "@/components/Hero";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -153,12 +154,13 @@ const DEMO_CATS_2: TaxonomyType[] = [
 function PageHome() {
   return (
     <main className="nc-PageHome relative overflow-hidden">
-      <div className="container relative space-y-24 mb-24 lg:space-y-28 lg:mb-28">
+      <div className="container relative space-y-10 mb-24 lg:space-y-28 lg:mb-28">
         <div
-          className={`relative pb-6 -ml-16 md:ml-0 bg-[url('../images/backgroundMobile.png')] bg-no-repeat bg-cover md:bg-none`}
+          className={`relative -ml-16 md:ml-0`}
         >
           <BackgroundSection className="bg-[#F6F4F6]" />
-          <SectionHero className="pt-10 lg:pt-16 lg:pb-16" />
+          {/* <Hero /> */}
+          <SectionHero className="md:pt-10 lg:pt-16 lg:pb-16" />
         </div>
         {/* SECTION 1 */}
 
@@ -175,7 +177,7 @@ function PageHome() {
             categories={DEMO_CATS}
           />
         </div> */}
-        <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
+        <div className="relative py-2 md:py-8 bg-white rounded-[8px]">
           <BrowseByDestination />
         </div>
         {/* <div className="relative"> */}

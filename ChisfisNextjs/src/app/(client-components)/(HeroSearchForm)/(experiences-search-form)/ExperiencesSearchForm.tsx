@@ -62,7 +62,7 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({ }) => {
               Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
             </h2>
           </div>
-          <div className="flex flex-col flex-1 mx-8 mt-8 py-4 border items-center gap-4 md:flex-row rounded-lg">
+          <div className="flex flex-col flex-1 mx-8 mt-8 py-4 md:border items-center gap-4 md:flex-row rounded-lg">
             <LocationInput className="flex-[1.5]" input="max-lg:w-[22vw]" />
             <ExperiencesDateSingleInput className="flex-1" />
             <GuestsInput

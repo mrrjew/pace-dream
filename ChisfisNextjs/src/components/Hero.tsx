@@ -10,8 +10,8 @@ import Vector from "@/images/Vector.png"
 
 const Hero = () => {
     return (
-        <div className="flex justify-center lg:gap-16 gap-2 md:flex-row flex-col-reverse text mx-auto bg-white md:py-20 py-8" >
-            <div className="relative lg:mx-0 md:w-[550px] w-screen ml-4">
+        <div className="flex justify-center lg:gap-16 gap-2 md:flex-row flex-col-reverse text mx-auto  md:py-20 py-8" >
+            <div className="relative lg:mx-0 md:w-[550px]  md:bg-transparent w-screen ml-16">
                 <Image src={arrowBg} alt="arrowBg" className="h-20 w-60 object-contain absolute md:top-28 top-20 right-2 md:-right-10 " />
                 <Image src={ellipse} alt="ellipse" className="object-contain absolute -left-40 -top-14 " />
                 <p className="md:block hidden text-4xl font-semibold">
@@ -26,11 +26,11 @@ const Hero = () => {
                 <p className="md:hidden block text-lg mt-8 font font-medium" >
                     An all-in-one platform that helps you to find what you needed.
                 </p>
-                <div className="flex md:gap-4 gap-4 mt-8">
+                <div className="flex md:gap-4 ml-4 md:ml-0 gap-4 mt-8">
                     <button className=" bg-[#5527D7] font-medium rounded-full md:px-8 md:py-4 px-4 py-4 text-white flex gap-4 items-center">Start your search <FaArrowRight /> </button>
                     <button className="flex rounded-full  md:px-8 md:py-4 px-4 py-4 gap-2 font-medium items-center text-[#5527D7] "><FiYoutube /> How it works</button>
                 </div>
-                <div className="mt-10 grid grid-cols-3 gap-8 w-96">
+                <div className="mt-10 ml-4 md:ml-2 grid grid-cols-3 gap-8 w-96">
                     <div className="flex gap-2 flex-col">
                         <p className="font-bold text-2xl text-center text-[#5527D7]">8,00,00+</p>
                         <hr className="w-full h-[3px] bg-gray-300 border-0 rounded dark:bg-gray-700" />
@@ -48,7 +48,7 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-            <div className="lg:w-[520px] h-[500px] w-96 lg:mx-0 ml-5 relative">
+            <div className="lg:w-[520px] h-[500px] w-96 lg:mx-0 ml-[72px] relative">
                 <Image src={Vector} alt="Hero-right" fill className="absolute z-0" />
                 <Image src={HeroImg} alt="Hero-right" fill className="object-contain  z-1 " />
                 <Image src={HeroImg1} alt="Hero-right" className="hidden md:block object-contain absolute bottom-[136px] -left-14 h-44 w-44" />
