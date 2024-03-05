@@ -22,6 +22,7 @@ import FrequentlyAskedQuestion from "@/components/FrequentlyAskedQuestions";
 import FrequentlyAskedQuestionsMobile from "@/components/FrequentlyAskedQuestionsMobile";
 import BrowseByDestination from "@/components/BrowseByDestination";
 import Hero from "@/components/Hero";
+import SectionSliderHourlyPlaces from "@/components/SectionSliderHourlyPlaces";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -183,19 +184,23 @@ function PageHome() {
         {/* <div className="relative"> */}
         {/* <SectionOurFeatures /> */}
 
-
+        {/* Time based for mobile */}
         <SectionSliderFeaturePlaces
           className="md:hidden block"
           itemPerRow={1}
         />
+        <SectionSliderHourlyPlaces
+          className="md:hidden block"
+          itemPerRow={1} />
         {/* </div> */}
-        <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
+        {/* Time based for Web */}
+        <div className="relative md:block hidden py-2 md:py-16 bg-white rounded-[8px]">
           <SectionGridFeaturePlaces
             cardType="card2"
             className="md:block hidden md:mt-16"
           />
         </div>
-        <div className="relative py-2 md:py-16 bg-white rounded-[8px]">
+        <div className="relative md:block hidden py-2 md:py-16 bg-white rounded-[8px]">
           <SectionDiscoverPerfectRoomStay
             cardType="card2"
             className="md:block hidden"
@@ -236,9 +241,9 @@ function PageHome() {
         <SectionClientSayMobile className="block md:hidden" itemPerRow={1} /> */}
         <SectionSubscribe />
       </div>
-      <div>
-        {/* <FrequentlyAskedQuestion />
-          <FrequentlyAskedQuestionsMobile /> */}
+      <div className="md:mb-24 mb-8 ml-5 md:ml-0 pt-4  " >
+        <FrequentlyAskedQuestion />
+        <FrequentlyAskedQuestionsMobile />
       </div>
 
     </main>

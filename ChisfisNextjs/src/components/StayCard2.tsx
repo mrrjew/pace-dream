@@ -47,7 +47,7 @@ const StayCard2: FC<StayCard2Props> = ({
       // {/* <img src="/Map.png" alt="" /> */}
       // <p>sjhbdvjvdh</p>
       // </>
-      <div className="relative md:w-full w-[82vw]">
+      <div className="relative md:w-full w-full">
         <Link href={`/listing-stay-detail/${id}?term=${term}`}>
           <GallerySlider
             uniqueID={`StayCard2_${id}`}
@@ -141,9 +141,8 @@ const StayCard2: FC<StayCard2Props> = ({
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
             {isAds && <Badge name="ADS" color="green" />}
             <h2
-              className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${
-                size === "default" && "text-base"
-              }`}
+              className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${size === "default" && "text-base"
+                }`}
             >
               <span className="line-clamp-1 truncate">{title}</span>
             </h2>
