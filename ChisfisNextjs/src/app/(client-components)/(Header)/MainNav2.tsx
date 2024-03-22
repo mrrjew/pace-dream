@@ -65,7 +65,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           <div className="hidden lg:flex items-center  justify-end ">
           <ol className=' flex items-center gap-4'>
               <li><Link href={'/about-us'}>About</Link></li>
-              <li>Contact</li>
+              <li><Link href={'/contact-us'}>Contact</Link></li>
               <div className=' items-center flex gap-1'>
               </div>
               
