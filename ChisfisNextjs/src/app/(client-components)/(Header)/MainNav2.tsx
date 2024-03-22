@@ -67,8 +67,6 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
               <li>About</li>
               <li>Contact</li>
               <div className=' items-center flex gap-1'>
-              <li>More </li>
-              <RiArrowDownSLine />
               </div>
               
 
