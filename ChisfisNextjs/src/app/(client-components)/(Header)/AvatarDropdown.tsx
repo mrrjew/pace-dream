@@ -76,20 +76,23 @@ export default function AvatarDropdown({ className = '' }: Props) {
               <Popover.Panel className="absolute z-10 w-screen max-w-[260px] px-4 top-full -right-10 sm:right-0 sm:px-0">
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
-                    <div className="flex items-center space-x-3">
-                      <Avatar sizeClass="w-12 h-12" />
+                    {
+                      userInfo && userInfo.first_name &&
+                      <>
+                        <div className="flex items-center space-x-3">
+                          <Avatar sizeClass="w-12 h-12" />
 
-                      <div className="flex-grow">
-                        <h4 className="font-semibold">
-                          {userInfo && userInfo.first_name
-                            ? `${userInfo.first_name} ${userInfo.last_name}`
-                            : 'John Doe'}
-                        </h4>
-                        {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
-                      </div>
-                    </div>
+                          <div className="flex-grow">
+                            <h4 className="font-semibold">
+                              ${userInfo.first_name} ${userInfo.last_name}`
+                            </h4>
+                            {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
+                          </div>
+                        </div>
+                        <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
+                      </>
+                    }
 
-                    <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
                     {/* ------------------ 1 --------------------- */}
 
