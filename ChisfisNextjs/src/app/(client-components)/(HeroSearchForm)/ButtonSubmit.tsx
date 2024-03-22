@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 interface Props {
-  href?: PathName | string ;
+  href?: PathName | string;
   as?: string
 }
 
@@ -14,12 +14,12 @@ const ButtonSubmit: FC<Props> = ({ href = "/listing-stay-map/[id]", as = "/listi
       href={urlObject}
       as={as}
       type="button"
-      className="h-14 md:h-8 md:w-8 xl:h-8 w-full xl:w-8 rounded-full bg-primary-6000 hover:bg-primary-700 flex items-center justify-center text-neutral-50 focus:outline-none"
+      className="h-11 md:h-11 md:w-16 xl:h-11 w-full xl:w-16 rounded-lg bg-primary-6000 hover:bg-primary-700 flex items-center justify-center text-neutral-50 focus:outline-none mt-1"
     >
       <span className="mr-3 md:hidden">Search</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="hidden md:flex h-6 w-6"
+        className="hidden md:flex h-8 w-8"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

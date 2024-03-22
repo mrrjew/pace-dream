@@ -1,3 +1,340 @@
+import React from "react";
+import Image from "next/image";
+// import Badge from '@/shared/custom/Badge';
+import Input from "@/shared/Input";
+// import Calendar from '@/shared/custom/Calendar';
+import button from "@/shared/ButtonPrimary";
+import mapImage from "../../../assets/images/userDemoImages/Map.png";
+
+const FormItem = () => {
+  return (
+    <div className="bg-gray-100 min-h-screen">
+      <main className="py-8 px-2 md:px-8">
+        <div className="max-w-4xl mx-auto bg-white p-2 md:p-8 rounded-lg shadow">
+          <h1 className="text-xl font-[900] leading-6  mb-4">
+            {/* <span className="underline decoration-2 decoration-[#632DF8]">Create</span> a Listing */}
+            <span>Create</span> a Listing
+          </h1>
+          <hr />
+          <section>
+            <h2 className="font-[700] text-[16px] mt-4 mb-2">Select Category</h2>
+            <div className="flex flex-wrap gap-4 lg:justify-between mb-6">
+              <button
+                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+                type="button"
+              >
+                Room Stays
+              </button>
+              <button
+                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+                type="button"
+              >
+                Time-Based
+              </button>
+              <button
+                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+                type="button"
+              >
+                Hourly Rental Gear
+              </button>
+              <button
+                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+                type="button"
+              >
+                Find Roommate
+              </button>
+              <button
+                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+                type="button"
+              >
+                Experiences
+              </button>
+            </div>
+            <h2 className=" font-[700] text-[16px] mb-2">Room Type</h2>
+            <div className="flex flex-wrap gap-2 mb-6">
+              <button
+                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
+                type="button"
+              >
+                Anytime
+              </button>
+              <button
+                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
+                type="button"
+              >
+                Any type
+              </button>
+              <button
+                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
+                type="button"
+              >
+                Hostel
+              </button>
+              <button
+                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
+                type="button"
+              >
+                Guesthouse
+              </button>
+              <button
+                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
+                type="button"
+              >
+                Long term
+              </button>
+              <button
+                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
+                type="button"
+              >
+                Short Term
+              </button>
+            </div>
+            <div className=" flex justify-between">
+              <div>
+                <h2 className=" font-[700] text-[16px] mb-2">Add Location</h2>
+                <Input className="mb-6" placeholder="Type your locations" />
+              </div>
+              <img src="/Images/map.png" />
+            </div>
+            <h2 className=" font-[700] text-[16px] mb-2">Description</h2>
+            <Input className="mb-6" placeholder="Description of the space" />
+            <h2 className=" font-[700] text-[16px] mb-2">
+              Available Amenities
+            </h2>
+            <div className="flex flex-wrap lg:justify-between px-4 rounded-[8px] py-2 bg-[#F6F4F6] mb-6">
+              <div className=" flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="h-[12px] w-[12px] rounded-full"
+                ></input>
+                <p className=" text-[16px] font-[500]"> Wi-Fi Access</p>
+              </div>
+              <div className=" flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="h-[12px] w-[12px] rounded-full"
+                ></input>
+                <p className=" text-[16px] font-[500]"> Air Conditioning</p>
+              </div>
+              <div className=" flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="h-[12px] w-[12px] rounded-full"
+                ></input>
+                <p className=" text-[16px] font-[500]">Free Parking</p>
+              </div>
+              <div className=" flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="h-[12px] w-[12px] rounded-full"
+                ></input>
+                <p className=" text-[16px] font-[500]"> Swimming Pool</p>
+              </div>
+              <div className=" flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="h-[12px] w-[12px] rounded-full"
+                ></input>
+                <p className=" text-[16px] font-[500]"> Gym/Fitness Center</p>
+              </div>
+              {/* <button
+className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+type="button"
+>
+Wi-Fi Access
+</button>
+<button
+className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
+type="button"
+>
+Air Conditioning
+</button>
+<button
+className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[50px]"
+type="button"
+>
+Free Parking
+</button>
+<button
+className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[50px]"
+type="button"
+>
+Swimming Pool
+</button>
+<button
+className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[50px]"
+type="button"
+>
+Gym/Fitness Center
+</button> */}
+            </div>
+            <h2 className=" font-[700] text-[16px] mb-2">Price Per Night</h2>
+            <Input className="mb-6" placeholder="$150.00" />
+            <h2 className=" font-[700] text-[16px] mb-2">Availability Dates</h2>
+            <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <div className="flex flex-col w-full">
+                  <label
+
+                    className="text-lg font-medium text-gray-700 mb-2"
+                  >
+                    Start Date
+                  </label>
+                  <input
+                    type="date"
+                    id="startDate"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  />
+                </div>
+
+                <div className="flex flex-col w-full">
+                  <label
+
+                    className="text-lg font-medium text-gray-700 mb-2"
+                  >
+                    End Date
+                  </label>
+                  <input
+                    type="date"
+                    id="endDate"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  />
+                </div>
+              </div>
+            </div>
+            {/* <Calendar className="rounded-md border mb-6" mode="single" /> */}
+            <h2 className=" font-[700] mt-4 text-[16px] mb-2">House Rules:</h2>
+            <div className=" border p-3">
+              <ol className="list-decimal pl-4 mb-6">
+                <li>
+                  No Smoking: Smoking is strictly prohibited inside the house.
+                  Designate specific outdoor areas for smoking if necessary.
+                </li>
+                <li>
+                  Quiet Hours: Respect quiet hours to ensure a peaceful
+                  environment, typically from [Insert specific time] to [Insert
+                  specific time].
+                </li>
+                <li>
+                  Guest Policy: Notify the host in advance if you plan to have
+                  guests, and limit the number of guests allowed. No overnight
+                  guests without prior approval.
+                </li>
+                <li>
+                  No Pets: Unless explicitly allowed, pets are not permitted on
+                  the premises.
+                </li>
+              </ol>
+            </div>
+            {/* <div className=" mt-5 flex items-center gap-4">
+              <h2 className=" font-[700] text-[16px] mb-2">Upload a file:</h2>
+              <div className="flex items-center space-x-2">
+                <input
+                  type="text"
+                  className=" p-2 rounded-[8px]"
+                  placeholder="select a file or drag and drop"
+                />
+                <button type="button" className="bg-[#F6F4F6] p-3 rounde-[8px]">
+                  Upload
+                </button>
+              </div>
+            </div> */}
+            <div className="max-w-md p-6 bg-white rounded-md shadow-md flex items-center">
+              <div className="flex-1 mr-4">
+                <label className="block text-lg font-medium text-gray-700 mb-2">
+                  Choose a file to upload
+                </label>
+
+                <div className="relative border-dashed border-2 border-gray-400 p-6 flex items-center">
+                  <input
+                    id="fileInput"
+                    type="file"
+                    className="absolute w-full h-full opacity-0"
+                  />
+                  <div className="text-center">
+                    <svg
+                      className="mx-auto h-12 w-12 text-gray-400"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 14v6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-6m-6 0l6-6 6 6m-6-6v6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-6m-6 0l6-6 6 6m-12 6h24"
+                      ></path>
+                    </svg>
+                    <p className="mt-1 text-sm text-gray-600">
+                      Drag and drop your file here, or click to select
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                Upload
+              </button>
+            </div>
+            <div className="flex space-x-2 gap-2 mt-[2rem]">
+              <img
+                alt="Room Image"
+                height="100"
+                // src="/placeholder.svg"
+                src="/Images/image1.png"
+                style={{
+                  aspectRatio: "150/100",
+                  objectFit: "cover",
+                }}
+                width="150"
+              />
+              <img
+                alt="Room Image"
+                height="100"
+                // src="/placeholder.svg"
+                src="/Images/image2.png"
+                style={{
+                  aspectRatio: "150/100",
+                  objectFit: "cover",
+                }}
+                width="150"
+              />
+              <img
+                alt="Room Image"
+                height="100"
+                // src="/placeholder.svg"
+                src="/Images/image3.png"
+                style={{
+                  aspectRatio: "150/100",
+                  objectFit: "cover",
+                }}
+                width="150"
+              />
+            </div>
+          </section>
+          <div className="flex justify-center gap-5 mt-8">
+            <button
+              className=" py-3 px-6 hover:bg-[#047857] border bg-[#F6F4F6] text-[#64748B] hover:text-white text-[14px] font-[500] rounded-[12px]"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              className=" py-3 px-6 hover:bg-[#047857] border bg-[#F6F4F6] hover:text-white text-[14px] font-[500] rounded-[12px]"
+              type="button"
+            >
+              Create Listing
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default FormItem;
+
+
 // 'use client';
 
 // import React, { useEffect, useState } from 'react';
@@ -325,337 +662,3 @@
 
 // export default Page;
 // pages/CreateListing.js
-import React from "react";
-import Image from "next/image";
-// import Badge from '@/shared/custom/Badge';
-import Input from "@/shared/Input";
-// import Calendar from '@/shared/custom/Calendar';
-import button from "@/shared/ButtonPrimary";
-import mapImage from "../../../assets/images/userDemoImages/Map.png";
-
-const FormItem = () => {
-  return (
-    <div className="bg-gray-100 min-h-screen">
-      <main className="py-8 px-2 md:px-8">
-        <div className="max-w-4xl mx-auto bg-white p-2 md:p-8 rounded-lg shadow">
-          <h1 className="text-[18px] font-[900] underline decoration-4 decoration-[#632DF8] mb-4">
-            Create a Listing
-          </h1>
-
-          <section>
-            <h2 className="font-[700] text-[16px] mb-2">Select Category</h2>
-            <div className="flex flex-wrap gap-4 lg:justify-between mb-6">
-              <button
-                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-                type="button"
-              >
-                Room Stays
-              </button>
-              <button
-                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-                type="button"
-              >
-                Time-Based
-              </button>
-              <button
-                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-                type="button"
-              >
-                Hourly Rental Gear
-              </button>
-              <button
-                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-                type="button"
-              >
-                Find Roommate
-              </button>
-              <button
-                className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-                type="button"
-              >
-                Experiences
-              </button>
-            </div>
-            <h2 className=" font-[700] text-[16px] mb-2">Room Type</h2>
-            <div className="flex flex-wrap gap-2 mb-6">
-              <button
-                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
-                type="button"
-              >
-                Anytime
-              </button>
-              <button
-                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
-                type="button"
-              >
-                Any type
-              </button>
-              <button
-                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
-                type="button"
-              >
-                Hostel
-              </button>
-              <button
-                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
-                type="button"
-              >
-                Guesthouse
-              </button>
-              <button
-                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
-                type="button"
-              >
-                Long term
-              </button>
-              <button
-                className="px-4 py-2 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[12px] font-[400] rounded-[12px]"
-                type="button"
-              >
-                Short Term
-              </button>
-            </div>
-            <div className=" flex justify-between">
-              <div>
-                <h2 className=" font-[700] text-[16px] mb-2">Add Location</h2>
-                <Input className="mb-6" placeholder="Type your locations" />
-              </div>
-              <img src="/Images/map.png" />
-            </div>
-            <h2 className=" font-[700] text-[16px] mb-2">Description</h2>
-            <Input className="mb-6" placeholder="Description of the space" />
-            <h2 className=" font-[700] text-[16px] mb-2">
-              Available Amenities
-            </h2>
-            <div className="flex flex-wrap lg:justify-between px-4 rounded-[8px] py-2 bg-[#F6F4F6] mb-6">
-              <div className=" flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="h-[12px] w-[12px] rounded-full"
-                ></input>
-                <p className=" text-[16px] font-[500]"> Wi-Fi Access</p>
-              </div>
-              <div className=" flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="h-[12px] w-[12px] rounded-full"
-                ></input>
-                <p className=" text-[16px] font-[500]"> Air Conditioning</p>
-              </div>
-              <div className=" flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="h-[12px] w-[12px] rounded-full"
-                ></input>
-                <p className=" text-[16px] font-[500]">Free Parking</p>
-              </div>
-              <div className=" flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="h-[12px] w-[12px] rounded-full"
-                ></input>
-                <p className=" text-[16px] font-[500]"> Swimming Pool</p>
-              </div>
-              <div className=" flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="h-[12px] w-[12px] rounded-full"
-                ></input>
-                <p className=" text-[16px] font-[500]"> Gym/Fitness Center</p>
-              </div>
-              {/* <button
-className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-type="button"
->
-Wi-Fi Access
-</button>
-<button
-className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[50px]"
-type="button"
->
-Air Conditioning
-</button>
-<button
-className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[50px]"
-type="button"
->
-Free Parking
-</button>
-<button
-className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[50px]"
-type="button"
->
-Swimming Pool
-</button>
-<button
-className=" py-3 px-6 hover:bg-[#632DF8] text-black border border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[50px]"
-type="button"
->
-Gym/Fitness Center
-</button> */}
-            </div>
-            <h2 className=" font-[700] text-[16px] mb-2">Price Per Night</h2>
-            <Input className="mb-6" placeholder="$150.00" />
-            <h2 className=" font-[700] text-[16px] mb-2">Availability Dates</h2>
-            <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <div className="flex flex-col w-full">
-                  <label
-                    
-                    className="text-lg font-medium text-gray-700 mb-2"
-                  >
-                    Start Date
-                  </label>
-                  <input
-                    type="date"
-                    id="startDate"
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                  />
-                </div>
-
-                <div className="flex flex-col w-full">
-                  <label
-                  
-                    className="text-lg font-medium text-gray-700 mb-2"
-                  >
-                    End Date
-                  </label>
-                  <input
-                    type="date"
-                    id="endDate"
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                  />
-                </div>
-              </div>
-            </div>
-            {/* <Calendar className="rounded-md border mb-6" mode="single" /> */}
-            <h2 className=" font-[700] mt-4 text-[16px] mb-2">House Rules:</h2>
-            <div className=" border p-3">
-              <ol className="list-decimal pl-4 mb-6">
-                <li>
-                  No Smoking: Smoking is strictly prohibited inside the house.
-                  Designate specific outdoor areas for smoking if necessary.
-                </li>
-                <li>
-                  Quiet Hours: Respect quiet hours to ensure a peaceful
-                  environment, typically from [Insert specific time] to [Insert
-                  specific time].
-                </li>
-                <li>
-                  Guest Policy: Notify the host in advance if you plan to have
-                  guests, and limit the number of guests allowed. No overnight
-                  guests without prior approval.
-                </li>
-                <li>
-                  No Pets: Unless explicitly allowed, pets are not permitted on
-                  the premises.
-                </li>
-              </ol>
-            </div>
-            {/* <div className=" mt-5 flex items-center gap-4">
-              <h2 className=" font-[700] text-[16px] mb-2">Upload a file:</h2>
-              <div className="flex items-center space-x-2">
-                <input
-                  type="text"
-                  className=" p-2 rounded-[8px]"
-                  placeholder="select a file or drag and drop"
-                />
-                <button type="button" className="bg-[#F6F4F6] p-3 rounde-[8px]">
-                  Upload
-                </button>
-              </div>
-            </div> */}
-            <div className="max-w-md p-6 bg-white rounded-md shadow-md flex items-center">
-              <div className="flex-1 mr-4">
-                <label className="block text-lg font-medium text-gray-700 mb-2">
-                  Choose a file to upload
-                </label>
-
-                <div className="relative border-dashed border-2 border-gray-400 p-6 flex items-center">
-                  <input
-                    id="fileInput"
-                    type="file"
-                    className="absolute w-full h-full opacity-0"
-                  />
-                  <div className="text-center">
-                    <svg
-                      className="mx-auto h-12 w-12 text-gray-400"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 48 48"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 14v6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-6m-6 0l6-6 6 6m-6-6v6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-6m-6 0l6-6 6 6m-12 6h24"
-                      ></path>
-                    </svg>
-                    <p className="mt-1 text-sm text-gray-600">
-                      Drag and drop your file here, or click to select
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-                Upload
-              </button>
-            </div>
-            <div className="flex space-x-2 gap-2 mt-[2rem]">
-              <img
-                alt="Room Image"
-                height="100"
-                // src="/placeholder.svg"
-                src="/Images/image1.png"
-                style={{
-                  aspectRatio: "150/100",
-                  objectFit: "cover",
-                }}
-                width="150"
-              />
-              <img
-                alt="Room Image"
-                height="100"
-                // src="/placeholder.svg"
-                src="/Images/image2.png"
-                style={{
-                  aspectRatio: "150/100",
-                  objectFit: "cover",
-                }}
-                width="150"
-              />
-              <img
-                alt="Room Image"
-                height="100"
-                // src="/placeholder.svg"
-                src="/Images/image3.png"
-                style={{
-                  aspectRatio: "150/100",
-                  objectFit: "cover",
-                }}
-                width="150"
-              />
-            </div>
-          </section>
-          <div className="flex justify-center gap-5 mt-8">
-            <button
-              className=" py-3 px-6 hover:bg-[#047857] border bg-[#F6F4F6] text-[#64748B] hover:text-white text-[14px] font-[500] rounded-[12px]"
-              type="button"
-            >
-              Cancel
-            </button>
-            <button
-              className=" py-3 px-6 hover:bg-[#047857] border bg-[#F6F4F6] hover:text-white text-[14px] font-[500] rounded-[12px]"
-              type="button"
-            >
-              Create Listing
-            </button>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
-
-export default FormItem;

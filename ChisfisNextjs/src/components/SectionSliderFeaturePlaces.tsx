@@ -11,9 +11,10 @@ import { useWindowSize } from "react-use";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
 import StayCard from "./StayCard";
+import StayCard2 from "./StayCard2";
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 18);
-export type Tab =  "New York" | "Tokio" | "London"
+export type Tab = "Room" | "Parking" | "EV Parking" | "Restroom"
 
 export interface SectionSliderFeaturePlacesProps {
   className?: string;
@@ -28,7 +29,7 @@ export interface SectionSliderFeaturePlacesProps {
 }
 
 const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
-  heading = "Hourly Places",
+  heading = "Time Based",
   subHeading = "Popular places to recommends for you",
   className = "",
   itemClassName = "",
@@ -36,9 +37,9 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
   itemPerRow = 1,
   categoryCardType = "card2",
   sliderStyle = "style1",
-  currentTab = "New York",
+  currentTab = "Room",
 }) => {
-    const tabs: Tab[] = ["New York" , "Tokio" , "London"];
+  const tabs: Tab[] = ["Room", "Parking", "EV Parking", "Restroom"];
   const [tabActive, setTabActive] = useState<Tab>(currentTab);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -85,16 +86,16 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
   });
 
   const renderCard = (item: StayDataType) => {
-    let CardName = StayCard;
+    let CardName = StayCard2;
     switch (categoryCardType) {
       case "card1":
-        CardName = StayCard;
+        CardName = StayCard2;
         break;
       case "card2":
-        CardName = StayCard;
+        CardName = StayCard2;
         break;
       default:
-        CardName = StayCard;
+        CardName = StayCard2;
     }
     return <CardName key={item.id} data={item} />;
   };
@@ -103,65 +104,68 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
 
   return (
     <div className={` md:px-24 ${className} inline-block`}>
-      <Heading desc={subHeading} isCenter={sliderStyle === "style2"} className="w-[80vw] mb-8">
+      <Heading desc={subHeading} isCenter={sliderStyle === "style2"} className="w-[80vw] ml-4 mb-8">
         {heading}
       </Heading>
       <ul className="ml-4 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-          {tabs.map((tab) => {
-            const active = tab === tabActive;
-            return (
-              <li
-                onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 flex items-center cursor-pointer text-xs md:text-sm font-medium ${
-                  active
-                    ? "text-violet pb-8"
-                    : "text-neutral-500 hover:text-violet pb-8"
-                } `}
-                key={tab}
-              >
-                <span>{tab}</span>
-                
-              </li>
-            );
-          })}
-        </ul>
-        <ul className="ml-2 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-        <div className="flex justify-center items-center mb-8" >
-        {tabs.map((tab, i) => {
+        {tabs.map((tab) => {
           const active = tab === tabActive;
-          if(i === 0){
-            return(
-              <div className={` md:w-[100px] w-[75px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 1){
-            return(
-              <div className={` md:w-[85px] w-[50px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else if(i === 2){
-            return(
-              <div className={` md:w-[140px] w-[70px] h-0.5 ${
-                active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-              }`} />
-            )
-          } else {
-            return null
-          }
+          return (
+            <li
+              onClick={() => setTabActive(tab)}
+              className={`flex-shrink-0 flex items-center cursor-pointer text-base md:text-sm font-medium ${active
+                ? "text-violet pb-8"
+                : "text-neutral-500 hover:text-violet pb-8"
+                } `}
+              key={tab}
+            >
+              <span>{tab}</span>
+
+            </li>
+          );
+        })}
+      </ul>
+      <ul className="ml-4 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+        <div className="flex justify-center items-center mb-8" >
+          {tabs.map((tab, i) => {
+            const active = tab === tabActive;
+            if (i === 0) {
+              return (
+                <div className={` md:w-[100px] w-[75px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`} />
+              )
+            } else if (i === 1) {
+              return (
+                <div className={` md:w-[85px] w-[50px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`} />
+              )
+            } else if (i === 2) {
+              return (
+                <div className={` md:w-[140px] w-[70px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`} />
+              )
+            }
+            else if (i === 3) {
+              return (
+                <div className={` md:w-[140px] w-[70px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`} />
+              )
+            }
+            else {
+              return null
+            }
           })
-        }
+          }
         </div>
-        </ul>
+      </ul>
       <MotionConfig
         transition={{
           x: { type: "spring", stiffness: 300, damping: 30 },
           opacity: { duration: 0.2 },
         }}
       >
-        <div className={`relative flow-root`} {...handlers}>
-          <div className={`flow-root overflow-hidden rounded-xl`}>
+        <div className={`relative flow-root ml-2 `} {...handlers}>
+          <div className={`flow-root overflow-hidden p-2 rounded-xl`}>
             <motion.ul
               initial={false}
               className="relative whitespace-nowrap -mx-2 xl:-mx-4 w-max-[630px] w-[90vw]"
@@ -187,23 +191,23 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
                   </motion.li>
                 ))}
                 <div className="w-[95vw] mt-8 flex justify-center">
-                {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-        />}
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
-        />}
-        </div>
+                  {currentIndex ? (
+                    <PrevBtn
+                      onClick={() => changeItemId(currentIndex - 1)}
+                      className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
+                    />
+                  ) : <PrevBtn
+                    className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
+                  />}
+                  {categories.length > currentIndex + numberOfItems ? (
+                    <NextBtn
+                      onClick={() => changeItemId(currentIndex + 1)}
+                      className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
+                    />
+                  ) : <NextBtn
+                    className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
+                  />}
+                </div>
               </AnimatePresence>
             </motion.ul>
           </div>

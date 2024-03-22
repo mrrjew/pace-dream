@@ -18,7 +18,7 @@ export interface LocationInputProps {
 const LocationInput: FC<LocationInputProps> = ({
   autoFocus = false,
   desc = "Location",
-  placeHolder = "Minamiuonuma, Niigata ?",
+  placeHolder = "Select Location",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
   inputs = "",
@@ -251,7 +251,7 @@ const LocationInput: FC<LocationInputProps> = ({
 
   return (
     <div
-      className={`relative flex ${className} ${typeInput} mt-4`}
+      className={`relative flex ${className} ${typeInput}`}
       ref={containerRef}
     >
       <div
@@ -265,11 +265,9 @@ const LocationInput: FC<LocationInputProps> = ({
             {desc}
           </span>
           <input
-            className={`flex flex-row ${
-              inputs ? inputs : "max-md:w-[85vw]"
-            }  border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${
-              input ? input : "max-lg:w-[25vw]"
-            } xl:p-[5px] w-full rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
+            className={`flex flex-row ${inputs ? inputs : "max-md:w-[85vw]"
+              }  border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : "max-lg:w-[25vw]"
+              } xl:p-[5px] w-full h-11 rounded-lg mt-1 text-base text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}
