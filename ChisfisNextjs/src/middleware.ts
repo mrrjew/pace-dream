@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   const cookies = request.cookies;
   const authToken = cookies.get('auth-token')?.value;
 
-  let isValidToken = true;
+  let isValidToken = false;
 
   const checkToken = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-token`,
