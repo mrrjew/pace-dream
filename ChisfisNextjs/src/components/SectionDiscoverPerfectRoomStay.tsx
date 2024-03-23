@@ -44,6 +44,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
   cardType = "card2",
   sliderStyle= "style1"
 }) => {
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [numberOfItems, setNumberOfitem] = useState(0);
@@ -88,6 +89,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
     },
     trackMouse: true,
   });
+  const sortedStayListings = stayListings.slice().sort((a, b) => b.reviewStart - a.reviewStart);
 
   return (
     <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24  ${className}`}>
@@ -113,7 +115,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
           ) : <PrevBtn
           className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
         />}
-          {stayListings.length > currentIndex + numberOfItems ? (
+          {sortedStayListings.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
               className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
@@ -128,7 +130,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
               className="relative whitespace-nowrap -mx-2 xl:-mx-4"
             >
               <AnimatePresence initial={false} custom={direction}>
-                {stayListings.map((item, indx) => (
+                {sortedStayListings.map((item, indx) => (
                   <motion.li
                     className={`relative md:inline-block px-4 xl:px-4 truncate`}
                     custom={direction}

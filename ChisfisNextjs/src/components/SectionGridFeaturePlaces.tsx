@@ -29,6 +29,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   tabs = ["Room", "Parking", "EV Parking", "Restroom"],
   cardType = "card2",
 }) => {
+  
   const renderCard = (stay: StayDataType) => {
     let CardName = StayCard;
     switch (cardType) {
@@ -45,7 +46,8 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
 
     return <CardName className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border"key={stay.id} data={stay} />;
   };
-
+  const sortedStayListings = stayListings.slice().sort((a, b) => b.reviewStart - a.reviewStart);
+  console.log(sortedStayListings)
   return (
     <div className={`nc-SectionGridFeaturePlaces md:pr-24 md:pl-24 relative ${className}`} >
       <HeaderFilter
@@ -56,11 +58,11 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
       <div
         className={`grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${gridClass}`}
       >
-        {stayListings.map((stay) => renderCard(stay))}
+        {sortedStayListings.map((stay) => renderCard(stay))}
       </div>
-      {/* <div className="flex my-16 justify-center items-center">
+      <div className="flex my-6 justify-center items-center">
         <ButtonShowMore>Show more</ButtonShowMore>
-      </div> */}
+      </div>
     </div>
   );
 };
