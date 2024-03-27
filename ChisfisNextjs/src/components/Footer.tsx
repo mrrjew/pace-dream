@@ -366,18 +366,23 @@ export default function Component() {
             <Logo className="w-full ml-7"/>
           </div>
           <div className="flex mt-[2rem] justify-center gap-4">
+            //Facebook
             <Link className="text-gray-500 hover:text-purple-600" href="https://www.facebook.com/profile.php?id=61554764998573">
               <FacebookIcon className="h-5 w-5" color='#5527D7'/>
             </Link>
+            //Youtube
             <Link className="text-gray-500 hover:text-purple-600" href="https://www.youtube.com/channel/UCqj0k3Sy-2o1UVqNEKOMrhA">
               <YoutubeIcon className="h-5 w-5" color='#5527D7' />
             </Link>
+            //Linkedin
             <Link className="text-gray-500 hover:text-purple-600" href="#">
               <LinkedinIcon className="h-5 w-5" color='#5527D7' />
             </Link>
+            //Mail
             <Link className="text-gray-500 hover:text-purple-600" href="mailto:Jim@pacedrea.com">
               <MailIcon className="h-5 w-5" color='#5527D7' />
             </Link>
+            //Instagram
             <Link className="text-gray-500 hover:text-purple-600" href="https://www.instagram.com/pacedream_official/">
               <InstagramIcon className="h-5 w-5" color='#5527D7' />
             </Link>
