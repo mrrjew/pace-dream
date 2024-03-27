@@ -374,10 +374,6 @@ export default function Component() {
             <Link className="text-gray-500 hover:text-purple-600" href="https://www.youtube.com/channel/UCqj0k3Sy-2o1UVqNEKOMrhA">
               <YoutubeIcon className="h-5 w-5" color='#5527D7' />
             </Link>
-            //Linkedin
-            {/* <Link className="text-gray-500 hover:text-purple-600" href="#">
-              <LinkedinIcon className="h-5 w-5" color='#5527D7' />
-            </Link> */}
             //Mail
             <Link className="text-gray-500 hover:text-purple-600" href="mailto:Jim@pacedrea.com">
               <MailIcon className="h-5 w-5" color='#5527D7' />
