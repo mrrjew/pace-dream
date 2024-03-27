@@ -53,16 +53,16 @@ const notifications = [
 const hostInbox = () => {
 
   return (
-    <section className="bg-[#FAFAFA]">
-      <div className="md:px-7">
-        <div className="h-20 flex items-end">
+    <section className="bg-[#fafafa]">
+      <div >
+        <div className="h-[7rem] flex bg-[#FFFFFF] w-full px-12 py-10">
           <Link href="/" className="lg:ml-[5rem]">
             <button className="btn rounded-full border border-[#DAE0E6] bg-[#FFFFFF] text-sm px-5 py-3 btn-sm mobile-view ">
               Back
             </button>
           </Link>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 md:px-7">
           <div className="">
             <div className="pt-5 pb-16 px-5">
               <NotificationComponent notifications={notifications}/>

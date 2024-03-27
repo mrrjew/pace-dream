@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@/shared/Avatar';
+
 
 const NotificationComponent = ({ notifications }: any) => {
   const [selectedNotification, setSelectedNotification] = useState<any>(null);
@@ -10,14 +11,16 @@ const NotificationComponent = ({ notifications }: any) => {
     setSelectedNotification(notification);
   };
 
+
+
   return (
     <div className="flex">
       {/* left side */}
-      <div className='w-1/2 mobile-res p-1 h-[600px] overflow-y-auto tailwind-scrollbar-hide'>
+      <div className='w-1/2 mobile-res p-1 h-[600px] overflow-y-auto tailwind-scrollbar-hide px-20'>
         <h1 className='text-3xl font-semibold mb-4'>Notifications</h1>
-        <nav className='flex gap-4 mobile-view'>
+        <nav className='flex py-2 gap-2 mobile-view'>
           <button
-            className={`btn py-2 px-7 rounded-full ${activeTab === 'all' ? 'bg-[#3d49f3] text-white shadow-md' : 'bg-white text-gray-700 shadow-sm'}`}
+            className={`btn px-7 rounded-full ${activeTab === 'all' ? 'bg-[#3d49f3] text-white shadow-md' : 'bg-white text-gray-700 shadow-sm'}`}
             onClick={() => setActiveTab('all')}
           >
             All
