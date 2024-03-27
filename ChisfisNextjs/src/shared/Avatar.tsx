@@ -44,7 +44,7 @@ const Avatar: FC<AvatarProps> = ({
 
   const _setBgColor = (name: string) => {
     const backgroundIndex = Math.floor(
-      name.charCodeAt(0) % avatarColors.length
+      name?.charCodeAt(0) % avatarColors.length
     );
     return avatarColors[backgroundIndex];
   };
@@ -64,7 +64,7 @@ const Avatar: FC<AvatarProps> = ({
              alt={name}
            />
          )}
-         <span className="wil-avatar__name">{name[0]}</span>
+         <span className="wil-avatar__name">{name?.[0]}</span>
    
          {hasChecked && (
            <span
