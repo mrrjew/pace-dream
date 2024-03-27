@@ -10,7 +10,7 @@ import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
-import { BsBookmark, BsChat, BsThreeDots } from 'react-icons/bs';
+import { BsBookmark, BsChat, BsPersonAdd, BsThreeDots } from 'react-icons/bs';
 import { FiPieChart } from 'react-icons/fi';
 import { RiBuildingLine } from 'react-icons/ri';
 import { TbLayoutDashboard } from 'react-icons/tb';
@@ -372,6 +372,19 @@ export default function AvatarDropdown({ className = '' }: Props) {
                           </div>
                         </Link>
 
+                        {/* ------------------ Roommate --------------------- */}
+
+                        <Link
+                          href={'/roommate'}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <BsPersonAdd size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{'Roommate'}</p>
+                          </div>
+                        </Link>
                         {/* ------------------ Inbox --------------------- */}
 
                         <Link
