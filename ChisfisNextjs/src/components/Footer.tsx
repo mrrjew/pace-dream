@@ -375,7 +375,7 @@ export default function Component() {
             <Link className="text-gray-500 hover:text-purple-600" href="#">
               <LinkedinIcon className="h-5 w-5" color='#5527D7' />
             </Link>
-            <Link className="text-gray-500 hover:text-purple-600" href="#">
+            <Link className="text-gray-500 hover:text-purple-600" href="mailto:Jim@pacedrea.com">
               <MailIcon className="h-5 w-5" color='#5527D7' />
             </Link>
             <Link className="text-gray-500 hover:text-purple-600" href="https://www.instagram.com/pacedream_official/">
