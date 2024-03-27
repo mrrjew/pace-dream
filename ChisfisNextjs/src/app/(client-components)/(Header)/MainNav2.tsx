@@ -64,11 +64,9 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'> */}
           <div className="hidden lg:flex items-center  justify-end ">
           <ol className=' flex items-center gap-4'>
-              <li>About</li>
-              <li>Contact</li>
+              <li><Link href={'/about-us'}>About</Link></li>
+              <li><Link href={'/contact-us'}>Contact</Link></li>
               <div className=' items-center flex gap-1'>
-              <li>More </li>
-              <RiArrowDownSLine />
               </div>
               
 

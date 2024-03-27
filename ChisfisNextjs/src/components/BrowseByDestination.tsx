@@ -4,6 +4,8 @@ import image3 from "@/images/Rectangle 3035.png"
 import image4 from "@/images/Rectangle 3036.png"
 import image5 from "@/images/Rectangle 3037.png"
 import image6 from "@/images/Rectangle 3038.png"
+import image7 from "@/images/Rectangle 3039.png"
+import image8 from "@/images/Rectangle 3040.png"
 import Image from "next/image"
 import Link from "next/link"
 interface BrowseByDestinationProps {
@@ -35,6 +37,14 @@ const images = [
   {
     src: image6,
     alt: "Miami",
+  },
+  {
+    src: image7,
+    alt: "Honolulu",
+  },
+  {
+    src: image8,
+    alt: "Sydney",
   },
 
 ]
