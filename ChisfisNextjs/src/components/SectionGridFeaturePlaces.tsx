@@ -22,7 +22,7 @@ export interface SectionGridFeaturePlacesProps {
   className?: string;
   stayListings?: StayDataType[];
   gridClass?: string;
-  itemPerRow: number;
+  itemPerRow?: number;
   heading?: ReactNode;
   headingIsCenter?: boolean;
   tabs?: string[];
