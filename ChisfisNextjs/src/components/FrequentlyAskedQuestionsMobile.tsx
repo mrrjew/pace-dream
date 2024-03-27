@@ -42,7 +42,7 @@ const FrequentlyAskedQuestionsMobile = () => {
     return (
         <div className="md:hidden block w-96  mx-2">
             <div className="w-full py-2">
-                <p className='text-center mb-8 font-semibold text-4xl'>Frequently asked questions</p>
+                <p className='text-center mb-15 font-semibold text-4xl'>Frequently asked questions</p>
                 <div className="mx-auto w-full max-w-md rounded-2xl p-2">
                     {faq.map((item) => (
                         <Disclosure key={item.question}>
