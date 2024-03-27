@@ -19,7 +19,6 @@ import { variants } from "@/utils/animationVariants"
 import StayCard2 from "./StayCard2"
  interface BrowseByDestinationProps {
   className?: string;
-  stayListings: [{src: ImageData, alt: string}];
   heading?: ReactNode;
   subHeading?: ReactNode;
   headingIsCenter?: boolean;
@@ -65,7 +64,6 @@ const images = [
 ]
 const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
   className,
-  stayListings = images,
   heading = "Browse By Destination",
   // subHeading = "Explore Exclusive Last-Minute Deals on Hotels and Flights",
   headingIsCenter,
@@ -106,7 +104,7 @@ const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      if (currentIndex < stayListings?.length - 1) {
+      if (currentIndex < images?.length - 1) {
         changeItemId(currentIndex + 1);
       }
     },
