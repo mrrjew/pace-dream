@@ -375,9 +375,9 @@ export default function Component() {
               <YoutubeIcon className="h-5 w-5" color='#5527D7' />
             </Link>
             //Linkedin
-            <Link className="text-gray-500 hover:text-purple-600" href="#">
+            {/* <Link className="text-gray-500 hover:text-purple-600" href="#">
               <LinkedinIcon className="h-5 w-5" color='#5527D7' />
-            </Link>
+            </Link> */}
             //Mail
             <Link className="text-gray-500 hover:text-purple-600" href="mailto:Jim@pacedrea.com">
               <MailIcon className="h-5 w-5" color='#5527D7' />
