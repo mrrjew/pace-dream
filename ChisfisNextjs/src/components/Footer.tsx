@@ -296,11 +296,6 @@ export default function Component() {
               </li>
               <li className="mt-2">
                 <Link className="hover:underline" href="#">
-                  Ongoing Campaign
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
                   Updates
                 </Link>
               </li>
@@ -356,11 +351,6 @@ export default function Component() {
               <li className="mt-2">
                 <Link className="hover:underline" href="#">
                   Disclaimer
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  GDRP Information
                 </Link>
               </li>
               <li className="mt-2">
