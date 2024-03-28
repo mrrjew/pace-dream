@@ -87,6 +87,10 @@ const UserProvider = ({ children }: any) => {
     );
     const data = await response.json();
     setUserState(data.data);
+    if(response.status===403){
+        Cookies.remove('auth-token');
+        Cookies.remove('user_info');
+    }
   };
 
   useEffect(() => {
