@@ -1,12 +1,12 @@
 'use client'
 import Link from "next/link"
 import { useState } from "react";
-import MessageComponent from "./MessageComponent";
 import NotificationComponent from "./NotificationComponent";
+import MatchedRoommatesComponent from "./MatchedRoommatesComponent";
 
 const hostInbox = () => {
 
-  const [activeMenuItem, setActiveMenuItem] = useState('Message')
+  const [activeMenuItem, setActiveMenuItem] = useState('Matched Roommates')
 
 
   const handleMenuItemClick = (menuItem:string) => {
@@ -15,8 +15,8 @@ const hostInbox = () => {
 
 
   let activeComponent;
-  if (activeMenuItem === "Message") {
-    activeComponent = <MessageComponent/>
+  if (activeMenuItem === "Matched Roommates") {
+    activeComponent = <MatchedRoommatesComponent/>
   } else if (activeMenuItem === "Notifications") {
     activeComponent = <NotificationComponent/>
    }
@@ -38,8 +38,8 @@ const hostInbox = () => {
             <nav className="flex gap-2 border-b-2">
                 <h1
                   className={`btn font-medium px-9 py-3 
-                  ${ activeMenuItem === "Message" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }  curveBorder`}
-                 onClick={() => handleMenuItemClick("Message")}>Message</h1>
+                  ${ activeMenuItem === "Matched Roommates" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }  curveBorder`}
+                 onClick={() => handleMenuItemClick("Matched Roommates")}>Matched Roommates</h1>
 
                 <h1 className={`btn font-medium px-9 py-3 
                 ${ activeMenuItem === "Notifications" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }`}
