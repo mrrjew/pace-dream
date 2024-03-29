@@ -7,6 +7,6 @@ export class NotificationService {
   }
   list() {
     const uri = `/user/all`;
-    return serverAuthAxios().post(uri)
+    return serverAuthAxios().get(uri)
   }
 }

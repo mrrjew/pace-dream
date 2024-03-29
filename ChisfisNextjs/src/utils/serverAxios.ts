@@ -1,14 +1,23 @@
+import axios, { AxiosInstance } from 'axios';
 
-import axios from 'axios';
-import { cookies } from 'next/headers';
-
-export const serverAuthAxios = () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get('auth-token')?.value;
+export const serverAuthAxios = (): AxiosInstance => {
+  const token = getAuthTokenFromCookie();
   return axios.create({
-    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL, // Replace with your API base URL
+    baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+};
+
+const getAuthTokenFromCookie = (): string | null => {
+  const cookieHeader = document.cookie;
+  const cookies: { [key: string]: string } = cookieHeader
+    ? cookieHeader.split(';').reduce((prev: { [key: string]: string }, current) => {
+      const [name, value] = current.trim().split('=');
+      prev[name] = value;
+      return prev;
+    }, {})
+    : {};
+  return cookies['auth-token'] || null;
 };
