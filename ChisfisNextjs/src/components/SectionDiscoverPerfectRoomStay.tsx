@@ -1,21 +1,15 @@
 "use client"
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS, DEMO_RENTAL_LISTING } from "@/data/listings";
+import { DEMO_RENTAL_LISTING } from "@/data/listings";
 import { StayDataType, FlightDataType, LastDataType } from "@/data/types";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import HeaderFilter from "./HeaderFilter";
-import FlightCard from "./FlightCard";
-import StayCard2 from "./StayCard2";
 import { useWindowSize } from "react-use";
 import { useSwipeable } from "react-swipeable";
-import Heading from "@/shared/Heading";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
 import HeaderFilterDiscover from "./HeaderFilterDiscover";
 import ButtonShowMore from "@/shared/ButtonShowMore";
-import image1 from "@/images/Hourly Rental/image1.png"
 import StayCard3 from "./StayCard3";
 
 export interface SectionDiscoverPerfectRoomStayProps {
