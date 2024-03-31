@@ -50,6 +50,12 @@ const nextConfig = {
         pathname: '/**',
       },
       {
+        protocol: 'https',
+        hostname: 'i.hizliresim.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
         protocol:'https',
         hostname:'picsum.photos',
         port:'',

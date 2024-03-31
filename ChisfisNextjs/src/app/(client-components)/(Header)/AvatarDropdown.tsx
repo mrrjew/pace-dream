@@ -10,7 +10,7 @@ import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Fragment, useState } from 'react';
-import { BsBookmark, BsChat, BsThreeDots } from 'react-icons/bs';
+import { BsBookmark, BsChat, BsPersonAdd, BsThreeDots } from 'react-icons/bs';
 import { FiPieChart } from 'react-icons/fi';
 import { RiBuildingLine } from 'react-icons/ri';
 import { TbLayoutDashboard } from 'react-icons/tb';
@@ -76,20 +76,23 @@ export default function AvatarDropdown({ className = '' }: Props) {
               <Popover.Panel className="absolute z-10 w-screen max-w-[260px] px-4 top-full -right-10 sm:right-0 sm:px-0">
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
-                    <div className="flex items-center space-x-3">
-                      <Avatar sizeClass="w-12 h-12" />
+                    {
+                      userInfo && userInfo.first_name &&
+                      <>
+                        <div className="flex items-center space-x-3">
+                          <Avatar sizeClass="w-12 h-12" />
 
-                      <div className="flex-grow">
-                        <h4 className="font-semibold">
-                          {userInfo && userInfo.first_name
-                            ? `${userInfo.first_name} ${userInfo.last_name}`
-                            : 'John Doe'}
-                        </h4>
-                        {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
-                      </div>
-                    </div>
+                          <div className="flex-grow">
+                            <h4 className="font-semibold">
+                              {userInfo.first_name} {userInfo.last_name}
+                            </h4>
+                            {/* <p className="text-xs mt-0.5">{user?.email}</p> */}
+                          </div>
+                        </div>
+                        <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
+                      </>
+                    }
 
-                    <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
                     {/* ------------------ 1 --------------------- */}
 
@@ -369,6 +372,19 @@ export default function AvatarDropdown({ className = '' }: Props) {
                           </div>
                         </Link>
 
+                        {/* ------------------ Roommate --------------------- */}
+
+                        <Link
+                          href={'/roommate'}
+                          className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                        >
+                          <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                            <BsPersonAdd size={22} className="mr-2 ml-0.5" />
+                          </div>
+                          <div className="ml-2">
+                            <p className="text-sm font-medium ">{'Roommate'}</p>
+                          </div>
+                        </Link>
                         {/* ------------------ Inbox --------------------- */}
 
                         <Link

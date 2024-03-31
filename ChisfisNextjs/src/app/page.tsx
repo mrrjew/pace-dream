@@ -202,7 +202,6 @@ function PageHome() {
         </div>
         <div className="relative md:block hidden py-2 md:py-16 bg-white rounded-[8px]">
           <SectionDiscoverPerfectRoomStay
-            cardType="card2"
             className="md:block hidden"
           />
         </div>

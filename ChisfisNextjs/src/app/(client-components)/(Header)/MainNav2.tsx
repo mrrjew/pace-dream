@@ -61,19 +61,18 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
       <section className="flex justify-between h-16 px-4 lg:container">
         <article className="justify-between flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10">
           <Logo className="self-center w-34" />
+          {/* <div className='self-center hidden h-10 border-l lg:block border-neutral-300 dark:border-neutral-500'> */}
           <div className="items-center justify-end hidden lg:flex ">
           <ol className='flex items-center gap-4 '>
-              <li>About</li>
-              <li>Contact</li>
+              <li><Link href={'/about-us'}>About</Link></li>
+              <li><Link href={'/contact-us'}>Contact</Link></li>
               <div className='flex items-center gap-1 '>
-              <li>More </li>
-              <RiArrowDownSLine />
               </div>
               
 
             </ol>
             <button className={`${btnStyle}`} onClick={openModalCurrency}>
-              {currency}
+              {currency || 'USD'}
             </button>
             <button className={`${btnStyle}`} onClick={openModalCountry}>
               <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
@@ -100,7 +99,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             <AvatarDropdown />
           </div>
           <div className="flex space-x-2 lg:hidden">
-            {/* <NotifyDropdown /> */}
+            <NotifyDropdown />
             <AvatarDropdown />
             <MenuBar />
           </div>

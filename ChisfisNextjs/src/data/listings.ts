@@ -49,6 +49,7 @@ const carsImgs = [
   car16,
 ];
 
+
 const DEMO_STAY_LISTINGS = __stayListing.map((post, index): StayDataType => {
   //  ##########  GET CATEGORY BY CAT ID ######## //
   const category = DEMO_STAY_CATEGORIES.filter(
@@ -107,7 +108,7 @@ const DEMO_RENTAL_LISTING = _hourlyRental.map((post, index): any => {
   return {
     ...post,
     id: `${index}`,
-    saleOff: !index ? "-20% today" : post.saleOff,
+    saleOff: !index ? "Best Deal" : post.saleOff,
     isAds: !index ? true : post.isAds,
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
     listingCategory: category,

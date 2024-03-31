@@ -49,11 +49,13 @@ const StayCard2: FC<StayCard2Props> = ({
       // </>
       <div className="relative md:w-full w-full">
         <Link href={`/listing-stay-detail/${id}?term=${term}`}>
+        <div>
           <GallerySlider
             uniqueID={`StayCard2_${id}`}
             ratioClass="aspect-w-12 aspect-h-11"
             galleryImgs={galleryImgs}
             imageClass="rounded-lg"
+            
           />
           <BtnLikeIcon
             isLiked={like}
@@ -62,7 +64,8 @@ const StayCard2: FC<StayCard2Props> = ({
           {saleOff && (
             <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />
           )}
-        </Link>
+        </div>
+      </Link>
       </div>
     );
   };

@@ -23,7 +23,7 @@ export interface StayCard2Props {
 
 const DEMO_DATA = DEMO_RENTAL_LISTING[0];
 const image = [Image1, Image2, Image3, Image4];
-const StayCard2: FC<StayCard2Props> = ({
+const StayCard3: FC<StayCard2Props> = ({
   size = "default",
   className = "",
   data = DEMO_DATA,
@@ -41,7 +41,8 @@ const StayCard2: FC<StayCard2Props> = ({
     saleOff,
     isAds,
     price,
-
+    stock,
+    deposit,
     id,
   } = data;
 
@@ -60,14 +61,19 @@ const StayCard2: FC<StayCard2Props> = ({
             imageClass="rounded-lg"
           /> */}
           <div className="border border-white rounded-[8px]">
-          <Image src={Image1} alt="img1" className="aspect-w-12 aspect-h-2"></Image>
+            <div className="w-48 h-44 ">
+            <Image src={image} alt="img1" className="w-full h-full object-contain" width={100} height={100}  />
           </div>
-          <BtnLikeIcon
-            isLiked={like}
-            className="absolute right-3 top-3 z-[1]"
-          />
+          </div>
+          <div>
+
+            <BtnLikeIcon
+              isLiked={like}
+              className="absolute right-1 bottom-1 z-[1]"
+            />
+          </div>
           {saleOff && (
-            <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />
+            <SaleOffBadge desc={saleOff} className="absolute right-1 top-1 bg-orange-500" />
           )}
         </Link>
       </div>
@@ -117,7 +123,7 @@ const StayCard2: FC<StayCard2Props> = ({
               )}
             </div>
           ) : (
-            <span className="text-base font-semibold">
+            <span className="text-base font-semibold text-[#5527D7]">
               {price}
               {` `}
               {size === "default" && (
@@ -130,7 +136,7 @@ const StayCard2: FC<StayCard2Props> = ({
           {
             <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
               <p className="text-[14px] font-[600]">Stock</p>
-              <div className=" w-3 h-3 rounded-full bg-green-700">
+              <div className={`w-3 h-3 rounded-full bg-${stock===0 ?'red':'green'}-700`}>
 
               </div>
             </div>
@@ -139,14 +145,7 @@ const StayCard2: FC<StayCard2Props> = ({
 
 
         <div className="space-y-2">
-          <span className="text-sm text-neutral-500">
-            {listingCategory.name} · {bedrooms} beds{" "}
-            {term === "long" || term === "short"
-              ? "· " + shared + " beds occupied"
-              : ""}
-          </span>
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
-            {isAds && <Badge name="ADS" color="green" />}
             <h2
               className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${
                 size === "default" && "text-base"
@@ -155,6 +154,9 @@ const StayCard2: FC<StayCard2Props> = ({
               <span className="line-clamp-1 truncate">{title}</span>
             </h2>
           </div>
+          <span className="text-xs text-neutral-400">
+            {deposit} Refundable Deposit
+          </span>
           {/* <div className="flex items-center text-neutral-500 text-sm space-x-1.5">
             {size === "default" && (
               <svg
@@ -198,4 +200,4 @@ const StayCard2: FC<StayCard2Props> = ({
   );
 };
 
-export default StayCard2;
+export default StayCard3;
