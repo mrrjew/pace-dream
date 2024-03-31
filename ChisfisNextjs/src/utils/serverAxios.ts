@@ -11,6 +11,7 @@ export const serverAuthAxios = (): AxiosInstance => {
 };
 
 const getAuthTokenFromCookie = (): string | null => {
+  if (typeof document === 'undefined') return null; // Added check for document existence
   const cookieHeader = document.cookie;
   const cookies: { [key: string]: string } = cookieHeader
     ? cookieHeader.split(';').reduce((prev: { [key: string]: string }, current) => {
@@ -21,3 +22,5 @@ const getAuthTokenFromCookie = (): string | null => {
     : {};
   return cookies['auth-token'] || null;
 };
+
+export default getAuthTokenFromCookie; // Exporting getAuthTokenFromCookie for testing or other usage
