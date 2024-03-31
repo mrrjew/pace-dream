@@ -65,10 +65,13 @@ const StayCard3: FC<StayCard2Props> = ({
             <Image src={image} alt="img1" className="w-full h-full object-contain" width={100} height={100}  />
           </div>
           </div>
-          <BtnLikeIcon
-            isLiked={like}
-            className="absolute right-1 bottom-1 z-[1]"
-          />
+          <div onClick={(e) => e.preventDefault()}>
+
+            <BtnLikeIcon
+              isLiked={like}
+              className="absolute right-1 bottom-1 z-[1]"
+            />
+          </div>
           {saleOff && (
             <SaleOffBadge desc={saleOff} className="absolute right-1 top-1 bg-orange-500" />
           )}
