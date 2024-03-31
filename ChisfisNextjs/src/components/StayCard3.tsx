@@ -61,7 +61,7 @@ const StayCard3: FC<StayCard2Props> = ({
             imageClass="rounded-lg"
           /> */}
           <div className="border border-white rounded-[8px]">
-            <div className="w-48 h-44">
+            <div className="w-48 h-44 ">
             <Image src={image} alt="img1" className="w-full h-full object-contain" width={100} height={100}  />
           </div>
           </div>
