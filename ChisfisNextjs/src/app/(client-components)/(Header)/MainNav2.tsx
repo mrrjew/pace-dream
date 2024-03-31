@@ -72,7 +72,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
 
             </ol>
             <button className={`${btnStyle}`} onClick={openModalCurrency}>
-              {currency}
+              {currency || 'USD'}
             </button>
             <button className={`${btnStyle}`} onClick={openModalCountry}>
               <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
