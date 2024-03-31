@@ -1,12 +1,12 @@
-import { serverAuthAxios } from '@/utils/serverAxios';
+import { clientAuthAxios } from '@/utils/clientAxios';
 
 export class NotificationService {
   get({ id } : { id: string}) {
     const uri = `/user/${{id}}`;
-    return serverAuthAxios().get(uri)
+    return clientAuthAxios().get(uri)
   }
   list() {
     const uri = `/user/all`;
-    return serverAuthAxios().get(uri)
+    return clientAuthAxios().get(uri)
   }
 }

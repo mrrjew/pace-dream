@@ -41,6 +41,9 @@ const hostInbox = () => {
                   ${ activeMenuItem === "Matched Roommates" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }  curveBorder`}
                  onClick={() => handleMenuItemClick("Matched Roommates")}>Matched Roommates</h1>
 
+                <h1 className={`btn font-medium px-9 py-3 
+                ${ activeMenuItem === "Notifications" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }`}
+                 onClick={() => handleMenuItemClick("Notifications")}>Notification</h1>
             </nav>
 
             <div className="px-20 pt-5 pb-16">
