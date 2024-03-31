@@ -1,48 +1,35 @@
 "use client"
 import React, { FC, ReactNode, useEffect, useState } from "react";
-import { DEMO_STAY_LISTINGS, DEMO_LAST_LISTINGS } from "@/data/listings";
+import { DEMO_RENTAL_LISTING } from "@/data/listings";
 import { StayDataType, FlightDataType, LastDataType } from "@/data/types";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import HeaderFilter from "./HeaderFilter";
-import FlightCard from "./FlightCard";
-import StayCard2 from "./StayCard2";
 import { useWindowSize } from "react-use";
 import { useSwipeable } from "react-swipeable";
-import Heading from "@/shared/Heading";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
 import HeaderFilterDiscover from "./HeaderFilterDiscover";
 import ButtonShowMore from "@/shared/ButtonShowMore";
-import { RiArrowDownSLine } from "react-icons/ri";
+import StayCard3 from "./StayCard3";
 
-// OTHER DEMO WILL PASS PROPS
-/* const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8); */
-let DEMO_LAST: LastDataType[] = DEMO_LAST_LISTINGS.filter((_, i) => i < 8);
-//
 export interface SectionDiscoverPerfectRoomStayProps {
   className?: string;
-  stayListings?: LastDataType[];
   heading?: ReactNode;
+  stayListings?: StayDataType[];
   subHeading?: ReactNode;
   headingIsCenter?: boolean;
   itemPerRow?: 4 | 5;
   tabs?: string[];
-  cardType?: "card1" | "card2";
-  sliderStyle?: "style1" | "style2";
 }
-
+const DEMO_DATA: StayDataType[] = DEMO_RENTAL_LISTING.filter((_, i) => i < 8);
 const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = ({
   className = "",
-  stayListings = DEMO_LAST,
+  stayListings = DEMO_DATA,
   heading = "Hourly Rental Gear",
   // subHeading = "Explore Exclusive Last-Minute Deals on Hotels and Flights",
   headingIsCenter,
   itemPerRow = 4,
   tabs = ["Tech Gadgets", "Musical Instruments","Photography", "Fashion"],
-  cardType = "card2",
-  sliderStyle= "style1"
 }) => {
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -89,7 +76,6 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
     },
     trackMouse: true,
   });
-  const sortedStayListings = stayListings.slice().sort((a, b) => b.reviewStart - a.reviewStart);
 
   return (
     <div className={`nc-SectionDiscoverPerfectRoomStay md:px-24  ${className}`}>
@@ -115,7 +101,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
           ) : <PrevBtn
           className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
         />}
-          {sortedStayListings.length > currentIndex + numberOfItems ? (
+          {stayListings.length > currentIndex + numberOfItems ? (
             <NextBtn
               onClick={() => changeItemId(currentIndex + 1)}
               className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
@@ -130,7 +116,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
               className="relative whitespace-nowrap -mx-2 xl:-mx-4"
             >
               <AnimatePresence initial={false} custom={direction}>
-                {sortedStayListings.map((item, indx) => (
+                {stayListings.map((item, indx) => (
                   <motion.li
                     className={`relative md:inline-block px-4 xl:px-4 truncate`}
                     custom={direction}
@@ -146,9 +132,7 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
                       width: `calc(1/${numberOfItems} * 100%)`,
                     }}
                   >
-                    
-                <StayCard2 className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border " key={item.id} data={item} />
-
+                    <StayCard3 className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border " key={item.id} data={item} />
                   </motion.li>
                 ))}
               </AnimatePresence>
@@ -159,6 +143,8 @@ const SectionDiscoverPerfectRoomStay: FC<SectionDiscoverPerfectRoomStayProps> = 
       </MotionConfig>
       <div className="flex my-16 justify-center items-center">
         <ButtonShowMore>view more</ButtonShowMore>
+        <div className="">
+    </div>
       </div>
     </div>
     
