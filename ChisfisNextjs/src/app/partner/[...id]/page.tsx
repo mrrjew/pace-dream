@@ -36,6 +36,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState, Fragment } from "react";
+import { clientAuthAxios } from "@/utils/clientAxios";
 
 const page = ({ params }: any) => {
   const { id } = params;
@@ -70,7 +71,7 @@ const page = ({ params }: any) => {
     removeLocalStorageItem("showGreeting");
     setShowGreeting(null);
   };
-
+  
   const defaultProps = {
     center: {
       lat: 51.509865,

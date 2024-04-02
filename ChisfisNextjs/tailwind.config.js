@@ -51,6 +51,7 @@ module.exports = {
       },
       colors: {
         violet: "#632DF8",
+        'gradient-border': 'linear-gradient(to right, #ff0000, #0000ff)',
         primary: {
           50: customColors("--c-primary-50"),
           100: customColors("--c-primary-100"),
