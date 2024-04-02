@@ -36,8 +36,15 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
-
+import { clientAuthAxios } from "@/utils/clientAxios";
+import { useSession } from "@/hooks/useSession";
+interface Profile {
+  friends: any[]; 
+  incomingRequests: any[]; 
+  outgoingRequests: any[]; 
+}
 const RoomMateDetailsPage = () => {
+  const [profile, setProfile] = useState<Profile>({ friends: [], incomingRequests: [], outgoingRequests: [] });
   const pathname = usePathname();
   setLocalStorageItem("currentPath", pathname);
 
@@ -61,6 +68,45 @@ const RoomMateDetailsPage = () => {
     },
     zoom: 12,
   };
+  const getProfile = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().get('/user/get/660c23e1fa441c2539931392');
+      setProfile(res.data.data)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const { getSession } = useSession();
+  const { userId } = getSession();
+  useEffect(() => {
+    getProfile();
+  }, [])
+
+
+  const join = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().post('/user/friend/send',{
+        user_id: "660c23e1fa441c2539931392"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  console.log(profile)
+  const cancelRequest = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().post('/user/friend/cancel',{
+        user_id: "660c23e1fa441c2539931392"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="partner-details-page">
       <div className="btn-back">
@@ -296,15 +342,32 @@ const RoomMateDetailsPage = () => {
                 <p className="cost">
                   <span>$75-$90</span> / night
                 </p>
-                <div className="btn-wrapper">
-                  <button type="button" className="btn-message">
-                    Send Message
-                  </button>
-                  <Link href={"/add-partner/1"}>
-                    <button type="button" className="btn-proposal">
-                      Send Proposal
+                <div className="btn-wrapper items-center justify-center">
+                  {
+                    profile?.friends.includes(userId) ? 
+                    <button type="button" className="btn-message">
+                      Send Message
                     </button>
-                  </Link>
+                    :
+                    profile?.incomingRequests.includes(userId) ? 
+                    <button type="button" className="btn-message" onClick={() => cancelRequest()}>
+                      Cancel Request
+                    </button>
+                    :
+                    profile?.outgoingRequests.includes(userId) ?
+                    <>
+                      <button type="button" className="btn-proposal">
+                        Accept Request
+                      </button>
+                      <button type="button" className="btn-message">
+                        Decline Request
+                      </button>
+                    </>
+                    :
+                    <button type="button" className="btn-proposal" onClick={() => join()}>
+                      Join
+                    </button>
+                  }
                 </div>
                 <p className="message">You won’t be charged yet</p>
               </div>
