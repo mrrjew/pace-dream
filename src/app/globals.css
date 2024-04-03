@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.curveBorder {
+  border-top-left-radius: 20px;
+}
+
+.slick-slider button::before {
+  color: black;
+}
+
+.slick-slider .slick-track {
+  display: flex;
+  gap: 10px;
+}
+
+@media screen and (min-width: 767px) {
+  .desktop-view {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-view {
+    display: none;
+  }
+
+  .mobile-res {
+    width: 96vw;
+    margin-left: 8px;
+  }
+  .resBookComp {
+    width: 96vw;
+    margin-left: 8px;
+  }
+  .heading-alignment {
+    margin-left: 150px;
+  }
+}
