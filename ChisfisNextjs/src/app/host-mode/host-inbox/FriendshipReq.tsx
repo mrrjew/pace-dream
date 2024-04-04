@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import EmptyState from './components/EmptyState';
-import avatar4 from "@/images/avatars/Image-4.png";
-import Avatar from '@/shared/Avatar';
+import avatar1 from "@/images/avatars/profile-circle.png";
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import { clientAuthAxios } from '@/utils/clientAxios';
 import { useRouter } from 'next/navigation';
@@ -10,7 +8,7 @@ import ButtonSecondary from '@/shared/ButtonSecondary';
 
 interface Request {
   profilePic: string;
-  id: string;
+  _id: string;
   first_name: string;
   last_name: string;
 }
@@ -30,6 +28,7 @@ const FriendshipReq = () => {
       console.log(err);
     } 
   };
+  
   const getAllRequests = async () => {
     
     try {
@@ -40,7 +39,39 @@ const FriendshipReq = () => {
       console.log(err);
     } 
   };
-  console.log(outgoingRequests)
+  const cancelRequest = async(id: string) => {
+    try {
+      await clientAuthAxios().post('/user/friend/cancel',{
+        user_id: id
+      });
+      getAllRequests();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const declineRequest = async(id: string) => {
+    try {
+     await clientAuthAxios().post('/user/friend/decline',{
+        user_id: id
+      });
+      getAllRequests();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const acceptRequest = async(id: string) => {
+    try {
+      await clientAuthAxios().post('/user/friend/accept',{
+        user_id: id
+      });
+      await clientAuthAxios().post('/chat/create',{
+        user_id: id
+      });
+      getAllRequests();
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
     getAllRequests();
   },[])
@@ -53,16 +84,23 @@ const FriendshipReq = () => {
                 incomingRequests.length > 0 ?
                 incomingRequests?.map(request=> (
                   <div className='flex items-center justify-center flex-col md:flex-row gap-3 bg-slate-300 py-1 border-collapse rounded-xl'>
-                    <Avatar
-                        imgUrl={request.profilePic}
-                        sizeClass="w-8 h-8 sm:w-12 sm:h-12"
-                    />
+                    <div
+                        className={`rounded-full wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold w-8 h-8 sm:w-12 sm:h-12`}
+                        >
+                        <Image
+                        width={24}
+                        height={24}
+                        className={`absolute h-[70%] w-[70%] object-cover rounded-full`}
+                        src={request.profilePic || avatar1}
+                        alt={request.first_name}
+                      />
+                      </div>
                     <p className="text-sm font-medium w-[125px] text-gray-900 dark:text-gray-200 text-center">
                         {request.first_name} {" "} {request.last_name}
                     </p>
                     <div className="flex flex-col md:flex-row gap-3">
-                        <ButtonPrimary><p className='text-xs'>Accept Request</p></ButtonPrimary>
-                        <ButtonSecondary><p className='text-xs'>Decline Request</p></ButtonSecondary>
+                        <ButtonPrimary onClick={() => acceptRequest(request._id)}><p className='text-xs'>Accept Request</p></ButtonPrimary>
+                        <ButtonSecondary onClick={() => declineRequest(request._id)}><p className='text-xs'>Decline Request</p></ButtonSecondary>
                     </div>
                 </div>
                 ))
@@ -86,14 +124,14 @@ const FriendshipReq = () => {
                         width={24}
                         height={24}
                         className={`absolute h-[70%] w-[70%] object-cover rounded-full`}
-                        src={request.profilePic}
+                        src={request.profilePic || avatar1}
                         alt={request.first_name}
                       />
                       </div>
                       <p className="text-sm font-medium w-[125px] text-gray-900 dark:text-gray-200 text-center">
                           {request.first_name} {" "} {request.last_name}
                       </p>
-                      <ButtonSecondary><p className='text-xs'>Cancel Request</p></ButtonSecondary>
+                      <ButtonSecondary onClick={() => cancelRequest(request._id)}><p className='text-xs'>Cancel Request</p></ButtonSecondary>
                   </div>
                   ))
                   :

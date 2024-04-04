@@ -25,7 +25,7 @@ import dryerIcon from "@/images/dryer-icon.svg";
 import cameraIcon from "@/images/camera-icon.svg";
 import bicycleIcon from "@/images/bicycle-icon.svg";
 import HotelNearByList from "@/components/Partner/HotelNearByList";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   getLocalStorageItem,
@@ -71,7 +71,7 @@ const RoomMateDetailsPage = () => {
   const getProfile = async() => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
-      const res = await clientAuthAxios().get('/user/get/660c23e1fa441c2539931392');
+      const res = await clientAuthAxios().get('/user/get/660c3589ecf27bd18e712aaa');
       setProfile(res.data.data)
     } catch (err) {
       console.log(err);
@@ -83,30 +83,60 @@ const RoomMateDetailsPage = () => {
     getProfile();
   }, [])
 
-
   const join = async() => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
       const res = await clientAuthAxios().post('/user/friend/send',{
-        user_id: "660c23e1fa441c2539931392"
+        user_id: "660c3589ecf27bd18e712aaa"
       });
       getProfile();
     } catch (err) {
       console.log(err);
     }
   }
-  console.log(profile)
   const cancelRequest = async() => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
       const res = await clientAuthAxios().post('/user/friend/cancel',{
-        user_id: "660c23e1fa441c2539931392"
+        user_id: "660c3589ecf27bd18e712aaa"
       });
       getProfile();
     } catch (err) {
       console.log(err);
     }
   }
+  const declineRequest = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().post('/user/friend/decline',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const acceptRequest = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      await clientAuthAxios().post('/user/friend/accept',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      await clientAuthAxios().post('/chat/create',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const router = useRouter();
+
+  const gotoInbox = () => {
+    // @ts-ignore-error
+    router.push(`/inbox`);
+  };
   return (
     <div className="partner-details-page">
       <div className="btn-back">
@@ -345,7 +375,7 @@ const RoomMateDetailsPage = () => {
                 <div className="btn-wrapper items-center justify-center">
                   {
                     profile?.friends.includes(userId) ? 
-                    <button type="button" className="btn-message">
+                    <button type="button" className="btn-message" onClick={gotoInbox}>
                       Send Message
                     </button>
                     :
@@ -356,10 +386,10 @@ const RoomMateDetailsPage = () => {
                     :
                     profile?.outgoingRequests.includes(userId) ?
                     <>
-                      <button type="button" className="btn-proposal">
+                      <button type="button" className="btn-proposal" onClick={() => acceptRequest()}>
                         Accept Request
                       </button>
-                      <button type="button" className="btn-message">
+                      <button type="button" className="btn-message" onClick={() => {declineRequest()}}>
                         Decline Request
                       </button>
                     </>
