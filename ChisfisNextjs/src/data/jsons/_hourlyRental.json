@@ -17,6 +17,22 @@
   },
   {
     "id": 2,
+    "backgroundimage": "background1.png",
+    "image": "https://i.hizliresim.com/sru7qzl.png",
+    "like": 50,
+    "price": "$59.99",
+    "stock": 20,
+    "listingCategoryId": 1,
+    "title": "Camping Tent With Rainfly",
+    "bestDeal": true,
+    "saleOff": null,
+    "isAds": false,
+    "deposit": "$20",
+    "authorId": 101,
+    "href": ""
+  },
+  {
+    "id": 3,
     "backgroundimage": "background2.png",
     "image": "https://i.hizliresim.com/ih00da3.png",
     "like": 30,
@@ -32,7 +48,7 @@
     "href": ""
   },
   {
-    "id": 3,
+    "id": 4,
     "backgroundimage": "background3.png",
     "image": "https://i.hizliresim.com/6agcg6h.png",
     "like": 20,

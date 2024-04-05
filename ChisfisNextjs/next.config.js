@@ -60,7 +60,13 @@ const nextConfig = {
         hostname:'picsum.photos',
         port:'',
         pathname:'/**'
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.freepik.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };

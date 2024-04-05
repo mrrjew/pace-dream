@@ -25,7 +25,7 @@ import dryerIcon from "@/images/dryer-icon.svg";
 import cameraIcon from "@/images/camera-icon.svg";
 import bicycleIcon from "@/images/bicycle-icon.svg";
 import HotelNearByList from "@/components/Partner/HotelNearByList";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   getLocalStorageItem,
@@ -36,8 +36,15 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
-
+import { clientAuthAxios } from "@/utils/clientAxios";
+import { useSession } from "@/hooks/useSession";
+interface Profile {
+  friends: any[]; 
+  incomingRequests: any[]; 
+  outgoingRequests: any[]; 
+}
 const RoomMateDetailsPage = () => {
+  const [profile, setProfile] = useState<Profile>({ friends: [], incomingRequests: [], outgoingRequests: [] });
   const pathname = usePathname();
   setLocalStorageItem("currentPath", pathname);
 
@@ -60,6 +67,75 @@ const RoomMateDetailsPage = () => {
       lng: -0.118092,
     },
     zoom: 12,
+  };
+  const getProfile = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().get('/user/get/660c3589ecf27bd18e712aaa');
+      setProfile(res.data.data)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const { getSession } = useSession();
+  const { userId } = getSession();
+  useEffect(() => {
+    getProfile();
+  }, [])
+
+  const join = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().post('/user/friend/send',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const cancelRequest = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().post('/user/friend/cancel',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const declineRequest = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      const res = await clientAuthAxios().post('/user/friend/decline',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const acceptRequest = async() => {
+    try {
+      //The 'sent id' will be taken as a parameter after the roommate page is edited.
+      await clientAuthAxios().post('/user/friend/accept',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      await clientAuthAxios().post('/chat/create',{
+        user_id: "660c3589ecf27bd18e712aaa"
+      });
+      getProfile();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const router = useRouter();
+
+  const gotoInbox = () => {
+    // @ts-ignore-error
+    router.push(`/inbox`);
   };
   return (
     <div className="partner-details-page">
@@ -296,15 +372,32 @@ const RoomMateDetailsPage = () => {
                 <p className="cost">
                   <span>$75-$90</span> / night
                 </p>
-                <div className="btn-wrapper">
-                  <button type="button" className="btn-message">
-                    Send Message
-                  </button>
-                  <Link href={"/add-partner/1"}>
-                    <button type="button" className="btn-proposal">
-                      Send Proposal
+                <div className="btn-wrapper items-center justify-center">
+                  {
+                    profile?.friends.includes(userId) ? 
+                    <button type="button" className="btn-message" onClick={gotoInbox}>
+                      Send Message
                     </button>
-                  </Link>
+                    :
+                    profile?.incomingRequests.includes(userId) ? 
+                    <button type="button" className="btn-message" onClick={() => cancelRequest()}>
+                      Cancel Request
+                    </button>
+                    :
+                    profile?.outgoingRequests.includes(userId) ?
+                    <>
+                      <button type="button" className="btn-proposal" onClick={() => acceptRequest()}>
+                        Accept Request
+                      </button>
+                      <button type="button" className="btn-message" onClick={() => {declineRequest()}}>
+                        Decline Request
+                      </button>
+                    </>
+                    :
+                    <button type="button" className="btn-proposal" onClick={() => join()}>
+                      Join
+                    </button>
+                  }
                 </div>
                 <p className="message">You won’t be charged yet</p>
               </div>

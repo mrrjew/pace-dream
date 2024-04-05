@@ -2,11 +2,11 @@
 import Link from "next/link"
 import { useState } from "react";
 import NotificationComponent from "./NotificationComponent";
-import MatchedRoommatesComponent from "./MatchedRoommatesComponent";
+import FriendshipReq from "./FriendshipReq";
 
 const hostInbox = () => {
 
-  const [activeMenuItem, setActiveMenuItem] = useState('Matched Roommates')
+  const [activeMenuItem, setActiveMenuItem] = useState('Friendship Requests')
 
 
   const handleMenuItemClick = (menuItem:string) => {
@@ -15,8 +15,8 @@ const hostInbox = () => {
 
 
   let activeComponent;
-  if (activeMenuItem === "Matched Roommates") {
-    activeComponent = <MatchedRoommatesComponent/>
+  if (activeMenuItem === "Friendship Requests") {
+    activeComponent = <FriendshipReq/>
   } else if (activeMenuItem === "Notifications") {
     activeComponent = <NotificationComponent/>
    }
@@ -38,12 +38,12 @@ const hostInbox = () => {
             <nav className="flex gap-2 border-b-2">
                 <h1
                   className={`btn font-medium px-9 py-3 
-                  ${ activeMenuItem === "Matched Roommates" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }  curveBorder`}
-                 onClick={() => handleMenuItemClick("Matched Roommates")}>Matched Roommates</h1>
+                  ${ activeMenuItem === "Friendship Requests" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }  curveBorder`}
+                 onClick={() => handleMenuItemClick("Friendship Requests")}>Friendship Requests</h1>
 
                 <h1 className={`btn font-medium px-9 py-3 
                 ${ activeMenuItem === "Notifications" ? " bg-[#cdcaf7] text-[#463ed6]" : "bg-[#F9F9FF] text-[#615e5e] cursor-pointer" }`}
-                 onClick={() => handleMenuItemClick("Notifications")}>Notification</h1>
+                 onClick={() => handleMenuItemClick("Notifications")}>Notifications</h1>
             </nav>
 
             <div className="px-20 pt-5 pb-16">

@@ -1,15 +1,8 @@
 import React, { FC } from "react";
-import GallerySlider from "@/components/GallerySlider";
 import { DEMO_RENTAL_LISTING } from "@/data/listings";
 import { StayDataType } from "@/data/types";
-import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import SaleOffBadge from "@/components/SaleOffBadge";
-import Badge from "@/shared/Badge";
-import Image1 from "@/images/Hourly Rental/image1.png"
-import Image2 from "@/images/Hourly Rental/image2.png"
-import Image3 from "@/images/Hourly Rental/image3.png"
-import Image4 from "@/images/Hourly Rental/image4.png"
 // import use from ""
 import Link from "next/link";
 import Image from "next/image";
@@ -21,8 +14,18 @@ export interface StayCard2Props {
   term?: string;
 }
 
+const gradientColors = [
+  "#CEBDFF, #D3DAFF",
+  "#BDFFCC, #D3FFEF",
+  "#BDE7FF, #D3F7FF",
+  "#FFD5BD, #FFF0D3",
+  "#ff9a9e, #fad0c4",
+  "#fdcbf1, #e6dee9",
+  "#d4fc79, #96e6a1",
+  "#cfd9df, #e2ebf0"
+]
+
 const DEMO_DATA = DEMO_RENTAL_LISTING[0];
-const image = [Image1, Image2, Image3, Image4];
 const StayCard3: FC<StayCard2Props> = ({
   size = "default",
   className = "",
@@ -47,6 +50,8 @@ const StayCard3: FC<StayCard2Props> = ({
   } = data;
 
   const renderSliderGallery = () => {
+    const randomGradientIndex = Math.floor(Math.random() * gradientColors.length);
+    const randomGradient = gradientColors[randomGradientIndex];
     return (
       // <>
       // {/* <img src="/Map.png" alt="" /> */}
@@ -60,11 +65,21 @@ const StayCard3: FC<StayCard2Props> = ({
             galleryImgs={galleryImgs}
             imageClass="rounded-lg"
           /> */}
-          <div className="border border-white rounded-[8px]">
-            <div className="w-48 h-44 ">
-            <Image src={image} alt="img1" className="w-full h-full object-contain" width={100} height={100}  />
+          <div className="border border-white rounded-[8px] relative">
+              <div className="w-48 h-44 relative z-10">
+                  <Image src={image} alt="img1" className="w-full h-full object-contain" width={100} height={100} />
+              </div>
+              <div 
+                  className="top-0 w-full h-full absolute z-0 rounded-xl"
+                  style={{
+                      backgroundImage: `linear-gradient(to top right, ${randomGradient})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                  }}
+              />
           </div>
-          </div>
+
+
           <div>
 
             <BtnLikeIcon
@@ -136,7 +151,7 @@ const StayCard3: FC<StayCard2Props> = ({
           {
             <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
               <p className="text-[14px] font-[600]">Stock</p>
-              <div className={`w-3 h-3 rounded-full bg-${stock===0 ?'red':'green'}-700`}>
+              <div className={`w-3 h-3 rounded-full ${stock===0 ?'bg-red-800':'bg-green-700'}`}>
 
               </div>
             </div>

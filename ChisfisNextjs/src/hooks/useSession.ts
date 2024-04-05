@@ -13,7 +13,6 @@ export const useSession = () => {
       Cookies.get('user_info') ? Cookies.get('user_info')! : '{}'
     );
     const userId = Cookies.get('user_id');
-
     return {
       token,
       userInfo,
