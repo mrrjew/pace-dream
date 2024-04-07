@@ -29,7 +29,7 @@ const hostInbox = () => {
         <button  className="btn mt-10 rounded-full border border-[#DAE0E6] font-medium px-5 py-2 btn-sm mobile-view">Back</button>      
        </Link>
 
-        <div className="flex mt-14 mb-10 items-center justify-between heading-alignment">
+        <div className="flex items-center justify-between mb-10 mt-14 heading-alignment">
           <h2 className="text-3xl font-semibold">Inbox</h2>
         </div>
         <div>
@@ -46,7 +46,7 @@ const hostInbox = () => {
                  onClick={() => handleMenuItemClick("Notifications")}>Notifications</h1>
             </nav>
 
-            <div className="pt-5 pb-16 px-20">
+            <div className="px-20 pt-5 pb-16">
                 {activeComponent}            
             </div>
           </div>

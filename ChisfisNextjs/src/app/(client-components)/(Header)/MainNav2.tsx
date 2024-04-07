@@ -58,15 +58,15 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   };
   return (
     <header className={`MainNav2 relative z-10 ${className}`}>
-      <section className="px-4 h-16 lg:container flex justify-between">
-        <article className="hidden md:flex justify-between flex-1 space-x-3 sm:space-x-8 lg:space-x-10">
-          <Logo className="w-34  self-center" />
-          {/* <div className='hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-500'> */}
-          <div className="hidden lg:flex items-center  justify-end ">
-          <ol className=' flex items-center gap-4'>
+      <section className="flex justify-between h-16 px-4 lg:container">
+        <article className="justify-between flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10">
+          <Logo className="self-center w-34" />
+          {/* <div className='self-center hidden h-10 border-l lg:block border-neutral-300 dark:border-neutral-500'> */}
+          <div className="items-center justify-end hidden lg:flex ">
+          <ol className='flex items-center gap-4 '>
               <li><Link href={'/about-us'}>About</Link></li>
               <li><Link href={'/contact-us'}>Contact</Link></li>
-              <div className=' items-center flex gap-1'>
+              <div className='flex items-center gap-1 '>
               </div>
               
 
@@ -77,43 +77,6 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             <button className={`${btnStyle}`} onClick={openModalCountry}>
               <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
             </button>
-            
-            {/* <Link href={"/help-center" as Route<string> } > */}
-            {/* <Link href={"/about-us" as Route<string>} className={`${btnStyle} mr-8`}>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6  border border-red-700"
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z'
-                />
-              </svg>
-            </Link> */}
-            {/* </Link> */}
-            {/* <Link href={"/help-center" as Route<string> } >
-              <button className={`${btnStyle} mr-8`}>
-                <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth={1.5}
-                stroke='currentColor'
-                className='w-6 h-6'>
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z'
-                  />
-                </svg>
-              </button>
-            </Link> */}
           </div>
         </article>
 
@@ -121,32 +84,22 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
         <NavbarMobile />
 
 
-        <div className="hidden md:flex  flex-shrink-0 justify-end flex-1 lg:flex-none text-neutral-700 dark:text-neutral-100">
-          <div className="hidden lg:flex space-x-1">
-          {token ? (
+        <div className="justify-end flex-1 flex-shrink-0 hidden md:flex lg:flex-none text-neutral-700 dark:text-neutral-100">
+          <div className="hidden space-x-1 lg:flex">
             <Link
-              href={'/add-listing' as Route<String>}
-              className="self-center text-opacity-90   group px-4 py-2 border border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-            >
-              List your property
-            </Link>
-          ) 
-          : 
-          (
-            <Link
-              href={'/auth/login'}
-              className="self-center  text-opacity-90 group px-4 py-2 border border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 rounded-full inline-flex items-center text-sm text-gray-700 dark:text-neutral-300 font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-            >
-              List your property
-            </Link>
-          )
-          }
+            href={token ? '/add-listing' : '/auth/login' as any}
 
-            {/* <NotifyDropdown className='' /> */}
+              as={token ? '/add-listing' : '/auth/login'}
+              className="inline-flex items-center self-center px-4 py-2 text-sm font-medium text-gray-700 border rounded-full text-opacity-90 group border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-300 hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              List your property
+            </Link>
+
+            <NotifyDropdown className='' />
             <AvatarDropdown />
           </div>
           <div className="flex space-x-2 lg:hidden">
-            {/* <NotifyDropdown /> */}
+            <NotifyDropdown />
             <AvatarDropdown />
             <MenuBar />
           </div>

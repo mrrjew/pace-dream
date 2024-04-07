@@ -3,45 +3,46 @@ import { FaArrowRight } from "react-icons/fa6";
 import { FiYoutube } from "react-icons/fi";
 import arrowBg from "@/images/Group 10.png"
 import ellipse from "@/images/Ellipse 1.png"
-import HeroImg from "@/images/Hero-Right-New.png"
+// import HeroImg from "@/images/Hero-Right-New.png"
 import HeroImg1 from "@/images/Hero-Right-New-1.png"
 import HeroImg2 from "@/images/Hero-Right-New-2.png"
 import Vector from "@/images/Vector.png"
+import { HeroImage } from "@/assets";
 
 const Hero = () => {
     return (
-        <div className="flex justify-center lg:gap-16 gap-2 md:flex-row flex-col-reverse text mx-auto  md:py-20 py-8" >
+        <div className="flex flex-col-reverse justify-center gap-2 py-8 mx-auto lg:gap-16 md:flex-row text md:py-20" >
             <div className="relative lg:mx-0 md:w-[550px]  md:bg-transparent w-screen ml-16">
-                <Image src={arrowBg} alt="arrowBg" className="h-20 w-60 object-contain absolute md:top-28 top-20 right-2 md:-right-10 " />
-                <Image src={ellipse} alt="ellipse" className="object-contain absolute -left-40 -top-14 " />
-                <p className="md:block hidden text-4xl font-semibold">
-                    Discover Your Perfect <br /> Match: Book Rooms, Find <br /> Roommates, and Secure <br /> Last-Minute Deals <br /><span className="underline">Effortlessl</span>y!
+                {/* <Image src={arrowBg} alt="arrowBg" className="absolute object-contain h-20 w-60 md:top-28 top-20 right-2 md:-right-10 " /> */}
+                {/* <Image src={ellipse} alt="ellipse" className="absolute object-contain -left-40 -top-14 " /> */}
+                <p className="text-4xl font-semibold text-left leading-relaxed tracking-wider md:text-5xl lg:text-[40px] text-[#0C051D]">
+                    Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
                 </p>
-                <p className="md:hidden block text-4xl font-semibold">
+                <p className="block text-4xl font-semibold md:hidden ">
                     Discover Your Perfect <br />  Match: Book Rooms, <br /> Find  Roommates, <br /> and Secure <br />  Last-Minute Deals <span className="underline">Effortlessl</span>y!
                 </p>
-                <p className=" md:block hidden text-lg mt-8 font font-medium" >
+                <p className="hidden mt-8 text-lg font-medium md:block font text-[#757575]"  >
                     An all-in-one platform that helps you to find <br /> what you needed.
                 </p>
-                <p className="md:hidden block text-lg mt-8 font font-medium" >
+                <p className="block mt-8 text-lg font-medium md:hidden font" >
                     An all-in-one platform that helps you to find what you needed.
                 </p>
-                <div className="flex md:gap-4 ml-4 md:ml-0 gap-4 mt-8">
+                <div className="flex gap-4 mt-8 ml-4 md:gap-4 md:ml-0">
                     <button className=" bg-[#5527D7] font-medium rounded-full md:px-8 md:py-4 px-4 py-4 text-white flex gap-4 items-center">Start your search <FaArrowRight /> </button>
                     <button className="flex rounded-full  md:px-8 md:py-4 px-4 py-4 gap-2 font-medium items-center text-[#5527D7] "><FiYoutube /> How it works</button>
                 </div>
-                <div className="mt-10 ml-4 md:ml-2 grid grid-cols-3 gap-8 w-96">
-                    <div className="flex gap-2 flex-col">
+                <div className="grid grid-cols-3 gap-8 mt-10 ml-4 md:ml-2 w-96">
+                    <div className="flex flex-col gap-2">
                         <p className="font-bold text-2xl text-center text-[#5527D7]">8,00,00+</p>
                         <hr className="w-full h-[3px] bg-gray-300 border-0 rounded dark:bg-gray-700" />
                         <p className="text-[15px] text-center font-medium">Hourly Rental Gears</p>
                     </div>
-                    <div className="flex gap-2 flex-col">
+                    <div className="flex flex-col gap-2">
                         <p className="font-bold text-2xl text-center text-[#5527D7]">1210+</p>
                         <hr className="w-full h-[3px] bg-gray-300 border-0 rounded dark:bg-gray-700" />
                         <p className="text-[15px] text-center font-medium">Hourly Places</p>
                     </div>
-                    <div className="flex gap-2 flex-col">
+                    <div className="flex flex-col gap-2">
                         <p className="font-bold text-2xl text-center text-[#5527D7]">1100+</p>
                         <hr className="h-[3px] bg-gray-300 border-0 rounded dark:bg-gray-700" />
                         <p className="text-[15px] text-center font-medium">Experiences</p>
@@ -49,10 +50,7 @@ const Hero = () => {
                 </div>
             </div>
             <div className="lg:w-[520px] h-[500px] w-96 lg:mx-0 ml-[72px] relative">
-                <Image src={Vector} alt="Hero-right" fill className="absolute z-0" />
-                <Image src={HeroImg} alt="Hero-right" fill className="object-contain  z-1 " />
-                <Image src={HeroImg1} alt="Hero-right" className="hidden md:block object-contain absolute bottom-[136px] -left-14 h-44 w-44" />
-                <Image src={HeroImg2} alt="Hero-right" className="hidden md:block object-contain absolute bottom-8 left-[10px] h-[215px] w-[215px]" />
+                <Image src={HeroImage} alt="Hero-right" fill className="object-contain z-1 " />
             </div>
         </div>
     )
