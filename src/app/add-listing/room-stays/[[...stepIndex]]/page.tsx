@@ -17,8 +17,6 @@ import { boolean } from 'yup';
 import { number } from 'prop-types';
 
 
-
-
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined | Boolean} }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const titles = ["Choosing Categories & Location", "General amenities, Other amenities & photos", "House rules for guest & Date & Pricing", ""];
