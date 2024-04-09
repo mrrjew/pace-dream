@@ -11,12 +11,6 @@ import FindImg from '@/images/svg/Find Roommate.svg';
 import LastminutesImg from '@/images/svg/time-fast 1.svg';
 import ExperiencesImg from '@/images/svg/Experience.svg';
 import Image from "next/image";
-// import RoomStays from "@/app/add-listing/room-stays/[[...stepIndex]]/PageAddListing1";
-// import TimeBased from "@/app/add-listing/time-based/[[...stepIndex]]/PageAddListing1";
-// import HourlyRentalGear from "@/app/add-listing/hourly-rental-gear/[[...stepIndex]]/PageAddListing1";
-// import FindRoommate from "@/app/add-listing/find-roommate/[[...stepIndex]]/PageAddListing1"
-// import Experience from "@/app/add-listing/experience/[[...stepIndex]]/PageAddListing1";
-// import LastMinutes from "@/app/add-listing/last-minutes/[[...stepIndex]]/PageAddListing1";
 import { Route } from '@/routers/types';
 import Link from 'next/link';
 

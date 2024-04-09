@@ -16,8 +16,6 @@ import { boolean } from 'yup';
 import { number } from 'prop-types';
 
 
-
-
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined | Boolean} }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const userdata = Cookies.get('user_info');
@@ -61,27 +59,7 @@ const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchP
     case 3:
       ContentComponent = PageAddListing3;
       break;
-    // case 4:
-    //   ContentComponent = PageAddListing4;
-    //   break;
-    // case 5:
-    //   ContentComponent = PageAddListing5;
-    //   break;
-    // case 6:
-    //   ContentComponent = PageAddListing6;
-    //   break;
-    // case 7:
-    //   ContentComponent = PageAddListing7;
-    //   break;
-    // case 8:
-    //   ContentComponent = PageAddListing8;
-    //   break;
-    // case 9:
-    //   ContentComponent = PageAddListing9;
-    //   break;
-    // case 10:
-    //   ContentComponent = PageAddListing10;
-    //   break;
+    
 
     default:
       ContentComponent = PageAddListing1;
