@@ -220,17 +220,7 @@ console.log(formData);
           )}
         </div>
 
-        {/* <!-- Error Alert --> */}
-        {/* {errorMessage && (
-          <div className='flex justify-between px-6 border py-2  rounded-xl   '>
-            <p className='    text-red-500 text-base'>{errorMessage}</p>
-
-            <RxCross1
-              onClick={() => setErrorMessage('')}
-              className='text-black group-hover:text-red-500 cursor-pointer'
-            />
-          </div>
-        )} */}
+        
       </form>
     </div>
   );

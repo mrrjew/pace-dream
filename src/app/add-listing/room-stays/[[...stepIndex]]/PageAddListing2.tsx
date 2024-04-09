@@ -5,6 +5,7 @@ import { PageAddingListing } from '@/types/types';
 import NcInputNumber from '@/components/ListingComponents/NcInputNumber';
 import Checkbox from '@/components/ListingComponents/Checkbox';
 
+
 const PageAddListing2 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
   const handlePropertyTypeSelection = (type: string) => {
     setInput({ ...input, propertyType: type });

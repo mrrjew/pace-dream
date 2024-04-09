@@ -17,7 +17,6 @@ import { number } from 'prop-types';
 
 
 
-
 const Page = ({ params, searchParams }: { params: { stepIndex: string }; searchParams?: { [key: string]: string | string[] | undefined | Boolean } }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const titles = ["Choosing Experiences, Location & Photo", "Pricing Per Person", ""];
