@@ -11,7 +11,6 @@ import FormItem from '../FormItem';
 import { PageAddingListing } from '@/types/types';
 
 
-
 const PageAddListing1 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
     return (
         <>

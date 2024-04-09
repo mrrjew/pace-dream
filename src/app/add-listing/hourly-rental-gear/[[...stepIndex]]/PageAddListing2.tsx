@@ -7,6 +7,7 @@ import NcInputNumber from '@/components/ListingComponents/NcInputNumber';
 import Checkbox from '@/components/ListingComponents/Checkbox';
 
 
+
 const PageAddListing2 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
 
     return (

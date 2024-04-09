@@ -1,7 +1,6 @@
 "use client"
 import Input from "@/shared/Input";
 import Select from "@/shared/Select";
-// import FormItem from "./FormItem";
 import { PageAddingListing } from "@/types/types";
 import React, { useEffect, useState, MouseEvent } from "react";
 import RoomImg from '@/images/svg/Room Stays.svg';
