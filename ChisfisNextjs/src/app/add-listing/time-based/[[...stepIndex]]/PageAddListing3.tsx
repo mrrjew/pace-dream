@@ -8,7 +8,8 @@ import { Route } from '@/routers/types';
 import { PageAddingListing } from '@/types/types';
 import useFormFields from '@/hooks/useFormFields';
 
-const PageAddListing10 = ({ input, setInput, handleInputChange, setPageNumber }: PageAddingListing) => {
+
+const PageAddListing3 = ({ input, setInput, handleInputChange, setPageNumber }: PageAddingListing) => {
   
   return (
     <>
@@ -44,4 +45,4 @@ const PageAddListing10 = ({ input, setInput, handleInputChange, setPageNumber }:
   );
 };
 
-export default PageAddListing10;
+export default PageAddListing3;
