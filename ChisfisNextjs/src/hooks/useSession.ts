@@ -11,7 +11,7 @@ export const useSession = () => {
     const token = Cookies.get('auth-token');
     const userInfo = JSON.parse(
       Cookies.get('user_info') ? Cookies.get('user_info')! : '{}'
-    );
+      );
     const userId = Cookies.get('user_id');
     return {
       token,

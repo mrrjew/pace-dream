@@ -4,6 +4,7 @@ import { ContactUsSchema } from "@/components/AccountSetting/Schemas/AccountSett
 import { useFormik } from "formik";
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import axios from "axios";
 const initialValues = {
   firstname: "",
   lastname: "",
@@ -28,23 +29,33 @@ const ContactUsForm = () => {
     onSubmit: (values) => { },
   });
 
-  const sendEmail = (e: any) => {
+  const sendEmail = async (e: any) => {
     e.preventDefault();
-
-    if (form.current) {
-      emailjs
-        .sendForm('service_a14dsnc', 'template_k0m5snj', form.current, '4itbfBdegtJAhQS1i')
-        .then(
-          (result: any) => {
-            console.log('SUCCESS!', result.text);
-          },
-          (error: any) => {
-            console.log('FAILED...', error.text);
-          }
-        );
-
-      resetForm();
+    // console.log(values)
+    const userInfo = {
+      name : values?.firstname + " " + values?.lastname,
+      email: values?.email,
+      message: values?.message,
+      phone: values?.phonenumber
     }
+
+    console.log(userInfo)
+    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact`, userInfo)
+    resetForm()
+    // if (form.current) {
+    //   emailjs
+    //     .sendForm('service_a14dsnc', 'template_k0m5snj', form.current, '4itbfBdegtJAhQS1i')
+    //     .then(
+    //       (result: any) => {
+    //         console.log('SUCCESS!', result.text);
+    //       },
+    //       (error: any) => {
+    //         console.log('FAILED...', error.text);
+    //       }
+    //     );
+
+    //   resetForm();
+    // }
   };
   return (
     <>
