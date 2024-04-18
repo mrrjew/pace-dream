@@ -1,12 +1,11 @@
 'use client'
 import { useProfile } from '@/context'
 import { useFetch } from '@/hooks/useFetch'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineGift, AiOutlineUser } from 'react-icons/ai'
 import { BsClipboard } from 'react-icons/bs'
 import { RiHeadphoneLine } from 'react-icons/ri'
-import { useScratch } from 'react-use'
+
 
 function HostDashboardView() {
     const [menuItems, setMenuItems] = useState<Array<any>>([])
@@ -109,9 +108,9 @@ function HostDashboardView() {
               } border-[#6269DF33] items-center`}
             >
                 <span>{item.icon}</span>
-                <Link href = {item.url}> 
+                <a href = {`${item.url}`}> 
                     <p className="text-2xl mt-1">{item.name}</p>
-                </Link>
+                </a>
             </li>
           ))}
         </ul>
