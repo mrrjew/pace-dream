@@ -9,17 +9,17 @@ import PhotoCameraOutlinedIcon from '@mui/icons-material/PhotoCameraOutlined';
 
 export default function Component() {
   return (
-    <footer className="bg-white text-gray-600 mt-2 min-h-[20rem] border border-transparent">
+    <footer className="bg-white text-gray-600 sm:text-center lg:mt-2 min-h-[20rem] border border-transparent">
       <div className="px-[1rem] md:px-[0.5rem] sm:w-[95%] container min-h-[12rem] mx-auto lg:px-6 my-10 md:flex md:justify-between md:items-start">
       <div className="text-gray-700 md:w-full lg:w-1/4 pt-[3rem]">
 
-          <div className="text-left">
-            <Logo className="w-full ml-7"/>
+          <div className="text-center md:text-left">
+            <Logo className="sm:w-1/2 md:w-full ml-7"/>
           </div>
       <br />
 
-          <div className="">
-            <p className="text-base text-gray-500">
+          <div>
+            <p className="text-base text-gray-500 text-center">
               An all-in-one platform that helps you to find
               what you needed.
             </p>
@@ -43,20 +43,20 @@ export default function Component() {
       <br />
 
           <div>
-            <p className="text-sm text-gray-500">&copy; 2024 PaceDrem. All Rights Reserved.</p>
+            <p className="text-sm text-center text-gray-500">&copy; 2024 PaceDrem. All Rights Reserved.</p>
           </div>
 
         </div>
         
         <div className="pt-14 md:mb-0 md:w-full lg:w-1/4">
-          <h2 className="text-2xl font-semibold text-gray-700">Contact</h2>
-          <p className="mt-4 text-sm text-gray-500">
+          <h2 className="text-2xl text-center font-semibold text-gray-700">Contact</h2>
+          <p className="mt-4 text-sm text-center text-gray-500">
             8521 Leesburg Pike, Vienna, VA 22182 Virginia, USA
           </p>
-          <p className="mt-4 text-sm text-gray-500">
+          <p className="mt-4 text-sm text-center text-gray-500">
             info@pacedream.com
           </p>
-          <p className="mt-4 text-sm text-gray-500">
+          <p className="mt-4 text-sm text-center text-gray-500">
             703-869-2029
           </p>
         </div>
