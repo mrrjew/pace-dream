@@ -6,7 +6,7 @@ return (
     <div className=' bg-slate-100'>
         <h3 className='text-center text-3xl font-bold m-auto p-4'>Scenarios We Cater To:</h3>
         <br />
-        <div className="grid gap-5 grid-cols-2 px-[50px] p-7">
+        <div className="sm:grid grid-cols-1 lg:grid gap-5 grid-cols-2 px-[50px] p-7 ">
             <div className='border-4 left-[100px]'>
                 <br />
                 <CalendarDaysIcon className='h-[45px] w-[100px]'/>

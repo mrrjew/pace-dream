@@ -27,8 +27,8 @@ const contacts = [
 const AboutUsValues = () => {
   return (
     <>
-      <div className="bg-white lg:py-20 py-12 lg:px-36 px-4 mb-5">
-        <div className="mt-20 text-center">
+      <div className="bg-white  sm:py-20 py-12 lg:px-36 px-4 mb-5">
+        <div className="sm:mb-5 pb-8 lg:mt-20 text-center">
           <p className="font-semibold text-5xl mt-6">
             We're a distributed team
           </p>

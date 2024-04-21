@@ -36,12 +36,12 @@ const services = [
 
 const AboutUsWork = () => {
 return (
-    <div className='h-[800px] p-5 pt-5 pb-5  bg-slate-100'>
+    <div className='lg:h-[800px] p-5 pt-5 pb-5  bg-slate-100'>
         <div className='text-center mt-5 '>
             <h1 className="text-2xl font-semibold">What We Do</h1>
             <p>Pace Dream offers a comprehensive range of services designed to meet the needs of modern, mobile, and diverse lifestyles:</p>
         </div>
-        <div className="grid grid-cols-3 gap-2 m-auto mt-3 p-4">
+        <div className="lg:grid grid-cols-3 gap-2 m-auto mt-3 p-4 sm:grid grid-cols-1 text-center px-[50px]">
             {services.map((service) => (
                 <div className='bg-primary-50 h-[330px] w-[300px] text-center p-5 rounded-xl mt-2'>
                 <h3 className='text-left text-2xl h-2 font-bold'>{service.id}</h3>

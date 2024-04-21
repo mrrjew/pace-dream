@@ -5,7 +5,7 @@ import img from "@/images/aboutUsStats.jpg";
 const AboutUsMission = () => {
 return (
     <div>
-        <div className="grid grid-cols-2 px-8">
+        <div className="lg:grid grid-cols-2 px-8 sm:flex justify-center items-center">
         <div className="h-[551.11px] flex justify-center items-center flex-col">
         <h3 className="text-2xl font-semibold">Our Mission</h3>
         <br />
