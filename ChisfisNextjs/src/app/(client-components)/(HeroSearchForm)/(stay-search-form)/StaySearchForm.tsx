@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 import GuestsInput from "../GuestsInput";
 import LocationInput from "../LocationInput";
 import StayDatesRangeInput from "./StayDatesRangeInput";
+import ButtonSubmit from "../ButtonSubmit";
 
 export type TypeDropOffLocationType = "anytime" | "anytype" | "hostel" | "guesthouse" | "long" | "short";
 const StaySearchForm: FC<{}> = ({ }) => {
@@ -79,10 +80,15 @@ const StaySearchForm: FC<{}> = ({ }) => {
               Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
             </h2>
           </div>
-          <div className="flex flex-col flex-1 mx-8 mt-8 py-4 md:border items-center gap-4 md:flex-row rounded-lg">
-            <LocationInput className="" />
-            <StayDatesRangeInput className="" />
-            <GuestsInput className="" buttonSubmitHref={`/listing-stay-map/1?term=${dropOffLocationType}`} />
+          <div className="flex flex-col flex-1 mx-8 mt-8 py-4  items-center gap-4 md:flex-row rounded-lg">
+            <LocationInput className="md:border" />
+            <GuestsInput className="md:border" buttonSubmitHref={`/listing-stay-map/1?term=${dropOffLocationType}`} />
+            <StayDatesRangeInput className="md:border" />
+            
+              <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
+                <ButtonSubmit href='/listing-stay-map/[room]' />
+              </div>
+            
           </div>
         </form>
       </div>
