@@ -10,6 +10,7 @@ import { PathName } from "@/routers/types";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { GuestsObject } from "../type";
 
+
 export interface GuestsInputProps {
   currentTab?: string;
   className?: string;
@@ -28,6 +29,17 @@ const GuestsInput: FC<GuestsInputProps> = ({
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(1);
+  const [guestCount, setGuestCount] = useState(1);
+
+  const incrementGuestCount = () => {
+    setGuestCount(prevCount => prevCount + 1);
+  };
+
+  const decrementGuestCount = () => {
+    if (guestCount > 1) {
+      setGuestCount(prevCount => prevCount - 1);
+    }
+  };
 
   const handleChangeData = (value: number, type: keyof GuestsObject) => {
     let newValue = {
@@ -53,20 +65,25 @@ const GuestsInput: FC<GuestsInputProps> = ({
     guestChildrenInputValue + guestAdultsInputValue + guestInfantsInputValue;
 
   return (
-    <Popover className={`flex relative ${className}`}>
+    <Popover className={`flex relative rounded-xl h-[130px] ${className}`}>
       {({ open }) => (
         <>
           <Popover.Button
             className={`flex z-10 flex-1 flex-col md:flex-row relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
           >
             <div className="flex-grow max-md:mt-4 md:mr-4">
-              <span className="block xl:text-lg font-normal text-left text-black md:font-semibold">
+              <span className="block xl:text-lg font-normal text-left text-base ">
                 Guests
               </span>
-              <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} border lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-lg h-11 mt-1 text-base text-neutral-400 items-center justify-between leading-none font-light`}>
+              <span className={`flex flex-grow ${inputs ? inputs : 'max-md:w-[85vw]'} lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-lg h-11 mt-1 text-black items-center justify-between leading-none font-light md:font-semibold`}>
                 Add Guests
                 <UserPlusIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex text-gray-500 ml-4" />
               </span>
+              <div className="flex flex-row items-center ml-4 px-2 pr-2">
+              <button onClick={decrementGuestCount}>- &nbsp; </button>
+            <span>{guestCount} &nbsp;
+            <button onClick={incrementGuestCount}>+</button></span>
+          </div>
             </div>
             {!!totalGuests && open && (
               <ClearDataButton
@@ -74,15 +91,18 @@ const GuestsInput: FC<GuestsInputProps> = ({
                   setGuestAdultsInputValue(0);
                   setGuestChildrenInputValue(0);
                   setGuestInfantsInputValue(0);
+                  setGuestCount(1);
                 }}
               />
             )}
-            {hasButtonSubmit && (
+            {/* {hasButtonSubmit && (
               <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
                 <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref} />
               </div>
-            )}
+            )} */}
           </Popover.Button>
+          {/* Simple number counter */}
+          
           {open && (
             <div className="h-8  hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
           )}

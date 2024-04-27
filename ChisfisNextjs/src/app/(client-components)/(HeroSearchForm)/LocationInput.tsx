@@ -3,6 +3,7 @@
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect, FC } from "react";
 import ClearDataButton from "./ClearDataButton";
+import PinDropIcon from '@mui/icons-material/PinDrop';
 
 export interface LocationInputProps {
   placeHolder?: string;
@@ -30,6 +31,8 @@ const LocationInput: FC<LocationInputProps> = ({
   const [value, setValue] = useState("");
   const [showPopover, setShowPopover] = useState(autoFocus);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [currentLocation, setCurrentLocation] = useState<string | null>(null);
+  const [readableLocation, setReadableLocation] = useState<string | null>(null);
 
   useEffect(() => {
     setShowPopover(autoFocus);
@@ -52,6 +55,61 @@ const LocationInput: FC<LocationInputProps> = ({
     }
   }, [showPopover]);
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation(`Latitude: ${latitude}, Longitude: ${longitude}`);
+  
+          // Reverse Geocoding to get human-readable address
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
+            .then(response => response.json())
+            .then(data => {
+              const address = data.address;
+              let readableLocation = '';
+  
+              if (address.city) {
+                readableLocation = address.city;
+              } else if (address.town) {
+                readableLocation = address.town;
+              } else if (address.village) {
+                readableLocation = address.village;
+              } else if (address.hamlet) {
+                readableLocation = address.hamlet;
+              }
+  
+              // Append state or country if available
+              if (address.state) {
+                readableLocation += ` ${address.state}`;
+              } else if (address.country) {
+                readableLocation += `, ${address.country}`;
+              }
+  
+              // Slice pincode and district
+              if (address.postcode) {
+                // const pincode = address.postcode;
+                const district = address.suburb || address.county || address.city_district || '';
+                readableLocation += `, ${district}`;
+              }
+  
+              setReadableLocation(readableLocation);
+            })
+            .catch(error => {
+              console.error('Error getting readable location:', error);
+            });
+        },
+        (error) => {
+          console.error('Error getting current location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }, []);
+  
+  
+  
   const eventClickOutsideDiv = (event: MouseEvent) => {
     if (!containerRef.current) return;
     // CLICK IN_SIDE
@@ -251,23 +309,23 @@ const LocationInput: FC<LocationInputProps> = ({
 
   return (
     <div
-      className={`relative flex ${className} ${typeInput}`}
+      className={`relative flex rounded-xl h-[130px] ${className} ${typeInput}`}
       ref={containerRef}
     >
       <div
         onClick={() => setShowPopover(true)}
-        className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-0 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
+        className={`flex flex-1 h-[110px] relative pl-4 md:pl-7 md:pr-0 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
       >
         <div className="flex-grow ">
           <span
-            className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none xl:text-lg font-normal md:font-semibold placeholder-black truncate`}
+            className={`bg-transparent border-none focus:ring-0 p-0 focus:outline-none xl:text-base font-normal md: placeholder-black truncate`}
           >
             {desc}
           </span>
           <input
-            className={`flex flex-row ${inputs ? inputs : "max-md:w-[85vw]"
-              }  border border-[#e5e7eb] focus:border-[#e5e7eb] focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : "max-lg:w-[25vw]"
-              } xl:p-[5px] w-full h-11 rounded-lg mt-1 text-base text-neutral-400 items-center justify-between leading-none font-light line-clamp-1`}
+            className={`flex font-semibold ${inputs ? inputs : "max-md:w-[190px]"
+              } border-none text-lg focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : "max-lg:[190px]"
+              } xl:p-[5px] w-[190px] h-11 rounded-lg mt-1 text-xl items-center justify-between leading-none line-clamp-1`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}
@@ -283,9 +341,17 @@ const LocationInput: FC<LocationInputProps> = ({
               }}
             />
           )}
+          {readableLocation && (
+      <span className="absolute left-0 right-0 bottom-[0.5] bg-transparent px-4 sm:px-8 py-2 text-sm text-neutral-500">
+        <MapPinIcon className="h-4 w-4 inline-block mr-1" />
+        {readableLocation}
+      </span>
+      )}
         </div>
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+            <PinDropIcon />
+          </div>
       </div>
-
       {showPopover && (
         <div
           className={`h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 bg-white ${divHideVerticalLineClass}`}
@@ -293,10 +359,13 @@ const LocationInput: FC<LocationInputProps> = ({
       )}
 
       {showPopover && (
-        <div className="absolute left-0 border border-gray-200 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
+        <div className="absolute top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
           {value ? renderSearchValue() : renderRecentSearches()}
         </div>
       )}
+
+      
+
     </div>
   );
 };
