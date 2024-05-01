@@ -44,8 +44,8 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     setEndDate(end);
   };
 
-  const handleCurrentDateChange = (action) => {
-    const newDate = new Date(currentDate);
+  const handleCurrentDateChange = (action: 'prev' | 'next'): void => {
+    const newDate: Date = new Date(currentDate);
     if (action === 'prev') {
       newDate.setDate(newDate.getDate() - 1); // Subtract one day
     } else {
@@ -53,8 +53,8 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     }
     setCurrentDate(newDate);
     // Update tomorrow's date accordingly
-    setTomorrowDate((prevTomorrow) => {
-      const nextTomorrow = new Date(newDate);
+    setTomorrowDate((prevTomorrow: Date) => {
+      const nextTomorrow: Date = new Date(newDate);
       nextTomorrow.setDate(nextTomorrow.getDate() + 1); // Get tomorrow's date
       return nextTomorrow;
     });
@@ -62,15 +62,15 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   function getCurrentDate() {
     const currentDate = new Date();
-    const options = { weekday: 'short', day: 'numeric', month: 'short' };
+    const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
     const formattedDate = currentDate.toLocaleDateString('en-US', options);
     // Extract the first three characters of the day
     const day = formattedDate.split(',')[0];
     return `${day.slice(0, 3)},${formattedDate.split(',')[1]}`;
   }
 
-  const handleTomorrowDateChange = (action) => {
-    const newTomorrowDate = new Date(tomorrowDate);
+  const handleTomorrowDateChange = (action: 'prev' | 'next'): void => {
+    const newTomorrowDate: Date = new Date(tomorrowDate);
     if (action === 'prev') {
       newTomorrowDate.setDate(newTomorrowDate.getDate() - 1); // Subtract one day
     } else {
@@ -82,7 +82,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   function getTomorrowDate() {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1); // Get tomorrow's date
-    const options = { weekday: 'short', day: 'numeric', month: 'short' };
+    const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
     const formattedDate = tomorrow.toLocaleDateString('en-US', options);
     // Extract the first three characters of the day
     const day = formattedDate.split(',')[0];

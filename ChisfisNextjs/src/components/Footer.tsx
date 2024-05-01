@@ -11,12 +11,12 @@ export default function Component() {
   return (
     <footer className="bg-white text-gray-600 sm:text-center lg:mt-2 min-h-[20rem] border border-transparent">
       <div className="px-[1rem] md:px-[0.5rem] sm:w-[95%] container min-h-[12rem] mx-auto lg:px-6 my-10 md:flex md:justify-between md:items-start">
-      <div className="text-gray-700 md:w-full lg:w-1/4 pt-[3rem]">
+        <div className="text-gray-700 md:w-full lg:w-1/4 pt-[3rem]">
 
           <div className="text-center md:text-left">
-            <Logo className="sm:w-1/2 md:w-full ml-7"/>
+            <Logo className="sm:w-1/2 md:w-full ml-7" />
           </div>
-      <br />
+          <br />
 
           <div>
             <p className="text-base text-gray-500 text-center">
@@ -24,9 +24,9 @@ export default function Component() {
               what you needed.
             </p>
           </div>
-      <br />
+          <br />
 
-          <div className="flex mt-2 justify-center gap-4 pr-14">    
+          <div className="flex mt-2 justify-center gap-4 pr-14">
             <Link className="text-blue-600" href="https://www.facebook.com/profile.php?id=61554764998573">
               <FacebookOutlinedIcon />
             </Link>
@@ -40,14 +40,14 @@ export default function Component() {
               <PhotoCameraOutlinedIcon />
             </Link>
           </div>
-      <br />
+          <br />
 
           <div>
             <p className="text-sm text-center text-gray-500">&copy; 2024 PaceDrem. All Rights Reserved.</p>
           </div>
 
         </div>
-        
+
         <div className="pt-14 md:mb-0 md:w-full lg:w-1/4">
           <h2 className="text-2xl text-center font-semibold text-gray-700">Contact</h2>
           <p className="mt-4 text-sm text-center text-gray-500">
@@ -66,7 +66,7 @@ export default function Component() {
   );
 }
 
-function FacebookIcon(props:any) {
+function FacebookIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -87,7 +87,7 @@ function FacebookIcon(props:any) {
 }
 
 
-function InstagramIcon(props:any) {
+function InstagramIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -110,7 +110,7 @@ function InstagramIcon(props:any) {
 }
 
 
-function LinkedinIcon(props:any) {
+function LinkedinIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -133,7 +133,7 @@ function LinkedinIcon(props:any) {
 }
 
 
-function LocateIcon(props:any) {
+function LocateIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -158,7 +158,7 @@ function LocateIcon(props:any) {
 }
 
 
-function MailIcon(props:any) {
+function MailIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -180,7 +180,7 @@ function MailIcon(props:any) {
 }
 
 
-function PhoneIcon(props:any) {
+function PhoneIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -201,7 +201,7 @@ function PhoneIcon(props:any) {
 }
 
 
-function YoutubeIcon(props:any) {
+function YoutubeIcon(props: any) {
   const { color, ...restProps } = props;
   return (
     <svg
@@ -219,5 +219,6 @@ function YoutubeIcon(props:any) {
       <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
       <path d="m10 15 5-3-5-3z" />
     </svg>
-  )}
+  )
+}
 
