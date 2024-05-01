@@ -1,15 +1,19 @@
 import AboutUsHero from "./AboutUsHero";
 import AboutUsOffices from "./AboutUsOffices";
-import AboutUsStats from "./AboutUsStats";
-import AboutUsTeamMembers from "./AboutUsTeamMembers";
 import AboutUsValues from "./AboutUsValues";
+import AboutUsMission from './AboutUsMission';
+import AboutUsWork from './AboutUsWork';
+import AboutUsSecFair from './AboutUsSecFair';
+import AboutUsScenario from './AboutUsScenario';
 
 const AboutUs = () => {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col">
       <AboutUsHero />
-      <AboutUsStats />
-      <AboutUsTeamMembers />
+      <AboutUsMission />
+      <AboutUsWork />
+      <AboutUsSecFair />
+      <AboutUsScenario />
       <AboutUsValues />
       <AboutUsOffices />
     </div>
