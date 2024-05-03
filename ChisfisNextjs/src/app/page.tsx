@@ -33,6 +33,10 @@ import connector from "@/images/browseByCategories/connector.png";
 import Image from "next/image";
 import BrowseByDestinationMobile from "@/components/BrowseByDestinationMobile/BrowseByDestinationMobile";
 import TImeBasedMobile from "@/components/TimeBasedMobile/TImeBasedMobile";
+import PerfectCar from "@/components/PerfectCar/PerfectCar";
+import HourlyGearsMobile from "@/components/HourlyGearsMobile/HourlyGearsMobile";
+import ParkingSpotMobile from "@/components/ParkingSpotMobile/ParkingSpotMobile";
+import MoreQuestionsMobile from "@/components/MoreQuestionsMobile/MoreQuestionsMobile";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -163,13 +167,6 @@ const DEMO_CATS_2: TaxonomyType[] = [
 ];
 
 function PageHome() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  };
   return (
     <>
       {/* Web */}
@@ -389,6 +386,19 @@ function PageHome() {
         <BrowseByDestinationMobile />
         {/* Time Based */}
         <TImeBasedMobile />
+        {/* Find the perfect car */}
+        <PerfectCar/>
+        {/* Hourly Gears */}
+        <HourlyGearsMobile/>
+        {/* Parking Spot */}
+        <ParkingSpotMobile/>
+        {/* FAQ */}
+        <FrequentlyAskedQuestionsMobile />
+        {/* More Questions */}
+        <MoreQuestionsMobile />
+        {/* Newsletter */}
+        <SectionSubscribe />
+
       </main>
     </>
   );

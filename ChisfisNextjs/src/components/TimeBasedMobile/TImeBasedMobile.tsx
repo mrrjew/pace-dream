@@ -241,66 +241,6 @@ const TImeBasedMobile = () => {
                     </div>
                 </div>
                 {/* Card */}
-                {/* <div className="w-4/5 h-[293px]">
-                    <Slider {...settings}>
-                        <div className="h-[293px] w-[310px] p-3 bg-white rounded-2xl relative">
-                            <Image src={londonImg} className="rounded-lg h-[159px] object-cover" alt="london" />
-                            <p className="text-lg font-semibold mt-2">Best Western Cedars</p>
-                            <div className="flex mt-2 gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-[#5527D7]">
-                                    <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
-                                </svg>
-                                <p className="text-[15px] text-[#666666] font-medium">1 Anzinger Court</p>
-                            </div>
-                            <div className="flex mt-3 justify-between items-center">
-                                <p><span className="text-xl font-bold">$250</span>/hour</p>
-                                <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">Stock</button>
-                            </div>
-                        </div>
-                        <div className="h-[292px] shadow-lg w-[273px] p-3 bg-white rounded-2xl relative">
-                            <Image src={londonImg} className="rounded-lg h-[159px] object-cover" alt="london" />
-                            <p className="text-lg font-semibold mt-2">Best Western Cedars</p>
-                            <div className="flex mt-2 gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-[#5527D7]">
-                                    <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
-                                </svg>
-                                <p className="text-[15px] text-[#666666] font-medium">1 Anzinger Court</p>
-                            </div>
-                            <div className="flex mt-3 justify-between items-center">
-                                <p><span className="text-xl font-bold">$250</span>/hour</p>
-                                <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">Stock</button>
-                            </div>
-                        </div>
-                        <div className="h-[292px] shadow-lg w-[273px] p-3 bg-white rounded-2xl relative">
-                            <Image src={londonImg} className="rounded-lg h-[159px] object-cover" alt="london" />
-                            <p className="text-lg font-semibold mt-2">Best Western Cedars</p>
-                            <div className="flex mt-2 gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-[#5527D7]">
-                                    <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
-                                </svg>
-                                <p className="text-[15px] text-[#666666] font-medium">1 Anzinger Court</p>
-                            </div>
-                            <div className="flex mt-3 justify-between items-center">
-                                <p><span className="text-xl font-bold">$250</span>/hour</p>
-                                <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">Stock</button>
-                            </div>
-                        </div>
-                        <div className="h-[292px] shadow-lg w-[273px] p-3 bg-white rounded-2xl relative">
-                            <Image src={londonImg} className="rounded-lg h-[159px] object-cover" alt="london" />
-                            <p className="text-lg font-semibold mt-2">Best Western Cedars</p>
-                            <div className="flex mt-2 gap-1 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-[#5527D7]">
-                                    <path fillRule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
-                                </svg>
-                                <p className="text-[15px] text-[#666666] font-medium">1 Anzinger Court</p>
-                            </div>
-                            <div className="flex mt-3 justify-between items-center">
-                                <p><span className="text-xl font-bold">$250</span>/hour</p>
-                                <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">Stock</button>
-                            </div>
-                        </div>
-                    </Slider>
-                </div> */}
                 <div className="w-4/5 h-[293px]">
                     <Slider {...settings}>
                         {cardData[activeCategory as keyof typeof cardData]?.map((card) => (
