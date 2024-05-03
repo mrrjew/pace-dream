@@ -11,10 +11,10 @@ export default function Component() {
   return (
     <footer className="bg-white text-gray-600 sm:text-center lg:mt-2 min-h-[20rem] border border-transparent">
       <div className="px-[1rem] md:px-[0.5rem] sm:w-[95%] container min-h-[12rem] mx-auto lg:px-6 my-10 md:flex md:justify-between md:items-start">
-        <div className="text-gray-700 md:w-full lg:w-1/4 pt-[3rem]">
+        <div className="text-gray-700 md:w-full text-center lg:w-1/4 pt-[3rem]">
 
-          <div className="text-center md:text-left">
-            <Logo className="sm:w-1/2 md:w-full ml-7" />
+          <div className="text-center">
+            <Logo className="sm:w-1/2 md:w-full mx-auto" />
           </div>
           <br />
 
@@ -26,7 +26,7 @@ export default function Component() {
           </div>
           <br />
 
-          <div className="flex mt-2 justify-center gap-4 pr-14">
+          <div className="flex mt-2 justify-center gap-4 sm:pr-14">
             <Link className="text-blue-600" href="https://www.facebook.com/profile.php?id=61554764998573">
               <FacebookOutlinedIcon />
             </Link>
@@ -48,7 +48,7 @@ export default function Component() {
 
         </div>
 
-        <div className="pt-14 md:mb-0 md:w-full lg:w-1/4">
+        <div className="pt-8 md:mb-0 md:w-full lg:w-1/4">
           <h2 className="text-2xl text-center font-semibold text-gray-700">Contact</h2>
           <p className="mt-4 text-sm text-center text-gray-500">
             8521 Leesburg Pike, Vienna, VA 22182 Virginia, USA

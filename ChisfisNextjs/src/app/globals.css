@@ -2,12 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
 .curveBorder {
   border-top-left-radius: 20px;
 }
 
 .slick-slider button::before {
   color: black;
+}
+
+.lr {
+  writing-mode: vertical-lr;
+}
+
+.skew-x-12 {
+  transform: skewX(-12deg);
 }
 
 .slick-slider .slick-track {
