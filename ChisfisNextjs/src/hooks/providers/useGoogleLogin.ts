@@ -10,7 +10,7 @@ import Cookies, { set } from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useSession } from '../useSession';
 
-export const useGoogleLogin = () => {
+export const useGoogleLogin = () => { 
   const router = useRouter();
   const { setSession } = useSession();
 
