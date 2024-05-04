@@ -23,7 +23,7 @@ const SectionHero: FC<SectionHeroProps> = () => {
         className={`nc-SectionHero flex flex-col-reverse md:flex-col md:pt-44 lg:pt-20 lg:pl-24 lg:pr-24 pt-4 md:max-w-[100%]`}
       >
         <div className="md:block w-max-[95vw] w-[93vw] xl:w-[80vw] lg:w-[90vw] flex md:pt-0 z-10 mb-12 ml-16 md:ml-0 lg:mb-0 md:mt-8 lg:-mt-16 md:max-w-full border-grey border bg-white rounded-2xl">
-          <HeroSearchForm />
+          {/* <HeroSearchForm /> */}
         </div>
       </section>
     </>

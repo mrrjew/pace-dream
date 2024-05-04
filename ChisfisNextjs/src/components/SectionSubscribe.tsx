@@ -45,7 +45,7 @@ const SectionSubscribe: FC<SectionSubscribe> = ({ className = "" }) => {
     <div
       className={`mb-[4rem] nc-SectionSubscribe ${className} z-10 flex flex-col max-w-[93vw] w-[97%] mx-auto md:max-w-[75%] lg:max-w-[70%] xl:max-w-[65%] mt-10 bg-gradient-to-r from-[#5527D7] via-[#704BD7] to-[#5527D7] relative md:ml-auto md:mr-auto items-center border rounded-xl p-8 py-[4rem]`}
     >
-      <h2 className="text-white font-semibold text-[32px] text-center">
+      <h2 className="text-white leading-10  font-semibold text-[32px] text-center">
         Join our newsletter
       </h2>
       <span className="block text-center mt-5 text-white text-sm w-[75vw] md:max-w-[100%]">

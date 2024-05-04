@@ -28,8 +28,8 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   const renderTab = () => {
     return (
-      <div className="ml-2 flex md:block   justify-center">
-        <select className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-black"
+      <div className="ml-2 flex md:block justify-center">
+        <select className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-white"
           value={tabActive}
           onChange={(e) => setTabActive(e.target.value as SearchTab)}>
           {tabs.map((tab) => {
@@ -42,15 +42,15 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           })}
         </select>
-        <ul className="ml-4 md:ml-8 mt-4 md:mt-8 md:flex hidden     space-x-10 sm:space-x-5 lg:space-x-14 xl:space-x-20 overflow-x-auto hiddenScrollbar">
+        <ul className="md:flex hidden space-x-10 sm:space-x-5 lg:space-x-14 xl:space-x-20 overflow-x-auto hiddenScrollbar bg-black h-18">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
               <li
                 onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 flex items-center   cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
-                  ? "text-violet pb-8"
-                  : "text-neutral-500 hover:text-violet pb-8"
+                className={`flex-shrink-0 flex m-0 items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
+                  ? "bg-violet pb-8 text-white" 
+                  : "text-white hover:bg-violet pb-8"
                   } `}
                 key={tab}
               >
@@ -80,7 +80,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
           }
 })}
         </div> */}
-        <ul className="ml-2 md:ml-8    w-full flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+        <ul className="ml-2 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
           <div className="md:flex justify-center  items-center hidden " >
             {tabs.map((tab, i) => {
               const active = tab === tabActive;

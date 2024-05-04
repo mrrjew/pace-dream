@@ -47,7 +47,7 @@ export default function RootLayout({
                 </div>
               </div>
             </div>
-            <FooterNav />
+            {/* <FooterNav /> */}
             <Footer />
           </UserProvider>
         </ReactQueryClientProvider>

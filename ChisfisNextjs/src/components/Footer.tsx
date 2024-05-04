@@ -1,420 +1,74 @@
 "use client";
 
-// import Logo from "@/shared/Logo";
-// import SocialsList1 from "@/shared/SocialsList1";
-// import { CustomLink } from "@/data/types";
-// import React from "react";
-// import FooterNav from "./FooterNav";
-// import Image from "next/image";
-// import PlayStore from "../images/download/google-play-store-badge-en.svg"
-// import Apple from "../images/download/download-on-the-app-store-apple-logo-svgrepo-com.svg"
-// import Facebook from "../images/logos/Facebook.svg"
-// import Google from "../images/logos/Google.svg"
-// import Instagram from "../images/logos/Instagram.svg"
-
-// export interface WidgetFooterMenu {
-//   id: string;
-//   title: string;
-//   menus: CustomLink[];
-// }
-
-// const widgetMenus: WidgetFooterMenu[] = [
-//   {
-//     id: "1",
-//     title: "PaceDream",
-//     menus: [
-//       { href: "#", label: "Your Space" },
-//       { href: "#", label: "Roommate" },
-//       { href: "#", label: "Gift Card" },
-//       { href: "#", label: "Experience" },
-//     ],
-//   },
-//   {
-//     id: "2",
-//     title: "Support",
-//     menus: [
-//       { href: "/about-us", label: "Help Center" },
-//       { href: "#", label: "Press" },
-//     ],
-//   },
-//   {
-//     id: "3",
-//     title: "Contact",
-//     menus: [
-//       { href: "/about-us", label: "About Us" },
-//       { href: "/contact-us", label: "Contact Us" },
-//     ],
-//   },
-// ];
-
-// const Footer: React.FC = () => {
-//   const date=new Date();
-//   const year=date.getFullYear();
-//   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
-
-//     return (
-//       <div key={index} className="text-sm bg-white">
-//         <h2 className="font-bold text-black">
-//           {menu.title}
-//         </h2>
-//         <ul className="mt-5 space-y-4">
-//           {menu.menus.map((item, index) => (
-//             <li key={index}>
-//               <a
-//                 key={index}
-//                 className="text-neutral-400 dark:text-neutral-300 hover:text-black"
-//                 href={item.href}
-//               >
-//                 {item.label}
-//               </a>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   };
-
-//   return (
-
-//     <div className="bg-white">
-//       <FooterNav />
-//       <div className="relative pt-24 pb-16 bg-white border-t nc-Footer lg:pt-24 border-neutral-200 max-md:ml-9">
-//         <div className="container grid grid-cols-2 gap-y-10 gap-x-2 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 md:justify-items-end">
-//           {widgetMenus.map(renderWidgetMenuItem)}
-//           <div className="md:col-span-1">
-//             <h2 className="font-bold text-black">
-//               MobileApp
-//             </h2>
-//             <div className="relative w-[120px] h-[35px] md:w-[120px] md:h-[35px] md:mt-4 md:mb-2 my-2">
-//               <Image src={Apple} alt="Download on the AppStore" layout="fill" objectFit="cover" />
-//             </div>
-//             <Image src={PlayStore} alt="Get it on Google Play" width={120} height={35} />
-//           </div>
-//           {/* <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" /> */}
-//         </div>
-//       </div>
-//       <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between max-md:flex-col">
-//         <div className="flex flex-col md:flex-row max-md:ml-8 max-md:mb-8">
-//           <h2 className="text-neutral-400">
-//             © {year} PaceDream. All Rights Reserved.
-//           </h2>
-//           <div className="flex">
-//             <h2 className="mx-2 text-neutral-400">
-//               Terms.
-//             </h2>
-//             <h2 className="mr-2 text-neutral-400">
-//               Sitemap.
-//             </h2>
-//             <h2 className="text-neutral-400">
-//               Privacy
-//             </h2>
-//           </div>
-//         </div>
-//         <div className="flex max-md:pb-12 max-md:ml-9">
-//           <a href="https://www.facebook.com/profile.php?id=61554764998573">
-//             <Image src={Facebook} alt="Facebook" width={24} />
-//           </a>
-//           <a href="#">
-//             <Image src={Google} alt="Google" width={24} className="mx-4" />
-//           </a>
-//           <a href="https://www.instagram.com/pacedream_official/">
-//             <Image src={Instagram} alt="Instagram" width={24} />
-//           </a>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Footer;
-// "use client";
-
-// import Logo from "@/shared/Logo";
-// import SocialsList1 from "@/shared/SocialsList1";
-// import { CustomLink } from "@/data/types";
-// import React from "react";
-// import FooterNav from "./FooterNav";
-// import Image from "next/image";
-// import PlayStore from "../images/download/google-play-store-badge-en.svg"
-// import Apple from "../images/download/download-on-the-app-store-apple-logo-svgrepo-com.svg"
-// import Facebook from "../images/logos/Facebook.svg"
-// import Google from "../images/logos/Google.svg"
-// import Instagram from "../images/logos/Instagram.svg"
-
-// export interface WidgetFooterMenu {
-//   id: string;
-//   title: string;
-//   menus: CustomLink[];
-// }
-
-// const widgetMenus: WidgetFooterMenu[] = [
-//   {
-//     id: "1",
-//     title: "PaceDream",
-//     menus: [
-//       { href: "#", label: "Your Space" },
-//       { href: "#", label: "Roommate" },
-//       { href: "#", label: "Gift Card" },
-//       { href: "#", label: "Experience" },
-//     ],
-//   },
-//   {
-//     id: "2",
-//     title: "Support",
-//     menus: [
-//       { href: "#", label: "Help Center" },
-//       { href: "#", label: "Press" },
-//     ],
-//   },
-//   {
-//     id: "3",
-//     title: "Contact",
-//     menus: [
-//       { href: "#", label: "About Us" },
-//       { href: "#", label: "Carrers" },
-//     ],
-//   },
-// ];
-
-// const Footer: React.FC = () => {
-//   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
-//     return (
-//       <div key={index} className="text-sm bg-white">
-//         <h2 className="font-bold text-black">
-//           {menu.title}
-//         </h2>
-//         <ul className="mt-5 space-y-4">
-//           {menu.menus.map((item, index) => (
-//             <li key={index}>
-//               <a
-//                 key={index}
-//                 className="text-neutral-400 dark:text-neutral-300 hover:text-black"
-//                 href={item.href}
-//               >
-//                 {item.label}
-//               </a>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     );
-//   };
-
-//   return (
-//     <div className="bg-white">
-//       <FooterNav />
-//       <div className="relative pt-24 pb-16 bg-white border-t nc-Footer lg:pt-24 border-neutral-200 max-md:ml-9">
-//         <div className="container grid grid-cols-2 gap-y-10 gap-x-2 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 md:justify-items-end">
-//           {widgetMenus.map(renderWidgetMenuItem)}
-//             <div className="md:col-span-1">
-//               <h2 className="font-bold text-black">
-//                 MobileApp
-//               </h2>
-//               <div className="relative w-[120px] h-[35px] md:w-[120px] md:h-[35px] md:mt-4 md:mb-2 my-2">
-//                 <Image src={Apple} alt="Download on the AppStore" layout="fill" objectFit="cover"/>
-//               </div>
-//               <Image src={PlayStore} alt="Get it on Google Play" width={120} height={35}/>
-//             </div>
-//             {/* <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" /> */}
-//           </div>
-//         </div>
-//         <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between max-md:flex-col">
-//           <div className="flex flex-col md:flex-row max-md:ml-8 max-md:mb-8">
-//             <h2 className="text-neutral-400">
-//               © 2023 PaceDream. All Rights Reserved.
-//             </h2>
-//             <div className="flex">
-//               <h2 className="mx-2 text-neutral-400">
-//                 Terms.
-//               </h2>
-//               <h2 className="mr-2 text-neutral-400">
-//                 Sitemap.
-//               </h2>
-//               <h2 className="text-neutral-400">
-//                 Privacy
-//               </h2>
-//             </div>
-//           </div>
-//           <div className="flex max-md:pb-12 max-md:ml-9">
-//             <a href="https://www.facebook.com/profile.php?id=61554764998573">
-//               <Image src={Facebook} alt="Facebook" width={24}/>
-//             </a>
-//             <a href="#">
-//               <Image src={Google} alt="Google" width={24} className="mx-4"/>
-//             </a>
-//             <a href="https://www.instagram.com/pacedream_official/">
-//               <Image src={Instagram} alt="Instagram" width={24}/>
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//   );
-// };
-
-// export default Footer;
-"use client";
 import Link from "next/link";
 import Logo from "@/shared/Logo";
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import SmartDisplayOutlinedIcon from "@mui/icons-material/SmartDisplayOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
+
 export default function Component() {
   return (
-    <footer className="bg-white text-gray-600 min-h-[20rem] border border-transparent">
+    <footer className="bg-white text-gray-600 sm:text-center lg:mt-2 min-h-[20rem] border border-transparent">
       <div className="px-[1rem] md:px-[0.5rem] sm:w-[95%] container min-h-[12rem] mx-auto lg:px-6 my-10 md:flex md:justify-between md:items-start">
-        <div className="mb-6 md:mb-0 md:w-full lg:w-1/4">
-          <h2 className="text-lg font-semibold text-gray-700">
-            About the company
-          </h2>
-          <p className="mt-4 text-sm text-gray-500">
-            A Large group Product based company launched in North America.
-          </p>
-          <div className="flex items-center mt-4 text-gray-700">
-            <div className="h-7 w-7 rounded-[4rem] flex justify-center items-center border-2 border-[#5527D7] cursor-pointer">
-              <PhoneIcon className="w-4 h-4" color="#5527D7" />
-            </div>
-            <span className="ml-3 text-sm">979-968-89787</span>
+        <div className="text-gray-700 md:w-full text-center lg:w-1/4 pt-[3rem]">
+          <div className="text-center">
+            <Logo className="mx-auto sm:w-1/2 md:w-full" />
           </div>
-          <div className="flex items-center mt-2 text-gray-700">
-            <div className="h-7 w-7 rounded-[4rem] flex justify-center items-center border-2 border-[#5527D7] cursor-pointer">
-              <LocateIcon className="w-4 h-4" color="#5527D7" />
-            </div>
-            <span className="ml-3 text-sm">California, USA</span>
-          </div>
-        </div>
-        <div className="mb-6 md:mb-0 md:w-full lg:w-1/4">
-          <h2 className="text-lg font-semibold text-gray-700">Products</h2>
-          <nav className="mt-4">
-            <ul className="text-sm text-gray-500">
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Notes
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Project Manage
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  News
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Updates
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="mb-6 md:mb-0 md:w-full lg:w-1/4">
-          <h2 className="text-lg font-semibold text-gray-700">Get Started</h2>
-          <nav className="mt-4">
-            <ul className="text-sm text-gray-500">
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Career
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Business
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Partner with Us
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Tutorials
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Buy Premium
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="mb-6 md:mb-0 md:w-full lg:w-1/4">
-          <h2 className="text-lg font-semibold text-gray-700">About</h2>
-          <nav className="mt-4">
-            <ul className="text-sm text-gray-500">
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Privicy Policy
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Terms and Conditions
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Disclaimer
-                </Link>
-              </li>
-              <li className="mt-2">
-                <Link className="hover:underline" href="#">
-                  Investor Relations
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="text-gray-700 md:w-full lg:w-1/4 pt-[3rem]">
+          <br />
+
           <div>
-            <Logo className="w-fit ml-7" />
+            <p className="text-base text-center text-gray-500">
+              An all-in-one platform that helps you to find what you needed.
+            </p>
           </div>
-          <div className="flex mt-[2rem] justify-center gap-4">
+          <br />
+
+          <div className="flex justify-center gap-4 mt-2 sm:pr-14">
             <Link
-              className="text-gray-500 hover:text-purple-600"
+              className="text-blue-600"
               href="https://www.facebook.com/profile.php?id=61554764998573"
             >
-              <FacebookIcon className="w-5 h-5" color="#5527D7" />
+              <FacebookOutlinedIcon />
             </Link>
             <Link
-              className="text-gray-500 hover:text-purple-600"
+              className="text-rose-600"
               href="https://www.youtube.com/channel/UCqj0k3Sy-2o1UVqNEKOMrhA"
             >
-              <YoutubeIcon className="w-5 h-5" color="#5527D7" />
+              <SmartDisplayOutlinedIcon />
+            </Link>
+            <Link className="text-rose-900" href="mailto:Jim@pacedrea.com">
+              <EmailOutlinedIcon />
             </Link>
             <Link
-              className="text-gray-500 hover:text-purple-600"
-              href="mailto:Jim@pacedrea.com"
-            >
-              <MailIcon className="w-5 h-5" color="#5527D7" />
-            </Link>
-            <Link
-              className="text-gray-500 hover:text-purple-600"
+              className="text-rose-800"
               href="https://www.instagram.com/pacedream_official/"
             >
-              <InstagramIcon className="w-5 h-5" color="#5527D7" />
+              <PhotoCameraOutlinedIcon />
             </Link>
           </div>
+          <br />
+
+          <div>
+            <p className="text-sm text-center text-gray-500">
+              &copy; 2024 PaceDrem. All Rights Reserved.
+            </p>
+          </div>
+        </div>
+
+        <div className="pt-8 md:mb-0 md:w-full lg:w-1/4">
+          <h2 className="text-2xl font-semibold text-center text-gray-700">
+            Contact
+          </h2>
+          <p className="mt-4 text-sm text-center text-gray-500">
+            8521 Leesburg Pike, Vienna, VA 22182 Virginia, USA
+          </p>
+          <p className="mt-4 text-sm text-center text-gray-500">
+            info@pacedream.com
+          </p>
+          <p className="mt-4 text-sm text-center text-gray-500">703-869-2029</p>
         </div>
       </div>
-      {/* <div className="flex m-auto bg-white border-t border-[#F0ECFC] lg:max-w-[80vw] py-8 justify-between max-md:flex-col">
-          <div className="flex flex-col md:flex-row max-md:ml-8 max-md:mb-8">
-            <h2 className="text-neutral-400">
-              © 2023 PaceDream. All Rights Reserved.
-            </h2> 
-            <div className="flex">
-              <h2 className="mx-2 text-neutral-400">
-                Terms.
-              </h2>
-              <h2 className="mr-2 text-neutral-400">
-                Sitemap.
-              </h2>
-              <h2 className="text-neutral-400">
-                Privacy
-               </h2>
-             </div>
-         </div>
-         </div> */}
     </footer>
   );
 }
