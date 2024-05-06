@@ -42,15 +42,16 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           })}
         </select>
-        <ul className="md:flex hidden space-x-10 sm:space-x-5 lg:space-x-14 xl:space-x-20 overflow-x-auto hiddenScrollbar bg-black h-18">
+        <ul className="md:flex hidden justify-evenly hiddenScrollbar bg-black h-18 w-[800px] rounded-lg ml-0
+        ">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
               <li
                 onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 flex m-0 items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
-                  ? "bg-violet pb-8 text-white" 
-                  : "text-white hover:bg-violet pb-8"
+                className={`flex-shrink-0 flex m-0 h-[50px] items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
+                  ? "bg-violet text-white" 
+                  : "text-white hover:bg-violet"
                   } `}
                 key={tab}
               >
@@ -80,8 +81,8 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
           }
 })}
         </div> */}
-        <ul className="ml-2 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-          <div className="md:flex justify-center  items-center hidden " >
+        {/* <ul className="ml-2 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
+          <div className="md:flex justify-center items-center hidden" >
             {tabs.map((tab, i) => {
               const active = tab === tabActive;
               if (i === 0) {
@@ -118,7 +119,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             })
             }
           </div>
-        </ul>
+        </ul> */}
       </div>
     );
   };

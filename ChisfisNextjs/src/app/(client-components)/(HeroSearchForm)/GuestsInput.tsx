@@ -72,14 +72,14 @@ const GuestsInput: FC<GuestsInputProps> = ({
             className={`flex z-10 flex-1 flex-col md:flex-row relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
           >
             <div className="flex-grow max-md:mt-4 md:mr-4">
-              <span className="block xl:text-lg font-normal text-left text-base ">
+              <span className="block xl:text-lg font-normal text-left text-base ml-1 pl-1">
                 Guests
               </span>
-              <span className={`flex flex-grow ${inputs ? inputs : 'max-md:w-[85vw]'} lg:py-2.5 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-lg h-11 mt-1 text-black items-center justify-between leading-none font-light md:font-semibold`}>
+              <span className={`flex flex-grow ${inputs ? inputs : 'max-md:w-[85vw]'} w-full md:w-40 lg:w-40 rounded-lg h-10 text-black items-center justify-between leading-none font-light md:font-semibold text-lg gap-0 ml-1`}>
                 Add Guests
-                <UserPlusIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex text-gray-500 ml-4" />
+                <UserPlusIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex text-gray-500 mr-5" />
               </span>
-              <div className="flex flex-row items-center ml-4 px-2 pr-2">
+              <div className="flex flex-row items-center px-2 pr-2">
               <button onClick={decrementGuestCount}>- &nbsp; </button>
             <span>{guestCount} &nbsp;
             <button onClick={incrementGuestCount}>+</button></span>

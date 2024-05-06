@@ -95,13 +95,13 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         <span className="block xl:text-lg">
           From
         </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} p-2 md:p-2 w-full ${dates} md:w-36 lg:w-40 rounded-lg mt-1 text-base h-11 font-semibold items-center justify-between leading-none`}>
+        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} p-2 md:p-0 w-full ${dates} md:w-36 lg:w-40 rounded-lg text-base h-11 font-semibold items-center leading-none gap-0`}>
           {selectedRange[0] ? selectedRange[0]?.toLocaleDateString("en-US") : `${getCurrentDate()}`}
           <CalendarDaysIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 ml-4 text-black" />
         </span>
-        <div className="flex justify-center mt-2">
-          <button onClick={() => handleCurrentDateChange('prev')} className="px-2 py-1 mr-2 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Previous</button>
-          <button onClick={() => handleCurrentDateChange('next')} className="px-2 py-1 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Next</button>
+        <div className="flex justify-start">
+          <button onClick={() => handleCurrentDateChange('prev')} className="mr-2 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Previous</button>
+          <button onClick={() => handleCurrentDateChange('next')} className="bg-transparent hover:bg-gray-300 text-gray-700 rounded">Next</button>
         </div>
       </div>
     );
@@ -113,20 +113,20 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
         <span className="block xl:text-lg">
           Until
         </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} p-2 md:p-2 w-full ${dates} md:w-48 lg:w-48 rounded-lg mt-1 text-base h-11 items-center justify-between leading-none font-semibold`}>
+        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} p-2 md:p-0 w-full ${dates} md:w-48 lg:w-48 rounded-lg text-base h-11 items-center leading-none font-semibold gap-5`}>
           {selectedRange[1] ? selectedRange[1]?.toLocaleDateString("en-US") : `${getTomorrowDate()}`}
-          <CalendarDaysIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 ml-4 text-black" />
+          <CalendarDaysIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 text-black" />
         </span>
-        <div className="flex justify-center mt-2">
-          <button onClick={() => handleCurrentDateChange('prev')} className="px-2 py-1 mr-2 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Previous</button>
-          <button onClick={() => handleCurrentDateChange('next')} className="px-2 py-1 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Next</button>
+        <div className="flex justify-start">
+          <button onClick={() => handleCurrentDateChange('prev')} className="mr-2 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Previous</button>
+          <button onClick={() => handleCurrentDateChange('next')} className="bg-transparent hover:bg-gray-300 text-gray-700 rounded">Next</button>
         </div>
       </div>
     )
   }
 
   return (
-    <div className={`border flex rounded-3xl h-[130px] ${className}`}>
+    <div className={`border flex rounded-xl h-[130px] ${className}`}>
       <Popover className={`StayDatesRangeInput z-50 relative flex ${className}`}>
         {({ open }) => (
           <>
