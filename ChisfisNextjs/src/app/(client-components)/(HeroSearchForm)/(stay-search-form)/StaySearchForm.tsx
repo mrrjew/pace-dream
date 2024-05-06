@@ -83,7 +83,7 @@ const StaySearchForm: FC<{}> = ({ }) => {
           <div className="flex flex-col flex-1 mx-8 mt-8 py-4  items-center gap-4 md:flex-row rounded-lg">
             <LocationInput className="md:border" />
             <GuestsInput className="md:border" buttonSubmitHref={`/listing-stay-map/1?term=${dropOffLocationType}`} />
-            <StayDatesRangeInput className="md:border" />
+            <StayDatesRangeInput />
             
               <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
                 <ButtonSubmit href='/listing-stay-map/[room]' />
