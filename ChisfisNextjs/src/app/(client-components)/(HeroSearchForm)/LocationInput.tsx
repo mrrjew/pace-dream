@@ -318,14 +318,14 @@ const LocationInput: FC<LocationInputProps> = ({
       >
         <div className="flex-grow ">
           <span
-            className={`bg-transparent border-none focus:ring-0 p-0 focus:outline-none xl:text-base font-normal md: placeholder-black truncate`}
+            className={`bg-transparent border-none focus:ring-0 p-1 focus:outline-none xl:text-base font-normal md: placeholder-black truncate ml-1`}
           >
             {desc}
           </span>
           <input
             className={`flex font-semibold ${inputs ? inputs : "max-md:w-[190px]"
               } border-none text-lg focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : "max-lg:[190px]"
-              } xl:p-[5px] w-[190px] h-11 rounded-lg mt-1 text-xl items-center justify-between leading-none line-clamp-1`}
+              } xl:p-[5px] w-[190px] h-11 rounded-lg text-xl items-center justify-between leading-none line-clamp-1`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}
@@ -342,13 +342,13 @@ const LocationInput: FC<LocationInputProps> = ({
             />
           )}
           {readableLocation && (
-      <span className="absolute left-0 right-0 bottom-[0.5] bg-transparent px-4 sm:px-8 py-2 text-sm text-neutral-500">
-        <MapPinIcon className="h-4 w-4 inline-block mr-1" />
+      <span className="absolute left-0 right-0 bottom-[0.5] bg-transparent px-4 sm:px-8 text-sm text-neutral-500">
+        <MapPinIcon className="h-4 w-4 inline-block mr-0" />
         {readableLocation}
       </span>
       )}
         </div>
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+          <div className="absolute right-3 top-14 pt-3 transform -translate-y-1/2">
             <PinDropIcon />
           </div>
       </div>
