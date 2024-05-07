@@ -59,13 +59,14 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   return (
     <header className={`MainNav2 relative z-10 ${className}`}>
       <section className="flex justify-between h-16 px-4 lg:container">
-        <article className="justify-between flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10">
-          <Logo className="self-center w-34" />
+        <article className="justify-start flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10 gap-14">
+          <Logo className="self-center w-34 ml-6" />
           {/* <div className='self-center hidden h-10 border-l lg:block border-neutral-300 dark:border-neutral-500'> */}
           <div className="items-center justify-end hidden lg:flex ">
-          <ol className='flex items-center gap-4 '>
-              <li><Link href={'/about-us'}>About</Link></li>
-              <li><Link href={'/contact-us'}>Contact</Link></li>
+          <ol className='flex items-center gap-4 ml-48'>
+              <li>Find Roomate  &nbsp; /</li>
+              <li><Link href={'/about-us'}>About  &nbsp; /</Link></li>
+              <li><Link href={'/contact-us'}>Contact  &nbsp; /</Link></li>
               <div className='flex items-center gap-1 '>
               </div>
               
@@ -75,7 +76,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
               {currency || 'USD'}
             </button>
             <button className={`${btnStyle}`} onClick={openModalCountry}>
-              <Image src={usaImg} className="w-6 h-6 rounded-full" alt="usa" />
+              <Image src={usaImg} className="w-4 h-4 rounded-full" alt="usa" />
             </button>
           </div>
         </article>
@@ -95,7 +96,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
               List your property
             </Link>
 
-            <NotifyDropdown className='' />
+            {/* <NotifyDropdown className='' /> */}
             <AvatarDropdown />
           </div>
           <div className="flex space-x-2 lg:hidden">
