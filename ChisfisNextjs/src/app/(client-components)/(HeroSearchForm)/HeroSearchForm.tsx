@@ -23,12 +23,12 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   currentTab = "Room Stays",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Room Stays", "Time-Based", "Hourly Rental Gear", "Find Roommate", "Experiences", "Last Minutes"];
+  const tabs: SearchTab[] = ["Room Stays", "Time-Based", "Hourly Rental Gear", "Find Roommate", "Experiences"];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
     return (
-      <div className="ml-2 flex md:block justify-center">
+      <div className="flex justify-start">
         <select className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-white"
           value={tabActive}
           onChange={(e) => setTabActive(e.target.value as SearchTab)}>
@@ -42,16 +42,16 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           })}
         </select>
-        <ul className="md:flex hidden justify-evenly hiddenScrollbar bg-black h-18 w-[800px] rounded-lg ml-0
+        <ul className="md:flex hidden justify-start hiddenScrollbar bg-black h-18 w-[625px] rounded-lg
         ">
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
               <li
                 onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 flex m-0 h-[50px] items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
-                  ? "bg-violet text-white" 
-                  : "text-white hover:bg-violet"
+                className={`flex-shrink-0 px-5 flex m-0 h-[50px] items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
+                  ? "text-violet bg-white" 
+                  : "bg-black text-white"
                   } `}
                 key={tab}
               >
@@ -136,8 +136,8 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
         return <TimeBasedForm />;
       case "Hourly Rental Gear":
         return <HourlySearchForm />;
-      case "Last Minutes":
-        return <MinutesSearchForm />;
+      // case "Last Minutes":
+      //   return <MinutesSearchForm />;
       default:
         return null;
     }
@@ -145,7 +145,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   return (
     <div
-      className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 max-w-[90vw] w-[90vw] md:max-w-full py-5 lg:py-0 ${className}`}
+      className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 md:max-w-8/12 py-5 lg:py-0 z-10 ${className}`}
     >
       {renderTab()}
       {renderForm()}
