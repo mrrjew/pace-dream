@@ -9,8 +9,6 @@ import MinutesSearchForm from "./(minutes-search-form)/MinutesSearchForm";
 import TimeBasedForm from "./(hourly-search-form)/TimeBasedForm"
 import Input from "@/shared/Input";
 import Button from "@/shared/Button";
-import SearchTabs from "./SearchTabs";
-
 export type SearchTab = "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
 
 export interface HeroSearchFormProps {
@@ -30,11 +28,6 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   const renderTab = () => {
     return (
       <div className="flex justify-start bg-none w-fit z-0">
-        {/* <SearchTabs
-        tabs={tabs}
-        activeTab={tabActive}
-        onTabClick={setTabActive}
-      /> */}
         <select className="border border-gray-200 md:hidden w-[80vw] text-white"
           value={tabActive}
           onChange={(e) => setTabActive(e.target.value as SearchTab)}>
