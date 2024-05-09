@@ -16,18 +16,21 @@ const Hero = () => {
             <div className="relative lg:mx-0 md:w-[550px]  md:bg-transparent w-screen ml-16">
                 {/* <Image src={arrowBg} alt="arrowBg" className="absolute object-contain h-20 w-60 md:top-28 top-20 right-2 md:-right-10 " /> */}
                 {/* <Image src={ellipse} alt="ellipse" className="absolute object-contain -left-40 -top-14 " /> */}
-                <p className="text-4xl font-semibold text-left leading-relaxed tracking-wider md:text-5xl lg:text-[40px] text-[#0C051D]">
-                    Perfect Match: Book Rooms, Find Roommates, Get Last Minute Deals with Ease!
+                <p className="text-4xl font-light text-white text-left leading-relaxed tracking-wider md:text-5xl lg:text-[40px]">
+                    Find Your Ideal Stay,
                 </p>
-                <p className="block text-4xl font-semibold md:hidden ">
-                    Discover Your Perfect <br />  Match: Book Rooms, <br /> Find  Roommates, <br /> and Secure <br />  Last-Minute Deals <span className="underline">Effortlessl</span>y!
+                <p className="text-4xl mt-2 font-semibold text-left leading-relaxed tracking-wider md:text-5xl lg:text-[40px] text-white">
+                    Perfectly Suited To You!
                 </p>
-                <p className="hidden mt-8 text-lg font-medium md:block font text-[#757575]"  >
+                {/* <p className="block text-4xl font-semibold md:hidden ">
+                    An all-in-one platform that helps you to find <br /> what you needed.
+                </p> */}
+                <p className="hidden mt-5 text-lg font-medium md:block font text-white"  >
                     An all-in-one platform that helps you to find <br /> what you needed.
                 </p>
-                <p className="block mt-8 text-lg font-medium md:hidden font" >
+                {/* <p className="block mt-8 text-lg font-medium md:hidden font" >
                     An all-in-one platform that helps you to find what you needed.
-                </p>
+                </p> */}
                 <section
         className={`nc-SectionHero flex flex-col-reverse md:flex-col md:pt-44 lg:pt-20 lg:lg:pr-24 pt-4 md:max-w-[100%]`}
         >
@@ -57,8 +60,8 @@ const Hero = () => {
                     </div>
                 </div> */}
             </div>
-            <div className="lg:w-[520px] h-[350px] w-96 lg:mx-0 ml-[72px] mb-[70px] relative -top-3 right-0">
-                <Image src={homePage} alt="Hero-right" fill className="object-cover z-1 " />
+            <div className="lg:w-[520px] h-[540px] w-96 lg:mx-0 ml-[72px] mb-[70px] relative top-15 right-0">
+                <Image src="/_next/static/media/hero.152cd109.svg" alt="Hero-right" fill className="object-cover z-1 " />
             </div>
             <br />
         </div>
