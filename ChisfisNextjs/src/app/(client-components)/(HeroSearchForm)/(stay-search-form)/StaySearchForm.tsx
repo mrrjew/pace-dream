@@ -72,15 +72,15 @@ const StaySearchForm: FC<{}> = ({ }) => {
   };
   const renderForm = () => {
     return (
-      <div className="pb-8">
-        <form className="md:w-full md:relative block mt-8 ">
+      <div className="">
+        <form className="md:w-full md:relative block pt-3">
           {renderRadioBtn()}
           <div className="ml-4 mt-4 md:hidden">
             <h2 className="text-left font-semibold md:hidden text-3xl">
               Discover Your Perfect Match: Book Rooms, Find Roommates, and Secure Last-Minute Deals Effortlessly!
             </h2>
           </div>
-          <div className="flex flex-col flex-1 mx-8 mt-8 py-4  items-center gap-4 md:flex-row rounded-lg">
+          <div className="flex flex-col flex-1 mx-8 py-4  items-center gap-4 md:flex-row rounded-lg">
             <LocationInput className="md:border" />
             <GuestsInput className="md:border" buttonSubmitHref={`/listing-stay-map/1?term=${dropOffLocationType}`} />
             <StayDatesRangeInput />
