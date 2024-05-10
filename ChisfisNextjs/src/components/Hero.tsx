@@ -34,7 +34,7 @@ const Hero = () => {
                 <section
         className={`nc-SectionHero flex flex-col-reverse md:flex-col md:pt-44 lg:pt-20 lg:lg:pr-24 pt-4 md:max-w-[100%]`}
         >
-        <div className="md:block w-max-[95vw] w-[93vw] xl:w-[80vw] lg:w-[90vw] flex md:pt-0 z-10 mb-12 md:ml-0 lg:mb-0 md:mt-8 lg:-mt-10 md:w-9/12 border-grey border bg-white rounded-2xl">
+        <div className="md:block h-[70px] w-[80vw] xl:w-[80vw] lg:w-[70vw] flex md:pt-0 mb-12 md:ml-0 lg:mb-0 md:mt-8 lg:-mt-10 md:w-8/12 rounded-2xl z-30">
             <HeroSearchForm />
         </div>
         </section>
@@ -60,8 +60,8 @@ const Hero = () => {
                     </div>
                 </div> */}
             </div>
-            <div className="lg:w-[520px] h-[540px] w-96 lg:mx-0 ml-[72px] mb-[70px] relative top-15 right-0">
-                <Image src="/_next/static/media/hero.152cd109.svg" alt="Hero-right" fill className="object-cover z-1 " />
+            <div className="lg:w-[520px] h-[540px] w-96 lg:mx-0 ml-[72px] mb-[70px] relative right-0">
+                <Image src="/_next/static/media/hero.152cd109.svg" alt="Hero-right" fill className="object-cover z-20 mt-[75px] ml-[60px]" />
             </div>
             <br />
         </div>

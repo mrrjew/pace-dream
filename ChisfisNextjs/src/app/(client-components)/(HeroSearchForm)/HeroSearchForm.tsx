@@ -9,7 +9,6 @@ import MinutesSearchForm from "./(minutes-search-form)/MinutesSearchForm";
 import TimeBasedForm from "./(hourly-search-form)/TimeBasedForm"
 import Input from "@/shared/Input";
 import Button from "@/shared/Button";
-
 export type SearchTab = "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
 
 export interface HeroSearchFormProps {
@@ -28,8 +27,8 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   const renderTab = () => {
     return (
-      <div className="flex justify-start">
-        <select className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-white"
+      <div className="flex justify-start bg-none w-fit z-0">
+        <select className="border border-gray-200 md:hidden w-[80vw] text-white"
           value={tabActive}
           onChange={(e) => setTabActive(e.target.value as SearchTab)}>
           {tabs.map((tab) => {
@@ -42,7 +41,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
             )
           })}
         </select>
-        <ul className="md:flex hidden justify-start hiddenScrollbar bg-black h-18 w-[625px] rounded-lg
+        <ul className="md:flex hidden justify-start hiddenScrollbar h-18 w-[625px]
         ">
           {tabs.map((tab) => {
             const active = tab === tabActive;
@@ -50,7 +49,7 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
               <li
                 onClick={() => setTabActive(tab)}
                 className={`flex-shrink-0 px-5 flex m-0 h-[50px] items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
-                  ? "text-violet bg-white" 
+                  ? "text-violet bg-white rounded-t-lg" 
                   : "bg-black text-white"
                   } `}
                 key={tab}
@@ -145,11 +144,12 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   return (
     <div
-      className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 md:max-w-8/12 py-5 lg:py-0 z-10 ${className}`}
+      className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 md:max-w-8/12 py-5 lg:py-0 z-10 bg-none mt-1 ${className}`}
     >
-      {renderTab()}
-      {renderForm()}
-
+        {renderTab()}
+      <div className="bg-white rounded-b-lg rounded-e-lg">
+        {renderForm()}
+      </div>
     </div>
   );
 };
