@@ -29,7 +29,7 @@ const AboutUsValues = () => {
     <>
       <div className="bg-white  sm:py-20 py-12 lg:px-36 px-4 mb-5">
         <div className="sm:mb-5 pb-8 lg:mt-20 text-center">
-          <p className="font-semibold text-5xl mt-6">
+          <p className="font-semibold text-4xl mt-3">
             We're a distributed team
           </p>
           <p className="mt-6">We have offices and teams all around the world</p>
@@ -42,16 +42,26 @@ const AboutUsValues = () => {
           </div>
           <div className="grid lg:grid-cols-3 grid-cols-1 mt-12 lg:gap-6 gap-4 ">
             {contacts.map((contact) => (
-              <div className="bg-slate-50  p-4 rounded-xl">
-                <p className="w-[50px] h-[50px]">{contact.icon}</p>
-                <p className="font-semibold text-xl">{contact.title}</p>
-                <p className="text-gray-700 mt-4 font-medium ">
-                  {contact.desc}
-                </p>
-                <p className="text-[#632DF8] mt-4 font-medium">
-                  {contact.email}
-                </p>
+              <div className="bg-slate-50 p-4 rounded-xl flex items-center">
+              <div className="w-[100px] h-[100px] p-3 mr-4 bg-[#632DF8] rounded-lg text-white">
+                  {contact.icon}
               </div>
+              <div>
+                  <p className="font-semibold text-xl text-left pl-1">{contact.title}</p>
+                  <p className="text-gray-700 mt-2 font-medium text-sm pl-1 text-left">{contact.desc}</p>
+                  <p className="text-[#632DF8] mt-1 font-medium pl-1 text-left">{contact.email}</p>
+              </div>
+          </div>
+              // <div className="bg-slate-50  p-4 rounded-xl">
+              //   <p className="w-[50px] h-[50px]">{contact.icon}</p>
+              //   <p className="font-semibold text-xl">{contact.title}</p>
+              //   <p className="text-gray-700 mt-4 font-medium ">
+              //     {contact.desc}
+              //   </p>
+              //   <p className="text-[#632DF8] mt-4 font-medium">
+              //     {contact.email}
+              //   </p>
+              // </div>
             ))}
           </div>
         </div>
