@@ -18,30 +18,30 @@ export default function Component() {
           <br />
 
           <div>
-            <p className="text-base text-center text-gray-500">
+            <p className="text-base text-left text-gray-500">
               An all-in-one platform that helps you to find what you needed.
             </p>
           </div>
           <br />
 
-          <div className="flex justify-center gap-4 mt-2 sm:pr-14">
+          <div className="flex justify-start gap-4 mt-2 sm:pr-14">
             <Link
-              className="text-blue-600"
+              className="bg-blue-600 text-white p-2 rounded-full w-[40px] h-[40px]"
               href="https://www.facebook.com/profile.php?id=61554764998573"
             >
               <FacebookOutlinedIcon />
             </Link>
             <Link
-              className="text-rose-600"
+              className="bg-rose-600 text-white p-2 rounded-full w-[40px] h-[40px]"
               href="https://www.youtube.com/channel/UCqj0k3Sy-2o1UVqNEKOMrhA"
             >
               <SmartDisplayOutlinedIcon />
             </Link>
-            <Link className="text-rose-900" href="mailto:Jim@pacedrea.com">
+            <Link className="bg-rose-900 text-white p-2 rounded-full w-[40px] h-[40px]" href="mailto:Jim@pacedrea.com">
               <EmailOutlinedIcon />
             </Link>
             <Link
-              className="text-rose-800"
+              className="bg-rose-800 text-white p-2 rounded-full w-[40px] h-[40px]"
               href="https://www.instagram.com/pacedream_official/"
             >
               <PhotoCameraOutlinedIcon />
@@ -50,23 +50,23 @@ export default function Component() {
           <br />
 
           <div>
-            <p className="text-sm text-center text-gray-500">
+            <p className="text-sm text-left text-gray-500">
               &copy; 2024 PaceDrem. All Rights Reserved.
             </p>
           </div>
         </div>
 
-        <div className="pt-8 md:mb-0 md:w-full lg:w-1/4">
-          <h2 className="text-2xl font-semibold text-center text-gray-700">
+        <div className="pt-8 mt-10 md:mb-0 md:w-full lg:w-1/4">
+          <h2 className="text-2xl font-semibold text-left text-gray-700">
             Contact
           </h2>
-          <p className="mt-4 text-sm text-center text-gray-500">
+          <p className="mt-4 text-base text-left text-gray-500">
             8521 Leesburg Pike, Vienna, VA 22182 Virginia, USA
           </p>
-          <p className="mt-4 text-sm text-center text-gray-500">
+          <p className="mt-4 text-base text-left text-gray-500">
             info@pacedream.com
           </p>
-          <p className="mt-4 text-sm text-center text-gray-500">703-869-2029</p>
+          <p className="mt-4 text-base text-left text-gray-500">703-869-2029</p>
         </div>
       </div>
     </footer>
