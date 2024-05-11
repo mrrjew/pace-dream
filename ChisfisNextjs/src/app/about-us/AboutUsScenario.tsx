@@ -9,21 +9,21 @@ return (
         <div className="sm:grid grid-cols-1 lg:grid gap-5 grid-cols-2 px-[50px] p-7 ">
             <div className='border-2 rounded-md left-[100px]'>
                 <br />
-                <CalendarDaysIcon className='h-[45px] w-[100px] ml-4'/>
+                <CalendarDaysIcon className='h-[50px] w-[60px] p-1 bg-violet text-white rounded-md ml-4'/>
                 <br />
-                <h3 className='pl-[50px] text-xl font-semibold'>Pre-Booked Split </h3>
+                <h3 className='pl-[20px] text-xl font-semibold'>Pre-Booked Split </h3>
                 <br />
-                <p className='pl-[50px] pr-2 text-base'>Book and split the cost of accommodations seamlessly with other
+                <p className='pl-[20px] pr-2 text-base'>Book and split the cost of accommodations seamlessly with other <br />
                     verified users.</p>
                 <br />
             </div>
             <div className='border-2 rounded-md'>
                 <br />
-                <ClipboardDocumentListIcon className='h-[45px] w-[100px] ml-4'/>
+                <ClipboardDocumentListIcon className='h-[50px] w-[60px] p-1 bg-violet text-white rounded-md ml-5'/>
                 <br />
-                <h3 className='pl-[50px] text-xl font-semibold'>Wishlist Collaboration</h3>
+                <h3 className='pl-[20px] text-xl font-semibold'>Wishlist Collaboration</h3>
                 <br />
-                <p className='pl-[50px] pr-2 text-base'>Share your travel aspirations on your wishlist and find like-minded
+                <p className='pl-[20px] pr-2 text-base'>Share your travel aspirations on your wishlist and find like-minded <br />
                     travelers to make bookings together.</p>
                 <br />
             </div>
