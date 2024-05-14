@@ -37,6 +37,7 @@ import PerfectCar from "@/components/PerfectCar/PerfectCar";
 import HourlyGearsMobile from "@/components/HourlyGearsMobile/HourlyGearsMobile";
 import ParkingSpotMobile from "@/components/ParkingSpotMobile/ParkingSpotMobile";
 import MoreQuestionsMobile from "@/components/MoreQuestionsMobile/MoreQuestionsMobile";
+import Home from "./(home)/home-abhay/Home";
 
 const DEMO_CATS: TaxonomyType[] = [
   {
@@ -169,52 +170,54 @@ const DEMO_CATS_2: TaxonomyType[] = [
 function PageHome() {
   return (
     <>
+      <div className="flex w-full ">
+        <Home />
+      </div>
       {/* Web */}
-      <main className="nc-PageHome sm:block hidden relative overflow-hidden">
-        <div className="container relative space-y-10 mb-24 lg:space-y-28 lg:mb-28">
+      {/* <main className="relative hidden overflow-hidden nc-PageHome sm:block">
+        <div className="container relative mb-24 space-y-10 lg:space-y-28 lg:mb-28">
           <div className={`relative -ml-16 md:ml-0`}>
             <BackgroundSection className="bg-[#F6F4F6]" />
-            {/* <Hero /> */}
+           
             <SectionHero className="md:pt-10 lg:pt-16 lg:pb-16" />
           </div>
           <div className="relative py-2 md:py-8 bg-white rounded-[8px]">
             <BrowseByDestination />
           </div>
-          {/* Time based for mobile */}
+        
           <SectionSliderFeaturePlaces
-            className="md:hidden block"
+            className="block md:hidden"
             itemPerRow={1}
           />
           <SectionSliderHourlyPlaces
-            className="md:hidden block"
+            className="block md:hidden"
             itemPerRow={1}
           />
-          {/* Time based for Web */}
+          
           <div className="relative md:block hidden py-2 md:py-16 bg-white rounded-[8px]">
             <SectionGridFeaturePlaces
               cardType="card2"
-              className="md:block hidden md:mt-16"
+              className="hidden md:block md:mt-16"
             />
           </div>
           <div className="relative md:block hidden py-2 md:py-16 bg-white rounded-[8px]">
-            <SectionDiscoverPerfectRoomStay className="md:block hidden" />
+            <SectionDiscoverPerfectRoomStay className="hidden md:block" />
           </div>
         </div>
         <div className="relative pb-8">
           <BackgroundSection />
           <SectionSubscribe />
         </div>
-        <div className="md:mb-24 mb-8 ml-5 md:ml-0 pt-4  ">
+        <div className="pt-4 mb-8 ml-5 md:mb-24 md:ml-0 ">
           <FrequentlyAskedQuestion />
           <FrequentlyAskedQuestionsMobile />
         </div>
-      </main>
+      </main> */}
       {/* Mobile */}
-      <main className="sm:hidden block max-w-[430px]">
-        {/* Section Hero Mobile */}
-        <div className="bg-[#5527D7] pt-4 w-screen space-y-3 h-[760px]">
-          {/* Search form Mobile */}
-          <form className="h-fit mx-4 p-3 flex flex-col gap-6 rounded-lg bg-white">
+      {/* <main className="sm:hidden block max-w-[430px]"> */}
+      {/* Section Hero Mobile */}
+      {/* <div className="bg-[#5527D7] pt-4 w-screen space-y-3 h-[760px]">
+          <form className="flex flex-col gap-6 p-3 mx-4 bg-white rounded-lg h-fit">
             <div className="flex text-[#5B5B5B] flex-col h-[35px]">
               <label htmlFor="" className="text-xs font-semibold">
                 Where
@@ -224,7 +227,7 @@ function PageHome() {
                 name=""
                 placeholder="Hamptons, Suffolk County, NY"
                 id=""
-                className="border-0 p-0 mt-2 font-medium"
+                className="p-0 mt-2 font-medium border-0"
               />
               <div className="h-2 border"></div>
             </div>
@@ -237,7 +240,7 @@ function PageHome() {
                 name=""
                 placeholder="Add Guests"
                 id=""
-                className="border-0 p-0 mt-2 font-medium"
+                className="p-0 mt-2 font-medium border-0"
               />
               <div className="h-2 border"></div>
             </div>
@@ -251,9 +254,9 @@ function PageHome() {
                   name=""
                   placeholder="Sun, 07 Feb"
                   id=""
-                  className="border-0 px-0 mt-2 font-medium"
+                  className="px-0 mt-2 font-medium border-0"
                 />
-                <div className="h-2 border mt-2"></div>
+                <div className="h-2 mt-2 border"></div>
               </div>
               <div className="flex text-[#5B5B5B] w-1/2  flex-col h-[35px]">
                 <label htmlFor="" className="text-xs font-semibold">
@@ -264,9 +267,9 @@ function PageHome() {
                   name=""
                   placeholder="Sun, 07 Feb"
                   id=""
-                  className="border-0 px-0 mt-2 font-medium"
+                  className="px-0 mt-2 font-medium border-0"
                 />
-                <div className="h-2 border mt-2"></div>
+                <div className="h-2 mt-2 border"></div>
               </div>
             </div>
             <button
@@ -276,14 +279,14 @@ function PageHome() {
               Search Now
             </button>
           </form>
-          {/* Recent Searches */}
+
           <div>
-            <div className="h-fit p-4 mx-4 flex flex-col rounded-lg bg-white">
-              <div className="flex justify-between items-center">
+            <div className="flex flex-col p-4 mx-4 bg-white rounded-lg h-fit">
+              <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold">Recent Searches</h3>
                 <button className="text-sm font-semibold">View All</button>
               </div>
-              <div className="flex gap-3 items-center mt-2">
+              <div className="flex items-center gap-3 mt-2">
                 <div className="bg-[#5527D7] p-4 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -317,19 +320,19 @@ function PageHome() {
               <Image
                 src={heroMobile}
                 alt="adventure"
-                className="w-full relative h-auto"
+                className="relative w-full h-auto"
               />
             </div>
           </div>
-        </div>
-        {/* Browse by Categories */}
-        <div className="h-fit mt-32 mb-20 w-screen text-center">
-          <p className="font-bold text-xl">Browse by Categories</p>
+        </div> */}
+      {/* Browse by Categories */}
+      {/* <div className="w-screen mt-32 mb-20 text-center h-fit">
+          <p className="text-xl font-bold">Browse by Categories</p>
           <p className="text-[#666666] text-[13px]">
             Help you to find what you needed.
           </p>
-          <div className="mx-auto px-4 ">
-            <div className="flex items-center px-2 items-center justify-around mt-10">
+          <div className="px-4 mx-auto ">
+            <div className="flex items-center justify-around px-2 mt-10">
               <div className="flex flex-col items-center justify-center">
                 <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
                   <svg
@@ -338,7 +341,7 @@ function PageHome() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-7 h-7 text-white"
+                    className="text-white w-7 h-7"
                   >
                     <path
                       strokeLinecap="round"
@@ -347,7 +350,7 @@ function PageHome() {
                     />
                   </svg>
                 </div>
-                <p className="font-semibold text-base mt-2">Restroom</p>
+                <p className="mt-2 text-base font-semibold">Restroom</p>
               </div>
               <div className="flex items-center">
                 <GoDotFill className="text-[#5527D7]" />
@@ -358,15 +361,15 @@ function PageHome() {
                 <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
                   <MdOutlineElectricCar className="text-white size-7" />
                 </div>
-                <p className="font-semibold text-base mt-2">EV Parking</p>
+                <p className="mt-2 text-base font-semibold">EV Parking</p>
               </div>
             </div>
-            <div className="flex items-center pr-2 justify-around mt-10">
+            <div className="flex items-center justify-around pr-2 mt-10">
               <div className="flex flex-col items-center justify-center">
                 <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
                   <SiHomeassistantcommunitystore className="text-white size-7" />
                 </div>
-                <p className="font-semibold text-base mt-2">Storage Room</p>
+                <p className="mt-2 text-base font-semibold">Storage Room</p>
               </div>
               <div className="flex items-center">
                 <GoDotFill className="text-[#5527D7]" />
@@ -377,29 +380,28 @@ function PageHome() {
                 <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
                   <MdOutlineElectricCar className="text-white size-7" />
                 </div>
-                <p className="font-semibold text-base mt-2">Parking Spot</p>
+                <p className="mt-2 text-base font-semibold">Parking Spot</p>
               </div>
             </div>
           </div>
-        </div>
-        {/* Browse by Destination */}
-        <BrowseByDestinationMobile />
-        {/* Time Based */}
-        <TImeBasedMobile />
-        {/* Find the perfect car */}
-        <PerfectCar/>
-        {/* Hourly Gears */}
-        <HourlyGearsMobile/>
-        {/* Parking Spot */}
-        <ParkingSpotMobile/>
-        {/* FAQ */}
-        <FrequentlyAskedQuestionsMobile />
-        {/* More Questions */}
-        <MoreQuestionsMobile />
-        {/* Newsletter */}
-        <SectionSubscribe />
-
-      </main>
+        </div> */}
+      {/* Browse by Destination */}
+      {/* <BrowseByDestinationMobile /> */}
+      {/* Time Based */}
+      {/* <TImeBasedMobile /> */}
+      {/* Find the perfect car */}
+      {/* <PerfectCar /> */}
+      {/* Hourly Gears */}
+      {/* <HourlyGearsMobile /> */}
+      {/* Parking Spot */}
+      {/* <ParkingSpotMobile /> */}
+      {/* FAQ */}
+      {/* <FrequentlyAskedQuestionsMobile /> */}
+      {/* More Questions */}
+      {/* <MoreQuestionsMobile /> */}
+      {/* Newsletter */}
+      {/* <SectionSubscribe /> */}
+      {/* </main> */}
     </>
   );
 }

@@ -23,7 +23,9 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [selectedRange, setSelectedRange] = useState<[Date | null, Date | null]>([null, null]);
+  const [selectedRange, setSelectedRange] = useState<
+    [Date | null, Date | null]
+  >([null, null]);
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [tomorrowDate, setTomorrowDate] = useState(() => {
@@ -32,9 +34,12 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     return tomorrow;
   });
 
-  const handleChange = (date: [Date | null, Date | null], event: React.SyntheticEvent<any, Event> | undefined) => {
+  const handleChange = (
+    date: [Date | null, Date | null],
+    event: React.SyntheticEvent<any, Event> | undefined
+  ) => {
     setSelectedRange(date);
-    console.log(selectedRange)
+    console.log(selectedRange);
     const [startDate, endDate] = date;
   };
 
@@ -44,9 +49,9 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     setEndDate(end);
   };
 
-  const handleCurrentDateChange = (action: 'prev' | 'next'): void => {
+  const handleCurrentDateChange = (action: "prev" | "next"): void => {
     const newDate: Date = new Date(currentDate);
-    if (action === 'prev') {
+    if (action === "prev") {
       newDate.setDate(newDate.getDate() - 1); // Subtract one day
     } else {
       newDate.setDate(newDate.getDate() + 1); // Add one day
@@ -62,16 +67,20 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   function getCurrentDate() {
     const currentDate = new Date();
-    const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
-    const formattedDate = currentDate.toLocaleDateString('en-US', options);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    };
+    const formattedDate = currentDate.toLocaleDateString("en-US", options);
     // Extract the first three characters of the day
-    const day = formattedDate.split(',')[0];
-    return `${day.slice(0, 3)},${formattedDate.split(',')[1]}`;
+    const day = formattedDate.split(",")[0];
+    return `${day.slice(0, 3)},${formattedDate.split(",")[1]}`;
   }
 
-  const handleTomorrowDateChange = (action: 'prev' | 'next'): void => {
+  const handleTomorrowDateChange = (action: "prev" | "next"): void => {
     const newTomorrowDate: Date = new Date(tomorrowDate);
-    if (action === 'prev') {
+    if (action === "prev") {
       newTomorrowDate.setDate(newTomorrowDate.getDate() - 1); // Subtract one day
     } else {
       newTomorrowDate.setDate(newTomorrowDate.getDate() + 1); // Add one day
@@ -82,26 +91,44 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   function getTomorrowDate() {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1); // Get tomorrow's date
-    const options: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
-    const formattedDate = tomorrow.toLocaleDateString('en-US', options);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    };
+    const formattedDate = tomorrow.toLocaleDateString("en-US", options);
     // Extract the first three characters of the day
-    const day = formattedDate.split(',')[0];
-    return `${day.slice(0, 3)},${formattedDate.split(',')[1]}`;
+    const day = formattedDate.split(",")[0];
+    return `${day.slice(0, 3)},${formattedDate.split(",")[1]}`;
   }
 
   const renderInput = () => {
     return (
-      <div className="flex-grow border-none text-left max-md:mt-4 max-md:ml-2">
-        <span className="block xl:text-lg">
-          From
-        </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} p-2 md:p-0 w-full ${dates} md:w-36 lg:w-40 rounded-lg text-base h-11 font-semibold items-center leading-none gap-0`}>
-          {selectedRange[0] ? selectedRange[0]?.toLocaleDateString("en-US") : `${getCurrentDate()}`}
-          <CalendarDaysIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 ml-4 text-black" />
+      <div className="flex-grow text-left border-none max-md:mt-4 max-md:ml-2">
+        <span className="block xl:text-lg">From</span>
+        <span
+          className={`flex flex-row ${
+            inputs ? inputs : "max-md:w-[85vw]"
+          } p-2 md:p-0 w-full ${dates} md:w-36 lg:w-40 rounded-lg text-base h-11 font-semibold items-center leading-none gap-0`}
+        >
+          {selectedRange[0]
+            ? selectedRange[0]?.toLocaleDateString("en-US")
+            : `${getCurrentDate()}`}
+          <CalendarDaysIcon className="w-6 h-6 ml-4 text-black lg:w-6 lg:h-6 xl:w-6 xl:h-6" />
         </span>
         <div className="flex justify-start">
-          <button onClick={() => handleCurrentDateChange('prev')} className="mr-2 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Previous</button>
-          <button onClick={() => handleCurrentDateChange('next')} className="bg-transparent hover:bg-gray-300 text-gray-700 rounded">Next</button>
+          <button
+            onClick={() => handleCurrentDateChange("prev")}
+            className="mr-2 text-gray-700 bg-transparent rounded hover:bg-gray-300"
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => handleCurrentDateChange("next")}
+            className="text-gray-700 bg-transparent rounded hover:bg-gray-300"
+          >
+            Next
+          </button>
         </div>
       </div>
     );
@@ -109,25 +136,41 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   const renderOutput = () => {
     return (
-      <div className="flex-grow border-none text-left max-md:mt-4 max-md:ml-4">
-        <span className="block xl:text-lg">
-          Until
-        </span>
-        <span className={`flex flex-row ${inputs ? inputs : 'max-md:w-[85vw]'} p-2 md:p-0 w-full ${dates} md:w-48 lg:w-48 rounded-lg text-base h-11 items-center leading-none font-semibold gap-5`}>
-          {selectedRange[1] ? selectedRange[1]?.toLocaleDateString("en-US") : `${getTomorrowDate()}`}
-          <CalendarDaysIcon className="w-6 h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 text-black" />
+      <div className="flex-grow text-left border-none max-md:mt-4 max-md:ml-4">
+        <span className="block xl:text-lg">Until</span>
+        <span
+          className={`flex flex-row ${
+            inputs ? inputs : "max-md:w-[85vw]"
+          } p-2 md:p-0 w-full ${dates} md:w-48 lg:w-48 rounded-lg text-base h-11 items-center leading-none font-semibold gap-5`}
+        >
+          {selectedRange[1]
+            ? selectedRange[1]?.toLocaleDateString("en-US")
+            : `${getTomorrowDate()}`}
+          <CalendarDaysIcon className="w-6 h-6 text-black lg:w-6 lg:h-6 xl:w-6 xl:h-6" />
         </span>
         <div className="flex justify-start">
-          <button onClick={() => handleCurrentDateChange('prev')} className="mr-2 bg-transparent hover:bg-gray-300 text-gray-700 rounded">Previous</button>
-          <button onClick={() => handleCurrentDateChange('next')} className="bg-transparent hover:bg-gray-300 text-gray-700 rounded">Next</button>
+          <button
+            onClick={() => handleCurrentDateChange("prev")}
+            className="mr-2 text-gray-700 bg-transparent rounded hover:bg-gray-300"
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => handleCurrentDateChange("next")}
+            className="text-gray-700 bg-transparent rounded hover:bg-gray-300"
+          >
+            Next
+          </button>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className={`border flex rounded-xl h-[130px] ${className}`}>
-      <Popover className={`StayDatesRangeInput z-50 relative flex ${className}`}>
+      <Popover
+        className={`StayDatesRangeInput z-50 relative flex ${className}`}
+      >
         {({ open }) => (
           <>
             <Popover.Button
@@ -152,8 +195,8 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-full z-50 mt-3 top-full w-screen max-w-sm  bg-white -translate-x-96  md:-translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
+              <Popover.Panel className="absolute z-50 w-screen max-w-sm px-4 mt-3 transform bg-white left-full top-full -translate-x-96 md:-translate-x-1/2 sm:px-0 lg:max-w-3xl">
+                <div className="overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black ring-opacity-5">
                   <DatePicker
                     onChange={handleChange}
                     startDate={selectedRange[0]}
@@ -175,7 +218,9 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
           </>
         )}
       </Popover>
-      <Popover className={`StayDatesRangeInput z-49 relative flex ${className}`}>
+      <Popover
+        className={`StayDatesRangeInput z-49 relative flex ${className}`}
+      >
         {({ open }) => (
           <>
             <Popover.Button
@@ -200,8 +245,8 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-full z-50 mt-3 top-full w-screen max-w-sm -translate-x-96  md:-translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white">
+              <Popover.Panel className="absolute z-50 w-screen max-w-sm px-4 mt-3 transform left-full top-full -translate-x-96 md:-translate-x-1/2 sm:px-0 lg:max-w-3xl">
+                <div className="overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black ring-opacity-5">
                   <DatePicker
                     onChange={handleChange}
                     startDate={selectedRange[0]}
