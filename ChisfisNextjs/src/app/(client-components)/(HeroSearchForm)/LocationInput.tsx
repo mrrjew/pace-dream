@@ -3,7 +3,7 @@
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect, FC } from "react";
 import ClearDataButton from "./ClearDataButton";
-import PinDropIcon from '@mui/icons-material/PinDrop';
+import PinDropIcon from "@mui/icons-material/PinDrop";
 
 export interface LocationInputProps {
   placeHolder?: string;
@@ -61,14 +61,16 @@ const LocationInput: FC<LocationInputProps> = ({
         (position) => {
           const { latitude, longitude } = position.coords;
           setCurrentLocation(`Latitude: ${latitude}, Longitude: ${longitude}`);
-  
+
           // Reverse Geocoding to get human-readable address
-          fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`)
-            .then(response => response.json())
-            .then(data => {
+          fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+          )
+            .then((response) => response.json())
+            .then((data) => {
               const address = data.address;
-              let readableLocation = '';
-  
+              let readableLocation = "";
+
               if (address.city) {
                 readableLocation = address.city;
               } else if (address.town) {
@@ -78,38 +80,40 @@ const LocationInput: FC<LocationInputProps> = ({
               } else if (address.hamlet) {
                 readableLocation = address.hamlet;
               }
-  
+
               // Append state or country if available
               if (address.state) {
                 readableLocation += ` ${address.state}`;
               } else if (address.country) {
                 readableLocation += `, ${address.country}`;
               }
-  
+
               // Slice pincode and district
               if (address.postcode) {
                 // const pincode = address.postcode;
-                const district = address.suburb || address.county || address.city_district || '';
+                const district =
+                  address.suburb ||
+                  address.county ||
+                  address.city_district ||
+                  "";
                 readableLocation += `, ${district}`;
               }
-  
+
               setReadableLocation(readableLocation);
             })
-            .catch(error => {
-              console.error('Error getting readable location:', error);
+            .catch((error) => {
+              console.error("Error getting readable location:", error);
             });
         },
         (error) => {
-          console.error('Error getting current location:', error);
+          console.error("Error getting current location:", error);
         }
       );
     } else {
-      console.error('Geolocation is not supported by this browser.');
+      console.error("Geolocation is not supported by this browser.");
     }
   }, []);
-  
-  
-  
+
   const eventClickOutsideDiv = (event: MouseEvent) => {
     if (!containerRef.current) return;
     // CLICK IN_SIDE
@@ -264,7 +268,7 @@ const LocationInput: FC<LocationInputProps> = ({
   const renderRecentSearches = () => {
     return (
       <>
-        <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800">
+        <h3 className="block px-4 mt-2 text-base font-semibold sm:mt-0 sm:px-8 sm:text-lg text-neutral-800">
           Recent searches
         </h3>
         <div className="mt-2">
@@ -277,7 +281,7 @@ const LocationInput: FC<LocationInputProps> = ({
             <span
               onClick={() => handleSelectLocation(item)}
               key={item}
-              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 cursor-pointer"
+              className="flex items-center px-4 py-4 space-x-3 cursor-pointer sm:px-8 sm:space-x-4"
             >
               <span className="block text-neutral-400"></span>
               <span className="block font-medium text-neutral-700">{item}</span>
@@ -295,10 +299,10 @@ const LocationInput: FC<LocationInputProps> = ({
           <span
             onClick={() => handleSelectLocation(item)}
             key={item}
-            className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 cursor-pointer"
+            className="flex items-center px-4 py-4 space-x-3 cursor-pointer sm:px-8 sm:space-x-4 hover:bg-neutral-100"
           >
             <span className="block text-neutral-400">
-              <ClockIcon className="h-4 w-4 sm:h-6 sm:w-6" />
+              <ClockIcon className="w-4 h-4 sm:h-6 sm:w-6" />
             </span>
             <span className="block font-medium text-neutral-700">{item}</span>
           </span>
@@ -323,9 +327,11 @@ const LocationInput: FC<LocationInputProps> = ({
             {desc}
           </span>
           <input
-            className={`flex font-semibold ${inputs ? inputs : "max-md:w-[190px]"
-              } border-none text-lg focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${input ? input : "max-lg:[190px]"
-              } xl:p-[5px] w-[190px] h-11 rounded-lg text-xl items-center justify-between leading-none line-clamp-1`}
+            className={`flex font-semibold ${
+              inputs ? inputs : "max-md:w-[190px]"
+            } border-none text-lg focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${
+              input ? input : "max-lg:[190px]"
+            } xl:p-[5px] w-[190px] h-11 rounded-lg text-xl items-center justify-between leading-none line-clamp-1`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}
@@ -342,15 +348,15 @@ const LocationInput: FC<LocationInputProps> = ({
             />
           )}
           {readableLocation && (
-      <span className="absolute left-0 right-0 bottom-[0.5] bg-transparent px-4 sm:px-8 text-sm text-neutral-500">
-        <MapPinIcon className="h-4 w-4 inline-block mr-0" />
-        {readableLocation}
-      </span>
-      )}
+            <span className="absolute left-0 right-0 bottom-[0.5] bg-transparent px-4 sm:px-8 text-sm text-neutral-500">
+              <MapPinIcon className="inline-block w-4 h-4 mr-0" />
+              {readableLocation}
+            </span>
+          )}
         </div>
-          <div className="absolute right-3 top-14 pt-3 transform -translate-y-1/2">
-            <PinDropIcon />
-          </div>
+        <div className="absolute pt-3 transform -translate-y-1/2 right-3 top-14">
+          <PinDropIcon />
+        </div>
       </div>
       {showPopover && (
         <div
@@ -359,13 +365,10 @@ const LocationInput: FC<LocationInputProps> = ({
       )}
 
       {showPopover && (
-        <div className="absolute top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
+        <div className="absolute py-3 mt-3 overflow-y-auto shadow-xl top-full sm:py-6 rounded-3xl max-h-96">
           {value ? renderSearchValue() : renderRecentSearches()}
         </div>
       )}
-
-      
-
     </div>
   );
 };

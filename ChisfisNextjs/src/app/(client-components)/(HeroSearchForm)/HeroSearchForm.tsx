@@ -6,15 +6,35 @@ import FlightSearchForm from "./(flight-search-form)/FlightSearchForm";
 import StaySearchForm from "./(stay-search-form)/StaySearchForm";
 import HourlySearchForm from "./(hourly-search-form)/HourlySearchForm";
 import MinutesSearchForm from "./(minutes-search-form)/MinutesSearchForm";
-import TimeBasedForm from "./(hourly-search-form)/TimeBasedForm"
+import TimeBasedForm from "./(hourly-search-form)/TimeBasedForm";
 import Input from "@/shared/Input";
 import Button from "@/shared/Button";
-export type SearchTab = "Room Stays" | "Stays" | "Find Roommate" | "Experiences" | "Flights" | "Cars" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
+
+export type SearchTab =
+  | "Room Stays"
+  | "Stays"
+  | "Find Roommate"
+  | "Experiences"
+  | "Flights"
+  | "Cars"
+  | "Hourly"
+  | "Stays"
+  | "Time-Based"
+  | "Hourly Rental Gear"
+  | "Last Minutes";
 
 export interface HeroSearchFormProps {
   className?: string;
   currentTab?: SearchTab;
-  currentPage?: "Room Stays" | "Find Roommate" | "Experiences" | "Hourly" | "Stays" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes";
+  currentPage?:
+    | "Room Stays"
+    | "Find Roommate"
+    | "Experiences"
+    | "Hourly"
+    | "Stays"
+    | "Time-Based"
+    | "Hourly Rental Gear"
+    | "Last Minutes";
 }
 
 const HeroSearchForm: FC<HeroSearchFormProps> = ({
@@ -22,40 +42,46 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
   currentTab = "Room Stays",
   currentPage,
 }) => {
-  const tabs: SearchTab[] = ["Room Stays", "Time-Based", "Hourly Rental Gear", "Find Roommate", "Experiences"];
+  const tabs: SearchTab[] = [
+    "Room Stays",
+    "Time-Based",
+    "Hourly Rental Gear",
+    "Find Roommate",
+    "Experiences",
+  ];
   const [tabActive, setTabActive] = useState<SearchTab>(currentTab);
 
   const renderTab = () => {
     return (
-      <div className="flex justify-start bg-none w-fit z-0">
-        <select className="border border-gray-200 md:hidden w-[80vw] text-white"
+      <div className="flex justify-start">
+        <select
+          className="rounded-2xl  border border-gray-200 md:hidden w-[80vw] text-white"
           value={tabActive}
-          onChange={(e) => setTabActive(e.target.value as SearchTab)}>
+          onChange={(e) => setTabActive(e.target.value as SearchTab)}
+        >
           {tabs.map((tab) => {
             return (
-              <option
-                value={tab}
-                key={tab}>
+              <option value={tab} key={tab}>
                 {tab}
               </option>
-            )
+            );
           })}
         </select>
-        <ul className="md:flex hidden justify-start hiddenScrollbar h-18 w-[625px]
-        ">
+        <ul
+          className="md:flex hidden justify-start hiddenScrollbar bg-black h-18 w-[625px] rounded-lg
+        "
+        >
           {tabs.map((tab) => {
             const active = tab === tabActive;
             return (
               <li
                 onClick={() => setTabActive(tab)}
-                className={`flex-shrink-0 px-5 flex m-0 h-[50px] items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${active
-                  ? "text-violet bg-white rounded-t-lg" 
-                  : "bg-black text-white"
-                  } `}
+                className={`flex-shrink-0 px-5 flex m-0 h-[50px] items-center cursor-pointer text-xs md:text-xs xl:text-sm font-medium ${
+                  active ? "text-violet bg-white" : "bg-black text-white"
+                } `}
                 key={tab}
               >
                 <span>{tab}</span>
-
               </li>
             );
           })}
@@ -80,8 +106,8 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
           }
 })}
         </div> */}
-        {/* <ul className="ml-2 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-          <div className="md:flex justify-center items-center hidden" >
+        {/* <ul className="flex ml-2 space-x-5 overflow-x-auto md:ml-8 sm:space-x-8 lg:space-x-11 hiddenScrollbar">
+          <div className="items-center justify-center hidden md:flex" >
             {tabs.map((tab, i) => {
               const active = tab === tabActive;
               if (i === 0) {
@@ -144,12 +170,10 @@ const HeroSearchForm: FC<HeroSearchFormProps> = ({
 
   return (
     <div
-      className={`nc-HeroSearchForm flex flex-col md:block md:mr-8 md:max-w-8/12 py-5 lg:py-0 z-10 bg-none mt-1 ${className}`}
+      className={` flex flex-col md:block md:mr-8 md:max-w-8/12 py-5 lg:py-0 z-10 ${className}`}
     >
-        {renderTab()}
-      <div className="bg-white rounded-b-lg rounded-e-lg">
-        {renderForm()}
-      </div>
+      {renderTab()}
+      {renderForm()}
     </div>
   );
 };
@@ -172,9 +196,8 @@ function CalendarIcon(props: any) {
       <line x1="8" x2="8" y1="2" y2="6" />
       <line x1="3" x2="21" y1="10" y2="10" />
     </svg>
-  )
+  );
 }
-
 
 function MapPinIcon(props: any) {
   return (
@@ -193,9 +216,8 @@ function MapPinIcon(props: any) {
       <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
       <circle cx="12" cy="10" r="3" />
     </svg>
-  )
+  );
 }
-
 
 function SearchIcon(props: any) {
   return (
@@ -214,9 +236,8 @@ function SearchIcon(props: any) {
       <circle cx="11" cy="11" r="8" />
       <path d="m21 21-4.3-4.3" />
     </svg>
-  )
+  );
 }
-
 
 function UserPlusIcon(props: any) {
   return (
@@ -237,7 +258,7 @@ function UserPlusIcon(props: any) {
       <line x1="19" x2="19" y1="8" y2="14" />
       <line x1="22" x2="16" y1="11" y2="11" />
     </svg>
-  )
+  );
 }
 
 export default HeroSearchForm;

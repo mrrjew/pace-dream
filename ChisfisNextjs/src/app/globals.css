@@ -13,6 +13,7 @@
   color: black;
 }
 
+
 .lr {
   writing-mode: vertical-lr;
 }
@@ -29,6 +30,7 @@
 .panel-open {
   overflow: hidden;
 }
+
 
 .bg-overlay {
   background: rgba(0, 0, 0, 0.2);
