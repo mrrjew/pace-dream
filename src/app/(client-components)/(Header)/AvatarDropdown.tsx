@@ -422,7 +422,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                         {/* ------------------ Space --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/host-space"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -432,7 +432,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"Space"}</p>
                           </div>
-                        </Link>
+                        </Link> */}
 
                         {/* ------------------ Business --------------------- */}
 
@@ -450,7 +450,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                         {/* ------------------ More --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -460,7 +460,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"More"}</p>
                           </div>
-                        </Link>
+                        </Link> */}
                       </>
                     )}
 
