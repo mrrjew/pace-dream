@@ -13,15 +13,18 @@ import {
   SortingState,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
-import transactionData from "@/data/jsons/__transactions.json";
+import { useEffect, useMemo, useState } from "react";
+import { useFetch } from "@/hooks/useFetch";
+import { useProfile } from "@/context";
+import { useSession } from "@/hooks/useSession";
+// import transactionData from "@/data/jsons/__transactions.json";
 
 type Transaction = {
-  id: number;
+  // id: number;
   date: string;
   status: string;
   customer: string;
-  purchased: string;
+  purchased_property: string;
   revenue: string;
 };
 
@@ -32,14 +35,37 @@ type Column = {
 };
 
 const TransactionActivity = () => {
-  const data: Transaction[] = useMemo(() => transactionData, []);
+  // const { user }: any = useProfile();
+  const { getSession } = useSession();
+  const { token, userInfo } = getSession();
+  const [data, setTransactionData] = useState<Transaction[]>([]);
+  const [loaded, setIsLoaded] = useState(false);
+  // const data: Transaction[] = useMemo(() => transactionData, []);
+  // const data: Transaction[] = useMemo(() => )
+  const { fetchData } = useFetch({
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/host/get/transaction-history/${userInfo?.user_id}`,
+    config: { headers: { Authorization: userInfo?.token } },
+    queryKey: ["transactionHistory"],
+    enabled: true,
+  });
+  useEffect(() => {
+    const data = async () => {
+      const result = await fetchData();
+      setTransactionData(result.data);
+      console.log(result.data, "Fetch Data");
+      setIsLoaded(true);
+    };
+
+    data();
+  }, [loaded]);
+  // const data: Transaction[] = [];
 
   const columns: Column[] = [
-    {
-      header: "Sr No",
-      accessorKey: "id",
-      footer: "id",
-    },
+    // {
+    //   header: "Sr No",
+    //   accessorKey: "id",
+    //   footer: "id",
+    // },
     {
       header: "Date",
       accessorKey: "date",
@@ -57,7 +83,7 @@ const TransactionActivity = () => {
     },
     {
       header: "Purchased",
-      accessorKey: "purchased",
+      accessorKey: "purchased_property",
       footer: "purchased",
     },
     {
@@ -139,6 +165,9 @@ const TransactionActivity = () => {
             ))}
           </thead>
           <tbody>
+            {!table.getRowModel().rows.length && (
+              <p className="max-w-lg"> No Records found</p>
+            )}
             {table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
