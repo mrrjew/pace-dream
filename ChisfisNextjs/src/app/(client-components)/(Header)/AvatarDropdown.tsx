@@ -2,6 +2,7 @@
 
 import { useProfile } from "@/context";
 import { useSession } from "@/hooks/useSession";
+import { useLazyGetHostMenuDropdownQuery } from "@/app/redux/api/hostMenuDropdownApislice";
 import Avatar from "@/shared/Avatar";
 import SwitchDarkMode2 from "@/shared/SwitchDarkMode2";
 import { Popover, Transition } from "@headlessui/react";
@@ -9,18 +10,26 @@ import { app } from "config/firebase";
 import { getAuth } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Fragment, useState } from "react";
-import { BsBookmark, BsChat, BsThreeDots } from "react-icons/bs";
-import { FiLayout, FiPieChart, FiSettings, FiUserCheck } from "react-icons/fi";
-import { RiBuildingLine, RiDraftLine } from "react-icons/ri";
+import { Fragment, useEffect, useState } from "react";
+import * as FiIcons from "react-icons/fi";
 import { TbLayoutDashboard } from "react-icons/tb";
+import { ApiDrivenIcon } from "@/assets/ApiDrivenIcon";
 
+const {
+  FiSettings,
+  FiUserCheck,
+}= FiIcons;
 interface Props {
   className?: string;
 }
 
 export default function AvatarDropdown({ className = "" }: Props) {
   const [isHost, setIsHost] = useState<boolean>(false);
+
+  const [
+    fetchHostDropdownMenu,
+    { data: hostMenuData, isLoading: isHostMenuLoading, error: hostMenuError },
+  ] = useLazyGetHostMenuDropdownQuery({});
 
   const handleSwitch = () => {
     setIsHost(!isHost);
@@ -31,6 +40,10 @@ export default function AvatarDropdown({ className = "" }: Props) {
   const { token, userInfo } = getSession();
 
   const router = useRouter();
+
+  useEffect(() => {
+    fetchHostDropdownMenu({});
+  }, [token]);
 
   const handleLogout = async () => {
     const auth = getAuth(app);
@@ -254,7 +267,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
                           <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                            <FiUserCheck size={22} className="ml-0.5"/>
+                            <FiUserCheck size={22} className="ml-0.5" />
                           </div>
                           <div className="ml-4">
                             <p className="text-sm font-medium ">
@@ -275,7 +288,23 @@ export default function AvatarDropdown({ className = "" }: Props) {
                         >
                           Switch to guest mode
                         </button>
-                        {token ? (
+                        {
+                          hostMenuData?.data?.map((hostMenuItem: any) => (<Link
+                            key={hostMenuItem.id}
+                            href={hostMenuItem.url}
+                            className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                          >
+                            <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+                              <ApiDrivenIcon iconName={hostMenuItem.icon} />
+                            </div>
+                            <div className="mt-1 ml-2">
+                              <p className="text-sm font-medium ">{hostMenuItem.name}</p>
+                            </div>
+                          </Link>))
+                        }
+                        
+
+                        {/* {token ? (
                           <Link
                             href={"/account"}
                             className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -343,11 +372,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                               <p className="text-sm font-medium ">{"Login"}</p>
                             </div>
                           </Link>
-                        )}
+                        )} */}
 
                         {/* ------------------ Host Dashboard --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/host-dashboard"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -362,11 +391,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                               {"Host Dashboard"}
                             </p>
                           </div>
-                        </Link>
+                        </Link> */}
 
                         {/* ------------------ Booking--------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/booking"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -376,11 +405,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"Booking"}</p>
                           </div>
-                        </Link>
+                        </Link> */}
 
                         {/* ------------------ Listings --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/host-inbox"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -390,11 +419,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"Listings"}</p>
                           </div>
-                        </Link>
-                        
+                        </Link> */}
+
                         {/* ------------------ Drafts --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/host-inbox"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -404,11 +433,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"Drafts"}</p>
                           </div>
-                        </Link>
-                        
+                        </Link> */}
+
                         {/* ------------------ Inbox --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/host-inbox"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -418,7 +447,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"Inbox"}</p>
                           </div>
-                        </Link>
+                        </Link> */}
 
                         {/* ------------------ Space --------------------- */}
 
@@ -436,7 +465,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                         {/* ------------------ Business --------------------- */}
 
-                        <Link
+                        {/* <Link
                           href={"/host-mode/host-business"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -446,7 +475,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           <div className="ml-2">
                             <p className="text-sm font-medium ">{"Business"}</p>
                           </div>
-                        </Link>
+                        </Link> */}
 
                         {/* ------------------ More --------------------- */}
 
@@ -572,7 +601,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-                        <FiSettings size={22} className="ml-0.5"/>
+                        <FiSettings size={22} className="ml-0.5" />
                       </div>
                       <div className="ml-4">
                         <p className="text-sm font-medium ">{"Settings"}</p>
