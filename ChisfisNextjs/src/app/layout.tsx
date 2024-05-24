@@ -9,6 +9,7 @@ import FooterNav from "@/components/FooterNav";
 import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
 import "./globals.css";
 import UserProvider from "@/context";
+import ReduxProvider from "@/app/redux/providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,22 +33,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-[#F6F4F6] text-base text-neutral-900">
-        <ReactQueryClientProvider>
-          <UserProvider>
-            <ClientCommons />
-            <div>
-              <SiteHeader />
-              <div className="flex overflow-x-hidden max-w-screen">
-                {/* <div className="hidden md:block" >
+          <ReduxProvider>
+            <ReactQueryClientProvider>
+              <UserProvider>
+                <ClientCommons />
+                <div>
+                  <SiteHeader />
+                  <div className="flex overflow-x-hidden max-w-screen">
+                    {/* <div className="hidden md:block" >
                 <SideBar/>
                 </div> */}
-                <div className="flex-1">{children}</div>
-              </div>
-            </div>
-            {/* <FooterNav /> */}
-            <Footer />
-          </UserProvider>
-        </ReactQueryClientProvider>
+                    <div className="flex-1">{children}</div>
+                  </div>
+                </div>
+                {/* <FooterNav /> */}
+                <Footer />
+              </UserProvider>
+            </ReactQueryClientProvider>
+          </ReduxProvider>
       </body>
     </html>
   );
