@@ -19,6 +19,7 @@ export interface NavItemType {
   id: string;
   name: string;
   isNew?: boolean;
+  icon?:React.ReactNode;
   href: Route<string> | string | PathName;
   targetBlank?: boolean;
   children?: NavItemType[];
