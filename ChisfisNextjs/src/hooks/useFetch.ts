@@ -1,5 +1,6 @@
-// import { QueryKey, useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
+import { QueryKey, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useSession } from './useSession';
 
 // interface FetchConfig {
 //   headers?: Record<string, string>;
@@ -41,60 +42,55 @@
 
 
 
+// new fetch hook
+interface FetchConfig {
+  headers?: Record<string, string>;
+}
 
-// import { QueryKey, useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
+interface FetchParams {
+  url: string;
+  queryKey: QueryKey;
+  config?: FetchConfig;
+  data?: any;
+  enabled?: boolean;
+}
 
-// interface FetchConfig {
-//   headers?: Record<string, string>;
-// }
+export const useFetch = ({ url, config, data, queryKey, enabled }: FetchParams) => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(url, config);
+      return response.data;
+    } catch (error: any) {
+      console.log(error.response.data.data.error);
+      return null;
+    }
+  };
 
-// interface FetchParams {
-//   url: string;
-//   queryKey: QueryKey;
-//   config?: FetchConfig;
-//   data?: any;
-//   enabled?: boolean;
-// }
-
-// export const useFetch = ({ url, config, data, queryKey, enabled }: FetchParams) => {
-//   const fetchData = async () => {
-//     try {
-//       const response = await axios.get(url, config);
-//       return response.data;
-//     } catch (error: any) {
-//       console.log(error.response.data.data.error);
-//       return null;
-//     }
-//   };
-
-//   const {
-//     data: responseData,
-//     isLoading,
-//     error,
-//     isSuccess,
-//     isError
-//   } = useQuery({
-//     queryKey,
-//     queryFn: fetchData,
-//     enabled
-//   });
-//   return { fetchData, isLoading, error, isSuccess, isError};
-// };
+  const {
+    data: responseData,
+    isLoading,
+    error,
+    isSuccess,
+    isError
+  } = useQuery({
+    queryKey,
+    queryFn: fetchData,
+    enabled
+  });
+  return { fetchData, isLoading, error, isSuccess, isError};
+};
 
 
 
 // create a hook with a generic type that can be passed as type of data in useFetch
 // Path: ChisfisNextjs/src/hooks/useFetch.ts
-import { QueryKey, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useSession } from './useSession';
+
 
 interface FetchConfig {
   headers?: Record<string, string>;
 }
 
-interface FetchParams<T> {
+interface FetchParamsType<T> {
   baseUrl?: string
   endpoint: string;
   params?: Record<string, string>;
@@ -111,9 +107,9 @@ interface RequestResponse<T> {
   data:T | null
 }
 
-export const useFetch = <T>({ 
+export const useFetchData = <T>({ 
   baseUrl, endpoint, params, queryParams,queryKey,config
- }: FetchParams<T>) => {
+ }: FetchParamsType<T>) => {
 
   const { getSession } = useSession();
 
