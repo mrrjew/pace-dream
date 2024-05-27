@@ -49,7 +49,7 @@ const PersonalInformation = () => {
           <div className="flex gap-7">
             {/* firstname */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">First name</label>
+              <label htmlFor="firstname">First name</label>
               <input
                 type="text"
                 placeholder="First name"
@@ -65,7 +65,7 @@ const PersonalInformation = () => {
             </div>
             {/* lastname */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Last name</label>
+              <label htmlFor="lastname">Last name</label>
               <input
                 type="text"
                 placeholder="Last name"
@@ -83,7 +83,7 @@ const PersonalInformation = () => {
           <div className="flex lg:flex-row flex-col gap-7">
             {/* email */}
             <div className="flex flex-col lg:w-[407px] w-96">
-              <label htmlFor="">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -99,7 +99,7 @@ const PersonalInformation = () => {
             </div>
             {/* phone number */}
             <div className="flex flex-col lg:w-[407px] w-96">
-              <label htmlFor="">Phone number</label>
+              <label htmlFor="phonenumber">Phone number</label>
               <input
                 type="tel"
                 pattern="[0-9]{10}"
@@ -118,7 +118,7 @@ const PersonalInformation = () => {
           <div className="flex gap-7">
             {/* Date of Birth */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Date of Birth</label>
+              <label htmlFor="dateofbirth">Date of Birth</label>
               <input
                 type="date"
                 placeholder="Date of Birth"
@@ -134,7 +134,7 @@ const PersonalInformation = () => {
             </div>
             {/* Town city */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Town/city</label>
+              <label htmlFor="towncity">Town/city</label>
               <input
                 type="text"
                 placeholder="Town/city"
@@ -152,7 +152,7 @@ const PersonalInformation = () => {
           <div className="flex gap-7">
             {/* Zip Code */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Zip code</label>
+              <label htmlFor="zipcode">Zip code</label>
               <input
                 type="number"
                 placeholder="Zip code"
@@ -168,7 +168,7 @@ const PersonalInformation = () => {
             </div>
             {/* Bio */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Bio</label>
+              <label htmlFor="bio">Bio</label>
               <input
                 type="text"
                 placeholder="Bio"
@@ -217,7 +217,7 @@ const PersonalInformation = () => {
           <div className="flex gap-7">
             {/* Country/region */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Country/region</label>
+              <label htmlFor="countryregion">Country/region</label>
               <input
                 type="text"
                 placeholder="Country/region"
@@ -233,7 +233,7 @@ const PersonalInformation = () => {
             </div>
             {/* City */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">City</label>
+              <label htmlFor="city">City</label>
               <input
                 type="text"
                 placeholder="City"
@@ -251,7 +251,7 @@ const PersonalInformation = () => {
           <div className="flex gap-7">
             {/* Street Address */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">Street Address</label>
+              <label htmlFor="streetaddress">Street Address</label>
               <input
                 type="text"
                 placeholder="Street Address"
@@ -267,7 +267,7 @@ const PersonalInformation = () => {
             </div>
             {/* State */}
             <div className="flex flex-col lg:w-[407px] w-44">
-              <label htmlFor="">State</label>
+              <label htmlFor="state">State</label>
               <input
                 type="text"
                 placeholder="State"

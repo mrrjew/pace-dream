@@ -13,8 +13,8 @@ const AccountSetting = () => {
       <div className="hidden lg:inline-flex flex-col items-start gap-3">
         <p className="text-5xl font-semibold">Account</p>
         <p className="text-xl">
-          Ashik Image,{" "}
-          <span className="text-[#757575]">imageashik@gmail.com</span> · Go to
+          MrrJew,{" "}
+          <span className="text-[#757575]">jwlarbi15@gmail.com</span> · Go to
           profile
         </p>
       </div>
