@@ -1,6 +1,7 @@
 "use client";
 import { useFormik } from "formik";
 import { PersonalInformationSchema } from "./Schemas/AccountSettingSchema";
+import ProfileImageEdit from "../profile/ProfileImageEdit";
 
 const initialValues = {
   firstname: "",
@@ -46,6 +47,7 @@ const PersonalInformation = () => {
       <div className="flex flex-col gap-7">
         <p className="text-[28px] font-semibold mt-2">Personal Information</p>
         <div className="flex flex-col gap-10">
+            <ProfileImageEdit />
           <div className="flex gap-7">
             {/* firstname */}
             <div className="flex flex-col lg:w-[407px] w-44">
