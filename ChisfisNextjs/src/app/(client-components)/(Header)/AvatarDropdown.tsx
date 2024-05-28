@@ -152,12 +152,12 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
     otherMenuItems: [
       {
-        url: "/#",
+        url: "/help-center",
         name: "Help",
         icon:<HelpSvg/>
       },
       {
-        url: "/#",
+        url: "/acc-setting",
         name: "Settings",
         icon: <FiSettings size={22} className="ml-0.5" />
       },
