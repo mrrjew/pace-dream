@@ -34,6 +34,8 @@ module.exports = {
       padding: {
         DEFAULT: "1rem",
         "2xl": "128px",
+        "3xl": "128px",
+        "4xl": "128px",
       },
     },
     // fontFamily: {
