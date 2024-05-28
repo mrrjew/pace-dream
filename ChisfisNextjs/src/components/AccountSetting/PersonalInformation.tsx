@@ -1,10 +1,8 @@
 "use client";
 
-import { EyeIcon } from "@heroicons/react/24/solid";
-import { Details, Shield, ShieldOutlined } from "@mui/icons-material";
-import { Fragment } from "react";
-import { BiDetail } from "react-icons/bi";
-import { IoEyeOutline } from "react-icons/io5";
+import { Fragment, useEffect } from "react";
+import { FaqSideComponent } from "./FrequentlyAskedQuestions";
+import { useSession } from "@/hooks/useSession";
 
 // const initialValues = {
 //   firstname: "",
@@ -306,10 +304,10 @@ import { IoEyeOutline } from "react-icons/io5";
 
 // export default PersonalInformation;
 
-type PersonalInfoIntem = {title:string,value:string,actionlabel:string,onEdit:()=>void}
+type PersonalInfoItem = {title:string,value:string,actionlabel:string,onEdit:()=>void}
 
 
-function PersonalInfoItem(props:PersonalInfoIntem){
+function PersonalInfoItem(props:PersonalInfoItem){
   const {title,value,actionlabel,onEdit} = props
   return (
     <div className="flex justify-between gap-8">
@@ -322,41 +320,38 @@ function PersonalInfoItem(props:PersonalInfoIntem){
   )
 }
 
-function PersonalInfoCardItem(props:{title:string,description:string,icon:any}){
-
-  return (
-    <div className="bg-white/45 p-6 rounded-lg  min-h-44 w-fill">
-      <div className=" rounded-lg mb-2">
-        {props.icon}
-      </div>
-      <div>
-        <p className="text-lg font-extrabold">{props.title}</p>
-        <p className="text-xs text-[#757575] mt-2">{props.description}</p>
-      </div>
-    </div>
-  )
-}
-
-
 export function PersonalInformation(){
-  const iconclassName = "w-12 h-12 text-gray-500 fill-primary-800 text-primary-800 stroke-primary-800 stroke-0";
+  const { getSession  } = useSession();
+  const { userInfo } = getSession();
+  // "profilePic":"https://lh3.googleusercontent.com/a/ACg8ocKUiKzlpqy8X72Qu5TWc5wopozIIACFORGmC-MyFreUVC7LygE=s96-c",
+  // "first_name":"Elvis",
+  // "last_name":"Kemevor",
+  // "user_id":"6650cbf6fbe4f0dd72751377",
+  // "email":"kemevoralwise@gmail.com",
+  // "emailVerified":true
 
-  const profileInfo : Array<PersonalInfoIntem> = [
+  useEffect(() => {
+    if(userInfo){
+      console.log(userInfo)
+    }
+  }, [userInfo]);
+
+  const profileInfo : Array<PersonalInfoItem> = [
     {
       title: "Legal Name",
-      value: "John Smith",
+      value: userInfo?.first_name ? (userInfo?.first_name + " " + userInfo?.last_name) : "Not provided",
       actionlabel: "Edit",
       onEdit: ()=>{}
     },
     {
       title: "Prefered Name",
-      value: "Not provided",
+      value: userInfo?.first_name ? (userInfo?.first_name) : "Not provided",
       actionlabel: "Add",
       onEdit: ()=>{}
     },
     {
       title: "Phone Number",
-      value: "Add a number so confirmed guests and Airbnb can get in touch. You can add other numbers and choose how they’re used",
+      value:  userInfo?.phone_number ? (userInfo?.phone_number) : "Add a number so confirmed guests and Airbnb can get in touch. You can add other numbers and choose how they’re used",
       actionlabel: "Add",
       onEdit: ()=>{}
     },
@@ -380,46 +375,23 @@ export function PersonalInformation(){
     },
 
   ];
-
-  const personalInfoCardItems = [
-      {
-          title: "Why isn’t my info shown here?",
-          description: "We’re hiding some account details to protect your identity.",
-          icon: <ShieldOutlined className={iconclassName} />
-      },
-      {
-          title: "Which details can be edited?",
-          description: "Contact info and personal details can be edited. If this info was used to verify your identity, you’ll need to get verified again the next time you book—or to continue hosting.",
-          icon: <BiDetail className={iconclassName} />
-      },
-      {
-          title: "What info is shared with others?",
-          description: "PaceDream only releases contact information for Hosts and guests after a reservation is confirmed.",
-          icon:  <IoEyeOutline className={iconclassName} stroke="2" />
-      }
-  ]
-
+ 
   return (
-      <div className="grid gap-24 grid-cols-1 md:grid-cols-3">
-        <div className="grid grid-cols-1 gap-4 col-span-3 md:col-span-2">
-           {
-              profileInfo.map((item,index) => (
-                <Fragment key={index} >
-                  <PersonalInfoItem title={item.title} value={item.value} actionlabel={item.actionlabel} onEdit={item.onEdit} />
-                  <hr className="my-3 bg-gray-300"/>
-                </Fragment>
-              ))
-           }
-        </div>
-        <div className="ring-1 ring-gray-300 rounded-md col-span-3 md:col-span-1"> 
+      <div className="grid grid-cols-1 md:grid-cols-3 space-y-8 md:space-y-0 space-x-0 md:space-x-20">
+        <div className="col-span-1 md:col-span-2">
+          <div className="grid grid-cols-1 gap-4">
             {
-              personalInfoCardItems.map((item,index,arr) => (
-                <Fragment key={index}>
-                  <PersonalInfoCardItem title={item.title} description={item.description} icon={item.icon} />
-                  {index < (arr.length-1) && <hr className="my-3 bg-gray-300"/>}
-                </Fragment>
-              ))
+                profileInfo.map((item,index) => (
+                  <Fragment key={index} >
+                    <PersonalInfoItem title={item.title} value={item.value} actionlabel={item.actionlabel} onEdit={item.onEdit} />
+                    <hr className="my-3 bg-gray-300"/>
+                  </Fragment>
+                ))
             }
+          </div>
+        </div>
+        <div className="col-span-1 md:col-span-1">
+          <FaqSideComponent/>
         </div>
       </div>
   )
