@@ -19,14 +19,24 @@
 //   safeAmenities?: string[];
 // };
 
-
 export type formFieldInitialStateType = {
-  [key: string]: string | undefined | number | boolean | any[] | File | FileList;
+  [key: string]:
+    | string
+    | undefined
+    | number
+    | boolean
+    | any[]
+    | File
+    | FileList;
 };
 
 export type PageAddingListing = {
   input: formFieldInitialStateType;
   setInput: React.Dispatch<React.SetStateAction<formFieldInitialStateType>>;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  handleInputChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => void;
   setPageNumber?: React.Dispatch<React.SetStateAction<number>>;
 };
