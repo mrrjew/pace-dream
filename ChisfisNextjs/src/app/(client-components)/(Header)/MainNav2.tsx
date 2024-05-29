@@ -64,7 +64,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           {/* <div className='self-center hidden h-10 border-l lg:block border-neutral-300 dark:border-neutral-500'> */}
           <div className="items-center justify-end hidden lg:flex ">
           <ol className='flex items-center gap-4 ml-48'>
-              <li>Find Roomate  &nbsp; /</li>
+              <li><Link href={'/roommate'}>Find Roomate  &nbsp; /</Link></li>
               <li><Link href={'/about-us'}>About  &nbsp; /</Link></li>
               <li><Link href={'/contact-us'}>Contact  &nbsp; /</Link></li>
               <div className='flex items-center gap-1 '>
