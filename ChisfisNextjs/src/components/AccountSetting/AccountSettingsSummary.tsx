@@ -22,7 +22,7 @@ export function AccountSettingSummary({onSelect,selected}:{
             icon: <Security />
         },
         {
-            title: "Payments",
+            title: "Payment",
             description: "Review payments, coupons, and gift cards",
             icon: <Payment />
         },
