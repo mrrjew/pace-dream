@@ -26,8 +26,13 @@ const Checkbox: FC<CheckboxProps> = ({
   setInput,
   inputName,
 }) => {
-  // <!-- handle form checkbox -->
+  // Handle form checkbox change
   const handleCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!input || !inputName) {
+      console.error('input or inputName is undefined');
+      return;
+    }
+
     const val = e.target.value;
     const currentList = Array.isArray(input[inputName]) ? input[inputName] : [];
 
@@ -40,21 +45,8 @@ const Checkbox: FC<CheckboxProps> = ({
       updateList.push(val);
     }
 
-    setInput((prevState) => ({ ...prevState, [inputName]: updateList }));
+    setInput && setInput((prevState) => ({ ...prevState, [inputName]: updateList }));
   };
-
-  //   const currentList = Array.isArray(input[checkboxName]) ? input[checkboxName] : [];
-
-  //   const updateList = [...currentList];
-
-  //   if (currentList.includes(val)) {
-  //     updateList.splice(currentList.indexOf(val), 1);
-  //   } else {
-  //     updateList.push(val);
-  //   }
-
-  //   setInput((prevState) => ({ ...prevState, [checkboxName]: updateList }));
-  // };
 
   return (
     <div key={key} className={`flex text-sm sm:text-base ${className}`}>
@@ -63,7 +55,7 @@ const Checkbox: FC<CheckboxProps> = ({
         name={name}
         value={label}
         type="checkbox"
-        className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700  dark:checked:bg-primary-500 focus:ring-primary-500"
+        className="focus:ring-action-primary h-6 w-6 text-primary-500 border-primary rounded border-neutral-500 bg-white dark:bg-neutral-700 dark:checked:bg-primary-500 focus:ring-primary-500"
         defaultChecked={defaultChecked}
         onChange={handleCheckBoxChange}
       />
@@ -72,7 +64,7 @@ const Checkbox: FC<CheckboxProps> = ({
           htmlFor={name}
           className="ml-3.5 flex flex-col flex-1 justify-center"
         >
-          <span className=" text-neutral-900 dark:text-neutral-100">
+          <span className="text-neutral-900 dark:text-neutral-100">
             {label}
           </span>
           {subLabel && (
