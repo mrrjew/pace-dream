@@ -62,7 +62,7 @@ const ListingPage = () => {
                 </button>
               </div>
               <div className="max-w-3xl sm:ml-16 p-4 sm:mt-8 md:p-8 rounded-lg">
-                <h1 className="text-xl font-[1000] leading-6 text-center  mb-4">
+                <h1 className="text-xl font-[1000] leading-6 text-center mb-4">
                   <span className="decoration-2 decoration-[#192946]">
                     What Type of Place will guests have?
                   </span>
