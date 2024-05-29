@@ -5,6 +5,9 @@ import PageAddListing1 from "./PageAddListing1";
 import PageAddListing2 from "./PageAddListing2";
 import PageAddListing3 from "./PageAddListing3";
 import PageAddListing4 from "./PageAddListing4";
+import PageAddListing5 from "./PageAddListing5";
+// import PageAddListing6 from "./PageAddListing6";
+// import PageAddListing7 from "./PageAddListing7";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
@@ -157,6 +160,9 @@ const Page = () => {
     <PageAddListing2 />,
     <PageAddListing3 />,
     <PageAddListing4 />,
+    <PageAddListing5 />,
+    // <PageAddListing6 />,
+    // <PageAddListing7 />,
   ]);
 
   return (

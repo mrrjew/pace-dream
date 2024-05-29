@@ -14,11 +14,9 @@ const PageAddListing1 = ({}) => {
     <>
       <div className="listingSection__wrap ">
         {/* FORM */}
-
-        <div className="space-y-8">
-          <h2 className="text-xl font-semibold">Choosing Listing Category</h2>
-
-          <div className="grid grid-cols-1 gap-8 md:gap-5">
+        <div className="space-y-4 sm:space-y-8">
+          <h2 className="text-xl font-semibold">Property Details</h2>
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <FormItem label="What is the name of your property?">
               <Input name="location" type="text" placeholder="Property Name" />
             </FormItem>
@@ -26,7 +24,7 @@ const PageAddListing1 = ({}) => {
               <Input name="location" type="text" placeholder="Property Name" />
             </FormItem>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:gap-5">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <FormItem label="What type of property are you listing?">
               <Select name="roomstays">
                 <option value="">Property Type</option>
