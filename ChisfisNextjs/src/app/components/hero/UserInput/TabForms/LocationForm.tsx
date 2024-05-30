@@ -1,7 +1,6 @@
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect, FC } from "react";
 import ClearDataButton from "@/app/(client-components)/(HeroSearchForm)/ClearDataButton";
-import PinDropIcon from "@mui/icons-material/PinDrop";
 import Image from "next/image";
 import { LocationIconImage } from "public/assetsManager";
 
@@ -64,7 +63,7 @@ const LocationForm: FC<LocationInputProps> = ({
 
           // Reverse Geocoding to get human-readable address
           fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`,
           )
             .then((response) => response.json())
             .then((data) => {
@@ -107,7 +106,7 @@ const LocationForm: FC<LocationInputProps> = ({
         },
         (error) => {
           console.error("Error getting current location:", error);
-        }
+        },
       );
     } else {
       console.error("Geolocation is not supported by this browser.");

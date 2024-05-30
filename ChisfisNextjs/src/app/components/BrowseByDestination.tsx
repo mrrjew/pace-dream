@@ -1,10 +1,9 @@
 "use client";
+
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import londonImg from "@/images/browseByDestination/london.jpg";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
-
 import {
   LondonCityImage,
   NewYorkCityImage,

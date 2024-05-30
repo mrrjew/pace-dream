@@ -1,10 +1,7 @@
 "use client";
 
-import { FC, useState } from "react";
-import GuestsInput from "../../../../../(client-components)/(HeroSearchForm)/GuestsInput";
-import LocationInput from "../../../../../(client-components)/(HeroSearchForm)/LocationInput";
-import StayDatesRangeInput from "../../../../../(client-components)/(HeroSearchForm)/(stay-search-form)/StayDatesRangeInput";
-import ButtonSubmit from "../../../../../(client-components)/(HeroSearchForm)/ButtonSubmit";
+import { type FC } from "react";
+import ButtonSubmit from "@/app/(client-components)/(HeroSearchForm)/ButtonSubmit";
 import LocationForm from "./LocationForm";
 import GuestForm from "./GuestForm";
 import DatesRangeForm from "./DatesRangeForm";

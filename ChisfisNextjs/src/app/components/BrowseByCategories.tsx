@@ -1,10 +1,7 @@
 "use client";
 
 import React from "react";
-import { MdOutlineElectricCar } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
-import { FaRestroom } from "react-icons/fa";
-import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { useState } from "react";
 import {
   RestRoomIcon,

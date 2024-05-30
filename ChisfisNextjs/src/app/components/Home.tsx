@@ -1,6 +1,5 @@
 import Hero from "./hero/Hero";
 import BrowseByCategories from "./BrowseByCategories";
-import BrowseByDestinationMobile from "@/components/BrowseByDestinationMobile/BrowseByDestinationMobile";
 import BrowseByDestination from "./BrowseByDestination";
 import TimeBased from "./TimeBased";
 import PerfectCar from "./PerfectCar";

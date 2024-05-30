@@ -2,7 +2,6 @@
 
 import React, { Fragment, useState, FC } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderTwoMonth";
 import DatePickerCustomDay from "@/components/DatePickerCustomDay";
 import DatePicker from "react-datepicker";
@@ -38,7 +37,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
 
   const handleChange = (
     date: [Date | null, Date | null],
-    event: React.SyntheticEvent<any, Event> | undefined
+    event: React.SyntheticEvent<any, Event> | undefined,
   ) => {
     setSelectedRange(date);
     console.log(selectedRange);

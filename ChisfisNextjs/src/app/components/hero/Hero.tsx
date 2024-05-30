@@ -1,10 +1,9 @@
-import { HeroBgMaskImage, HeroImage } from "public/assetsManager";
-import HeroSearchForm from "@/app/(client-components)/(HeroSearchForm)/HeroSearchForm";
+"use client";
 
+import { HeroBgMaskImage, HeroImage } from "public/assetsManager";
 import Image from "next/image";
-import { Poppins, Rubik } from "next/font/google";
+import { Rubik } from "next/font/google";
 import SearchForm from "./UserInput/SearchForm";
-// HeroBgMaskImage
 
 const rubik = Rubik({
   subsets: ["latin"],

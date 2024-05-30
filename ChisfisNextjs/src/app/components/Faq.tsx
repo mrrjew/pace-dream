@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { MdOutlineArrowBackIos } from "react-icons/md";
 import { MdAdd, MdRemove } from "react-icons/md";
 
 const faqData = [
