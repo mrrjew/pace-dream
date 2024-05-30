@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import SiteHeader from "@/app/(client-components)/(Header)/SiteHeader";
 import Footer from "@/components/Footer";
 // import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
-import ReduxProvider from "@/app/redux/providers";
+import ReduxProvider from "@/store/providers";
 import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import "./globals.css";
