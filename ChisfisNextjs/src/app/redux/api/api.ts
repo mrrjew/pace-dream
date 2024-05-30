@@ -1,22 +1,14 @@
 "use client";
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const token = Cookies.get('auth-token');
-const fetch = axios.create({
+const token = Cookies.get("auth-token");
+export const fetch = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   headers: {
-    common: {
-      'Content-Type': 'application/json',
-    },
+    "Content-Type": "application/json",
   },
 });
-
-fetch.defaults.headers['Content-Type'] = 'application/json';
-
-const basicFetch = axios.create();
-
-basicFetch.defaults.headers['Content-Type'] = 'application/json';
 
 fetch.interceptors.request.use(function interceptor(config) {
   if (token) {
@@ -25,4 +17,9 @@ fetch.interceptors.request.use(function interceptor(config) {
   return config;
 });
 
-export { fetch };
+export const basicFetch = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+

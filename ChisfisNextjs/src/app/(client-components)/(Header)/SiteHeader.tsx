@@ -1,106 +1,112 @@
-'use client';
+"use client";
+import Logo from "@/shared/Logo";
+import MenuBar from "@/shared/MenuBar";
+import Link from "next/link";
+import { useSession } from "@/hooks/useSession";
+import React, { useEffect, useState } from "react";
+import AvatarDropdown from "./AvatarDropdown";
+import NotifyDropdown from "./NotifyDropdown";
+import Image from "next/image";
+import usaImg from "@/images/country/usa.png";
+import CurrencyModal from "./NewCurrencyModal";
+import LanguageModal from "./LanguageModal";
+import NavbarMobile from "./NavbarMobile";
 
-import React, { Fragment, useEffect, useRef, useState } from 'react';
-// import { ShoppingBagIcon as ShoppingCartIcon, Cog8ToothIcon as CogIcon } from '@heroicons/react/24/outline';
-// import { Popover, Transition } from '@headlessui/react';
-import { PathName } from '@/routers/types';
-// import Link from 'next/link';
-import Header from './Header';
-// import Header3 from './Header3';
-import { usePathname } from 'next/navigation';
-import { useThemeMode } from '@/utils/useThemeMode';
+export interface MainNav2Props {
+  className?: string;
+}
 
-export type SiteHeaders = 'Header 1' | 'Header 2' | 'Header 3';
+const btnStyle =
+  "group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative";
 
-// interface HomePageItem {
-//   name: string;
-//   slug: PathName;
-// }
+export default function SiteHeader() {
+  const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
+  const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
 
-let OPTIONS = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 1.0
-};
-let OBSERVER: IntersectionObserver | null = null;
-const PAGES_HIDE_HEADER_BORDER: PathName[] = ['/home-3', '/listing-car-detail', '/listing-experiences-detail'];
-
-const SiteHeader = () => {
-  const anchorRef = useRef<HTMLDivElement>(null);
-
-  const [headerSelected, setHeaderSelected] = useState<SiteHeaders>('Header 2');
-
-  const [isTopOfPage, setIsTopOfPage] = useState(true);
+  const { getSession } = useSession();
+  const { token } = getSession();
+  const [currency, setCurrency] = useState<string | null>("USD");
 
   useEffect(() => {
-    setIsTopOfPage(window.pageYOffset < 5);
+    if (typeof window !== "undefined" && window.localStorage) {
+      let localCurrency = localStorage.getItem("currency");
+      setCurrency(localCurrency);
+    }
   }, []);
-  //
-  useThemeMode();
-  //
-  const pathname = usePathname();
 
-  const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry) => {
-      setIsTopOfPage(entry.isIntersecting);
-    });
+  const openModalCurrency = () => {
+    setIsModalOpenCurrency(true);
   };
 
-  useEffect(() => {
-
-    if (!PAGES_HIDE_HEADER_BORDER.includes(pathname as PathName)) {
-      OBSERVER && OBSERVER.disconnect();
-      OBSERVER = null;
-      return;
-    }
-    if (!OBSERVER) {
-      OBSERVER = new IntersectionObserver(intersectionCallback, OPTIONS);
-      anchorRef.current && OBSERVER.observe(anchorRef.current);
-    }
-  }, [pathname]);
-
-  const renderHeader = () => {
-    let headerClassName = 'shadow-sm dark:border-b dark:border-neutral-700';
-    if (PAGES_HIDE_HEADER_BORDER.includes(pathname as PathName)) {
-      headerClassName = isTopOfPage ? '' : 'shadow-sm dark:border-b dark:border-neutral-700';
-    }
-    switch (headerSelected) {
-      // case 'Header 1':
-      //   return (
-      //     <Header
-      //       className={headerClassName}
-      //       navType='MainNav1'
-      //     />
-      //   );
-      case 'Header 2':
-        return (
-          <Header
-            className={headerClassName}
-            navType='MainNav2'
-          />
-        );
-      // case 'Header 3':
-      //   return <Header3 className={headerClassName} />;
-
-      default:
-        return (
-          <Header
-            className={headerClassName}
-            navType='MainNav2'
-          />
-        );
-    }
+  const openModalCountry = () => {
+    setIsModalOpenCountry(true);
   };
 
+  const closeModalCurrency = () => {
+    setIsModalOpenCurrency(false);
+    window.location.reload();
+  };
+
+  const closeModalCountry = () => {
+    setIsModalOpenCountry(false);
+    window.location.reload();
+  };
   return (
-    <>
-      {/* {renderControlSelections()} */}
-      {renderHeader()}
-      <div
-        ref={anchorRef}
-        className='h-1 absolute invisible'></div>
-    </>
-  );
-};
+    <header
+      className={`fixed bg-white/70 dark:bg-neutral-900/60 backdrop-blur-2xl backdrop-filter top-0 w-full left-0 right-0 z-[100] shadow-sm dark:border-b dark:border-neutral-700`}
+    >
+      <section className="flex justify-between h-16 px-4 lg:container">
+        <article className="justify-start flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10 gap-14">
+          <Logo className="self-center w-34 ml-6" />
+          <div className="items-center justify-end hidden lg:flex ">
+            <ol className="flex items-center gap-4 ml-48">
+              <li>
+                <Link href={"/roommate"}>Find Roomate &nbsp; /</Link>
+              </li>
+              <li>
+                <Link href={"/about-us"}>About &nbsp; /</Link>
+              </li>
+              <li>
+                <Link href={"/contact-us"}>Contact &nbsp; /</Link>
+              </li>
+              <div className="flex items-center gap-1 "></div>
+            </ol>
+            <button className={`${btnStyle}`} onClick={openModalCurrency}>
+              {currency || "USD"}
+            </button>
+            <button className={`${btnStyle}`} onClick={openModalCountry}>
+              <Image src={usaImg} className="w-4 h-4 rounded-full" alt="usa" />
+            </button>
+          </div>
+        </article>
 
-export default SiteHeader;
+        <NavbarMobile />
+
+        <div className="justify-end flex-1 flex-shrink-0 hidden md:flex lg:flex-none text-neutral-700 dark:text-neutral-100">
+          <div className="hidden space-x-1 lg:flex">
+            <Link
+              href="/auth/login"
+              // href={token ? "/add-listing" : ("/auth/login" as any)}
+              // as={token ? "/add-listing" : "/auth/login"}
+              className="inline-flex items-center self-center px-4 py-2 text-sm font-medium text-gray-700 border rounded-full text-opacity-90 group border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-300 hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              Post a Listing
+            </Link>
+            <AvatarDropdown />
+          </div>
+          <div className="flex space-x-2 lg:hidden">
+            <NotifyDropdown />
+            <AvatarDropdown />
+            <MenuBar />
+          </div>
+        </div>
+      </section>
+
+      <CurrencyModal
+        isOpen={isModalOpenCurrency}
+        onClose={closeModalCurrency}
+      />
+      <LanguageModal isOpen={isModalOpenCountry} onClose={closeModalCountry} />
+    </header>
+  );
+}

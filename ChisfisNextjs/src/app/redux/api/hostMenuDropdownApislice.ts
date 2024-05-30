@@ -17,7 +17,5 @@ export const hostMenuDropdownApi = apiSlice.injectEndpoints({
   overrideExisting: false,
 });
 
-export const {
-  useLazyGetHostMenuDropdownQuery,
-  endpoints,
-} = hostMenuDropdownApi;
+export const { useLazyGetHostMenuDropdownQuery, endpoints } =
+  hostMenuDropdownApi;

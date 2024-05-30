@@ -19,3 +19,4 @@ export type RetryConditionFunction = (
     extraOptions: ExtraOptions;
   },
 ) => boolean;
+

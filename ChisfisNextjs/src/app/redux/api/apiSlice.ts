@@ -3,14 +3,11 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { hostMenuDropdownItemsTag } from "./apiTags";
 import { staggeredBaseQuery } from "./apiSliceBaseQuery";
 
-
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: staggeredBaseQuery,
-  tagTypes: [
-    hostMenuDropdownItemsTag,
-  ],
-  endpoints: () => ({}),
+  tagTypes: [hostMenuDropdownItemsTag],
+  endpoints: (buider) => ({}),
 });
 
 export const { endpoints } = apiSlice;

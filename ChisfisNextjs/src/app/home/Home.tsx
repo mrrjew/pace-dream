@@ -11,20 +11,18 @@ import Faq from "./Faq";
 
 const Home = () => {
   return (
-    <>
-      <div className="w-full h-full scrollbar-thin ">
-        <Hero />
-        <BrowseByCategories />
-        <BrowseByDestination />
-        <TimeBased />
-        <PerfectCar />
-        <HourlyRentalGear />
-        <ParkingSpot />
-        <LastMinuteDeals />
-        <Faq />
-        <JoinOurCommunity />
-      </div>
-    </>
+    <div className="w-full h-full scrollbar-thin ">
+      <Hero />
+      <BrowseByCategories />
+      <BrowseByDestination />
+      <TimeBased />
+      <PerfectCar />
+      <HourlyRentalGear />
+      <ParkingSpot />
+      <LastMinuteDeals />
+      <Faq />
+      <JoinOurCommunity />
+    </div>
   );
 };
 

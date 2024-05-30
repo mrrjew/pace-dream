@@ -1,10 +1,9 @@
 "use client";
-import { ThunkDispatch } from '@reduxjs/toolkit';
-import { retry } from '@reduxjs/toolkit/query/react';
-import { RetryConditionFunction } from './apiSliceTypes';
-import { AxiosResponse } from 'axios';
-import { fetch } from './api';
-
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { retry } from "@reduxjs/toolkit/query/react";
+import { RetryConditionFunction } from "./apiSliceTypes";
+import { AxiosResponse } from "axios";
+import { fetch } from "./api";
 
 export interface CustomAxiosResponse<T, D> extends AxiosResponse<T, D> {
   success?: boolean;
@@ -20,7 +19,14 @@ const baseQueryHandler = async (
   try {
     //params = GET call query-params
     //data = POST call body
-    const { method, url, params = {}, data = {}, config = {}, headers } = requestOpts;
+    const {
+      method,
+      url,
+      params = {},
+      data = {},
+      config = {},
+      headers,
+    } = requestOpts;
 
     const result = (await fetch({
       ...{ method, url, params, data, headers, ...config },
@@ -33,14 +39,18 @@ const baseQueryHandler = async (
       },
     };
   } catch (error) {
-    if (onError && typeof onError === 'function') {
+    if (onError && typeof onError === "function") {
       onError(dispatch, error);
     }
     return { error };
   }
 };
 
-const trackRetryCondition: RetryConditionFunction = (error, args, { extraOptions, attempt }) => {
+const trackRetryCondition: RetryConditionFunction = (
+  error,
+  args,
+  { extraOptions, attempt },
+) => {
   const maxRetries = extraOptions?.maxRetries;
   if (maxRetries) {
     if (attempt > maxRetries) {
