@@ -5,9 +5,13 @@ import {
   FaParking,
   FaSnowflake,
   FaSwimmingPool,
+  FaDumbbell,
 } from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
-import { MdRoomService } from "react-icons/md";
+import { MdRoomService, MdSmokeFree } from "react-icons/md";
+import { GrAidOption } from "react-icons/gr";
+import { TbFireExtinguisher, TbSofa } from "react-icons/tb";
+import { GiFireplace, GiGrandPiano } from "react-icons/gi";
 
 interface Amenity {
   icon?: React.ReactNode;
@@ -16,28 +20,49 @@ interface Amenity {
 }
 
 const amenities: Amenity[] = [
+  { icon: <TbSofa />, label: "Furnished", id: "furnished" },
   { icon: <FaWifi />, label: "Wifi", id: "wifi" },
+  { icon: <FaDumbbell />, label: "Gym", id: "gym" },
   { icon: <FaSwimmingPool />, label: "Swimming Pool", id: "swimming-pool" },
   { icon: <FaTv />, label: "TV", id: "tv" },
   { icon: <FaKitchenSet />, label: "Kitchen", id: "kitchen" },
-  {
-    icon: <FaParking />,
-    label: "Parking",
-    id: "parking",
-  },
+  { icon: <GiGrandPiano />, label: "Piano", id: "piano" },
+  { icon: <FaParking />, label: "Parking", id: "parking" },
   { icon: <FaSnowflake />, label: "AC", id: "ac" },
+  { icon: <MdRoomService />, label: "Room Service", id: "room-service" },
+  { icon: <GiFireplace />, label: "Fire Pit", id: "fire-pit" },
+];
+
+const safetyAmenities: Amenity[] = [
+  { icon: <MdSmokeFree />, label: "Smoke Alarm", id: "smoke-alarm" },
+  { icon: <GrAidOption />, label: "First Aid Kit", id: "first-aid-kit" },
   {
-    icon: <MdRoomService />,
-    label: "Room Service",
-    id: "room-service",
+    icon: <TbFireExtinguisher />,
+    label: "Fire Extinguisher",
+    id: "fire-extinguisher",
   },
 ];
 
 const AmenityGrid: React.FC = () => {
-  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [selectedGeneralAmenities, setSelectedGeneralAmenities] = useState<
+    string[]
+  >([]);
+  const [selectedSafetyAmenities, setSelectedSafetyAmenities] = useState<
+    string[]
+  >([]);
 
-  const handleAmenityClick = (amenityId: string) => {
-    setSelectedAmenities((prevSelectedAmenities) => {
+  const handleGeneralAmenityClick = (amenityId: string) => {
+    setSelectedGeneralAmenities((prevSelectedAmenities) => {
+      if (prevSelectedAmenities.includes(amenityId)) {
+        return prevSelectedAmenities.filter((id) => id !== amenityId);
+      } else {
+        return [...prevSelectedAmenities, amenityId];
+      }
+    });
+  };
+
+  const handleSafetyAmenityClick = (amenityId: string) => {
+    setSelectedSafetyAmenities((prevSelectedAmenities) => {
       if (prevSelectedAmenities.includes(amenityId)) {
         return prevSelectedAmenities.filter((id) => id !== amenityId);
       } else {
@@ -47,51 +72,57 @@ const AmenityGrid: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="bg-white rounded-lg p-6">
-        <h2 className="text-xl font-bold mb-4">
-          Tell guests what your place has to offer
-        </h2>
-        <p className="text-gray-600 mb-6">General Amenities</p>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-          {amenities.map((amenity) => (
-            <div
-              key={amenity.id}
-              className={`flex flex-col border text-blue-700 border-slate-400 rounded-lg gap-3 py-4 justify-center items-center cursor-pointer ${
-                selectedAmenities.includes(amenity.id || "")
-                  ? "text-blue-500 ring-1 ring-blue-600"
-                  : "text-gray-500"
-              }`}
-              onClick={() => handleAmenityClick(amenity.id || "")}
-            >
-              <div className="text-2xl">{amenity.icon}</div>
-              <span className="text-center md:text-lg font-medium">
-                {amenity.label}
-              </span>
-            </div>
-          ))}
-        </div>
+    <div>
+      <h2 className="text-2xl text-center font-semibold mb-4">
+        Tell guests what your place has to offer
+      </h2>
+
+      <h2 className="text-xl font-semibold text-center mb-4">
+        General Amenities
+      </h2>
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6">
+        {amenities.map((amenity) => (
+          <div
+            key={amenity.id}
+            className={`flex flex-col border-[0.5px] shadow-sm hover:shadow-lg rounded-lg gap-3 py-4 justify-center items-center cursor-pointer ${
+              selectedGeneralAmenities.includes(amenity.id || "")
+                ? "bg-blue-500 text-white"
+                : "text-gray-700"
+            }`}
+            onClick={() => handleGeneralAmenityClick(amenity.id || "")}
+          >
+            <div className="text-2xl">{amenity.icon}</div>
+            <span className="text-center md:text-lg font-medium">
+              {amenity.label}
+            </span>
+          </div>
+        ))}
       </div>
-      <div className="bg-white rounded-lg p-6">
-        <h2 className="text-xl font-bold mb-4">Safety Amenities</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-          {amenities.map((amenity) => (
-            <div
-              key={amenity.id}
-              className={`flex flex-col border text-blue-700 border-slate-400 rounded-lg gap-3 py-4 justify-center items-center cursor-pointer ${
-                selectedAmenities.includes(amenity.id || "")
-                  ? "text-blue-500 ring-1 ring-blue-600"
-                  : "text-gray-500"
-              }`}
-              onClick={() => handleAmenityClick(amenity.id || "")}
-            >
-              <div className="text-2xl">{amenity.icon}</div>
-              <span className="text-center md:text-lg">{amenity.label}</span>
-            </div>
-          ))}
-        </div>
+
+      <hr />
+
+      <h2 className="text-xl mt-4 font-semibold text-center mb-4">
+        Safety Amenities
+      </h2>
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+        {safetyAmenities.map((amenity) => (
+          <div
+            key={amenity.id}
+            className={`flex flex-col border-[0.5px] shadow-sm hover:shadow-lg rounded-lg gap-3 py-4 justify-center items-center cursor-pointer ${
+              selectedSafetyAmenities.includes(amenity.id || "")
+                ? "bg-blue-700 text-white"
+                : "text-gray-700"
+            }`}
+            onClick={() => handleSafetyAmenityClick(amenity.id || "")}
+          >
+            <div className="text-2xl">{amenity.icon}</div>
+            <span className="text-center md:text-lg font-medium">
+              {amenity.label}
+            </span>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 
