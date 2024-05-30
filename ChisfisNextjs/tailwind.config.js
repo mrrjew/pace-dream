@@ -1,10 +1,3 @@
-/**
- * @format
- * @type {import('tailwindcss').Config}
- */
-
-const defaultTheme = require("tailwindcss/defaultTheme");
-
 // Custom color with css variable color in __theme_color.scss
 function customColors(cssVar) {
   return ({ opacityVariable, opacityValue }) => {
@@ -18,34 +11,15 @@ function customColors(cssVar) {
   };
 }
 
+/**
+ * @type {import('tailwindcss').Config}
+ */
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-
-    // Or if using `src` directory:
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: "1rem",
-        "2xl": "128px",
-        "3xl": "128px",
-        "4xl": "128px",
-      },
-    },
-    // fontFamily: {
-    //   display: ["var(--font-display)", ...defaultTheme.fontFamily.sans],
-    //   body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
-    // },
-
     extend: {
       fontFamily: {
-        // 👇 Add CSS variables
         rubik: ["var(--font-rubik)"],
       },
       backgroundImage: {
@@ -105,9 +79,6 @@ module.exports = {
         },
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [
     require("@tailwindcss/typography"),
