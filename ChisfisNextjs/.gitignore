@@ -1,0 +1,9 @@
+/.next
+/node_modules
+
+.env
+.env*
+*.env
+/.idea/
+package-lock.json
+yarn.lock

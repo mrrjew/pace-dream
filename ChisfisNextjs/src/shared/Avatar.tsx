@@ -57,8 +57,8 @@ const Avatar: FC<AvatarProps> = ({
        >
          {url && (
            <Image
-             width={24}
-             height={24}
+             width={20}
+             height={20}
              className={`absolute inset-0 w-full h-full object-cover ${radius}`}
              src={url}
              alt={name}
@@ -81,8 +81,8 @@ const Avatar: FC<AvatarProps> = ({
          className={`wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold  ${radius} ${sizeClass} ${containerClassName}`}
        >
        <Image
-       width={24}
-       height={24}
+       width={20}
+       height={20}
        className={`absolute h-[70%] w-[70%] object-cover ${radius}`}
        src={avatar1}
        alt={name}
