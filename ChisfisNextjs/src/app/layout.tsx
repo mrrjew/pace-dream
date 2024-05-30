@@ -1,15 +1,15 @@
-import { Poppins, Rubik } from "next/font/google";
-import SiteHeader from "./(client-components)/(Header)/SiteHeader";
-import ClientCommons from "./ClientCommons";
-import "@/fonts/line-awesome-1.3.0/css/line-awesome.css";
-import "@/styles/index.scss";
-import "rc-slider/assets/index.css";
+import { Poppins } from "next/font/google";
+import SiteHeader from "@/app/(client-components)/(Header)/SiteHeader";
+import ClientCommons from "@/app/ClientCommons";
 import Footer from "@/components/Footer";
-import FooterNav from "@/components/FooterNav";
 import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
-import "./globals.css";
 import UserProvider from "@/context";
 import ReduxProvider from "@/app/redux/providers";
+
+// import "@/fonts/line-awesome-1.3.0/css/line-awesome.css";
+import "@/styles/index.scss";
+import "rc-slider/assets/index.css";
+import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,24 +33,24 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-[#F6F4F6] text-base text-neutral-900">
-          <ReduxProvider>
-            <ReactQueryClientProvider>
-              <UserProvider>
-                <ClientCommons />
-                <div>
-                  <SiteHeader />
-                  <div className="flex overflow-x-hidden max-w-screen">
-                    {/* <div className="hidden md:block" >
+        <ReduxProvider>
+          <ReactQueryClientProvider>
+            <UserProvider>
+              <ClientCommons />
+              <div>
+                <SiteHeader />
+                <div className="flex overflow-x-hidden max-w-screen">
+                  {/* <div className="hidden md:block" >
                 <SideBar/>
                 </div> */}
-                    <div className="flex-1">{children}</div>
-                  </div>
+                  <div className="flex-1">{children}</div>
                 </div>
-                {/* <FooterNav /> */}
-                <Footer />
-              </UserProvider>
-            </ReactQueryClientProvider>
-          </ReduxProvider>
+              </div>
+              {/* <FooterNav /> */}
+              <Footer />
+            </UserProvider>
+          </ReactQueryClientProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
