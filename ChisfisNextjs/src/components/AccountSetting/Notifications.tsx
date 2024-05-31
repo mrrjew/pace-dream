@@ -73,7 +73,7 @@ const Notifications = () => {
                 <div>
                   <p className="text-xl font-medium">Everything</p>
                   <p className="text-[#757575] lg:w-[500px]">
-                    Send Every changes as a push notification.
+                    Send every changes as a push notification.
                   </p>
                 </div>
               </div>

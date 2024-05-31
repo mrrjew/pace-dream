@@ -1,49 +1,98 @@
-import StayCard from '@/components/StayCard';
-import { DEMO_STAY_LISTINGS } from '@/data/listings';
-import React from 'react';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import ButtonSecondary from '@/shared/ButtonSecondary';
-import { EyeIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
-import { Route } from '@/routers/types';
-import { PageAddingListing } from '@/types/types';
-import useFormFields from '@/hooks/useFormFields';
+import React, { useState } from "react";
+import {
+  FaWifi,
+  FaTv,
+  FaParking,
+  FaSnowflake,
+  FaSwimmingPool,
+} from "react-icons/fa";
+import { FaKitchenSet } from "react-icons/fa6";
+import { MdRoomService } from "react-icons/md";
 
+interface Amenity {
+  icon?: React.ReactNode;
+  label?: string;
+  id?: string;
+}
 
+const amenities: Amenity[] = [
+  { icon: <FaWifi />, label: "Wifi", id: "wifi" },
+  { icon: <FaSwimmingPool />, label: "Swimming Pool", id: "swimming-pool" },
+  { icon: <FaTv />, label: "TV", id: "tv" },
+  { icon: <FaKitchenSet />, label: "Kitchen", id: "kitchen" },
+  {
+    icon: <FaParking />,
+    label: "Parking",
+    id: "parking",
+  },
+  { icon: <FaSnowflake />, label: "AC", id: "ac" },
+  {
+    icon: <MdRoomService />,
+    label: "Room Service",
+    id: "room-service",
+  },
+];
 
-const PageAddListing4 = ({ input, setInput, handleInputChange, setPageNumber }: PageAddingListing) => {
-  
+const AmenityGrid: React.FC = () => {
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+
+  const handleAmenityClick = (amenityId: string) => {
+    setSelectedAmenities((prevSelectedAmenities) => {
+      if (prevSelectedAmenities.includes(amenityId)) {
+        return prevSelectedAmenities.filter((id) => id !== amenityId);
+      } else {
+        return [...prevSelectedAmenities, amenityId];
+      }
+    });
+  };
+
   return (
     <>
-      <div>
-        <h2 className='text-2xl font-semibold'>Congratulations 🎉</h2>
-        <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>Excellent, congratulations on completing the listing, it is waiting to be reviewed for publication</span>
-      </div>
-      <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
-      {/* FORM */}
-      <div>
-        <h3 className='text-lg font-semibold'>This is your listing</h3>
-        <div className='max-w-xs'>
-          <h1>{!input.propertyType}</h1>
-          <StayCard
-            className='mt-8'
-            data={{ ...DEMO_STAY_LISTINGS[0], reviewStart: 0 }}
-          />
-        </div>
-        <div className='flex items-center space-x-5 mt-8'>
-          <ButtonSecondary onClick={() => setPageNumber && setPageNumber(1)}>
-            <PencilSquareIcon className='h-5 w-5' />
-            <span className='ml-3'>Edit</span>
-          </ButtonSecondary>
-
-          <ButtonPrimary>
-            <EyeIcon className='h-5 w-5' />
-            <span className='ml-3'>Preview</span>
-          </ButtonPrimary>
+      <div className="bg-white rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">
+          Tell guests what your place has to offer
+        </h2>
+        <p className="text-gray-600 mb-6">General Amenities</p>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+          {amenities.map((amenity) => (
+            <div
+              key={amenity.id}
+              className={`flex flex-col border text-blue-700 border-slate-400 rounded-lg gap-3 py-4 justify-center items-center cursor-pointer ${
+                selectedAmenities.includes(amenity.id || "")
+                  ? "text-blue-500 ring-1 ring-blue-600"
+                  : "text-gray-500"
+              }`}
+              onClick={() => handleAmenityClick(amenity.id || "")}
+            >
+              <div className="text-2xl">{amenity.icon}</div>
+              <span className="text-center md:text-lg font-medium">
+                {amenity.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
-      {/*  */}
+      <div className="bg-white rounded-lg p-6">
+        <h2 className="text-xl font-bold mb-4">Safety Amenities</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+          {amenities.map((amenity) => (
+            <div
+              key={amenity.id}
+              className={`flex flex-col border text-blue-700 border-slate-400 rounded-lg gap-3 py-4 justify-center items-center cursor-pointer ${
+                selectedAmenities.includes(amenity.id || "")
+                  ? "text-blue-500 ring-1 ring-blue-600"
+                  : "text-gray-500"
+              }`}
+              onClick={() => handleAmenityClick(amenity.id || "")}
+            >
+              <div className="text-2xl">{amenity.icon}</div>
+              <span className="text-center md:text-lg">{amenity.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };
 
-export default PageAddListing4;
+export default AmenityGrid;

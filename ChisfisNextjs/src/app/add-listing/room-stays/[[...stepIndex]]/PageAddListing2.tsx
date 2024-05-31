@@ -1,193 +1,68 @@
-import React, { FC } from 'react';
-import Select from '@/shared/Select';
-import FormItem from '../FormItem';
-import { PageAddingListing } from '@/types/types';
-import NcInputNumber from '@/components/ListingComponents/NcInputNumber';
-import Checkbox from '@/components/ListingComponents/Checkbox';
+import React, { FC } from "react";
+import Select from "@/shared/Select";
+import FormItem from "../FormItem";
+import { PageAddingListing } from "@/types/types";
+import NcInputNumber from "@/components/ListingComponents/NcInputNumber";
+import Input from "@/shared/Input";
 
-
-
-const PageAddListing2 = ({ input, setInput, handleInputChange }: PageAddingListing) => {
-  const handlePropertyTypeSelection = (type: string) => {
-    setInput({ ...input, propertyType: type });
-  };
-  const handleRemoveFile = (file: File) => {
-    const oldPlaceImage = [...(input.placeImages as [])];
-    const removeFile = oldPlaceImage?.filter((item) => item !== file);
-    setInput((prevState) => ({ ...prevState, placeImages: removeFile }));
-  };
-  const generalAmentiesList = [
-    {
-      label: 'Wifi',
-      name: 'Wifi'
-    },
-    {
-      label: 'Parking',
-      name: 'Parking'
-    },
-    {
-      label: 'Breakfast',
-      name: 'Breakfast'
-    }
-  ];
-  const otherAmentiesList = [
-    {
-      label: 'Fan',
-      name: 'Fan'
-    },
-    {
-      label: 'TV',
-      name: 'TV'
-    },
-    {
-      label: 'Desk',
-      name: 'Desk'
-    },
-    {
-      label: 'Fridge',
-      name: 'Fridge'
-    },
-    {
-      label: 'Clothes dryer',
-      name: 'Clothes dryer'
-    },
-    {
-      label: 'Air conditioning',
-      name: 'Air conditioning'
-    }
-  ];
-  interface PropertyTypeSelectionProps {
-    onSelectPropertyType: (type: string) => void;
-  }
+const PageAddListing2 = () => {
   return (
     <>
-      {/* <h2 className='text-2xl font-semibold'>General amenities</h2> */}
-      <div className='w-14 border-b border-neutral-200 dark:border-neutral-700'></div>
       {/* FORM */}
-      <div className='listingSection__wrap '>
-        <div className='space-y-8'>
-          {/* <h2 className='text-2xl font-semibold'>General amenities</h2> */}
-          <label
-            className='text-lg font-semibold'
-            htmlFor=''>
-            General amenities
-          </label>
-          {/* ITEM */}
-          <div>
-            <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
-              {generalAmentiesList?.map((item, index) => (
-                <Checkbox
-                  inputName='generalAmenities'
-                  key={index}
-                  label={item.label}
-                  name={item.name}
-                  defaultChecked={Array.isArray(input?.generalAmenities) && input.generalAmenities.includes(item.name)}
-                  input={input}
-                  setInput={setInput}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      
+      <div className="listingSection__wrap ">
+        {/* FORM */}
 
-      <div className='listingSection__wrap my-5'>
-        <div className='space-y-8'>
-          <div>
-            <label
-              className='text-lg font-semibold'
-              htmlFor=''>
-              Other amenities
-            </label>
-            <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
-              {otherAmentiesList?.map((item, index) => (
-                <Checkbox
-                  inputName='otherAmenties'
-                  key={index}
-                  label={item.label}
-                  name={item.name}
-                  defaultChecked={Array.isArray(input?.otherAmenties) && input.otherAmenties.includes(item.name)}
-                  input={input}
-                  setInput={setInput}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='space-y-8'>
-        <div>
-          <label
-            className='text-lg font-semibold'
-            htmlFor=''>
-            Additional amenities
-          </label>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {['Parking', 'Washing', 'Gaming'].map((type) => (
-              <button
-                key={type}
-                className={`px-4 py-2 hover:bg-[#632DF8] text-black border border-gray-400 hover:text-white text-[12px] font-[400] rounded-full ${input.propertyType === type ? 'bg-[#632DF8] text-white' : ''}`}
-                type="button"
-                onClick={() => handlePropertyTypeSelection(type)}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-          <label
-            className='text-lg font-semibold'
-            htmlFor=''>
-            Pictures of the place
-          </label>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2 mt-5">
-              Upload the place photos
-            </label>
-          </div>
-          
-          <div className='mt-5 '>
-            <div className='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-300 dark:border-neutral-6000 border-dashed rounded-md'>
-              <div className='space-y-1 text-center'>
-                <svg
-                  className='mx-auto h-12 w-12 text-neutral-400'
-                  stroke='currentColor'
-                  fill='none'
-                  viewBox='0 0 48 48'
-                  aria-hidden='true'>
-                  <path
-                    d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
-                    strokeWidth='2'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'></path>
-                </svg>
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold">Location Details</h2>
 
-                {input?.coverImage instanceof File && input?.coverImage.name && <p className='text-xs text-neutral-500 dark:text-neutral-400'>{input.coverImage.name}</p>}
-
-                <div className='flex text-sm text-neutral-6000 dark:text-neutral-300'>
-                  <label
-                    htmlFor='file-upload'
-                    className='relative cursor-pointer rounded-md font-medium text-primary-6000 hover:text-primary-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500'>
-                    <span>Upload a file</span>
-                    <input
-                      id='file-upload'
-                      name='coverImage'
-                      onChange={(e) => {
-                        setInput((prevState) => ({ ...prevState, coverImage: e?.target?.files?.[0] }));
-                      }}
-                      accept='.jpg, .jpeg, .png,.gif'
-                      type='file'
-                      className='sr-only'
-                    />
-                  </label>
-                  <p className='pl-1'>or drag and drop</p>
-                </div>
-                <p className='text-xs text-neutral-500 dark:text-neutral-400'>PNG,JPEG, JPG, GIF up to 10MB</p>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
+            <FormItem label="">
+              <Input name="cou try" type="text" placeholder="Country" />
+            </FormItem>
           </div>
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+            <FormItem label="">
+              <Input name="street" type="text" placeholder="Street" />
+            </FormItem>
+            <FormItem label="">
+              <Input name="city" type="text" placeholder="City" />
+            </FormItem>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+            <FormItem label="">
+              <Input name="state" type="text" placeholder="State" />
+            </FormItem>
+            <FormItem label="">
+              <Input name="zipcode" type="text" placeholder="Zip Code" />
+            </FormItem>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
+            <FormItem label="">
+              <Input
+                name="cou try"
+                type="text"
+                placeholder="Transportation links near the property"
+              />
+            </FormItem>
+          </div>
+          <div className="w-full h-[200px] rounded-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1716987280536!5m2!1sen!2sin"
+              className="w-full h-full rounded-lg"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <label className="inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" className="sr-only peer" />
+            <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Show your current location
+            </span>
+          </label>
         </div>
       </div>
     </>
