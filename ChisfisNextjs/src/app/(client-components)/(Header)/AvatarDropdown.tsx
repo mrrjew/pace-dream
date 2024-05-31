@@ -34,17 +34,7 @@ type HostMenueDashboardType = {
 
 export default function AvatarDropdown({ className = "" }: Props) {
   const [isHost, setIsHost] = useState<boolean>(false);
-  // const [hostDashboardMenueList,setHostDashboardMenueList] = useState<Array<HostMenueDashboardType>>([])
 
-  // const [
-  //   fetchHostDropdownMenu,
-  //   { data: hostMenuData, isLoading: isHostMenuLoading, error: hostMenuError },
-  // ] = useLazyGetHostMenuDropdownQuery({});
-
-  // const { data, refetch } = useFetch<Array<HostMenueDashboardType>>({
-  //   endpoint: "/host_dashboard_seed/get-host-dashboard",
-  //   queryKey: ["host_dashbord_menue"],
-  // })
 
   const handleSwitch = () => {
     setIsHost(!isHost);
