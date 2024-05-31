@@ -2,6 +2,7 @@
 
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 
@@ -218,6 +219,8 @@ function PaymentItems({
 
 
 export function PaymentMethods() {
+  const router = useRouter()
+
   const paymentItems:Array<PaymentItemsProps> = [
     {
       title: "Your Payments",
@@ -235,7 +238,9 @@ export function PaymentMethods() {
       title: "PaceDream gift credit",
       description: "",
       btnLabel: "Add Gift Card",
-      onBtnClick: () => {},
+      onBtnClick: () => {
+        router.push("/gift-card/redeen")
+      },
       hideDivider: true
     },
     {

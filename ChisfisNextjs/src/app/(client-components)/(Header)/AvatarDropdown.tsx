@@ -81,7 +81,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
         {
             name: "Gift card",
             icon: "AiOutlineGift",
-            url: "/"
+            url: "/gift-card"
         },
         {
             name: "Contact support",
