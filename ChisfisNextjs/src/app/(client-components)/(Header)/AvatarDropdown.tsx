@@ -108,7 +108,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
         {
           name: "Bookings & Listings",
           icon: "BsBookmark",
-          url: "/host-mode/booking"
+          url: "/host-mode/bookings-and-listings"
         },
         {
           name: "Business Insight",
@@ -152,7 +152,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
     otherMenuItems: [
       {
-        url: "/#",
+        url: "/help-center",
         name: "Help",
         icon:<HelpSvg/>
       },
