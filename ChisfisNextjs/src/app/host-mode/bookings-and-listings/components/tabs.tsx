@@ -15,7 +15,7 @@ export function CustomTab({ tabs,onTabChange }:{tabs:string[],
     };
 
   return (
-    <div className="flex items-center relative overflow-x-scroll  space-x-8 w-full h-fit ">
+    <div className="flex items-center relative overflow-y-hidden overflow-x-scroll  space-x-8 w-full h-fit ">
       {tabs.map((tab, index) => (
         <div
           key={index}

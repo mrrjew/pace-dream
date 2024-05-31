@@ -54,34 +54,6 @@ export default function AvatarDropdown({ className = "" }: Props) {
   // const { clearUser }: any = useProfile();
   const { token, userInfo } = getSession();
 
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   // fetchHostDropdownMenu({});
-  //   refetch()
-  // }, [token]);
-
-  // const handleLogout = async () => {
-  //   const auth = getAuth(app);
-  //   await auth.signOut();
-  //   const res = await fetch(
-  //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   if (res.ok) {
-  //     clearSession();
-  //     clearUser();
-  //     setTimeout(() => {
-  //       router.push("/auth/login");
-  //     }, 10);
-  //   }
-  // };
-
   // dropdown menu list
   const dropdownMenu = {
     account: token ?  {
@@ -115,11 +87,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
           icon: <FiPieChart size={22} className="ml-0.5" />,
           url: "/host-mode/host-business"
         },
-        {
-            name: "Transaction history",
-            icon: "BsClipboard",
-            url: "/transaction-activity"
-        },
+    
         {
             name: "Gift card",
             icon: "AiOutlineGift",
@@ -130,6 +98,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
             icon: "RiHeadphoneLine",
             url: "/contact-us"
         }
+          // {
+          //     name: "Transaction history",
+          //     icon: "BsClipboard",
+          //     url: "/transaction-activity"
+          // },
         ],
     },
     guestMenuList: [

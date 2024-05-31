@@ -48,7 +48,7 @@ export default function BookingAndListingPage(){
     return (
         <section className="min-h-screen bg-white">
            {/* header */}
-           <div className="container py-10 flex justify-between items-center">
+           <div className="container py-10 flex justify-between items-center flex-wrap-reverse">
                 <div>
                     <h1 className="text-md md:text-3xl font-bold">{"Welcome to host mode"}</h1>
                     <p className="py-1 text-sm font-semibold">{"Manage your bookings and listings"}</p>
