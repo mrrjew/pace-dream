@@ -8,7 +8,7 @@ const page = () => {
             <div className="w-max flex flex-col gap-2 space-y-2 px-4 py-10">
                 {SETTINGS_NAV.map((nav) => {
                     return(
-                        <Link href={`${nav.href}`} className="hover:bg-slate-100  p-2 rounded-md rounded-md">
+                        <Link href={nav?.href as any} className="hover:bg-slate-100  p-2 rounded-md">
                             {nav.icon}
                             {nav.name}
                         </Link>
