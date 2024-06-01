@@ -46,51 +46,52 @@ export default function BookingAndListingPage(){
 
 
     return (
-        <section className="min-h-screen bg-white">
-           {/* header */}
-           <div className="container py-10 flex justify-between items-center flex-wrap-reverse">
-                <div>
-                    <h1 className="text-md md:text-3xl font-bold">{"Welcome to host mode"}</h1>
-                    <p className="py-1 text-sm font-semibold">{"Manage your bookings and listings"}</p>
+        <div className="bg-white min-h-screen">
+            {/* container */}
+                {/* header */}
+                <div className="container py-10 flex justify-between items-center flex-wrap-reverse">
+                        <div>
+                            <h1 className="text-md md:text-3xl font-bold">{"Welcome to host mode"}</h1>
+                            <p className="py-1 text-sm font-semibold">{"Manage your bookings and listings"}</p>
+                        </div>
+                        <div className="flex gap-2 items-center">
+                            <Image 
+                                className="rounded-full"
+                                src={userInfo?.profilePic}
+                                width={90} height={90} 
+                                alt="You" 
+                            />
+                            <div>
+                                <h3 className="text-xs md:text-xl font-bold">{`${userInfo?.first_name ?? 'You'} ${userInfo?.last_name ?? ''}`}</h3>
+                                <p className="text-xs md:text-lg font-normal">{"Host Account"}</p>
+                            </div>
+                        </div>
+
                 </div>
-                <div className="flex gap-2 items-center">
-                    <Image 
-                        className="rounded-full"
-                        src={userInfo?.profilePic}
-                        width={90} height={90} 
-                        alt="You" 
-                    />
-                    <div>
-                        <h3 className="text-xs md:text-xl font-bold">{`${userInfo?.first_name ?? 'You'} ${userInfo?.last_name ?? ''}`}</h3>
-                        <p className="text-xs md:text-lg font-normal">{"Host Account"}</p>
+
+                    {/* tabs */}
+                        <div className="w-full h-fit bg-primary-500">
+                        <div className="container pt-8">
+                                <CustomTab tabs={tabs} onTabChange={(val)=>{
+                                    setSelectedTab(val);
+                                    setItemIsSelected(false);
+                                }} />
+                        </div>
+                        </div>
+                    {/* selected tab title */}
+                    <div className="container w-full py-8">
+                        <h2 className="text-sm md:text-4xl font-bold">{tabPageTitles[selectedtab].title}</h2>
+                        <p className="text-xs md:text-sm font-bold">{tabPageTitles[selectedtab].subTitle}</p>
                     </div>
+
+                    {/* selected tab content */}
+                    <div className="container">
+                        {tabPageTitles[selectedtab].component}
+                    </div>
+                <div className="mt-24">
+                <JoinOurCommunity />
                 </div>
-
-           </div>
-
-              {/* tabs */}
-                <div className="w-full h-fit bg-primary-500">
-                   <div className="container pt-8">
-                        <CustomTab tabs={tabs} onTabChange={(val)=>{
-                            setSelectedTab(val);
-                            setItemIsSelected(false);
-                        }} />
-                   </div>
-                </div>
-            {/* selected tab title */}
-            <div className="container py-8">
-                <h2 className="text-sm md:text-4xl font-bold">{tabPageTitles[selectedtab].title}</h2>
-                <p className="text-xs md:text-sm font-bold">{tabPageTitles[selectedtab].subTitle}</p>
-            </div>
-
-            {/* selected tab content */}
-            <div className="container">
-                {tabPageTitles[selectedtab].component}
-            </div>
-           <div className="mt-24">
-           <JoinOurCommunity />
-           </div>
-        </section>
+        </div>
     )
 }
 
