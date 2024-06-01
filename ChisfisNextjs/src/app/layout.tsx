@@ -31,7 +31,7 @@ export default function RootLayout({
         <ReactQueryClientProvider>
           <ReduxProvider>
             <SiteHeader />
-            <div className="flex-1">{children}</div>
+            <section className="flex-1">{children}</section>
             <Footer />
           </ReduxProvider>
         </ReactQueryClientProvider>

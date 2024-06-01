@@ -22,6 +22,17 @@ module.exports = {
       fontFamily: {
         rubik: ["var(--font-rubik)"],
       },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "4rem",
+          xl: "5rem",
+          "2xl": "6rem",
+        },
+      
+      },
       backgroundImage: {
         rectangle:
           "url('https://s3-alpha-sig.figma.com/img/806b/93b3/1fb5f1cd8b70dae7015d65698870c4fa?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=boHIQm3zpCHaPI5430xiL7nqBbe6RS98yVD0CuIC9AjZ5W146jWUTlHBFQsvC1paM2YKIaN0pWJyj0S0j7-yoVkCOI375bkGumN7x1ktpjlvELVdms-a41EDaCvs2uuiusqeAVSWFxBWke~~EB1VSlztOWueXGxW8Gf9Pcgb~3uFqwyipHmkRI8A1fGBtihUuWVmxpLnpCwGpJlO7Tm18rSvfK3IPdvVlUOvihHYDz5wQTQrjXnqCgT98YUqfsG40RnUsA7Ysjwq62kFMg9V6b1ikfitZPCnQxPg2E9ZGWc1q98TCwXsknt4aF~IxW0sImsiQ6k-K0~VJ5kNZYolYQ__')",
