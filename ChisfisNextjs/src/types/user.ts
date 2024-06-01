@@ -62,9 +62,9 @@ export type User = {
 export const DbResponseToUser = (user: any): User => {
   return {
     id: user._id,
-    firstName: user.first_name,
-    lastName: user.last_name,
-    email: user.email,
-    profilePic: user.profilePic,
+    first_name: user?.first_name,
+    last_name: user?.last_name,
+    email: user?.email,
+    profilePic: user?.profilePic,
   };
 };
