@@ -55,7 +55,7 @@ export default function GiftCardPage() {
         <div className="flex justify-center my-12">
             <Image 
                 className="rounded-xl object-cover"
-                src="/images/giftcard.png"
+                src="https://i.postimg.cc/6QsJ4BFh/Screenshot-2024-05-31-at-20-23-44.png"
                 width={600} 
                 height={500} 
                 alt="Gift Card" />
