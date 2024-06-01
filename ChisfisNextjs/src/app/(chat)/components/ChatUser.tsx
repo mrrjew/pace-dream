@@ -25,6 +25,7 @@ export const ChatUser: React.FC<IChatUserProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
+    
     // @ts-ignore-error
     router.push(`/inbox/${conversation?.id}`);
   };
