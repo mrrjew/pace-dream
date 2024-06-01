@@ -24,7 +24,7 @@ export const Header: React.FC<IHeaderProps> = ({
   const chatName = useMemo(() => {
     return conversation.isGroupChat
       ? conversation.name
-      : `${otherUser?.firstName} ${otherUser?.lastName}`;
+      : `${otherUser?.first_name} ${otherUser?.last_name}`;
   }, [otherUser, conversation.isGroupChat, conversation.name]);
 
   return (
