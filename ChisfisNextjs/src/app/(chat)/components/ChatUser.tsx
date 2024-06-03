@@ -20,7 +20,7 @@ export const ChatUser: React.FC<IChatUserProps> = ({
   const sender = conversation.users.filter((user) => user.id !== userId)[0];
   const name = conversation.isGroupChat
     ? conversation.name
-    : `${sender.firstName} ${sender.lastName}`;
+    : `${sender.first_name} ${sender.last_name}`;
 
   const router = useRouter();
 
@@ -32,7 +32,7 @@ export const ChatUser: React.FC<IChatUserProps> = ({
   const latestMessageSender = useMemo(() => {
     return conversation.latestMessage?.sender.id === userId
       ? 'You'
-      : conversation.latestMessage?.sender.firstName;
+      : conversation.latestMessage?.sender.first_name;
   }, [conversation]);
 
   return (
