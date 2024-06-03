@@ -6,6 +6,7 @@ import ReduxProvider from "@/store/providers";
 import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import "./globals.css";
+import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,11 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       <body className="bg-[#F6F4F6] text-base text-neutral-900 pt-[64px] overflow-x-hidden max-w-screen flex flex-col">
-        <ReduxProvider>
-          <SiteHeader />
-          <div className="flex-1">{children}</div>
-          <Footer />
-        </ReduxProvider>
+        <ReactQueryClientProvider>
+          <ReduxProvider>
+            <SiteHeader />
+            <section className="flex-1">{children}</section>
+            <Footer />
+          </ReduxProvider>
+        </ReactQueryClientProvider>
       </body>
     </html>
   );

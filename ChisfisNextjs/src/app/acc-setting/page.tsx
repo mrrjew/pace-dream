@@ -79,7 +79,7 @@ const AccountSetting = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

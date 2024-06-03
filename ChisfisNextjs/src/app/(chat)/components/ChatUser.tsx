@@ -25,12 +25,13 @@ export const ChatUser: React.FC<IChatUserProps> = ({
   const router = useRouter();
 
   const handleClick = () => {
+    
     // @ts-ignore-error
-    router.push(`/inbox/${conversation.id}`);
+    router.push(`/inbox/${conversation?.id}`);
   };
 
   const latestMessageSender = useMemo(() => {
-    return conversation.latestMessage?.sender.id === userId
+    return conversation.latestMessage?.sender?.id === userId
       ? 'You'
       : conversation.latestMessage?.sender.first_name;
   }, [conversation]);

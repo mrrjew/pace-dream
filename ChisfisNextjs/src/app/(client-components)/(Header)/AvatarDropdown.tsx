@@ -34,17 +34,7 @@ type HostMenueDashboardType = {
 
 export default function AvatarDropdown({ className = "" }: Props) {
   const [isHost, setIsHost] = useState<boolean>(false);
-  // const [hostDashboardMenueList,setHostDashboardMenueList] = useState<Array<HostMenueDashboardType>>([])
 
-  // const [
-  //   fetchHostDropdownMenu,
-  //   { data: hostMenuData, isLoading: isHostMenuLoading, error: hostMenuError },
-  // ] = useLazyGetHostMenuDropdownQuery({});
-
-  // const { data, refetch } = useFetch<Array<HostMenueDashboardType>>({
-  //   endpoint: "/host_dashboard_seed/get-host-dashboard",
-  //   queryKey: ["host_dashbord_menue"],
-  // })
 
   const handleSwitch = () => {
     setIsHost(!isHost);
@@ -53,34 +43,6 @@ export default function AvatarDropdown({ className = "" }: Props) {
   const { getSession,  handleLogout } = useSession();
   // const { clearUser }: any = useProfile();
   const { token, userInfo } = getSession();
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   // fetchHostDropdownMenu({});
-  //   refetch()
-  // }, [token]);
-
-  // const handleLogout = async () => {
-  //   const auth = getAuth(app);
-  //   await auth.signOut();
-  //   const res = await fetch(
-  //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   if (res.ok) {
-  //     clearSession();
-  //     clearUser();
-  //     setTimeout(() => {
-  //       router.push("/auth/login");
-  //     }, 10);
-  //   }
-  // };
 
   // dropdown menu list
   const dropdownMenu = {
@@ -108,28 +70,29 @@ export default function AvatarDropdown({ className = "" }: Props) {
         {
           name: "Bookings & Listings",
           icon: "BsBookmark",
-          url: "/host-mode/booking"
+          url: "/host-mode/bookings-and-listings"
         },
         {
           name: "Business Insight",
           icon: <FiPieChart size={22} className="ml-0.5" />,
           url: "/host-mode/host-business"
         },
-        {
-            name: "Transaction history",
-            icon: "BsClipboard",
-            url: "/transaction-activity"
-        },
+    
         {
             name: "Gift card",
             icon: "AiOutlineGift",
-            url: "/"
+            url: "/gift-card"
         },
         {
             name: "Contact support",
             icon: "RiHeadphoneLine",
             url: "/contact-us"
         }
+          // {
+          //     name: "Transaction history",
+          //     icon: "BsClipboard",
+          //     url: "/transaction-activity"
+          // },
         ],
     },
     guestMenuList: [
