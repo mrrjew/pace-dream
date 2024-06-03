@@ -1,4 +1,5 @@
 import { SETTINGS_NAV } from "@/data/navigation";
+import { Route } from "next";
 import Link from "next/link";
 
 const page = () => {
@@ -8,7 +9,7 @@ const page = () => {
         {SETTINGS_NAV.map((nav) => {
           return (
             <Link
-              href={nav.href}
+              href={nav.href as Route}
               className="hover:bg-slate-100  p-2 rounded-md"
             >
               {nav.icon}
