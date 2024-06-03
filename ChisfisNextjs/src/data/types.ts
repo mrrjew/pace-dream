@@ -5,7 +5,7 @@ import { PathName } from "@/routers/types";
 //  ######  CustomLink  ######## //
 export interface CustomLink {
   label: string;
-  href: Route<string> | string;
+  href: Route | string;
   targetBlank?: boolean;
 }
 
@@ -13,7 +13,7 @@ export interface CustomLink {
 export interface TaxonomyType {
   id: string | number;
   name: string;
-  href: Route<string> | string | PathName;
+  href: Route | string | PathName;
   count?: number;
   thumbnail?: string;
   desc?: string;
@@ -33,7 +33,7 @@ export interface AuthorType {
   count: number;
   desc: string;
   jobName: string;
-  href: Route<string>;
+  href: Route;
   starRating?: number;
 }
 
@@ -41,7 +41,7 @@ export interface PostDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   categories: TaxonomyType[];
   title: string;
   featuredImage: StaticImageData | string;
@@ -68,7 +68,7 @@ export interface StayDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   term?: string;
   shared?: string;
@@ -100,7 +100,7 @@ export interface TimeBasedDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   featuredImage: StaticImageData | string;
   commentCount: number;
@@ -140,7 +140,7 @@ export interface LastDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   lastMinute: number;
   featuredImage: StaticImageData | string;
@@ -171,7 +171,7 @@ export interface ExperiencesDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   featuredImage: StaticImageData | string;
   commentCount: number;
@@ -197,7 +197,7 @@ export interface CarDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   featuredImage: StaticImageData | string;
   commentCount: number;

@@ -19,8 +19,8 @@ export interface NavItemType {
   id: string;
   name: string;
   isNew?: boolean;
-  icon?:React.ReactNode;
-  href: Route<string> | string | PathName;
+  icon?: React.ReactNode;
+  href: Route | string | PathName;
   targetBlank?: boolean;
   children?: NavItemType[];
   megaMenu?: MegamenuItem[];
@@ -118,7 +118,8 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
   };
 
   const renderMegaMenuNavlink = (item: NavItemType) => {
-    const urlObject = typeof item.href === "string" ? { pathname: item.href } : item.href;
+    const urlObject =
+      typeof item.href === "string" ? { pathname: item.href } : item.href;
     return (
       <li key={item.id}>
         <Link
@@ -234,7 +235,8 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
   };
 
   const renderDropdownMenuNavlink = (item: NavItemType) => {
-    const urlObject = typeof item.href === "string" ? { pathname: item.href } : item.href;
+    const urlObject =
+      typeof item.href === "string" ? { pathname: item.href } : item.href;
     return (
       <Link
         target={item.targetBlank ? "_blank" : undefined}
@@ -255,7 +257,8 @@ const NavigationItem: FC<NavigationItemWithRouterProps> = ({ menuItem }) => {
 
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: NavItemType) => {
-    const urlObject = typeof item.href === "string" ? { pathname: item.href } : item.href;
+    const urlObject =
+      typeof item.href === "string" ? { pathname: item.href } : item.href;
     return (
       <Link
         rel="noopener noreferrer"
