@@ -54,7 +54,7 @@ export function AddOffer(){
                         },
                     ]} setSelectedItem={()=>{}}   />
             </div>
-            <div className="col-span-1 relative ml-o md:ml-12">
+            <div className="col-span-1 relative ml-0 md:ml-12">
                 <div className="flex justify-center items-center relative">
                     <DatePicker
                             onChange={handleChange}
@@ -74,9 +74,9 @@ export function AddOffer(){
                         />
                 </div>
 
-                    <div className="mt-4 w-full md:w-72">
+                    <div className="mt-4 w-full md:w-60">
                         <h2 className="text-xl font-semibold py-4">Add Discount</h2>
-                        <div className="grid grid-cols-1 space-y-4">
+                        <div className="grid grid-cols-1 space-y-4 ">
                             {
                                 Array.from([5,10,20,50,"Custom"]).map((item, index) => {
                                     return (

@@ -100,7 +100,7 @@ export function BookingAndListingVerticalCard({menus,setSelectedItem}:{
                 </div>
                 <div>
                     <Place className="text-primary-800" />
-                    <span className="text-sm font-extralight text-gray-300">1 Anzinger Court</span>
+                    <span className="text-sm font-light text-gray-500">1 Anzinger Court</span>
                 </div>
                 <div className="flex justify-between h-fit">
                     <span><span className="text-sm font-bold">$250</span> <span className="text-xs text-gray-500">/hour</span></span>

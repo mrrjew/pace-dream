@@ -145,7 +145,7 @@ const InitialData: FormData = {
 };
 
 const Page = () => {
-  const [data, setData] = useState(InitialData);
+  const [data, setData] = useState<typeof InitialData>(InitialData);
   const {
     steps,
     currentStepIndex,
