@@ -124,7 +124,7 @@ const BrowseByCategories = () => {
               return (
                 <div
                   onClick={() => setCatActive(data.id)}
-                  className={`flex flex-col gap-[.5rem] p-[1rem] px-[2rem]  items-center  border-2 font-rubik shrink-0 ${
+                  className={`flex flex-col gap-[.5rem] p-[1rem] px-[2rem] items-center border-2 font-rubik shrink-0 ${
                     id == catActive
                       ? "bg-[#5527D7] border-transparent text-white "
                       : " border-[#D9D9D9] text-[#939393] "
