@@ -85,7 +85,7 @@ const GuestForm: FC<GuestsInputProps> = ({
                   <Image
                     src={AddGuestIconImage}
                     alt="Add guest"
-                    className=" w-[1.02rem] "
+                    className="shrink-0 size-5 flex items-center "
                   />
                   {/* <UserPlusIcon className=" w-[1.2rem] " /> */}
                 </div>
