@@ -116,7 +116,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
           <Image
             src={CalendarImage}
             alt="Calendar"
-            className=" w-[1.1rem] h-[1.1rem] flex items-center "
+            className="shrink-0 size-5 flex items-center "
           />
 
           {/* <CalendarDaysIcon className="w-6 h-6 ml-4 text-black lg:w-6 lg:h-6 xl:w-6 xl:h-6" /> */}
@@ -144,7 +144,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
       <div className="flex-grow text-left border-none max-md:mt-4 max-md:ml-4">
         <div className="font-rubik text-[.6rem] font-[400]">Until</div>
         <div
-          className={`flex  justify-between items-center p-0  bg-transparent border-none text-[1.13rem] font-rubik font-[700] placeholder:text-black text-black  focus:ring-0 focus:outline-none w-[8.2rem] h-[2rem]  line-clamp-1`}
+          className={`flex justify-between items-center p-0  bg-transparent border-none text-[1.13rem] font-rubik font-[700] placeholder:text-black text-black  focus:ring-0 focus:outline-none w-[8.2rem] h-[2rem]  line-clamp-1`}
         >
           {selectedRange[1]
             ? selectedRange[1]?.toLocaleDateString("en-US")
@@ -152,7 +152,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
           <Image
             src={CalendarImage}
             alt="Calendar"
-            className=" w-[1.1rem] h-[1.1rem] flex items-center "
+            className="shrink-0 size-5 flex items-center"
           />
         </div>
         <div className="flex leading-[1.1] text-[.75rem] font-rubik font-[400] justify-start">

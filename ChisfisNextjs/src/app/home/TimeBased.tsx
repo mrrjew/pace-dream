@@ -77,10 +77,10 @@ const TimeBased = () => {
 
   let sliderRef = useRef<Slider>(null);
   const next = () => {
-    sliderRef?.current?.slickNext;
+    sliderRef?.current?.slickNext();
   };
   const previous = () => {
-    sliderRef?.current?.slickPrev;
+    sliderRef?.current?.slickPrev();
   };
   const settings = {
     dots: true,
@@ -218,7 +218,7 @@ const TimeBased = () => {
           </div>
           {/* Card */}
           <div className="  w-[100%] h-[293px]">
-            <Slider {...settings}>
+            <Slider ref={sliderRef} {...settings}>
               {cardData?.map((card) => (
                 <div
                   key={card.id}
