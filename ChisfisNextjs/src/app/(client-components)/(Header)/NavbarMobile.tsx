@@ -1,15 +1,17 @@
+"use client";
 import Image from "next/image";
 import { useProfile } from '@/context';
 import { useSession } from '@/hooks/useSession';
 import { IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import LogoMobile from "@/images/paceDreamLogo-light.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { app } from 'config/firebase';
 import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Avatar from '@/shared/Avatar';
+import { ChevronLeft } from "@mui/icons-material";
 
 const CollapsibleMenu = () => {
 
@@ -326,25 +328,47 @@ const CollapsibleMenu = () => {
 export default function NavbarMobile() {
   const [switchMenu, setSwitchMenu] = useState(false);
   const handlerSwitchMenu = () => setSwitchMenu(!switchMenu);
+  const pathname = usePathname();
+  const [hideLogo, setHideLogo] = useState(false);
+
+  // check if path contains add-listing
+  function hasAddListing(){
+    return window?.location.pathname.split('/').includes("add-listing");
+  }
+
+  // check if path contains add-listing
+  useEffect(() => {
+    setHideLogo(hasAddListing());
+  }, [pathname]);
 
 
   return (
     <>
       <article className="w-full flex items-center justify-between md:hidden relative ">
-        <Image src={LogoMobile} alt="logo" className="ml-4" />
-        {
-          !switchMenu ? (<IoMenu
-            size={44}
-            color="#000"
-            className="rounded-full bg-[#F2F2F7] p-2 mr-4"
-            onClick={handlerSwitchMenu}
-          />) : (<IoMdClose
-            size={44}
-            color="#000"
-            className="rounded-full bg-[#F2F2F7] p-2 mr-4"
-            onClick={handlerSwitchMenu}
-          />)
-        }
+        <Image src={LogoMobile} alt="logo" className={`ml-4 ${hideLogo ? 'hidden' : 'block'}`} />
+        {hideLogo && <div className="flex w-full items-center justify-between">
+          <button 
+            onClick={() => window.history.back()}
+            className="btn p-2 rounded-full shadow-lg text-sm font-semibold ">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <h2 className="text-xs w-full text-center font-semibold capitalize">{
+            window?.location.pathname.split("/").pop()?.replaceAll("-", " ") || "Stay Room"
+          }</h2>
+        </div>}
+      {
+        !switchMenu ? (<IoMenu
+          size={44}
+          color="#000"
+          className="rounded-full bg-[#F2F2F7] p-2 mr-4"
+          onClick={handlerSwitchMenu}
+        />) : (<IoMdClose
+          size={44}
+          color="#000"
+          className="rounded-full bg-[#F2F2F7] p-2 mr-4"
+          onClick={handlerSwitchMenu}
+        />)
+      }
       </article>
       {
         switchMenu && <CollapsibleMenu />

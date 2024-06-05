@@ -57,7 +57,7 @@ export default function SiteHeader() {
     >
       <section className="flex justify-between h-16 px-4 lg:container">
         <article className="justify-start flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10 gap-14">
-          <Logo className="self-center w-34 ml-6" />
+          <Logo className={`self-center w-34 ml-6`} />
           <div className="items-center justify-end hidden lg:flex ">
             <ol className="flex items-center gap-4 ml-48">
               <li>
@@ -85,9 +85,9 @@ export default function SiteHeader() {
         <div className="justify-end flex-1 flex-shrink-0 hidden md:flex lg:flex-none text-neutral-700 dark:text-neutral-100">
           <div className="hidden space-x-1 lg:flex">
             <Link
-              href="/auth/login"
-              // href={token ? "/add-listing" : ("/auth/login" as any)}
-              // as={token ? "/add-listing" : "/auth/login"}
+              // href="/auth/login"
+              href={token ? "/add-listing" : "/auth/login"}
+              as={token ? "/add-listing" : "/auth/login"}
               className="inline-flex items-center self-center px-4 py-2 text-sm font-medium text-gray-700 border rounded-full text-opacity-90 group border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-300 hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
               Post a Listing
