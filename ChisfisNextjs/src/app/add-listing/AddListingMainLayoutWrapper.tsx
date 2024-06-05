@@ -3,7 +3,7 @@ import { RoomImg, TimeImg, HourlyImg, FindImg, ExperiencesImg, LastminutesImg } 
 // import Sidebar from "../SideBar";
 import { Filter, Home, Timer, Watch } from "@mui/icons-material";
 import { BriefcaseIcon, UsersIcon } from "@heroicons/react/24/solid";
-import { Route } from "@/routers/types";
+// import { Route } from "@/routers/types";
 import { ListingOption } from "@/types/types";
 import Sidebar from "./SideBar";
 
@@ -11,42 +11,42 @@ import Sidebar from "./SideBar";
 
 const options:Array<ListingOption> = [
   {
-    href: "/add-listing/room-stays" as Route<string>,
+    href: "/add-listing/room-stays",
     img: RoomImg,
     alt: "Room Stays",
     label: "Room Stays",
     avatar: <Home  className="w-5 h-5 text-gray-500 text-inherit"/>
   },
   {
-    href: "/add-listing/time-based" as Route<string>,
+    href: "/add-listing/time-based",
     img: TimeImg,
     alt: "Time-Based",
     label: "Time-Based",
     avatar: <Watch  className="w-5 h-5 text-gray-500 text-inherit"/>
   },
   {
-    href: "/add-listing/hourly-rental-gear" as Route<string>,
+    href: "/add-listing/hourly-rental-gear",
     img: HourlyImg,
     alt: "Hourly Rental Gear",
     label: "Hourly Rental Gear",
     avatar: <Filter  className="w-5 h-5 text-gray-500 text-inherit"/>
   },
   {
-    href: "/add-listing/find-roommate" as Route<string>,
+    href: "/add-listing/find-roommate",
     img: FindImg,
     alt: "Find Roommate",
     label: "Find Roommate",
     avatar:<UsersIcon className="w-5 h-5 text-gray-500 text-inherit"/>
   },
   {
-    href: "/add-listing/experience" as Route<string>,
+    href: "/add-listing/experience",
     img: ExperiencesImg,
     alt: "Experiences",
     label: "Experiences",
     avatar: <BriefcaseIcon  className="w-5 h-5 text-gray-500 text-inherit"/>
   },
   {
-    href: "/add-listing/last-minutes" as Route<string>,
+    href: "/add-listing/last-minutes",
     img: LastminutesImg,
     alt: "Last minutes",
     label: "Last minutes",
