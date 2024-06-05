@@ -84,17 +84,17 @@ const HourlyRentalGear = () => {
 
   let sliderRef = useRef<Slider>(null);
   const next = () => {
-    sliderRef?.current?.slickNext;
+    sliderRef?.current?.slickNext();
   };
   const previous = () => {
-    sliderRef?.current?.slickPrev;
+    sliderRef?.current?.slickPrev();
   };
   const settings = {
     dots: true,
     infinite: false,
     slidesToShow: 4,
     // centerMode: true,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     arrows: false,
     autoplay: false,
     speed: 500,
@@ -225,7 +225,7 @@ const HourlyRentalGear = () => {
           </div>
           {/* Card */}
           <div className=" font-rubik  w-[100%] h-[293px]">
-            <Slider {...settings}>
+            <Slider ref={sliderRef} {...settings}>
               {cardData?.map((card) => (
                 <div
                   key={card.id}

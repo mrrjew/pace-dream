@@ -165,7 +165,7 @@ const Hero = () => {
               <Image
                 src={HeroImage}
                 alt="adventure"
-                className="absolute relative w-full h-auto select none "
+                className="relative w-full h-auto select none "
               />
             </div>
           </div>
