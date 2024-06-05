@@ -73,14 +73,6 @@ const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<ListingData
               Pictures of the place
             </label>
             <div className="grid grid-cols-1 items-center">
-              {/* <FaCloudUploadAlt className="text-gray-500 mr-2" />
-              <input
-                type="file"
-                accept="image/png,image/jpeg,image/jpg"
-                multiple
-                onChange={handleImageUpload}
-                className="flex-grow file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-              /> */}
                <DragDrop />
             </div>
             {/* <p className="text-gray-500 mt-2">
