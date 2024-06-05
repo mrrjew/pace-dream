@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ListingDataType } from "@/types/types";
 import FormItem from "../room-stays/FormItem";
 import Input from "@/shared/Input";
 import RoomCounter from "@/components/ListingComponents/RoomCounter";
-import PageAddListing4 from "./PageAddListing4";
 import DragDrop from "./dag-drop-file";
 
 const ExperiencePag3 = (

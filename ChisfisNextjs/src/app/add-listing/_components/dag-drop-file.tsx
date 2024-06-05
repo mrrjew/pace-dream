@@ -1,12 +1,12 @@
 "use client";
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
-import { Upload, VideoCallOutlined } from "@mui/icons-material";
+import { VideoCallOutlined } from "@mui/icons-material";
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
-const fileTypes = ["JPG", "PNG", "GIF"];
 
-function DragDrop({isVideo}:{
+
+export default function DragDrop({isVideo}:{
     isVideo?: boolean;
 }) {
   const [files, setFiles] = useState<File[]|null>(null);
@@ -14,6 +14,7 @@ function DragDrop({isVideo}:{
     const _file = _fileList[0];
     setFiles(_fileList);
   };
+  const fileTypes = !isVideo ? ["JPG", "PNG", "GIF"] : ["MP4", "MOV", "AVI"];
   return (
     <FileUploader 
         handleChange={(e:any)=>{
@@ -51,5 +52,3 @@ function DragDrop({isVideo}:{
       </FileUploader>
   );
 }
-
-export default DragDrop;
