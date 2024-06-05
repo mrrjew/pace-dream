@@ -4,8 +4,6 @@ import { ListingDataType } from "@/types/types";
 import { useState } from "react";
 import PageAddListing1 from "../../_components/PageAddListing1";
 import PageAddListing2 from "../../_components/PageAddListing2";
-import PageAddListing3 from "../../_components/PageAddListing3";
-import PageAddListing5 from "../../_components/PageAddListing5";
 import PageAddListing6 from "../../_components/PageAddListing6";
 import PageAddListing7 from "../../_components/PageAddListing7";
 import PageAddListing8 from "../../_components/PageAddListing8";
