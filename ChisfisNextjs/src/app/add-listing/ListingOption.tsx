@@ -1,4 +1,5 @@
 import { Route } from "@/routers/types";
+import { cn } from "@/utils/tailwind-merger";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,12 +8,13 @@ interface ListingOptionProps {
   img: string;
   alt: string;
   label: string;
+  className?: string;
 }
 
-const ListingOption = ({ href, img, alt, label }: ListingOptionProps) => {
+const ListingOption = ({ href, img, alt, label,className }: ListingOptionProps) => {
   return (
     <Link
-      className=" py-10 px-6 hover:bg-[#632DF8] flex flex-col items-center sm:w-44 h-40 w-40 text-black border shadow-md border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[9px]"
+      className={cn(['py-10 px-6 hover:bg-[#632DF8] flex flex-col items-center sm:w-44 h-40 w-40 text-black border shadow-md border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[9px]',className])}
       href={href as Route<string>}
       type="button"
     >

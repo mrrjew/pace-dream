@@ -57,7 +57,7 @@ export default function SiteHeader() {
     >
       <section className="flex justify-between h-16 px-4 lg:container">
         <article className="justify-start flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10 gap-14">
-          <Logo className="self-center w-34 ml-6" />
+          <Logo className={`self-center w-34 ml-6`} />
           <div className="items-center justify-end hidden lg:flex ">
             <ol className="flex items-center gap-4 ml-48">
               <li>
