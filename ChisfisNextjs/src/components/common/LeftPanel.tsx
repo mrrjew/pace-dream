@@ -42,7 +42,7 @@ const LeftPanel = ({
 
   const toggleSubLinks = (linkId: number) => {
     setOpenLinkId((prevOpenLinkId) =>
-      prevOpenLinkId === linkId ? -1 : linkId
+      prevOpenLinkId === linkId ? -1 : linkId,
     );
   };
 

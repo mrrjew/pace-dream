@@ -78,8 +78,8 @@ const SearchForm: FC<SearchFormPropsType> = ({ currentTab = "Room Stays" }) => {
                   index === 0
                     ? "rounded-tl-[.5rem]"
                     : index === tabs.length - 1
-                    ? "rounded-tr-[.5rem]"
-                    : ""
+                      ? "rounded-tr-[.5rem]"
+                      : ""
                 }
                 `}
                 key={tab}

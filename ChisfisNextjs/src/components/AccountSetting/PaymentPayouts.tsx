@@ -192,92 +192,138 @@ import { FaMoneyCheckDollar } from "react-icons/fa6";
 
 // export default PaymentPayouts;
 
-
-type PaymentItemsProps = {title:string,description:string,btnLabel:string,onBtnClick:()=>void,value?:string,hideDivider?:boolean};
+type PaymentItemsProps = {
+  title: string;
+  description: string;
+  btnLabel: string;
+  onBtnClick: () => void;
+  value?: string;
+  hideDivider?: boolean;
+};
 
 function PaymentItems({
-  title,description,onBtnClick,btnLabel,value,hideDivider
-}:PaymentItemsProps) {
-
+  title,
+  description,
+  onBtnClick,
+  btnLabel,
+  value,
+  hideDivider,
+}: PaymentItemsProps) {
   return (
     <div className="mb-3">
-      <h2 className={`text-md font-bold ${hideDivider ? 'my-4' :''}`}>{title}</h2>
-        <Fragment>
-            <div className="flex justify-between gap-4 mt-1">
-              <p className="text-sm text-gray-400">{description}</p>
-              <p className="text-sm text-gray-400">{value}</p>
-          </div>
-         <div className="grid grid-cols-1 space-y-0">
-          <hr className={`my-4 ${hideDivider ? "bg-transparent border-transparent my-0" : "bg-gray-300"}`}/>
-          <ButtonPrimary onClick={onBtnClick} className="!text-xs !bg-black !text-white rounded-md font-semibold !p-2 w-fit">{btnLabel}</ButtonPrimary>
-         </div>
-        </Fragment>
+      <h2 className={`text-md font-bold ${hideDivider ? "my-4" : ""}`}>
+        {title}
+      </h2>
+      <Fragment>
+        <div className="flex justify-between gap-4 mt-1">
+          <p className="text-sm text-gray-400">{description}</p>
+          <p className="text-sm text-gray-400">{value}</p>
+        </div>
+        <div className="grid grid-cols-1 space-y-0">
+          <hr
+            className={`my-4 ${hideDivider ? "bg-transparent border-transparent my-0" : "bg-gray-300"}`}
+          />
+          <ButtonPrimary
+            onClick={onBtnClick}
+            className="!text-xs !bg-black !text-white rounded-md font-semibold !p-2 w-fit"
+          >
+            {btnLabel}
+          </ButtonPrimary>
+        </div>
+      </Fragment>
     </div>
-  )
-
+  );
 }
 
-
 export function PaymentMethods() {
-  const router = useRouter()
+  const router = useRouter();
 
-  const paymentItems:Array<PaymentItemsProps> = [
+  const paymentItems: Array<PaymentItemsProps> = [
     {
       title: "Your Payments",
       description: "Keep track of all your payments and refunds.",
       btnLabel: "Manage Payments",
-      onBtnClick: () => {}
+      onBtnClick: () => {},
     },
     {
       title: "Payment Methods",
-      description: "Add a payment method using our secure payment system, then start planning your next trip.",
+      description:
+        "Add a payment method using our secure payment system, then start planning your next trip.",
       btnLabel: "Add Payment Method",
-      onBtnClick: () => {}
+      onBtnClick: () => {},
     },
     {
       title: "PaceDream gift credit",
       description: "",
       btnLabel: "Add Gift Card",
       onBtnClick: () => {
-        router.push("/gift-card/redeen")
+        router.push("/gift-card/redeen");
       },
-      hideDivider: true
+      hideDivider: true,
     },
     {
       title: "Coupons",
       description: "Your coupons",
       value: "0",
       btnLabel: "Add Coupon",
-      onBtnClick: () => {}
-    }
-  ]
-
+      onBtnClick: () => {},
+    },
+  ];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 space-y-8 md:space-y-0 space-x-0 md:space-x-20">
-        <div  className="col-span-1 md:col-span-2">
-            {
-              paymentItems.map((item,index) => (
-                  <PaymentItems key={index} hideDivider={item?.hideDivider} title={item.title} description={item?.description} btnLabel={item.btnLabel} onBtnClick={item?.onBtnClick} value={item?.value} />
-              ))
-            }
-        </div>
-        <div className="ring-1 h-fit rounded-md ring-gray-300 col-span-1 md:col-span-1">
+      <div className="col-span-1 md:col-span-2">
+        {paymentItems.map((item, index) => (
+          <PaymentItems
+            key={index}
+            hideDivider={item?.hideDivider}
+            title={item.title}
+            description={item?.description}
+            btnLabel={item.btnLabel}
+            onBtnClick={item?.onBtnClick}
+            value={item?.value}
+          />
+        ))}
+      </div>
+      <div className="ring-1 h-fit rounded-md ring-gray-300 col-span-1 md:col-span-1">
         <div className="bg-white/45 p-4 rounded-lg  min-h-44">
-            <div className="rounded-lg mb-2">
-              <FaMoneyCheckDollar className="w-16 h-16 fill-primary-700"/>
-            </div>
-            <div>
-              <p className="text-lg font-extrabold">{"Make all payments through PaceDream"}</p>
-              <p className="text-sm text-[#757575] mt-2">
-                Always pay and communicate through Airbnb to ensure you're protected under our <Link className="underline text-black" target="_blank" href={"/#"}>Terms of Service</Link>, <Link className="underline text-black" target="_blank" href={"/#"}>Payment Terms of Service</Link>, cancellation, and other safeguards. <Link className="underline text-black" target="_blank" href={"/#"}>Learn more</Link>
-              </p>
-            </div>
+          <div className="rounded-lg mb-2">
+            <FaMoneyCheckDollar className="w-16 h-16 fill-primary-700" />
+          </div>
+          <div>
+            <p className="text-lg font-extrabold">
+              {"Make all payments through PaceDream"}
+            </p>
+            <p className="text-sm text-[#757575] mt-2">
+              Always pay and communicate through Airbnb to ensure you're
+              protected under our 
+              <Link
+                className="underline text-black"
+                target="_blank"
+                href={"/#"}
+              >
+                Terms of Service
+              </Link>
+              , 
+              <Link
+                className="underline text-black"
+                target="_blank"
+                href={"/#"}
+              >
+                Payment Terms of Service
+              </Link>
+              , cancellation, and other safeguards.{" "}
+              <Link
+                className="underline text-black"
+                target="_blank"
+                href={"/#"}
+              >
+                Learn more
+              </Link>
+            </p>
           </div>
         </div>
+      </div>
     </div>
-  )
-
-
-
+  );
 }

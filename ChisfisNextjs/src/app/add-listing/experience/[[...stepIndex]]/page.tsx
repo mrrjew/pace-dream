@@ -11,10 +11,6 @@ import AddListingExperienceWrapper from "../ExperiencePageWrapper";
 import ExperiencePag3 from "../../_components/ExperiencePage3";
 import ExperiencePage4 from "../../_components/ExperiencePage4";
 
-
-
-
-
 const InitialData: ListingDataType = {
   propertyType: "",
   roomType: "",
@@ -72,8 +68,7 @@ const Page = () => {
   const updateData = (newData: Partial<typeof InitialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
-  
-  
+
   const {
     steps,
     currentStepIndex,
@@ -88,16 +83,28 @@ const Page = () => {
     <PageAddListing2 data={data} updateData={updateData} />,
     <ExperiencePag3 data={data} updateData={updateData} />, //change page 3
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <ExperiencePage4 data={data} updateData={updateData}/>, // change page 4
-    <PageAddListing6 data={data} onPreview={()=>{next()}} />,
-    <PageAddListing7 data={data} onBackToHost={()=>{back()}}/>,
-    <PageAddListing8 data={data} onBackToHost={()=>{back()}}/>,
+    <ExperiencePage4 data={data} updateData={updateData} />, // change page 4
+    <PageAddListing6
+      data={data}
+      onPreview={() => {
+        next();
+      }}
+    />,
+    <PageAddListing7
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
+    <PageAddListing8
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
   ]);
 
-
-
   return (
-
     <AddListingExperienceWrapper
       onNext={next}
       onBack={back}
@@ -105,10 +112,9 @@ const Page = () => {
       isLastStep={isLastStep}
       currentStep={currentStepIndex}
     >
-        {step}
+      {step}
     </AddListingExperienceWrapper>
-  )
-
-}
+  );
+};
 
 export default Page;

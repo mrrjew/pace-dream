@@ -2,8 +2,8 @@
 
 import { ContactUsSchema } from "@/components/AccountSetting/Schemas/AccountSettingSchema";
 import { useFormik } from "formik";
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 import axios from "axios";
 const initialValues = {
   firstname: "",
@@ -26,22 +26,25 @@ const ContactUsForm = () => {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: ContactUsSchema,
-    onSubmit: (values) => { },
+    onSubmit: (values) => {},
   });
 
   const sendEmail = async (e: any) => {
     e.preventDefault();
     // console.log(values)
     const userInfo = {
-      name : values?.firstname + " " + values?.lastname,
+      name: values?.firstname + " " + values?.lastname,
       email: values?.email,
       message: values?.message,
-      phone: values?.phonenumber
-    }
+      phone: values?.phonenumber,
+    };
 
-    console.log(userInfo)
-    await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact`, userInfo)
-    resetForm()
+    console.log(userInfo);
+    await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/contact`,
+      userInfo,
+    );
+    resetForm();
     // if (form.current) {
     //   emailjs
     //     .sendForm('service_a14dsnc', 'template_k0m5snj', form.current, '4itbfBdegtJAhQS1i')
@@ -66,7 +69,6 @@ const ContactUsForm = () => {
           We'd love to hear from you. Please fill out this form.
         </p>
       </div>
-
 
       <form
         onSubmit={sendEmail}

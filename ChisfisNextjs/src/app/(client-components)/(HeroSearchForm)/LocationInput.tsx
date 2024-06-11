@@ -64,7 +64,7 @@ const LocationInput: FC<LocationInputProps> = ({
 
           // Reverse Geocoding to get human-readable address
           fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`,
           )
             .then((response) => response.json())
             .then((data) => {
@@ -107,7 +107,7 @@ const LocationInput: FC<LocationInputProps> = ({
         },
         (error) => {
           console.error("Error getting current location:", error);
-        }
+        },
       );
     } else {
       console.error("Geolocation is not supported by this browser.");

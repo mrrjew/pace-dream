@@ -38,12 +38,10 @@ export type PageAddingListing = {
   handleInputChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => void;
   setPageNumber?: React.Dispatch<React.SetStateAction<number>>;
 };
-
-
 
 export type ListingDataType = {
   propertyType: string;
@@ -62,9 +60,11 @@ export type ListingDataType = {
   state: string;
   postalCode: string;
   location: {
-    link: string,
-    address: string, latitude: number, longitude: number
-  },
+    link: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+  };
   acreage: string;
   guests: number;
   bedroom: number;
@@ -94,12 +94,10 @@ export type ListingDataType = {
   availabilityDate: string[];
 };
 
-
-
 export type ListingOption = {
-  href:  any,
-  label: string,
-  avatar:React.ReactNode
-  img?: string,
-  alt?: string,
-}
+  href: any;
+  label: string;
+  avatar: React.ReactNode;
+  img?: string;
+  alt?: string;
+};

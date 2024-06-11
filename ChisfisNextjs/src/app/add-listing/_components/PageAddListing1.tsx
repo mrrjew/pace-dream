@@ -10,9 +10,13 @@ import Select from "@/shared/Select";
 import FormItem from "../room-stays/FormItem";
 import { ListingDataType } from "@/types/types";
 
-const PageAddListing1 = (
-  {data,updateData}:{updateData:(data:Partial<ListingDataType>)=>void, data:Partial<ListingDataType>}
-) => {
+const PageAddListing1 = ({
+  data,
+  updateData,
+}: {
+  updateData: (data: Partial<ListingDataType>) => void;
+  data: Partial<ListingDataType>;
+}) => {
   return (
     <>
       <div className="listingSection__wrap ">
@@ -21,24 +25,40 @@ const PageAddListing1 = (
           {/* <h2 className="text-xl font-semibold">Property Details</h2> */}
           <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
             <FormItem label="What is the name of your property?">
-              <Input defaultValue={data?.placeName} onChange={(e)=>updateData({...data,placeName:e?.currentTarget?.value})} name="propertyName" type="text" placeholder="Property Name" />
+              <Input
+                defaultValue={data?.placeName}
+                onChange={(e) =>
+                  updateData({ ...data, placeName: e?.currentTarget?.value })
+                }
+                name="propertyName"
+                type="text"
+                placeholder="Property Name"
+              />
             </FormItem>
             <FormItem label="Can you tell us a bit about your property?">
-              <Input 
+              <Input
                 defaultValue={data?.placeDescription}
-                onChange={(e)=>updateData({...data,placeDescription:e?.currentTarget?.value})}
-                name="propertyDescription" 
-                type="text" 
-              placeholder="Property Description" />
+                onChange={(e) =>
+                  updateData({
+                    ...data,
+                    placeDescription: e?.currentTarget?.value,
+                  })
+                }
+                name="propertyDescription"
+                type="text"
+                placeholder="Property Description"
+              />
             </FormItem>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
             <FormItem label="What type of property are you listing?">
               <Select
                 defaultValue={data?.propertyType}
-                onChange={(e)=>updateData({...data,propertyType:e?.currentTarget?.value})}
-                name="roomstays" 
-                >
+                onChange={(e) =>
+                  updateData({ ...data, propertyType: e?.currentTarget?.value })
+                }
+                name="roomstays"
+              >
                 <option value="">Property Type</option>
                 <option value="apartment">Apartment</option>
                 <option value="house">House</option>
@@ -48,8 +68,11 @@ const PageAddListing1 = (
             <FormItem label="Is this a long-term or short-term rental?">
               <Select
                 defaultValue={data?.roomType}
-                onChange={(e)=>updateData({...data,roomType:e?.currentTarget?.value})} 
-                name="roomtype">
+                onChange={(e) =>
+                  updateData({ ...data, roomType: e?.currentTarget?.value })
+                }
+                name="roomtype"
+              >
                 <option value="">Room Type</option>
                 <option value="Any type">Any type</option>
                 <option value="Hostel">Hostel</option>

@@ -29,7 +29,7 @@ const Checkbox: FC<CheckboxProps> = ({
   // Handle form checkbox change
   const handleCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!input || !inputName) {
-      console.error('input or inputName is undefined');
+      console.error("input or inputName is undefined");
       return;
     }
 
@@ -45,7 +45,8 @@ const Checkbox: FC<CheckboxProps> = ({
       updateList.push(val);
     }
 
-    setInput && setInput((prevState) => ({ ...prevState, [inputName]: updateList }));
+    setInput &&
+      setInput((prevState) => ({ ...prevState, [inputName]: updateList }));
   };
 
   return (

@@ -17,15 +17,17 @@ const ModalSelectDate: FC<ModalSelectDateProps> = ({ renderChildren }) => {
   const [showModal, setShowModal] = useState(false);
 
   const selectedStartDate = getLocalStorageItem("startedDate");
-  const initialStartDate = selectedStartDate ? new Date(selectedStartDate) : null;
+  const initialStartDate = selectedStartDate
+    ? new Date(selectedStartDate)
+    : null;
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
-  
-  
+
   const selectedEndDate: string | null = getLocalStorageItem("endedDate");
   console.log("selectedEndDate from localStorage:", selectedEndDate);
-  const initialEndDate: Date | null = selectedEndDate ? new Date(selectedEndDate) : null;
+  const initialEndDate: Date | null = selectedEndDate
+    ? new Date(selectedEndDate)
+    : null;
   const [endDate, setEndDate] = useState<Date | null>(initialEndDate);
-  
 
   const onChangeDate = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;

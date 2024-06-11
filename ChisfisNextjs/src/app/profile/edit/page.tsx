@@ -13,7 +13,9 @@ import { AiOutlineMail } from "react-icons/ai";
 
 const page = () => {
   return (
-    <div className={`lg:container px-4 mx-auto pb-24 pt-4 sm:py-10 lg:pb-32 text-neutral-700 dark:text-neutral-300`}>
+    <div
+      className={`lg:container px-4 mx-auto pb-24 pt-4 sm:py-10 lg:pb-32 text-neutral-700 dark:text-neutral-300`}
+    >
       <div className="space-y-4">
         <div className="flex-end hidden md:block">
           <ButtonSecondary>Back</ButtonSecondary>
@@ -31,8 +33,16 @@ const page = () => {
         {/* ----------menu item link----------- */}
         <div className="mt-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <InputGroup label="First Name" placeholder="Enter your first name." name="first_name" />
-            <InputGroup label="Last Name" placeholder="Enter your Last name" name="last_name" />
+            <InputGroup
+              label="First Name"
+              placeholder="Enter your first name."
+              name="first_name"
+            />
+            <InputGroup
+              label="Last Name"
+              placeholder="Enter your Last name"
+              name="last_name"
+            />
             <InputGroup label="Date of Birth?">
               <div className="flex flex-row gap-3">
                 <Input name="day" placeholder="day" />
@@ -60,7 +70,11 @@ const page = () => {
                   <div className="absolute left-4 top-3 w-[32px] h-[32px]">
                     <AiOutlineMail width={26.67} height={21.33} />
                   </div>
-                  <Input name="email" placeholder="Enter your email." className="pl-14" />
+                  <Input
+                    name="email"
+                    placeholder="Enter your email."
+                    className="pl-14"
+                  />
                 </div>
               </InputGroup>
               <InputGroup label="Phone">

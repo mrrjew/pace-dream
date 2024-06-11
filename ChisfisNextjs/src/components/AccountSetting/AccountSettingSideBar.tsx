@@ -11,7 +11,7 @@ interface SidebarOptionProps {
   icon: any;
   onSelect: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    label: string
+    label: string,
   ) => string;
 }
 

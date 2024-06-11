@@ -132,7 +132,7 @@ export interface FlightDataType {
   airlines: {
     logo: string;
     name: string;
-  }
+  };
 }
 
 export interface LastDataType {

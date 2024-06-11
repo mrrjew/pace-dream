@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import ButtonSecondary from '@/shared/ButtonSecondary';
-import { MessageType } from '@/types/chat';
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import ButtonSecondary from "@/shared/ButtonSecondary";
+import { MessageType } from "@/types/chat";
 
 interface IImagePreviewModalProps {
   images: File[];

@@ -89,7 +89,9 @@ const ContactUsPage = () => {
         />
       </div>
       <div>
-        <p className="text-[34px] lg:leading-none leading-10">Exploring PaceDream Partner hub</p>
+        <p className="text-[34px] lg:leading-none leading-10">
+          Exploring PaceDream Partner hub
+        </p>
         <p className="text-[#5f6d7e] mt-4">
           If you need assistance with YCS, payment, your property listing, or
           rate calculations, you can send us a message by following the steps

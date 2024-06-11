@@ -2,7 +2,6 @@ import Label from "@/components/Label";
 import React from "react";
 import { FC } from "react";
 
-
 export interface FormItemProps {
   className?: string;
   label?: string;

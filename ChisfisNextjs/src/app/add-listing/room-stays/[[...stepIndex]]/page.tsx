@@ -14,14 +14,12 @@ import PageAddListing7 from "../../_components/PageAddListing7";
 import PageAddListing8 from "../../_components/PageAddListing8";
 import AddListingRoomStayWrapper from "../RoomStayWrapper";
 
-
 // const titles = [
 //   "Choosing Categories & Location",
 //   "General amenities, Other amenities & photos",
 //   "House rules for guest & Date & Pricing",
 //   "",
 // ];
-
 
 const InitialData: ListingDataType = {
   propertyType: "",
@@ -80,8 +78,7 @@ const Page = () => {
   const updateData = (newData: Partial<typeof InitialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
-  
-  
+
   const {
     steps,
     currentStepIndex,
@@ -96,27 +93,39 @@ const Page = () => {
     <PageAddListing2 data={data} updateData={updateData} />,
     <PageAddListing3 data={data} updateData={updateData} />,
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <PageAddListing5 data={data} updateData={updateData}/>,
-    <PageAddListing6 data={data} onPreview={()=>{next()}} />,
-    <PageAddListing7 data={data} onBackToHost={()=>{back()}}/>,
-    <PageAddListing8 data={data} onBackToHost={()=>{back()}}/>,
+    <PageAddListing5 data={data} updateData={updateData} />,
+    <PageAddListing6
+      data={data}
+      onPreview={() => {
+        next();
+      }}
+    />,
+    <PageAddListing7
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
+    <PageAddListing8
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
   ]);
 
-
-
   return (
-
-      <AddListingRoomStayWrapper
-        onNext={next}
-        onBack={back}
-        isFirstStep={isFirstStep}
-        isLastStep={isLastStep}
-        currentStep={currentStepIndex}
-      >
-          {step}
-      </AddListingRoomStayWrapper>
+    <AddListingRoomStayWrapper
+      onNext={next}
+      onBack={back}
+      isFirstStep={isFirstStep}
+      isLastStep={isLastStep}
+      currentStep={currentStepIndex}
+    >
+      {step}
+    </AddListingRoomStayWrapper>
     // <div className={`nc-PageAddListing1 max-w-screen flex pb-24 lg:pb-32`}>
-    
+
     //   <form className="space-y-4 md:ml-16 md:mr-48 p-4 sm:mt-8 md:p-4 w-full">
     //       {step}
     //     <div className="flex justify-end space-x-5">

@@ -10,7 +10,7 @@ export default function TemplatesDropdown() {
   const renderMegaMenuNavlink = (
     item: NavItemType,
     index: number,
-    close: () => void
+    close: () => void,
   ) => {
     return (
       <li key={item.id} className={`${item.isNew ? "menuIsNew" : ""}`}>
@@ -67,7 +67,7 @@ export default function TemplatesDropdown() {
                             </p>
                             <ul className="grid space-y-4 mt-4">
                               {item.children?.map((item, index) =>
-                                renderMegaMenuNavlink(item, index, close)
+                                renderMegaMenuNavlink(item, index, close),
                               )}
                             </ul>
                           </div>

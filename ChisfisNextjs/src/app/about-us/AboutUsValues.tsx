@@ -1,26 +1,29 @@
 import Image from "next/image";
 import map from "@/images/world-map.jpg";
-import { BanknotesIcon, ChatBubbleLeftRightIcon, PhoneIcon } from "@heroicons/react/24/outline";
-
+import {
+  BanknotesIcon,
+  ChatBubbleLeftRightIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
 
 const contacts = [
   {
     title: "Support",
     desc: "Our friendly team is here to help",
     email: "support@pacedream.com",
-    icon: <ChatBubbleLeftRightIcon />
+    icon: <ChatBubbleLeftRightIcon />,
   },
   {
     title: "Sales",
     desc: "Get in touch with our sales team",
     email: "sales@pacedream.com",
-    icon: <BanknotesIcon />
+    icon: <BanknotesIcon />,
   },
   {
     title: "Phone",
     desc: "Mon-Fri 8am-5pm",
     email: "+1(123) 456-7890",
-    icon: <PhoneIcon />
+    icon: <PhoneIcon />,
   },
 ];
 
@@ -43,15 +46,21 @@ const AboutUsValues = () => {
           <div className="grid lg:grid-cols-3 grid-cols-1 mt-12 lg:gap-6 gap-4 ">
             {contacts.map((contact) => (
               <div className="bg-slate-50 p-4 rounded-xl flex items-center">
-              <div className="w-[100px] h-[100px] p-3 mr-4 bg-[#632DF8] rounded-lg text-white">
+                <div className="w-[100px] h-[100px] p-3 mr-4 bg-[#632DF8] rounded-lg text-white">
                   {contact.icon}
+                </div>
+                <div>
+                  <p className="font-semibold text-xl text-left pl-1">
+                    {contact.title}
+                  </p>
+                  <p className="text-gray-700 mt-2 font-medium text-sm pl-1 text-left">
+                    {contact.desc}
+                  </p>
+                  <p className="text-[#632DF8] mt-1 font-medium pl-1 text-left">
+                    {contact.email}
+                  </p>
+                </div>
               </div>
-              <div>
-                  <p className="font-semibold text-xl text-left pl-1">{contact.title}</p>
-                  <p className="text-gray-700 mt-2 font-medium text-sm pl-1 text-left">{contact.desc}</p>
-                  <p className="text-[#632DF8] mt-1 font-medium pl-1 text-left">{contact.email}</p>
-              </div>
-          </div>
               // <div className="bg-slate-50  p-4 rounded-xl">
               //   <p className="w-[50px] h-[50px]">{contact.icon}</p>
               //   <p className="font-semibold text-xl">{contact.title}</p>

@@ -170,9 +170,7 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
 
   return (
     <div className={` md:px-24 ${className} lg:mb-16 lg:pt-16 inline-block`}>
-      <Heading desc={subHeading}>
-        {heading}
-      </Heading>
+      <Heading desc={subHeading}>{heading}</Heading>
       <MotionConfig
         transition={{
           x: { type: "spring", stiffness: 300, damping: 30 },
@@ -186,17 +184,17 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
                 onClick={() => changeItemId(currentIndex - 1)}
                 className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl border-2  -translate-y-1/2 z-[1]"
               />
-            ) : <PrevBtn
-              className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl border-2 border-neutral-100 -translate-y-1/2 z-[1]"
-            />}
+            ) : (
+              <PrevBtn className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl border-2 border-neutral-100 -translate-y-1/2 z-[1]" />
+            )}
             {categories.length > currentIndex + numberOfItems ? (
               <NextBtn
                 onClick={() => changeItemId(currentIndex + 1)}
                 className="ml-8 order-first font-black text-black text-xl border-2 -translate-y-1/2 z-[1]"
               />
-            ) : <NextBtn
-              className="ml-8 bg-neutral-100 text-neutral-100 text-xl border-2 -translate-y-1/2 z-[1]"
-            />}
+            ) : (
+              <NextBtn className="ml-8 bg-neutral-100 text-neutral-100 text-xl border-2 -translate-y-1/2 z-[1]" />
+            )}
           </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
@@ -209,10 +207,10 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
                     className={`relative md:mr-0px inline-block px-2 xl:px-4 ${itemClassName} `}
                     custom={direction}
                     initial={{
-                      x: `${(currentIndex - 1) * - 100}%`,
+                      x: `${(currentIndex - 1) * -100}%`,
                     }}
                     animate={{
-                      x: `${currentIndex * - 100}%`,
+                      x: `${currentIndex * -100}%`,
                     }}
                     variants={variants(200, 1)}
                     key={indx}
@@ -229,17 +227,17 @@ const SectionSliderNewCategories: FC<SectionSliderNewCategoriesProps> = ({
                       onClick={() => changeItemId(currentIndex - 1)}
                       className="md:hidden font-black order-first text-black text-lg -translate-y-1/2 z-[1]"
                     />
-                  ) : <PrevBtn
-                    className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-                  />}
+                  ) : (
+                    <PrevBtn className="md:hidden bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]" />
+                  )}
                   {categories.length > currentIndex + numberOfItems ? (
                     <NextBtn
                       onClick={() => changeItemId(currentIndex + 1)}
                       className="md:hidden ml-2 order-first font-black text-black text-lg -translate-y-1/2 z-[1]"
                     />
-                  ) : <NextBtn
-                    className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]"
-                  />}
+                  ) : (
+                    <NextBtn className="md:hidden ml-2 bg-neutral-100 text-neutral-100 text-lg -translate-y-1/2 z-[1]" />
+                  )}
                 </div>
               </AnimatePresence>
             </motion.ul>

@@ -1,6 +1,6 @@
-import { Popover, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import { customHourInput } from './constant';
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import { customHourInput } from "./constant";
 
 interface CustomHourInputProps {
   className?: string;
@@ -8,7 +8,7 @@ interface CustomHourInputProps {
 }
 
 export const CustomHourInput: React.FC<CustomHourInputProps> = (
-  props: CustomHourInputProps
+  props: CustomHourInputProps,
 ) => {
   const { className } = props;
 
@@ -18,7 +18,7 @@ export const CustomHourInput: React.FC<CustomHourInputProps> = (
         <>
           <div
             className={`flex-1 flex items-center focus:outline-none rounded-b-3xl ${
-              open ? 'shadow-lg' : ''
+              open ? "shadow-lg" : ""
             }`}
           >
             <Popover.Button

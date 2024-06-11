@@ -1,12 +1,12 @@
-import { SignupMethod } from '@/types/SignupMethod';
-import { useSession } from '@/hooks/useSession';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
-import axios from 'axios';
-import { app } from 'config/firebase';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { SignupMethod } from "@/types/SignupMethod";
+import { useSession } from "@/hooks/useSession";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Input from "@/shared/Input";
+import axios from "axios";
+import { app } from "config/firebase";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const PasswordMatchText = (props: {
   password: string;
@@ -14,7 +14,7 @@ export const PasswordMatchText = (props: {
 }) => {
   const { password, confirmPassword } = props;
 
-  if (password === '' || confirmPassword === '') {
+  if (password === "" || confirmPassword === "") {
     return <span></span>;
   }
 
@@ -45,10 +45,10 @@ export const SignupForm: React.FC<{
 }) => {
   const [userDetails, setUserDetails] = useState<IUserDetails>({
     email: props.email,
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
     dob: new Date(),
     mobile: props.mobile,
   });
@@ -66,13 +66,13 @@ export const SignupForm: React.FC<{
 
     if (props.signupMethod === SignupMethod.EMAIL) {
       if (userDetails.password !== userDetails.confirmPassword) {
-        alert('Passwords do not match');
+        alert("Passwords do not match");
         setLoading(false);
         return;
       }
       if (userDetails.password.length < 6) {
         setLoading(false);
-        alert('Password must be at least 8 characters');
+        alert("Password must be at least 8 characters");
         return;
       }
     }
@@ -96,13 +96,13 @@ export const SignupForm: React.FC<{
           dob: userDetails.dob,
           mobile: userDetails.mobile,
           method: props.signupMethod,
-        }
+        },
       );
       const newUser = response.data.data;
       setSession(newUser.token, newUser, newUser.user_id);
 
       setTimeout(() => {
-        router.push('/');
+        router.push("/");
       }, 500);
     } catch (error) {
       console.log(error);
@@ -153,11 +153,11 @@ export const SignupForm: React.FC<{
           type="date"
           placeholder="Smith"
           className="mt-1"
-          max={new Date().toISOString().split('T')[0]}
-          min={new Date(1900, 1, 1).toISOString().split('T')[0]}
+          max={new Date().toISOString().split("T")[0]}
+          min={new Date(1900, 1, 1).toISOString().split("T")[0]}
           value={
             userDetails.dob
-              ? userDetails.dob.toISOString().split('T')[0]
+              ? userDetails.dob.toISOString().split("T")[0]
               : undefined
           }
           onChange={(e) => {

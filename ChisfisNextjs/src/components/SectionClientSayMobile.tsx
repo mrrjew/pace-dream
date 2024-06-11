@@ -18,7 +18,7 @@ import { useWindowSize } from "react-use";
 export interface SectionClientSayMobileProps {
   className?: string;
   data?: typeof DEMO_DATA;
-  itemPerRow?: 1 | 3 
+  itemPerRow?: 1 | 3;
 }
 
 const DEMO_DATA = [
@@ -147,7 +147,9 @@ const SectionClientSayMobile: FC<SectionClientSayMobileProps> = ({
   });
 
   return (
-    <div className={`nc-SectionClientSay w-max-[95vw] w-[90vw] inline-block relative ${className} `}>
+    <div
+      className={`nc-SectionClientSay w-max-[95vw] w-[90vw] inline-block relative ${className} `}
+    >
       <Heading desc="" isCenter>
         Good news form far away
       </Heading>
@@ -159,51 +161,56 @@ const SectionClientSayMobile: FC<SectionClientSayMobileProps> = ({
               opacity: { duration: 0.2 },
             }}
           >
-            <div className={`relative pl-4 pr-4 flow-root overflow-hidden rounded-xl`} {...handlers}>
-            <motion.ul
-              initial={false}
-              className="relative whitespace-nowrap w-max-[100vw] w-[95vw]"
+            <div
+              className={`relative pl-4 pr-4 flow-root overflow-hidden rounded-xl`}
+              {...handlers}
             >
-              <AnimatePresence initial={false} custom={direction} >
-                {data.map((item, indx) => (
-                  <motion.li
-                    className={`relative mr-[99vw] pr-2 h-60 max-w-[95vw] w-[80vw] max-h-60 inline-block px-2 xl:px-4 bg-white border rounded-2xl border-neutral-200`}
-                    custom={direction}
-                    initial={{
-                      x: `${((index + indx) % data.length) * -105}%`,
-                    }}
-                    animate={{
-                      x: `${(index + indx) * -105}%`,
-                    }}
-                    variants={variants(200, 1)}
-                    key={indx}
-                    style={{
-                      width: `90vw`,
-                    }}
-                  >
-                  <span className="block text-xs mt-4 text-pretty text-[#757575]">
-                    {item.content}
-                  </span>
-                  <div className="w-max-[95vw] w-[80vw] absolute bottom-0 left-0 flex items-center space-x-2 text-lg mt-2 text-neutral-400">
-                    <Image className="-mb-4 ml-4 h-12 w-12" src={item.img} alt="" />
-                    <div className="flex flex-col mb-4">
-                      <span className="mt-8 text-xl text-black font-semibold">
-                        {item.clientName}
+              <motion.ul
+                initial={false}
+                className="relative whitespace-nowrap w-max-[100vw] w-[95vw]"
+              >
+                <AnimatePresence initial={false} custom={direction}>
+                  {data.map((item, indx) => (
+                    <motion.li
+                      className={`relative mr-[99vw] pr-2 h-60 max-w-[95vw] w-[80vw] max-h-60 inline-block px-2 xl:px-4 bg-white border rounded-2xl border-neutral-200`}
+                      custom={direction}
+                      initial={{
+                        x: `${((index + indx) % data.length) * -105}%`,
+                      }}
+                      animate={{
+                        x: `${(index + indx) * -105}%`,
+                      }}
+                      variants={variants(200, 1)}
+                      key={indx}
+                      style={{
+                        width: `90vw`,
+                      }}
+                    >
+                      <span className="block text-xs mt-4 text-pretty text-[#757575]">
+                        {item.content}
                       </span>
-                      <span className="text-sm">
-                        {item.clientAddress}
-                      </span>
-                    </div>
-                  </div>
-                  </motion.li>
-                ))}
-              </AnimatePresence>
-            </motion.ul>
-            <div className="mt-10 flex items-center justify-center space-x-2">
+                      <div className="w-max-[95vw] w-[80vw] absolute bottom-0 left-0 flex items-center space-x-2 text-lg mt-2 text-neutral-400">
+                        <Image
+                          className="-mb-4 ml-4 h-12 w-12"
+                          src={item.img}
+                          alt=""
+                        />
+                        <div className="flex flex-col mb-4">
+                          <span className="mt-8 text-xl text-black font-semibold">
+                            {item.clientName}
+                          </span>
+                          <span className="text-sm">{item.clientAddress}</span>
+                        </div>
+                      </div>
+                    </motion.li>
+                  ))}
+                </AnimatePresence>
+              </motion.ul>
+              <div className="mt-10 flex items-center justify-center space-x-2">
                 {data.map((item, i) => (
-                <button
+                  <button
                     className={`w-2 h-2 rounded-full ${
-                      i  === index ? "bg-black/70" : "bg-black/10 "
+                      i === index ? "bg-black/70" : "bg-black/10 "
                     }`}
                     onClick={() => changeItemId(i)}
                     key={i}
@@ -212,9 +219,9 @@ const SectionClientSayMobile: FC<SectionClientSayMobileProps> = ({
               </div>
             </div>
           </MotionConfig>
-          </div>
         </div>
       </div>
+    </div>
   );
 };
 

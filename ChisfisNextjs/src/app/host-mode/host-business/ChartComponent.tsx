@@ -84,25 +84,24 @@ const ChartComponent: React.FC = () => {
   });
 
   return (
-
-       <>
-         <div>
-           <p className="font-semibold text-xl text-[#168027] ">
-             $100 earned in 2023
-           </p>
-           <p className=" text-[#616462]">All earnings adjustments included</p>
-         </div>
-         <div className="w-full h-96">
-         <div>
-           <DynamicApexChart
-             options={chartData.options as any}
-             series={chartData.series}
-             type="area"
-             height={350}
-           />
-         </div>
-           </div>
-       </>
+    <>
+      <div>
+        <p className="font-semibold text-xl text-[#168027] ">
+          $100 earned in 2023
+        </p>
+        <p className=" text-[#616462]">All earnings adjustments included</p>
+      </div>
+      <div className="w-full h-96">
+        <div>
+          <DynamicApexChart
+            options={chartData.options as any}
+            series={chartData.series}
+            type="area"
+            height={350}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

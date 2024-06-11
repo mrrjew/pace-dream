@@ -307,24 +307,30 @@ import { useSession } from "@/hooks/useSession";
 
 // export default PersonalInformation;
 
-type PersonalInfoItem = {title:string,value:string,actionlabel:string,onEdit:()=>void}
+type PersonalInfoItem = {
+  title: string;
+  value: string;
+  actionlabel: string;
+  onEdit: () => void;
+};
 
-
-function PersonalInfoItem(props:PersonalInfoItem){
-  const {title,value,actionlabel,onEdit} = props
+function PersonalInfoItem(props: PersonalInfoItem) {
+  const { title, value, actionlabel, onEdit } = props;
   return (
     <div className="flex justify-between gap-8">
       <div className="flex flex-col gap-2">
         <p className="text-sm">{title}</p>
         <p className="text-sm text-gray-400">{value}</p>
       </div>
-      <button onClick={onEdit} className="text-sm text-gray-800 underline">{actionlabel}</button>
+      <button onClick={onEdit} className="text-sm text-gray-800 underline">
+        {actionlabel}
+      </button>
     </div>
-  )
+  );
 }
 
-export function PersonalInformation(){
-  const { getSession  } = useSession();
+export function PersonalInformation() {
+  const { getSession } = useSession();
   const { userInfo } = getSession();
   // "profilePic":"https://lh3.googleusercontent.com/a/ACg8ocKUiKzlpqy8X72Qu5TWc5wopozIIACFORGmC-MyFreUVC7LygE=s96-c",
   // "first_name":"Elvis",
@@ -334,68 +340,74 @@ export function PersonalInformation(){
   // "emailVerified":true
 
   useEffect(() => {
-    if(userInfo){
-      console.log(userInfo)
+    if (userInfo) {
+      console.log(userInfo);
     }
   }, [userInfo]);
 
-  const profileInfo : Array<PersonalInfoItem> = [
+  const profileInfo: Array<PersonalInfoItem> = [
     {
       title: "Legal Name",
-      value: userInfo?.first_name ? (userInfo?.first_name + " " + userInfo?.last_name) : "Not provided",
+      value: userInfo?.first_name
+        ? userInfo?.first_name + " " + userInfo?.last_name
+        : "Not provided",
       actionlabel: "Edit",
-      onEdit: ()=>{}
+      onEdit: () => {},
     },
     {
       title: "Prefered Name",
-      value: userInfo?.first_name ? (userInfo?.first_name) : "Not provided",
+      value: userInfo?.first_name ? userInfo?.first_name : "Not provided",
       actionlabel: "Add",
-      onEdit: ()=>{}
+      onEdit: () => {},
     },
     {
       title: "Phone Number",
-      value:  userInfo?.phone_number ? (userInfo?.phone_number) : "Add a number so confirmed guests and Airbnb can get in touch. You can add other numbers and choose how they’re used",
+      value: userInfo?.phone_number
+        ? userInfo?.phone_number
+        : "Add a number so confirmed guests and Airbnb can get in touch. You can add other numbers and choose how they’re used",
       actionlabel: "Add",
-      onEdit: ()=>{}
+      onEdit: () => {},
     },
     {
       title: "Government ID",
       value: "Not Provided",
       actionlabel: "Add",
-      onEdit: ()=>{}
+      onEdit: () => {},
     },
     {
       title: "Address",
       value: "Not Provided",
       actionlabel: "Add",
-      onEdit: ()=>{}
+      onEdit: () => {},
     },
     {
       title: "Emergency Contact",
       value: "Not Provided",
       actionlabel: "Add",
-      onEdit: ()=>{}
+      onEdit: () => {},
     },
-
   ];
- 
+
   return (
-      <div className="grid grid-cols-1 md:grid-cols-3 space-y-8 md:space-y-0 space-x-0 md:space-x-20">
-        <div className="col-span-1 md:col-span-2">
-          <div className="grid grid-cols-1 gap-4">
-            {
-                profileInfo.map((item,index) => (
-                  <Fragment key={index} >
-                    <PersonalInfoItem title={item.title} value={item.value} actionlabel={item.actionlabel} onEdit={item.onEdit} />
-                    <hr className="my-3 bg-gray-300"/>
-                  </Fragment>
-                ))
-            }
-          </div>
-        </div>
-        <div className="col-span-1 md:col-span-1">
-          <FaqSideComponent/>
+    <div className="grid grid-cols-1 md:grid-cols-3 space-y-8 md:space-y-0 space-x-0 md:space-x-20">
+      <div className="col-span-1 md:col-span-2">
+        <div className="grid grid-cols-1 gap-4">
+          {profileInfo.map((item, index) => (
+            <Fragment key={index}>
+              <PersonalInfoItem
+                title={item.title}
+                value={item.value}
+                actionlabel={item.actionlabel}
+                onEdit={item.onEdit}
+              />
+              <hr className="my-3 bg-gray-300" />
+            </Fragment>
+          ))}
         </div>
       </div>
-  )
+      <div className="col-span-1 md:col-span-1">
+        <FaqSideComponent />
+      </div>
+    </div>
+  );
 }

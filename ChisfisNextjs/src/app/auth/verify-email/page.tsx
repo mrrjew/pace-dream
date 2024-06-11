@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { PasswordMatchText } from '@/app/auth/components/SignupForm';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
-import { Loader } from '@/shared/Loader';
-import axios, { AxiosError } from 'axios';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { PasswordMatchText } from "@/app/auth/components/SignupForm";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Input from "@/shared/Input";
+import { Loader } from "@/shared/Loader";
+import axios, { AxiosError } from "axios";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function VerifyEmailPage() {
   const query = useSearchParams();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    const token = query.get('token');
-    console.log(token)
+    const token = query.get("token");
+    console.log(token);
     if (!token) {
       setError("Cloudn't verify email. Please try again");
       return;
@@ -30,7 +30,7 @@ export default function VerifyEmailPage() {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-email`,
-        { token }
+        { token },
       );
       console.log(response.data, response.data);
       if (response.status === 200 && response.data.data) {
@@ -61,39 +61,42 @@ export default function VerifyEmailPage() {
 
 const ResetPasswordForm = ({ email }: { email: string }) => {
   const query = useSearchParams();
-  const token = query.get('token');
+  const token = query.get("token");
   const [resetPassword, setResetPassword] = useState<{
     password: string;
     confirmPassword: string;
-  }>({ password: '', confirmPassword: '' });
+  }>({ password: "", confirmPassword: "" });
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState('');
-  const [error, setError] = useState('');
+  const [result, setResult] = useState("");
+  const [error, setError] = useState("");
 
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
     if (
       resetPassword &&
       resetPassword.password !== resetPassword.confirmPassword
     ) {
-      alert('Passwords do not match');
+      alert("Passwords do not match");
       setLoading(false);
       return;
     }
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/update/password`,
-        {  currentPassword: resetPassword.password,newPassword:resetPassword.confirmPassword },{
+        {
+          currentPassword: resetPassword.password,
+          newPassword: resetPassword.confirmPassword,
+        },
+        {
           headers: {
             Authorization: `${token}`,
           },
-        }
+        },
       );
       if (response.status === 200) {
-        setResult('success');
+        setResult("success");
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -108,12 +111,12 @@ const ResetPasswordForm = ({ email }: { email: string }) => {
     }
   };
 
-  return result && result === 'success' ? (
+  return result && result === "success" ? (
     <div className="flex flex-col justify-center">
       <h3 className="text-center">Password changed successfully</h3>
 
       <Link
-        href={'/auth/login'}
+        href={"/auth/login"}
         className="font-semibold underline text-center text-neutral-700 dark:text-neutral-300"
       >
         Log in

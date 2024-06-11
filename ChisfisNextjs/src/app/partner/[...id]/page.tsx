@@ -60,7 +60,7 @@ const page = ({ params }: any) => {
   setLocalStorageItem("currentPath", pathname);
 
   const [showGreeting, setShowGreeting] = useState(
-    getLocalStorageItem("showGreeting")
+    getLocalStorageItem("showGreeting"),
   );
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const page = ({ params }: any) => {
     removeLocalStorageItem("showGreeting");
     setShowGreeting(null);
   };
-  
+
   const defaultProps = {
     center: {
       lat: 51.509865,
@@ -324,7 +324,6 @@ const page = ({ params }: any) => {
                 >
                   Show all {amenities.length} amenities
                 </button>
-
               </div>
             </div>
 

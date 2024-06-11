@@ -22,7 +22,7 @@ const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
   hasButtonSubmit = true,
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/03/01")
+    new Date("2023/03/01"),
   );
   const [endDate, setEndDate] = useState<Date | null>(new Date("2023/03/16"));
 

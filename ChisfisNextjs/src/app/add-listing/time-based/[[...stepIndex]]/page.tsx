@@ -11,9 +11,6 @@ import PageAddListing7 from "../../_components/PageAddListing7";
 import PageAddListing8 from "../../_components/PageAddListing8";
 import AddListingTimeBaseWrapper from "../TimeBasedWrapper";
 
-
-
-
 const InitialData: ListingDataType = {
   propertyType: "",
   roomType: "",
@@ -71,8 +68,7 @@ const Page = () => {
   const updateData = (newData: Partial<typeof InitialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
-  
-  
+
   const {
     steps,
     currentStepIndex,
@@ -87,16 +83,28 @@ const Page = () => {
     <PageAddListing2 data={data} updateData={updateData} />,
     <PageAddListing3 data={data} updateData={updateData} />,
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <PageAddListing5 data={data} updateData={updateData}/>,
-    <PageAddListing6 data={data} onPreview={()=>{next()}} />,
-    <PageAddListing7 data={data} onBackToHost={()=>{back()}}/>,
-    <PageAddListing8 data={data} onBackToHost={()=>{back()}}/>,
+    <PageAddListing5 data={data} updateData={updateData} />,
+    <PageAddListing6
+      data={data}
+      onPreview={() => {
+        next();
+      }}
+    />,
+    <PageAddListing7
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
+    <PageAddListing8
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
   ]);
 
-
-
   return (
-
     <AddListingTimeBaseWrapper
       onNext={next}
       onBack={back}
@@ -104,10 +112,9 @@ const Page = () => {
       isLastStep={isLastStep}
       currentStep={currentStepIndex}
     >
-        {step}
+      {step}
     </AddListingTimeBaseWrapper>
-  )
-
-}
+  );
+};
 
 export default Page;

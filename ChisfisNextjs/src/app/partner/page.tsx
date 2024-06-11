@@ -14,7 +14,6 @@ import PartnerList from "@/components/Partner/PartnerList";
 import SectionSubscribe from "@/components/SectionSubscribe";
 import RoomMate_Bg from "@/images/room-mate-filter-image.png";
 
-
 const buttonClassTop =
   "h-[46px] border-[1px] rounded-full w-fit px-5 text-[#757575] hover:bg-[#632DF8] hover:text-white";
 const buttonClass =

@@ -22,4 +22,3 @@ export const basicFetch = axios.create({
     "Content-Type": "application/json",
   },
 });
-

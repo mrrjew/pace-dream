@@ -117,4 +117,3 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
 };
 
 export default MainNav2;
-
