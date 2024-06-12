@@ -26,45 +26,49 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const searchParams = useSearchParams();
   const option = searchParams.get("option");
   const terms = searchParams.get("term");
+  const location = searchParams.get("regex");
+  const guests = searchParams.get("guests");
+
+  console.log(location)
 
   let DEMO_STAYS: StayDataType[] | LastDataType[] | TimeBasedDataType[];
-  switch (terms) {
+  switch (terms || location || guests) {
     case "long":
       DEMO_STAYS = DEMO_STAY_LISTINGS.filter(
         (listing) => listing.term === "long",
-      ).filter((_, i) => i < 12);
+      );
       break;
     case "short":
       DEMO_STAYS = DEMO_STAY_LISTINGS.filter(
-        (listing) => listing.term === "short",
-      ).filter((_, i) => i < 12);
+        (listing) => listing.term === "short" && listing.address == location ? location : ""
+      );
       break;
     case "40":
       DEMO_STAYS = DEMO_LAST_LISTINGS.filter(
         (listing) => listing.lastMinute === 40,
-      ).filter((_, i) => i < 12);
+      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
       break;
     case "30":
       DEMO_STAYS = DEMO_LAST_LISTINGS.filter(
         (listing) => listing.lastMinute === 30,
-      ).filter((_, i) => i < 12);
+      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
       break;
     case "20":
       DEMO_STAYS = DEMO_LAST_LISTINGS.filter(
         (listing) => listing.lastMinute === 20,
-      ).filter((_, i) => i < 12);
+      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
       break;
     case "Hourly":
       DEMO_STAYS = DEMO_TIMEBASED_LISTINGS.filter(
         (e) => e.listingCategory.name === option,
-      ).filter((_, i) => i < 12);
+      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
       break;
     default:
-      DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
+      DEMO_STAYS = DEMO_STAY_LISTINGS.filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests) && listing.term == terms);
       break;
   }
 
-  // console.log(DEMO_STAYS)
+  console.log(DEMO_STAYS)
 
   return (
     <div className="relative flex min-h-screen">
@@ -130,7 +134,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
             >
               <GoogleMapReact
                 defaultZoom={12}
-                defaultCenter={DEMO_STAYS[0].map}
+                defaultCenter={DEMO_STAYS[0]?.map}
                 bootstrapURLKeys={{
                   key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
                 }}
@@ -158,7 +162,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
           >
             <GoogleMapReact
               defaultZoom={12}
-              defaultCenter={DEMO_STAYS[0].map}
+              defaultCenter={DEMO_STAYS[0]?.map}
               bootstrapURLKeys={{
                 key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
               }}

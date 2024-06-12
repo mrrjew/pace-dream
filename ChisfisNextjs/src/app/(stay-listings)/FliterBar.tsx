@@ -3,11 +3,14 @@ import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderT
 import { Popover } from "@headlessui/react";
 import { Search } from "@mui/icons-material";
 import DatePicker from "react-datepicker";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { FaUsers } from "react-icons/fa";
+import {usePathname, useRouter} from "next/navigation"
 
 const FilterBar = () => {
+
+  
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [selectedRange, setSelectedRange] = useState<
@@ -15,11 +18,6 @@ const FilterBar = () => {
   >([null, null]);
 
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [tomorrowDate, setTomorrowDate] = useState(() => {
-    const tomorrow = new Date(currentDate);
-    tomorrow.setDate(tomorrow.getDate() + 1); // Get tomorrow's date
-    return tomorrow;
-  });
 
   const handleChange = (
     date: [Date | null, Date | null],
@@ -29,34 +27,6 @@ const FilterBar = () => {
     console.log(selectedRange);
     const [startDate, endDate] = date;
   };
-
-  function getTodayDate() {
-    const today = new Date();
-    today.setDate(today.getDate()); // Format today's date
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    };
-    const formattedDate = today.toLocaleDateString("en-US", options);
-    // Extract the first three characters of the day
-    const day = formattedDate.split(",")[0];
-    return `${day.slice(0, 3)},${formattedDate.split(",")[1]}`;
-  }
-
-  function getTomorrowDate() {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1); // Get tomorrow's date
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    };
-    const formattedDate = tomorrow.toLocaleDateString("en-US", options);
-    // Extract the first three characters of the day
-    const day = formattedDate.split(",")[0];
-    return `${day.slice(0, 3)},${formattedDate.split(",")[1]}`;
-  }
 
   const renderStartDateOutput = (): any => {
     return (
@@ -87,6 +57,25 @@ const FilterBar = () => {
   // guests
   const [guests, setGuests] = useState<number>(0);
 
+  // search
+  const [regex,setRegex] = useState<string>("")
+
+    // setting query params
+    const {push} = useRouter()
+    const pathname = usePathname()
+
+    const date1 = new Date(selectedRange[0] ?? '');
+    const date2 = new Date(selectedRange[1] ?? '');
+
+    const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
+    const diffInMonths = diffInMilliseconds / (1000 * 60 * 60 * 24 * 30);
+    
+    const query = `guests=${guests}&regex=${regex}&term=${diffInMonths > 6 ? "long" : "short"}`
+
+    const search = () => {
+      push(`${pathname}?${query}`)
+  }
+
   return (
     <div className="w-max flex flex-col items-center">
       {/* wrapper */}
@@ -103,6 +92,7 @@ const FilterBar = () => {
               <input
                 type="text"
                 placeholder="location"
+                onChange={(e) => setRegex(e.target.value)}
                 className="bg-transparent border-none outline-none focus:border-none"
               />
             </div>
@@ -123,7 +113,7 @@ const FilterBar = () => {
                           {startDate && open && <p>{startDate.toString()}</p>}
                         </Popover.Button>
 
-                        <Popover.Panel>
+                        <Popover.Panel className="p-2 absolute z-50 w-screen max-w-sm mt-3 transform bg-white rounded-3xl left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
                           <DatePicker
                             onChange={handleChange}
                             startDate={selectedRange[0]}
@@ -167,7 +157,7 @@ const FilterBar = () => {
                           {startDate && open && <p>{startDate.toString()}</p>}
                         </Popover.Button>
 
-                        <Popover.Panel>
+                        <Popover.Panel className="p-2 absolute z-50 w-screen max-w-sm mt-3 transform bg-white rounded-3xl left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
                           <DatePicker
                             onChange={handleChange}
                             startDate={selectedRange[0]}
@@ -226,7 +216,7 @@ const FilterBar = () => {
               Button
             </label>
             <div>
-              <button className="bg-violet rounded-lg px-8 py-[12px] text-white">
+              <button className="bg-violet rounded-lg px-8 py-[12px] text-white" onClick={() => search()}>
                 Search
               </button>
             </div>
