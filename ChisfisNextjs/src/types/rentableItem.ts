@@ -161,6 +161,10 @@ export type Rental = {
   status: RentalStatus;
   /** The chosen price configuration */
   price: Price;
+  rental_start: Date;
+  /** if the rental_end is null then it means the rent is for the entire life time of the product until either parties stops the rent. */
+  rental_end: Date | null;
+  autorenew: boolean;
   /**
    * The item that is rented. Please note that this item is a snapshot of when the rent started.
    * If you need to get the latest then use the `item.original_id` to fetch the latest info. We are saving
