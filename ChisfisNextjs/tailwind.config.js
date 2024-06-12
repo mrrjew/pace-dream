@@ -33,7 +33,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        wrapper:"url('https://s3-alpha-sig.figma.com/img/dcf3/f07b/84b04edab5f456f29109a21d383dfe4f?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=blfdOraxy1tRFrqvKsLaZkRgffaCSXxpU6jdzXRKdFHhJN1fmqSRcwm7~IBqs--akvTdp4VP7liMbGKDCUG11m5EAI8yq8ZBOYa4~Iv7UnpKx7nnvj68kWpVT7J1P6hEPg7oUJQO43riLvpJtusXFlLE0h-ufK7tiZUkuy0RTXo8HdclQNLu80Fl1vkwd9iT6FuJubOfEPycTBUBcpOIexyb2FKaCAUSIag7rdHo7dYs6dc0EDujt8XEGsFdLIwN3iZrfN2Xu64YAV6f9MPpnoHOZroEp-VlwPWqCaQqmvUZ4uAp8Z4GLRV5v2O4Dlbg9w-WWFS0XpgJhYUMsa6Ikg__')",
+        wrapper:
+          "url('https://s3-alpha-sig.figma.com/img/dcf3/f07b/84b04edab5f456f29109a21d383dfe4f?Expires=1719187200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=blfdOraxy1tRFrqvKsLaZkRgffaCSXxpU6jdzXRKdFHhJN1fmqSRcwm7~IBqs--akvTdp4VP7liMbGKDCUG11m5EAI8yq8ZBOYa4~Iv7UnpKx7nnvj68kWpVT7J1P6hEPg7oUJQO43riLvpJtusXFlLE0h-ufK7tiZUkuy0RTXo8HdclQNLu80Fl1vkwd9iT6FuJubOfEPycTBUBcpOIexyb2FKaCAUSIag7rdHo7dYs6dc0EDujt8XEGsFdLIwN3iZrfN2Xu64YAV6f9MPpnoHOZroEp-VlwPWqCaQqmvUZ4uAp8Z4GLRV5v2O4Dlbg9w-WWFS0XpgJhYUMsa6Ikg__')",
         rectangle:
           "url('https://s3-alpha-sig.figma.com/img/806b/93b3/1fb5f1cd8b70dae7015d65698870c4fa?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=boHIQm3zpCHaPI5430xiL7nqBbe6RS98yVD0CuIC9AjZ5W146jWUTlHBFQsvC1paM2YKIaN0pWJyj0S0j7-yoVkCOI375bkGumN7x1ktpjlvELVdms-a41EDaCvs2uuiusqeAVSWFxBWke~~EB1VSlztOWueXGxW8Gf9Pcgb~3uFqwyipHmkRI8A1fGBtihUuWVmxpLnpCwGpJlO7Tm18rSvfK3IPdvVlUOvihHYDz5wQTQrjXnqCgT98YUqfsG40RnUsA7Ysjwq62kFMg9V6b1ikfitZPCnQxPg2E9ZGWc1q98TCwXsknt4aF~IxW0sImsiQ6k-K0~VJ5kNZYolYQ__')",
         mobile:

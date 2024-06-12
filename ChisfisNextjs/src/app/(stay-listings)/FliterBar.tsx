@@ -29,7 +29,7 @@ const FilterBar = () => {
     console.log(selectedRange);
     const [startDate, endDate] = date;
   };
-  
+
   function getTodayDate() {
     const today = new Date();
     today.setDate(today.getDate()); // Format today's date
@@ -58,35 +58,34 @@ const FilterBar = () => {
     return `${day.slice(0, 3)},${formattedDate.split(",")[1]}`;
   }
 
-  const renderStartDateOutput = ():any => {
-    return(
+  const renderStartDateOutput = (): any => {
+    return (
       <div
-          className={`flex justify-between items-center p-0  bg-transparent border-none text-sm placeholder:text-black text-black w-[8.2rem] h-[2rem]  line-clamp-1`}
-        >
-          <SlCalender className="text-gray-400 text-md"/>
-          {selectedRange[0]
-            ? selectedRange[0]?.toLocaleDateString("en-US")
-            : `Check In Date`}
-        </div>
-    )
-  }
-  
+        className={`flex justify-between items-center p-0  bg-transparent border-none text-sm placeholder:text-black text-black w-[8.2rem] h-[2rem]  line-clamp-1`}
+      >
+        <SlCalender className="text-gray-400 text-md" />
+        {selectedRange[0]
+          ? selectedRange[0]?.toLocaleDateString("en-US")
+          : `Check In Date`}
+      </div>
+    );
+  };
+
   const renderEndDateOutput = () => {
-    return(
+    return (
       <div
-          className={`flex justify-between items-center p-0  bg-transparent border-none text-sm placeholder:text-black text-black w-[8.2rem] h-[2rem]  line-clamp-1`}
-          >
-          <SlCalender className="text-gray-400 text-md"/>
-          {selectedRange[1]
-            ? selectedRange[1]?.toLocaleDateString("en-US")
-            : `Check Out Date`}
-        </div>
-    )
-  }
-  
+        className={`flex justify-between items-center p-0  bg-transparent border-none text-sm placeholder:text-black text-black w-[8.2rem] h-[2rem]  line-clamp-1`}
+      >
+        <SlCalender className="text-gray-400 text-md" />
+        {selectedRange[1]
+          ? selectedRange[1]?.toLocaleDateString("en-US")
+          : `Check Out Date`}
+      </div>
+    );
+  };
 
   // guests
-  const [guests,setGuests] = useState<number>(0)
+  const [guests, setGuests] = useState<number>(0);
 
   return (
     <div className="w-max flex flex-col items-center">
@@ -94,121 +93,146 @@ const FilterBar = () => {
       <div className="w-screen flex items-center justify-center relative -top-12 -mb-[40px] lg:-ml-24 bg-slate-200 r-0 bg-wrapper bg-center bg-cover h-max py-8 md:py-20">
         <div className="w-full bg-slate-900/60 h-full absolute "></div>
 
-      <div className="bg-white relative l-0 px-8 rounded-lg p-8 flex flex-col lg:flex-row gap-1 lg:gap-4 md:gap-2 w-max ">
-     <div className="space-y-1 lg:space-y-2">
-       <label htmlFor="location" className="text-gray-900 text-sm">Location</label>
-       <div className="flex gap-2 items-center border-[1px] border-gray-200 p-1 px-4 rounded-lg">
-         <Search className="text-gray-400 text-md"/>
-         <input type="text" placeholder="location" className="bg-transparent border-none outline-none focus:border-none" />
-       </div>
-     </div>
+        <div className="bg-white relative l-0 px-8 rounded-lg p-8 flex flex-col lg:flex-row gap-1 lg:gap-4 md:gap-2 w-max ">
+          <div className="space-y-1 lg:space-y-2">
+            <label htmlFor="location" className="text-gray-900 text-sm">
+              Location
+            </label>
+            <div className="flex gap-2 items-center border-[1px] border-gray-200 p-1 px-4 rounded-lg">
+              <Search className="text-gray-400 text-md" />
+              <input
+                type="text"
+                placeholder="location"
+                className="bg-transparent border-none outline-none focus:border-none"
+              />
+            </div>
+          </div>
 
-     <div className="flex">
-     <div className="space-y-1 lg:space-y-2">
-       <label htmlFor="location" className="text-gray-900 text-sm">Availability</label>
-       <div className="flex justify-between gap-2">
+          <div className="flex">
+            <div className="space-y-1 lg:space-y-2">
+              <label htmlFor="location" className="text-gray-900 text-sm">
+                Availability
+              </label>
+              <div className="flex justify-between gap-2">
+                <div className="flex gap-2 items-center border-[1px] border-r-0 rounded-r-none border-gray-200 p-1 px-4 py-2 rounded-lg">
+                  <Popover className="StayDatesRangeInput z-50 bg-transparent relative flex flex-col gap-4">
+                    {({ open }) => (
+                      <>
+                        <Popover.Button>
+                          {renderStartDateOutput()}
+                          {startDate && open && <p>{startDate.toString()}</p>}
+                        </Popover.Button>
 
-       <div className="flex gap-2 items-center border-[1px] border-r-0 rounded-r-none border-gray-200 p-1 px-4 py-2 rounded-lg">
-         <Popover className="StayDatesRangeInput z-50 bg-transparent relative flex flex-col gap-4">
-            {({open}) => (
-              <>
-                <Popover.Button>
-                  {renderStartDateOutput()}
-                  {startDate && open && (
-                    <p>{startDate.toString()}</p>
+                        <Popover.Panel>
+                          <DatePicker
+                            onChange={handleChange}
+                            startDate={selectedRange[0]}
+                            endDate={selectedRange[1]}
+                            selectsRange
+                            monthsShown={2}
+                            showPopperArrow={false}
+                            inline
+                            renderCustomHeader={(p) => (
+                              <DatePickerCustomHeaderTwoMonth {...p} />
+                            )}
+                            renderDayContents={(day, date) => (
+                              <DatePickerCustomDay
+                                dayOfMonth={day}
+                                date={date}
+                              />
+                            )}
+                          />
+                        </Popover.Panel>
+                      </>
                     )}
-                </Popover.Button>
+                  </Popover>
+                </div>
+              </div>
+            </div>
 
-                <Popover.Panel>
-                <DatePicker
-                    onChange={handleChange}
-                    startDate={selectedRange[0]}
-                    endDate={selectedRange[1]}
-                    selectsRange
-                    monthsShown={2}
-                    showPopperArrow={false}
-                    inline
-                    renderCustomHeader={(p) => (
-                      <DatePickerCustomHeaderTwoMonth {...p} />
+            <div className="space-y-1 lg:space-y-2">
+              <label
+                htmlFor="location"
+                className="text-gray-900 text-sm text-white"
+              >
+                Availability{" "}
+              </label>
+              <div className="flex justify-between gap-2">
+                <div className="flex gap-2 items-center border-[1px] border-gray-200 p-1 px-4 py-2 rounded-r-lg">
+                  <Popover className="StayDatesRangeInput z-50 bg-transparent relative flex flex-col gap-4">
+                    {({ open }) => (
+                      <>
+                        <Popover.Button>
+                          {renderEndDateOutput()}
+                          {startDate && open && <p>{startDate.toString()}</p>}
+                        </Popover.Button>
+
+                        <Popover.Panel>
+                          <DatePicker
+                            onChange={handleChange}
+                            startDate={selectedRange[0]}
+                            endDate={selectedRange[1]}
+                            selectsRange
+                            monthsShown={2}
+                            showPopperArrow={false}
+                            inline
+                            renderCustomHeader={(p) => (
+                              <DatePickerCustomHeaderTwoMonth {...p} />
+                            )}
+                            renderDayContents={(day, date) => (
+                              <DatePickerCustomDay
+                                dayOfMonth={day}
+                                date={date}
+                              />
+                            )}
+                          />
+                        </Popover.Panel>
+                      </>
                     )}
-                    renderDayContents={(day, date) => (
-                      <DatePickerCustomDay dayOfMonth={day} date={date} />
-                    )}
-                  />
-                </Popover.Panel>
-              </>
-            )}
-         </Popover>
-       </div>
-       </div>
+                  </Popover>
+                </div>
+              </div>
+            </div>
+          </div>
 
-     </div>
+          <div className="space-y-1 lg:space-y-2">
+            <label htmlFor="location" className="text-gray-900 text-sm">
+              Guests
+            </label>
+            <div className="flex gap-2 items-center border-[1px] border-gray-200 py-[12px] px-4 rounded-lg">
+              <FaUsers className="text-gray-400 text-md" />
+              <div className="flex items-center gap-2 ">
+                <p>Add Guests</p>
+                <button
+                  onClick={() =>
+                    setGuests((prev) => {
+                      return prev < 1 ? 0 : prev - 1;
+                    })
+                  }
+                >
+                  -
+                </button>
+                <p>{guests}</p>
+                <button onClick={() => setGuests((prev) => prev + 1)}>+</button>
+              </div>
+            </div>
+          </div>
 
-
-     <div className="space-y-1 lg:space-y-2">
-       <label htmlFor="location" className="text-gray-900 text-sm text-white">Availability </label>
-       <div className="flex justify-between gap-2">
-       <div className="flex gap-2 items-center border-[1px] border-gray-200 p-1 px-4 py-2 rounded-r-lg">
-         <Popover className="StayDatesRangeInput z-50 bg-transparent relative flex flex-col gap-4">
-            {({open}) => (
-              <>
-                <Popover.Button>
-                  {renderEndDateOutput()}
-                  {startDate && open && (
-                    <p>{startDate.toString()}</p>
-                    )}
-                </Popover.Button>
-
-                <Popover.Panel>
-                <DatePicker
-                    onChange={handleChange}
-                    startDate={selectedRange[0]}
-                    endDate={selectedRange[1]}
-                    selectsRange
-                    monthsShown={2}
-                    showPopperArrow={false}
-                    inline
-                    renderCustomHeader={(p) => (
-                      <DatePickerCustomHeaderTwoMonth {...p} />
-                    )}
-                    renderDayContents={(day, date) => (
-                      <DatePickerCustomDay dayOfMonth={day} date={date} />
-                    )}
-                  />
-                </Popover.Panel>
-              </>
-            )}
-         </Popover>
-       </div>
-       </div>
-     </div>
-     </div>
-
-     <div className="space-y-1 lg:space-y-2">
-       <label htmlFor="location" className="text-gray-900 text-sm">Guests</label>
-       <div className="flex gap-2 items-center border-[1px] border-gray-200 py-[12px] px-4 rounded-lg">
-         <FaUsers className="text-gray-400 text-md"/>
-         <div className="flex items-center gap-2 ">
-           <p>Add Guests</p>
-           <button onClick={() => setGuests((prev) => {return prev < 1 ? 0 : prev -1})}>-</button>
-            <p>{guests}</p>
-           <button onClick={() => setGuests((prev) => prev +1)}>+</button>
-         </div>
-       </div>
-     </div>
-
-     <div className="space-y-1 lg:space-y-2">
-       <label htmlFor="location" className="text-gray-900 text-sm text-white">Button</label>
-       <div>
-        
-     <button className="bg-violet rounded-lg px-8 py-[12px] text-white">
-       Search
-     </button>
-       </div>
-     </div>
-     </div>
-
-   </div>
+          <div className="space-y-1 lg:space-y-2">
+            <label
+              htmlFor="location"
+              className="text-gray-900 text-sm text-white"
+            >
+              Button
+            </label>
+            <div>
+              <button className="bg-violet rounded-lg px-8 py-[12px] text-white">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
