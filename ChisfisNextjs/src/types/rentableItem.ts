@@ -34,11 +34,22 @@ const PRICING_TYPE = {
   UTILS: "utils",
 } as const;
 
+export const RENTAL_STATUS = {
+  ACTIVE: "active",
+  ENDED: "ENDED",
+  NEED_PAYMENT: "need_payment",
+  OVERDUE: "overdue",
+} as const;
+
 export type PricingFrequency =
   (typeof PRICING_FREQUENCY)[keyof typeof PRICING_FREQUENCY];
+
 export type RentableItemType =
   (typeof RENTABLE_ITEM_TYPE)[keyof typeof RENTABLE_ITEM_TYPE];
+
 export type PricingType = (typeof PRICING_TYPE)[keyof typeof PRICING_TYPE];
+
+export type RentalStatus = (typeof RENTAL_STATUS)[keyof typeof RENTAL_STATUS];
 
 export type Discount = {
   /** Either use amount off (i.e. $50 off) */
@@ -80,6 +91,13 @@ export type Attachment = {
   link: string;
   description: string;
   mime_type: string;
+};
+
+export type UserInfoTruncated = {
+  _id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
 };
 
 export type PropertyDetails = {
@@ -131,4 +149,24 @@ export type RentableItem = {
   // following two fields will be auto generated in the server.
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type Rental = {
+  /** The owner of the rentable item (room/gear/stuff) */
+  lessor: UserInfoTruncated;
+  /** The first tenant */
+  tenant: UserInfoTruncated;
+  /** List of other tenants who shares the bills */
+  sharing_tenants: string[];
+  status: RentalStatus;
+  /** The chosen price configuration */
+  price: Price;
+  /**
+   * The item that is rented. Please note that this item is a snapshot of when the rent started.
+   * If you need to get the latest then use the `item.original_id` to fetch the latest info. We are saving
+   * a snapshot to prevent discrepancies as the owner changes/deleted the rented item after the rent has started.
+   */
+  item: RentableItem;
+  deleted: boolean;
+  archived: boolean;
 };
