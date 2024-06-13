@@ -4,6 +4,7 @@ import React, { FC, useState } from "react";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
 import SectionSliderGridHasMap from "@/components/SectionSliderGridHasMap";
 import GoogleMapReact from "google-map-react";
+import NoResult from "@/images/no-result.jpg"
 import {
   DEMO_STAY_LISTINGS,
   DEMO_LAST_LISTINGS,
@@ -16,6 +17,7 @@ import StayCard2 from "@/components/StayCard2";
 import { useSearchParams } from "next/navigation";
 import FlightCard2 from "@/components/FlightCard2";
 import { LastDataType, StayDataType, TimeBasedDataType } from "@/data/types";
+import Image from "next/image";
 
 export interface SectionGridHasMapProps {}
 
@@ -26,49 +28,22 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const searchParams = useSearchParams();
   const option = searchParams.get("option");
   const terms = searchParams.get("term");
-  const location = searchParams.get("regex");
+  const location = searchParams.get("location");
   const guests = searchParams.get("guests");
 
-  console.log(location)
+  function filterListings(listings:any, { guests, location, terms }:any) {
+    return listings.filter((listing:any) => {
+        const matchesAddress = location ? listing.address.toLowerCase().includes(location.toLowerCase()) : true;
+        const matchesGuests = guests ? listing.maxGuests === parseInt(guests) : true;
+        const matchesTerm = terms ? listing.term === terms : true;
 
-  let DEMO_STAYS: StayDataType[] | LastDataType[] | TimeBasedDataType[];
-  switch (terms || location || guests) {
-    case "long":
-      DEMO_STAYS = DEMO_STAY_LISTINGS.filter(
-        (listing) => listing.term === "long",
-      );
-      break;
-    case "short":
-      DEMO_STAYS = DEMO_STAY_LISTINGS.filter(
-        (listing) => listing.term === "short" && listing.address == location ? location : ""
-      );
-      break;
-    case "40":
-      DEMO_STAYS = DEMO_LAST_LISTINGS.filter(
-        (listing) => listing.lastMinute === 40,
-      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
-      break;
-    case "30":
-      DEMO_STAYS = DEMO_LAST_LISTINGS.filter(
-        (listing) => listing.lastMinute === 30,
-      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
-      break;
-    case "20":
-      DEMO_STAYS = DEMO_LAST_LISTINGS.filter(
-        (listing) => listing.lastMinute === 20,
-      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
-      break;
-    case "Hourly":
-      DEMO_STAYS = DEMO_TIMEBASED_LISTINGS.filter(
-        (e) => e.listingCategory.name === option,
-      ).filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests));
-      break;
-    default:
-      DEMO_STAYS = DEMO_STAY_LISTINGS.filter((listing) => listing.address.includes(location ? location : "") && listing.maxGuests == (guests && +guests) && listing.term == terms);
-      break;
-  }
+        return matchesAddress && matchesGuests && matchesTerm;
+    });
+}
 
-  console.log(DEMO_STAYS)
+
+// Filter the listings
+const DEMO_STAYS = filterListings(DEMO_STAY_LISTINGS, {guests,location,terms});
 
   return (
     <div className="relative flex min-h-screen">
@@ -79,10 +54,16 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
         <div
           className={`hidden md:flex flex-row w-[90vw] ${map ? "h-[92vw]" : "h-full"} `}
         >
+           {
+            DEMO_STAYS.length == 0 && (<div className="w-full flex flex-col items-center h-max py-40">
+              <Image src={NoResult} alt="not found" width={600} height={600} className="rounded-md text-center"/>
+              <h1 className="text-gray-600 text-2xl my-8 font-rubik">No Result Found</h1>
+            </div>)
+           }
           <div
             className={`hidden md:grid grid-cols-1 ${map ? "sm:grid-cols-2" : "sm:grid-cols-4"} gap-x-5 2xl:gap-x-6 gap-y-8 ${map ? "max-w-[45vw]" : "max-w-[90vw]"} ${map ? "overflow-y-auto scrollbar-webkit scrollbar-thin" : "overflow-y-hidden"}`}
           >
-            {DEMO_STAYS.map((item) => (
+            {DEMO_STAYS.map((item: StayDataType) => (
               <div
                 key={item.id}
                 onMouseEnter={() => setCurrentHoverID(item.id)}
@@ -140,7 +121,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
                 }}
                 yesIWantToUseGoogleMapApiInternals
               >
-                {DEMO_STAYS.map((item) => (
+                {DEMO_STAYS.map((item: StayDataType) => (
                   <AnyReactComponent
                     isSelected={currentHoverID === item.id}
                     key={item.id}
@@ -168,7 +149,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
               }}
               yesIWantToUseGoogleMapApiInternals
             >
-              {DEMO_STAYS.map((item) => (
+              {DEMO_STAYS.map((item: StayDataType) => (
                 <AnyReactComponent
                   isSelected={currentHoverID === item.id}
                   key={item.id}

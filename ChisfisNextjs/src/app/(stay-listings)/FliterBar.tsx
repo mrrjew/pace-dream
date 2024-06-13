@@ -55,10 +55,10 @@ const FilterBar = () => {
   };
 
   // guests
-  const [guests, setGuests] = useState<number>(0);
+  const [guests, setGuests] = useState<number>(1);
 
   // search
-  const [regex,setRegex] = useState<string>("")
+  const [location,setLocation] = useState<string>("")
 
     // setting query params
     const {push} = useRouter()
@@ -70,7 +70,7 @@ const FilterBar = () => {
     const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
     const diffInMonths = diffInMilliseconds / (1000 * 60 * 60 * 24 * 30);
     
-    const query = `guests=${guests}&regex=${regex}&term=${diffInMonths > 6 ? "long" : "short"}`
+    const query = `guests=${guests}&location=${location}&term=${diffInMonths > 6 ? "long" : "short"}`
 
     const search = () => {
       push(`${pathname}?${query}`)
@@ -79,7 +79,7 @@ const FilterBar = () => {
   return (
     <div className="w-max flex flex-col items-center">
       {/* wrapper */}
-      <div className="w-screen flex items-center justify-center relative -top-12 -mb-[40px] lg:-ml-24 bg-slate-200 r-0 bg-wrapper bg-center bg-cover h-max py-8 md:py-20">
+      <div className="w-screen flex items-center justify-center relative -top-12 -mb-[40px] lg:-ml-20 bg-slate-200 r-0 bg-wrapper bg-center bg-cover h-max py-8 md:py-20">
         <div className="w-full bg-slate-900/60 h-full absolute "></div>
 
         <div className="bg-white relative l-0 px-8 rounded-lg p-8 flex flex-col lg:flex-row gap-1 lg:gap-4 md:gap-2 w-max ">
@@ -92,7 +92,7 @@ const FilterBar = () => {
               <input
                 type="text"
                 placeholder="location"
-                onChange={(e) => setRegex(e.target.value)}
+                onChange={(e) => setLocation(e.target.value)}
                 className="bg-transparent border-none outline-none focus:border-none"
               />
             </div>
@@ -196,7 +196,7 @@ const FilterBar = () => {
                 <button
                   onClick={() =>
                     setGuests((prev) => {
-                      return prev < 1 ? 0 : prev - 1;
+                      return prev < 1 ? 1 : prev - 1;
                     })
                   }
                 >
