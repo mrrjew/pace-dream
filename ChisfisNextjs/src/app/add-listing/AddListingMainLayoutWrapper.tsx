@@ -63,7 +63,6 @@ export default function AddListingMainLayoutWrapper(
     isLastStep,
     currentStep,
     submitBtnText
-
     }:{
       children:React.ReactNode,
       hideBackBtn?:boolean,
@@ -76,24 +75,22 @@ export default function AddListingMainLayoutWrapper(
     }) {
 
   return (
-    <div className="flex">
-        <div className="w-60 bg-white h-screen hidden md:block">
+    <div className="flex pt-[64px] h-[100dvh]">
+        <div className="w-60 h-full bg-white hidden md:block">
             <Sidebar options={options} />
         </div>
         <div className="grid grid-cols-1 flex-1 p-4 px-4 md:px-8">
-            <div className="col-span-2 h-fit md:h-[70dvh]">
-                    {children}
+            <div className="col-span-2 h-fit pb-24 md:pb-0 md:h-[70dvh]">
+                {children}
             </div>
-          
-            <div className="w-full sticky bottom-0 md:static mt-4 bg-inherit">
+            <div className="w-full bg-white rounded-lg md:bg-inherit fixed md:static right-0 left-0 bottom-0  mt-4 bg-inherit">
                 <div className="flex justify-between  md:justify-end gap-4 items-center p-2 md:p-1">
-                  {!hideBackBtn &&  <button onClick={onBack} disabled={isFirstStep} className="bg-primary-100 text-black py-3 px-8 min-w-40 rounded-md disabled:opacity-40 disabled:cursor-not-allowed">Back</button>}
-                    <button onClick={onNext} disabled={isLastStep} className="bg-primary-700 text-white py-3 px-4  min-w-40 rounded-md">
+                   <button onClick={onBack} disabled={isFirstStep} className={`${hideBackBtn ? 'block md:hidden':''} bg-primary-100 text-black py-2 md:py-3 px-8 min-w-40 rounded-md disabled:opacity-40 disabled:cursor-not-allowed`}>Back</button>
+                    <button onClick={onNext} disabled={isLastStep} className="bg-primary-700 text-white py-2 md:py-3 px-4  min-w-40 rounded-md">
                       {submitBtnText}
                     </button>
                 </div>
           </div>
-
         </div>
     </div>
   );

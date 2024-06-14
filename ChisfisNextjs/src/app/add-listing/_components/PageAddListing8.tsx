@@ -2,39 +2,41 @@
 import React, { Fragment } from 'react';
 import ButtonPrimary from '@/shared/ButtonPrimary';
 import ButtonSecondary from '@/shared/ButtonSecondary';
-import { ListingDataType } from '@/types/types';
+// import { ListingDataType } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Bed, Place, Shower, Star } from '@mui/icons-material';
-import { FaWifi, FaParking } from 'react-icons/fa';
-import { FaKitchenSet } from 'react-icons/fa6';
-import { IoIosCloseCircle } from 'react-icons/io';
+// import { FaWifi, FaParking } from 'react-icons/fa';
+// import { FaKitchenSet } from 'react-icons/fa6';
+// import { IoIosCloseCircle } from 'react-icons/io';
+import { RentableItem } from '@/types/rentalItems';
+import { AMENITIES_DATA } from '@/data/amenities';
 
 
 
 const PageAddListing8 = (
-  {data,onBackToHost}:{onBackToHost:()=>void, data:Partial<ListingDataType>}
+  {data,onBackToHost}:{onBackToHost:()=>void, data:Partial<RentableItem>}
 ) => {
   const [selectedImage, setSelectedImage] = React.useState<number>(0)
 
-  const imageList = [
-    'https://a0.muscache.com/im/pictures/7d828007-c02d-4c04-ac3f-53e0683602cf.jpg?im_w=1200',
-    'https://a0.muscache.com/im/pictures/125d1348-b08b-448c-a5c5-ac6cdab6817b.jpg?im_w=720',
-    'https://a0.muscache.com/im/pictures/miso/Hosting-549896275278976027/original/f0d86ec0-45da-4458-bb23-a1bcc275c711.jpeg?im_w=1200',
-    'https://a0.muscache.com/im/pictures/miso/Hosting-549896275278976027/original/6f30cffe-68f5-4f49-9adb-5541c478e484.jpeg?im_w=720',
-    'https://a0.muscache.com/im/pictures/miso/Hosting-549896275278976027/original/77cc2c6e-8f59-44cd-a380-da697e5618eb.jpeg?im_w=720'
-  ]
+  // const imageList = [
+  //   'https://a0.muscache.com/im/pictures/7d828007-c02d-4c04-ac3f-53e0683602cf.jpg?im_w=1200',
+  //   'https://a0.muscache.com/im/pictures/125d1348-b08b-448c-a5c5-ac6cdab6817b.jpg?im_w=720',
+  //   'https://a0.muscache.com/im/pictures/miso/Hosting-549896275278976027/original/f0d86ec0-45da-4458-bb23-a1bcc275c711.jpeg?im_w=1200',
+  //   'https://a0.muscache.com/im/pictures/miso/Hosting-549896275278976027/original/6f30cffe-68f5-4f49-9adb-5541c478e484.jpeg?im_w=720',
+  //   'https://a0.muscache.com/im/pictures/miso/Hosting-549896275278976027/original/77cc2c6e-8f59-44cd-a380-da697e5618eb.jpeg?im_w=720'
+  // ]
 
-  const amenities = [
-    {
-      icon: <FaParking />,
-      label: "Parking",
-      id: "parking",
-    },
-    { icon: <FaWifi />, label: "Wifi", id: "wifi" },
-    { icon: <FaKitchenSet />, label: "Kitchen", id: "kitchen" },
-  ]
-  
+  // const amenities = [
+  //   {
+  //     icon: <FaParking />,
+  //     label: "Parking",
+  //     id: "parking",
+  //   },
+  //   { icon: <FaWifi />, label: "Wifi", id: "wifi" },
+  //   { icon: <FaKitchenSet />, label: "Kitchen", id: "kitchen" },
+  // ]
+
   return (
     <div className='rounded-lg bg-white p-2 md:p-6'>
       <div className='space-y-4 mb-4'>
@@ -51,7 +53,7 @@ const PageAddListing8 = (
           <div className=''>
             <Image 
                 className='rounded-lg h-72 w-full object-cover'
-                src={imageList[selectedImage]}
+                src={data?.gallery?.images?.at(selectedImage) || ''}
                 alt="Picture of the author"
                 width={500}
                 height={360}
@@ -60,7 +62,7 @@ const PageAddListing8 = (
           {/* images */}
           <div className='flex gap-2 items-center flex-wrap'>
               {
-                imageList.map((img,index)=>{
+                data?.gallery?.images?.map((img,index)=>{
                   return (
                     <div key={index}
                       className={`rounded-xl border-2  cursor-pointer ${selectedImage === index ? 'border-primary-500' : 'border-transparent'}`}
@@ -84,7 +86,7 @@ const PageAddListing8 = (
           <div className='space-y-4'>
             <p className='text-lg font-semibold'>Best Western Cedars</p>
             <p className='text-neutral-500 dark:text-neutral-400'>
-                Welcome to Best Western Cedars Room, the number one choice for those seeking a <br/> peaceful stay in our town. Raise your hand and book your spot now!
+                {data?.details?.description || data?.summary}
               </p>
             <p>
               <Link href='#' className='text-primary-500 underline'>
@@ -108,18 +110,24 @@ const PageAddListing8 = (
              {/* price, bed,bath */}
           <div className='flex items-center justify-between'>
               <div className='flex items-center'>
-                <span className='text-2xl font-semibold'>$300</span>
+                <span className='text-2xl font-semibold'>
+                  $ {data?.price?.at(0)?.amount || 0}
+                </span>
                 <span className='text-neutral-600'>/night</span>
               </div>
               <hr className='bg-gray-400 w-[0.5px] h-4 ' />
             <div>
                 <Bed />
-              <span className='text-neutral-600'>2 Beds</span>
+              <span className='text-neutral-600'>
+                {data?.details?.bedroom_count || 0} Bed
+              </span>
             </div>
               <hr className='bg-gray-400 w-[0.5px] h-4 ' />
             <div>
                 <Shower />
-                <span className='text-neutral-600'>1 Bath</span>
+                <span className='text-neutral-600'>
+                  {data?.details?.bathroom_count || 0} Bath
+                  </span>
            </div>
           </div>
           <hr className='bg-gray-400 w-full' />
@@ -137,14 +145,16 @@ const PageAddListing8 = (
           {/* amenities */}
            <div className='flex items-center justify-between'>
               {
-                amenities.map((amenity,index)=>{
+                data?.details?.amenities?.map((_id:string,index:number,array:string[])=>{
+                  const amenity = AMENITIES_DATA.find(item=>item.id === _id)
+                  if(!amenity) return null
                   return (
                     <Fragment key={index}>
                     <div key={index} className='flex items-center gap-2'>
                       <div className='text-neutral-500'>{amenity.icon}</div>
                       <span className='text-neutral-600'>{amenity.label}</span>
                     </div>
-                     { index < amenities.length - 1 && <hr className='bg-gray-400 w-[0.5px] h-4 ' />}
+                     { (index < (array.length - 1)) && <hr className='bg-gray-400 w-[0.5px] h-4 ' />}
                     </Fragment>
                   )
                 })
@@ -153,7 +163,7 @@ const PageAddListing8 = (
           <hr className='bg-gray-400 w-full' />
 
            {/* rules */}
-           <div className='flex items-center gap-2'>
+           {/* <div className='flex items-center gap-2'>
               <div className='flex items-center gap-1 text-neutral-600'>
                <IoIosCloseCircle className='text-red-600' />
                No smoking inside
@@ -164,16 +174,17 @@ const PageAddListing8 = (
                 No pets allowed
               </div>
             </div>
-          <hr className='bg-gray-400 w-full' />
+          <hr className='bg-gray-400 w-full' /> */}
 
           {/* unorded list rules */}
           <ul className='list-disc list-outside p-4 py-0'>
-            <li className='text-neutral-600'>
-            Our room stay is not mine when I give it to someone for living.
-            </li>
-            <li className='text-neutral-600'>
-            You just need to know basic manners.
-            </li>
+            {
+              data?.details?.rule_description?.split('\n').map((item:string,index:number)=>{
+                return (
+                  <li key={index} className='text-neutral-600'>{item}</li>
+                )
+              })
+            }
           </ul>
           <hr className='border-none bg-transparent w-full' />
           {/* buttons */}

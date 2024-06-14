@@ -7,22 +7,23 @@ import Input from "@/shared/Input";
 import RoomCounter from "@/components/ListingComponents/RoomCounter";
 import PageAddListing4 from "./PageAddListing4";
 import { DateImputField,TimeSelector } from "@/components/ListingComponents/TimeAndDateSelecter";
+import { RentableItem } from "@/types/rentalItems";
 
 const PageAddListingToHourlyRentalGear3 = (
-  {data,updateData}:{updateData:(data:Partial<ListingDataType>)=>void, data:Partial<ListingDataType>}
+  {data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}
 ) => {
-  const [bedrooms, setBedrooms] = useState<number>((data?.bedroom as number) || 1);
-  const [bathrooms, setBathrooms] = useState<number>((data?.bathroom as number) || 1);
+  // const [bedrooms, setBedrooms] = useState<number>((data?.details?.bedroom_count || 1));
+  // const [bathrooms, setBathrooms] = useState<number>((data?.details?.bathroom_count || 1));
 
   // update data with bedrooms and bathrooms
-  const updateDataWithRooms = () => {
-      updateData({...data,bedroom:bedrooms,bathroom:bathrooms})
-  }
+  // const updateDataWithRooms = () => {
+  //     updateData({...data,details:{...data?.details,bedroom_count:bedrooms,bathroom_count:bathrooms}})
+  // }
 
-  // use callback to update data with bedrooms and bathrooms
-  useEffect(() => {
-    updateDataWithRooms()
-  }, [bedrooms, bathrooms])
+  // // use callback to update data with bedrooms and bathrooms
+  // useEffect(() => {
+  //   updateDataWithRooms()
+  // }, [bedrooms, bathrooms])
 
   return (
     <>
@@ -38,35 +39,37 @@ const PageAddListingToHourlyRentalGear3 = (
               <div className="grid gap-4">
                 <FormItem label="">
                   <Input
-                    defaultValue={data?.hourlyrate}
-                    onChange={(e)=>updateData({...data,hourlyrate:e?.currentTarget?.value})}
+                    defaultValue={data?.price?.filter((p)=>p.frequency==="hourly")?.[0]?.amount || ""}
+                    onChange={(e)=>{
+                      // const _others = data?.price?.filter((p)=>p.frequency!=="hourly") || [];
+                      const _existing = data?.price?.find((p)=>p.frequency!=="hourly");
+                      const _price =  _existing ?
+                        {
+                          ..._existing,
+                          amount:parseFloat(e.target.value),
+                          frequency:"hourly",
+                          pricing_type:"base",
+                          recurring_days:0,
+                          discounts:[],
+                          currency: "USD",
+                          grace_period:0,
+                        } :
+                        {
+                          frequency:'hourly',
+                          grace_period:0,
+                          pricing_type:"base",
+                          currency:"USD",
+                          recurring_days:0,
+                          discounts:[],
+                          amount:parseInt(e.target.value)
+                        } as any
+                      updateData({
+                          ...data,
+                          price:[_price]
+                      })
+                    }}
                   name="pricePerHour" type="text" placeholder="$10 Per Hour" />
                 </FormItem>
-
-                {/* <FormItem label="">
-                  <Input 
-                    defaultValue={data?.weeklyrate}
-                    onChange={(e)=>updateData({...data,weeklyrate:e?.currentTarget?.value})}
-                    name="weeklyRate" type="text" placeholder="$300 Weekly rent" />
-                </FormItem>
-                <FormItem label="">
-                  <Input
-                    defaultValue={data?.monthlyrate}
-                    onChange={(e)=>updateData({...data,monthlyrate:e?.currentTarget?.value})}
-                    name="monthlyRate"
-                    type="text"
-                    placeholder="$1250 Monthly rent"
-                  />
-                </FormItem> */}
-                {/* <FormItem label="">
-                  <Input
-                    defaultValue={data?.cleaningfeesDaily}
-                    onChange={(e)=>updateData({...data,cleaningfeesDaily:e?.currentTarget?.value})}
-                    name="cleaningFeesDaily"
-                    type="text"
-                    placeholder="$15 cleaning fees daily"
-                  />
-                </FormItem> */}
               </div>
             </div>
 
@@ -74,13 +77,51 @@ const PageAddListingToHourlyRentalGear3 = (
               
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <p className="col-span-2">Choose rental duration time</p>
-                  <TimeSelector initialTime={{min:0,hour:0,amPm:'AM'}} onTimeChange={(val)=>{}} />
-                  <TimeSelector initialTime={{min:0,hour:0,amPm:'AM'}} onTimeChange={(val)=>{}} />
+                  <TimeSelector 
+                    initialTime={{
+                      min:data?.details?.hourlt_rental_time?.start_time?.split(':')?.[1] || 0,
+                      hour:data?.details?.hourlt_rental_time?.start_time?.split(':')?.[0] || 0,
+                      amPm:data?.details?.hourlt_rental_time?.start_time?.split(':')?.[2] || 'AM'
+                     }}
+                    onTimeChange={(val)=>{
+                    updateData({...data,details:{...data?.details,hourlt_rental_time:{
+                      ...data?.details?.hourlt_rental_time,
+                      // convert object to string time format 00:00 AM
+                      start_time:`${val.hour}:${val.min} ${val.amPm}`
+                    }}})
+                  }} />
+                  <TimeSelector initialTime={{
+                      min:data?.details?.hourlt_rental_time?.end_time?.split(':')?.[1] || 0,
+                      hour:data?.details?.hourlt_rental_time?.end_time?.split(':')?.[0] || 0,
+                      amPm:data?.details?.hourlt_rental_time?.end_time?.split(':')?.[2] || 'AM'
+                  }} onTimeChange={(val)=>{
+                    updateData({...data,details:{...data?.details,hourlt_rental_time:{
+                      ...data?.details?.hourlt_rental_time,
+                      // convert object to string time format 00:00 AM
+                      end_time:`${val.hour}:${val.min} ${val.amPm}`
+                    }}})
+                  }} />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <p className="col-span-2">Choose rental duration date</p>
-                  <DateImputField placeholder="Start Date" name="startDate" id={"startDate"} />
-                  <DateImputField placeholder="End Date" name="endDate" id={"endDate"} />
+                  <DateImputField placeholder="Start Date" name="startDate" id={"startDate"}
+                    defaultValue={data?.details?.hourlt_rental_time?.start_date}
+                    onChange={(date)=>{
+                      updateData({...data,details:{...data?.details,hourlt_rental_time:{
+                        ...data?.details?.hourlt_rental_time,
+                        start_date:date
+                      }}})
+                    }}
+                  />
+                  <DateImputField placeholder="End Date" name="endDate" id={"endDate"}
+                    defaultValue={data?.details?.hourlt_rental_time?.end_date}
+                    onChange={(date)=>{
+                      updateData({...data,details:{...data?.details,hourlt_rental_time:{
+                        ...data?.details?.hourlt_rental_time,
+                        end_date:date
+                      }}})
+                    }}
+                  />
                 </div>
                  <PageAddListing4 data={data} updateData={updateData} />
             </div>
