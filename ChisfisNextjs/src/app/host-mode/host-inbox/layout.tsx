@@ -1,5 +1,5 @@
 
-import { ChatList } from "@/app/chat/components/ChatList";
+import { ChatList } from "@/app/(chat)/components/ChatList";
 import { Conversation, DbResponseToConversation } from "@/types/chat";
 import { serverAuthAxios } from "@/utils/serverAxios";
 
