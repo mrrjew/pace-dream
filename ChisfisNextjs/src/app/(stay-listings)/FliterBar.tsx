@@ -73,7 +73,8 @@ const FilterBar = () => {
     const query = `guests=${guests}&location=${location}&term=${diffInMonths > 6 ? "long" : "short"}`
 
     const search = () => {
-      push(`${pathname}?${query}`)
+      
+      push(`/listing-stay-map/:id?${query}`)
   }
 
   return (
