@@ -1,3 +1,4 @@
+'use client';
 import { SignupMethod } from '@/types/SignupMethod';
 import { useSession } from '@/hooks/useSession';
 import ButtonPrimary from '@/shared/ButtonPrimary';
@@ -7,6 +8,9 @@ import { app } from 'config/firebase';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useMutateData } from '@/hooks/useMutate';
+import { createToast } from '@/utils/createToast';
+import { User } from '@/types/user';
 
 export const PasswordMatchText = (props: {
   password: string;
@@ -32,6 +36,7 @@ interface IUserDetails {
   lastName: string;
   dob: Date;
   mobile?: string;
+  step?: string;
 }
 
 export const SignupForm: React.FC<{
@@ -51,27 +56,36 @@ export const SignupForm: React.FC<{
     lastName: '',
     dob: new Date(),
     mobile: props.mobile,
+    step: "1",
   });
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const { setSession } = useSession();
 
   const router = useRouter();
 
-  const createAccount = async (e: React.FormEvent<HTMLFormElement>) => {
-    const auth = getAuth(app);
-    e.preventDefault();
-    setLoading(true);
+  const mutate = useMutateData<User>({
+    queryKey: ['signup'],
+    endpoint: '/auth/signup',
+    body: {
+      user: userDetails
+    },
+  });
+
+  const createAccount = async () => {
+    // const auth = getAuth(app);
+    // e.preventDefault();
+    // setLoading(true);
 
     if (props.signupMethod === SignupMethod.EMAIL) {
       if (userDetails.password !== userDetails.confirmPassword) {
         alert('Passwords do not match');
-        setLoading(false);
+        // setLoading(false);
         return;
       }
       if (userDetails.password.length < 6) {
-        setLoading(false);
+        // setLoading(false);
         alert('Password must be at least 8 characters');
         return;
       }
@@ -86,36 +100,46 @@ export const SignupForm: React.FC<{
         //   userDetails.password
         // );
       }
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup/email`,
-        {
-          email: userDetails.email,
-          password: userDetails.password,
-          firstName: userDetails.firstName,
-          lastName: userDetails.lastName,
-          dob: userDetails.dob,
-          mobile: userDetails.mobile,
-          method: props.signupMethod,
+      // const response = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
+      //   {
+      //     email: userDetails.email,
+      //     password: userDetails.password,
+      //     firstName: userDetails.firstName,
+      //     lastName: userDetails.lastName,
+      //     dob: userDetails.dob,
+      //     mobile: userDetails.mobile,
+      //     method: props.signupMethod,
+      //   }
+      // );
+      // const newUser = response.data.data;
+      // setSession(newUser.token, newUser, newUser.user_id);
+      mutate.mutateAsync().then((response) => {
+        if(response?.status) {
+          createToast('Account created successfully', 'success');
+          setTimeout(() => {
+            router.push('/auth/login');
+          }, 500);
+        }else{
+          createToast(response?.message || 'Error creating account', 'error');
         }
-      );
-      const newUser = response.data.data;
-      setSession(newUser.token, newUser, newUser.user_id);
-
-      setTimeout(() => {
-        router.push('/');
-      }, 500);
+      }).catch((error) => {
+        console.log(error);
+        createToast('Error creating account', 'error');
+      });
+  
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   return (
     <form
       className="grid grid-cols-1 gap-6"
-      action="#"
-      method="post"
-      onSubmit={createAccount}
+      // action="#"
+      // method="post"
+      // onSubmit={createAccount}
     >
       <label className="block">
         <span className="text-neutral-800 dark:text-neutral-200">
@@ -218,8 +242,8 @@ export const SignupForm: React.FC<{
           </label>
         </>
       )}
-      <ButtonPrimary type="submit" loading={loading}>
-        Continue
+      <ButtonPrimary onClick={createAccount} type="button" loading={mutate.isLoading}>
+         {mutate.isLoading ? 'Creating Account...' : 'Continue'}
       </ButtonPrimary>
     </form>
   );

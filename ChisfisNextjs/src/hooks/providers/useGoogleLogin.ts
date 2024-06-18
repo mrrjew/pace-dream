@@ -19,10 +19,10 @@ export const useGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      console.log("Google Auth Result",result);
-      const user = result.user;
+      // console.log("Google Auth Result",result);
+      const user = result?.user;
       const token = await user?.getIdToken();
-      console.log("Google Auth Token",token);
+      // console.log("Google Auth Token",token);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
         {},
@@ -33,7 +33,7 @@ export const useGoogleLogin = () => {
           },
         }
       );
-      console.log("Google Auth Response",response);
+      // console.log("Google Auth Response",response);
       return response.data;
     } catch (error: any) {
       console.log("Google local error: ",error);
