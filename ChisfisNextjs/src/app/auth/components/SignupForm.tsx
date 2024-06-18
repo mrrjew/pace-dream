@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-import { SignupMethod } from "@/types/SignupMethod";
-import { useSession } from "@/hooks/useSession";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import Input from "@/shared/Input";
-import axios from "axios";
-import { app } from "config/firebase";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-=======
+
 'use client';
 import { SignupMethod } from '@/types/SignupMethod';
 import { useSession } from '@/hooks/useSession';
@@ -22,7 +12,6 @@ import { useState } from 'react';
 import { useMutateData } from '@/hooks/useMutate';
 import { createToast } from '@/utils/createToast';
 import { User } from '@/types/user';
->>>>>>> main1
 
 export const PasswordMatchText = (props: {
   password: string;
@@ -92,15 +81,7 @@ export const SignupForm: React.FC<{
 
     if (props.signupMethod === SignupMethod.EMAIL) {
       if (userDetails.password !== userDetails.confirmPassword) {
-<<<<<<< HEAD
-        alert("Passwords do not match");
-        setLoading(false);
-        return;
-      }
-      if (userDetails.password.length < 6) {
-        setLoading(false);
-        alert("Password must be at least 8 characters");
-=======
+
         alert('Passwords do not match');
         // setLoading(false);
         return;
@@ -108,7 +89,6 @@ export const SignupForm: React.FC<{
       if (userDetails.password.length < 6) {
         // setLoading(false);
         alert('Password must be at least 8 characters');
->>>>>>> main1
         return;
       }
     }
@@ -122,26 +102,7 @@ export const SignupForm: React.FC<{
         //   userDetails.password
         // );
       }
-<<<<<<< HEAD
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup/email`,
-        {
-          email: userDetails.email,
-          password: userDetails.password,
-          firstName: userDetails.firstName,
-          lastName: userDetails.lastName,
-          dob: userDetails.dob,
-          mobile: userDetails.mobile,
-          method: props.signupMethod,
-        },
-      );
-      const newUser = response.data.data;
-      setSession(newUser.token, newUser, newUser.user_id);
 
-      setTimeout(() => {
-        router.push("/");
-      }, 500);
-=======
       // const response = await axios.post(
       //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
       //   {
@@ -170,7 +131,6 @@ export const SignupForm: React.FC<{
         createToast('Error creating account', 'error');
       });
   
->>>>>>> main1
     } catch (error) {
       console.log(error);
     }

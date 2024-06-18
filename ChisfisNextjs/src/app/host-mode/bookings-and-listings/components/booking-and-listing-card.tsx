@@ -1,59 +1,5 @@
 "use client";
 
-<<<<<<< HEAD
-import { MoreHorizOutlined, Place } from "@mui/icons-material";
-import Image from "next/image";
-import { BsEye } from "react-icons/bs";
-import { FaRegEdit } from "react-icons/fa";
-import { Menu, MenuItem } from "@szhsin/react-menu";
-import "@szhsin/react-menu/dist/index.css";
-import "@szhsin/react-menu/dist/transitions/slide.css";
-import { Fragment } from "react";
-
-export function BookingAndListingCard({
-  menus,
-  setSelectedItem,
-}: {
-  setSelectedItem: (value: boolean) => void;
-  menus: { title: string; onClick: () => void; className?: string }[];
-}) {
-  return (
-    <div className="grid grid-cols-3 gap-4 p-4 w-full rounded-2xl">
-      <Image
-        className="rounded-xl h-40 w-44 object-cover col-span-1"
-        src="https://a0.muscache.com/im/pictures/81dca5d6-5a86-49bc-8eca-4a8610a07d27.jpg?im_w=1920"
-        alt="HotelDemo1"
-        width={300}
-        height={300}
-      />
-      <div className="grid grid-cols-1 col-span-2">
-        <div className="flex items-center justify-between ">
-          <h2 className="text-xs md:text-lg line-clamp-1 font-semibold">
-            Best Western Cedars{" "}
-          </h2>
-          <Menu
-            menuStyle={{
-              borderRadius: "0.5rem",
-            }}
-            menuButton={<MoreHorizOutlined className="ring-1 rounded-full" />}
-          >
-            {menus.map((item, index, arr) => (
-              <Fragment key={index}>
-                <MenuItem
-                  style={{
-                    fontSize: "0.8rem",
-                    padding: "0.5rem 1rem",
-                  }}
-                  onClick={item.onClick}
-                  className={item.className}
-                >
-                  {item.title}
-                </MenuItem>
-                {index < arr.length - 1 && <hr className="border-gray-200" />}
-              </Fragment>
-            ))}
-          </Menu>
-=======
 import {  MoreHorizOutlined, Place } from "@mui/icons-material"
 import Image from "next/image"
 import { BsEye } from "react-icons/bs"
@@ -127,7 +73,6 @@ export function BookingAndListingCard({menus,setSelectedItem,data}:{
                 </div>
                 
             </div>
->>>>>>> main1
         </div>
         <div>
           <Place className="text-primary-800" />

@@ -15,64 +15,6 @@ import PageAddListing8 from "../../_components/PageAddListing8";
 import AddListingRoomStayWrapper from "../RoomStayWrapper";
 import { RentableItem } from "@/types/rentalItems";
 
-<<<<<<< HEAD
-// const titles = [
-//   "Choosing Categories & Location",
-//   "General amenities, Other amenities & photos",
-//   "House rules for guest & Date & Pricing",
-//   "",
-// ];
-
-const InitialData: ListingDataType = {
-  propertyType: "",
-  roomType: "",
-  placeName: "",
-  rentalForm: "",
-  hourlyrate: "",
-  dailyrate: "",
-  weeklyrate: "",
-  monthlyrate: "",
-  cleaningfeesDaily: "",
-  street: "",
-  country: "",
-  location: {
-    link: "",
-    address: "",
-    latitude: 0,
-    longitude: 0,
-  },
-  otherservices: "",
-  city: "",
-  state: "",
-  postalCode: "",
-  acreage: "",
-  guests: 0,
-  bedroom: 0,
-  beds: 0,
-  bathroom: 0,
-  kitchen: 0,
-  generalAmenities: [],
-  otherAmenities: [],
-  safeAmenities: [],
-  smokingRole: "",
-  petRole: "",
-  partyOrganizingRole: "",
-  cookingRole: "",
-  additionalRules: [],
-  placeDescription: "",
-  availability: true,
-  capacity: 0,
-  currency: "",
-  basePriceMonToThu: 0,
-  basePriceFriToSun: 0,
-  longTermPriceDiscount: 0,
-  stayNightMin: 0,
-  stayNightMax: 0,
-  coverImage: "",
-  placeImages: [],
-  placeVideo: "",
-  availabilityDate: [],
-=======
 
 
 const initialData: Partial<RentableItem> = {
@@ -114,7 +56,6 @@ const initialData: Partial<RentableItem> = {
    owner:"",
    createdAt: new Date(),
    updatedAt: new Date(),
->>>>>>> main1
 };
 
 const Page = () => {
@@ -160,51 +101,6 @@ const Page = () => {
   ]);
 
   return (
-<<<<<<< HEAD
-    <AddListingRoomStayWrapper
-      onNext={next}
-      onBack={back}
-      isFirstStep={isFirstStep}
-      isLastStep={isLastStep}
-      currentStep={currentStepIndex}
-    >
-      {step}
-    </AddListingRoomStayWrapper>
-    // <div className={`nc-PageAddListing1 max-w-screen flex pb-24 lg:pb-32`}>
-
-    //   <form className="space-y-4 md:ml-16 md:mr-48 p-4 sm:mt-8 md:p-4 w-full">
-    //       {step}
-    //     <div className="flex justify-end space-x-5">
-    //       {!isFirstStep && (
-    //         <ButtonSecondary type="button" onClick={back}>
-    //           Go back
-    //         </ButtonSecondary>
-    //       )}
-    //       {isFirstStep && (
-    //         <Link href="/add-listing">
-    //           <ButtonSecondary type="button">Go back</ButtonSecondary>
-    //         </Link>
-    //       )}
-
-    //       {isLastStep ? (
-    //         <button
-    //           type="submit"
-    //           className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  "
-    //         >
-    //           {
-    //             // loading ? "Loading..." :
-    //             "Publish listing"
-    //           }
-    //         </button>
-    //       ) : (
-    //         <ButtonPrimary type="button" onClick={next}>
-    //           Next
-    //         </ButtonPrimary>
-    //       )}
-    //     </div>
-    //   </form>
-    // </div>
-=======
 
       <AddListingRoomStayWrapper
         onNext={next}
@@ -217,7 +113,6 @@ const Page = () => {
       >
           {step}
       </AddListingRoomStayWrapper>
->>>>>>> main1
   );
 };
 

@@ -13,57 +13,6 @@ import AddListingHourlyRentalGearWrapper from "../HourlyRentalGearWrapper";
 import PageAddListingToHourlyRentalGear3 from "../../_components/PageAddListingHourlyRentalGear3";
 import { RentableItem } from "@/types/rentalItems";
 
-<<<<<<< HEAD
-const InitialData: ListingDataType = {
-  propertyType: "",
-  roomType: "",
-  placeName: "",
-  rentalForm: "",
-  hourlyrate: "",
-  dailyrate: "",
-  weeklyrate: "",
-  monthlyrate: "",
-  cleaningfeesDaily: "",
-  street: "",
-  country: "",
-  location: {
-    link: "",
-    address: "",
-    latitude: 0,
-    longitude: 0,
-  },
-  otherservices: "",
-  city: "",
-  state: "",
-  postalCode: "",
-  acreage: "",
-  guests: 0,
-  bedroom: 0,
-  beds: 0,
-  bathroom: 0,
-  kitchen: 0,
-  generalAmenities: [],
-  otherAmenities: [],
-  safeAmenities: [],
-  smokingRole: "",
-  petRole: "",
-  partyOrganizingRole: "",
-  cookingRole: "",
-  additionalRules: [],
-  placeDescription: "",
-  availability: true,
-  capacity: 0,
-  currency: "",
-  basePriceMonToThu: 0,
-  basePriceFriToSun: 0,
-  longTermPriceDiscount: 0,
-  stayNightMin: 0,
-  stayNightMax: 0,
-  coverImage: "",
-  placeImages: [],
-  placeVideo: "",
-  availabilityDate: [],
-=======
 
 
 const initialData: Partial<RentableItem> = {
@@ -105,7 +54,6 @@ const initialData: Partial<RentableItem> = {
    owner:"",
    createdAt: new Date(),
    updatedAt: new Date(),
->>>>>>> main1
 };
 
 

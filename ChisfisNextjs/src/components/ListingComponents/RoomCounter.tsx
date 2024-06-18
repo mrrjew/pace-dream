@@ -23,23 +23,7 @@ const RoomCounter = ({ title, count,placeholder, setCount }: RoomCounterProps) =
       >
         {/* <span>{count}</span> */}
         {/* <CounterButton onClick={increment} label="+" /> */}
-<<<<<<< HEAD
-        <Input
-          defaultValue={count}
-          onChange={(e) => setCount(parseInt(e?.currentTarget?.value) || 0)}
-          value={count}
-          name="counter"
-          type="text"
-          placeholder={`0 ${title}`}
-          className="border-none focus:ring-0"
-        />
-        <button
-          onClick={increment}
-          className="bg-transparent hover:bg-gray-300 text-gray-600 p-2 rounded-full"
-        >
-          <PlusIcon className="w-5 h-5 text-inherit font-bold" />
-        </button>
-=======
+
         <Input 
                 defaultValue={count}
                 onChange={(e)=>{
@@ -54,7 +38,6 @@ const RoomCounter = ({ title, count,placeholder, setCount }: RoomCounterProps) =
             <button onClick={increment} className="bg-transparent hover:bg-gray-300 text-gray-600 p-2 rounded-full">
               <PlusIcon className="w-5 h-5 text-inherit font-bold"/>
             </button>
->>>>>>> main1
       </div>
     </div>
   );
