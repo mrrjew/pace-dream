@@ -317,7 +317,7 @@ const LocationForm: FC<LocationInputProps> = ({
     >
       <div
         onClick={() => setShowPopover(true)}
-        className={`flex  h-[100%] items-center  relative  flex-shrink-0 items-center  cursor-pointer focus:outline-none text-left`}
+        className={`flex  h-[100%]  relative  flex-shrink-0 items-center  cursor-pointer focus:outline-none text-left`}
       >
         <div className="">
           <div className={` font-rubik text-[.6rem] font-[400] `}>{desc}</div>
@@ -336,7 +336,7 @@ const LocationForm: FC<LocationInputProps> = ({
               <Image
                 src={LocationIconImage}
                 alt="location"
-                className=" w-[1.02rem] "
+                className="shrink-0 size-5 flex items-center "
               />
               {/* <PinDropIcon className=" text-[1.2rem] " /> */}
             </div>
@@ -353,7 +353,7 @@ const LocationForm: FC<LocationInputProps> = ({
           <div className=" min-h-[1rem] ">
             {readableLocation && (
               <div className="flex gap-[.2rem] leading-[.7rem] text-neutral-500">
-                <MapPinIcon className=" w-[.5rem] " />
+                <MapPinIcon className=" shrink-0 w-[.5rem] " />
                 <div className=" font-rubik text-[.6rem] font-[400]  w-[10rem] line-clamp-1 ">
                   {readableLocation}
                 </div>

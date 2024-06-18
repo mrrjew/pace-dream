@@ -5,6 +5,7 @@ import SectionGridHasMap from "../../SectionGridHasMap";
 import { useParams, useRouter } from "next/navigation";
 import SectionHeroArchivePage from "@/app/(server-components)/SectionHeroArchivePage";
 import { PathName } from "@/routers/types";
+import FilterBar from "@/app/(stay-listings)/FliterBar"
 
 
 
@@ -40,8 +41,9 @@ const ListingStayMapPage = () => {
   }
   return (
     <>
-      <div className="md:pb-14 pt-10 pb-2 md:pt-14 flex justify-center max-w-[100vw] bg-center bg-no-repeat bg-cover bg-mobile md:bg-rectangle">
-        <SectionHeroArchivePage currentPage={room} currentTab={room} />
+      <div className="pb-14 lg:pb-18 mt-14 w-full lg:w-[90%] lg:mx-auto">
+        {/* <SectionHeroArchivePage currentPage={room} currentTab={room} /> */}
+        <FilterBar />
       </div>
       <div className="pb-24 lg:pb-28 md:ml-16">
         <SectionGridHasMap />

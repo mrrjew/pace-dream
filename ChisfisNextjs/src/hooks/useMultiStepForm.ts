@@ -3,6 +3,7 @@ import { ReactElement, useState } from "react";
 export const useMultiStepForm = (steps: ReactElement[]) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
+
   function next() {
     setCurrentStepIndex((i) => {
       if (i >= steps.length - 1) return i;
@@ -23,6 +24,7 @@ export const useMultiStepForm = (steps: ReactElement[]) => {
 
   return {
     currentStepIndex,
+    // pass the data to the child component
     step: steps[currentStepIndex],
     goToStep,
     next,
