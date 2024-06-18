@@ -1,4 +1,4 @@
-import { DbResponseToUser, User } from './user';
+import { DbResponseToUser, User } from "./user";
 
 export interface Conversation {
   id: string;
@@ -11,15 +11,15 @@ export interface Conversation {
 }
 
 export enum MessageType {
-  TEXT = 'TEXT',
-  IMAGE = 'IMAGE',
-  VIDEO = 'VIDEO',
-  FILE = 'FILE',
+  TEXT = "TEXT",
+  IMAGE = "IMAGE",
+  VIDEO = "VIDEO",
+  FILE = "FILE",
 }
 
 export enum MessageStatus {
-  SENDING = 'SENDING',
-  SENT = 'SENT',
+  SENDING = "SENDING",
+  SENT = "SENT",
   // RECEIVED = 'RECEIVED',
   // READ = 'READ',
 }
@@ -48,19 +48,19 @@ export interface Message {
 export type InboxMessage = Message | SendingMessage;
 
 export const isSendingMessage = (
-  message: InboxMessage
+  message: InboxMessage,
 ): message is SendingMessage => {
   return (message as SendingMessage).status !== undefined;
 };
 export const MessageTypeTextToEnum = (type: string): MessageType => {
   switch (type) {
-    case 'text':
+    case "text":
       return MessageType.TEXT;
-    case 'image':
+    case "image":
       return MessageType.IMAGE;
-    case 'file':
+    case "file":
       return MessageType.FILE;
-    case 'video':
+    case "video":
       return MessageType.VIDEO;
     default:
       return MessageType.TEXT;
