@@ -79,24 +79,24 @@ const PageAddListingToHourlyRentalGear3 = (
                   <p className="col-span-2">Choose rental duration time</p>
                   <TimeSelector 
                     initialTime={{
-                      min:data?.details?.hourlt_rental_time?.start_time?.split(':')?.[1] || 0,
-                      hour:data?.details?.hourlt_rental_time?.start_time?.split(':')?.[0] || 0,
-                      amPm:data?.details?.hourlt_rental_time?.start_time?.split(':')?.[2] || 'AM'
+                      min:data?.details?.hourly_rental_time?.start_time?.split(':')?.[1] || 0,
+                      hour:data?.details?.hourly_rental_time?.start_time?.split(':')?.[0] || 0,
+                      amPm:data?.details?.hourly_rental_time?.start_time?.split(':')?.[2] || 'AM'
                      }}
                     onTimeChange={(val)=>{
-                    updateData({...data,details:{...data?.details,hourlt_rental_time:{
-                      ...data?.details?.hourlt_rental_time,
+                    updateData({...data,details:{...data?.details,hourly_rental_time:{
+                      ...data?.details?.hourly_rental_time,
                       // convert object to string time format 00:00 AM
                       start_time:`${val.hour}:${val.min} ${val.amPm}`
                     }}})
                   }} />
                   <TimeSelector initialTime={{
-                      min:data?.details?.hourlt_rental_time?.end_time?.split(':')?.[1] || 0,
-                      hour:data?.details?.hourlt_rental_time?.end_time?.split(':')?.[0] || 0,
-                      amPm:data?.details?.hourlt_rental_time?.end_time?.split(':')?.[2] || 'AM'
+                      min:data?.details?.hourly_rental_time?.end_time?.split(':')?.[1] || 0,
+                      hour:data?.details?.hourly_rental_time?.end_time?.split(':')?.[0] || 0,
+                      amPm:data?.details?.hourly_rental_time?.end_time?.split(':')?.[2] || 'AM'
                   }} onTimeChange={(val)=>{
-                    updateData({...data,details:{...data?.details,hourlt_rental_time:{
-                      ...data?.details?.hourlt_rental_time,
+                    updateData({...data,details:{...data?.details,hourly_rental_time:{
+                      ...data?.details?.hourly_rental_time,
                       // convert object to string time format 00:00 AM
                       end_time:`${val.hour}:${val.min} ${val.amPm}`
                     }}})
@@ -105,19 +105,19 @@ const PageAddListingToHourlyRentalGear3 = (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <p className="col-span-2">Choose rental duration date</p>
                   <DateImputField placeholder="Start Date" name="startDate" id={"startDate"}
-                    defaultValue={data?.details?.hourlt_rental_time?.start_date}
+                    defaultValue={data?.details?.hourly_rental_time?.start_date}
                     onChange={(date)=>{
-                      updateData({...data,details:{...data?.details,hourlt_rental_time:{
-                        ...data?.details?.hourlt_rental_time,
+                      updateData({...data,details:{...data?.details,hourly_rental_time:{
+                        ...data?.details?.hourly_rental_time,
                         start_date:date
                       }}})
                     }}
                   />
                   <DateImputField placeholder="End Date" name="endDate" id={"endDate"}
-                    defaultValue={data?.details?.hourlt_rental_time?.end_date}
+                    defaultValue={data?.details?.hourly_rental_time?.end_date}
                     onChange={(date)=>{
-                      updateData({...data,details:{...data?.details,hourlt_rental_time:{
-                        ...data?.details?.hourlt_rental_time,
+                      updateData({...data,details:{...data?.details,hourly_rental_time:{
+                        ...data?.details?.hourly_rental_time,
                         end_date:date
                       }}})
                     }}
