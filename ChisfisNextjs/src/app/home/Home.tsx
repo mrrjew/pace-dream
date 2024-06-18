@@ -12,7 +12,7 @@ import Faq from "./Faq";
 
 const Home = () => {
   return (
-    <div className="w-full h-full scrollbar-thin ">
+    <div className="w-full h-full scrollbar-thin">
       <Hero />
       <BrowseByCategories />
       <BrowseByDestination />

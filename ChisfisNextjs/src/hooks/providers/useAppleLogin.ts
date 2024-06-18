@@ -1,14 +1,14 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { app, getAuth } from 'config/firebase';
-import { OAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { app, getAuth } from "config/firebase";
+import { OAuthProvider, signInWithPopup } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export const useAppleLogin = () => {
   const router = useRouter();
   const authWithApple = async () => {
     const auth = getAuth(app);
-    const provider = new OAuthProvider('apple.com');
+    const provider = new OAuthProvider("apple.com");
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
@@ -18,10 +18,10 @@ export const useAppleLogin = () => {
         {},
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return response.data;
     } catch (err: any) {
@@ -32,12 +32,12 @@ export const useAppleLogin = () => {
   const { mutate: appleLogin, isLoading } = useMutation({
     mutationFn: authWithApple,
     onSuccess: (data) => {
-      localStorage.setItem('auth-token', data.data.token);
-      localStorage.setItem('user_id', data.data.id);
-      localStorage.setItem('user_info', JSON.stringify(data.data));
+      localStorage.setItem("auth-token", data.data.token);
+      localStorage.setItem("user_id", data.data.id);
+      localStorage.setItem("user_info", JSON.stringify(data.data));
 
       setTimeout(() => {
-        router.push('/');
+        router.push("/");
       }, 500);
     },
   });

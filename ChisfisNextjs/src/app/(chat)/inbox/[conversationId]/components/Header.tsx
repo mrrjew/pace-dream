@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useSession } from '@/hooks/useSession';
-import Avatar from '@/shared/Avatar';
-import { Conversation } from '@/types/chat';
-import { useMemo } from 'react';
-import { FaRegStar } from 'react-icons/fa';
-import { IoIosMore } from 'react-icons/io';
+import { useSession } from "@/hooks/useSession";
+import Avatar from "@/shared/Avatar";
+import { Conversation } from "@/types/chat";
+import { useMemo } from "react";
+import { FaRegStar } from "react-icons/fa";
+import { IoIosMore } from "react-icons/io";
 
 interface IHeaderProps {
   conversation: Conversation;

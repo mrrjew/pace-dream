@@ -1,117 +1,44 @@
 "use client";
 
 import React, { useState } from "react";
-import PageAddListing1 from "./PageAddListing1";
-import PageAddListing2 from "./PageAddListing2";
-import PageAddListing3 from "./PageAddListing3";
-import PageAddListing4 from "./PageAddListing4";
-import PageAddListing5 from "./PageAddListing5";
+import PageAddListing1 from "../../_components/PageAddListing1";
+import PageAddListing2 from "../../_components/PageAddListing2";
+import PageAddListing3 from "../../_components/PageAddListing3";
+import PageAddListing5 from "../../_components/PageAddListing5";
 // import PageAddListing6 from "./PageAddListing6";
 // import PageAddListing7 from "./PageAddListing7";
-import ButtonSecondary from "@/shared/ButtonSecondary";
-import ButtonPrimary from "@/shared/ButtonPrimary";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
-import {
-  RoomImg,
-  TimeImg,
-  HourlyImg,
-  FindImg,
-  LastminutesImg,
-  ExperiencesImg,
-} from "@/images";
-import Sidebar from "../../SideBar";
-import Link from "next/link";
+import { ListingDataType } from "@/types/types";
+import PageAddListing6 from "../../_components/PageAddListing6";
+import PageAddListing7 from "../../_components/PageAddListing7";
+import PageAddListing8 from "../../_components/PageAddListing8";
+import AddListingRoomStayWrapper from "../RoomStayWrapper";
 
-type FormData = {
-  propertyType: string;
-  placeName: string;
-  rentalForm: string;
-  hourlyrate: string;
-  street: string;
-  otherservices: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  acreage: string;
-  guests: number;
-  bedroom: number;
-  beds: number;
-  bathroom: number;
-  kitchen: number;
-  generalAmenities: string[];
-  otherAmenities: string[];
-  safeAmenities: string[];
-  smokingRole: string;
-  petRole: string;
-  partyOrganizingRole: string;
-  cookingRole: string;
-  additionalRules: string[];
-  placeDescription: string;
-  availability: boolean;
-  capacity: number;
-  currency: string;
-  basePriceMonToThu: number;
-  basePriceFriToSun: number;
-  longTermPriceDiscount: number;
-  stayNightMin: number;
-  stayNightMax: number;
-  coverImage: string;
-  placeImages: string[];
-  availabilityDate: string[];
-};
+// const titles = [
+//   "Choosing Categories & Location",
+//   "General amenities, Other amenities & photos",
+//   "House rules for guest & Date & Pricing",
+//   "",
+// ];
 
-const titles = [
-  "Choosing Categories & Location",
-  "General amenities, Other amenities & photos",
-  "House rules for guest & Date & Pricing",
-  "",
-];
-
-const options = [
-  {
-    href: "/add-listing/room-stays",
-    img: RoomImg,
-    alt: "Room Stays",
-    label: "Room Stays",
-  },
-  {
-    href: "/add-listing/time-based",
-    img: TimeImg,
-    alt: "Time-Based",
-    label: "Time-Based",
-  },
-  {
-    href: "/add-listing/hourly-rental-gear",
-    img: HourlyImg,
-    alt: "Hourly Rental Gear",
-    label: "Hourly Rental Gear",
-  },
-  {
-    href: "/add-listing/find-roommate",
-    img: FindImg,
-    alt: "Find Roommate",
-    label: "Find Roommate",
-  },
-  {
-    href: "/add-listing/experience",
-    img: ExperiencesImg,
-    alt: "Experiences",
-    label: "Experiences",
-  },
-  {
-    href: "/add-listing/last-minutes",
-    img: LastminutesImg,
-    alt: "Last minutes",
-    label: "Last minutes",
-  },
-];
-
-const InitialData: FormData = {
+const InitialData: ListingDataType = {
   propertyType: "",
+  roomType: "",
   placeName: "",
   rentalForm: "",
   hourlyrate: "",
+  dailyrate: "",
+  weeklyrate: "",
+  monthlyrate: "",
+  cleaningfeesDaily: "",
   street: "",
+  country: "",
+  location: {
+    link: "",
+    address: "",
+    latitude: 0,
+    longitude: 0,
+  },
   otherservices: "",
   city: "",
   state: "",
@@ -141,11 +68,17 @@ const InitialData: FormData = {
   stayNightMax: 0,
   coverImage: "",
   placeImages: [],
+  placeVideo: "",
   availabilityDate: [],
 };
 
 const Page = () => {
-  const [data, setData] = useState(InitialData);
+  const [data, setData] = useState<typeof InitialData>(InitialData);
+  // update data from child component
+  const updateData = (newData: Partial<typeof InitialData>) => {
+    setData((prev) => ({ ...prev, ...newData }));
+  };
+
   const {
     steps,
     currentStepIndex,
@@ -156,55 +89,75 @@ const Page = () => {
     isFirstStep,
     isLastStep,
   } = useMultiStepForm([
-    <PageAddListing1 />,
-    <PageAddListing2 />,
-    <PageAddListing3 />,
-    <PageAddListing4 />,
-    <PageAddListing5 />,
-    // <PageAddListing6 />,
-    // <PageAddListing7 />,
+    <PageAddListing1  key="page"data={data} updateData={updateData} />,
+    <PageAddListing2  key="page"data={data} updateData={updateData} />,
+    <PageAddListing3  key="page"data={data} updateData={updateData} />,
+    // <PageAddListing4 data={data} updateData={updateData} />,
+    <PageAddListing5  key="page"data={data} updateData={updateData} />,
+    <PageAddListing6
+      data={data} key="page"
+      onPreview={() => {
+        next();
+      }}
+    />,
+    <PageAddListing7
+      data={data} key="page"
+      onBackToHost={() => {
+        back();
+      }}
+    />,
+    <PageAddListing8
+      data={data} key="page"
+      onBackToHost={() => {
+        back();
+      }}
+    />,
   ]);
 
   return (
-    <div className={`nc-PageAddListing1 max-w-screen flex pb-24 lg:pb-32`}>
-      <Sidebar options={options} />
-      <form className="space-y-4 md:ml-16 md:mr-48 p-4 sm:mt-8 md:p-4 w-full">
-        {/* <div>
-          <span className="text-2xl sm:text-4xl mb-8 font-semibold">
-            {titles[currentStepIndex]}
-          </span>
-        </div> */}
-        {step}
-        <div className="flex justify-end space-x-5">
-          {!isFirstStep && (
-            <ButtonSecondary type="button" onClick={back}>
-              Go back
-            </ButtonSecondary>
-          )}
-          {isFirstStep && (
-            <Link href="/add-listing">
-              <ButtonSecondary type="button">Go back</ButtonSecondary>
-            </Link>
-          )}
+    <AddListingRoomStayWrapper
+      onNext={next}
+      onBack={back}
+      isFirstStep={isFirstStep}
+      isLastStep={isLastStep}
+      currentStep={currentStepIndex}
+    >
+      {step}
+    </AddListingRoomStayWrapper>
+    // <div className={`nc-PageAddListing1 max-w-screen flex pb-24 lg:pb-32`}>
 
-          {isLastStep ? (
-            <button
-              type="submit"
-              className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  "
-            >
-              {
-                // loading ? "Loading..." :
-                "Publish listing"
-              }
-            </button>
-          ) : (
-            <ButtonPrimary type="button" onClick={next}>
-              Next
-            </ButtonPrimary>
-          )}
-        </div>
-      </form>
-    </div>
+    //   <form className="space-y-4 md:ml-16 md:mr-48 p-4 sm:mt-8 md:p-4 w-full">
+    //       {step}
+    //     <div className="flex justify-end space-x-5">
+    //       {!isFirstStep && (
+    //         <ButtonSecondary type="button" onClick={back}>
+    //           Go back
+    //         </ButtonSecondary>
+    //       )}
+    //       {isFirstStep && (
+    //         <Link href="/add-listing">
+    //           <ButtonSecondary type="button">Go back</ButtonSecondary>
+    //         </Link>
+    //       )}
+
+    //       {isLastStep ? (
+    //         <button
+    //           type="submit"
+    //           className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-70 bg-primary-6000 hover:bg-primary-700 text-neutral-50  "
+    //         >
+    //           {
+    //             // loading ? "Loading..." :
+    //             "Publish listing"
+    //           }
+    //         </button>
+    //       ) : (
+    //         <ButtonPrimary type="button" onClick={next}>
+    //           Next
+    //         </ButtonPrimary>
+    //       )}
+    //     </div>
+    //   </form>
+    // </div>
   );
 };
 

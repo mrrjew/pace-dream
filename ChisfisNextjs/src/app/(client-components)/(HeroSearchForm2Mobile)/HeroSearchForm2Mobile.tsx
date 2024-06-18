@@ -88,24 +88,28 @@ const HeroSearchForm2Mobile = () => {
                       </div>
 
                       <Tab.List className="pt-12 flex w-full justify-center font-semibold text-sm sm:text-base text-neutral-500 dark:text-neutral-400 space-x-6 sm:space-x-8">
-                        {["Stay", "Hourly", "Find Roommate"].map((item, index) => (
-                          <Tab key={index} as={Fragment}>
-                            {({ selected }) => (
-                              <div className="relative focus:outline-none focus-visible:ring-0 outline-none select-none">
-                                <div
-                                  className={`${
-                                    selected ? "text-black dark:text-white" : ""
-                                  }  `}
-                                >
-                                  {item}
+                        {["Stay", "Hourly", "Find Roommate"].map(
+                          (item, index) => (
+                            <Tab key={index} as={Fragment}>
+                              {({ selected }) => (
+                                <div className="relative focus:outline-none focus-visible:ring-0 outline-none select-none">
+                                  <div
+                                    className={`${
+                                      selected
+                                        ? "text-black dark:text-white"
+                                        : ""
+                                    }  `}
+                                  >
+                                    {item}
+                                  </div>
+                                  {selected && (
+                                    <span className="absolute inset-x-0 top-full border-b-2 border-black dark:border-white"></span>
+                                  )}
                                 </div>
-                                {selected && (
-                                  <span className="absolute inset-x-0 top-full border-b-2 border-black dark:border-white"></span>
-                                )}
-                              </div>
-                            )}
-                          </Tab>
-                        ))}
+                              )}
+                            </Tab>
+                          ),
+                        )}
                       </Tab.List>
                       <div className="flex-1 pt-3 px-1.5 sm:px-4 flex overflow-hidden">
                         <Tab.Panels className="flex-1 overflow-y-auto hiddenScrollbar py-4">

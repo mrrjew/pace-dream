@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 export interface PageAddPartner9Props {}
 
 const PageAddPartner9: FC<PageAddPartner9Props> = () => {
-
   return (
     <>
       <div>

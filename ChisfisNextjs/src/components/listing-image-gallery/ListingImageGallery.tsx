@@ -29,7 +29,7 @@ export const DEMO_IMAGE: ListingGalleryImage[] = [...PHOTOS].map(
       id: index,
       url: item,
     };
-  }
+  },
 );
 
 export const getNewParam = ({

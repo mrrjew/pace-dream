@@ -10,130 +10,124 @@ import { ApiDrivenIcon } from "@/assets/ApiDrivenIcon";
 // import { useFetch } from "@/hooks/useFetch";
 import { FiPieChart } from "react-icons/fi";
 
-const {
-  FiSettings,
-  FiUserCheck,
-} = FiIcons;
+const { FiSettings, FiUserCheck } = FiIcons;
 
 interface Props {
   className?: string;
 }
 
-
 type HostMenueDashboardType = {
-  _id: string
+  _id: string;
   url: string;
-  icon: string
-  name: string
-  createdAt: string
-  updatedAt: string
-}
-
-
-
+  icon: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 export default function AvatarDropdown({ className = "" }: Props) {
   const [isHost, setIsHost] = useState<boolean>(false);
-
 
   const handleSwitch = () => {
     setIsHost(!isHost);
   };
 
-  const { getSession,  handleLogout } = useSession();
+  const { getSession, handleLogout } = useSession();
   // const { clearUser }: any = useProfile();
   const { token, userInfo } = getSession();
 
   // dropdown menu list
   const dropdownMenu = {
-    account: token ?  {
-        url: "/account",
-        name: "My Account",
-        icon:<MyAccountSvg/>
-      } :  {
-        url: "/auth/login",
-        name: "Account",
-        icon:<LoginSvg/>
-    },
+    account: token
+      ? {
+          url: "/account",
+          name: "My Account",
+          icon: <MyAccountSvg />,
+        }
+      : {
+          url: "/auth/login",
+          name: "Account",
+          icon: <LoginSvg />,
+        },
 
     hostMenuList: {
-      account: token ? {
-        name: "My Account",
-        icon: "AiOutlineUser",
-        url: "/acc-setting"
-    } : {
-      url: "/auth/login",
-      name: "Account",
-      icon:<LoginSvg/>
-    },
-      others: [ 
+      account: token
+        ? {
+            name: "My Account",
+            icon: "AiOutlineUser",
+            url: "/acc-setting",
+          }
+        : {
+            url: "/auth/login",
+            name: "Account",
+            icon: <LoginSvg />,
+          },
+      others: [
         {
           name: "Bookings & Listings",
           icon: "BsBookmark",
-          url: "/host-mode/bookings-and-listings"
+          url: "/host-mode/bookings-and-listings",
         },
         {
           name: "Business Insight",
           icon: <FiPieChart size={22} className="ml-0.5" />,
-          url: "/host-mode/host-business"
+          url: "/host-mode/host-business",
         },
-    
+
         {
-            name: "Gift card",
-            icon: "AiOutlineGift",
-            url: "/gift-card"
+          name: "Gift card",
+          icon: "AiOutlineGift",
+          url: "/gift-card",
         },
         {
-            name: "Contact support",
-            icon: "RiHeadphoneLine",
-            url: "/contact-us"
-        }
-          // {
-          //     name: "Transaction history",
-          //     icon: "BsClipboard",
-          //     url: "/transaction-activity"
-          // },
-        ],
+          name: "Contact support",
+          icon: "RiHeadphoneLine",
+          url: "/contact-us",
+        },
+        // {
+        //     name: "Transaction history",
+        //     icon: "BsClipboard",
+        //     url: "/transaction-activity"
+        // },
+      ],
     },
     guestMenuList: [
       {
         url: "/author",
         name: "My Bookings",
-        icon: <MyBookingsSvg />
+        icon: <MyBookingsSvg />,
       },
       {
         url: "/account-savelists",
         name: "Wishlist",
-        icon: <WhiteListSvg />
+        icon: <WhiteListSvg />,
       },
       {
         url: "/roommate",
         name: "My Roommate",
-        icon: <FiUserCheck size={22} className="ml-0.5" />
-      }
+        icon: <FiUserCheck size={22} className="ml-0.5" />,
+      },
     ],
 
     otherMenuItems: [
       {
         url: "/help-center",
         name: "Help",
-        icon:<HelpSvg/>
+        icon: <HelpSvg />,
       },
       {
         url: "/acc-setting",
         name: "Settings",
-        icon: <FiSettings size={22} className="ml-0.5" />
+        icon: <FiSettings size={22} className="ml-0.5" />,
       },
       {
         url: "/#",
         name: token ? "Logout" : "",
-        icon: <LogOutSvg/>,
-        onClick:handleLogout
-      }
-    ]
-  }
-
-
+        icon: <LogOutSvg />,
+        onClick: handleLogout,
+      },
+    ],
+  };
 
   return (
     <>
@@ -173,57 +167,95 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
                     <button
-                          onClick={handleSwitch}
-                          className={`btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold`}
-                        >
-                         {isHost ? "Switch to guest mode" : "Switch to host mode"}
+                      onClick={handleSwitch}
+                      className={`btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold`}
+                    >
+                      {isHost ? "Switch to guest mode" : "Switch to host mode"}
                     </button>
                     {/* account menu for guest */}
-                    {!isHost && <MenuLink name={dropdownMenu.account.name} url={dropdownMenu.account.url} icon={dropdownMenu.account.icon} /> }
-                    {isHost && token && <HostRemotMenuLink  name={dropdownMenu.hostMenuList.account.name} url={dropdownMenu.hostMenuList.account.url} icon={dropdownMenu.hostMenuList.account.icon as string} /> }
-                    {isHost && !token &&  <MenuLink name={dropdownMenu.hostMenuList.account.name} url={dropdownMenu.hostMenuList.account.url} icon={dropdownMenu.hostMenuList.account.icon} />}
-                    
+                    {!isHost && (
+                      <MenuLink
+                        name={dropdownMenu.account.name}
+                        url={dropdownMenu.account.url}
+                        icon={dropdownMenu.account.icon}
+                      />
+                    )}
+                    {isHost && token && (
+                      <HostRemotMenuLink
+                        name={dropdownMenu.hostMenuList.account.name}
+                        url={dropdownMenu.hostMenuList.account.url}
+                        icon={dropdownMenu.hostMenuList.account.icon as string}
+                      />
+                    )}
+                    {isHost && !token && (
+                      <MenuLink
+                        name={dropdownMenu.hostMenuList.account.name}
+                        url={dropdownMenu.hostMenuList.account.url}
+                        icon={dropdownMenu.hostMenuList.account.icon}
+                      />
+                    )}
+
                     {/* guest & host other menu list */}
-                    {
-                      isHost ? dropdownMenu.hostMenuList.others?.map((menu)=>{
-                        if(typeof menu.icon === "string"){
-                          return (<HostRemotMenuLink key={menu.url} name={menu.name} url={menu.url} icon={menu.icon}   />)
-                        }
-                        return (
-                          <MenuLink key={menu.url} name={menu.name} url={menu.url} icon={menu.icon} />
-                        )
-                      }) :
-                      dropdownMenu.guestMenuList.map((menu)=>{
-                        return (
-                          <MenuLink key={menu.url} name={menu.name} url={menu.url} icon={menu.icon} />
-                        )
-                      })
-                    }
-                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
+                    {isHost
+                      ? dropdownMenu.hostMenuList.others?.map((menu) => {
+                          if (typeof menu.icon === "string") {
+                            return (
+                              <HostRemotMenuLink
+                                key={menu.url}
+                                name={menu.name}
+                                url={menu.url}
+                                icon={menu.icon}
+                              />
+                            );
+                          }
+                          return (
+                            <MenuLink
+                              key={menu.url}
+                              name={menu.name}
+                              url={menu.url}
+                              icon={menu.icon}
+                            />
+                          );
+                        })
+                      : dropdownMenu.guestMenuList.map((menu) => {
+                          return (
+                            <MenuLink
+                              key={menu.url}
+                              name={menu.name}
+                              url={menu.url}
+                              icon={menu.icon}
+                            />
+                          );
+                        })}
+                    <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
                     {/* other menu list */}
-                    {
-                      dropdownMenu.otherMenuItems.map((menu)=>{
-                        if(!menu?.name){
-                          return null;
-                        }
-                        return (
-                          <MenuLink key={menu.url} name={menu.name} url={menu.url} icon={menu.icon} onClick={menu?.onClick} />
-                        )
-                      })
-                    }
+                    {dropdownMenu.otherMenuItems.map((menu) => {
+                      if (!menu?.name) {
+                        return null;
+                      }
+                      return (
+                        <MenuLink
+                          key={menu.url}
+                          name={menu.name}
+                          url={menu.url}
+                          icon={menu.icon}
+                          onClick={menu?.onClick}
+                        />
+                      );
+                    })}
 
                     {/* ------------------ 1 --------------------- */}
 
                     {/* {!isHost && (
                       <> */}
-                        {/* <button
+                    {/* <button
                           onClick={handleSwitch}
                           className={`btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold`}
                         >
                           Switch to host mode
                         </button> */}
 
-                        {/* {token ? (
+                    {/* {token ? (
                           <Link
                             href={"/account"}
                             className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -293,8 +325,8 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </Link>
                         )} */}
 
-                        {/* ------------------ 2 --------------------- */}
-                        {/* <Link
+                    {/* ------------------ 2 --------------------- */}
+                    {/* <Link
                           href={"/author"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -346,8 +378,8 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ 2 --------------------- */}
-                        {/* <Link
+                    {/* ------------------ 2 --------------------- */}
+                    {/* <Link
                           href={"/account-savelists"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -372,7 +404,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/roommate"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -385,14 +417,14 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             </p>
                           </div>
                         </Link> */}
-                      {/* </>
+                    {/* </>
                     )} */}
 
                     {/* for host mode */}
 
                     {/* {isHost && ( */}
-                      {/* <> */}
-                        {/* <button
+                    {/* <> */}
+                    {/* <button
                           onClick={handleSwitch}
                           className="btn p-2 rounded-full text-white bg-[#5043d8] text-sm font-semibold "
                         >
@@ -413,10 +445,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </Link>))
                         } */}
 
-
-
-
-                        {/* {token ? (
+                    {/* {token ? (
                           <Link
                             href={"/account"}
                             className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -486,9 +515,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </Link>
                         )} */}
 
-                        {/* ------------------ Host Dashboard --------------------- */}
+                    {/* ------------------ Host Dashboard --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/host-dashboard"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -505,9 +534,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ Booking--------------------- */}
+                    {/* ------------------ Booking--------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/booking"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -519,9 +548,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ Listings --------------------- */}
+                    {/* ------------------ Listings --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/host-inbox"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -533,9 +562,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ Drafts --------------------- */}
+                    {/* ------------------ Drafts --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/host-inbox"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -547,9 +576,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ Inbox --------------------- */}
+                    {/* ------------------ Inbox --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/host-inbox"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -561,9 +590,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ Space --------------------- */}
+                    {/* ------------------ Space --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/host-space"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -575,9 +604,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ Business --------------------- */}
+                    {/* ------------------ Business --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/host-mode/host-business"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -589,9 +618,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                           </div>
                         </Link> */}
 
-                        {/* ------------------ More --------------------- */}
+                    {/* ------------------ More --------------------- */}
 
-                        {/* <Link
+                    {/* <Link
                           href={"/"}
                           className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         >
@@ -602,7 +631,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                             <p className="text-sm font-medium ">{"More"}</p>
                           </div>
                         </Link> */}
-                      {/* </>
+                    {/* </>
                     )} */}
 
                     {/* <div className="w-full border-b border-neutral-200 dark:border-neutral-700" /> */}
@@ -776,110 +805,105 @@ export default function AvatarDropdown({ className = "" }: Props) {
   );
 }
 
-
-function HostRemotMenuLink(prop:Partial<HostMenueDashboardType>){
-  const {name,icon,url } = prop
+function HostRemotMenuLink(prop: Partial<HostMenueDashboardType>) {
+  const { name, icon, url } = prop;
   return (
-  <Link
+    <Link
       href={url as any}
-      className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
-  <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-    <ApiDrivenIcon iconName={icon as string} />
-  </div>
-  <div className="mt-1 ml-2">
-    <p className="text-sm font-medium ">{name}</p>
-  </div>
-  </Link>
-  )
+      className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+    >
+      <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
+        <ApiDrivenIcon iconName={icon as string} />
+      </div>
+      <div className="mt-1 ml-2">
+        <p className="text-sm font-medium ">{name}</p>
+      </div>
+    </Link>
+  );
 }
 
-function MenuLink(props:{
-  icon:any,name:string,url:string,
-  onClick?:()=>void
-}){
-  const {icon,name,url,onClick} = props
+function MenuLink(props: {
+  icon: any;
+  name: string;
+  url: string;
+  onClick?: () => void;
+}) {
+  const { icon, name, url, onClick } = props;
   return (
     <Link
       href={url as any}
       onMouseDown={onClick}
-      className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+      className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+    >
       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
-          {icon}
+        {icon}
       </div>
       <div className="ml-4">
-        <p className="text-sm font-medium ">
-          {`${name}`}
-        </p>
+        <p className="text-sm font-medium ">{`${name}`}</p>
       </div>
     </Link>
-  )
+  );
 }
 // my account svg
-function MyAccountSvg(){
-
-  return (
-    <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-  )
-}
-
-// login svg
-function LoginSvg(){
-  return (
-    <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-  )
-}
-
-// my bookings svg
-function MyBookingsSvg() {
+function MyAccountSvg() {
   return (
     <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
+      <path
+        d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// login svg
+function LoginSvg() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12.1601 10.87C12.0601 10.86 11.9401 10.86 11.8301 10.87C9.45006 10.79 7.56006 8.84 7.56006 6.44C7.56006 3.99 9.54006 2 12.0001 2C14.4501 2 16.4401 3.99 16.4401 6.44C16.4301 8.84 14.5401 10.79 12.1601 10.87Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.15997 14.56C4.73997 16.18 4.73997 18.82 7.15997 20.43C9.90997 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.91997 12.73 7.15997 14.56Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+// my bookings svg
+function MyBookingsSvg() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
         d="M8 12.2H15"
         stroke="currentColor"
@@ -913,17 +937,13 @@ function MyBookingsSvg() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 // whitelist svg
 function WhiteListSvg() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
         d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
         stroke="currentColor"
@@ -932,102 +952,96 @@ function WhiteListSvg() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 // help svg
-function HelpSvg(){
-
+function HelpSvg() {
   return (
     <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M11.97 22C17.4928 22 21.97 17.5228 21.97 12C21.97 6.47715 17.4928 2 11.97 2C6.44715 2 1.97 6.47715 1.97 12C1.97 17.5228 6.44715 22 11.97 22Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4.89999 4.92993L8.43999 8.45993"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4.89999 19.07L8.43999 15.54"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M19.05 19.07L15.51 15.54"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M19.05 4.92993L15.51 8.45993"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-  )
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.97 22C17.4928 22 21.97 17.5228 21.97 12C21.97 6.47715 17.4928 2 11.97 2C6.44715 2 1.97 6.47715 1.97 12C1.97 17.5228 6.44715 22 11.97 22Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.89999 4.92993L8.43999 8.45993"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M4.89999 19.07L8.43999 15.54"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19.05 19.07L15.51 15.54"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19.05 4.92993L15.51 8.45993"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 // settings svg
-function LogOutSvg(){
-
-
+function LogOutSvg() {
   return (
     <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
-    <path
-    d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    />
-    <path
-    d="M15 12H3.62"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    />
-    <path
-    d="M5.85 8.6499L2.5 11.9999L5.85 15.3499"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    />
+      <path
+        d="M8.90002 7.55999C9.21002 3.95999 11.06 2.48999 15.11 2.48999H15.24C19.71 2.48999 21.5 4.27999 21.5 8.74999V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 12H3.62"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.85 8.6499L2.5 11.9999L5.85 15.3499"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
-)
+  );
 }
-
-
-

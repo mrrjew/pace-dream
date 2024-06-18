@@ -12,7 +12,7 @@ export interface SectionGridFilterCardProps {
 }
 
 const DEMO_DATA: ExperiencesDataType[] = DEMO_EXPERIENCES_LISTINGS.filter(
-  (_, i) => i < 8
+  (_, i) => i < 8,
 );
 
 const SectionGridFilterCard: FC<SectionGridFilterCardProps> = ({

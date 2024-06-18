@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useSession } from '@/hooks/useSession';
-import Avatar from '@/shared/Avatar';
-import { Conversation } from '@/types/chat';
-import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
-import { MessageDate } from '../inbox/[conversationId]/components/MessageDate';
+import { useSession } from "@/hooks/useSession";
+import Avatar from "@/shared/Avatar";
+import { Conversation } from "@/types/chat";
+import { useRouter } from "next/navigation";
+import { useMemo } from "react";
+import { MessageDate } from "../inbox/[conversationId]/components/MessageDate";
 
 interface IChatUserProps {
   conversation: Conversation;
@@ -20,20 +20,19 @@ export const ChatUser: React.FC<IChatUserProps> = ({
   const sender = conversation.users.filter((user) => user.id !== userId)[0];
   const name = conversation.isGroupChat
     ? conversation.name
-    : `${sender?.first_name} ${sender?.last_name}`;
+    : `${sender.first_name} ${sender.last_name}`;
 
   const router = useRouter();
 
   const handleClick = () => {
-    
     // @ts-ignore-error
     router.push(`/inbox/${conversation?.id}`);
   };
 
   const latestMessageSender = useMemo(() => {
     return conversation.latestMessage?.sender?.id === userId
-      ? 'You'
-      : conversation.latestMessage?.sender?.first_name;
+      ? "You"
+      : conversation.latestMessage?.sender.first_name;
   }, [conversation]);
 
   return (
@@ -65,7 +64,7 @@ export const ChatUser: React.FC<IChatUserProps> = ({
         </div>
         {conversation.latestMessage ? (
           <span className="mt-1 text-sm text-neutral-600 w-full">
-            {latestMessageSender}:{' '}
+            {latestMessageSender}:{" "}
             {conversation.latestMessage?.message.substring(0, 50)}
           </span>
         ) : (

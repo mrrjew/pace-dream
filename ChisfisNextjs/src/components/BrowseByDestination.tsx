@@ -1,23 +1,23 @@
-"use client"
-import image1 from "@/images/Rectangle 3033.png"
-import image2 from "@/images/Rectangle 3034.png"
-import image3 from "@/images/Rectangle 3035.png"
-import image4 from "@/images/Rectangle 3036.png"
-import image5 from "@/images/Rectangle 3037.png"
-import image6 from "@/images/Rectangle 3038.png"
-import image7 from "@/images/Rectangle 3039.png"
-import image8 from "@/images/Rectangle 3040.png"
-import { AnimatePresence, MotionConfig, motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { ReactNode, useEffect, useState } from "react"
-import { useSwipeable } from "react-swipeable"
-import { useWindowSize } from "react-use"
-import PrevBtn from "./PrevBtn"
-import NextBtn from "./NextBtn"
-import { variants } from "@/utils/animationVariants"
-import StayCard2 from "./StayCard2"
- interface BrowseByDestinationProps {
+"use client";
+import image1 from "@/images/Rectangle 3033.png";
+import image2 from "@/images/Rectangle 3034.png";
+import image3 from "@/images/Rectangle 3035.png";
+import image4 from "@/images/Rectangle 3036.png";
+import image5 from "@/images/Rectangle 3037.png";
+import image6 from "@/images/Rectangle 3038.png";
+import image7 from "@/images/Rectangle 3039.png";
+import image8 from "@/images/Rectangle 3040.png";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ReactNode, useEffect, useState } from "react";
+import { useSwipeable } from "react-swipeable";
+import { useWindowSize } from "react-use";
+import PrevBtn from "./PrevBtn";
+import NextBtn from "./NextBtn";
+import { variants } from "@/utils/animationVariants";
+import StayCard2 from "./StayCard2";
+interface BrowseByDestinationProps {
   className?: string;
   heading?: ReactNode;
   subHeading?: ReactNode;
@@ -30,7 +30,6 @@ const images = [
   {
     src: image1,
     alt: "New York",
-
   },
   {
     src: image2,
@@ -60,8 +59,7 @@ const images = [
     src: image8,
     alt: "Sydney",
   },
-
-]
+];
 const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
   className,
   heading = "Browse By Destination",
@@ -69,7 +67,7 @@ const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
   headingIsCenter,
   itemPerRow = 4,
   cardType = "card2",
-  sliderStyle= "style1"
+  sliderStyle = "style1",
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -116,10 +114,13 @@ const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
     trackMouse: true,
   });
   return (
-
     <div className={`container md:px-20 md:pb-0  ${className}`}>
-      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Browse by Destination</h2>
-        <p className="mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">Explore perfect places by destination</p>
+      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+        Browse by Destination
+      </h2>
+      <p className="mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">
+        Explore perfect places by destination
+      </p>
       <MotionConfig
         transition={{
           x: { type: "spring", stiffness: 300, damping: 30 },
@@ -127,24 +128,24 @@ const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-        <div className="-mt-20 mb-20">
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
-        />}
-          {images.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-        />}
-        </div>
+          <div className="-mt-20 mb-20">
+            {currentIndex ? (
+              <PrevBtn
+                onClick={() => changeItemId(currentIndex - 1)}
+                className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
+              />
+            ) : (
+              <PrevBtn className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]" />
+            )}
+            {images.length > currentIndex + numberOfItems ? (
+              <NextBtn
+                onClick={() => changeItemId(currentIndex + 1)}
+                className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
+              />
+            ) : (
+              <NextBtn className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
+            )}
+          </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -167,38 +168,37 @@ const BrowseByDestination: React.FC<BrowseByDestinationProps> = ({
                       width: `calc(1/${numberOfItems} * 100%)`,
                     }}
                   >
-                  <Link href="/listing-stay" key={indx}>
-                    <div key={indx} className="flex flex-col items-center">
-                      <Image
-                        alt={item.alt}
-                        className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover"
-                        height="160"
-                        src={item.src}
-                        style={{
-                          width: "146px",
-                          height: "243px",
-                          borderRadius: "73px",
-                          aspectRatio: "160/160",
-                          objectFit: "cover",
-                        }}
-                        width="160"
-                      />
-                      <p className="mt-3 text-sm font-medium text-gray-700">{item.alt}</p>
-                    </div>
-                  </Link>
-
+                    <Link href="/listing-stay" key={indx}>
+                      <div key={indx} className="flex flex-col items-center">
+                        <Image
+                          alt={item.alt}
+                          className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover"
+                          height="160"
+                          src={item.src}
+                          style={{
+                            width: "146px",
+                            height: "243px",
+                            borderRadius: "73px",
+                            aspectRatio: "160/160",
+                            objectFit: "cover",
+                          }}
+                          width="160"
+                        />
+                        <p className="mt-3 text-sm font-medium text-gray-700">
+                          {item.alt}
+                        </p>
+                      </div>
+                    </Link>
                   </motion.li>
                 ))}
               </AnimatePresence>
             </motion.ul>
           </div>
-
         </div>
       </MotionConfig>
-      <div className="flex my-5 justify-center items-center">
-      </div>
+      <div className="flex my-5 justify-center items-center"></div>
     </div>
-  )
-}
+  );
+};
 
 export default BrowseByDestination;

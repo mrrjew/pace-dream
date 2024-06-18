@@ -1,10 +1,10 @@
 import AboutUsHero from "./AboutUsHero";
 import AboutUsOffices from "./AboutUsOffices";
 import AboutUsValues from "./AboutUsValues";
-import AboutUsMission from './AboutUsMission';
-import AboutUsWork from './AboutUsWork';
-import AboutUsSecFair from './AboutUsSecFair';
-import AboutUsScenario from './AboutUsScenario';
+import AboutUsMission from "./AboutUsMission";
+import AboutUsWork from "./AboutUsWork";
+import AboutUsSecFair from "./AboutUsSecFair";
+import AboutUsScenario from "./AboutUsScenario";
 
 const AboutUs = () => {
   return (

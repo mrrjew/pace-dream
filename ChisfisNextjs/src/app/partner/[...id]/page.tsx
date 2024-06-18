@@ -38,7 +38,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState, Fragment } from "react";
 import { clientAuthAxios } from "@/utils/clientAxios";
 
-const page = ({ params }: any) => {
+const Page = ({ params }: any) => {
   const { id } = params;
   const partnerId = id.toString();
 
@@ -60,7 +60,7 @@ const page = ({ params }: any) => {
   setLocalStorageItem("currentPath", pathname);
 
   const [showGreeting, setShowGreeting] = useState(
-    getLocalStorageItem("showGreeting")
+    getLocalStorageItem("showGreeting"),
   );
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const page = ({ params }: any) => {
     removeLocalStorageItem("showGreeting");
     setShowGreeting(null);
   };
-  
+
   const defaultProps = {
     center: {
       lat: 51.509865,
@@ -204,7 +204,7 @@ const page = ({ params }: any) => {
 
                 <div className="amenities-list">
                   {amenities.slice(0, 10).map((item: any) => (
-                    <div className="amenities-list__item">
+                    <div key={item} className="amenities-list__item">
                       <Image
                         src={gardenViewIcon}
                         width={32}
@@ -324,7 +324,6 @@ const page = ({ params }: any) => {
                 >
                   Show all {amenities.length} amenities
                 </button>
-
               </div>
             </div>
 
@@ -357,11 +356,11 @@ const page = ({ params }: any) => {
           </div>
 
           <div className="location">
-            <h3 className="title">Where he's looking for the partner?</h3>
+            <h3 className="title">Where he{'\''}s looking for the partner?</h3>
 
             <div className="btn-wrapper">
               {looking_for_partner_location.map((item: any) => (
-                <button type="button" className="btn-location">
+                <button key={item} type="button" className="btn-location">
                   {item}
                 </button>
               ))}
@@ -488,4 +487,4 @@ const page = ({ params }: any) => {
   );
 };
 
-export default page;
+export default Page;

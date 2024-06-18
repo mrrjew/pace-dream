@@ -12,7 +12,7 @@ export interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-  href?: Route<string> | string | PathName | undefined;
+  href?: Route | string | PathName | undefined;
   targetBlank?: boolean;
   onClick?: () => void;
   children?: React.ReactNode;
@@ -32,7 +32,8 @@ const Button: FC<ButtonProps> = ({
   onClick = () => {},
 }) => {
   const CLASSES = `nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors ${fontSize} ${sizeClass} ${translate} ${className} `;
-  const urlObject = typeof href === "string" ? { pathname: href } : (href as unknown as Route<string>);
+  const urlObject =
+    typeof href === "string" ? { pathname: href } : (href as unknown as Route);
   const _renderLoading = () => {
     return (
       <svg

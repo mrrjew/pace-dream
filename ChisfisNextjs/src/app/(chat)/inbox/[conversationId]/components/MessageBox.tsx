@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import useConversation from '@/hooks/useConversation';
-import { useSession } from '@/hooks/useSession';
-import Avatar from '@/shared/Avatar';
+import useConversation from "@/hooks/useConversation";
+import { useSession } from "@/hooks/useSession";
+import Avatar from "@/shared/Avatar";
 import {
   InboxMessage,
   MessageStatus,
   MessageType,
   SendingMessage,
   isSendingMessage,
-} from '@/types/chat';
-import { clientAuthAxios } from '@/utils/clientAxios';
-import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
-import { IoMdRefresh } from 'react-icons/io';
-import { MdDownload } from 'react-icons/md';
-import { MessageDate } from './MessageDate';
+} from "@/types/chat";
+import { clientAuthAxios } from "@/utils/clientAxios";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import { IoMdRefresh } from "react-icons/io";
+import { MdDownload } from "react-icons/md";
+import { MessageDate } from "./MessageDate";
 
 interface IMessageContainerProps {
   message: InboxMessage;
@@ -29,7 +29,7 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
   const [localMessage, setLocalMessage] = useState(message);
   const [sending, setSending] = useState(
     isSendingMessage(localMessage) &&
-      localMessage.status === MessageStatus.SENDING
+      localMessage.status === MessageStatus.SENDING,
   );
   const [error, setError] = useState(false);
 
@@ -47,14 +47,14 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
         ? URL.createObjectURL(localMessage.file!)
         : localMessage.url;
     }
-    return '';
+    return "";
   }, [localMessage]);
 
   const sendMessage = async (message: SendingMessage) => {
     setSending(true);
     setError(false);
     try {
-      await clientAuthAxios().post('/message/send', {
+      await clientAuthAxios().post("/message/send", {
         chatId: conversationId,
         message: message.message,
       });
@@ -76,19 +76,19 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
     setError(false);
     try {
       const formData = new FormData();
-      formData.append('chatId', conversationId);
-      formData.append('message', message.message);
+      formData.append("chatId", conversationId);
+      formData.append("message", message.message);
       if (message.type === MessageType.IMAGE) {
-        formData.append('images', message.file!);
+        formData.append("images", message.file!);
       }
       if (message.type === MessageType.FILE) {
-        formData.append('files', message.file!);
+        formData.append("files", message.file!);
       }
       if (message.type === MessageType.VIDEO) {
-        formData.append('video', message.file!);
+        formData.append("video", message.file!);
       }
-      formData.append('type', message.type);
-      const res = await clientAuthAxios().post('/message/send', formData);
+      formData.append("type", message.type);
+      const res = await clientAuthAxios().post("/message/send", formData);
       setLocalMessage((prevMessage) => ({
         ...prevMessage,
         status: MessageStatus.SENT,
@@ -120,23 +120,23 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
   return (
     <div
       className={`flex gap-3 px-4 py-2 w-full ${
-        self ? 'justify-end' : 'justify-start'
+        self ? "justify-end" : "justify-start"
       }`}
     >
-      <div className={`${self ? 'order-2' : ''}`}>
+      <div className={`${self ? "order-2" : ""}`}>
         <Avatar sizeClass="h-8 w-8" />
       </div>
       <div
         className={`flex flex-col gap-1 w-full ${
-          self ? 'items-end' : 'items-start'
+          self ? "items-end" : "items-start"
         }`}
       >
         <div
           className={`rounded-lg py-2.5 max-w-[60%] ${
             self
-              ? 'bg-[#632DF8] text-white rounded-br-none'
-              : 'bg-white border-[1px] border-[#EAEBF0] rounded-bl-none'
-          } ${url && message.type === MessageType.IMAGE ? 'px-2.5' : 'px-4'}`}
+              ? "bg-[#632DF8] text-white rounded-br-none"
+              : "bg-white border-[1px] border-[#EAEBF0] rounded-bl-none"
+          } ${url && message.type === MessageType.IMAGE ? "px-2.5" : "px-4"}`}
         >
           {url && message.type === MessageType.IMAGE ? (
             <div className="h-auto w-[350px] md:w-[450px]">
@@ -166,14 +166,14 @@ export const MessageBox: React.FC<IMessageContainerProps> = ({
         <span className="text-xs text-neutral-500">
           {error ? (
             <span className="text-red-500 flex gap-1 items-center">
-              Error Sending{' '}
+              Error Sending{" "}
               <IoMdRefresh
                 className="text-sm cursor-pointer"
                 onClick={() => triggerSend()}
               />
             </span>
           ) : sending ? (
-            'Sending...'
+            "Sending..."
           ) : (
             <MessageDate date={message.createdAt} />
           )}

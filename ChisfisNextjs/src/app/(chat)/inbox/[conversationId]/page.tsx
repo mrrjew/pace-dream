@@ -2,23 +2,23 @@ import {
   DbResponseToConversation,
   DbResponseToMessage,
   Message,
-} from '@/types/chat';
-import { serverAuthAxios } from '@/utils/serverAxios';
-import { EmptyState } from '../../components/EmptyState';
-import { Body } from './components/Body';
-import { Header } from './components/Header';
+} from "@/types/chat";
+import { serverAuthAxios } from "@/utils/serverAxios";
+import { EmptyState } from "../../components/EmptyState";
+import { Body } from "./components/Body";
+import { Header } from "./components/Header";
 
 interface IParams {
   conversationId: string;
 }
 
 export default async function MessageBoxPage({ params }: { params: IParams }) {
-  const response = await serverAuthAxios().get('/message', {
+  const response = await serverAuthAxios().get("/message", {
     params: { chatId: params.conversationId },
   });
 
   const conversationResponse = await serverAuthAxios().get(
-    `/chat/${params.conversationId}`
+    `/chat/${params.conversationId}`,
   );
   const conversation = DbResponseToConversation(conversationResponse.data.data);
 

@@ -1,5 +1,3 @@
-"use client"
-
 
 import DynamicPageIndicator from "@/components/DynamicPageIndicator";
 import money from "@/images/money.png";

@@ -1,5 +1,6 @@
-import { FaChevronRight } from "react-icons/fa6";
+
 import Link from "next/link";
+import { FaChevronRight } from "react-icons/fa6";
 
 const page = ({ main, curr_route }: any) => {
   return (

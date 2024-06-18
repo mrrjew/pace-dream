@@ -33,15 +33,25 @@ const BrowseByDestinationData = [
     img: TorontoCityImage,
     destination: "Toronto",
   },
+  {
+    id: 4,
+    img: TorontoCityImage,
+    destination: "Toronto",
+  },
+  {
+    id: 4,
+    img: TorontoCityImage,
+    destination: "Toronto",
+  },
 ];
 
 const BrowseByDestination = () => {
   let sliderRef = useRef<Slider>(null);
   const next = () => {
-    sliderRef?.current?.slickNext;
+    sliderRef?.current?.slickNext();
   };
   const previous = () => {
-    sliderRef?.current?.slickPrev;
+    sliderRef?.current?.slickPrev();
   };
   const settings = {
     dots: true,
@@ -112,12 +122,7 @@ const BrowseByDestination = () => {
             </p>
           </div>
           {/* <div className="flex flex-shrink-0 gap-3 overflow-x-scroll flex-nowrap"> */}
-          <Slider
-            ref={(slider: any) => {
-              sliderRef = slider;
-            }}
-            {...settings}
-          >
+          <Slider ref={sliderRef} {...settings}>
             {BrowseByDestinationData.map((item) => (
               <div
                 key={item.destination}
@@ -129,7 +134,7 @@ const BrowseByDestination = () => {
                   className="object-cover object-center rounded-2xl"
                   alt={item.destination}
                 />
-                <div className="absolute flex flex-col items-start  justify-end py-[.5rem]  bg-gradient-to-b from-transparent via-transparent to-black shadow-lg  bottom-0 flex  w-[100%] h-[5rem] font-medium text-white rounded-2xl  ">
+                <div className="absolute flex-col items-start  justify-end py-[.5rem]  bg-gradient-to-b from-transparent via-transparent to-black shadow-lg  bottom-0 flex  w-[100%] h-[5rem] font-medium text-white rounded-2xl  ">
                   <div className=" rounded-2xl flex items-center gap-1 px-[.5rem] font-medium text-white w-fit bottom-0 left-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
