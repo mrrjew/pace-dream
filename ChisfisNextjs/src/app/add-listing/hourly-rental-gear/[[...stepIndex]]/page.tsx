@@ -11,65 +11,56 @@ import PageAddListing7 from "../../_components/PageAddListing7";
 import PageAddListing8 from "../../_components/PageAddListing8";
 import AddListingHourlyRentalGearWrapper from "../HourlyRentalGearWrapper";
 import PageAddListingToHourlyRentalGear3 from "../../_components/PageAddListingHourlyRentalGear3";
+import { RentableItem } from "@/types/rentalItems";
 
 
 
-
-const InitialData: ListingDataType = {
-  propertyType: "",
-  roomType: "",
-  placeName: "",
-  rentalForm: "",
-  hourlyrate: "",
-  dailyrate: "",
-  weeklyrate: "",
-  monthlyrate: "",
-  cleaningfeesDaily: "",
-  street: "",
-  country: "",
-  location: {
-    link: "",
-    address: "",
-    latitude: 0,
-    longitude: 0,
-  },
-  otherservices: "",
-  city: "",
-  state: "",
-  postalCode: "",
-  acreage: "",
-  guests: 0,
-  bedroom: 0,
-  beds: 0,
-  bathroom: 0,
-  kitchen: 0,
-  generalAmenities: [],
-  otherAmenities: [],
-  safeAmenities: [],
-  smokingRole: "",
-  petRole: "",
-  partyOrganizingRole: "",
-  cookingRole: "",
-  additionalRules: [],
-  placeDescription: "",
-  availability: true,
-  capacity: 0,
-  currency: "",
-  basePriceMonToThu: 0,
-  basePriceFriToSun: 0,
-  longTermPriceDiscount: 0,
-  stayNightMin: 0,
-  stayNightMax: 0,
-  coverImage: "",
-  placeImages: [],
-  placeVideo: "",
-  availabilityDate: [],
+const initialData: Partial<RentableItem> = {
+  title: "",
+  summary: "",
+  details: {
+   amenities: [],
+   rules: [],
+   room_type: "any type",
+   property_type: "",
+   hourly_rental_time: {
+     startDate: undefined,
+     endDate: undefined,
+     startTime: "",
+     endTime: "",
+   },
+   },
+   location: {
+     address: "",
+     longitude: 0,
+     latitude: 0,
+     zipcode: "",
+     city: "",
+     state: "",
+     country: "",
+     street_address: "",
+     googlemap_link: "",
+   },
+   gallery: {
+     thumbnail: "",
+     images: [],
+     videos: [],
+   },
+   attachments: [],
+   item_type:'room',
+   price: [],
+   rules: {},
+   rating:0,
+   owner:"",
+   createdAt: new Date(),
+   updatedAt: new Date(),
 };
 
+
 const Page = () => {
-  const [data, setData] = useState<typeof InitialData>(InitialData);
+  const [data, setData] = useState<typeof initialData>(initialData);
   // update data from child component
-  const updateData = (newData: Partial<typeof InitialData>) => {
+  const updateData = (newData: Partial<typeof initialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
   

@@ -1,5 +1,5 @@
 'use client'
-import { ListingDataType } from "@/types/types";
+// import { ListingDataType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import {
   FaWifi,
@@ -7,13 +7,15 @@ import {
   FaParking,
   FaSnowflake,
   FaSwimmingPool,
-  FaDumbbell,
+  // FaDumbbell,
 } from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
 import { MdRoomService, MdSmokeFree } from "react-icons/md";
 import { GrAidOption } from "react-icons/gr";
 import { TbFireExtinguisher, TbSofa } from "react-icons/tb";
 import { GiFireplace, GiGrandPiano } from "react-icons/gi";
+import { RentableItem } from "@/types/rentalItems";
+import { AMENITIES_DATA } from "@/data/amenities";
 
 interface Amenity {
   icon?: React.ReactNode;
@@ -21,17 +23,6 @@ interface Amenity {
   id: string;
 }
 
-const amenities: Amenity[] = [
-  { icon: <TbSofa />, label: "Furnished", id: "furnished" },
-  { icon: <FaWifi />, label: "Wifi", id: "wifi" },
-  { icon: <FaTv />, label: "TV", id: "tv" },
-  { icon: <FaKitchenSet />, label: "Kitchen", id: "kitchen" },
-  { icon: <GiGrandPiano />, label: "Piano", id: "piano" },
-  { icon: <FaParking />, label: "Parking", id: "parking" },
-  { icon: <FaSnowflake />, label: "AC", id: "ac" },
-  { icon: <MdRoomService />, label: "Room Service", id: "room-service" },
-  { icon: <GiFireplace />, label: "Fire Pit", id: "fire-pit" },
-];
 
 const safetyAmenities: Amenity[] = [
   { icon: <MdSmokeFree />, label: "Smoke Alarm", id: "smoke-alarm" },
@@ -44,10 +35,10 @@ const safetyAmenities: Amenity[] = [
   { icon: <FaSwimmingPool />, label: "Swimming Pool", id: "swimming-pool" },
 ];
 
-const AmenityGrid: React.FC<{updateData:(data:Partial<ListingDataType>)=>void, data:Partial<ListingDataType>}> = (
+const AmenityGrid: React.FC<{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}> = (
   {updateData, data}
 ) => {
-  const [selectedAmenities, setSelectedAmenities] = useState<string[]>(data?.generalAmenities || []);
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>(data?.details?.amenities || []);
 
   const handleAmenityClick = (amenityId: string) => {
       const _copySelectedAmenities = [...selectedAmenities];
@@ -61,7 +52,7 @@ const AmenityGrid: React.FC<{updateData:(data:Partial<ListingDataType>)=>void, d
 
   // update data with amenities
   const updateDataWithAmenities = () => {
-    updateData({...data,generalAmenities:selectedAmenities})
+    updateData({...data,details:{...data?.details,amenities:selectedAmenities}})
   }
 
   // use callback to update data with amenities
@@ -77,10 +68,10 @@ const AmenityGrid: React.FC<{updateData:(data:Partial<ListingDataType>)=>void, d
         </p>
         {/* <p className="text-gray-600 mb-6">General Amenities</p> */}
         <div className="flex gap-2 md:gap-4 flex-wrap items-center">
-          {amenities?.map((amenity) => (
+          {AMENITIES_DATA?.map((amenity) => (
             <div
               key={amenity?.id}
-              className={`flex flex-col  text-blue-700 rounded-lg gap-2 py-1 justify-center items-center cursor-pointer`}
+              className={`flex flex-col text-blue-700 rounded-lg gap-2 py-1 justify-center items-center cursor-pointer`}
             >
               <div 
                 onClick={() => handleAmenityClick(amenity.id || "")}

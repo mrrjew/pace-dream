@@ -353,7 +353,7 @@ export default function NavbarMobile() {
             <ChevronLeft className="w-6 h-6" />
           </button>
           <h2 className="text-xs w-full text-center font-semibold capitalize">{
-            window?.location.pathname.split("/").pop()?.replaceAll("-", " ") || "Stay Room"
+            pathname.split("/").pop()?.replaceAll("-", " ") || "Stay Room"
           }</h2>
         </div>}
       {

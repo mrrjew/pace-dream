@@ -1,18 +1,17 @@
 import Input from "@/shared/Input";
-import CounterButton from "./CounterButton";
-import FormItem from "@/app/add-listing/FormItem";
 import { PlusIcon } from "@heroicons/react/24/solid";
 // import FormItem from "../FormItem";
 
 interface RoomCounterProps {
   title: string;
   count: number;
+  placeholder?: string;
   setCount: (count: number) => void;
 }
 
-const RoomCounter = ({ title, count, setCount }: RoomCounterProps) => {
+const RoomCounter = ({ title, count,placeholder, setCount }: RoomCounterProps) => {
   const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count > 1 ? count - 1 : 1);
+  // const decrement = () => setCount(count > 1 ? count - 1 : 1);
 
   return (
     <div className="flex flex-col gap-4">
@@ -24,11 +23,13 @@ const RoomCounter = ({ title, count, setCount }: RoomCounterProps) => {
         {/* <CounterButton onClick={increment} label="+" /> */}
         <Input 
                 defaultValue={count}
-                onChange={(e)=>setCount(parseInt(e?.currentTarget?.value) || 0)}
-                value={count}
+                onChange={(e)=>{
+                  setCount(parseInt(e?.currentTarget?.value) || 0)
+                }}
+                value={count ||''}
                 name="counter" 
-                type="text" 
-                placeholder={`0 ${title}`}
+                type="number" 
+                placeholder={`2 ${placeholder}`}
                 className="border-none focus:ring-0"
                 />
             <button onClick={increment} className="bg-transparent hover:bg-gray-300 text-gray-600 p-2 rounded-full">

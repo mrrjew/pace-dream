@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
 const isAuthRelatedRoutes = (pathname: string) => {
   return pathname.startsWith('/auth');
 };
@@ -20,20 +19,25 @@ export async function middleware(request: NextRequest) {
   const authToken = cookies.get('auth-token')?.value;
 
   let isValidToken = false;
+  // const _baseUrl = process.env.BACKEND_URL as string;
 
-  const checkToken = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-token`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
-      },
+   try {
+    const checkToken = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check-token`,
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    )
+    if (checkToken?.status === 200) {
+      isValidToken = true;
     }
-  );
-  if (checkToken.status === 200) {
-    isValidToken = true;
+  } catch (error:any) {
+    console.error('Error checking token', error);
   }
+
+ 
   if (isAuthRelatedRoutes(request.nextUrl.pathname) && isValidToken) {
     return NextResponse.redirect(new URL('/', request.nextUrl).href);
   }

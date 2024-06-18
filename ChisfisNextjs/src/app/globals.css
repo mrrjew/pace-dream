@@ -61,3 +61,15 @@
     margin-left: 150px;
   }
 }
+
+
+/* arrow in number input field */
+.remove-arrow::-webkit-inner-spin-button, 
+.remove-arrow::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+} 
+
+.remove-arrow { 
+    -moz-appearance: textfield; 
+} 
