@@ -1,4 +1,6 @@
+"use client"
 import DynamicPageIndicator from "@/components/DynamicPageIndicator";
+
 import NewsLetter from "@/components/HelpCenter/NewsLetter";
 import { FaChevronRight } from "react-icons/fa6";
 
