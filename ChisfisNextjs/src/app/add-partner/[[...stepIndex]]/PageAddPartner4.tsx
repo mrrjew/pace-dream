@@ -15,7 +15,7 @@ const PageAddPartner4: FC<PageAddPartner4Props> = () => {
           Which of these best describes your booked room?
         </h2>
         <p className="mt-4">
-          In this step, we'll ask you which type of stays you have and if guests
+          In this step, we{'\''}ll ask you which type of stays you have and if guests
           will book the entire place or just a room. Then let us know the
           location and how many guests can stay.
         </p>

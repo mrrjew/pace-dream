@@ -5,7 +5,7 @@ import { BiFilterAlt } from "react-icons/bi";
 import ListingComponent from "./ListingComponent";
 import ClaimsComponent from "./ClaimsComponent";
 
-const hostSpace = () => {
+const HostSpace = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("Listings");
 
   const handleMenuItemClick = (menuItem: string) => {
@@ -82,4 +82,4 @@ const hostSpace = () => {
   );
 };
 
-export default hostSpace;
+export default HostSpace;

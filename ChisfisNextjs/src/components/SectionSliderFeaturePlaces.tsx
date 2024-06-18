@@ -136,6 +136,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
             if (i === 0) {
               return (
                 <div
+                key={tab}
                   className={` md:w-[100px] w-[75px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}
@@ -144,6 +145,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
             } else if (i === 1) {
               return (
                 <div
+                key={tab}
                   className={` md:w-[85px] w-[50px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}
@@ -152,6 +154,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
             } else if (i === 2) {
               return (
                 <div
+                key={tab}
                   className={` md:w-[140px] w-[70px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}

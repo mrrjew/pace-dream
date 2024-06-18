@@ -21,7 +21,7 @@ const buttonClass =
 const searchButtonClass =
   "bg-[#632DF8] w-full h-[46px] lg:w-[46px] rounded-full flex justify-center items-center";
 
-const page = () => {
+const Page = () => {
   const [searchKey, setSearchKey] = useState<string>("");
 
   const handleSearchKeyChange = debounce((value) => {
@@ -181,4 +181,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

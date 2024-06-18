@@ -11,7 +11,7 @@ const PageAddPartner7: FC<PageAddPartner7Props> = () => {
       <div>
         <h2 className="text-2xl font-semibold">Who will share the room?</h2>
         <p className="mt-4">
-          You'll add more details later, such as bed types.
+          You{'\''}ll add more details later, such as bed types.
         </p>
       </div>
 

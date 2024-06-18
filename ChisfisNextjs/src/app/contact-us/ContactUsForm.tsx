@@ -66,7 +66,7 @@ const ContactUsForm = () => {
         <p className="text-[#632DF8] font-semibold">Contact us</p>
         <p className="font-semibold text-5xl mt-6">Get in touch</p>
         <p className="mt-6">
-          We'd love to hear from you. Please fill out this form.
+          We{'\''}d love to hear from you. Please fill out this form.
         </p>
       </div>
 

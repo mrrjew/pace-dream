@@ -14,7 +14,7 @@ const PageAddPartner5: FC<PageAddPartner5Props> = () => {
           What type of place will roommate have?
         </h2>
         <p className="mt-4">
-          In this step, we'll ask you which type of stays you have and if guests
+          In this step, we{'\''}ll ask you which type of stays you have and if guests
           will book the entire place or just a room. Then let us know the
           location and how many guests can stay.
         </p>

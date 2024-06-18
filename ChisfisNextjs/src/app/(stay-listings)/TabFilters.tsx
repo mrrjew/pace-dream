@@ -53,7 +53,7 @@ const tabs: TypeDropOffLocationHourlyType[] = [
   "Student",
   "Professional",
 ];
-const renderRadioBtn = () => {
+const RenderRadioBtn = () => {
   const [dropOffLocationType, setDropOffLocationType] =
     useState<TypeDropOffLocationHourlyType>();
   return (
@@ -61,6 +61,7 @@ const renderRadioBtn = () => {
       {tabs.map((tab) => {
         return (
           <div
+          key={tab}
             className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
               dropOffLocationType === tab
                 ? "bg-violet shadow-black/10 shadow-lg text-white "
@@ -286,7 +287,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
     );
   };
 
-  const renderTabMoreFilter = () => {
+  const RenderTabMoreFilter = () => {
     const toggleDefaultChecked = (index: number, filterSet: number) => {
       let updatedFilters;
       switch (filterSet) {
@@ -360,6 +361,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
           {moreFilter1.map((tab, index) => {
             return (
               <div
+                key="filter"
                 className={`py-2.5 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
                   tab.defaultChecked === true
                     ? "bg-violet shadow-black/10 shadow-lg text-white "
@@ -612,7 +614,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
     );
   };
 
-  const renderTabMoreFilterMobile = () => {
+  const RenderTabMoreFilterMobile = () => {
     const toggleDefaultChecked = (index: number, filterSet: number) => {
       let updatedFilters;
       switch (filterSet) {
@@ -685,7 +687,8 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
         <div className="py-5 pl-4 flex flex-row flex-wrap">
           {moreFilter1.map((tab, index) => {
             return (
-              <div
+              <div 
+              key="filter"
                 className={`py-2.5 mx-1 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
                   tab.defaultChecked === true
                     ? "bg-violet shadow-black/10 shadow-lg text-white "
@@ -942,8 +945,8 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
     <div className="flex space-x-2 md:mt-0 mt-4 justify-start">
       <div className="hidden md:flex justify-start items-center lg:ml-8 space-x-2 w-[90vw]">
         {renderTabsPriceRage()}
-        {renderRadioBtn()}
-        {renderTabMoreFilter()}
+        {RenderRadioBtn()}
+        {RenderTabMoreFilter()}
         <div
           className={`py-1.5 md:py-2 lg:px-2.5 flex items-center rounded-full font-medium cursor-pointer text-sm my-1 mr-8 ${
             map === true
@@ -957,7 +960,7 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
       </div>
       <div className="flex md:hidden">
         {renderTabsPriceRage()}
-        {renderTabMoreFilterMobile()}
+        {RenderTabMoreFilterMobile()}
         <div
           className={`py-1 px-4 text-sm md:hidden flex items-center rounded-full font-medium cursor-pointer my-1 ${
             map === true

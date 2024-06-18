@@ -79,25 +79,25 @@ const Page = () => {
     isFirstStep,
     isLastStep,
   } = useMultiStepForm([
-    <PageAddListing1 data={data} updateData={updateData} />,
-    <PageAddListing2 data={data} updateData={updateData} />,
-    <ExperiencePag3 data={data} updateData={updateData} />, //change page 3
-    // <PageAddListing4 data={data} updateData={updateData} />,
-    <ExperiencePage4 data={data} updateData={updateData} />, // change page 4
+    <PageAddListing1  key="page1"data={data} updateData={updateData} />,
+    <PageAddListing2  key="page2"data={data} updateData={updateData} />,
+    <ExperiencePag3  key="page3"data={data} updateData={updateData} />, //change page 3
+    // <PageAddListing4 data={data4} updateData={updateData} />,
+    <ExperiencePage4  key="page5"data={data} updateData={updateData} />, // change page 4
     <PageAddListing6
-      data={data}
+      data={data} key="page6"
       onPreview={() => {
         next();
       }}
     />,
     <PageAddListing7
-      data={data}
+      data={data} key="page7"
       onBackToHost={() => {
         back();
       }}
     />,
     <PageAddListing8
-      data={data}
+      data={data} key="page8"
       onBackToHost={() => {
         back();
       }}

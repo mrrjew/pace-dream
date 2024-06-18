@@ -22,7 +22,7 @@ const HelpCenterLayout = () => {
               Hi, how can we help?
             </span>
             <p className="text-[15px] mt-2 text-gray-700/80 tracking-[0.1px]">
-              Sign in to contact Customer Service - we're available 24 hours a
+              Sign in to contact Customer Service - we{'\''}re available 24 hours a
               day
             </p>
           </p>

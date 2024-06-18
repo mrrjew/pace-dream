@@ -295,7 +295,7 @@ export function PaymentMethods() {
               {"Make all payments through PaceDream"}
             </p>
             <p className="text-sm text-[#757575] mt-2">
-              Always pay and communicate through Airbnb to ensure you're
+              Always pay and communicate through Airbnb to ensure you{'\''}re
               protected under our 
               <Link
                 className="underline text-black"

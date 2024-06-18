@@ -4,7 +4,7 @@ import React, { FC, useState } from "react";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
 import SectionSliderGridHasMap from "@/components/SectionSliderGridHasMap";
 import GoogleMapReact from "google-map-react";
-import NoResult from "@/images/no-result.jpg"
+import NoResult from "@/images/no-result.jpg";
 import {
   DEMO_STAY_LISTINGS,
   DEMO_LAST_LISTINGS,
@@ -31,19 +31,26 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const location = searchParams.get("location");
   const guests = searchParams.get("guests");
 
-  function filterListings(listings:any, { guests, location, terms }:any) {
-    return listings.filter((listing:any) => {
-        const matchesAddress = location ? listing.address.toLowerCase().includes(location.toLowerCase()) : true;
-        const matchesGuests = guests ? listing.maxGuests === parseInt(guests) : true;
-        const matchesTerm = terms ? listing.term === terms : true;
+  function filterListings(listings: any, { guests, location, terms }: any) {
+    return listings.filter((listing: any) => {
+      const matchesAddress = location
+        ? listing.address.toLowerCase().includes(location.toLowerCase())
+        : true;
+      const matchesGuests = guests
+        ? listing.maxGuests === parseInt(guests)
+        : true;
+      const matchesTerm = terms ? listing.term === terms : true;
 
-        return matchesAddress && matchesGuests && matchesTerm;
+      return matchesAddress && matchesGuests && matchesTerm;
     });
-}
+  }
 
-
-// Filter the listings
-const DEMO_STAYS = filterListings(DEMO_STAY_LISTINGS, {guests,location,terms});
+  // Filter the listings
+  const DEMO_STAYS = filterListings(DEMO_STAY_LISTINGS, {
+    guests,
+    location,
+    terms,
+  });
 
   return (
     <div className="relative flex min-h-screen">
@@ -54,12 +61,20 @@ const DEMO_STAYS = filterListings(DEMO_STAY_LISTINGS, {guests,location,terms});
         <div
           className={`hidden md:flex flex-row w-[90vw] ${map ? "h-[92vw]" : "h-full"} `}
         >
-           {
-            DEMO_STAYS.length == 0 && (<div className="w-full flex flex-col items-center h-max py-40">
-              <Image src={NoResult} alt="not found" width={600} height={600} className="rounded-md text-center"/>
-              <h1 className="text-gray-600 text-2xl my-8 font-rubik">No Result Found</h1>
-            </div>)
-           }
+          {DEMO_STAYS.length == 0 && (
+            <div className="w-full flex flex-col items-center h-max py-40">
+              <Image
+                src={NoResult}
+                alt="not found"
+                width={600}
+                height={600}
+                className="rounded-md text-center"
+              />
+              <h1 className="text-gray-600 text-2xl my-8 font-rubik">
+                No Result Found
+              </h1>
+            </div>
+          )}
           <div
             className={`hidden md:grid grid-cols-1 ${map ? "sm:grid-cols-2" : "sm:grid-cols-4"} gap-x-5 2xl:gap-x-6 gap-y-8 ${map ? "max-w-[45vw]" : "max-w-[90vw]"} ${map ? "overflow-y-auto scrollbar-webkit scrollbar-thin" : "overflow-y-hidden"}`}
           >

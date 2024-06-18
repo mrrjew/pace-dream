@@ -6,11 +6,9 @@ import DatePicker from "react-datepicker";
 import { useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { FaUsers } from "react-icons/fa";
-import {usePathname, useRouter} from "next/navigation"
+import { usePathname, useRouter } from "next/navigation";
 
 const FilterBar = () => {
-
-  
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [selectedRange, setSelectedRange] = useState<
@@ -58,24 +56,23 @@ const FilterBar = () => {
   const [guests, setGuests] = useState<number>(1);
 
   // search
-  const [location,setLocation] = useState<string>("")
+  const [location, setLocation] = useState<string>("");
 
-    // setting query params
-    const {push} = useRouter()
-    const pathname = usePathname()
+  // setting query params
+  const { push } = useRouter();
+  const pathname = usePathname();
 
-    const date1 = new Date(selectedRange[0] ?? '');
-    const date2 = new Date(selectedRange[1] ?? '');
+  const date1 = new Date(selectedRange[0] ?? "");
+  const date2 = new Date(selectedRange[1] ?? "");
 
-    const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
-    const diffInMonths = diffInMilliseconds / (1000 * 60 * 60 * 24 * 30);
-    
-    const query = `guests=${guests}&location=${location}&term=${diffInMonths > 6 ? "long" : "short"}`
+  const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
+  const diffInMonths = diffInMilliseconds / (1000 * 60 * 60 * 24 * 30);
 
-    const search = () => {
-      
-      push(`/listing-stay-map/:id?${query}`)
-  }
+  const query = `guests=${guests}&location=${location}&term=${diffInMonths > 6 ? "long" : "short"}`;
+
+  const search = () => {
+    push(`/listing-stay-map/:id?${query}`);
+  };
 
   return (
     <div className="w-max flex flex-col items-center">
@@ -217,7 +214,10 @@ const FilterBar = () => {
               Button
             </label>
             <div>
-              <button className="bg-violet rounded-lg px-8 py-[12px] text-white" onClick={() => search()}>
+              <button
+                className="bg-violet rounded-lg px-8 py-[12px] text-white"
+                onClick={() => search()}
+              >
                 Search
               </button>
             </div>

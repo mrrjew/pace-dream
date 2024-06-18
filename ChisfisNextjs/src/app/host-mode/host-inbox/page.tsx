@@ -4,7 +4,7 @@ import { useState } from "react";
 import NotificationComponent from "./NotificationComponent";
 import FriendshipReq from "./FriendshipReq";
 
-const hostInbox = () => {
+const HostInbox = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("Friendship Requests");
 
   const handleMenuItemClick = (menuItem: string) => {
@@ -58,4 +58,4 @@ const hostInbox = () => {
   );
 };
 
-export default hostInbox;
+export default HostInbox;

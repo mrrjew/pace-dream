@@ -5,7 +5,7 @@ import ChartComponent from "./ChartComponent";
 import { useState } from "react";
 import ReviewComponent from "./ReviewComponent";
 
-const hostBusiness = () => {
+const HostBusiness = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("Business");
 
   const handleMenuItemClick = (menuItem: string) => {
@@ -82,4 +82,4 @@ const hostBusiness = () => {
   );
 };
 
-export default hostBusiness;
+export default HostBusiness;

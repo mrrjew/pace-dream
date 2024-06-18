@@ -435,7 +435,7 @@ const RoomMateDetailsPage = () => {
           </div>
 
           <div className="location">
-            <h3 className="title">Where he's looking for the partner?</h3>
+            <h3 className="title">Where he{'\''}s looking for the partner?</h3>
 
             <div className="btn-wrapper">
               <button type="button" className="btn-location">

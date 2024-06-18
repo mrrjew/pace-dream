@@ -20,7 +20,7 @@ const PageAddListing4 = ({
     <div className="bg-white rounded-xl h-fit p-2 md:p-8">
       <div>
         <p className="text-lg py-4 font-medium">
-          It's time to publish property!
+          It{"\'"}s time to publish property!
         </p>
         {/* <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>Excellent, congratulations on completing the listing, it is waiting to be reviewed for publication</span> */}
       </div>

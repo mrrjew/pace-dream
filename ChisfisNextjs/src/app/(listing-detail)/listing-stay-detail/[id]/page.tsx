@@ -835,7 +835,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   </ButtonPrimary>
 
                   <p className="mt-4 text-[#9DA1AB] text-sm text-center">
-                    You won't be charged yet
+                    You won{'\''}t be charged yet
                   </p>
 
                   <div className="flex justify-between items-center mt-4">

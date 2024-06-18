@@ -9,7 +9,7 @@ const PageAddPartner1: FC<PageAddPartner1Props> = () => {
       <div>
         <h2 className="text-2xl font-semibold">Give your availability</h2>
         <p className="mt-4">
-          In this step, we'll ask you which type of stays you have and if guests
+          In this step, we{'\''}ll ask you which type of stays you have and if guests
           will book the entire place or just a room. Then let us know the
           location and how many guests can stay.
         </p>

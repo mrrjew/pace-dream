@@ -40,6 +40,7 @@ const HourlySearchForm: FC<{}> = ({}) => {
         {tabs.map((tab) => {
           return (
             <div
+            key={tab}
               className={`py-1.5 px-4 flex items-center rounded-full font-medium text-xs cursor-pointer mr-2 my-1 sm:mr-3 ${
                 dropOffLocationType === tab
                   ? "bg-violet shadow-black/10 shadow-lg text-white"
