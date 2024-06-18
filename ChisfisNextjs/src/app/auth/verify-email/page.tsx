@@ -32,8 +32,8 @@ export default function VerifyEmailPage() {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-email`,
         { token }
       );
-      console.log(response.data, response.data);
-      if (response.status === 200 && response.data.data) {
+      // console.log(response.data, response.data);
+      if (response.status === 200 && response?.data?.data) {
         setEmail(response.data.data);
       }
     } catch (error) {
