@@ -15,7 +15,7 @@ const ParkingSpotMobile = () => {
         </p>
         <p className="text-[#666666] text-[13px]">
           Are you looking for the ultimate parking spot tailored for your
-          beloved electric vehicle (EV)? We've got you covered! Finding the best
+          beloved electric vehicle (EV)? We{'\''}ve got you covered! Finding the best
           parking spot for your favorite EV involves more than just any ordinary
           space.
         </p>

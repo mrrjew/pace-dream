@@ -163,6 +163,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
             } else if (i === 3) {
               return (
                 <div
+                key={tab}
                   className={` md:w-[140px] w-[70px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}
