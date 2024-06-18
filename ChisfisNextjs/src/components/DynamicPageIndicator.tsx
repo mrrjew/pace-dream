@@ -13,5 +13,4 @@ const page = ({ main, curr_route }: any) => {
     </div>
   );
 };
-
 export default page;
