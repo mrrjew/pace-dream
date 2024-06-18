@@ -6,7 +6,7 @@ import ReduxProvider from "@/store/providers";
 import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
 import "./globals.css";
-import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
+// import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
 import LayoutWrapper from "./layoutWrapper";
 
 const poppins = Poppins({

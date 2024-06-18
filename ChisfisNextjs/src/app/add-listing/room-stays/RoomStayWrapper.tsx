@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AddListingMainLayoutWrapper from "../AddListingMainLayoutWrapper";
+import { RentableItem } from "@/types/rentalItems";
 
 
 
@@ -10,8 +11,12 @@ export default function AddListingRoomStayWrapper(
     onBack,
     isFirstStep,
     isLastStep,
-    currentStep
-    }:{children:React.ReactNode,onNext:()=>void,onBack:()=>void,isFirstStep:boolean,isLastStep:boolean,currentStep:number}
+    currentStep,
+    data,
+     totalSteps
+    }:{children:React.ReactNode,onNext:()=>void,onBack:()=>void,isFirstStep:boolean,isLastStep:boolean,currentStep:number,
+      data?:Partial<RentableItem>,totalSteps?:number
+    }
 ) {
 
   const [submitBtnText, setSubmitBtnText] = useState<string>("Next");
@@ -40,7 +45,10 @@ export default function AddListingRoomStayWrapper(
           isLastStep={isLastStep}
           currentStep={currentStep}
           submitBtnText={submitBtnText}
-          hideBackBtn={hidBackBtn}>
+          hideBackBtn={hidBackBtn}
+          data={data}
+          totalSteps={totalSteps}
+          >
             {children}
       </AddListingMainLayoutWrapper>
   );

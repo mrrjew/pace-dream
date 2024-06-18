@@ -17,8 +17,8 @@ function useLoadGoogleMapScript(){
 }
 
 
-function PlacesAutocompleteInput( 
-    {val,onSelect}:{val:string,onSelect:(address: string, placeID: string)=>void}
+export function PlacesAutocompleteInput( 
+    {val,onSelect,className}:{val:string,onSelect:(address: string, placeID: string)=>void,className?:string}
 ){
     const [value, setValue] = React.useState<string>(val);
     const { isLoaded, loadError } = useLoadGoogleMapScript();
@@ -40,14 +40,14 @@ function PlacesAutocompleteInput(
             debounce={300}
             value={value}
             onChange={setValue}
-            onSelect={handleSelect}
-        >
+            onSelect={handleSelect}>
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div className="relative mb-2" key={"all-suggestions.."}>
                     {/* <input {...getInputProps({ placeholder: "Search for a Places ..." })} /> */}
                     <FormItem label="" key={'input-field'}>
                         <Input
                            {...getInputProps({ placeholder: "Search for a Places ..." })}
+                           className={cn("w-full",className)}
                         />
                     </FormItem>
                     <div className="absolute z-10 bg-white w-full" key={"data-list"}>

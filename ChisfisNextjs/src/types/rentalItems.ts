@@ -49,7 +49,8 @@ const PRICING_FREQUENCY = {
   
   export type PricingType = (typeof PRICING_TYPE)[keyof typeof PRICING_TYPE];
   
-  export type RentalStatus = (typeof RENTAL_STATUS)[keyof typeof RENTAL_STATUS];
+  // export type RentalStatus = (typeof RENTAL_STATUS)[keyof typeof RENTAL_STATUS];
+  export type RentalStatus = 'draft' | 'published'
   
   export type Discount = {
     /** Either use amount off (i.e. $50 off) */
@@ -133,6 +134,7 @@ const PRICING_FREQUENCY = {
   };
   
   export type RentableItem = {
+    _id: string;
     /** Id of the user who created the rentable item. */
     owner: string;
     /** Title of the rentable item */
@@ -142,6 +144,7 @@ const PRICING_FREQUENCY = {
     item_type: RentableItemType;
     /** The actual shape depends on `item_type`. For example, a room will have different details than a DSLR */
     details: Record<string, any> | PropertyDetails;
+    category: 'room_stays' | 'time_based' | 'hourly_rental_gear' | 'find_roommate' |'last_minutes' | 'experience'
     /**
      * Prices for the rentable item. An item can have multiple pricing schema for example monthly, weekly, or hourly.
      * Each pricing can have different discounts. For example, yearly pricing can have a 20% discount while monthly pricing can have 5% discount.
@@ -168,6 +171,7 @@ const PRICING_FREQUENCY = {
     hidden?: boolean;
     deleted?: boolean;
     archived?: boolean;
+    status?: RentalStatus;
     // following two fields will be auto generated in the server.
     createdAt: Date;
     updatedAt: Date;
@@ -182,7 +186,7 @@ const PRICING_FREQUENCY = {
     tenant: UserInfoTruncated;
     /** List of other tenants who shares the bills */
     sharing_tenants: string[];
-    status: RentalStatus;
+    status?: RentalStatus;
     /** The chosen price configuration */
     price: Price;
     rental_start: Date;

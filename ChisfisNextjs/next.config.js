@@ -84,6 +84,12 @@ const nextConfig = {
         hostname: "totel-images.s3.us-east-2.amazonaws.com",
         port: "",
         pathname: "/**",
+      },
+      {
+        protocol: 'https',
+        hostname: "placehold.co",
+        port: "",
+        pathname: "/**",
       }
     ],
   },

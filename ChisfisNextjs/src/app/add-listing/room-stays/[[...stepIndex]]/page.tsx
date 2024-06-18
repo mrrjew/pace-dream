@@ -96,6 +96,8 @@ const Page = () => {
         isFirstStep={isFirstStep}
         isLastStep={isLastStep}
         currentStep={currentStepIndex}
+        data={data}
+        totalSteps={steps?.length}
       >
           {step}
       </AddListingRoomStayWrapper>

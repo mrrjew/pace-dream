@@ -152,7 +152,8 @@ const PageAddListing8 = (
                     <Fragment key={index}>
                     <div key={index} className='flex items-center gap-2'>
                       <div className='text-neutral-500'>{amenity.icon}</div>
-                      <span className='text-neutral-600'>{amenity.label}</span>
+                      {array.length <= 3 && <span className='text-neutral-600'>{amenity.label}</span>}
+                      {/* <span className='text-neutral-600'>{amenity.label}</span> */}
                     </div>
                      { (index < (array.length - 1)) && <hr className='bg-gray-400 w-[0.5px] h-4 ' />}
                     </Fragment>

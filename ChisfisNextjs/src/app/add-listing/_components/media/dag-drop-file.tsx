@@ -4,7 +4,6 @@ import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import { Cancel, Delete, RecyclingRounded, VideoCallOutlined } from "@mui/icons-material";
 import React from "react";
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
-import { _Object } from '@aws-sdk/client-s3';
 import { useMutation } from '@tanstack/react-query';
 import { Group, MantineProvider } from '@mantine/core';
 import { DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/solid';
@@ -64,7 +63,7 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
             }
         }, 1000);
     },
-    onError: (err) => {
+    onError: (err:any) => {
         console.error("Error uploading file", err);
     },
  });

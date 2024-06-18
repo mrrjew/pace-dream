@@ -1,15 +1,39 @@
+'use client';
 import React from 'react';
-import { ListingDataType } from '@/types/types';
+// import { ListingDataType } from '@/types/types';
 import Image from 'next/image';
 import { Bed, MoreHorizOutlined, Place, Shower, Star } from '@mui/icons-material';
 import { RentableItem } from '@/types/rentalItems';
 import { GoogleMapLayout } from '@/components/GoogleMap';
+import { useSession } from '@/hooks/useSession';
+import { useRouter } from 'next/navigation';
+import { useMutateData } from '@/hooks/useMutate';
 
 
 
 const PageAddListing4 = (
   {data,onPreview}:{onPreview:()=>void, data:Partial<RentableItem>}
 ) => {
+  const route = useRouter();
+  const {getSession} = useSession();
+  const {userId} = getSession();
+  const mutate = useMutateData<typeof data>({endpoint:'/property/add',queryKey:['publishProperty'],body:{
+    data: {...data,owner:userId,status:'draft',
+    // set first line of description as summary
+    summary: data?.details?.description?.split('\n')[0] || '',
+   },
+  }});
+
+  function handleSaveDraft(){
+    mutate.mutateAsync().then((res)=>{
+      console.log("response : ",res);
+      if(res?.status == true){
+        route.replace('/add-listing')
+      }
+    }).catch((error)=>{
+      console.log("error : ",error);
+    } );
+  }
   
   return (
     <div className='bg-white rounded-xl h-fit p-2 md:p-8'>
@@ -103,7 +127,12 @@ const PageAddListing4 = (
               </iframe> */}
           <div className='flex  space-y-2 justify-center py-8'>
               <div className='grid grid-cols-1 space-y-4 py-4'>
-              <button className='bg-primary-100 w-60 text-gray-700 p-2 rounded-lg'>Save Draft</button>
+              <button 
+                onClick={handleSaveDraft}
+                disabled={mutate.isLoading}
+                className={`bg-primary-100 w-60 text-gray-700 p-2 rounded-lg ${mutate.isLoading ? 'cursor-progress' :'cursor-pointer'}`}>
+                  {mutate.isLoading ? 'Saving Draft...' : 'Save Draft'}
+                </button>
               <button 
                 onClick={onPreview}
                 className='ring-1 ring-gray-300 w-60 text-primary-700 p-2 rounded-lg'>Show Preview</button>

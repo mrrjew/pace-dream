@@ -48,12 +48,12 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   // time slot state
   const { id } = useParams();
   const filteredData = DEMO_STAY_LISTINGS.filter((item) => item.id === id);
-  const priceDayNumber = parseFloat(filteredData[0].priceDay.replace("$", ""));
+  const priceDayNumber = parseFloat(filteredData[0]?.priceDay?.replace("$", ""));
   const priceHourNumber = parseFloat(
-    filteredData[0].priceHour.replace("$", ""),
+    filteredData[0]?.priceHour?.replace("$", ""),
   );
   const filteredAuthors = DEMO_AUTHORS.filter(
-    (item) => item.id === filteredData[0].authorId,
+    (item) => item.id === filteredData[0]?.authorId,
   );
   const searchParams = useSearchParams();
   const terms = searchParams.get("term");
@@ -75,8 +75,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   let sharedNumber: number;
   let sharedExpensesDayNumber: number;
   let sharedExpensesHourNumber: number;
-  if (filteredData[0].shared !== undefined) {
-    sharedNumber = parseInt(filteredData[0].shared, 10);
+  if (filteredData[0]?.shared !== undefined) {
+    sharedNumber = parseInt(filteredData[0]?.shared, 10);
     sharedNumber = sharedNumber + 1;
     sharedExpensesDayNumber = Math.round(priceDayNumber / sharedNumber);
     sharedExpensesHourNumber = Math.round(priceHourNumber / sharedNumber);
@@ -114,15 +114,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   if (isDay === "Day") {
     if (terms === "long" || terms === "short") {
       if (
-        filteredData[0].shared !== undefined &&
-        filteredData[0].priceDay !== undefined &&
-        filteredData[0].priceHour !== undefined
+        filteredData[0]?.shared !== undefined &&
+        filteredData[0]?.priceDay !== undefined &&
+        filteredData[0]?.priceHour !== undefined
       ) {
         let priceDayNum = parseInt(
-          filteredData[0].priceDay.replace("$", ""),
+          filteredData[0]?.priceDay.replace("$", ""),
           10,
         );
-        let sharedNum = parseInt(filteredData[0].shared, 10);
+        let sharedNum = parseInt(filteredData[0]?.shared, 10);
         sharedNum = sharedNum + 1;
         headingComponent = (
           <h3 className="text-2xl font-semibold">
@@ -137,7 +137,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
     } else {
       headingComponent = (
         <h3 className="text-2xl font-semibold">
-          {filteredData[0].priceDay}{" "}
+          {filteredData[0]?.priceDay}{" "}
           <span className="font-normal"> / Night</span>
         </h3>
       );
@@ -145,15 +145,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   } else if (isDay === "Hour") {
     if (terms === "long" || terms === "short") {
       if (
-        filteredData[0].shared !== undefined &&
-        filteredData[0].priceDay !== undefined &&
-        filteredData[0].priceHour !== undefined
+        filteredData[0]?.shared !== undefined &&
+        filteredData[0]?.priceDay !== undefined &&
+        filteredData[0]?.priceHour !== undefined
       ) {
         let priceHourNum = parseInt(
-          filteredData[0].priceHour.replace("$", ""),
+          filteredData[0]?.priceHour.replace("$", ""),
           10,
         );
-        let sharedNum = parseInt(filteredData[0].shared, 10);
+        let sharedNum = parseInt(filteredData[0]?.shared, 10);
         sharedNum = sharedNum + 1;
         headingComponent = (
           <h3 className="text-2xl font-semibold">
@@ -169,7 +169,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       headingComponent = (
         <h3 className="text-2xl font-semibold">
           {" "}
-          {filteredData[0].priceHour}{" "}
+          {filteredData[0]?.priceHour}{" "}
           <span className="font-normal"> / Hour</span>{" "}
         </h3>
       );
@@ -396,7 +396,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         </div>
         <div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold ml-4 sm:ml-20">
-            {filteredData[0].title}
+            {filteredData[0]?.title}
           </h2>
           <div className="flex items-center space-x-4 mt-2 mx-4 sm:mx-20 justify-between  mb-8">
             <span className="text-gray-500"> Tokyo, Jappan</span>
@@ -541,9 +541,9 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
               </div>
               <a className="block text-xl font-black ml-4" href="/author">
                 Hosted By{" "}
-                {filteredAuthors[0].firstName +
+                {filteredAuthors[0]?.firstName +
                   " " +
-                  filteredAuthors[0].lastName}
+                  filteredAuthors[0]?.lastName}
               </a>
             </div>
           </div>
@@ -845,7 +845,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                           " x " +
                           selectedHour +
                           " hours"
-                        : filteredData[0].priceHour +
+                        : filteredData[0]?.priceHour +
                           " x " +
                           selectedHour +
                           " hours"}
@@ -1066,7 +1066,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                                 " x " +
                                 numberOfDays +
                                 " nights"
-                              : filteredData[0].priceDay +
+                              : filteredData[0]?.priceDay +
                                 " x " +
                                 numberOfDays +
                                 " nights"}
@@ -1138,13 +1138,13 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             <Image
               fill
               className="object-cover rounded-md sm:rounded-xl"
-              src={filteredData[0].featuredImage}
+              src={filteredData[0]?.featuredImage}
               alt=""
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
             />
             <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
           </div>
-          {filteredData[0].galleryImgs
+          {filteredData[0]?.galleryImgs
             .filter((_, i) => i >= 0 && i < 4)
             .map((item, index) => (
               <div

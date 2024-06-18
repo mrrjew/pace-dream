@@ -1,6 +1,7 @@
 import { QueryKey, useMutation,useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from './useSession';
+import { createToast } from '@/utils/createToast';
 
 
 interface MutateConfigs {
@@ -12,7 +13,7 @@ interface MutateConfigs {
     endpoint: string;
     params?: Record<string, string>;
     queryParams?: Record<string, string>;
-    body?: T;
+    body?: Record<string, any>;
     queryKey: QueryKey;
     config?: MutateConfigs;
   }
@@ -26,7 +27,7 @@ interface MutateConfigs {
   }
 
 export const useMutateData = <T>({
-    baseUrl, endpoint, params, queryParams, body, config,queryKey,
+    baseUrl, endpoint, params, queryParams, body,queryKey,
 }: MutateParamsType<T>) => {
       
      const { getSession } = useSession();
@@ -34,6 +35,7 @@ export const useMutateData = <T>({
       
         const mutateData = async () => {
             try {
+              // const formData = new FormData();
                 let url = (baseUrl || process.env.NEXT_PUBLIC_BACKEND_URL) + endpoint
                 let query = '';
                 // add query params to the endpoint
@@ -55,12 +57,29 @@ export const useMutateData = <T>({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${getSession()?.token}`
                     },
-                    ...config
+                    // ...(config || {})
                 };
-         const response = await axios.post(url, body, _config);
+                // console.log("_config type: ", typeof _config)
+                // console.log("Body type: ", typeof body)
+                // add body to the form data
+         const response = await axios.post(url,
+          JSON.stringify(body),
+          _config);
+           console.log(response.data);
+            // check if the response is successful and show toast
+            if (response?.data?.status) {
+              console.log(response.data.data);
+              createToast(response.data.message, 'success');
+            }
+            if (!response?.data?.status) {
+              console.log(response.data.data);
+              createToast(response.data.message, 'error');
+            }
+
           return response.data as RequestResponse<T>
         } catch (error: any) {
-          console.log(error.response.data.data.error);
+          createToast(error.response.data.message, 'error');
+          console.log(error.response.data);
           return null;
         }finally{
           queryClient.invalidateQueries({queryKey:queryKey});

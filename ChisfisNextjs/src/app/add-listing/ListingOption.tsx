@@ -14,7 +14,7 @@ interface ListingOptionProps {
 const ListingOption = ({ href, img, alt, label,className }: ListingOptionProps) => {
   return (
     <Link
-      className={cn(['py-10 px-6 hover:bg-[#632DF8] flex flex-col items-center sm:w-44 h-40 w-40 text-black border shadow-md border-[F6F4F6] hover:text-white text-[14px] font-[500] rounded-[25px] lg:rounded-[9px]',className])}
+      className={cn(['py-10 px-4 hover:bg-[#632DF8] flex flex-col items-center h-40 w-40 text-black border shadow-md border-[F6F4F6] hover:text-white text-sm font-[500] rounded-[25px] lg:rounded-[9px]',className])}
       href={href as any}
       type="button"
     >
