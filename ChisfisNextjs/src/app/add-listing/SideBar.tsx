@@ -3,11 +3,11 @@ import { useRouter, usePathname } from "next/navigation";
 import { ListingOption } from "@/types/types";
 
 const Sidebar = ({ options }: { options: Array<ListingOption> }) => {
-  const router = useRouter();
+  // const router = useRouter();
   const pathname = usePathname();
 
   return (
-    <div className="grid grid-cols-1 py-2 space-y-4 w-full h-fit bg-white">
+    <div className="grid grid-cols-1 py-2 space-y-2 w-full h-fit">
       {options.map((option) => {
         const isActive = pathname === option.href;
         return (

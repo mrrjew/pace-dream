@@ -2,7 +2,7 @@
 
 import React, { FC, useEffect, useState } from "react";
 import AnyReactComponent from "@/components/AnyReactComponent/AnyReactComponent";
-import GoogleMapReact from "google-map-react";
+// import GoogleMapReact from "google-map-react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import StayCard2 from "@/components/StayCard2";
 
@@ -13,9 +13,9 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
   const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
   return (
     <div>
-      <div className="relative lg:w-full w-96  lg:flex lg:flex-row flex flex-col">
+      <div className="relative flex flex-col">
         {/* CARDSSSS */}
-        <div className="min-h-screen xl:w-[60%] 2xl:w-[60%] max-w-[1184px] lg:flex-shrink-0  xl:px-8 ">
+        <div className="min-h-screen lg:flex-shrink-0  xl:px-8 ">
           <div className="grid grid-cols-1 justify-center lg:grid-cols-3 gap-x-5 2xl:gap-x-6 gap-y-8">
             {DEMO_STAYS.map((item) => (
               <div
@@ -32,7 +32,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
           <div className="fixed xl:sticky top-0 xl:top-[88px] left-0 w-full h-full xl:h-[calc(100vh-88px)] rounded-md overflow-hidden"> */}
 
         {/* MAP */}
-        <div className="w-full mt-8 lg:mt-0">
+        {/* <div className="w-full mt-8 lg:mt-0">
           <div className="sm:w-80 h-[500px]  lg:w-full lg:h-full rounded-md overflow-hidden">
             <GoogleMapReact
               defaultZoom={12}
@@ -53,7 +53,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
               ))}
             </GoogleMapReact>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

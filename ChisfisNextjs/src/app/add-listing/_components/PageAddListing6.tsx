@@ -1,21 +1,41 @@
-import React from "react";
-import { ListingDataType } from "@/types/types";
-import Image from "next/image";
-import {
-  Bed,
-  MoreHorizOutlined,
-  Place,
-  Shower,
-  Star,
-} from "@mui/icons-material";
 
-const PageAddListing4 = ({
-  data,
-  onPreview,
-}: {
-  onPreview: () => void;
-  data: Partial<ListingDataType>;
-}) => {
+'use client';
+import React from 'react';
+// import { ListingDataType } from '@/types/types';
+import Image from 'next/image';
+import { Bed, MoreHorizOutlined, Place, Shower, Star } from '@mui/icons-material';
+import { RentableItem } from '@/types/rentalItems';
+import { GoogleMapLayout } from '@/components/GoogleMap';
+import { useSession } from '@/hooks/useSession';
+import { useRouter } from 'next/navigation';
+import { useMutateData } from '@/hooks/useMutate';
+
+
+
+const PageAddListing4 = (
+  {data,onPreview}:{onPreview:()=>void, data:Partial<RentableItem>}
+) => {
+  const route = useRouter();
+  const {getSession} = useSession();
+  const {userId} = getSession();
+  const mutate = useMutateData<typeof data>({endpoint:'/property/add',queryKey:['publishProperty'],body:{
+    data: {...data,owner:userId,status:'draft',
+    // set first line of description as summary
+    summary: data?.details?.description?.split('\n')[0] || '',
+   },
+  }});
+
+  function handleSaveDraft(){
+    mutate.mutateAsync().then((res)=>{
+      console.log("response : ",res);
+      if(res?.status == true){
+        route.replace('/add-listing')
+      }
+    }).catch((error)=>{
+      console.log("error : ",error);
+    } );
+  }
+  
   return (
     <div className="bg-white rounded-xl h-fit p-2 md:p-8">
       <div>
@@ -26,13 +46,12 @@ const PageAddListing4 = ({
       </div>
       {/* <div className=' border-b border-neutral-200 dark:border-neutral-700'></div> */}
       {/* FORM */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="col-span-1 md:col-span-2 space-y-6 rounded-lg">
-          <Image
-            className="rounded-t-lg h-72 w-full object-cover"
-            src={
-              "https://a0.muscache.com/im/pictures/7d828007-c02d-4c04-ac3f-53e0683602cf.jpg?im_w=1200"
-            }
+
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+        <div className='col-span-1 md:col-span-2 space-y-6 rounded-lg'>
+          <Image 
+            className='rounded-t-lg h-72 w-full object-cover'
+            src={data?.gallery?.thumbnail || ''}
             alt="Picture of the author"
             width={500}
             height={360}
@@ -51,61 +70,74 @@ const PageAddListing4 = ({
                   <Star className="h-4 w-4 text-yellow-500" />0 (0 Review)
                 </span>
               </div>
-              <MoreHorizOutlined className="h-6 w-6 text-gray-500 ring rounded-full ring-primary-100" />
-            </div>
-            <div>
-              <h2 className="text-xl">Best Western Cedars</h2>
+
+          <div>
+              <h2 className='text-xl'>
+                {data?.title}
+              </h2>
               {/* location */}
-              <div className="flex items-center gap-2 py-2">
-                <Place className="text-primary-400 h-4 w-4" />
-                <span className="text-neutral-500 dark:text-neutral-400 text-xs">
-                  121 king street road, Melbourne
-                </span>
+              <div className='flex items-center gap-2 py-2'>
+                 <Place className='text-primary-400 h-4 w-4' />
+                  <span className='text-neutral-500 dark:text-neutral-400 text-xs'>
+                     {data?.location?.address}
+                  </span>
               </div>
-            </div>
-            <hr className="bg-gray-500 w-full h-[0.5px]" />
-            {/* price, bed,bath */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <span className="text-2xl">$300</span>
-                <span className="text-neutral-500 dark:text-neutral-400">
-                  /night
-                </span>
-              </div>
-              <hr className="bg-gray-500 w-[0.5px] h-4 " />
-              <div>
-                <Bed />
-                <span className="text-neutral-500 dark:text-neutral-400">
-                  1 Bed
-                </span>
-              </div>
-              <hr className="bg-gray-500 w-[0.5px] h-4 " />
-              <div>
-                <Shower />
-                <span className="text-neutral-500 dark:text-neutral-400">
-                  1 Bath
-                </span>
-              </div>
-            </div>
           </div>
+          <hr className='bg-gray-500 w-full h-[0.5px]' />
+          {/* price, bed,bath */}
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center'>
+              <span className='text-2xl'>
+                $ {parseFloat(data?.price?.at(0)?.amount?.toString() || '0')}
+              </span>
+              <span className='text-neutral-500 dark:text-neutral-400'>/night</span>
+            </div>
+            <hr className='bg-gray-500 w-[0.5px] h-4 ' />
+           <div>
+              <Bed />
+             <span className='text-neutral-500 dark:text-neutral-400'>
+                {data?.details?.bedroom_count} Bed
+             </span>
+           </div>
+            <hr className='bg-gray-500 w-[0.5px] h-4 ' />
+            <div>
+              <Shower />
+              <span className='text-neutral-500 dark:text-neutral-400'>
+                {data?.details?.bathroom_count} Bath
+              </span>
+           </div>
+          </div>
+         </div>
         </div>
         {/* map */}
-        <div className="grid grid-cols-1">
-          <iframe
-            width="100%"
-            height="350"
-            loading="lazy"
-            allowFullScreen
-            className="rounded-lg"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.5763072647406!2d30.0580783147535!3d-1.9441786373846997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19d9e3b2c5b0b8f9%3A0x6d0a8a9a5e4e0a7f!2sKigali%20Convention%20Centre!5e0!3m2!1sen!2srw!4v1630946802508!5m2!1sen!2srw"
-          ></iframe>
-
-          <div className="flex  space-y-2 justify-center py-8">
-            <div className="grid grid-cols-1 space-y-4 py-4">
-              <button className="bg-primary-100 w-60 text-gray-700 p-2 rounded-lg">
-                Save Draft
-              </button>
-              <button
+        <div className='grid grid-cols-1'>
+          <GoogleMapLayout
+            isMapOnly
+            init={{
+              center: {lat:data?.location?.latitude || 0,lng:data?.location?.longitude || 0},
+              place: data.location?.address || "",
+            }}
+            className='h-[350px] w-full rounded-lg'
+          />
+              {/* <iframe 
+                width="100%" 
+                height="350" 
+                loading="lazy" 
+                allowFullScreen
+                className='rounded-lg'
+                // src={data?.location?.googlemap_link || ''}
+                src={"https://www.google.com/maps/?pb=!1m14!1m12!1m3!1d15883.860440917622!2d-74.05644989999999!3d41.1912507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1en!2sgh!4v1717982745573!5m2!1en!2sgh"}
+                >
+              </iframe> */}
+          <div className='flex  space-y-2 justify-center py-8'>
+              <div className='grid grid-cols-1 space-y-4 py-4'>
+              <button 
+                onClick={handleSaveDraft}
+                disabled={mutate.isLoading}
+                className={`bg-primary-100 w-60 text-gray-700 p-2 rounded-lg ${mutate.isLoading ? 'cursor-progress' :'cursor-pointer'}`}>
+                  {mutate.isLoading ? 'Saving Draft...' : 'Save Draft'}
+                </button>
+              <button 
                 onClick={onPreview}
                 className="ring-1 ring-gray-300 w-60 text-primary-700 p-2 rounded-lg"
               >

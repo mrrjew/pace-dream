@@ -10,7 +10,9 @@ import PageAddListing6 from "../../_components/PageAddListing6";
 import PageAddListing7 from "../../_components/PageAddListing7";
 import PageAddListing8 from "../../_components/PageAddListing8";
 import AddListingTimeBaseWrapper from "../TimeBasedWrapper";
+import { RentableItem } from "@/types/rentalItems";
 
+<<<<<<< HEAD
 const InitialData: ListingDataType = {
   propertyType: "",
   roomType: "",
@@ -60,12 +62,53 @@ const InitialData: ListingDataType = {
   placeImages: [],
   placeVideo: "",
   availabilityDate: [],
+=======
+const initialData: Partial<RentableItem> = {
+  title: "",
+  summary: "",
+  details: {
+   amenities: [],
+   rules: [],
+   room_type: "any type",
+   property_type: "",
+   hourly_rental_time: {
+     startDate: undefined,
+     endDate: undefined,
+     startTime: "",
+     endTime: "",
+   },
+   },
+   location: {
+     address: "",
+     longitude: 0,
+     latitude: 0,
+     zipcode: "",
+     city: "",
+     state: "",
+     country: "",
+     street_address: "",
+     googlemap_link: "",
+   },
+   gallery: {
+     thumbnail: "",
+     images: [],
+     videos: [],
+   },
+   attachments: [],
+   item_type:'room',
+   price: [],
+   rules: {},
+   rating:0,
+   owner:"",
+   createdAt: new Date(),
+   updatedAt: new Date(),
+>>>>>>> main1
 };
 
 const Page = () => {
-  const [data, setData] = useState<typeof InitialData>(InitialData);
+  const [data, setData] = useState<typeof initialData>(initialData);
   // update data from child component
-  const updateData = (newData: Partial<typeof InitialData>) => {
+  const updateData = (newData: Partial<typeof initialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
 

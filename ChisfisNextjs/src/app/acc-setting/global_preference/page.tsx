@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> main1
 import DynamicPageIndicator from "@/components/DynamicPageIndicator";
 import money from "@/images/money.png";
 import Image from "next/image";
@@ -97,4 +101,8 @@ const page = () => {
   );
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main1
 export default page;

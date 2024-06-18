@@ -19,9 +19,10 @@ export const useGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      // console.log("Google Auth Result",result);
+      const user = result?.user;
       const token = await user?.getIdToken();
-
+      // console.log("Google Auth Token",token);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
         {},
@@ -32,15 +33,18 @@ export const useGoogleLogin = () => {
           },
         },
       );
+      // console.log("Google Auth Response",response);
       return response.data;
     } catch (error: any) {
-      console.log(error.response.data.data.error);
+      console.log("Google local error: ",error);
+      // console.log(error.response.data.data.error);
     }
   };
 
   const { mutate: googleLogin, isLoading } = useMutation({
     mutationFn: authWithGoogle,
     onSuccess: (result) => {
+      console.log("authWithGoogle",result);
       const { data } = result;
       console.log(data, result);
       setSession(data.token, data, data.user_id);
