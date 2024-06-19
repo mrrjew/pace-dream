@@ -1,3 +1,4 @@
+
 import DynamicPageIndicator from "@/components/DynamicPageIndicator";
 import money from "@/images/money.png";
 import Image from "next/image";

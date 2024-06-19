@@ -8,7 +8,7 @@ import { useEffect } from "react";
  */
 function useOutsideAlerter(
   ref: React.RefObject<HTMLDivElement>,
-  handleClickOutsideCallback: () => void
+  handleClickOutsideCallback: () => void,
 ) {
   useEffect(() => {
     /**

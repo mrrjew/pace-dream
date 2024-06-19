@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import ButtonSecondary from '@/shared/ButtonSecondary';
-import { MessageType } from '@/types/chat';
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import ButtonSecondary from "@/shared/ButtonSecondary";
+import { MessageType } from "@/types/chat";
 
 interface IImagePreviewModalProps {
   images: File[];
@@ -25,13 +25,14 @@ export const ImagePreviewModal: React.FC<IImagePreviewModalProps> = ({
         {type === MessageType.IMAGE
           ? urls?.map((url) => (
               <img
+                key={url}
                 src={url}
                 alt=""
                 className="w-48 h-30 md:w-60 md:h-36 lg:w-72 lg:h-48"
               />
             ))
           : images.map((file) => (
-              <div className="h-12 rounded-lg bg-[#F9F8FB] flex items-center justify-center px-4 py-2">
+              <div key={file.name} className="h-12 rounded-lg bg-[#F9F8FB] flex items-center justify-center px-4 py-2">
                 <p className="text-sm text-gray-500">{file.name}</p>
               </div>
             ))}

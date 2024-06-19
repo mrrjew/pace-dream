@@ -1,16 +1,16 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import {
   GoogleAuthProvider,
   app,
   getAuth,
   signInWithPopup,
-} from 'config/firebase';
-import Cookies, { set } from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import { useSession } from '../useSession';
+} from "config/firebase";
+import Cookies, { set } from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useSession } from "../useSession";
 
-export const useGoogleLogin = () => { 
+export const useGoogleLogin = () => {
   const router = useRouter();
   const { setSession } = useSession();
 
@@ -28,10 +28,10 @@ export const useGoogleLogin = () => {
         {},
         {
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       // console.log("Google Auth Response",response);
       return response.data;
@@ -48,7 +48,7 @@ export const useGoogleLogin = () => {
       const { data } = result;
       console.log(data, result);
       setSession(data.token, data, data.user_id);
-      router.push('/');
+      router.push("/");
     },
   });
 

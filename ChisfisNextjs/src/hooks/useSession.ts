@@ -1,24 +1,24 @@
-import { useProfile } from '@/context';
-import { app } from 'config/firebase';
-import { getAuth } from 'firebase/auth';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import { useProfile } from "@/context";
+import { app } from "config/firebase";
+import { getAuth } from "firebase/auth";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export const useSession = () => {
   const { clearUser }: any = useProfile();
   const router = useRouter();
   const setSession = (token: string, userInfo: any, userId: string) => {
-    Cookies.set('auth-token', token);
-    Cookies.set('user_id', userId);
-    Cookies.set('user_info', JSON.stringify(userInfo));
+    Cookies.set("auth-token", token);
+    Cookies.set("user_id", userId);
+    Cookies.set("user_info", JSON.stringify(userInfo));
   };
 
   const getSession = () => {
-    const token = Cookies.get('auth-token');
+    const token = Cookies.get("auth-token");
     const userInfo = JSON.parse(
-      Cookies.get('user_info') ? Cookies.get('user_info')! : '{}'
-      );
-    const userId = Cookies.get('user_id');
+      Cookies.get("user_info") ? Cookies.get("user_info")! : "{}",
+    );
+    const userId = Cookies.get("user_id");
     return {
       token,
       userInfo,
@@ -27,9 +27,9 @@ export const useSession = () => {
   };
 
   const clearSession = () => {
-    Cookies.remove('auth-token');
-    Cookies.remove('user_id');
-    Cookies.remove('user_info');
+    Cookies.remove("auth-token");
+    Cookies.remove("user_id");
+    Cookies.remove("user_info");
   };
 
   const handleLogout = async () => {
@@ -42,7 +42,7 @@ export const useSession = () => {
         headers: {
           Authorization: `Bearer ${getSession()?.token}`,
         },
-      }
+      },
     );
     if (res.ok) {
       clearSession();
@@ -57,6 +57,6 @@ export const useSession = () => {
     setSession,
     getSession,
     clearSession,
-    handleLogout
+    handleLogout,
   };
 };

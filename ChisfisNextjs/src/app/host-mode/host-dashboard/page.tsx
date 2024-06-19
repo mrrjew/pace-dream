@@ -9,19 +9,17 @@ import { useFetch } from "@/hooks/useFetch";
 import { useProfile } from "@/context";
 import HostDashboardView from "./HostDashboardView";
 const HostDashboard = () => {
-
   return (
     <section>
       <div className="md:px-28">
         <Link href="/">
-         <button className="btn mt-10 rounded-full border border-[#DAE0E6] font-medium px-5 py-2 btn-sm mobile-view">
-          Back    
-        </button>         
+          <button className="btn mt-10 rounded-full border border-[#DAE0E6] font-medium px-5 py-2 btn-sm mobile-view">
+            Back
+          </button>
         </Link>
-        <UserProfilePreview/>
-       
-        <HostDashboardView/>
+        <UserProfilePreview />
 
+        <HostDashboardView />
       </div>
     </section>
   );

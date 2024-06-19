@@ -38,7 +38,7 @@ export type PageAddingListing = {
   handleInputChange: (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => void;
   setPageNumber?: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -150,12 +150,10 @@ export type ListingDataType = {
 }
 
 
-
-
 export type ListingOption = {
-  href:  any,
-  label: string,
-  avatar:React.ReactNode
-  img?: string,
-  alt?: string,
-}
+  href: any;
+  label: string;
+  avatar: React.ReactNode;
+  img?: string;
+  alt?: string;
+};

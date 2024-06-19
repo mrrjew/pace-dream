@@ -1,7 +1,7 @@
-import { MessageType } from '@/types/chat';
-import { Menu, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
-import { IoIosAttach } from 'react-icons/io';
+import { MessageType } from "@/types/chat";
+import { Menu, Transition } from "@headlessui/react";
+import React, { Fragment } from "react";
+import { IoIosAttach } from "react-icons/io";
 
 interface IAttachFileMenuProps {
   handleOnSelect: (type: MessageType) => void;
@@ -32,7 +32,7 @@ export const AttachFileMenu: React.FC<IAttachFileMenuProps> = ({
               {({ active }) => (
                 <button
                   className={`${
-                    active ? 'bg-[#632DF7] text-white' : 'text-gray-900'
+                    active ? "bg-[#632DF7] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   onClick={() => handleOnSelect(MessageType.FILE)}
                 >
@@ -44,7 +44,7 @@ export const AttachFileMenu: React.FC<IAttachFileMenuProps> = ({
               {({ active }) => (
                 <button
                   className={`${
-                    active ? 'bg-[#632DF7] text-white' : 'text-gray-900'
+                    active ? "bg-[#632DF7] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   onClick={() => handleOnSelect(MessageType.VIDEO)}
                 >
@@ -58,7 +58,7 @@ export const AttachFileMenu: React.FC<IAttachFileMenuProps> = ({
               {({ active }) => (
                 <button
                   className={`${
-                    active ? 'bg-[#632DF7] text-white' : 'text-gray-900'
+                    active ? "bg-[#632DF7] text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   onClick={() => handleOnSelect(MessageType.IMAGE)}
                 >

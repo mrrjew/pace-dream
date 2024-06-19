@@ -18,9 +18,9 @@ const Sidebar = ({ options }: { options: Array<ListingOption> }) => {
               isActive ? "bg-primary-700 text-white" : "bg-white text-black"
             }`}
           >
-           {/* <Image src={option.img} width={10} height={10} alt="img" /> */}
+            {/* <Image src={option.img} width={10} height={10} alt="img" /> */}
             {option.avatar}
-           <span className="ml-2">{option.label}</span>
+            <span className="ml-2">{option.label}</span>
           </Link>
         );
       })}

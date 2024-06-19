@@ -11,7 +11,13 @@ interface ListingOptionProps {
   className?: string;
 }
 
-const ListingOption = ({ href, img, alt, label,className }: ListingOptionProps) => {
+const ListingOption = ({
+  href,
+  img,
+  alt,
+  label,
+  className,
+}: ListingOptionProps) => {
   return (
     <Link
       className={cn(['py-10 px-4 hover:bg-[#632DF8] flex flex-col items-center h-40 w-40 text-black border shadow-md border-[F6F4F6] hover:text-white text-sm font-[500] rounded-[25px] lg:rounded-[9px]',className])}

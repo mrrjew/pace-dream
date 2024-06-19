@@ -39,17 +39,21 @@ import { useEffect, useState } from "react";
 import { clientAuthAxios } from "@/utils/clientAxios";
 import { useSession } from "@/hooks/useSession";
 interface Profile {
-  friends: any[]; 
-  incomingRequests: any[]; 
-  outgoingRequests: any[]; 
+  friends: any[];
+  incomingRequests: any[];
+  outgoingRequests: any[];
 }
 const RoomMateDetailsPage = () => {
-  const [profile, setProfile] = useState<Profile>({ friends: [], incomingRequests: [], outgoingRequests: [] });
+  const [profile, setProfile] = useState<Profile>({
+    friends: [],
+    incomingRequests: [],
+    outgoingRequests: [],
+  });
   const pathname = usePathname();
   setLocalStorageItem("currentPath", pathname);
 
   const [showGreeting, setShowGreeting] = useState(
-    getLocalStorageItem("showGreeting")
+    getLocalStorageItem("showGreeting"),
   );
 
   useEffect(() => {
@@ -68,68 +72,70 @@ const RoomMateDetailsPage = () => {
     },
     zoom: 12,
   };
-  const getProfile = async() => {
+  const getProfile = async () => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
-      const res = await clientAuthAxios().get('/user/get/660c3589ecf27bd18e712aaa');
-      setProfile(res.data.data)
+      const res = await clientAuthAxios().get(
+        "/user/get/660c3589ecf27bd18e712aaa",
+      );
+      setProfile(res.data.data);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   const { getSession } = useSession();
   const { userId } = getSession();
   useEffect(() => {
     getProfile();
-  }, [])
+  }, []);
 
-  const join = async() => {
+  const join = async () => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
-      const res = await clientAuthAxios().post('/user/friend/send',{
-        user_id: "660c3589ecf27bd18e712aaa"
+      const res = await clientAuthAxios().post("/user/friend/send", {
+        user_id: "660c3589ecf27bd18e712aaa",
       });
       getProfile();
     } catch (err) {
       console.log(err);
     }
-  }
-  const cancelRequest = async() => {
+  };
+  const cancelRequest = async () => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
-      const res = await clientAuthAxios().post('/user/friend/cancel',{
-        user_id: "660c3589ecf27bd18e712aaa"
+      const res = await clientAuthAxios().post("/user/friend/cancel", {
+        user_id: "660c3589ecf27bd18e712aaa",
       });
       getProfile();
     } catch (err) {
       console.log(err);
     }
-  }
-  const declineRequest = async() => {
+  };
+  const declineRequest = async () => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
-      const res = await clientAuthAxios().post('/user/friend/decline',{
-        user_id: "660c3589ecf27bd18e712aaa"
+      const res = await clientAuthAxios().post("/user/friend/decline", {
+        user_id: "660c3589ecf27bd18e712aaa",
       });
       getProfile();
     } catch (err) {
       console.log(err);
     }
-  }
-  const acceptRequest = async() => {
+  };
+  const acceptRequest = async () => {
     try {
       //The 'sent id' will be taken as a parameter after the roommate page is edited.
-      await clientAuthAxios().post('/user/friend/accept',{
-        user_id: "660c3589ecf27bd18e712aaa"
+      await clientAuthAxios().post("/user/friend/accept", {
+        user_id: "660c3589ecf27bd18e712aaa",
       });
-      await clientAuthAxios().post('/chat/create',{
-        user_id: "660c3589ecf27bd18e712aaa"
+      await clientAuthAxios().post("/chat/create", {
+        user_id: "660c3589ecf27bd18e712aaa",
       });
       getProfile();
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const router = useRouter();
 
@@ -373,31 +379,50 @@ const RoomMateDetailsPage = () => {
                   <span>$75-$90</span> / night
                 </p>
                 <div className="btn-wrapper items-center justify-center">
-                  {
-                    profile?.friends.includes(userId) ? 
-                    <button type="button" className="btn-message" onClick={gotoInbox}>
+                  {profile?.friends.includes(userId) ? (
+                    <button
+                      type="button"
+                      className="btn-message"
+                      onClick={gotoInbox}
+                    >
                       Send Message
                     </button>
-                    :
-                    profile?.incomingRequests.includes(userId) ? 
-                    <button type="button" className="btn-message" onClick={() => cancelRequest()}>
+                  ) : profile?.incomingRequests.includes(userId) ? (
+                    <button
+                      type="button"
+                      className="btn-message"
+                      onClick={() => cancelRequest()}
+                    >
                       Cancel Request
                     </button>
-                    :
-                    profile?.outgoingRequests.includes(userId) ?
+                  ) : profile?.outgoingRequests.includes(userId) ? (
                     <>
-                      <button type="button" className="btn-proposal" onClick={() => acceptRequest()}>
+                      <button
+                        type="button"
+                        className="btn-proposal"
+                        onClick={() => acceptRequest()}
+                      >
                         Accept Request
                       </button>
-                      <button type="button" className="btn-message" onClick={() => {declineRequest()}}>
+                      <button
+                        type="button"
+                        className="btn-message"
+                        onClick={() => {
+                          declineRequest();
+                        }}
+                      >
                         Decline Request
                       </button>
                     </>
-                    :
-                    <button type="button" className="btn-proposal" onClick={() => join()}>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn-proposal"
+                      onClick={() => join()}
+                    >
                       Join
                     </button>
-                  }
+                  )}
                 </div>
                 <p className="message">You won’t be charged yet</p>
               </div>
@@ -410,7 +435,7 @@ const RoomMateDetailsPage = () => {
           </div>
 
           <div className="location">
-            <h3 className="title">Where he's looking for the partner?</h3>
+            <h3 className="title">Where he{'\''}s looking for the partner?</h3>
 
             <div className="btn-wrapper">
               <button type="button" className="btn-location">

@@ -3,8 +3,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import { FC, Fragment, useState, useEffect } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
-import { pusherClient } from '@/utils/pusher';
-import { useSession } from '@/hooks/useSession';
+import { pusherClient } from "@/utils/pusher";
+import { useSession } from "@/hooks/useSession";
 import { CalendarIcon, CreditCardIcon } from "@heroicons/react/24/solid";
 import { NotificationService } from "@/services/NotificationService";
 import { useRouter } from "next/navigation";
@@ -16,12 +16,12 @@ interface Props {
 }
 
 interface Notification {
-  id: string; 
-  type: string; 
-  title: string; 
+  id: string;
+  type: string;
+  title: string;
   message: string;
   createdAt: string;
-  href?: string; 
+  href?: string;
 }
 
 const NotifyDropdown: FC<Props> = ({ className = "" }) => {
@@ -31,35 +31,36 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
   const router = useRouter();
 
   const getNotifications = async () => {
-    const {data:{data}} = await services.list();
-    setNotifications(data?.notifications)
+    const {
+      data: { data },
+    } = await services.list();
+    setNotifications(data?.notifications);
   };
 
-  
-
-  const handleNotification = (data:any) => {
-    setNotifications((prevNotifications:any) => [data, ...prevNotifications]);
-  }
+  const handleNotification = (data: any) => {
+    setNotifications((prevNotifications: any) => [data, ...prevNotifications]);
+  };
 
   useEffect(() => {
     getNotifications();
-    console.log(userId)
+    console.log(userId);
     pusherClient.subscribe(`${userId}-notifications`);
     pusherClient.bind(`notification:new`, handleNotification);
 
     return () => {
       pusherClient.unsubscribe(`${userId}-notifications`);
       pusherClient.unbind(`notification:new`, handleNotification);
-    }
-
+    };
   }, []);
 
   const getIcon = (type: string) => {
     type = type.toLowerCase();
-    if(type.includes('payment')) return <CreditCardIcon className="w-8 h-8 text-blue-500" />
-    if(type.includes('booking')) return <CalendarIcon className="w-8 h-8 text-blue-500" />
-    return <BellIcon className="w-8 h-8 text-blue-500" />
-  }
+    if (type.includes("payment"))
+      return <CreditCardIcon className="w-8 h-8 text-blue-500" />;
+    if (type.includes("booking"))
+      return <CalendarIcon className="w-8 h-8 text-blue-500" />;
+    return <BellIcon className="w-8 h-8 text-blue-500" />;
+  };
 
   return (
     <>
@@ -109,12 +110,15 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
                         <span className="absolute w-2 h-2 transform -translate-y-1/2 bg-blue-500 rounded-full right-1 top-1/2"></span>
                       </a>
                     ))}
-                  <button onClick={()=>{
-                    router.push("/notifications");
-                    close();
-                  }} className="px-4 py-2 mt-4 text-white rounded-lg bg-[#5526d7] hover:bg-[#5526d7] focus:outline-none ">
-                    View All Notifications
-                  </button>
+                    <button
+                      onClick={() => {
+                        router.push("/notifications");
+                        close();
+                      }}
+                      className="px-4 py-2 mt-4 text-white rounded-lg bg-[#5526d7] hover:bg-[#5526d7] focus:outline-none "
+                    >
+                      View All Notifications
+                    </button>
                   </div>
                 </div>
               </Popover.Panel>

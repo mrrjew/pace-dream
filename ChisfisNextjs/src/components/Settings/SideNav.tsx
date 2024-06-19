@@ -10,6 +10,7 @@ const page = () => {
           return (
             <Link
               href={nav.href as Route}
+              key={nav.name}
               className="hover:bg-slate-100  p-2 rounded-md"
             >
               {nav.icon}

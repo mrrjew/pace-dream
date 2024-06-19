@@ -131,7 +131,7 @@ const RealestateSearchForm = () => {
             <span className="text-neutral-400">Price</span>
             <span>
               {`$${convertNumbThousand(
-                rangePrices[0] / 1000
+                rangePrices[0] / 1000,
               )}k ~ $${convertNumbThousand(rangePrices[1] / 1000)}k`}
             </span>
           </button>

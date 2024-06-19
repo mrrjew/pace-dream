@@ -17,10 +17,15 @@ const Heading: React.FC<HeadingProps> = ({
     <div className={`nc-Section-Heading relative ${className}`}>
       <div
         className={
-          isCenter ? "text-center w-full md:max-w-2xl mx-auto mb-4" : "max-w-2xl"
+          isCenter
+            ? "text-center w-full md:max-w-2xl mx-auto mb-4"
+            : "max-w-2xl"
         }
       >
-        <h2 className={`text-[#192946] text-3xl md:text-4xl font-semibold mb-8`} {...args}>
+        <h2
+          className={`text-[#192946] text-3xl md:text-4xl font-semibold mb-8`}
+          {...args}
+        >
           {children || `Section Heading`}
         </h2>
         {desc && (

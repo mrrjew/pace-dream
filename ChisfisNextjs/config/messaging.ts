@@ -26,12 +26,10 @@ export async function saveMessagingDeviceToken() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("auth-token")}`,
         },
-      }
+      },
     );
-
   } else {
     // Needs to request permission to show notifications.
     requestNotificationsPermission();
   }
-
 }

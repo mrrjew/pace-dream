@@ -13,6 +13,7 @@ import ExperiencePage4 from "../../_components/ExperiencePage4";
 import { RentableItem } from "@/types/rentalItems";
 
 
+
 const initialData: Partial<RentableItem> = {
    title: "",
    summary: "",
@@ -60,8 +61,7 @@ const Page = () => {
   const updateData = (newData: Partial<typeof initialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
-  
-  
+
   const {
     steps,
     currentStepIndex,
@@ -72,20 +72,18 @@ const Page = () => {
     isFirstStep,
     isLastStep,
   } = useMultiStepForm([
-    <PageAddListing1 data={data} updateData={updateData} />,
-    <PageAddListing2 data={data} updateData={updateData} />,
-    <ExperiencePag3 data={data} updateData={updateData} />, //change page 3
+
+    <PageAddListing1 key="page"  data={data} updateData={updateData} />,
+    <PageAddListing2 key="page"  data={data} updateData={updateData} />,
+    <ExperiencePag3  key="page" data={data} updateData={updateData} />, //change page 3
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <ExperiencePage4 data={data} updateData={updateData}/>, // change page 4
-    <PageAddListing6 data={data} onPreview={()=>{next()}} />,
-    <PageAddListing7 data={data} onBackToHost={()=>{back()}}/>,
-    <PageAddListing8 data={data} onBackToHost={()=>{back()}}/>
+    <ExperiencePage4 key="page"  data={data} updateData={updateData}/>, // change page 4
+    <PageAddListing6 key="page"  data={data} onPreview={()=>{next()}} />,
+    <PageAddListing7 key="page"  data={data} onBackToHost={()=>{back()}}/>,
+    <PageAddListing8 key="page"  data={data} onBackToHost={()=>{back()}}/>
   ]);
 
-
-
   return (
-
     <AddListingExperienceWrapper
       onNext={next}
       onBack={back}
@@ -93,10 +91,9 @@ const Page = () => {
       isLastStep={isLastStep}
       currentStep={currentStepIndex}
     >
-        {step}
+      {step}
     </AddListingExperienceWrapper>
-  )
-
-}
+  );
+};
 
 export default Page;
