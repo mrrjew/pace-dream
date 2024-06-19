@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-
 import {
   S3Client,
   ListObjectsCommand,
@@ -8,8 +7,7 @@ import {
 } from "@aws-sdk/client-s3";
 // import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import uuid4 from "uuid4";
-
-const Bucket = process.env.AWS_S3_BUCKET_NAME;
+const Bucket = process.env.AWS_S3_BUCKET_NAME  || "totel-images";
 const s3 = new S3Client({
   region: process.env.AWS_S3_REGION as string,
   credentials: {
