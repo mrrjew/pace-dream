@@ -11,6 +11,7 @@ import Checkbox from "@/shared/Checkbox"
 
 
 export function AddOffer(){
+    
     const [selectedRange, setSelectedRange] = useState<Date[]>([new Date(), new Date()]);
     const handleChange = (date: Date | [Date, Date] | null | any) => {
         if (Array.isArray(date)) {
@@ -34,7 +35,6 @@ export function AddOffer(){
 
     // ]
 
-    
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="col-span-1">

@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
 
    try {
     const checkToken = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check-token`,
+      `${process.env.BACKEND_URL}/auth/check-token`,
       {
         headers: {
           Authorization: `Bearer ${authToken}`,

@@ -26,7 +26,7 @@ const PageAddListing4 = (
 
   function handleSaveDraft(){
     mutate.mutateAsync().then((res)=>{
-      console.log("response : ",res);
+      // console.log("response : ",res);
       if(res?.status == true){
         route.replace('/add-listing')
       }
@@ -86,7 +86,9 @@ const PageAddListing4 = (
               <span className='text-2xl'>
                 $ {parseFloat(data?.price?.at(0)?.amount?.toString() || '0')}
               </span>
-              <span className='text-neutral-500 dark:text-neutral-400'>/night</span>
+              <span className='text-neutral-500 dark:text-neutral-400 capitalize'>
+                /{data?.price?.at(0)?.frequency || 'night'}
+              </span>
             </div>
             <hr className='bg-gray-500 w-[0.5px] h-4 ' />
            <div>

@@ -18,7 +18,7 @@ async function uploadDocuments(
     arg.files.forEach((file) => {
       body.append("file", file, file.name);
     });
-  
+    // const _host = window.location.host + url;
     const response = await fetch(url, { method: "POST", body });
     return await response.json();
   }
