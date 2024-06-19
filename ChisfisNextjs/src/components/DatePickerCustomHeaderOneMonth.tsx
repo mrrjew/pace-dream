@@ -4,47 +4,45 @@ import { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 
 export const DatePickerCustomHeaderOneMonth = ({
   monthDate,
-//   customHeaderCount,
+  //   customHeaderCount,
   decreaseMonth,
   increaseMonth,
 }: ReactDatePickerCustomHeaderProps) => {
   return (
     <div className="flex justify-between items-center">
-        <span className="react-datepicker__current-month">
+      <span className="react-datepicker__current-month">
         {monthDate.toLocaleString("en-US", {
           month: "long",
           year: "numeric",
         })}
       </span>
 
-     <div className="flex justify-end items-center">
+      <div className="flex justify-end items-center">
         <button
-            aria-label="Previous Month"
-            className={
+          aria-label="Previous Month"
+          className={
             "react-datepicker__navigation react-datepicker__navigation--previous flex items-center justify-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-            }
-            // style={customHeaderCount === 1 ? { visibility: "hidden" } : {}}
-            onClick={decreaseMonth}
-            type="button"
+          }
+          // style={customHeaderCount === 1 ? { visibility: "hidden" } : {}}
+          onClick={decreaseMonth}
+          type="button"
         >
-            <span className="react-datepicker__navigation-icon react-datepicker__navigation-icon--previous">
+          <span className="react-datepicker__navigation-icon react-datepicker__navigation-icon--previous">
             <ChevronLeftIcon className="w-5 h-5" />
-            </span>
+          </span>
         </button>
         <button
-            aria-label="Next Month"
-            className="react-datepicker__navigation react-datepicker__navigation--next flex items-center justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
-            // style={customHeaderCount === 0 ? { visibility: "hidden" } : {}}
-            type="button"
-            onClick={increaseMonth}
+          aria-label="Next Month"
+          className="react-datepicker__navigation react-datepicker__navigation--next flex items-center justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+          // style={customHeaderCount === 0 ? { visibility: "hidden" } : {}}
+          type="button"
+          onClick={increaseMonth}
         >
-            <span className="react-datepicker__navigation-icon react-datepicker__navigation-icon--next">
+          <span className="react-datepicker__navigation-icon react-datepicker__navigation-icon--next">
             <ChevronRightIcon className="w-5 h-5" />
-            </span>
+          </span>
         </button>
-        </div>
-
-        </div>
+      </div>
+    </div>
   );
 };
-

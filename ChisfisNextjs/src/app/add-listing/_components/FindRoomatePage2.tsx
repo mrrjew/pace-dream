@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { RentableItem } from "@/types/rentalItems"
 // import { ListingDataType } from "@/types/types"
@@ -8,13 +8,14 @@ export default function AddListingFindRoomatePage2(
 ) {
   return (
     <>
-    <div className="listingSection__wrap ">
-      {/* FORM */}
-      <div className="space-y-4 sm:space-y-8">
-        {/* <h2 className="text-xl font-semibold">Property Details</h2> */}
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
+      <div className="listingSection__wrap ">
+        {/* FORM */}
+        <div className="space-y-4 sm:space-y-8">
+          {/* <h2 className="text-xl font-semibold">Property Details</h2> */}
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
             <p>Any specific gender?</p>
             <select
+
             className="rounded-lg border-1 border-gray-400 focus:ring-0"
               defaultValue={data?.details?.room_mate?.gender}
               onChange={(e)=>updateData({...data,details:{...data?.details,room_mate:{...data?.details?.room_mate,gender:e?.target.value}}})}
@@ -50,9 +51,9 @@ export default function AddListingFindRoomatePage2(
                     <option value="none">None</option>
                 
             </select>
-        </div>
+          </div>
         </div>
       </div>
-  </>
-  )
+    </>
+  );
 }

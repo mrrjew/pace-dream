@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { StayDataType } from "@/data/types";
@@ -33,13 +33,12 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   className = "",
   stayListings = DEMO_DATA,
   gridClass = "",
-  itemPerRow= 4,
+  itemPerRow = 4,
   heading = "Time Based",
   headingIsCenter,
   tabs = ["Room", "Parking", "EV Parking", "Restroom"],
   cardType = "card2",
 }) => {
-  
   const renderCard = (stay: StayDataType) => {
     let CardName = StayCard;
     switch (cardType) {
@@ -54,7 +53,13 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
         CardName = StayCard;
     }
 
-    return <CardName className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border"key={stay.id} data={stay} />;
+    return (
+      <CardName
+        className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border"
+        key={stay.id}
+        data={stay}
+      />
+    );
   };
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -100,7 +105,9 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
     },
     trackMouse: true,
   });
-  const sortedStayListings = stayListings.slice().sort((a, b) => b.reviewStart - a.reviewStart);
+  const sortedStayListings = stayListings
+    .slice()
+    .sort((a, b) => b.reviewStart - a.reviewStart);
   return (
     <div className={`nc-SectionGridFeaturePlaces md:px-24  ${className}`}>
       <HeaderFilterDiscover
@@ -116,24 +123,24 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-        <div className="-mt-20 mb-20">
-        {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]"
-        />}
-          {sortedStayListings.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-        />}
-        </div>
+          <div className="-mt-20 mb-20">
+            {currentIndex ? (
+              <PrevBtn
+                onClick={() => changeItemId(currentIndex - 1)}
+                className="xl:ml-[90%] md:ml-[87%] font-black text-black text-xl -translate-y-1/2 z-[1]"
+              />
+            ) : (
+              <PrevBtn className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]" />
+            )}
+            {sortedStayListings.length > currentIndex + numberOfItems ? (
+              <NextBtn
+                onClick={() => changeItemId(currentIndex + 1)}
+                className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
+              />
+            ) : (
+              <NextBtn className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
+            )}
+          </div>
           <div className={`flow-root overflow-hidden rounded-xl`}>
             <motion.ul
               initial={false}
@@ -156,15 +163,16 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
                       width: `calc(1/${numberOfItems} * 100%)`,
                     }}
                   >
-                    
-                <StayCard2 className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border " key={item.id} data={item} />
-
+                    <StayCard2
+                      className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border "
+                      key={item.id}
+                      data={item}
+                    />
                   </motion.li>
                 ))}
               </AnimatePresence>
             </motion.ul>
           </div>
-
         </div>
       </MotionConfig>
       <div className="flex my-16 justify-center items-center">

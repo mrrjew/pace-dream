@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { FC } from "react";
 import imagePng from "@/images/img-header.png";
 import rightImgDemo from "@/images/BecomeAnAuthorImg.png";
@@ -13,11 +13,10 @@ export interface SectionHeroProps {
 
 const SectionHero: FC<SectionHeroProps> = () => {
   const handleButtonClick = () => {
-    window.scrollBy({ top: 1000, behavior: 'smooth' });
+    window.scrollBy({ top: 1000, behavior: "smooth" });
   };
   return (
     <>
-
       <Hero />
       <section
         className={`nc-SectionHero flex flex-col-reverse md:flex-col md:pt-44 lg:pt-20 lg:pl-24 lg:pr-24 pt-4 md:max-w-[100%]`}

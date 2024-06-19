@@ -1,25 +1,27 @@
-'use client'
+"use client";
 
 import React, { FC } from "react";
 import SectionGridHasMap from "../../SectionGridHasMap";
 import { useParams, useRouter } from "next/navigation";
-import SectionHeroArchivePage from "@/app/(server-components)/SectionHeroArchivePage";
-import { PathName } from "@/routers/types";
-import FilterBar from "@/app/(stay-listings)/FliterBar"
-
-
+import FilterBar from "@/app/(stay-listings)/FliterBar";
 
 const ListingStayMapPage = () => {
-  const router = useRouter()
-  const { id } = useParams()
+  const router = useRouter();
+  const { id } = useParams();
   console.log(id);
-  let room: "Room Stays" | "Experiences" | "Find Roommate" | "Time-Based" | "Hourly Rental Gear" | "Last Minutes" = 'Room Stays';
+  let room:
+    | "Room Stays"
+    | "Experiences"
+    | "Find Roommate"
+    | "Time-Based"
+    | "Hourly Rental Gear"
+    | "Last Minutes" = "Room Stays";
   switch (id) {
     case "1":
-      room = 'Room Stays'
+      room = "Room Stays";
       break;
     case "2":
-      room = 'Experiences'
+      room = "Experiences";
       break;
     case "3":
       // room = 'Find Roommate'
@@ -27,22 +29,21 @@ const ListingStayMapPage = () => {
       return null;
       break;
     case "4":
-      room = 'Hourly Rental Gear'
+      room = "Hourly Rental Gear";
       break;
     case "5":
-      room = 'Last Minutes'
+      room = "Last Minutes";
       break;
     case "6":
-      room = 'Time-Based'
+      room = "Time-Based";
       break;
     default:
-      room = 'Room Stays'
+      room = "Room Stays";
       break;
   }
   return (
     <>
       <div className="pb-14 lg:pb-18 mt-14 w-full lg:w-[90%] lg:mx-auto">
-        {/* <SectionHeroArchivePage currentPage={room} currentTab={room} /> */}
         <FilterBar />
       </div>
       <div className="pb-24 lg:pb-28 md:ml-16">

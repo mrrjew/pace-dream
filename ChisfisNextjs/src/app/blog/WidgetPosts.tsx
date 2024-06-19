@@ -10,7 +10,7 @@ export interface WidgetPostsProps {
 }
 
 const widgetPostsDemo: PostDataType[] = DEMO_POSTS.filter(
-  (_, i) => i > 2 && i < 7
+  (_, i) => i > 2 && i < 7,
 );
 
 const WidgetPosts: FC<WidgetPostsProps> = ({

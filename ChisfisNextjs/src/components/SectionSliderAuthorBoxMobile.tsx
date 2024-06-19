@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import CardAuthorBox from "@/components/CardAuthorBox";
 import CardAuthorBox2 from "@/components/CardAuthorBox2";
@@ -81,7 +81,7 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
   const renderCard = (item: AuthorType) => {
     switch (boxCard) {
       case "box1":
-        return <CardAuthorBox author={item} className="border-[#F0ECFC]"/>;
+        return <CardAuthorBox author={item} className="border-[#F0ECFC]" />;
       case "box2":
         return <CardAuthorBox2 author={item} />;
       default:
@@ -90,10 +90,12 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
   };
   if (!numberOfItems) return null;
   return (
-    <div
-      className={`md:px-24 ${className} inline-block w-[95vw]`}
-    >
-      <Heading desc="Rating based on customer reviews" isCenter={sliderStyle === "style2"} className="w-[95vw] text-center mb-16">
+    <div className={`md:px-24 ${className} inline-block w-[95vw]`}>
+      <Heading
+        desc="Rating based on customer reviews"
+        isCenter={sliderStyle === "style2"}
+        className="w-[95vw] text-center mb-16"
+      >
         Top 10 author of the month
       </Heading>
       <MotionConfig
@@ -129,23 +131,23 @@ const SectionSliderAuthorBoxMobile: FC<SectionSliderAuthorMobileProps> = ({
                   </motion.li>
                 ))}
                 <div className="w-[95vw] mt-8 flex justify-center">
-                {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-        />}
-          {authors.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
-        />}
-        </div>
+                  {currentIndex ? (
+                    <PrevBtn
+                      onClick={() => changeItemId(currentIndex - 1)}
+                      className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
+                    />
+                  ) : (
+                    <PrevBtn className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
+                  )}
+                  {authors.length > currentIndex + numberOfItems ? (
+                    <NextBtn
+                      onClick={() => changeItemId(currentIndex + 1)}
+                      className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
+                    />
+                  ) : (
+                    <NextBtn className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2" />
+                  )}
+                </div>
               </AnimatePresence>
             </motion.ul>
           </div>

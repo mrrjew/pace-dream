@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface Props {
   className?: string;
-  href?: PathName | string ;
+  href?: PathName | string;
 }
 
 const ButtonSubmit: FC<Props> = ({

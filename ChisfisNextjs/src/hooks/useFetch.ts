@@ -1,6 +1,6 @@
-import { QueryKey, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useSession } from './useSession';
+import { QueryKey, useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useSession } from "./useSession";
 
 // interface FetchConfig {
 //   headers?: Record<string, string>;
@@ -38,10 +38,6 @@ import { useSession } from './useSession';
 //   return { fetchData, isLoading, error, isSuccess, isError };
 // };
 
-
-
-
-
 // new fetch hook
 interface FetchConfig {
   headers?: Record<string, string>;
@@ -55,7 +51,13 @@ interface FetchParams {
   enabled?: boolean;
 }
 
-export const useFetch = ({ url, config, data, queryKey, enabled }: FetchParams) => {
+export const useFetch = ({
+  url,
+  config,
+  data,
+  queryKey,
+  enabled,
+}: FetchParams) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(url, config);
@@ -71,27 +73,24 @@ export const useFetch = ({ url, config, data, queryKey, enabled }: FetchParams) 
     isLoading,
     error,
     isSuccess,
-    isError
+    isError,
   } = useQuery({
     queryKey,
     queryFn: fetchData,
-    enabled
+    enabled,
   });
-  return { fetchData, isLoading, error, isSuccess, isError};
+  return { fetchData, isLoading, error, isSuccess, isError };
 };
-
-
 
 // create a hook with a generic type that can be passed as type of data in useFetch
 // Path: ChisfisNextjs/src/hooks/useFetch.ts
-
 
 interface FetchConfig {
   headers?: Record<string, string>;
 }
 
 interface FetchParamsType<T> {
-  baseUrl?: string
+  baseUrl?: string;
   endpoint: string;
   params?: Record<string, string>;
   queryParams?: Record<string, string>;
@@ -99,70 +98,71 @@ interface FetchParamsType<T> {
   config?: FetchConfig;
 }
 
-// response type 
+// response type
 interface RequestResponse<T> {
-  action?:string;
-  status:boolean;
-  message:string;
-  data:T | null
+  action?: string;
+  status: boolean;
+  message: string;
+  data: T | null;
 }
 
-export const useFetchData = <T>({ 
-  baseUrl, endpoint, params, queryParams,queryKey,config
- }: FetchParamsType<T>) => {
-
+export const useFetchData = <T>({
+  baseUrl,
+  endpoint,
+  params,
+  queryParams,
+  queryKey,
+  config,
+}: FetchParamsType<T>) => {
   const { getSession } = useSession();
 
   const fetchData = async () => {
     try {
-      let url = (baseUrl || process.env.NEXT_PUBLIC_BACKEND_URL) + endpoint
-      let query = '';
+      let url = (baseUrl || process.env.NEXT_PUBLIC_BACKEND_URL) + endpoint;
+      let query = "";
       // add query params to the endpoint
       if (queryParams) {
-        query = '?' + new URLSearchParams(queryParams).toString();
+        query = "?" + new URLSearchParams(queryParams).toString();
         url += query;
       }
       // add params to the endpoint
       if (params) {
-        endpoint = endpoint.replace(/\/$/, '');
-        endpoint += '/' + Object.values(params).join('/');
+        endpoint = endpoint.replace(/\/$/, "");
+        endpoint += "/" + Object.values(params).join("/");
         url += query;
       }
-      
+
       // remove double slashes using regex
       url = url.replace(/([^:]\/)\/+/g, "$1");
       const _config = {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${getSession()?.token}`
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getSession()?.token}`,
         },
-        ...config
+        ...config,
       };
       const response = await axios.get(url, _config);
-      if([200,201].includes(response.status)){
+      if ([200, 201].includes(response.status)) {
         return response.data as RequestResponse<T>;
       }
       // console.log(`Error fetching data from ${endpoint}: ${response.statusText}`);
-      return {status:false,message:'Error fetching data',data:null};
+      return { status: false, message: "Error fetching data", data: null };
     } catch (error: any) {
       // console.log(
       //   `Error fetching data from ${endpoint}`
       // );
-      return {status:false,message:"Error fetching data",data:null};
+      return { status: false, message: "Error fetching data", data: null };
     }
   };
 
- const result = useQuery({
+  const result = useQuery({
     queryFn: fetchData,
     queryKey,
-    enabled:!!endpoint
+    enabled: !!endpoint,
   });
-  return { 
+  return {
     ...result,
-    data: result?.data?.data ? result.data.data : null
+    data: result?.data?.data ? result.data.data : null,
   };
 };
-
-
-
 

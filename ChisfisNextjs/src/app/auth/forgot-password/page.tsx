@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
-import axios from 'axios';
-import { useState } from 'react';
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Input from "@/shared/Input";
+import axios from "axios";
+import { useState } from "react";
 
 export default function ForgotPasswordPage() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
 
   const sendVerificationEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/forgot-password`,
-        { email, method: 'custom_email' }
+        { email, method: "custom_email" },
       );
       if (response.status === 200) {
         setSuccess(true);

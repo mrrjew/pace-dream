@@ -22,8 +22,8 @@ const gradientColors = [
   "#ff9a9e, #fad0c4",
   "#fdcbf1, #e6dee9",
   "#d4fc79, #96e6a1",
-  "#cfd9df, #e2ebf0"
-]
+  "#cfd9df, #e2ebf0",
+];
 
 const DEMO_DATA = DEMO_RENTAL_LISTING[0];
 const StayCard3: FC<StayCard2Props> = ({
@@ -50,7 +50,9 @@ const StayCard3: FC<StayCard2Props> = ({
   } = data;
 
   const renderSliderGallery = () => {
-    const randomGradientIndex = Math.floor(Math.random() * gradientColors.length);
+    const randomGradientIndex = Math.floor(
+      Math.random() * gradientColors.length,
+    );
     const randomGradient = gradientColors[randomGradientIndex];
     return (
       // <>
@@ -59,36 +61,43 @@ const StayCard3: FC<StayCard2Props> = ({
       // </>
       <div className="relative md:w-full w-[82vw]">
         <Link href={`/listing-stay-detail/${id}?term=${term}`}>
-        {/* <GallerySlider
+          {/* <GallerySlider
             uniqueID={`StayCard2_${id}`}
             ratioClass="aspect-w-12 aspect-h-11"
             galleryImgs={galleryImgs}
             imageClass="rounded-lg"
           /> */}
           <div className="border border-white rounded-[8px] relative">
-              <div className="w-48 h-44 relative z-10">
-                  <Image src={image} alt="img1" className="w-full h-full object-contain" width={100} height={100} />
-              </div>
-              <div 
-                  className="top-0 w-full h-full absolute z-0 rounded-xl"
-                  style={{
-                      backgroundImage: `linear-gradient(to top right, ${randomGradient})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                  }}
+            <div className="w-48 h-44 relative z-10">
+              <Image
+                src={image}
+                alt="img1"
+                className="w-full h-full object-contain"
+                width={100}
+                height={100}
               />
+            </div>
+            <div
+              className="top-0 w-full h-full absolute z-0 rounded-xl"
+              style={{
+                backgroundImage: `linear-gradient(to top right, ${randomGradient})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
           </div>
 
-
           <div>
-
             <BtnLikeIcon
               isLiked={like}
               className="absolute right-1 bottom-1 z-[1]"
             />
           </div>
           {saleOff && (
-            <SaleOffBadge desc={saleOff} className="absolute right-1 top-1 bg-orange-500" />
+            <SaleOffBadge
+              desc={saleOff}
+              className="absolute right-1 top-1 bg-orange-500"
+            />
           )}
         </Link>
       </div>
@@ -151,13 +160,12 @@ const StayCard3: FC<StayCard2Props> = ({
           {
             <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
               <p className="text-[14px] font-[600]">Stock</p>
-              <div className={`w-3 h-3 rounded-full ${stock===0 ?'bg-red-800':'bg-green-700'}`}>
-
-              </div>
+              <div
+                className={`w-3 h-3 rounded-full ${stock === 0 ? "bg-red-800" : "bg-green-700"}`}
+              ></div>
             </div>
           }
         </div>
-
 
         <div className="space-y-2">
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">

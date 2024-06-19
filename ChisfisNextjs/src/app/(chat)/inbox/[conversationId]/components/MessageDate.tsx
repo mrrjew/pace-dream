@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useMemo } from 'react';
-import Moment from 'react-moment';
+import { useMemo } from "react";
+import Moment from "react-moment";
 
 export const MessageDate = ({ date }: { date: Date }) => {
   const today = new Date();

@@ -26,6 +26,7 @@ const AccountSetting = () => {
         <div className="hidden md:grid gap-6 md:grid-cols-3 my-14">
           {SETTINGS_CARD_DATA.map((card) => (
             <Link
+            key={card.title}
               href={card.href as Object}
               className="space-y-4 rounded-md shadow-md ring-[0.1px] ring-inset ring-gray-300/80 p-4 py-10"
             >
@@ -40,7 +41,7 @@ const AccountSetting = () => {
 
         <div className="md:hidden flex flex-col">
           {SETTINGS_CARD_DATA.map((card) => (
-            <div>
+            <div key={card.title}>
               <Link
                 href={card.href as Object}
                 className="flex items-center justify-between rounded-md shadow-md ring-[0.1px] ring-inset ring-gray-300/80 p-4 py-6"

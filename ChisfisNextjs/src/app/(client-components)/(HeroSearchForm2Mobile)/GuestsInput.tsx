@@ -16,13 +16,13 @@ const GuestsInput: FC<GuestsInputProps> = ({
   className = "",
 }) => {
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(
-    defaultValue?.guestAdults || 0
+    defaultValue?.guestAdults || 0,
   );
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(
-    defaultValue?.guestChildren || 0
+    defaultValue?.guestChildren || 0,
   );
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(
-    defaultValue?.guestInfants || 0
+    defaultValue?.guestInfants || 0,
   );
 
   useEffect(() => {

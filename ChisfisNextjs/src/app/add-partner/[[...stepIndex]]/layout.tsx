@@ -1,11 +1,14 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { FC } from "react";
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import { Route } from "@/routers/types";
-import { getLocalStorageItem, setLocalStorageItem } from "@/utils/localStorageUtil";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "@/utils/localStorageUtil";
 
 export interface CommonLayoutProps {
   children: React.ReactNode;
@@ -19,26 +22,24 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children, params }) => {
   const index = Number(params.stepIndex) || 1;
 
   const handleClick = () => {
-    if(index == 10){
-    setLocalStorageItem('showGreeting', 'greeting')    
+    if (index == 10) {
+      setLocalStorageItem("showGreeting", "greeting");
     }
-   }
-  
-useEffect(() => {
-  const prevUrl = getLocalStorageItem("currentPath");
+  };
 
-  const nextHref = (
-    index < 10 ? `/add-partner/${index + 1}` : prevUrl
-  ) as Route;
-  setNextHref(nextHref);
+  useEffect(() => {
+    const prevUrl = getLocalStorageItem("currentPath");
 
-}, []);
-
+    const nextHref = (
+      index < 10 ? `/add-partner/${index + 1}` : prevUrl
+    ) as Route;
+    setNextHref(nextHref);
+  }, []);
 
   const backHref = (
     index > 1 ? `/add-partner/${index - 1}` : `/add-partner/${1}`
   ) as Route;
-  
+
   const nextBtnText = index > 9 ? "Submit Proposal" : "Next";
   return (
     <div

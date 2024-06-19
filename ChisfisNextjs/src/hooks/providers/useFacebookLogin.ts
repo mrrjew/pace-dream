@@ -22,7 +22,7 @@ export const useFacebookLogin = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return response.data;
     } catch (error: any) {

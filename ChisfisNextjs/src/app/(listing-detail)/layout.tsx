@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import BackgroundSection from "@/components/BackgroundSection";
 import ListingImageGallery from "@/components/listing-image-gallery/ListingImageGallery";
 import SectionSliderNewCategories from "@/components/SectionSliderNewCategories";
@@ -16,45 +16,39 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const thisPathname = usePathname();
   const searchParams = useSearchParams();
-  const modal = searchParams?.get('modal');
+  const modal = searchParams?.get("modal");
 
   const handleCloseModalImageGallery = () => {
     let params = new URLSearchParams(document.location.search);
-    params.delete('modal');
+    params.delete("modal");
     router.push(`${thisPathname}/?${params.toString()}` as Route);
   };
 
   const getImageGalleryListing = () => {
-    if (thisPathname?.includes('/listing-stay-detail')) {
+    if (thisPathname?.includes("/listing-stay-detail")) {
       return listingStayImageGallery;
     }
-    if (thisPathname?.includes('/listing-car-detail')) {
+    if (thisPathname?.includes("/listing-car-detail")) {
       return listingCarImageGallery;
     }
-    if (thisPathname?.includes('/listing-experiences-detail')) {
+    if (thisPathname?.includes("/listing-experiences-detail")) {
       return listingExperienceImageGallery;
     }
 
     return [];
   };
 
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };
-    /* <div className="ListingDetailPage bg-white">
+/* <div className="ListingDetailPage bg-white">
       <ListingImageGallery
         isShowModal={modal === 'PHOTO_TOUR_SCROLLABLE'}
         onClose={handleCloseModalImageGallery}
         images={getImageGalleryListing()}
       /> */
 
-      
-
-      /* OTHER SECTION */
-      /* <div className="container py-24 lg:py-32">
+/* OTHER SECTION */
+/* <div className="container py-24 lg:py-32">
         <div className="relative py-16">
           <BackgroundSection />
           <SectionSliderNewCategories
@@ -68,9 +62,8 @@ const DetailtLayout = ({ children }: { children: ReactNode }) => {
         <SectionSubscribe className="pt-24 lg:pt-32" />
       </div> */
 
-      /* STICKY FOOTER MOBILE */
-      /* <MobileFooterSticky />
+/* STICKY FOOTER MOBILE */
+/* <MobileFooterSticky />
     </div> */
-  
 
 export default DetailtLayout;

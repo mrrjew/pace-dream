@@ -1,5 +1,5 @@
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 interface IMobileInputProps {
   phone: string;
@@ -8,7 +8,7 @@ interface IMobileInputProps {
 }
 
 export const MobileInput: React.FC<IMobileInputProps> = (
-  props: IMobileInputProps
+  props: IMobileInputProps,
 ) => {
   const { phone, country, onChange } = props;
 

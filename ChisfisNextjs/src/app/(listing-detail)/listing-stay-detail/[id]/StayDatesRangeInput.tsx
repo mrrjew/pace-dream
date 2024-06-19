@@ -13,7 +13,7 @@ export interface StayDatesRangeInputProps {
   className?: string;
   startDate: Date | any;
   endDate: Date | any;
-  setStartDate: (date: Date | null) => void; 
+  setStartDate: (date: Date | null) => void;
   setEndDate: (date: Date | null) => void;
 }
 
@@ -23,15 +23,13 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   endDate,
   setStartDate,
   setEndDate,
-
 }) => {
-
   const onChangeDate = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-    setLocalStorageItem("startedDate", start?.toISOString() || '')
-    setLocalStorageItem("endedDate", end?.toISOString() || '')
+    setLocalStorageItem("startedDate", start?.toISOString() || "");
+    setLocalStorageItem("endedDate", end?.toISOString() || "");
   };
 
   const renderInput = () => {

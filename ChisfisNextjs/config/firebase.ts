@@ -1,6 +1,5 @@
-
 import { initializeApp } from "firebase/app";
-import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getMessaging, isSupported } from "firebase/messaging";
 
 const firebaseConfig = {
@@ -13,17 +12,8 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const messaging=async()=>await isSupported() && getMessaging(app)
+const messaging = async () => (await isSupported()) && getMessaging(app);
 
-
-export {
-    getAuth,
-    GoogleAuthProvider,
-    app,
-    signInWithPopup,
-    messaging
-    
-}
+export { getAuth, GoogleAuthProvider, app, signInWithPopup, messaging };

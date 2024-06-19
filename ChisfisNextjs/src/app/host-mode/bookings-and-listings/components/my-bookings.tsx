@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useFetchData } from "@/hooks/useFetch";
 import { BookingAndListingCard } from "./booking-and-listing-card"

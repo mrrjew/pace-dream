@@ -1,21 +1,21 @@
-'use client';
-import { SignupForm } from '@/app/auth/components/SignupForm';
-import { useAppleLogin } from '@/hooks/providers/useAppleLogin';
-import { useFacebookLogin } from '@/hooks/providers/useFacebookLogin';
-import { useGoogleLogin } from '@/hooks/providers/useGoogleLogin';
-import { useSession } from '@/hooks/useSession';
-import appleSvg from '@/images/Apple.svg';
-import facebookSvg from '@/images/Facebook.svg';
-import googleSvg from '@/images/Google.svg';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
-import axios, { AxiosError } from 'axios';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { FC, useState } from 'react';
-import { SignupMethod } from '@/types/SignupMethod';
-import { MobileInput } from '@/components/MobileInput';
+"use client";
+import { SignupForm } from "@/app/auth/components/SignupForm";
+import { useAppleLogin } from "@/hooks/providers/useAppleLogin";
+import { useFacebookLogin } from "@/hooks/providers/useFacebookLogin";
+import { useGoogleLogin } from "@/hooks/providers/useGoogleLogin";
+import { useSession } from "@/hooks/useSession";
+import appleSvg from "@/images/Apple.svg";
+import facebookSvg from "@/images/Facebook.svg";
+import googleSvg from "@/images/Google.svg";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Input from "@/shared/Input";
+import axios, { AxiosError } from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { FC, useState } from "react";
+import { SignupMethod } from "@/types/SignupMethod";
+import { MobileInput } from "@/components/MobileInput";
 
 export interface PageSignUpProps {}
 
@@ -23,15 +23,15 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
   const { googleLogin, isLoading: googleLoggingin } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
-  const [userEmail, setUserEmail] = useState('');
-  const [mobile, setMobile] = useState('');
+  const [userEmail, setUserEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [signupMethod, setSignupMethod] = useState<SignupMethod>(
-    SignupMethod.EMAIL
+    SignupMethod.EMAIL,
   );
   const [showVerifyOtp, setShowVerifyOtp] = useState(false);
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
 
   const router = useRouter();
 
@@ -45,7 +45,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup/check-email`,
         {
           email: userEmail,
-        }
+        },
       );
       if (response.status === 200) {
         setShowSignupForm(true);
@@ -53,7 +53,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 409) {
-        router.push('/auth/login');
+        router.push("/auth/login");
       } else {
         console.log(error);
       }
@@ -69,7 +69,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/send-otp`,
         {
           mobile: `+${mobile}`,
-        }
+        },
       );
       if (response.status === 200) {
         setShowVerifyOtp(true);
@@ -90,17 +90,17 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
         {
           mobile: `+${mobile}`,
           otp,
-        }
+        },
       );
       // check if user already exists
       if (response.data.data?.token) {
         setSession(
           response.data.data.token,
           response.data.data,
-          response.data.data.user_id
+          response.data.data.user_id,
         );
         setTimeout(() => {
-          router.push('/');
+          router.push("/");
         }, 200);
         return;
       }
@@ -146,7 +146,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                         <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                       </div>
                     ) : (
-                      'Continue with Google'
+                      "Continue with Google"
                     )}
                   </h3>
                 </button>
@@ -166,7 +166,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                         <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                       </div>
                     ) : (
-                      'Continue with Facebook'
+                      "Continue with Facebook"
                     )}
                   </h3>
                 </button>
@@ -186,7 +186,7 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
                         <div className="w-4 h-4 border-t-2 border-r-2 border-gray-900 rounded-full animate-spin"></div>
                       </div>
                     ) : (
-                      'Continue with Apple'
+                      "Continue with Apple"
                     )}
                   </h3>
                 </button>

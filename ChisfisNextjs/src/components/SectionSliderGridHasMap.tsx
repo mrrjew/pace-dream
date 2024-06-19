@@ -120,23 +120,23 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
                   </motion.li>
                 ))}
                 <div className="w-[95vw] mt-8 flex justify-center">
-                {currentIndex ? (
-            <PrevBtn
-              onClick={() => changeItemId(currentIndex - 1)}
-              className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <PrevBtn
-          className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-        />}
-          {categories.length > currentIndex + numberOfItems ? (
-            <NextBtn
-              onClick={() => changeItemId(currentIndex + 1)}
-              className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
-            />
-          ) : <NextBtn
-          className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
-        />}
-        </div>
+                  {currentIndex ? (
+                    <PrevBtn
+                      onClick={() => changeItemId(currentIndex - 1)}
+                      className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
+                    />
+                  ) : (
+                    <PrevBtn className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
+                  )}
+                  {categories.length > currentIndex + numberOfItems ? (
+                    <NextBtn
+                      onClick={() => changeItemId(currentIndex + 1)}
+                      className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
+                    />
+                  ) : (
+                    <NextBtn className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2" />
+                  )}
+                </div>
               </AnimatePresence>
             </motion.ul>
           </div>

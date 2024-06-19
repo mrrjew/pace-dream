@@ -1,3 +1,4 @@
+
 'use client';
 import { SignupMethod } from '@/types/SignupMethod';
 import { useSession } from '@/hooks/useSession';
@@ -18,7 +19,7 @@ export const PasswordMatchText = (props: {
 }) => {
   const { password, confirmPassword } = props;
 
-  if (password === '' || confirmPassword === '') {
+  if (password === "" || confirmPassword === "") {
     return <span></span>;
   }
 
@@ -50,10 +51,10 @@ export const SignupForm: React.FC<{
 }) => {
   const [userDetails, setUserDetails] = useState<IUserDetails>({
     email: props.email,
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
     dob: new Date(),
     mobile: props.mobile,
     step: "1",
@@ -80,6 +81,7 @@ export const SignupForm: React.FC<{
 
     if (props.signupMethod === SignupMethod.EMAIL) {
       if (userDetails.password !== userDetails.confirmPassword) {
+
         alert('Passwords do not match');
         // setLoading(false);
         return;
@@ -100,6 +102,7 @@ export const SignupForm: React.FC<{
         //   userDetails.password
         // );
       }
+
       // const response = await axios.post(
       //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
       //   {
@@ -177,11 +180,11 @@ export const SignupForm: React.FC<{
           type="date"
           placeholder="Smith"
           className="mt-1"
-          max={new Date().toISOString().split('T')[0]}
-          min={new Date(1900, 1, 1).toISOString().split('T')[0]}
+          max={new Date().toISOString().split("T")[0]}
+          min={new Date(1900, 1, 1).toISOString().split("T")[0]}
           value={
             userDetails.dob
-              ? userDetails.dob.toISOString().split('T')[0]
+              ? userDetails.dob.toISOString().split("T")[0]
               : undefined
           }
           onChange={(e) => {

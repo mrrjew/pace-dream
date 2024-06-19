@@ -14,7 +14,6 @@ const AvatarInput = () => {
   };
 
   const { updateProfile }: any = useProfile();
-  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.currentTarget.files ?? []);

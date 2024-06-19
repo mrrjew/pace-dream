@@ -20,7 +20,7 @@ const StaySearchForm = () => {
     guestInfants: 0,
   });
   const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
+    new Date("2023/02/06"),
   );
   const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
   //

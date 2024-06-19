@@ -16,11 +16,14 @@ const RoomCounter = ({ title, count,placeholder, setCount }: RoomCounterProps) =
   return (
     <div className="flex flex-col gap-4">
       <p className="flex-1 py-2">{title}</p>
-      <div className="flex flex-1 justify-end items-center gap-2 
+      <div
+        className="flex flex-1 justify-end items-center gap-2 
        ring-1 ring-gray-300 rounded-lg px-2
-      ">
+      "
+      >
         {/* <span>{count}</span> */}
         {/* <CounterButton onClick={increment} label="+" /> */}
+
         <Input 
                 defaultValue={count}
                 onChange={(e)=>{

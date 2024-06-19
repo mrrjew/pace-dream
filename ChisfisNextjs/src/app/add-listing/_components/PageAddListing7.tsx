@@ -1,3 +1,4 @@
+
 'use client';
 import React, { Fragment } from 'react';
 import ButtonPrimary from '@/shared/ButtonPrimary';
@@ -27,13 +28,17 @@ const PageAddListing5 = (
     },
     { icon: <FaWifi />, label: "Wifi", id: "wifi" },
     { icon: <FaKitchenSet />, label: "Kitchen", id: "kitchen" },
-  ]
-  
+  ];
+
   return (
+
     <div className='rounded-lg bg-white p-2 md:p-2'>
       <div>
-        <p className='text-lg font-medium py-4'>You are viewing this page as a guest</p>
+        <p className="text-lg font-medium py-4">
+          You are viewing this page as a guest
+        </p>
       </div>
+
 
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           {/* image and description */}

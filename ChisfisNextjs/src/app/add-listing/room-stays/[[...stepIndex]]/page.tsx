@@ -64,8 +64,7 @@ const Page = () => {
   const updateData = (newData: Partial<typeof initialData>) => {
     setData((prev) => ({ ...prev, ...newData }));
   };
-  
-  
+
   const {
     steps,
     currentStepIndex,
@@ -76,17 +75,30 @@ const Page = () => {
     isFirstStep,
     isLastStep,
   } = useMultiStepForm([
-    <PageAddListing1 data={data} updateData={updateData} />,
-    <PageAddListing2 data={data} updateData={updateData} />,
-    <PageAddListing3 data={data} updateData={updateData} />,
+    <PageAddListing1  key="page"data={data} updateData={updateData} />,
+    <PageAddListing2  key="page"data={data} updateData={updateData} />,
+    <PageAddListing3  key="page"data={data} updateData={updateData} />,
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <PageAddListing5 data={data} updateData={updateData}/>,
-    <PageAddListing6 data={data} onPreview={()=>{next()}} />,
-    <PageAddListing7 data={data} onBackToHost={()=>{back()}}/>,
-    <PageAddListing8 data={data} onBackToHost={()=>{back()}}/>,
+    <PageAddListing5  key="page"data={data} updateData={updateData} />,
+    <PageAddListing6
+      data={data} key="page"
+      onPreview={() => {
+        next();
+      }}
+    />,
+    <PageAddListing7
+      data={data} key="page"
+      onBackToHost={() => {
+        back();
+      }}
+    />,
+    <PageAddListing8
+      data={data} key="page"
+      onBackToHost={() => {
+        back();
+      }}
+    />,
   ]);
-
-
 
   return (
 

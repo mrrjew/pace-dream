@@ -15,7 +15,7 @@ const PriceRangeInput: FC<PriceRangeInputProps> = ({
   defaultValue,
 }) => {
   const [rangePrices, setRangePrices] = useState(
-    defaultValue || [100000, 4000000]
+    defaultValue || [100000, 4000000],
   );
 
   useEffect(() => {

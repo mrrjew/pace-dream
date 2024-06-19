@@ -1,4 +1,4 @@
 export enum SignupMethod {
-  EMAIL = 'email',
-  MOBILE = 'mobile',
+  EMAIL = "email",
+  MOBILE = "mobile",
 }

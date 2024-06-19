@@ -23,16 +23,23 @@ const SectionOurFeatures: FC<SectionOurFeaturesProps> = ({
       data-nc-id="SectionOurFeatures"
     >
       <div className="max-w-[40rem] flex-grow mr-12 pt-12">
-        <h2 className="font-semibold text-3xl mt-5">Discover Your Perfect Roommate </h2>
-        <h4 className="text-zinc-500 font-medium text-base mt-4">Explore our new section and connect with the perfect roommate for a harmonious living experience. Your ideal match is just a click away!</h4>
-        <ButtonPrimary href="/listing-stay-map" sizeClass="my-10 px-5 py-4 sm:px-7">
-            Discover Roommate
+        <h2 className="font-semibold text-3xl mt-5">
+          Discover Your Perfect Roommate{" "}
+        </h2>
+        <h4 className="text-zinc-500 font-medium text-base mt-4">
+          Explore our new section and connect with the perfect roommate for a
+          harmonious living experience. Your ideal match is just a click away!
+        </h4>
+        <ButtonPrimary
+          href="/listing-stay-map"
+          sizeClass="my-10 px-5 py-4 sm:px-7"
+        >
+          Discover Roommate
         </ButtonPrimary>
       </div>
       <div>
         <Image src={rightImg} alt="img"></Image>
       </div>
-    
     </div>
   );
 };

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import StartRating from "@/components/StartRating";
 import React, { FC, useState } from "react";
@@ -10,44 +10,43 @@ import { getLocalStorageItem } from "@/utils/localStorageUtil";
 export interface PayPageProps {}
 
 const PayPage: FC<PayPageProps> = () => {
-
   const selectedStartDate = getLocalStorageItem("startedDate");
-  const initialStartDate = selectedStartDate ? new Date(selectedStartDate) : null;
+  const initialStartDate = selectedStartDate
+    ? new Date(selectedStartDate)
+    : null;
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
-  
-  
+
   const selectedEndDate: string | null = getLocalStorageItem("endedDate");
-  const initialEndDate: Date | null = selectedEndDate ? new Date(selectedEndDate) : null;
+  const initialEndDate: Date | null = selectedEndDate
+    ? new Date(selectedEndDate)
+    : null;
   const [endDate, setEndDate] = useState<Date | null>(initialEndDate);
 
   const guests = getLocalStorageItem("totalGuest");
-  let bookedDay: any = getLocalStorageItem("bookedDay")
-
+  let bookedDay: any = getLocalStorageItem("bookedDay");
 
   const formatDate = (dateString: string | null): string => {
     if (dateString === null) {
-      return '';
+      return "";
     }
-  
+
     const date = new Date(dateString);
-  
+
     if (isNaN(date.getTime())) {
-      return 'Invalid Date';
+      return "Invalid Date";
     }
-  
+
     const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     };
-      
-    return new Intl.DateTimeFormat('en-US', options).format(date);
+
+    return new Intl.DateTimeFormat("en-US", options).format(date);
   };
-  
+
   const originalDate: string | null = selectedStartDate;
   const formattedDate = formatDate(originalDate);
-
-
 
   const renderContent = () => {
     return (
@@ -108,7 +107,7 @@ const PayPage: FC<PayPageProps> = () => {
               <div className="flex flex-col">
                 <span className="text-sm text-neutral-400">Date</span>
                 <span className="mt-1.5 text-lg font-semibold">
-                {converSelectedDateToString([startDate, endDate])}
+                  {converSelectedDateToString([startDate, endDate])}
                 </span>
               </div>
             </div>
@@ -155,7 +154,7 @@ const PayPage: FC<PayPageProps> = () => {
             <div className="flex text-neutral-6000 dark:text-neutral-300">
               <span className="flex-1">Total</span>
               <span className="flex-1 font-medium text-neutral-900 dark:text-neutral-100">
-               $ {75 * bookedDay}
+                $ {75 * bookedDay}
               </span>
             </div>
             <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">

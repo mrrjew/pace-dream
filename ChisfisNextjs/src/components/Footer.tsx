@@ -37,7 +37,10 @@ export default function Component() {
             >
               <SmartDisplayOutlinedIcon />
             </Link>
-            <Link className="bg-rose-900 text-white p-2 rounded-full w-[40px] h-[40px]" href="mailto:Jim@pacedrea.com">
+            <Link
+              className="bg-rose-900 text-white p-2 rounded-full w-[40px] h-[40px]"
+              href="mailto:Jim@pacedrea.com"
+            >
               <EmailOutlinedIcon />
             </Link>
             <Link

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Conversation, DbResponseToConversation } from '@/types/chat';
-import { ChatUser } from './ChatUser';
-import { IoSearchOutline } from 'react-icons/io5';
-import { useEffect, useMemo, useState } from 'react';
-import { pusherClient } from '@/utils/pusher';
-import { useSession } from '@/hooks/useSession';
-import useConversation from '@/hooks/useConversation';
+import { Conversation, DbResponseToConversation } from "@/types/chat";
+import { ChatUser } from "./ChatUser";
+import { IoSearchOutline } from "react-icons/io5";
+import { useEffect, useMemo, useState } from "react";
+import { pusherClient } from "@/utils/pusher";
+import { useSession } from "@/hooks/useSession";
+import useConversation from "@/hooks/useConversation";
 
 const SearchBox: React.FC<{}> = () => {
   return (
@@ -54,7 +54,7 @@ export const ChatList: React.FC<IChatListProps> = ({
               };
             }
             return conv;
-          })
+          }),
         );
       } else {
         setConversations((prevConversations) => [chat, ...prevConversations]);
@@ -69,14 +69,14 @@ export const ChatList: React.FC<IChatListProps> = ({
       }
     };
 
-    pusherClient.bind('conversation:update', updateHandler);
+    pusherClient.bind("conversation:update", updateHandler);
 
-    pusherClient.bind('conversation:new', newHandler);
+    pusherClient.bind("conversation:new", newHandler);
 
     return () => {
       pusherClient.unsubscribe(userId!);
-      pusherClient.unbind('conversation:update', updateHandler);
-      pusherClient.unbind('conversation:new', newHandler);
+      pusherClient.unbind("conversation:update", updateHandler);
+      pusherClient.unbind("conversation:new", newHandler);
     };
   }, [userId]);
 
@@ -93,7 +93,7 @@ export const ChatList: React.FC<IChatListProps> = ({
   return (
     <div
       className={`col-span-12 lg:col-span-3 h-full overflow-y-auto ${
-        conversationId ? 'hidden' : ''
+        conversationId ? "hidden" : ""
       }`}
     >
       <h2 className="ml-4 text-lg mt-2">All Messages</h2>

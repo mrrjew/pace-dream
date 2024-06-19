@@ -1,8 +1,8 @@
-import logoImg from '@/images/paceDreamLogo-light.png';
-import logoLightImg from '@/images/paceDreamLogo-light.png';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
-import React from 'react';
+import logoImg from "@/images/paceDreamLogo-light.png";
+import logoLightImg from "@/images/paceDreamLogo-light.png";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
+import React from "react";
 
 export interface LogoProps {
   img?: StaticImageData;
@@ -13,7 +13,7 @@ export interface LogoProps {
 const Logo: React.FC<LogoProps> = ({
   img = logoImg,
   imgLight = logoLightImg,
-  className = 'w-24',
+  className = "w-24",
 }) => {
   return (
     <Link
@@ -23,7 +23,7 @@ const Logo: React.FC<LogoProps> = ({
       {img ? (
         <Image className="h-[52px] dark:hidden" src={img} alt="Logo" />
       ) : (
-        'Logo Here'
+        "Logo Here"
       )}
       {imgLight && (
         <Image

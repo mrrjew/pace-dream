@@ -15,8 +15,9 @@ const ExperiencePag3 = (
   return (
     <>
       {/* FORM */}
-        <div className=" ">
+      <div className=" ">
         {/* FORM */}
+
           <div className="space-y-4">
             <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
                 <div className="bg-white p-2 md:p-6 rounded-2xl grid grid-cols-1 space-y-6">
@@ -68,16 +69,17 @@ const ExperiencePag3 = (
           <div>
 
             <div className="bg-white p-2 md:p-6 rounded-2xl grid grid-cols-1 space-y-6">
-                <div className="mb-6">
+              <div className="mb-6">
                 <label className="block text-gray-700 font-medium mb-2">
-                Pictures of the place
+                  Pictures of the place
                 </label>
                 <div className="grid grid-cols-1 items-center">
+
                 <DragDrop  type="image" isMultiple maxFiles={6} media={data?.gallery?.images || []} onUploaded={(urls)=>{
                     updateData({...data,gallery:{...data.gallery,thumbnail:urls[0],images:urls}})
                 }}/>
                 </div>
-            </div>
+              </div>
 
             <div className="mb-6">
                     <label className="block text-gray-700 font-medium mb-2">
@@ -93,10 +95,10 @@ const ExperiencePag3 = (
                     </div>
             </div>
             </div>
+          </div>
         </div>
-     </div>
-    </div>
-        {/* <PageAddListing4 data={data} updateData={updateData} /> */}
+      </div>
+      {/* <PageAddListing4 data={data} updateData={updateData} /> */}
     </>
   );
 };

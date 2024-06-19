@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import useConversation from '@/hooks/useConversation';
-import { useSession } from '@/hooks/useSession';
-import Avatar from '@/shared/Avatar';
-import NcModal from '@/shared/NcModal';
+import useConversation from "@/hooks/useConversation";
+import { useSession } from "@/hooks/useSession";
+import Avatar from "@/shared/Avatar";
+import NcModal from "@/shared/NcModal";
 import {
   DbResponseToMessage,
   InboxMessage,
@@ -11,15 +11,15 @@ import {
   MessageStatus,
   MessageType,
   SendingMessage,
-} from '@/types/chat';
-import { pusherClient } from '@/utils/pusher';
-import { find } from 'lodash';
-import { Fragment, useEffect, useRef, useState } from 'react';
-import { IoIosAttach, IoIosSend } from 'react-icons/io';
-import { MdOutlineEmojiEmotions } from 'react-icons/md';
-import { ImagePreviewModal } from './ImagePreviewModal';
-import { MessageBox } from './MessageBox';
-import { AttachFileMenu } from './AttachFileMenu';
+} from "@/types/chat";
+import { pusherClient } from "@/utils/pusher";
+import { find } from "lodash";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { IoIosAttach, IoIosSend } from "react-icons/io";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
+import { ImagePreviewModal } from "./ImagePreviewModal";
+import { MessageBox } from "./MessageBox";
+import { AttachFileMenu } from "./AttachFileMenu";
 
 interface IBodyProps {
   initialMessages: Message[];
@@ -28,7 +28,7 @@ interface IBodyProps {
 export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
   const [messages, setMessages] = useState<InboxMessage[]>(initialMessages);
 
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [type, setType] = useState<MessageType>(MessageType.TEXT);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
@@ -79,9 +79,9 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
       return [...prevMessages, newMessage];
     });
     bottomRef.current?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: "smooth",
     });
-    setInputMessage('');
+    setInputMessage("");
   };
 
   const handleFileShare = (images: File[]) => {
@@ -90,7 +90,7 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
     images.forEach((image) => {
       const newMessage: SendingMessage = {
         id: new Date().toISOString(),
-        message: type === MessageType.IMAGE ? 'Sent an image' : image.name,
+        message: type === MessageType.IMAGE ? "Sent an image" : image.name,
         sender: { id: userId! },
         createdAt: new Date(),
         conversationId: conversationId!,
@@ -115,7 +115,7 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
   useEffect(() => {
     pusherClient.subscribe(conversationId);
     bottomRef.current?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: "smooth",
     });
 
     const messageHandler = (message: any) => {
@@ -127,11 +127,11 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
       });
     };
 
-    pusherClient.bind('message:new', messageHandler);
+    pusherClient.bind("message:new", messageHandler);
 
     return () => {
       pusherClient.unsubscribe(conversationId);
-      pusherClient.unbind('message:new', messageHandler);
+      pusherClient.unbind("message:new", messageHandler);
     };
   }, [conversationId]);
 
@@ -191,8 +191,8 @@ export const Body: React.FC<IBodyProps> = ({ initialMessages }: IBodyProps) => {
                 type === MessageType.IMAGE
                   ? `Sharing ${files.length} images`
                   : type === MessageType.VIDEO
-                  ? `Sharing ${files.length} videos`
-                  : `Sharing ${files.length} files`
+                    ? `Sharing ${files.length} videos`
+                    : `Sharing ${files.length} files`
               }
               contentPaddingClass="p-0"
               renderContent={() =>

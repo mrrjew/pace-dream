@@ -128,6 +128,8 @@ const LocationForm: FC<LocationInputProps> = ({
     setShowPopover(false);
   };
 
+  // set value as a query param
+
   const handleInputChange = (e: any) => {
     const inputValue = e.currentTarget.value;
     setValue(inputValue);
