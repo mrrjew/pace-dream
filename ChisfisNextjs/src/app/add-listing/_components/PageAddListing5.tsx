@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import { ListingDataType } from "@/types/types";
 import {DragDrop} from "./media/dag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
@@ -37,7 +37,7 @@ const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableIte
                     maxFiles={1}
                     media={data?.attachments?.map((val)=>val?.link) || []}
                     onUploaded={(urls)=>{
-                      updateData({...data,attachments:urls.map((url)=>({link:url,description:"",mime_type:"application/pdf"}))})
+                      updateData({...data,attachments:urls?.map((url)=>({link:url,description:"",mime_type:"application/pdf"}))})
                }}/>
           </div>
 
@@ -51,7 +51,8 @@ const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableIte
                     isMultiple maxFiles={6}
                     media={data?.gallery?.images || []}
                     onUploaded={(urls)=>{
-                      updateData({...data,gallery:{...data.gallery,images:urls,thumbnail:urls[0]}})
+                      // console.log("urls",urls)
+                      updateData({...data,gallery:{...data?.gallery,images:urls||[],thumbnail:urls?.[0]}})
                }}/>
             </div>
             {/* <p className="text-gray-500 mt-2">

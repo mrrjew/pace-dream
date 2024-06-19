@@ -3,18 +3,12 @@
 // import { ListingDataType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import {
-  FaWifi,
-  FaTv,
-  FaParking,
-  FaSnowflake,
   FaSwimmingPool,
   // FaDumbbell,
 } from "react-icons/fa";
-import { FaKitchenSet } from "react-icons/fa6";
-import { MdRoomService, MdSmokeFree } from "react-icons/md";
+import { MdSmokeFree } from "react-icons/md";
 import { GrAidOption } from "react-icons/gr";
-import { TbFireExtinguisher, TbSofa } from "react-icons/tb";
-import { GiFireplace, GiGrandPiano } from "react-icons/gi";
+import { TbFireExtinguisher } from "react-icons/tb";
 import { RentableItem } from "@/types/rentalItems";
 import { AMENITIES_DATA } from "@/data/amenities";
 

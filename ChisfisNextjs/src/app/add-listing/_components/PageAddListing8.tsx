@@ -115,7 +115,9 @@ const PageAddListing8 = (
                 <span className='text-2xl font-semibold'>
                   $ {data?.price?.at(0)?.amount || 0}
                 </span>
-                <span className='text-neutral-600'>/night</span>
+                <span className='text-neutral-600 capitalize'>
+                  / {data?.price?.at(0)?.frequency || 'night'}
+                </span>
               </div>
               <hr className='bg-gray-400 w-[0.5px] h-4 ' />
             <div>

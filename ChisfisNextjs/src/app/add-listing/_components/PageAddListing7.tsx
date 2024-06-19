@@ -110,7 +110,9 @@ const PageAddListing5 = (
                   <span className='text-2xl font-semibold'>$
                     {parseFloat(data?.price?.at(0)?.amount?.toString() || '0')}
                   </span>
-                  <span className='text-neutral-600'>/night</span>
+                  <span className='text-neutral-600 capitalize'>
+                    /{data?.price?.at(0)?.frequency || 'night'}
+                  </span>
                 </div>
                 <hr className='bg-gray-400 w-[0.5px] h-4 ' />
               <div>
