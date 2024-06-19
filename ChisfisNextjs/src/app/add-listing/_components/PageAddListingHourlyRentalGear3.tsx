@@ -6,7 +6,6 @@ import FormItem from "../room-stays/FormItem";
 import Input from "@/shared/Input";
 import RoomCounter from "@/components/ListingComponents/RoomCounter";
 import PageAddListing4 from "./PageAddListing4";
-
 import { DateImputField,TimeSelector } from "@/components/ListingComponents/TimeAndDateSelecter";
 import { RentableItem } from "@/types/rentalItems";
 
@@ -33,7 +32,6 @@ const PageAddListingToHourlyRentalGear3 = (
         {/* FORM */}
 
         <div className="space-y-4">
-
             <div className="bg-white rounded-2xl p-6">
                 <p className="flex-1 py-1">
                   How much do you charge per hour?
@@ -74,8 +72,6 @@ const PageAddListingToHourlyRentalGear3 = (
                 </FormItem>
               </div>
             </div>
-          </div>
-
 
             <div className="bg-white p-6 rounded-2xl grid grid-cols-1 space-y-6">
               
@@ -129,21 +125,6 @@ const PageAddListingToHourlyRentalGear3 = (
                 </div>
                  <PageAddListing4 data={data} updateData={updateData} />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <p className="col-span-2">Choose rental duration date</p>
-              <DateImputField
-                placeholder="Start Date"
-                name="startDate"
-                id={"startDate"}
-              />
-              <DateImputField
-                placeholder="End Date"
-                name="endDate"
-                id={"endDate"}
-              />
-            </div>
-            <PageAddListing4 data={data} updateData={updateData} />
-          </div>
         </div>
       </div>
     </>

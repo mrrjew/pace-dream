@@ -1,3 +1,114 @@
+'use client';
+import { RoomImg, TimeImg, HourlyImg, FindImg, ExperiencesImg, LastminutesImg } from "@/images";
+// import Sidebar from "../SideBar";
+import { Filter, Home, Timer, Watch } from "@mui/icons-material";
+import { BriefcaseIcon, UsersIcon } from "@heroicons/react/24/solid";
+// import { Route } from "@/routers/types";
+import { ListingOption } from "@/types/types";
+import Sidebar from "./SideBar";
+import { RentableItem } from "@/types/rentalItems";
+import { useSession } from "@/hooks/useSession";
+import { useMutateData } from "@/hooks/useMutate";
+import { useRouter } from "next/navigation";
+import Logo from "@/shared/Logo";
+import { useEffect, useState } from "react";
+
+
+// const sampleData:Partial<RentableItem> = {
+//   "title": "Sample Property",
+//   "summary": "Kai Heng Century Hotel offers ultimate comfort and luxury",
+//   "details": {
+//       "amenities": [
+//           "wifi",
+//           "furnished",
+//           "tv",
+//           "parking",
+//           "ac",
+//           "room-service"
+//       ],
+//       "rules": [],
+//       "room_type": "logn term",
+//       "property_type": "",
+//       "hourly_rental_time": {
+//           "startTime": "",
+//           "endTime": ""
+//       },
+//       "description": "Kai Heng Century Hotel offers ultimate comfort and luxury. This 4-storied hotel is a beautiful combination of traditional grandeur and modern facilities. The 255 exclusive guest rooms are furnished with a range of modern amenities such as television and internet access. International direct-dial phone and safe are also available in any of these rooms. Wake-up call facility is also available in these rooms. ",
+//       "bedroom_count": 3,
+//       "bathroom_count": 2,
+//       "rule_description": "No smoking\nKeep rooms clean"
+//   },
+//   "location": {
+//       "address": "321 24th St, Virginia Beach, VA 23451, USA",
+//       "longitude": -75.97921939999999,
+//       "latitude": 36.8516437,
+//       "zipcode": "23451",
+//       "city": "Virginia",
+//       "state": "Virginia",
+//       "country": "USA",
+//       "street_address": "321 24th St",
+//       "googlemap_link": "https://www.google.com/maps/?pb=!1m14!1m12!1m3!1d15883.860440917622!2d-75.97921939999999!3d36.8516437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1en!2sgh!4v1717982745573!5m2!1en!2sgh"
+//   },
+//   "gallery": {
+//       "thumbnail": "https://totel-images.s3.us-east-2.amazonaws.com/ac6f1722-92ae-4bba-b50f-fcfceba5a489-pacedream-1716795993904_download.jpeg",
+//       "images": [
+//           "https://totel-images.s3.us-east-2.amazonaws.com/ac6f1722-92ae-4bba-b50f-fcfceba5a489-pacedream-1716795993904_download.jpeg",
+//           "https://totel-images.s3.us-east-2.amazonaws.com/636c8129-b9f7-4208-9b34-059b8644d988-pacedream-marc_mintel_nSy6EkPBwe8_unsplash.jpg",
+//           "https://totel-images.s3.us-east-2.amazonaws.com/9edd85d7-c74a-415d-ab56-53bba48a4b2e-pacedream-marc_mintel_nSy6EkPBwe8_unsplash.jpg",
+//           "https://totel-images.s3.us-east-2.amazonaws.com/c0ae8367-2364-4d70-936e-65c542bc9e9f-pacedream-taylor_heery_8DlbPCxfGHA_unsplash.jpg"
+//       ],
+//       "videos": []
+//   },
+//   "attachments": [
+//       {
+//           "link": "https://totel-images.s3.us-east-2.amazonaws.com/65e01325-b1ea-4750-a17c-e4e188315ab1-pacedream-Example_API_Implementations_.pdf",
+//           "description": "",
+//           "mime_type": "application/pdf"
+//       }
+//   ],
+//   "item_type": "room",
+//   "price": [
+//       {
+//           "frequency": "monthly",
+//           "grace_period": 0,
+//           "pricing_type": "base",
+//           "currency": "USD",
+//           "recurring_days": 0,
+//           "discounts": [],
+//           "amount": 600
+//       },
+//       {
+//           "frequency": "weekly",
+//           "grace_period": 0,
+//           "pricing_type": "base",
+//           "currency": "USD",
+//           "recurring_days": 0,
+//           "discounts": [],
+//           "amount": 200
+//       },
+//       {
+//           "frequency": "custom",
+//           "grace_period": 0,
+//           "pricing_type": "base",
+//           "currency": "USD",
+//           "recurring_days": 0,
+//           "discounts": [],
+//           "amount": 5
+//       },
+//       {
+//           "frequency": "daily",
+//           "grace_period": 0,
+//           "pricing_type": "base",
+//           "currency": "USD",
+//           "recurring_days": 0,
+//           "discounts": [],
+//           "amount": 50
+//       }
+//   ],
+//   "rules": {},
+//   "rating": 0,
+//   "owner": "6664ddbef4bda44fab89cb64"
+// };
 
 
 
@@ -68,27 +179,7 @@ export default function AddListingMainLayoutWrapper(
         }
       }
 
-export default function AddListingMainLayoutWrapper({
-  children,
-  hideBackBtn,
-  onNext,
-  onBack,
-  isFirstStep,
-  isLastStep,
-  currentStep,
-  submitBtnText,
-}: {
-  children: React.ReactNode;
-  hideBackBtn?: boolean;
-  onNext: () => void;
-  onBack: () => void;
-  isFirstStep: boolean;
-  isLastStep: boolean;
-  currentStep: number;
-  submitBtnText: string;
-}) {
   return (
-
     <div className="">
             {children}
 

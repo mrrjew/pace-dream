@@ -1,4 +1,3 @@
-
 'use client';
 import React from 'react';
 // import { ListingDataType } from '@/types/types';
@@ -37,16 +36,13 @@ const PageAddListing4 = (
   }
   
   return (
-    <div className="bg-white rounded-xl h-fit p-2 md:p-8">
+    <div className='bg-white rounded-xl h-fit p-2 md:p-8'>
       <div>
-        <p className="text-lg py-4 font-medium">
-          It{"\'"}s time to publish property!
-        </p>
+        <p className='text-lg py-4 font-medium'>It{'\''}s time to publish property!</p>
         {/* <span className='block mt-2 text-neutral-500 dark:text-neutral-400'>Excellent, congratulations on completing the listing, it is waiting to be reviewed for publication</span> */}
       </div>
       {/* <div className=' border-b border-neutral-200 dark:border-neutral-700'></div> */}
       {/* FORM */}
-
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         <div className='col-span-1 md:col-span-2 space-y-6 rounded-lg'>
           <Image 
@@ -56,21 +52,21 @@ const PageAddListing4 = (
             width={500}
             height={360}
           />
-          <div className="p-4 space-y-4 shadow-lg rounded-b-2xl">
-            {/* review and address */}
-            <div className="flex items-center justify-between">
-              {/* <p className='text-neutral-500 flex-1 dark:text-neutral-400 w-full'>Room Stays</p> */}
-              <div className="flex items-center gap-4 justify-start">
-                <span className="text-xs capitalize rounded-md p-2 py-4 bg-black text-white font-semibold">
-                  {(window?.location?.pathname.split("/").pop() || "Room Stays")
-                    .replaceAll("-", " ")
-                    .toLowerCase()}
-                </span>
-                <span className="text-neutral-600 flex items-center">
-                  <Star className="h-4 w-4 text-yellow-500" />0 (0 Review)
-                </span>
+         <div className='p-4 space-y-4 shadow-lg rounded-b-2xl'>
+           {/* review and address */}
+            <div className='flex items-center justify-between'>
+                {/* <p className='text-neutral-500 flex-1 dark:text-neutral-400 w-full'>Room Stays</p> */}
+                <div className='flex items-center gap-4 justify-start'>
+                  <span className='text-xs capitalize rounded-md p-2 py-4 bg-black text-white font-semibold'>
+                    {(window?.location?.pathname.split('/').pop() || 'Room Stays').replaceAll('-', ' ').toLowerCase()}
+                  </span>
+                  <span className='text-neutral-600 flex items-center'>
+                    <Star className='h-4 w-4 text-yellow-500' />
+                      0 (0 Review)
+                    </span>
+                </div>
+                  <MoreHorizOutlined className='h-6 w-6 text-gray-500 ring rounded-full ring-primary-100' />
               </div>
-
           <div>
               <h2 className='text-xl'>
                 {data?.title}
@@ -139,13 +135,12 @@ const PageAddListing4 = (
                 </button>
               <button 
                 onClick={onPreview}
-                className="ring-1 ring-gray-300 w-60 text-primary-700 p-2 rounded-lg"
-              >
-                Show Preview
-              </button>
-            </div>
+                className='ring-1 ring-gray-300 w-60 text-primary-700 p-2 rounded-lg'>Show Preview</button>
+              </div>
           </div>
+
         </div>
+
       </div>
     </div>
   );

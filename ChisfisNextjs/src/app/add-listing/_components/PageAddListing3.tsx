@@ -7,7 +7,6 @@ import RoomCounter from "@/components/ListingComponents/RoomCounter";
 import PageAddListing4 from "./PageAddListing4";
 import { RentableItem } from "@/types/rentalItems";
 
-
 const PageAddListing3 = (
   {data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}
 ) => {
@@ -21,8 +20,8 @@ const PageAddListing3 = (
 
   // use callback to update data with bedrooms and bathrooms
   useEffect(() => {
-    updateDataWithRooms();
-  }, [bedrooms, bathrooms]);
+    updateDataWithRooms()
+  }, [bedrooms, bathrooms])
 
   return (
     <>
@@ -31,7 +30,6 @@ const PageAddListing3 = (
         {/* FORM */}
 
         <div className="space-y-4">
-
             <div className="bg-white rounded-2xl p-6">
                 <p className="flex-1 py-1">
                   What is the rental price per month?
@@ -179,8 +177,6 @@ const PageAddListing3 = (
                 </FormItem>
               </div>
             </div>
-          </div>
-
 
             <div className="bg-white p-6 rounded-2xl grid grid-cols-1 space-y-6">
                <RoomCounter

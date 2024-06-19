@@ -3,7 +3,6 @@ import React from "react";
 import {DragDrop} from "./media/dag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
 
-
 const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}) => {
   // const [rentalRules, setRentalRules] = useState<string>("");
   // const [terms, setTerms] = useState<string>("");
@@ -26,8 +25,8 @@ const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableIte
   //   setRentalVideo(file);
   // };
 
-  // update data with rental rules, images and video
 
+  // update data with rental rules, images and video
   // const updateDataWithRentalDetails = () => {
   //   updateData({...data,additionalRules:[rentalRules],placeImages:rentalImages.map((f)=>f?.webkitRelativePath),placeVideo:rentalVideo?.webkitRelativePath})
   // }
@@ -92,47 +91,6 @@ const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableIte
 
 
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">
-            List any requirements for participants
-          </label>
-          {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
-          <textarea
-            className="border border-gray-300 rounded-md p-2 w-full"
-            placeholder="E.G. File upload for terms"
-            value={terms}
-            defaultValue={terms}
-            onChange={(e) => setTerms(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">
-            Any specific rules for rental gear product?
-          </label>
-          {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
-          <textarea
-            className="border border-gray-300 rounded-md p-2 w-full"
-            placeholder="EG., Any restrictions"
-            value={terms}
-            defaultValue={terms}
-            onChange={(e) => setTerms(e.target.value)}
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">
-            Can you upload the terms?
-          </label>
-          {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
-          <textarea
-            className="border border-gray-300 rounded-md p-2 w-full"
-            placeholder="e.g., File upload for terms"
-            value={terms}
-            defaultValue={terms}
-            onChange={(e) => setTerms(e.target.value)}
-          />
-        </div>
-      </div>
     </>
   );
 };

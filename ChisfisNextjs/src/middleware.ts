@@ -22,20 +22,6 @@ export async function middleware(request: NextRequest) {
   let isValidToken = false;
   // const _baseUrl = process.env.BACKEND_URL as string;
 
-<<<<<<< HEAD
-  const checkToken = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/verify-token`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-    },
-  );
-  if (checkToken.status === 200) {
-    isValidToken = true;
-=======
    try {
     const checkToken = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check-token`,
@@ -50,7 +36,7 @@ export async function middleware(request: NextRequest) {
     }
   } catch (error:any) {
     console.error('Error checking token', error);
->>>>>>> main1
+
   }
 
  
