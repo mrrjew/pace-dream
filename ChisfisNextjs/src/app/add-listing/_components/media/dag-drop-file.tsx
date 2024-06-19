@@ -8,6 +8,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Group, MantineProvider } from '@mantine/core';
 import { DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
+import axios from 'axios';
 
 
 async function uploadDocuments(
@@ -19,8 +20,12 @@ async function uploadDocuments(
       body.append("file", file, file.name);
     });
     // const _host = window.location.host + url;
-    const response = await fetch(url, { method: "POST", body });
-    return await response.json();
+    // https://www.pacedream.com/api/media
+    // const response = await fetch(url, 
+    //     { method: "POST", body }
+    // );
+    const response = await axios.post(url, body);
+    return await response.data
   }
 
 export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
