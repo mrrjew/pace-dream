@@ -48,7 +48,7 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
       links: [
         {
           name: "Active",
-          path: "/listings/active" as PathName, 
+          path: "/listings/active" as PathName,
         },
         {
           name: "Draft",
@@ -115,7 +115,7 @@ const CommonLayout: FC<CommonLayoutProps> = ({ children }) => {
       id: 5,
       links: "/help" as PathName, // Change 'path' to 'links'
     },
-  ]
+  ];
 
   return (
     <div className="bg-white w-[100%] ">

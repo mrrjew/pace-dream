@@ -35,5 +35,5 @@ export const imageGallery: ListingGalleryImage[] = [...PHOTOS].map(
       id: index,
       url: item,
     };
-  }
+  },
 );

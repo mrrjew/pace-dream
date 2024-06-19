@@ -5,6 +5,7 @@ import {DragDrop} from "./media/dag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
 import { CheckboxGroup } from "@nextui-org/react";
 
+
 const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}) => {
 
 
@@ -57,7 +58,8 @@ const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableIte
             {/* <p className="text-gray-500 mt-2">
               Upload a file or drag and drop PNG, JPG, up to 10MB
             </p> */}
-          </div>
+        </div>
+
 
           <div className="mb-2">
             <label className=" text-gray-700 font-medium mb-2">
@@ -78,8 +80,8 @@ const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableIte
             {/* <p className="text-gray-500 mt-2">
               Upload a high quality video tour of the property
             </p> */}
-          </div>
         </div>
+      </div>
     </>
   );
 };

@@ -36,7 +36,7 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
 
   const handleChange = (
     date: [Date | null, Date | null],
-    event: React.SyntheticEvent<any, Event> | undefined
+    event: React.SyntheticEvent<any, Event> | undefined,
   ) => {
     setSelectedRange(date);
     console.log(selectedRange);

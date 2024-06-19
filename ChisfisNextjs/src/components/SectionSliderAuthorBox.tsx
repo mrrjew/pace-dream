@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import CardAuthorBox from "@/components/CardAuthorBox";
 import CardAuthorBox2 from "@/components/CardAuthorBox2";
@@ -78,10 +78,10 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
     trackMouse: true,
   });
 
-  const renderCard = (item: AuthorType, indx:any) => {
+  const renderCard = (item: AuthorType, indx: any) => {
     switch (boxCard) {
       case "box1":
-        return <CardAuthorBox author={item} index={indx+1}/>;
+        return <CardAuthorBox author={item} index={indx + 1} />;
       case "box2":
         return <CardAuthorBox2 author={item} />;
       default:
@@ -90,11 +90,12 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
   };
   if (!numberOfItems) return null;
   return (
-    <div
-      className={`md:px-24 ${className} inline-block`}
-    >
+    <div className={`md:px-24 ${className} inline-block`}>
       <div className="flex justify-center">
-        <Heading4 desc="Rating based on customer reviews" isCenter={sliderStyle === "style2"}>
+        <Heading4
+          desc="Rating based on customer reviews"
+          isCenter={sliderStyle === "style2"}
+        >
           Top 10 author of the month
         </Heading4>
       </div>
@@ -130,20 +131,23 @@ const SectionSliderAuthorBox: FC<SectionSliderAuthorProps> = ({
                     {renderCard(item, indx)}
                   </motion.li>
                 ))}
-          </AnimatePresence>
-          </motion.ul>
-          <div className="flex items-center justify-center space-x-2 mt-10">
-                {authors.map((item, i) => (
-                  i  % (numberOfItems + 1) === 0 ?
+              </AnimatePresence>
+            </motion.ul>
+            <div className="flex items-center justify-center space-x-2 mt-10">
+              {authors.map((item, i) =>
+                i % (numberOfItems + 1) === 0 ? (
                   <button
                     className={`w-2 h-2 rounded-full ${
-                      i  === currentIndex ? "bg-black/70 w-2.5 h-2.5" : "bg-black/10 "
+                      i === currentIndex
+                        ? "bg-black/70 w-2.5 h-2.5"
+                        : "bg-black/10 "
                     }`}
                     onClick={() => changeItemId(i)}
                     key={i}
-                  />: null
-                ))}
-              </div>
+                  />
+                ) : null,
+              )}
+            </div>
           </div>
         </div>
       </MotionConfig>

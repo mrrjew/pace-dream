@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Input from "@/shared/Input";
 import Select from "@/shared/Select";
 import FormItem from "../room-stays/FormItem";
+
 import { RentableItem } from "@/types/rentalItems";
 import { usePathname } from "next/navigation";
 const PageAddListing1 = (
@@ -82,6 +83,7 @@ const PageAddListing1 = (
           <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
             <FormItem label="What is the name of your property?">
               <Input
+
                  defaultValue={data?.title}
                 onChange={(e)=>updateData({...data,title:e?.currentTarget?.value})}
                 name="propertyName" type="text" placeholder="Property Name" />
@@ -98,6 +100,7 @@ const PageAddListing1 = (
         { (Number(propertyTypes?.options?.length) + Number(roomTypes.options.length)) >0 && <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
            {Number(propertyTypes?.options?.length)> 0 && <FormItem label={propertyTypes.title}>
               <Select
+
                 defaultValue={data?.details?.property_type}
                 onChange={(e)=>{
                    // if selected is undefined
@@ -119,6 +122,7 @@ const PageAddListing1 = (
             </FormItem>}
             {(Number(roomTypes.options.length) > 0) && <FormItem label={roomTypes.title}>
               <Select
+
                 defaultValue={data?.details?.room_type}
                 onChange={(e)=>{
                   if(e.currentTarget.value === undefined){

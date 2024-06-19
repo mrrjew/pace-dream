@@ -204,95 +204,97 @@ import { FaqSideComponent } from "./FrequentlyAskedQuestions";
 
 // export default LoginSecurity;
 
-type LoginAndSecurityData = {title:string, data:Array<{label:string,value:string,actionlabel:string,onEdit:()=>void}>}
+type LoginAndSecurityData = {
+  title: string;
+  data: Array<{
+    label: string;
+    value: string;
+    actionlabel: string;
+    onEdit: () => void;
+  }>;
+};
 
-
-function LoginAndSecurityItem(props:LoginAndSecurityData){
-  const {title,data} = props
+function LoginAndSecurityItem(props: LoginAndSecurityData) {
+  const { title, data } = props;
   return (
     <div>
       <h2 className="text-lg font-semibold mb-4">{title}</h2>
-      {
-        data.map(({label,value,actionlabel,onEdit},index) => {
-          return(
-            <Fragment key={`${label}${index}`}>
-                <div className="flex justify-between gap-8">
-                <div className="flex flex-col gap-1">
-                  <p className="text-sm">{label}</p>
-                  <p className="text-sm text-gray-400">{value}</p>
-                </div>
-                <button onClick={onEdit} className="text-xs text-primary-800 font-semibold">{actionlabel}</button>
+      {data.map(({ label, value, actionlabel, onEdit }, index) => {
+        return (
+          <Fragment key={`${label}${index}`}>
+            <div className="flex justify-between gap-8">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm">{label}</p>
+                <p className="text-sm text-gray-400">{value}</p>
               </div>
-              <hr className="my-6 bg-gray-300"/>
-            </Fragment>
-          )
-        })
-      }
+              <button
+                onClick={onEdit}
+                className="text-xs text-primary-800 font-semibold"
+              >
+                {actionlabel}
+              </button>
+            </div>
+            <hr className="my-6 bg-gray-300" />
+          </Fragment>
+        );
+      })}
     </div>
-    
-  )
+  );
 }
 
-
-export default function LoginAndSecurity(){
-
+export default function LoginAndSecurity() {
   const loginAndSecurityData: Array<LoginAndSecurityData> = [
-      {
-        title: "Login",
-        data: [
-          {
-            label:"Password",
-            value:"Last updated a day ago",
-            actionlabel:"Update",
-            onEdit:()=>{}
-          }
-        ]
-      },
-      {
-        title: "Social Accounts",
-        data: [
-          {
-            label:"Facebook",
-            value:"Not connected",
-            actionlabel:"Connect",
-            onEdit:()=>{}
-          },
-          {
-            label:"Google",
-            value:"Not connected",
-            actionlabel:"Connect",
-            onEdit:()=>{}
-          }
-        ]
-      },
-      {
-        title: "Account",
-        data: [
-          {
-            label:"Deactivate",
-            value:"Deactivate your account",
-            actionlabel:"Deactivate",
-            onEdit:()=>{}
-          }
-        ]
-      },
-      
-  ]
+    {
+      title: "Login",
+      data: [
+        {
+          label: "Password",
+          value: "Last updated a day ago",
+          actionlabel: "Update",
+          onEdit: () => {},
+        },
+      ],
+    },
+    {
+      title: "Social Accounts",
+      data: [
+        {
+          label: "Facebook",
+          value: "Not connected",
+          actionlabel: "Connect",
+          onEdit: () => {},
+        },
+        {
+          label: "Google",
+          value: "Not connected",
+          actionlabel: "Connect",
+          onEdit: () => {},
+        },
+      ],
+    },
+    {
+      title: "Account",
+      data: [
+        {
+          label: "Deactivate",
+          value: "Deactivate your account",
+          actionlabel: "Deactivate",
+          onEdit: () => {},
+        },
+      ],
+    },
+  ];
 
   return (
-      <div className="grid grid-cols-1 md:grid-cols-3 space-y-8 md:space-y-0 space-x-0 md:space-x-20">
-        <div className="col-span-1 md:col-span-2">
-          {
-            loginAndSecurityData.map((val,index)=>{
-              return (
-                <LoginAndSecurityItem key={index} {...val} />
-              )
-            })
-          }
-          </div>
-          <div className="col-span-1 md:col-span-1">
-          <FaqSideComponent/>
-          </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 space-y-8 md:space-y-0 space-x-0 md:space-x-20">
+      <div className="col-span-1 md:col-span-2">
+        {loginAndSecurityData.map((val, index) => {
+          return <LoginAndSecurityItem key={index} {...val} />;
+        })}
       </div>
-  )
+      <div className="col-span-1 md:col-span-1">
+        <FaqSideComponent />
+      </div>
+    </div>
+  );
 }

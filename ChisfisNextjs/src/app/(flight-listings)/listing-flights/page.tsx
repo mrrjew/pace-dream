@@ -6,7 +6,6 @@ import React, { FC } from "react";
 import SectionGridFilterCard from "../SectionGridFilterCard";
 import SectionSubscribe from "@/components/SectionSubscribe";
 
-
 export interface ListingFlightsPageProps {}
 
 const ListingFlightsPage: FC<ListingFlightsPageProps> = ({}) => {

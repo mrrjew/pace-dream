@@ -2,7 +2,7 @@ import { MegamenuItem, NavItemType } from "@/shared/Navigation/NavigationItem";
 import ncNanoId from "@/utils/ncNanoId";
 import { Route } from "@/routers/types";
 import __megamenu from "./jsons/__megamenu.json";
-import {FiUser} from "react-icons/fi"
+import { FiUser } from "react-icons/fi";
 
 const megaMenuDemo: MegamenuItem[] = [
   {
@@ -374,40 +374,40 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
   },
 ];
 
-export const SETTINGS_NAV:NavItemType[] = [
+export const SETTINGS_NAV: NavItemType[] = [
   {
-    id:ncNanoId(),
-    href:"/profile/settings/account",
-    name:"Account"
-},
+    id: ncNanoId(),
+    href: "/profile/settings/account",
+    name: "Account",
+  },
   {
-    id:ncNanoId(),
-    href:"/profile/settings/notification",
-    name:"Notification"
-},
+    id: ncNanoId(),
+    href: "/profile/settings/notification",
+    name: "Notification",
+  },
   {
-    id:ncNanoId(),
-    href:"/profile/settings/privacy",
-    name:"Privacy"
-},
+    id: ncNanoId(),
+    href: "/profile/settings/privacy",
+    name: "Privacy",
+  },
   {
-    id:ncNanoId(),
-    href:"/profile/settings/payment",
-    name:"Payment"
-},
+    id: ncNanoId(),
+    href: "/profile/settings/payment",
+    name: "Payment",
+  },
   {
-    id:ncNanoId(),
-    href:"/profile/settings/security",
-    name:"Security"
-},
+    id: ncNanoId(),
+    href: "/profile/settings/security",
+    name: "Security",
+  },
   {
-    id:ncNanoId(),
-    href:"/profile/settings/language_and_region",
-    name:"Language and Region"
-},
+    id: ncNanoId(),
+    href: "/profile/settings/language_and_region",
+    name: "Language and Region",
+  },
   {
-    id:ncNanoId(),
-    href:"/profile/settings/management",
-    name:"Management"
-},
-]
+    id: ncNanoId(),
+    href: "/profile/settings/management",
+    name: "Management",
+  },
+];

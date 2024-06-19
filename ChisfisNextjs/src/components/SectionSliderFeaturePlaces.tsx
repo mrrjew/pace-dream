@@ -14,7 +14,7 @@ import StayCard from "./StayCard";
 import StayCard2 from "./StayCard2";
 
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 18);
-export type Tab = "Room" | "Parking" | "EV Parking" | "Restroom"
+export type Tab = "Room" | "Parking" | "EV Parking" | "Restroom";
 
 export interface SectionSliderFeaturePlacesProps {
   className?: string;
@@ -25,7 +25,7 @@ export interface SectionSliderFeaturePlacesProps {
   categoryCardType?: "card1" | "card2" | "card3" | "card4" | "card5";
   itemPerRow?: 1 | 4 | 5;
   sliderStyle?: "style1" | "style2";
-  currentTab?: Tab,
+  currentTab?: Tab;
 }
 
 const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
@@ -104,7 +104,11 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
 
   return (
     <div className={` md:px-24 ${className} inline-block`}>
-      <Heading desc={subHeading} isCenter={sliderStyle === "style2"} className="w-[80vw] ml-4 mb-8">
+      <Heading
+        desc={subHeading}
+        isCenter={sliderStyle === "style2"}
+        className="w-[80vw] ml-4 mb-8"
+      >
         {heading}
       </Heading>
       <ul className="ml-4 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
@@ -113,49 +117,62 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
           return (
             <li
               onClick={() => setTabActive(tab)}
-              className={`flex-shrink-0 flex items-center cursor-pointer text-base md:text-sm font-medium ${active
-                ? "text-violet pb-8"
-                : "text-neutral-500 hover:text-violet pb-8"
-                } `}
+              className={`flex-shrink-0 flex items-center cursor-pointer text-base md:text-sm font-medium ${
+                active
+                  ? "text-violet pb-8"
+                  : "text-neutral-500 hover:text-violet pb-8"
+              } `}
               key={tab}
             >
               <span>{tab}</span>
-
             </li>
           );
         })}
       </ul>
       <ul className="ml-4 md:ml-8 flex space-x-5 sm:space-x-8 lg:space-x-11 overflow-x-auto hiddenScrollbar">
-        <div className="flex justify-center items-center mb-8" >
+        <div className="flex justify-center items-center mb-8">
           {tabs.map((tab, i) => {
             const active = tab === tabActive;
             if (i === 0) {
               return (
-                <div className={` md:w-[100px] w-[75px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-                  }`} />
-              )
+                <div
+                key={tab}
+                  className={` md:w-[100px] w-[75px] h-0.5 ${
+                    active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`}
+                />
+              );
             } else if (i === 1) {
               return (
-                <div className={` md:w-[85px] w-[50px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-                  }`} />
-              )
+                <div
+                key={tab}
+                  className={` md:w-[85px] w-[50px] h-0.5 ${
+                    active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`}
+                />
+              );
             } else if (i === 2) {
               return (
-                <div className={` md:w-[140px] w-[70px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-                  }`} />
-              )
-            }
-            else if (i === 3) {
+                <div
+                key={tab}
+                  className={` md:w-[140px] w-[70px] h-0.5 ${
+                    active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`}
+                />
+              );
+            } else if (i === 3) {
               return (
-                <div className={` md:w-[140px] w-[70px] h-0.5 ${active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
-                  }`} />
-              )
+                <div
+                key={tab}
+                  className={` md:w-[140px] w-[70px] h-0.5 ${
+                    active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
+                  }`}
+                />
+              );
+            } else {
+              return null;
             }
-            else {
-              return null
-            }
-          })
-          }
+          })}
         </div>
       </ul>
       <MotionConfig
@@ -196,17 +213,17 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
                       onClick={() => changeItemId(currentIndex - 1)}
                       className="font-black mr-8 text-black text-xl -translate-y-1/2 z-[1]"
                     />
-                  ) : <PrevBtn
-                    className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]"
-                  />}
+                  ) : (
+                    <PrevBtn className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
+                  )}
                   {categories.length > currentIndex + numberOfItems ? (
                     <NextBtn
                       onClick={() => changeItemId(currentIndex + 1)}
                       className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"
                     />
-                  ) : <NextBtn
-                    className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2"
-                  />}
+                  ) : (
+                    <NextBtn className="ml-8 bg-neutral-100 text-neutral-100 text-xl -translate-y-1/2" />
+                  )}
                 </div>
               </AnimatePresence>
             </motion.ul>

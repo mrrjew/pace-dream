@@ -1,3 +1,4 @@
+
 'use client';
 import React, { Fragment } from 'react';
 import ButtonPrimary from '@/shared/ButtonPrimary';
@@ -38,17 +39,17 @@ const PageAddListing8 = (
   // ]
 
   return (
-    <div className='rounded-lg bg-white p-2 md:p-6'>
-      <div className='space-y-4 mb-4'>
-        <h2 className='text-lg font-medium'>
-           Congratulations 🎉
-        </h2>
-        <p className='text-sm font-normal'>
-          Excellent, congratulations on completing the listing, it is waiting to be reviewed for publication.
-          </p>
+    <div className="rounded-lg bg-white p-2 md:p-6">
+      <div className="space-y-4 mb-4">
+        <h2 className="text-lg font-medium">Congratulations 🎉</h2>
+        <p className="text-sm font-normal">
+          Excellent, congratulations on completing the listing, it is waiting to
+          be reviewed for publication.
+        </p>
       </div>
-    < div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* image and description */}
+
         <div className='space-y-4 col-span-2'>
           <div className=''>
             <Image 
@@ -89,16 +90,17 @@ const PageAddListing8 = (
                 {data?.details?.description || data?.summary}
               </p>
             <p>
-              <Link href='#' className='text-primary-500 underline'>
-                      Read more
-                </Link>
+              <Link href="#" className="text-primary-500 underline">
+                Read more
+              </Link>
             </p>
           </div>
         </div>
 
         {/* property details */}
-        <div className='grid grid-cols-1 h-fit gap-4 rounded-xl ring-1 ring-gray-300 p-4'>
+        <div className="grid grid-cols-1 h-fit gap-4 rounded-xl ring-1 ring-gray-300 p-4">
           {/* title and rate*/}
+
             <div className='flex items-center gap-4 justify-start'>
               <span className='text-xs rounded-md p-2 py-4 bg-black text-white font-semibold'>Room Stays</span>
               <span className='text-neutral-600 flex items-center'>
@@ -132,19 +134,40 @@ const PageAddListing8 = (
                   </span>
            </div>
           </div>
-          <hr className='bg-gray-400 w-full' />
+          <hr className="bg-gray-400 w-full" />
+          {/* price, bed,bath */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <span className="text-2xl font-semibold">$300</span>
+              <span className="text-neutral-600">/night</span>
+            </div>
+            <hr className="bg-gray-400 w-[0.5px] h-4 " />
+            <div>
+              <Bed />
+              <span className="text-neutral-600">2 Beds</span>
+            </div>
+            <hr className="bg-gray-400 w-[0.5px] h-4 " />
+            <div>
+              <Shower />
+              <span className="text-neutral-600">1 Bath</span>
+            </div>
+          </div>
+          <hr className="bg-gray-400 w-full" />
           {/* location and map link */}
-          <div className='flex items-center justify-between'>
-           <div>
-             <Place className='text-primary-400 h-4 w-4' />
-            <span className='text-neutral-400 text-xs'>121 king street road, Melbourne</span>
-           </div>
-            <Link href='#' className='text-primary-500 underline'>
+          <div className="flex items-center justify-between">
+            <div>
+              <Place className="text-primary-400 h-4 w-4" />
+              <span className="text-neutral-400 text-xs">
+                121 king street road, Melbourne
+              </span>
+            </div>
+            <Link href="#" className="text-primary-500 underline">
               Map Link
             </Link>
           </div>
-          <hr className='bg-gray-400 w-full' />
+          <hr className="bg-gray-400 w-full" />
           {/* amenities */}
+
            <div className='flex items-center justify-between'>
               {
                 data?.details?.amenities?.map((_id:string,index:number,array:string[])=>{
@@ -189,15 +212,18 @@ const PageAddListing8 = (
               })
             }
           </ul>
-          <hr className='border-none bg-transparent w-full' />
+          <hr className="border-none bg-transparent w-full" />
           {/* buttons */}
-          <div className='grid gap-4'>
-            <ButtonSecondary className='w-full rounded-lg ring-1 ring-primary-700 text-primary-700'>Contact Host</ButtonSecondary>
-            <ButtonPrimary className='w-full rounded-lg'>Book now</ButtonPrimary>
+          <div className="grid gap-4">
+            <ButtonSecondary className="w-full rounded-lg ring-1 ring-primary-700 text-primary-700">
+              Contact Host
+            </ButtonSecondary>
+            <ButtonPrimary className="w-full rounded-lg">
+              Book now
+            </ButtonPrimary>
           </div>
-
         </div>
-    </div>
+      </div>
     </div>
   );
 };

@@ -49,23 +49,22 @@ const StayCard2: FC<StayCard2Props> = ({
       // </>
       <div className="relative md:w-full w-full">
         <Link href={`/listing-stay-detail/${id}?term=${term}`}>
-        <div>
-          <GallerySlider
-            uniqueID={`StayCard2_${id}`}
-            ratioClass="aspect-w-12 aspect-h-11"
-            galleryImgs={galleryImgs}
-            imageClass="rounded-lg"
-            
-          />
-          <BtnLikeIcon
-            isLiked={like}
-            className="absolute right-3 top-3 z-[1]"
-          />
-          {saleOff && (
-            <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />
-          )}
-        </div>
-      </Link>
+          <div>
+            <GallerySlider
+              uniqueID={`StayCard2_${id}`}
+              ratioClass="aspect-w-12 aspect-h-11"
+              galleryImgs={galleryImgs}
+              imageClass="rounded-lg"
+            />
+            <BtnLikeIcon
+              isLiked={like}
+              className="absolute right-3 top-3 z-[1]"
+            />
+            {saleOff && (
+              <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />
+            )}
+          </div>
+        </Link>
       </div>
     );
   };
@@ -126,13 +125,10 @@ const StayCard2: FC<StayCard2Props> = ({
           {
             <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
               <p className="text-[14px] font-[600]">Stock</p>
-              <div className=" w-3 h-3 rounded-full bg-green-700">
-
-              </div>
+              <div className=" w-3 h-3 rounded-full bg-green-700"></div>
             </div>
           }
         </div>
-
 
         <div className="space-y-2">
           <span className="text-sm text-neutral-500">
@@ -144,8 +140,9 @@ const StayCard2: FC<StayCard2Props> = ({
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
             {isAds && <Badge name="ADS" color="green" />}
             <h2
-              className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${size === "default" && "text-base"
-                }`}
+              className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${
+                size === "default" && "text-base"
+              }`}
             >
               <span className="line-clamp-1 truncate">{title}</span>
             </h2>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   CalendarIcon,
@@ -8,9 +8,9 @@ import {
   EnvelopeIcon,
   HeartIcon,
   HomeIcon,
-} from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import React, { useState } from 'react';
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
+import React, { useState } from "react";
 
 interface SidebarOptionProps {
   icon: React.ReactElement;
@@ -30,16 +30,16 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({
   <div
     className={`flex mb-1 mt-1 p-2 pl-3 cursor-pointer w-full ${
       label === selected
-        ? 'bg-[#F9F8FB] text-[#632DF8] border-l-4 border-indigo-500'
-        : 'text-black'
-    } ${collapse ? 'justify-center' : 'justify-start'}`}
+        ? "bg-[#F9F8FB] text-[#632DF8] border-l-4 border-indigo-500"
+        : "text-black"
+    } ${collapse ? "justify-center" : "justify-start"}`}
   >
     {icon}
     {collapse ? null : (
       <Link href={{ pathname: link }}>
         <p
           className={`text-md ml-2 pt-1 ${
-            label === selected ? 'text-[#632DF8]' : 'text-black'
+            label === selected ? "text-[#632DF8]" : "text-black"
           }`}
         >
           {label}
@@ -65,7 +65,7 @@ const Collapse = ({ collapse }: { collapse: boolean }) => (
 );
 
 const SideBar = () => {
-  const [selected, setSelected] = useState('Inbox');
+  const [selected, setSelected] = useState("Inbox");
   const [collapse, setCollapse] = useState(true);
   const clickCollapse = () => {
     setCollapse(!collapse);
@@ -73,7 +73,7 @@ const SideBar = () => {
   return (
     <div
       className={`left-0 lg:h-[90vh]  text-black flex flex-col justify-between border-r ${
-        collapse ? 'w-70' : 'w-200 min-w-[200px]'
+        collapse ? "w-70" : "w-200 min-w-[200px]"
       }`}
     >
       <div className="flex flex-col items-start">

@@ -1,15 +1,15 @@
-import { Conversation, DbResponseToConversation } from '@/types/chat';
-import { serverAuthAxios } from '@/utils/serverAxios';
-import { ChatList } from '../components/ChatList';
+import { Conversation, DbResponseToConversation } from "@/types/chat";
+import { serverAuthAxios } from "@/utils/serverAxios";
+import { ChatList } from "../components/ChatList";
 
 export default async function InboxPageLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const response = await serverAuthAxios().get('/chat/all');
+  const response = await serverAuthAxios().get("/chat/all");
   const conversation: Conversation[] = response.data.data.map((item: any) =>
-    DbResponseToConversation(item)
+    DbResponseToConversation(item),
   );
 
   return (

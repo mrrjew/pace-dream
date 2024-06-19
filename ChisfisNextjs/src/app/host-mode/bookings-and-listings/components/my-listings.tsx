@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useSession } from "@/hooks/useSession"
 import { BookingAndListingCard } from "./booking-and-listing-card"

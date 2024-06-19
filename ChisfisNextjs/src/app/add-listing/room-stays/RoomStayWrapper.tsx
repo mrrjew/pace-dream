@@ -4,7 +4,6 @@ import AddListingMainLayoutWrapper from "../AddListingMainLayoutWrapper";
 import { RentableItem } from "@/types/rentalItems";
 
 
-
 export default function AddListingRoomStayWrapper(
     {children,
     onNext,
@@ -24,21 +23,21 @@ export default function AddListingRoomStayWrapper(
   // list to current step if step is 4,5:publish, 6:Go back to home
   useEffect(() => {
     setHideBackBtn(false);
-    if(currentStep === 4 || currentStep === 5){
-      setSubmitBtnText("Publish")
+    if (currentStep === 4 || currentStep === 5) {
+      setSubmitBtnText("Publish");
       return;
     }
-    if(currentStep === 6 || currentStep === 7){
+    if (currentStep === 6 || currentStep === 7) {
       setSubmitBtnText("Go back to home");
       setHideBackBtn(true);
       return;
     }
-    setSubmitBtnText("Next");  
-  }, [currentStep])
-
+    setSubmitBtnText("Next");
+  }, [currentStep]);
 
   return (
     <AddListingMainLayoutWrapper
+
           onBack={onBack}
           onNext={onNext}
           isFirstStep={isFirstStep}

@@ -112,7 +112,7 @@ const Faq = () => {
                 </p>
                 <p className="text-[#666666] text-[.7rem] font-[300]  ">
                   An all-encompassing and user-friendly platform that seamlessly
-                  connects you with precisely what you're looking for,
+                  connects you with precisely what you{'\''}re looking for,
                   streamlining your search process effortlessly.
                 </p>
               </div>

@@ -6,6 +6,7 @@ import Input from "@/shared/Input";
 import {GoogleMapLayout} from "@/components/GoogleMap";
 import { RentableItem } from "@/types/rentalItems";
 
+
 const PageAddListing2 = (
   {data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}
 ) => {
@@ -43,6 +44,7 @@ const PageAddListing2 = (
           <h2 className="text-xl font-semibold">Location Details</h2>
           <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <FormItem label="">
+
               <Input 
                 defaultValue={data?.location?.country}
                 onChange={(e)=>
@@ -53,6 +55,7 @@ const PageAddListing2 = (
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             <FormItem label="">
+
               <Input 
                 defaultValue={data?.location?.street_address}
                 onChange={(e)=>updateData({...data,location:{...data?.location,street_address:e?.currentTarget?.value}} as RentableItem)}
@@ -67,6 +70,7 @@ const PageAddListing2 = (
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             <FormItem label="">
+
               <Input 
                 defaultValue={data?.location?.state}
                 onChange={(e)=>updateData({...data,location:{...data.location,state:e?.currentTarget?.value}} as RentableItem)}
@@ -82,6 +86,7 @@ const PageAddListing2 = (
           {/* <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <FormItem label="">
               <Input
+
                 defaultValue={data?.location?.address}
                 onChange={(e)=>{
                   const link = e?.currentTarget?.value;

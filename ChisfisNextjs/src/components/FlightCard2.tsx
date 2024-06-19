@@ -4,7 +4,7 @@ import { DEMO_FLIGHT_LISTINGS } from "@/data/listings";
 import { FlightDataType, StayDataType } from "@/data/types";
 import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
-import Flight from "@/images/flight.webp"
+import Flight from "@/images/flight.webp";
 import Link from "next/link";
 
 export interface FlightCard2Props {
@@ -22,12 +22,12 @@ const FlightCard2: FC<FlightCard2Props> = ({
   className = "",
   data = DEMO_DATA,
   nameFlight = "New York",
-  term = ""
+  term = "",
 }) => {
   const {
     price,
     saleOff,
-    airlines: {logo, name},
+    airlines: { logo, name },
     id,
   } = data;
 
@@ -35,8 +35,16 @@ const FlightCard2: FC<FlightCard2Props> = ({
     return (
       <div className="relative md:w-full w-[82vw]">
         <Link href={`/listing-stay-detail/${id}?term=${term}`}>
-          <Image src={Flight} alt="vuelo" width={300} height={300} className="rounded-xl"/>
-          {saleOff && <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />}
+          <Image
+            src={Flight}
+            alt="vuelo"
+            width={300}
+            height={300}
+            className="rounded-xl"
+          />
+          {saleOff && (
+            <SaleOffBadge desc={saleOff} className="absolute left-3 top-3" />
+          )}
         </Link>
       </div>
     );
@@ -46,9 +54,7 @@ const FlightCard2: FC<FlightCard2Props> = ({
     return (
       <div className={size === "default" ? "mt-3 space-y-3" : "mt-2 space-y-2"}>
         <div className="space-y-2">
-          <span className="text-sm text-neutral-500">
-            {nameFlight}
-          </span>
+          <span className="text-sm text-neutral-500">{nameFlight}</span>
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
             {/* {isAds && <Badge name="ADS" color="green" />} */}
             <h2
@@ -61,23 +67,25 @@ const FlightCard2: FC<FlightCard2Props> = ({
           </div>
           <div className="flex items-center text-neutral-500 text-sm space-x-1.5">
             {size === "default" && (
-              <Image src={logo} alt="logo" width={16} height={16}/>
+              <Image src={logo} alt="logo" width={16} height={16} />
             )}
             <span className="">{name}</span>
           </div>
         </div>
         <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
         <div className="flex justify-between items-center">
-            <span className="text-base font-semibold">{price}!</span>
+          <span className="text-base font-semibold">{price}!</span>
         </div>
-    </div>
+      </div>
     );
   };
 
   return (
     <div className={`nc-FlightCard2 group relative mt-4 ${className}`}>
       {renderSliderGallery()}
-      <Link href={`/listing-stay-detail/${id}?term=${term}`}>{renderContent()}</Link>
+      <Link href={`/listing-stay-detail/${id}?term=${term}`}>
+        {renderContent()}
+      </Link>
     </div>
   );
 };
