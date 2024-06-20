@@ -20,7 +20,7 @@ import GuestsInput from "./GuestsInput";
 import SectionDateRange from "../SectionDateRange";
 import { Route } from "next";
 
-export interface ListingExperiencesDetailPageProps {}
+ interface ListingExperiencesDetailPageProps {}
 
 const ListingExperiencesDetailPage: FC<
   ListingExperiencesDetailPageProps

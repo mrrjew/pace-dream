@@ -169,7 +169,7 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
                         // priority={index < 3}
                         src={url} 
                         fill
-                       sizes="100vw"
+                        sizes="100vw"
                         alt={'image'} 
                         blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII='
                         objectFit='cover'
