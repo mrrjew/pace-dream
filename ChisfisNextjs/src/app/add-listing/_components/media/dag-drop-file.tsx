@@ -45,9 +45,9 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
         arg.files.forEach((file) => {
             body.append("file", file, file.name);
         });
-        const response = await fetch('/api/media', { method: "POST", body});
+        const response = fetch('/api/media', { method: "POST", body,cache: 'no-cache'}).then((res)=>res.json());
         console.log("Response",response);
-        return await response.json();
+        return await response
       }
 
  const { mutateAsync,isLoading} = useMutation({
