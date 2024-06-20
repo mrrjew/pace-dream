@@ -51,8 +51,8 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
         arg.files.forEach((file) => {
             body.append("file", file, file.name);
         });
-        const response = fetch('/api/media', { method: "POST", body,cache: 'no-cache'}).then((res)=>res.json());
-        console.log("Response",response);
+        const response = fetch('/api/media', { method: "POST", body}).then((res)=>res.json());
+        // console.log("Response",await response);
         return await response
       }
 
@@ -155,14 +155,8 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
             {Number(localMedia?.length) >0 && localMedia?.map((url,index) => {
                  if(!url) return null;
                return  (
-                <div key={url} 
+                <div key={index} 
                     className="relative w-20 h-20 rounded-md p-0 ring-1"
-                    // style={{
-                    //     background: `url(${url})`,
-                    //     backgroundSize: 'cover',
-                    //     backgroundPosition: 'center',
-                    //     backgroundRepeat: 'no-repeat'
-                    // }}
                     >
                         {/* check if it's document */}
                      <Image 

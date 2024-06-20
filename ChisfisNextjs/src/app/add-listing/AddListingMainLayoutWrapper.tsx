@@ -179,6 +179,10 @@ export default function AddListingMainLayoutWrapper(
         }
       }
 
+      // useEffect(() => {
+      //   console.log("data : ",data?.gallery?.images);
+      // }, [data])
+
   return (
     <div className="">
             {children}

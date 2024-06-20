@@ -10,18 +10,6 @@ import { DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 
 
-async function uploadDocuments(
-    url: string,
-    { arg }: { arg: { files: FileWithPath[] } }
-  ): Promise<{result?:string[]}> {
-    const body = new FormData();
-    arg.files.forEach((file) => {
-      body.append("file", file, file.name);
-    });
-  
-    const response = await fetch(url, { method: "POST", body });
-    return await response.json();
-  }
 
 export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
     type: "image" | "video" | "document",
@@ -45,8 +33,21 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
         video: isMultiple ? (maxFiles ?? 1) : 1,
         document: isMultiple ? (maxFiles ?? 1) : 1
     }
-
     const [localMedia, setLocalMedia] = React.useState<string[]>(media || []);
+
+
+    async function uploadDocuments(
+        url: string,
+        { arg }: { arg: { files: FileWithPath[] } }
+    ): Promise<{result?:string[]}> {
+        const body = new FormData();
+        arg.files.forEach((file) => {
+        body.append("file", file, file.name);
+        });
+    
+        const response = await fetch(url, { method: "POST", body });
+        return await response.json();
+    }
 
 
  const { mutateAsync,isLoading} = useMutation({
