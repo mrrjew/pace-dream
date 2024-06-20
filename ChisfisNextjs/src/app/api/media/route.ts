@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   S3Client,
-  ListObjectsCommand,
   PutObjectCommand,
 //   GetObjectCommand,
 } from "@aws-sdk/client-s3";
@@ -17,10 +16,10 @@ const s3 = new S3Client({
 });
 
 // endpoint to get the list of files in the bucket
-export async function GET() {
-  const response = await s3.send(new ListObjectsCommand({ Bucket }));
-  return NextResponse.json(response?.Contents ?? []);
-}
+// export async function GET() {
+//   const response = await s3.send(new ListObjectsCommand({ Bucket }));
+//   return NextResponse.json(response?.Contents ?? []);
+// }
 
 // endpoint to upload a file to the bucket
 export async function POST(request: NextRequest) {
@@ -37,12 +36,15 @@ export async function POST(request: NextRequest) {
     })
   );
 
+  // delay for a few seconds to allow the file to be uploaded
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   // generate urls for the uploaded files
-  const result = await Promise.all( response.map(async (key) => {
+  const result = await Promise.all(response.map(async (key) => {
     // const command = new GetObjectCommand({ Bucket, Key: key });
     // const url = await getSignedUrl(s3, command, { expiresIn: 0});
     // https://totel-images.s3.us-east-2.amazonaws.com
     return `https://${Bucket}.s3.us-east-2.amazonaws.com/${key}`
   } ));
-  return NextResponse.json({ result});
+  return NextResponse.json({result});
 }

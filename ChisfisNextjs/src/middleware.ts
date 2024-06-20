@@ -6,15 +6,23 @@ const isAuthRelatedRoutes = (pathname: string) => {
 };
 
 const routeRequiringAuth = ["/account", "/inbox"];
+const whiteListedRoutes = ["/auth/login", "/auth/signup", "/auth/forgot-password","/api/media",'/_next/image','/api'];
 
 const checkRouteRequiresAuth = (pathname: string) => {
   return routeRequiringAuth.some((route) => pathname.startsWith(route));
 };
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/_next")) {
+
+  // check if route is part of the whiteListedRoutes
+  if (whiteListedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))) {
+    // console.log("whiteListedRoutes url: ", request.nextUrl.pathname );
     return NextResponse.next();
   }
+
+  // if (request.nextUrl.pathname.startsWith("/_next")) {
+  //   return NextResponse.next();
+  // }
 
   const cookies = request.cookies;
   const authToken = cookies.get("auth-token")?.value;
@@ -45,11 +53,11 @@ export async function middleware(request: NextRequest) {
   }
 
   if (!isValidToken && checkRouteRequiresAuth(request.nextUrl.pathname)) {
-    console.log("isValidToken", isValidToken);
-    console.log(
-      "checkRouteRequiresAuth",
-      checkRouteRequiresAuth(request.nextUrl.pathname),
-    );
+    // console.log("isValidToken", isValidToken);
+    // console.log(
+    //   "checkRouteRequiresAuth",
+    //   checkRouteRequiresAuth(request.nextUrl.pathname),
+    // );
     return NextResponse.redirect(new URL(`/auth/login`, request.nextUrl).href);
   }
 
