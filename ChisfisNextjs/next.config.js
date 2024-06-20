@@ -5,6 +5,7 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
     // serverActions: true,
+    
   },
   images: {
     remotePatterns: [
@@ -48,7 +49,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "totel-images.s3.us-east-2.amazonaws.com",
         port: "",
-        pathname: "/**",
+        pathname: "/**"
       },
       {
         protocol: "https",
@@ -71,18 +72,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.postimg.cc",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: 'http',
-        hostname: "totel-images.s3.us-east-2.amazonaws.com",
-        port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: 'https',
-        hostname: "totel-images.s3.us-east-2.amazonaws.com",
         port: "",
         pathname: "/**",
       },

@@ -2,12 +2,13 @@
 import '@mantine/dropzone/styles.css';
 import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import { Cancel, Delete, RecyclingRounded, VideoCallOutlined } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import { useMutation } from '@tanstack/react-query';
 import { Group, MantineProvider } from '@mantine/core';
 import { DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
+import { createToast } from '@/utils/createToast';
 
 
 
@@ -25,7 +26,8 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
         document: [MIME_TYPES.pdf]
     }
     const maxSize = {
-        image: 10 * 1024 * 1024,
+        //  limit image size to 1 mb
+        image: 1 * 1024 * 1024,
         video: 100 * 1024 * 1024,
         document: 50 * 1024 * 1024
     }
@@ -37,8 +39,12 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
 
     const [localMedia, setLocalMedia] = React.useState<string[]>(media || []);
 
+    useEffect(() => {
+
+        setLocalMedia(media || [""]);
+    }, [media]);
+
     async function uploadDocuments(
-        url: string,
         { arg }: { arg: { files: FileWithPath[] } }
       ): Promise<{result?:string[]}> {
         const body = new FormData();
@@ -53,8 +59,8 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
  const { mutateAsync,isLoading} = useMutation({
     mutationFn: (filePaths:FileWithPath[])=>{
         // generate urls from the local files
-        setLocalMedia([...localMedia, ...filePaths.map((file)=>URL.createObjectURL(file))]);
-        return uploadDocuments("/api/media", { arg: { files: filePaths } });
+        // setLocalMedia([...localMedia, ...filePaths.map((file)=>URL.createObjectURL(file))]);
+        return uploadDocuments({arg: { files: filePaths } });
     },
     onSuccess: (res:{result?:string[]}) => {
       // wait for few seconds before updating the state
@@ -78,6 +84,10 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
                 maxSize={maxSize[type]}
                 maxFiles={maxFileList[type]}
                 disabled={isLoading || localMedia?.length >= maxFileList[type]}
+                onReject={(files) => {
+                    console.log("Rejected files",files[0].errors[0].message);
+                 createToast(files[0]?.errors[0]?.message||"File type not supported","error")
+                }}
                 onDrop={(files) =>{
                     // check sum of files and local media is less than max files
                     if(files.length + localMedia.length > maxFileList[type]){
@@ -109,7 +119,7 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
                         {
                             type == "image" &&  <div className="h-20 justify-center flex items-center gap-4">
                                 <CloudArrowUpIcon className="w-12 h-12 text-primary-500"/>
-                                <p className="text-gray-400">Upload a file or drag and drop PNG, JPG, GIF up to 10MB</p>
+                                <p className="text-gray-400">Upload a file or drag and drop PNG, JPG, GIF up to 1MB</p>
                             </div>}
                         {
                             type == "video" && <div className="h-20 flex justify-center items-center gap-4">
@@ -142,19 +152,30 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
         </div>
         {/* list uploaded files */}
        {type == "image" &&  <div className="flex gap-4 flex-wrap items-center p-4">
-            {localMedia?.map((url) => (
+            {Number(localMedia?.length) >0 && localMedia?.map((url,index) => {
+                 if(!url) return null;
+               return  (
                 <div key={url} 
-                    className="relative w-20 h-20 rounded-md p-0 ring-1">
+                    className="relative w-20 h-20 rounded-md p-0 ring-1"
+                    // style={{
+                    //     background: `url(${url})`,
+                    //     backgroundSize: 'cover',
+                    //     backgroundPosition: 'center',
+                    //     backgroundRepeat: 'no-repeat'
+                    // }}
+                    >
                         {/* check if it's document */}
-                    {type == "image" &&  <Image 
-                        key={url}
-                        priority 
+                     <Image 
+                        // priority={index < 3}
                         src={url} 
+                        fill
+                       sizes="100vw"
                         alt={'image'} 
-                        width={360} 
-                        height={360} 
-                    className="w-full h-full object-cover rounded-md"/>}
+                        blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII='
+                        objectFit='cover'
+                    className="rounded-md"/>
                     {/* delete button */}
+                  
                     <div className="absolute -top-2 -right-1 p-1 bg-red-400 hover:bg-red-500 rounded-xl">
                         <button 
                             title='Delete file'
@@ -175,7 +196,8 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
                         </button>
                     </div>
                 </div>
-            ))}
+            )}
+            )}
         </div>}
   </MantineProvider>
   );
