@@ -5,6 +5,7 @@ import { BiEdit } from "react-icons/bi";
 import { useSession } from "@/hooks/useSession";
 import avatar1 from "@/images/avatars/profile-circle.png";
 import Avatar from "@/shared/Avatar";
+import Image from "next/image";
 
 function UserProfilePreview() {
   const { getSession } = useSession();
@@ -17,7 +18,9 @@ function UserProfilePreview() {
         <div className="avatar absolute top-20 left-14">
           {userInfo?.profilePic ? (
             <div className="w-28 border-white border-8 rounded-full">
-              <img
+              <Image
+                width={100}
+                height={100}
                 // src="https://i.ibb.co/mHnRpq9/image.png"
                 src={userInfo?.profilePic}
                 className="rounded-full"

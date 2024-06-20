@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import countryList from "@/utils/countryList.json";
+import Image from "next/image";
 
 export const suggestedLanguage = [
   {
@@ -123,9 +124,11 @@ export default function LanguageModal({
                               <div className="flex justify-between items-center gap-3">
                                 {item.countryImg && (
                                   <div className="w-6 h-6 rounded-full overflow-hidden">
-                                    <img
+                                    <Image
                                       src={item.countryImg}
                                       alt={item.countryImg}
+                                      width={24}
+                                      height={24}
                                       className="w-full h-full object-cover scale-500"
                                       style={{
                                         width: "100%",
@@ -179,9 +182,11 @@ export default function LanguageModal({
                               <div className="flex justify-between items-center gap-3">
                                 {item.image && (
                                   <div className="w-6 h-6 rounded-full overflow-hidden min-w-6">
-                                    <img
+                                    <Image
                                       src={item.image}
                                       alt={item.name}
+                                      width={24}
+                                      height={24}
                                       className="w-full h-full object-cover scale-500"
                                       style={{
                                         width: "100%",

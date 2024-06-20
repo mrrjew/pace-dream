@@ -9,17 +9,17 @@ import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderT
 import DatePickerCustomDay from "@/components/DatePickerCustomDay";
 import ClearDataButton from "@/app/(client-components)/(HeroSearchForm)/ClearDataButton";
 
-export interface RentalCarDatesRangeInputProps {
+interface RentalCarDatesRangeInputProps {
   className?: string;
 }
 
-const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
+export const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
   className = "",
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/03/01"),
+    new Date(),
   );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/03/16"));
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
 
   const onChangeDate = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
@@ -114,5 +114,3 @@ const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
     </>
   );
 };
-
-export default RentalCarDatesRangeInput;

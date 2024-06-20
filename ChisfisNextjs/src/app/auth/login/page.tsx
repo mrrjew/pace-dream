@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { useState } from "react";
 import facebookSvg from "@/images/Facebook.svg";
 import googleSvg from "@/images/Google.svg";
 import appleSvg from "@/images/Apple.svg";
@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useGoogleLogin } from "@/hooks/providers/useGoogleLogin";
 import { useAppleLogin } from "@/hooks/providers/useAppleLogin";
 import { useFacebookLogin } from "@/hooks/providers/useFacebookLogin";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { app } from "config/firebase";
 import axios, { AxiosError } from "axios";
 import { useSession } from "@/hooks/useSession";
@@ -19,9 +19,7 @@ import { SignupMethod } from "@/types/SignupMethod";
 import { FirebaseError } from "firebase/app";
 import { MobileInput } from "@/components/MobileInput";
 
-export interface PageLoginProps {}
-
-const PageLogin: FC<PageLoginProps> = ({}) => {
+export default function Page() {
   const { googleLogin, isLoading: googleLoggining } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
@@ -360,5 +358,3 @@ const PageLogin: FC<PageLoginProps> = ({}) => {
     </div>
   );
 };
-
-export default PageLogin;
