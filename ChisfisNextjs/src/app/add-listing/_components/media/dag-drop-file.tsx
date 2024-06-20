@@ -8,25 +8,9 @@ import { useMutation } from '@tanstack/react-query';
 import { Group, MantineProvider } from '@mantine/core';
 import { DocumentArrowDownIcon, DocumentIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
-import axios from 'axios';
 
 
-async function uploadDocuments(
-    url: string,
-    { arg }: { arg: { files: FileWithPath[] } }
-  ): Promise<{result?:string[]}> {
-    const body = new FormData();
-    arg.files.forEach((file) => {
-      body.append("file", file, file.name);
-    });
-    // const _host = window.location.host + url;
-    // https://www.pacedream.com/api/media
-    // const response = await fetch(url, 
-    //     { method: "POST", body }
-    // );
-    const response = await axios.post(url, body);
-    return await response.data
-  }
+
 
 export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
     type: "image" | "video" | "document",
@@ -53,6 +37,18 @@ export function DragDrop({type,maxFiles,isMultiple,media,onUploaded}:{
 
     const [localMedia, setLocalMedia] = React.useState<string[]>(media || []);
 
+    async function uploadDocuments(
+        url: string,
+        { arg }: { arg: { files: FileWithPath[] } }
+      ): Promise<{result?:string[]}> {
+        const body = new FormData();
+        arg.files.forEach((file) => {
+            body.append("file", file, file.name);
+        });
+        const response = await fetch('/api/media', { method: "POST", body});
+        console.log("Response",response);
+        return await response.json();
+      }
 
  const { mutateAsync,isLoading} = useMutation({
     mutationFn: (filePaths:FileWithPath[])=>{
