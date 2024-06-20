@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { cn } from "@/utils/tailwind-merger";
 import PlacesAutocomplete from 'react-places-autocomplete';

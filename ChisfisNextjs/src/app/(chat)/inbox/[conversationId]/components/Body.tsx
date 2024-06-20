@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import useConversation from "@/hooks/useConversation";
@@ -15,7 +16,7 @@ import {
 import { pusherClient } from "@/utils/pusher";
 import { find } from "lodash";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { IoIosAttach, IoIosSend } from "react-icons/io";
+import { IoIosSend } from "react-icons/io";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { ImagePreviewModal } from "./ImagePreviewModal";
 import { MessageBox } from "./MessageBox";

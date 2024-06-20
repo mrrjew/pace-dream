@@ -3,6 +3,7 @@
 import ButtonPrimary from "@/shared/ButtonPrimary";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import { MessageType } from "@/types/chat";
+import Image from "next/image";
 
 interface IImagePreviewModalProps {
   images: File[];
@@ -24,10 +25,12 @@ export const ImagePreviewModal: React.FC<IImagePreviewModalProps> = ({
       <div className="flex gap-2">
         {type === MessageType.IMAGE
           ? urls?.map((url) => (
-              <img
+              <Image
                 key={url}
                 src={url}
                 alt=""
+                width={60}
+                height={60}
                 className="w-48 h-30 md:w-60 md:h-36 lg:w-72 lg:h-48"
               />
             ))

@@ -11,7 +11,7 @@ export interface GuestsInputProps {
   className?: string;
 }
 
-const GuestsInput: FC<GuestsInputProps> = ({ className = "flex-1" }) => {
+export const GuestsInput: FC<GuestsInputProps> = ({ className = "flex-1" }) => {
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(1);
@@ -119,4 +119,3 @@ const GuestsInput: FC<GuestsInputProps> = ({ className = "flex-1" }) => {
   );
 };
 
-export default GuestsInput;

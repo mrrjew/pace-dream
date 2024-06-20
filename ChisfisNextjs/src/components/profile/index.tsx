@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Input from "@/shared/Input";
 import Label from "../Label";

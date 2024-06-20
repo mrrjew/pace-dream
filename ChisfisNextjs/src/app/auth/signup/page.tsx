@@ -1,5 +1,4 @@
 "use client";
-import { SignupForm } from "@/app/auth/components/SignupForm";
 import { useAppleLogin } from "@/hooks/providers/useAppleLogin";
 import { useFacebookLogin } from "@/hooks/providers/useFacebookLogin";
 import { useGoogleLogin } from "@/hooks/providers/useGoogleLogin";
@@ -16,10 +15,10 @@ import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { SignupMethod } from "@/types/SignupMethod";
 import { MobileInput } from "@/components/MobileInput";
+import { SignupForm } from "@/components/AuthComponents/SignupForm";
 
-export interface PageSignUpProps {}
 
-const PageSignUp: FC<PageSignUpProps> = ({}) => {
+export default function Page(){
   const { googleLogin, isLoading: googleLoggingin } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
@@ -303,4 +302,3 @@ const PageSignUp: FC<PageSignUpProps> = ({}) => {
   );
 };
 
-export default PageSignUp;

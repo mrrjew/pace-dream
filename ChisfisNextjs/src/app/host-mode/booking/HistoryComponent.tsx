@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
@@ -8,10 +9,12 @@ const HistoryComponent = () => {
         <div className=" text-gray-50 mt-10 md:w-[48%] shadow-xl">
           <div className="flex items-start border-b border-[#D9D9D9] pb-6 resBookComp">
             <div className="mx-5">
-              <img
+              <Image
                 src="https://i.ibb.co/QmWKH5K/image.png"
                 className="w-40 h-36 rounded-xl"
                 alt=""
+                width={160}
+                height={144}
               />
             </div>
             <div>

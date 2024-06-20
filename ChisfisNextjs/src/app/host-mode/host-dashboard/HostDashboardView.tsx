@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useProfile } from "@/context";
 import { useFetch } from "@/hooks/useFetch";
