@@ -14,9 +14,10 @@ const CardCategory6: FC<CardCategory6Props> = ({
   taxonomy,
 }) => {
   const { count, name, href = "/", thumbnail } = taxonomy;
+  const urlObject = typeof href === "string" ? { pathname: href } : href;
   return (
     <Link
-      href={href}
+      href={urlObject}
       className={`nc-CardCategory6 relative flex w-full group rounded-2xl z-0 overflow-hidden ${className}`}
     >
       <div className="aspect-w-16 aspect-h-10 sm:aspect-h-12 xl:aspect-h-9 w-full h-0"></div>

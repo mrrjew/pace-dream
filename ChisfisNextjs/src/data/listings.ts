@@ -1,11 +1,24 @@
 import __stayListing from "./jsons/__stayListing.json";
 import __carsListing from "./jsons/__carsListing.json";
+import __lastMinutesListing from "./jsons/__lastMinutesListing.json";
 import __experiencesListing from "./jsons/__experiencesListing.json";
+import __flightListing from "./jsons/__flightListing.json";
+import __timeBasedListing from "./jsons/__timeBasedListing.json";
+import _hourlyRental from "./jsons/_hourlyRental.json";
 import {
   DEMO_STAY_CATEGORIES,
   DEMO_EXPERIENCES_CATEGORIES,
+  DEMO_LAST_CATEGORIES,
+  DEMO_TIMEBASED_CATEGORIES,
 } from "./taxonomies";
-import { CarDataType, ExperiencesDataType, StayDataType } from "./types";
+import {
+  CarDataType,
+  ExperiencesDataType,
+  StayDataType,
+  LastDataType,
+  FlightDataType,
+  TimeBasedDataType,
+} from "./types";
 import { DEMO_AUTHORS } from "./authors";
 import car1 from "@/images/cars/1.png";
 import car2 from "@/images/cars/2.png";
@@ -46,13 +59,67 @@ const carsImgs = [
 const DEMO_STAY_LISTINGS = __stayListing.map((post, index): StayDataType => {
   //  ##########  GET CATEGORY BY CAT ID ######## //
   const category = DEMO_STAY_CATEGORIES.filter(
-    (taxonomy) => taxonomy.id === post.listingCategoryId
+    (taxonomy) => taxonomy.id === post.listingCategoryId,
   )[0];
-
   return {
     ...post,
-    id: `stayListing_${index}_`,
+    id: `${index}`,
     saleOff: !index ? "-20% today" : post.saleOff,
+    isAds: !index ? true : post.isAds,
+    author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
+    listingCategory: category,
+    href: post.href as Route,
+  };
+});
+
+const DEMO_TIMEBASED_LISTINGS = __timeBasedListing.map(
+  (post, index): TimeBasedDataType => {
+    const category = DEMO_TIMEBASED_CATEGORIES.filter(
+      (taxonomy) => taxonomy.id === post.listingCategoryId,
+    )[0];
+    return {
+      ...post,
+      id: `${index}`,
+      saleOff: !index ? "-20% today" : post.saleOff,
+      isAds: !index ? true : post.isAds,
+      author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
+      listingCategory: category,
+      href: post.href as Route,
+    };
+  },
+);
+
+const DEMO_FLIGHT_LISTINGS = __flightListing.map((post, index): any => {
+  return {
+    ...post,
+  };
+});
+
+const DEMO_LAST_LISTINGS = __lastMinutesListing.map(
+  (post, index): LastDataType => {
+    const category = DEMO_LAST_CATEGORIES.filter(
+      (taxonomy) => taxonomy.id === post.listingCategoryId,
+    )[0];
+    return {
+      ...post,
+      id: `${index}`,
+      saleOff: !index ? "-20% today" : post.saleOff,
+      isAds: !index ? true : post.isAds,
+      author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
+      listingCategory: category,
+      href: post.href as Route,
+    };
+  },
+);
+
+const DEMO_RENTAL_LISTING = _hourlyRental.map((post, index): any => {
+  const category = DEMO_LAST_CATEGORIES.filter(
+    (taxonomy) => taxonomy.id === post.listingCategoryId,
+  )[0];
+  return {
+    ...post,
+    id: `${index}`,
+    saleOff: !index ? "Best Deal" : post.saleOff,
     isAds: !index ? true : post.isAds,
     author: DEMO_AUTHORS.filter((user) => user.id === post.authorId)[0],
     listingCategory: category,
@@ -64,7 +131,7 @@ const DEMO_EXPERIENCES_LISTINGS = __experiencesListing.map(
   (post, index): ExperiencesDataType => {
     //  ##########  GET CATEGORY BY CAT ID ######## //
     const category = DEMO_EXPERIENCES_CATEGORIES.filter(
-      (taxonomy) => taxonomy.id === post.listingCategoryId
+      (taxonomy) => taxonomy.id === post.listingCategoryId,
     )[0];
 
     return {
@@ -76,13 +143,13 @@ const DEMO_EXPERIENCES_LISTINGS = __experiencesListing.map(
       listingCategory: category,
       href: post.href as Route,
     };
-  }
+  },
 );
 
 const DEMO_CAR_LISTINGS = __carsListing.map((post, index): CarDataType => {
   //  ##########  GET CATEGORY BY CAT ID ######## //
   const category = DEMO_EXPERIENCES_CATEGORIES.filter(
-    (taxonomy) => taxonomy.id === post.listingCategoryId
+    (taxonomy) => taxonomy.id === post.listingCategoryId,
   )[0];
 
   return {
@@ -97,4 +164,12 @@ const DEMO_CAR_LISTINGS = __carsListing.map((post, index): CarDataType => {
   };
 });
 
-export { DEMO_STAY_LISTINGS, DEMO_EXPERIENCES_LISTINGS, DEMO_CAR_LISTINGS };
+export {
+  DEMO_RENTAL_LISTING,
+  DEMO_STAY_LISTINGS,
+  DEMO_EXPERIENCES_LISTINGS,
+  DEMO_CAR_LISTINGS,
+  DEMO_LAST_LISTINGS,
+  DEMO_FLIGHT_LISTINGS,
+  DEMO_TIMEBASED_LISTINGS,
+};

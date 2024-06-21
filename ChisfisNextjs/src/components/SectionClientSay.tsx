@@ -1,7 +1,7 @@
 "use client";
 
 import Heading from "@/shared/Heading";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import clientSayMain from "@/images/clientSayMain.png";
 import clientSay1 from "@/images/clientSay1.png";
 import clientSay2 from "@/images/clientSay2.png";
@@ -16,10 +16,12 @@ import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import Image from "next/image";
 import { useSwipeable } from "react-swipeable";
 import { variants } from "@/utils/animationVariants";
+import { useWindowSize } from "react-use";
 
 export interface SectionClientSayProps {
   className?: string;
   data?: typeof DEMO_DATA;
+  itemPerRow?: 1 | 3;
 }
 
 const DEMO_DATA = [
@@ -29,6 +31,7 @@ const DEMO_DATA = [
     clientAddress: "Malaysia",
     content:
       "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSayMain,
   },
   {
     id: 2,
@@ -36,6 +39,7 @@ const DEMO_DATA = [
     clientAddress: "London",
     content:
       "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay2,
   },
   {
     id: 3,
@@ -43,15 +47,84 @@ const DEMO_DATA = [
     clientAddress: "Tokyo",
     content:
       "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay3,
+  },
+  {
+    id: 4,
+    clientName: "Tiana Abie",
+    clientAddress: "Malaysia",
+    content:
+      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay4,
+  },
+  {
+    id: 5,
+    clientName: "Lennie Swiffan",
+    clientAddress: "London",
+    content:
+      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay5,
+  },
+  {
+    id: 6,
+    clientName: "Berta Emili",
+    clientAddress: "Tokyo",
+    content:
+      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay6,
+  },
+  {
+    id: 7,
+    clientName: "Tiana Abie",
+    clientAddress: "Malaysia",
+    content:
+      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay1,
+  },
+  {
+    id: 8,
+    clientName: "Lennie Swiffan",
+    clientAddress: "London",
+    content:
+      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay2,
+  },
+  {
+    id: 9,
+    clientName: "Berta Emili",
+    clientAddress: "Tokyo",
+    content:
+      "This place is exactly like the picture posted on Chisfis. Great service, we had a great stay!",
+    img: clientSay3,
   },
 ];
 
 const SectionClientSay: FC<SectionClientSayProps> = ({
   className = "",
   data = DEMO_DATA,
+  itemPerRow = 3,
 }) => {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [numberOfItems, setNumberOfitem] = useState(0);
+
+  const windowWidth = useWindowSize().width;
+  useEffect(() => {
+    if (windowWidth < 320) {
+      return setNumberOfitem(1);
+    }
+    if (windowWidth < 500) {
+      return setNumberOfitem(itemPerRow - 3);
+    }
+    if (windowWidth < 1024) {
+      return setNumberOfitem(itemPerRow - 2);
+    }
+    if (windowWidth < 1280) {
+      return setNumberOfitem(itemPerRow - 1);
+    }
+
+    setNumberOfitem(itemPerRow);
+  }, [itemPerRow, windowWidth]);
 
   function changeItemId(newVal: number) {
     if (newVal > index) {
@@ -76,65 +149,16 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
     trackMouse: true,
   });
 
-  let currentItem = data[index];
-
-  const renderBg = () => {
-    return (
-      <div className="hidden md:block">
-        <Image
-          className="absolute top-9 -left-20"
-          src={clientSay1}
-          alt="client 1"
-        />
-        <Image
-          className="absolute bottom-[100px] right-full mr-40"
-          src={clientSay2}
-          alt="client 2"
-        />
-        <Image
-          className="absolute top-full left-[140px]"
-          src={clientSay3}
-          alt="client 3"
-        />
-        <Image
-          className="absolute -bottom-10 right-[140px]"
-          src={clientSay4}
-          alt="client 4"
-        />
-        <Image
-          className="absolute left-full ml-32 bottom-[80px]"
-          src={clientSay5}
-          alt="client 5"
-        />
-        <Image
-          className="absolute -right-10 top-10 "
-          src={clientSay6}
-          alt="client 6"
-        />
-      </div>
-    );
-  };
-
   return (
-    <div className={`nc-SectionClientSay relative ${className} `}>
-      <Heading desc="Let's see what people think of Chisfis" isCenter>
-        Good news from far away
-      </Heading>
-      <div className="relative md:mb-16 max-w-2xl mx-auto">
-        {renderBg()}
-        <Image className="mx-auto" src={clientSayMain} alt="" />
-        <div className={`mt-12 lg:mt-16 relative `}>
-          <Image
-            className="opacity-50 md:opacity-100 absolute -mr-16 lg:mr-3 right-full top-1"
-            src={quotationImg}
-            alt=""
-          />
-          <Image
-            className="opacity-50 md:opacity-100 absolute -ml-16 lg:ml-3 left-full top-1"
-            src={quotationImg2}
-            alt=""
-          />
+    <div
+      className={`nc-SectionClientSay max-w-[100%] inline-block relative ${className} `}
+    >
+      <h1 className="flex justify-center font-bold text-3xl text-black">
+        Good news form far away
+      </h1>
 
+      <div className="relative md:mb-16 max-w-full mx-auto lg:pl-24 lg:pr-24">
+        <div className={`mt-12 lg:mt-16 relative `}>
           <MotionConfig
             transition={{
               x: { type: "spring", stiffness: 300, damping: 30 },
@@ -142,44 +166,60 @@ const SectionClientSay: FC<SectionClientSayProps> = ({
             }}
           >
             <div
-              className={`relative whitespace-nowrap overflow-hidden`}
+              className={`relative pl-4 pr-4 flow-root overflow-hidden rounded-xl`}
               {...handlers}
             >
-              <AnimatePresence initial={false} custom={direction}>
-                <motion.div
-                  key={index}
-                  custom={direction}
-                  variants={variants(200, 1)}
-                  initial="enter"
-                  animate="center"
-                  // exit="exit"
-                  className="inline-flex flex-col items-center text-center whitespace-normal"
-                >
-                  <>
-                    <span className="block text-2xl">
-                      {currentItem.content}
-                    </span>
-                    <span className="block mt-8 text-2xl font-semibold">
-                      {currentItem.clientName}
-                    </span>
-                    <div className="flex items-center space-x-2 text-lg mt-2 text-neutral-400">
-                      <MapPinIcon className="h-5 w-5" />
-                      <span>{currentItem.clientAddress}</span>
-                    </div>
-                  </>
-                </motion.div>
-              </AnimatePresence>
+              <motion.ul initial={false} className="relative whitespace-nowrap">
+                <AnimatePresence initial={false} custom={direction}>
+                  {data.map((item, indx) => (
+                    <motion.li
+                      className={`relative mr-2 max-h-full h-60 max-w-[100%] inline-block px-2 lg:px-4 bg-white border rounded-2xl border-neutral-200`}
+                      custom={direction}
+                      initial={{
+                        x: `${index * -100}%`,
+                      }}
+                      animate={{
+                        x: `${index * -103.2}%`,
+                      }}
+                      variants={variants(200, 1)}
+                      key={indx}
+                      style={{
+                        width: `calc(100% / ${itemPerRow} )`,
+                      }}
+                    >
+                      <span className="block text-xs mt-4 text-pretty text-[#757575]">
+                        {item.content}
+                      </span>
 
+                      <div className="absolute bottom-0 left-0 flex items-center space-x-2 text-lg mt-2 text-neutral-400">
+                        <Image
+                          className="-mb-4 ml-4 h-12 w-12"
+                          src={item.img}
+                          alt=""
+                        />
+                        <div className="flex flex-col mb-4">
+                          <span className="mt-8 text-lg text-black font-semibold">
+                            {item.clientName}
+                          </span>
+                          <span className="text-sm">{item.clientAddress}</span>
+                        </div>
+                      </div>
+                    </motion.li>
+                  ))}
+                </AnimatePresence>
+              </motion.ul>
               <div className="mt-10 flex items-center justify-center space-x-2">
-                {data.map((item, i) => (
-                  <button
-                    className={`w-2 h-2 rounded-full ${
-                      i === index ? "bg-black/70" : "bg-black/10 "
-                    }`}
-                    onClick={() => changeItemId(i)}
-                    key={i}
-                  />
-                ))}
+                {data.map((item, i) =>
+                  i % (numberOfItems + 1) === 0 ? (
+                    <button
+                      className={`w-2 h-2 rounded-full ${
+                        i === index ? "bg-black/70 w-2.5 h-2.5" : "bg-black/10 "
+                      }`}
+                      onClick={() => changeItemId(i)}
+                      key={i}
+                    />
+                  ) : null,
+                )}
               </div>
             </div>
           </MotionConfig>

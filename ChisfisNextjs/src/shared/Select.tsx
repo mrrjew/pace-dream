@@ -3,6 +3,7 @@ import React, { FC, SelectHTMLAttributes } from "react";
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   className?: string;
   sizeClass?: string;
+  placeholder?: string;
 }
 
 const Select: FC<SelectProps> = ({
@@ -13,7 +14,7 @@ const Select: FC<SelectProps> = ({
 }) => {
   return (
     <select
-      className={`nc-Select ${sizeClass} ${className} block w-full text-sm rounded-2xl border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900`}
+      className={`nc-Select ${sizeClass} ${className} block w-full text-sm rounded-lg border-neutral-300 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900`}
       {...args}
     >
       {children}

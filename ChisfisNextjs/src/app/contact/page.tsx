@@ -5,6 +5,7 @@ import Label from "@/components/Label";
 import Input from "@/shared/Input";
 import Textarea from "@/shared/Textarea";
 import ButtonPrimary from "@/shared/ButtonPrimary";
+import SectionSubscribe from "@/components/SectionSubscribe";
 
 export interface PageContactProps {}
 
@@ -86,7 +87,7 @@ const PageContact: FC<PageContactProps> = ({}) => {
 
       {/* OTHER SECTIONS */}
       <div className="container">
-        <SectionSubscribe2 className="pb-24 lg:pb-32" />
+        <SectionSubscribe className="pb-24 lg:pb-32" />
       </div>
     </div>
   );

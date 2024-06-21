@@ -14,7 +14,7 @@ export interface GallerySliderProps {
   galleryImgs: (StaticImageData | string)[];
   ratioClass?: string;
   uniqueID: string;
-  href?: Route<string>;
+  href?: Route | string;
   imageClass?: string;
   galleryClass?: string;
   navigation?: boolean;
@@ -27,7 +27,6 @@ export default function GallerySlider({
   imageClass = "",
   uniqueID = "uniqueID",
   galleryClass = "rounded-xl",
-  href = "/listing-stay-detail",
   navigation = true,
 }: GallerySliderProps) {
   const [loaded, setLoaded] = useState(false);
@@ -73,8 +72,7 @@ export default function GallerySlider({
       >
         {/* Main image */}
         <div className={`w-full overflow-hidden ${galleryClass}`}>
-          <Link
-            href={href}
+          <div
             className={`relative flex items-center justify-center ${ratioClass}`}
           >
             <AnimatePresence initial={false} custom={direction}>
@@ -97,7 +95,7 @@ export default function GallerySlider({
                 />
               </motion.div>
             </AnimatePresence>
-          </Link>
+          </div>
         </div>
 
         {/* Buttons + bottom nav bar */}
@@ -118,7 +116,10 @@ export default function GallerySlider({
                 <button
                   className="absolute w-8 h-8 right-3 top-[calc(50%-16px)] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-6000 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 focus:outline-none"
                   style={{ transform: "translate3d(0, 0, 0)" }}
-                  onClick={() => changePhotoId(index + 1)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    changePhotoId(index + 1);
+                  }}
                 >
                   <ChevronRightIcon className="h-4 w-4" />
                 </button>
@@ -134,7 +135,10 @@ export default function GallerySlider({
                 className={`w-1.5 h-1.5 rounded-full ${
                   i === index ? "bg-white" : "bg-white/60 "
                 }`}
-                onClick={() => changePhotoId(i)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  changePhotoId(i);
+                }}
                 key={i}
               />
             ))}

@@ -16,27 +16,29 @@ import converSelectedDateToString from "@/utils/converSelectedDateToString";
 import ModalSelectGuests from "@/components/ModalSelectGuests";
 import Image from "next/image";
 import { GuestsObject } from "../(client-components)/type";
-import { getLocalStorageItem } from '@/utils/localStorageUtil';
+import { getLocalStorageItem } from "@/utils/localStorageUtil";
 
-export interface CheckOutPagePageMainProps {
+ interface CheckOutPagePageMainProps {
   className?: string;
 }
 
 const CheckOutPagePageMain: FC<CheckOutPagePageMainProps> = ({
   className = "",
 }) => {
-
   const selectedStartDate = getLocalStorageItem("startedDate");
-  const initialStartDate = selectedStartDate ? new Date(selectedStartDate) : null;
+  const initialStartDate = selectedStartDate
+    ? new Date(selectedStartDate)
+    : null;
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
-  
-  
+
   const selectedEndDate: string | null = getLocalStorageItem("endedDate");
-  const initialEndDate: Date | null = selectedEndDate ? new Date(selectedEndDate) : null;
+  const initialEndDate: Date | null = selectedEndDate
+    ? new Date(selectedEndDate)
+    : null;
   const [endDate, setEndDate] = useState<Date | null>(initialEndDate);
-  
-let total = getLocalStorageItem("totalGuest")
-let bookedDay: any = getLocalStorageItem("bookedDay")
+
+  let total = getLocalStorageItem("totalGuest");
+  let bookedDay: any = getLocalStorageItem("bookedDay");
 
   const renderSidebar = () => {
     return (
@@ -48,7 +50,8 @@ let bookedDay: any = getLocalStorageItem("bookedDay")
                 alt=""
                 fill
                 sizes="200px"
-                src="https://images.pexels.com/photos/6373478/pexels-photo-6373478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                src="https://images.pexels.com/photos/7128962/pexels-photo-7128962.jpeg"
+                className="object-cover"
               />
             </div>
           </div>
@@ -141,9 +144,7 @@ let bookedDay: any = getLocalStorageItem("bookedDay")
                   <div className="flex flex-col">
                     <span className="text-sm text-neutral-400">Guests</span>
                     <span className="mt-1.5 text-lg font-semibold">
-                      <span className="line-clamp-1">
-                        { total } Guests
-                      </span>
+                      <span className="line-clamp-1">{total} Guests</span>
                     </span>
                   </div>
                   <PencilSquareIcon className="w-6 h-6 text-neutral-6000 dark:text-neutral-400" />

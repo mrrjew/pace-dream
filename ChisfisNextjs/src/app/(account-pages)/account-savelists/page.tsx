@@ -58,7 +58,7 @@ const AccountSavelists = () => {
                   {DEMO_EXPERIENCES_LISTINGS.filter((_, i) => i < 8).map(
                     (stay) => (
                       <ExperiencesCard key={stay.id} data={stay} />
-                    )
+                    ),
                   )}
                 </div>
                 <div className="flex mt-11 justify-center items-center">

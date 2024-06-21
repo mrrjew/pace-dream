@@ -1,10 +1,11 @@
 import { Route } from "@/routers/types";
 import { StaticImageData } from "next/image";
+import { PathName } from "@/routers/types";
 
 //  ######  CustomLink  ######## //
 export interface CustomLink {
   label: string;
-  href: Route<string> | string;
+  href: Route | string;
   targetBlank?: boolean;
 }
 
@@ -12,13 +13,13 @@ export interface CustomLink {
 export interface TaxonomyType {
   id: string | number;
   name: string;
-  href: Route<string>;
+  href: Route | string | PathName;
   count?: number;
   thumbnail?: string;
   desc?: string;
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";
-  listingType?: "stay" | "experiences" | "car";
+  listingType?: "stay" | "experiences" | "car" | "last minutes" | "time based";
 }
 
 export interface AuthorType {
@@ -32,7 +33,7 @@ export interface AuthorType {
   count: number;
   desc: string;
   jobName: string;
-  href: Route<string>;
+  href: Route;
   starRating?: number;
 }
 
@@ -40,7 +41,7 @@ export interface PostDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   categories: TaxonomyType[];
   title: string;
   featuredImage: StaticImageData | string;
@@ -63,10 +64,43 @@ export type TwMainColor =
 
 //
 export interface StayDataType {
+  authorId: string | number;
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
+  title: string;
+  term?: string;
+  shared?: string;
+  featuredImage: StaticImageData | string;
+  commentCount: number;
+  viewCount: number;
+  address: string;
+  reviewStart: number;
+  reviewCount: number;
+  like: boolean;
+  galleryImgs: (StaticImageData | string)[];
+  price: string;
+  priceDay: string;
+  priceHour: string;
+  listingCategory: TaxonomyType;
+  maxGuests: number;
+  bedrooms: number;
+  bathrooms: number;
+  saleOff?: string | null;
+  isAds: boolean | null;
+  map: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface TimeBasedDataType {
+  authorId: string | number;
+  id: string | number;
+  author: AuthorType;
+  date: string;
+  href: Route;
   title: string;
   featuredImage: StaticImageData | string;
   commentCount: number;
@@ -77,6 +111,49 @@ export interface StayDataType {
   like: boolean;
   galleryImgs: (StaticImageData | string)[];
   price: string;
+  priceDay: string;
+  priceHour: string;
+  listingCategory: TaxonomyType;
+  maxGuests: number;
+  bedrooms: number;
+  bathrooms: number;
+  saleOff?: string | null;
+  isAds: boolean | null;
+  map: {
+    lat: number;
+    lng: number;
+  };
+}
+
+export interface FlightDataType {
+  id: string | number;
+  price: string;
+  saleOff: string;
+  airlines: {
+    logo: string;
+    name: string;
+  };
+}
+
+export interface LastDataType {
+  authorId: string | number;
+  id: string | number;
+  author: AuthorType;
+  date: string;
+  href: Route;
+  title: string;
+  lastMinute: number;
+  featuredImage: StaticImageData | string;
+  commentCount: number;
+  viewCount: number;
+  address: string;
+  reviewStart: number;
+  reviewCount: number;
+  like: boolean;
+  galleryImgs: (StaticImageData | string)[];
+  price: string;
+  priceDay: string;
+  priceHour: string;
   listingCategory: TaxonomyType;
   maxGuests: number;
   bedrooms: number;
@@ -94,7 +171,7 @@ export interface ExperiencesDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   featuredImage: StaticImageData | string;
   commentCount: number;
@@ -120,7 +197,7 @@ export interface CarDataType {
   id: string | number;
   author: AuthorType;
   date: string;
-  href: Route<string>;
+  href: Route;
   title: string;
   featuredImage: StaticImageData | string;
   commentCount: number;

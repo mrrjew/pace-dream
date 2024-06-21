@@ -22,7 +22,10 @@ const BtnLikeIcon: FC<BtnLikeIconProps> = ({
       }  ${colorClass} ${className}`}
       data-nc-id="BtnLikeIcon"
       title="Save"
-      onClick={() => setLikedState(!likedState)}
+      onClick={(e) => {
+        e.preventDefault();
+        setLikedState(!likedState);
+      }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

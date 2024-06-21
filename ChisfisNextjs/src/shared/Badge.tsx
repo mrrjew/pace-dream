@@ -7,7 +7,7 @@ export interface BadgeProps {
   className?: string;
   name: ReactNode;
   color?: TwMainColor;
-  href?: Route<string>;
+  href?: Route;
 }
 
 const Badge: FC<BadgeProps> = ({
@@ -33,7 +33,7 @@ const Badge: FC<BadgeProps> = ({
           hasHover ? "hover:bg-green-800" : ""
         }`;
       case "purple":
-        return `text-purple-800 bg-purple-100 ${
+        return `text-black font-bold bg-purple-100 ${
           hasHover ? "hover:bg-purple-800" : ""
         }`;
       case "indigo":

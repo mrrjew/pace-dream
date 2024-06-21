@@ -12,48 +12,29 @@ import ClearDataButton from "../ClearDataButton";
 export interface ExperiencesDateSingleInputProps {
   className?: string;
   fieldClassName?: string;
+  inputs?: string;
 }
 
 const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
   className = "",
-  fieldClassName = "[ nc-hero-field-padding ]",
+  fieldClassName = "",
+  inputs = "",
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/03/01")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date("2023/03/16"));
-
-  const onChangeDate = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
 
   const renderInput = () => {
     return (
-      <>
-        <div className="text-neutral-300 dark:text-neutral-400">
-          <CalendarIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-        </div>
-        <div className="flex-grow text-left">
-          <span className="block xl:text-lg font-semibold">
-            {startDate?.toLocaleDateString("en-US", {
-              month: "short",
-              day: "2-digit",
-            }) || "Date"}
-            {endDate
-              ? " - " +
-                endDate?.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "2-digit",
-                })
-              : ""}
-          </span>
-          <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-            {startDate ? "Date" : `Add dates`}
-          </span>
-        </div>
-      </>
+      <div className="flex-grow text-left max-md:mt-4">
+        <span className="block xl:text-lg font-normal text-black md:font-semibold">
+          From
+        </span>
+        <span
+          className={`flex flex-row ${inputs ? inputs : "max-md:w-[85vw]"} border lg:py-2 xl:py-2 p-2 md:p-2 w-full md:w-40 lg:w-40 rounded-2xl mt-1 text-xs text-neutral-400 items-center justify-between leading-none font-light`}
+        >
+          {startDate ? startDate?.toLocaleDateString("en-US") : `Add dates`}
+          <CalendarIcon className="w-3 h-3 lg:w-4 lg:h-4 xl:w-3 xl:h-3 ml-4 text-black" />
+        </span>
+      </div>
     );
   };
 
@@ -65,13 +46,11 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
-              className={`flex-1 z-10 flex relative ${fieldClassName} items-center space-x-3 focus:outline-none ${
-                open ? "nc-hero-field-focused" : ""
-              }`}
+              className={`flex z-10 flex-1 relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 lg:py-0 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
             >
               {renderInput()}
               {startDate && open && (
-                <ClearDataButton onClick={() => onChangeDate([null, null])} />
+                <ClearDataButton onClick={() => setStartDate(null)} />
               )}
             </Popover.Button>
 
@@ -92,10 +71,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-neutral-800 p-8">
                   <DatePicker
                     selected={startDate}
-                    onChange={onChangeDate}
-                    startDate={startDate}
-                    endDate={endDate}
-                    selectsRange
+                    onChange={(date: Date) => setStartDate(date)}
                     monthsShown={2}
                     showPopperArrow={false}
                     inline

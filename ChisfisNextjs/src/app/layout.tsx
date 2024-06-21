@@ -1,42 +1,39 @@
+
 import { Poppins } from "next/font/google";
-import SiteHeader from "./(client-components)/(Header)/SiteHeader";
-import ClientCommons from "./ClientCommons";
-import "./globals.css";
-import "@/fonts/line-awesome-1.3.0/css/line-awesome.css";
+import SiteHeader from "@/app/(client-components)/(Header)/SiteHeader";
+import Footer from "@/components/Footer";
+// import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
+import ReduxProvider from "@/store/providers";
 import "@/styles/index.scss";
 import "rc-slider/assets/index.css";
-import Footer from "@/components/Footer";
-import FooterNav from "@/components/FooterNav";
-import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
+import "./globals.css";
+// import ReactQueryClientProvider from "@/components/ReactQueryClientProvider";
+import LayoutWrapper from "./layoutWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: false,
   weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata = {
-  title: "Olaven - The best place to find your hotel",
+  title: "PaceDream - The best place to find your hotel",
   description: "The best place to find your hotel",
 };
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: any;
 }) {
   return (
     <html lang="en" className={poppins.className}>
-      <body className="bg-white text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
-        <ReactQueryClientProvider>
-          <ClientCommons />
-          <SiteHeader />
+      {/* pt-[64px] */}
+      <body className="bg-[#F6F4F6] text-base text-neutral-900 overflow-x-hidden max-w-screen flex flex-col">
+        <LayoutWrapper>
           {children}
-          <FooterNav />
-          <Footer />
-        </ReactQueryClientProvider>
+        </LayoutWrapper>
       </body>
     </html>
   );

@@ -138,7 +138,7 @@ const TabFilters = () => {
             >
               <span>
                 {`$${convertNumbThousand(
-                  rangePrices[0]
+                  rangePrices[0],
                 )} - $${convertNumbThousand(rangePrices[1])}`}{" "}
               </span>
               {renderXClear()}
@@ -306,7 +306,7 @@ const TabFilters = () => {
       name: string;
       description?: string;
       defaultChecked?: boolean;
-    }[]
+    }[],
   ) => {
     const list1 = data.filter((_, i) => i < data.length / 2);
     const list2 = data.filter((_, i) => i >= data.length / 2);

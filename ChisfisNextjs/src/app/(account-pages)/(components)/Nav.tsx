@@ -17,7 +17,7 @@ export const Nav = () => {
 
   return (
     <div className="container">
-      <div className="flex space-x-8 md:space-x-14 overflow-x-auto hiddenScrollbar">
+      <div className="flex space-x-8 overflow-x-auto md:space-x-14 hiddenScrollbar">
         {listNav.map((item) => {
           const isActive = pathname === item;
           return (

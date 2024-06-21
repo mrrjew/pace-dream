@@ -125,11 +125,8 @@ export default function DropdownTravelers() {
   );
 }
 
-
 function IconFive() {
-  return (
-    <ImManWoman/>
-  );
+  return <ImManWoman />;
 }
 
 function IconFour() {

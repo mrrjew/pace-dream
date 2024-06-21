@@ -3,6 +3,7 @@
 import { ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect, FC } from "react";
 import ClearDataButton from "./ClearDataButton";
+import PinDropIcon from "@mui/icons-material/PinDrop";
 
 export interface LocationInputProps {
   placeHolder?: string;
@@ -10,20 +11,28 @@ export interface LocationInputProps {
   className?: string;
   divHideVerticalLineClass?: string;
   autoFocus?: boolean;
+  inputs?: string;
+  input?: string;
+  typeInput?: string;
 }
 
 const LocationInput: FC<LocationInputProps> = ({
   autoFocus = false,
-  placeHolder = "Location",
-  desc = "Where are you going?",
+  desc = "Location",
+  placeHolder = "Select Location",
   className = "nc-flex-1.5",
   divHideVerticalLineClass = "left-10 -right-0.5",
+  inputs = "",
+  input = "",
+  typeInput = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [value, setValue] = useState("");
   const [showPopover, setShowPopover] = useState(autoFocus);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [currentLocation, setCurrentLocation] = useState<string | null>(null);
+  const [readableLocation, setReadableLocation] = useState<string | null>(null);
 
   useEffect(() => {
     setShowPopover(autoFocus);
@@ -46,6 +55,65 @@ const LocationInput: FC<LocationInputProps> = ({
     }
   }, [showPopover]);
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+          // Reverse Geocoding to get human-readable address
+          fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`,
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const address = data.address;
+              let readableLocation = "";
+
+              if (address.city) {
+                readableLocation = address.city;
+              } else if (address.town) {
+                readableLocation = address.town;
+              } else if (address.village) {
+                readableLocation = address.village;
+              } else if (address.hamlet) {
+                readableLocation = address.hamlet;
+              }
+
+              // Append state or country if available
+              if (address.state) {
+                readableLocation += ` ${address.state}`;
+              } else if (address.country) {
+                readableLocation += `, ${address.country}`;
+              }
+
+              // Slice pincode and district
+              if (address.postcode) {
+                // const pincode = address.postcode;
+                const district =
+                  address.suburb ||
+                  address.county ||
+                  address.city_district ||
+                  "";
+                readableLocation += `, ${district}`;
+              }
+
+              setReadableLocation(readableLocation);
+            })
+            .catch((error) => {
+              console.error("Error getting readable location:", error);
+            });
+        },
+        (error) => {
+          console.error("Error getting current location:", error);
+        },
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   const eventClickOutsideDiv = (event: MouseEvent) => {
     if (!containerRef.current) return;
     // CLICK IN_SIDE
@@ -61,10 +129,146 @@ const LocationInput: FC<LocationInputProps> = ({
     setShowPopover(false);
   };
 
+  const handleInputChange = (e: any) => {
+    const inputValue = e.currentTarget.value;
+    setValue(inputValue);
+    const filteredSuggestions = [
+      "Hamptons, Suffolk County, NY",
+      "Las Vegas, NV, United States",
+      "Ueno, Taito, Tokyo",
+      "Ikebukuro, Toshima, Tokyo",
+      "New York City",
+      "Los Angeles",
+      "Chicago",
+      "Houston",
+      "Phoenix",
+      "Philadelphia",
+      "San Antonio",
+      "San Diego",
+      "Dallas",
+      "San Jose",
+      "Austin",
+      "Jacksonville",
+      "San Francisco",
+      "Indianapolis",
+      "Columbus",
+      "Fort Worth",
+      "Charlotte",
+      "Seattle",
+      "Denver",
+      "El Paso",
+      "Detroit",
+      "Washington, D.C.",
+      "Boston",
+      "Memphis",
+      "Nashville",
+      "Portland",
+      "Oklahoma City",
+      "Las Vegas",
+      "Baltimore",
+      "Louisville",
+      "Milwaukee",
+      "Albuquerque",
+      "Tucson",
+      "Fresno",
+      "Sacramento",
+      "Kansas City",
+      "Long Beach",
+      "Mesa",
+      "Atlanta",
+      "Colorado Springs",
+      "Virginia Beach",
+      "Raleigh",
+      "Omaha",
+      "Miami",
+      "Oakland",
+      "Minneapolis",
+      "Tulsa",
+      "Wichita",
+      "New Orleans",
+      "Arlington",
+      "Tokyo",
+      "Yokohama",
+      "Osaka",
+      "Nagoya",
+      "Sapporo",
+      "Fukuoka",
+      "Kobe",
+      "Kyoto",
+      "Kawasaki",
+      "Saitama",
+      "Hiroshima",
+      "Sendai",
+      "Chiba",
+      "Kitakyushu",
+      "Nara",
+      "Shizuoka",
+      "Kumamoto",
+      "Okayama",
+      "Nagasaki",
+      "Kagoshima",
+      "Kanazawa",
+      "Kochi",
+      "Akita",
+      "Naha",
+      "Oita",
+      "London",
+      "Paris",
+      "Berlin",
+      "Madrid",
+      "Rome",
+      "Moscow",
+      "Vienna",
+      "Amsterdam",
+      "Dublin",
+      "Brussels",
+      "Munich",
+      "Zurich",
+      "Stockholm",
+      "Oslo",
+      "Copenhagen",
+      "Athens",
+      "Prague",
+      "Warsaw",
+      "Budapest",
+      "Lisbon",
+      "Helsinki",
+      "Bratislava",
+      "Ljubljana",
+      "Luxembourg City",
+      "Reykjavik",
+      "Birmingham",
+      "Manchester",
+      "Glasgow",
+      "Liverpool",
+      "Newcastle",
+      "Sheffield",
+      "Bristol",
+      "Leeds",
+      "Edinburgh",
+      "Leicester",
+      "Coventry",
+      "Belfast",
+      "Cardiff",
+      "Nottingham",
+      "Southampton",
+      "Aberdeen",
+      "Portsmouth",
+      "York",
+      "Cambridge",
+      "Oxford",
+      "Dundee",
+      "Inverness",
+      "Brighton",
+      "Plymouth",
+    ].filter((place) => place.toLowerCase().includes(inputValue.toLowerCase()));
+    setSuggestions(filteredSuggestions);
+  };
+
   const renderRecentSearches = () => {
     return (
       <>
-        <h3 className="block mt-2 sm:mt-0 px-4 sm:px-8 font-semibold text-base sm:text-lg text-neutral-800 dark:text-neutral-100">
+        <h3 className="block px-4 mt-2 text-base font-semibold sm:mt-0 sm:px-8 sm:text-lg text-neutral-800">
           Recent searches
         </h3>
         <div className="mt-2">
@@ -77,14 +281,10 @@ const LocationInput: FC<LocationInputProps> = ({
             <span
               onClick={() => handleSelectLocation(item)}
               key={item}
-              className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
+              className="flex items-center px-4 py-4 space-x-3 cursor-pointer sm:px-8 sm:space-x-4"
             >
-              <span className="block text-neutral-400">
-                <ClockIcon className="h-4 sm:h-6 w-4 sm:w-6" />
-              </span>
-              <span className=" block font-medium text-neutral-700 dark:text-neutral-200">
-                {item}
-              </span>
+              <span className="block text-neutral-400"></span>
+              <span className="block font-medium text-neutral-700">{item}</span>
             </span>
           ))}
         </div>
@@ -95,23 +295,16 @@ const LocationInput: FC<LocationInputProps> = ({
   const renderSearchValue = () => {
     return (
       <>
-        {[
-          "Ha Noi, Viet Nam",
-          "San Diego, CA",
-          "Humboldt Park, Chicago, IL",
-          "Bangor, Northern Ireland",
-        ].map((item) => (
+        {suggestions.map((item) => (
           <span
             onClick={() => handleSelectLocation(item)}
             key={item}
-            className="flex px-4 sm:px-8 items-center space-x-3 sm:space-x-4 py-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 cursor-pointer"
+            className="flex items-center px-4 py-4 space-x-3 cursor-pointer sm:px-8 sm:space-x-4 hover:bg-neutral-100"
           >
             <span className="block text-neutral-400">
-              <ClockIcon className="h-4 w-4 sm:h-6 sm:w-6" />
+              <ClockIcon className="w-4 h-4 sm:h-6 sm:w-6" />
             </span>
-            <span className="block font-medium text-neutral-700 dark:text-neutral-200">
-              {item}
-            </span>
+            <span className="block font-medium text-neutral-700">{item}</span>
           </span>
         ))}
       </>
@@ -119,30 +312,34 @@ const LocationInput: FC<LocationInputProps> = ({
   };
 
   return (
-    <div className={`relative flex ${className}`} ref={containerRef}>
+    <div
+      className={`relative flex rounded-xl h-[130px] ${className} ${typeInput}`}
+      ref={containerRef}
+    >
       <div
         onClick={() => setShowPopover(true)}
-        className={`flex z-10 flex-1 relative [ nc-hero-field-padding ] flex-shrink-0 items-center space-x-3 cursor-pointer focus:outline-none text-left  ${
-          showPopover ? "nc-hero-field-focused" : ""
-        }`}
+        className={`flex flex-1 h-[110px] relative pl-4 md:pl-7 md:pr-0 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
       >
-        <div className="text-neutral-300 dark:text-neutral-400">
-          <MapPinIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-        </div>
-        <div className="flex-grow">
+        <div className="flex-grow ">
+          <span
+            className={`bg-transparent border-none focus:ring-0 p-1 focus:outline-none xl:text-base font-normal md: placeholder-black truncate ml-1`}
+          >
+            {desc}
+          </span>
           <input
-            className={`block w-full bg-transparent border-none focus:ring-0 p-0 focus:outline-none focus:placeholder-neutral-300 xl:text-lg font-semibold placeholder-neutral-800 dark:placeholder-neutral-200 truncate`}
+            className={`flex font-semibold ${
+              inputs ? inputs : "max-md:w-[190px]"
+            } border-none text-lg focus:ring-0 focus:outline-none lg:p-[9px] md:p-[5px] ${
+              input ? input : "max-lg:[190px]"
+            } xl:p-[5px] w-[190px] h-11 rounded-lg text-xl items-center justify-between leading-none line-clamp-1`}
             placeholder={placeHolder}
             value={value}
             autoFocus={showPopover}
             onChange={(e) => {
-              setValue(e.currentTarget.value);
+              handleInputChange(e);
             }}
             ref={inputRef}
           />
-          <span className="block mt-0.5 text-sm text-neutral-400 font-light ">
-            <span className="line-clamp-1">{!!value ? placeHolder : desc}</span>
-          </span>
           {value && showPopover && (
             <ClearDataButton
               onClick={() => {
@@ -150,17 +347,25 @@ const LocationInput: FC<LocationInputProps> = ({
               }}
             />
           )}
+          {readableLocation && (
+            <span className="absolute left-0 right-0 bottom-[0.5] bg-transparent px-4 sm:px-8 text-sm text-neutral-500">
+              <MapPinIcon className="inline-block w-4 h-4 mr-0" />
+              {readableLocation}
+            </span>
+          )}
+        </div>
+        <div className="absolute pt-3 transform -translate-y-1/2 right-3 top-14">
+          <PinDropIcon />
         </div>
       </div>
-
       {showPopover && (
         <div
-          className={`h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 bg-white dark:bg-neutral-800 ${divHideVerticalLineClass}`}
+          className={`h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 bg-white ${divHideVerticalLineClass}`}
         ></div>
       )}
 
       {showPopover && (
-        <div className="absolute left-0 z-40 w-full min-w-[300px] sm:min-w-[500px] bg-white dark:bg-neutral-800 top-full mt-3 py-3 sm:py-6 rounded-3xl shadow-xl max-h-96 overflow-y-auto">
+        <div className="absolute py-3 mt-3 overflow-y-auto shadow-xl top-full sm:py-6 rounded-3xl max-h-96">
           {value ? renderSearchValue() : renderRecentSearches()}
         </div>
       )}

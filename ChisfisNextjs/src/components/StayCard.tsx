@@ -73,7 +73,7 @@ const StayCard: FC<StayCardProps> = ({
           <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
             {size === "default" && (
               <svg
-                className="h-4 w-4"
+                className="w-4 h-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -95,13 +95,13 @@ const StayCard: FC<StayCardProps> = ({
             <span className="">{address}</span>
           </div>
         </div>
-        <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
-        <div className="flex justify-between items-center">
+        <div className="border-b w-14 border-neutral-100 dark:border-neutral-800"></div>
+        <div className="flex items-center justify-between">
           <span className="text-base font-semibold">
             {price}
             {` `}
             {size === "default" && (
-              <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+              <span className="text-sm font-normal text-neutral-500 dark:text-neutral-400">
                 /night
               </span>
             )}

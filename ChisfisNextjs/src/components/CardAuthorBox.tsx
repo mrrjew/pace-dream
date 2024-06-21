@@ -25,7 +25,7 @@ const CardAuthorBox: FC<CardAuthorBoxProps> = ({
       {index && (
         <Badge
           className="absolute left-3 top-3"
-          color={index === 1 ? "red" : index === 2 ? "blue" : "green"}
+          color="purple"
           name={`#${index}`}
         />
       )}
@@ -36,7 +36,7 @@ const CardAuthorBox: FC<CardAuthorBoxProps> = ({
         userName={displayName}
       />
       <div className="mt-3">
-        <h2 className={`text-base font-medium`}>
+        <h2 className={`text-base font-semibold`}>
           <span className="line-clamp-1">{displayName}</span>
         </h2>
         <span

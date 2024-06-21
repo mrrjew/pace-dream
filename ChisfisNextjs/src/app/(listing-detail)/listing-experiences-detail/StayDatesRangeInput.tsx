@@ -12,11 +12,11 @@ export interface StayDatesRangeInputProps {
   className?: string;
 }
 
-const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
+export const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   className = "flex-1",
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2023/02/06")
+    new Date("2023/02/06"),
   );
   const [endDate, setEndDate] = useState<Date | null>(new Date("2023/02/23"));
   //
@@ -106,4 +106,3 @@ const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
   );
 };
 
-export default StayDatesRangeInput;

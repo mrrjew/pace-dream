@@ -11,21 +11,34 @@ import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { GuestsObject } from "../type";
 
 export interface GuestsInputProps {
-  fieldClassName?: string;
+  currentTab?: string;
   className?: string;
-  buttonSubmitHref?: PathName;
+  buttonSubmitHref?: PathName | string;
   hasButtonSubmit?: boolean;
+  inputs?: string;
 }
 
 const GuestsInput: FC<GuestsInputProps> = ({
-  fieldClassName = "[ nc-hero-field-padding ]",
+  currentTab = "Room Stays",
   className = "[ nc-flex-1 ]",
-  buttonSubmitHref = "/listing-stay-map",
+  buttonSubmitHref = "/listing-stay-map/1",
   hasButtonSubmit = true,
+  inputs = "",
 }) => {
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(1);
+  const [guestCount, setGuestCount] = useState(1);
+
+  const incrementGuestCount = () => {
+    setGuestCount((prevCount) => prevCount + 1);
+  };
+
+  const decrementGuestCount = () => {
+    if (guestCount > 1) {
+      setGuestCount((prevCount) => prevCount - 1);
+    }
+  };
 
   const handleChangeData = (value: number, type: keyof GuestsObject) => {
     let newValue = {
@@ -51,50 +64,52 @@ const GuestsInput: FC<GuestsInputProps> = ({
     guestChildrenInputValue + guestAdultsInputValue + guestInfantsInputValue;
 
   return (
-    <Popover className={`flex relative ${className}`}>
+    <Popover className={`flex relative rounded-xl h-[130px] ${className}`}>
       {({ open }) => (
         <>
-          <div
-            className={`flex-1 z-10 flex items-center focus:outline-none ${
-              open ? "nc-hero-field-focused" : ""
-            }`}
+          <Popover.Button
+            className={`flex z-10 flex-1 flex-col md:flex-row relative pl-4 md:pl-7 md:pr-4 xl:mr-4 lg:pr-3 flex-shrink-0 items-center space-x-1 cursor-pointer focus:outline-none text-left`}
           >
-            <Popover.Button
-              className={`relative z-10 flex-1 flex text-left items-center ${fieldClassName} space-x-3 focus:outline-none`}
-            >
-              <div className="text-neutral-300 dark:text-neutral-400">
-                <UserPlusIcon className="w-5 h-5 lg:w-7 lg:h-7" />
-              </div>
-              <div className="flex-grow">
-                <span className="block xl:text-lg font-semibold">
-                  {totalGuests || ""} Guests
+            <div className="flex-grow max-md:mt-4 md:mr-4">
+              <span className="block pl-1 ml-1 text-base font-normal text-left xl:text-lg">
+                Guests
+              </span>
+              <span
+                className={`flex flex-grow ${
+                  inputs ? inputs : "max-md:w-[85vw]"
+                } w-full md:w-40 lg:w-40 rounded-lg h-10 text-black items-center justify-between leading-none font-light md:font-semibold text-lg gap-0 ml-1`}
+              >
+                Add Guests
+                <UserPlusIcon className="w-6 h-6 mr-5 text-gray-500 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex" />
+              </span>
+              <div className="flex flex-row items-center px-2 pr-2">
+                <button onClick={decrementGuestCount}>- &nbsp; </button>
+                <span>
+                  {guestCount} &nbsp;
+                  <button onClick={incrementGuestCount}>+</button>
                 </span>
-                <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-                  {totalGuests ? "Guests" : "Add guests"}
-                </span>
               </div>
-
-              {!!totalGuests && open && (
-                <ClearDataButton
-                  onClick={() => {
-                    setGuestAdultsInputValue(0);
-                    setGuestChildrenInputValue(0);
-                    setGuestInfantsInputValue(0);
-                  }}
-                />
-              )}
-            </Popover.Button>
-
-            {/* BUTTON SUBMIT OF FORM */}
-            {hasButtonSubmit && (
-              <div className="pr-2 xl:pr-4">
-                <ButtonSubmit href={buttonSubmitHref} />
-              </div>
+            </div>
+            {!!totalGuests && open && (
+              <ClearDataButton
+                onClick={() => {
+                  setGuestAdultsInputValue(0);
+                  setGuestChildrenInputValue(0);
+                  setGuestInfantsInputValue(0);
+                  setGuestCount(1);
+                }}
+              />
             )}
-          </div>
+            {/* {hasButtonSubmit && (
+              <div className="mr-4 md:ml-4 xl:pr-3 w-[60%] max-md:w-[90%] md:pt-4 justify-center max-md:mt-6 mt-2">
+                <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref} />
+              </div>
+            )} */}
+          </Popover.Button>
+          {/* Simple number counter */}
 
           {open && (
-            <div className="h-8 absolute self-center top-1/2 -translate-y-1/2 z-0 -left-0.5 right-0.5 bg-white dark:bg-neutral-800"></div>
+            <div className="h-8  hidden absolute self-center top-1/2 -translate-y-1/2 z-0 -inset-x-0.5 bg-white"></div>
           )}
           <Transition
             as={Fragment}
@@ -105,7 +120,7 @@ const GuestsInput: FC<GuestsInputProps> = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute right-0 z-10 w-full sm:min-w-[340px] max-w-sm bg-white dark:bg-neutral-800 top-full mt-3 py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
+            <Popover.Panel className="absolute mt-3 right-0 z-10 w-full border border-gray-200 sm:min-w-[340px] max-w-sm bg-white top-full py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
               <NcInputNumber
                 className="w-full"
                 defaultValue={guestAdultsInputValue}

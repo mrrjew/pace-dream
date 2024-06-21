@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import {
   GoogleAuthProvider,
@@ -5,19 +6,23 @@ import {
   getAuth,
   signInWithPopup,
 } from "config/firebase";
-import { useMutation } from "@tanstack/react-query";
+import Cookies, { set } from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useSession } from "../useSession";
 
 export const useGoogleLogin = () => {
   const router = useRouter();
+  const { setSession } = useSession();
+
   const authWithGoogle = async () => {
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      // console.log("Google Auth Result",result);
+      const user = result?.user;
       const token = await user?.getIdToken();
-
+      // console.log("Google Auth Token",token);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/google`,
         {},
@@ -26,24 +31,24 @@ export const useGoogleLogin = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
+      // console.log("Google Auth Response",response);
       return response.data;
     } catch (error: any) {
-      console.log(error.response.data.data.error);
+      console.log("Google local error: ",error);
+      // console.log(error.response.data.data.error);
     }
   };
 
   const { mutate: googleLogin, isLoading } = useMutation({
     mutationFn: authWithGoogle,
-    onSuccess: (data) => {
-      localStorage.setItem("auth-token", data.data.token);
-      localStorage.setItem("user_id", data.data.id);
-      localStorage.setItem("user_info", JSON.stringify(data.data));
-
-      setTimeout(() => {
-        router.push("/");
-      }, 500);
+    onSuccess: (result) => {
+      console.log("authWithGoogle",result);
+      const { data } = result;
+      console.log(data, result);
+      setSession(data.token, data, data.user_id);
+      router.push("/");
     },
   });
 

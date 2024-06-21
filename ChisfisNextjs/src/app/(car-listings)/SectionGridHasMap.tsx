@@ -90,7 +90,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
               }}
               yesIWantToUseGoogleMapApiInternals
               defaultZoom={12}
-              defaultCenter={DEMO_CARS[0].map}
+              defaultCenter={{ "lat": 55.2094559, "lng": 61.5594641 }}
             >
               {DEMO_CARS.map((item) => (
                 <AnyReactComponent

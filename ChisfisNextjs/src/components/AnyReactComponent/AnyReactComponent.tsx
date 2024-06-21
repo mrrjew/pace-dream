@@ -34,10 +34,8 @@ const AnyReactComponent: FC<AnyReactComponentProps> = ({
       onMouseLeave={() => setIsOpen(false)}
     >
       <span
-        className={`flex px-2 py-1 rounded-lg bg-white dark:bg-neutral-900 text-sm font-semibold items-center justify-center min-w-max shadow-lg hover:bg-neutral-900 hover:text-white dark:hover:bg-white dark:hover:text-neutral-900 transition-colors ${
-          isSelected
-            ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-            : ""
+        className={`flex px-2 py-1 rounded-lg bg-white text-sm font-semibold items-center justify-center min-w-max shadow-lg hover:bg-neutral-900 hover:text-white transition-colors ${
+          isSelected ? "bg-neutral-900 text-white" : ""
         }`}
       >
         {listing?.price || experiences?.price || car?.price}
@@ -61,7 +59,7 @@ const AnyReactComponent: FC<AnyReactComponentProps> = ({
               size="small"
               data={experiences}
               ratioClass="aspect-w-12 aspect-h-10"
-              className="shadow-2xl bg-white dark:bg-neutral-900 rounded-3xl"
+              className="shadow-2xl bg-white rounded-3xl"
             />
           )}
           {car && <CarCard size="small" data={car} className="shadow-2xl " />}

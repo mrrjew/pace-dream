@@ -1,213 +1,112 @@
 "use client";
-
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import {
-  ShoppingBagIcon as ShoppingCartIcon,
-  Cog8ToothIcon as CogIcon,
-} from "@heroicons/react/24/outline";
-import { Popover, Transition } from "@headlessui/react";
-import { PathName } from "@/routers/types";
+import Logo from "@/shared/Logo";
+import MenuBar from "@/shared/MenuBar";
 import Link from "next/link";
-import Header from "./Header";
-import Header3 from "./Header3";
-import { usePathname } from "next/navigation";
-import { useThemeMode } from "@/utils/useThemeMode";
+import { useSession } from "@/hooks/useSession";
+import React, { useEffect, useState } from "react";
+import AvatarDropdown from "./AvatarDropdown";
+import NotifyDropdown from "./NotifyDropdown";
+import Image from "next/image";
+import usaImg from "@/images/country/usa.png";
+import CurrencyModal from "./NewCurrencyModal";
+import LanguageModal from "./LanguageModal";
+import NavbarMobile from "./NavbarMobile";
 
-export type SiteHeaders = "Header 1" | "Header 2" | "Header 3";
-
-interface HomePageItem {
-  name: string;
-  slug: PathName;
+export interface MainNav2Props {
+  className?: string;
 }
 
-let OPTIONS = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 1.0,
-};
-let OBSERVER: IntersectionObserver | null = null;
-const PAGES_HIDE_HEADER_BORDER: PathName[] = [
-  "/home-3",
-  "/listing-car-detail",
-  "/listing-experiences-detail",
-  "/listing-stay-detail",
-];
+const btnStyle =
+  "group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative";
 
-const SiteHeader = () => {
-  const anchorRef = useRef<HTMLDivElement>(null);
+export default function SiteHeader() {
+  const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
+  const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
 
-  let [headers] = useState<SiteHeaders[]>(["Header 1", "Header 2", "Header 3"]);
-
-  let [homePages] = useState<HomePageItem[]>([
-    { name: "Home Main", slug: "/" },
-    { name: "Real Estate", slug: "/home-2" },
-    { name: "Home 3", slug: "/home-3" },
-  ]);
-  const [headerSelected, setHeaderSelected] = useState<SiteHeaders>("Header 2");
-
-  const [isTopOfPage, setIsTopOfPage] = useState(true);
+  const { getSession } = useSession();
+  const { token } = getSession();
+  const [currency, setCurrency] = useState<string | null>("USD");
 
   useEffect(() => {
-    setIsTopOfPage(window.pageYOffset < 5);
+    if (typeof window !== "undefined" && window.localStorage) {
+      let localCurrency = localStorage.getItem("currency");
+      setCurrency(localCurrency);
+    }
   }, []);
-  //
-  useThemeMode();
-  //
-  const pathname = usePathname();
 
-  const intersectionCallback = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry) => {
-      setIsTopOfPage(entry.isIntersecting);
-    });
+  const openModalCurrency = () => {
+    setIsModalOpenCurrency(true);
   };
 
-  useEffect(() => {
-    // disconnect the observer
-    // observer for show the LINE bellow header
-    if (!PAGES_HIDE_HEADER_BORDER.includes(pathname as PathName)) {
-      OBSERVER && OBSERVER.disconnect();
-      OBSERVER = null;
-      return;
-    }
-    if (!OBSERVER) {
-      OBSERVER = new IntersectionObserver(intersectionCallback, OPTIONS);
-      anchorRef.current && OBSERVER.observe(anchorRef.current);
-    }
-  }, [pathname]);
-
-  const renderRadioHeaders = () => {
-    return (
-      <div className="mt-4">
-        <span className="text-sm font-medium">Header Styles</span>
-        <div className="mt-1.5 flex items-center space-x-2">
-          {headers.map((header) => {
-            return (
-              <div
-                key={header}
-                className={`py-1.5 px-3.5 flex items-center rounded-full font-medium text-xs cursor-pointer select-none ${
-                  headerSelected === header
-                    ? "bg-black text-white shadow-black/10 shadow-lg"
-                    : "border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500"
-                }`}
-                onClick={() => setHeaderSelected(header)}
-              >
-                {header}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
+  const openModalCountry = () => {
+    setIsModalOpenCountry(true);
   };
 
-  const renderRadioHomePages = () => {
-    return (
-      <div className="mt-4">
-        <span className="text-sm font-medium">Home Demos</span>
-        <div className="mt-1.5 flex items-center space-x-2">
-          {homePages.map((home) => {
-            return (
-              <Link
-                key={home.slug}
-                href={home.slug}
-                className={`py-1.5 px-3.5 flex items-center rounded-full font-medium text-xs cursor-pointer select-none ${
-                  pathname === home.slug
-                    ? "bg-black text-white shadow-black/10 shadow-lg"
-                    : "border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500"
-                }`}
-              >
-                {home.name}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    );
+  const closeModalCurrency = () => {
+    setIsModalOpenCurrency(false);
+    window.location.reload();
   };
 
-  // FOR DEMO PAGE
-  const renderControlSelections = () => {
-    return (
-      <div className="ControlSelections relative z-40 hidden lg:block">
-        <div className="fixed right-3 top-1/4 z-40 flex items-center">
-          <Popover className="relative">
-            {({ open }) => (
-              <>
-                <Popover.Button
-                  className={`p-2.5 bg-white hover:bg-neutral-100 dark:bg-primary-6000 dark:hover:bg-primary-700 rounded-xl shadow-xl border border-neutral-200 dark:border-primary-6000 z-10 focus:outline-none ${
-                    open ? " focus:ring-2 ring-primary-500" : ""
-                  }`}
-                >
-                  <CogIcon className="w-8 h-8" />
-                </Popover.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1"
-                >
-                  <Popover.Panel className="absolute right-0 z-10 mt-3 w-screen max-w-sm">
-                    <div className="rounded-2xl bg-white dark:bg-neutral-800 overflow-hidden nc-custom-shadow-1">
-                      <div className="relative p-6">
-                        <span className="text-xl font-semibold">Customize</span>
-                        <div className="w-full border-b border-neutral-200 dark:border-neutral-700 mt-4"></div>
-                        {renderRadioHeaders()}
-                        {renderRadioHomePages()}
-                      </div>
-                      <div className="bg-gray-50 dark:bg-white/5 p-5">
-                        <a
-                          className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
-                          href={
-                            "https://themeforest.net/item/chisfis-online-booking-nextjs-template/43399526"
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <ShoppingCartIcon className="w-4 h-4" />
-                          <span className="ml-2">Buy this template</span>
-                        </a>
-                      </div>
-                    </div>
-                  </Popover.Panel>
-                </Transition>
-              </>
-            )}
-          </Popover>
-        </div>
-      </div>
-    );
+  const closeModalCountry = () => {
+    setIsModalOpenCountry(false);
+    window.location.reload();
   };
-
-  const renderHeader = () => {
-    let headerClassName = "shadow-sm dark:border-b dark:border-neutral-700";
-    if (PAGES_HIDE_HEADER_BORDER.includes(pathname as PathName)) {
-      headerClassName = isTopOfPage
-        ? ""
-        : "shadow-sm dark:border-b dark:border-neutral-700";
-    }
-    switch (headerSelected) {
-      case "Header 1":
-        return <Header className={headerClassName} navType="MainNav1" />;
-      case "Header 2":
-        return <Header className={headerClassName} navType="MainNav2" />;
-      case "Header 3":
-        return <Header3 className={headerClassName} />;
-
-      default:
-        return <Header3 className={headerClassName} />;
-    }
-  };
-
   return (
-    <>
-      {renderControlSelections()}
-      {renderHeader()}
-      <div ref={anchorRef} className="h-1 absolute invisible"></div>
-    </>
-  );
-};
+    <header
+      className={`fixed bg-white/70 dark:bg-neutral-900/60 backdrop-blur-2xl backdrop-filter top-0 w-full left-0 right-0 z-[100] shadow-sm dark:border-b dark:border-neutral-700`}
+    >
+      <section className="flex justify-between h-16 px-4 lg:container">
+        <article className="justify-start flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10 gap-14">
+          <Logo className={`self-center w-34 ml-6`} />
+          <div className="items-center justify-end hidden lg:flex ">
+            <ol className="flex items-center gap-4 ml-48">
+              <li>
+                <Link href={"/roommate"}>Find Roomate &nbsp; /</Link>
+              </li>
+              <li>
+                <Link href={"/about-us"}>About &nbsp; /</Link>
+              </li>
+              <li>
+                <Link href={"/contact-us"}>Contact &nbsp; /</Link>
+              </li>
+              <div className="flex items-center gap-1 "></div>
+            </ol>
+            <button className={`${btnStyle}`} onClick={openModalCurrency}>
+              {currency || "USD"}
+            </button>
+            <button className={`${btnStyle}`} onClick={openModalCountry}>
+              <Image src={usaImg} className="w-4 h-4 rounded-full" alt="usa" />
+            </button>
+          </div>
+        </article>
 
-export default SiteHeader;
+        <NavbarMobile />
+
+        <div className="justify-end flex-1 flex-shrink-0 hidden md:flex lg:flex-none text-neutral-700 dark:text-neutral-100">
+          <div className="hidden space-x-1 lg:flex">
+            <Link
+              // href="/auth/login"
+              href={token ? "/add-listing" : "/auth/login"}
+              as={token ? "/add-listing" : "/auth/login"}
+              className="inline-flex items-center self-center px-4 py-2 text-sm font-medium text-gray-700 border rounded-full text-opacity-90 group border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-300 hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              Post a Listing
+            </Link>
+            <AvatarDropdown />
+          </div>
+          <div className="flex space-x-2 lg:hidden">
+            <NotifyDropdown />
+            <AvatarDropdown />
+            <MenuBar />
+          </div>
+        </div>
+      </section>
+
+      <CurrencyModal
+        isOpen={isModalOpenCurrency}
+        onClose={closeModalCurrency}
+      />
+      <LanguageModal isOpen={isModalOpenCountry} onClose={closeModalCountry} />
+    </header>
+  );
+}

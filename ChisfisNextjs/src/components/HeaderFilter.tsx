@@ -36,7 +36,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
   return (
     <div className="flex flex-col mb-8 relative">
       <Heading desc={subHeading}>{heading}</Heading>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between -mt-10">
         <Nav
           className="sm:space-x-2"
           containerClassName="relative flex w-full overflow-x-auto text-sm md:text-base hiddenScrollbar"
@@ -51,14 +51,6 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
             </NavItem>
           ))}
         </Nav>
-        <span className="hidden sm:block flex-shrink-0">
-          <ButtonSecondary href="/listing-stay" className="!leading-none">
-            <div className="flex items-center justify-center">
-              <span>View all</span>
-              <ArrowRightIcon className="w-5 h-5 ml-3" />
-            </div>
-          </ButtonSecondary>
-        </span>
       </div>
     </div>
   );

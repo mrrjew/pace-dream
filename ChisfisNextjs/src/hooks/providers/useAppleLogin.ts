@@ -1,8 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { app, getAuth } from "config/firebase";
 import { OAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { app, getAuth } from "config/firebase";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 
 export const useAppleLogin = () => {
   const router = useRouter();
@@ -21,13 +21,14 @@ export const useAppleLogin = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       return response.data;
     } catch (err: any) {
       console.log(err.response.data.data.error);
     }
   };
+
   const { mutate: appleLogin, isLoading } = useMutation({
     mutationFn: authWithApple,
     onSuccess: (data) => {
@@ -35,7 +36,6 @@ export const useAppleLogin = () => {
       localStorage.setItem("user_id", data.data.id);
       localStorage.setItem("user_info", JSON.stringify(data.data));
 
-      console.log(data.data);
       setTimeout(() => {
         router.push("/");
       }, 500);

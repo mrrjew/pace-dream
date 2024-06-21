@@ -1,20 +1,13 @@
-
 # Olaven Hotel booking website
 
-This is a hotel booking website that allows our potential users to book hotels, and rooms, and host their house/flat/hotel. 
-
-
-
+This is a hotel booking website that allows our potential users to book hotels, and rooms, and host their house/flat/hotel.
 
 #
-
 
 ## Tech Stack
 
 **Client:** React, Tanstack query, TailwindCSS, Next.js(13), Firebase
-
 **Server:** Node, Express, MongoDB
-
 
 ## Features
 
@@ -30,8 +23,8 @@ This is a hotel booking website that allows our potential users to book hotels, 
 - Finding partners for your stay
 - Chatting with your partners
 
-
 ## License
+
 - By contributing to this project, you agree to the license terms and conditions
 - You will not disclose any information about this project.
 - If you choose to ignore the above guidelines and engage in actions that mislead, harm, or disrupt the project, we reserve the right to take appropriate actions.
@@ -45,15 +38,15 @@ This is a hotel booking website that allows our potential users to book hotels, 
 - Work on only the task that is assigned to you don't make changes to other peoples' work until and unless they prompt you.
 - If any packages are to be installed please check the bundle size, If it is small you can else, try to use from available packages by navigating to package.json.
 - To test your code locally and the validity of types run the following command:
+
 ```bash
 npm run build
 ```
-  
+
 ## Pull Requests
+
 - Please create a descriptive pull request about the feature you've implemented, and attach a video link to the feature in your pull request.
 - To create a feature branch use: your_name/feature_name, for example, if your name is Mark and you are implementing partner-hosting UI, you might create a branch like: mark/partner-hosting-ui.
-
-
 
 ## Environment Variables
 
@@ -85,11 +78,6 @@ To run this project, you will need to add the following environment variables to
 
 `NEXT_PUBLIC_IMGBB_API_KEY`
 
-
-
-
-
-
 ## Run Locally
 
 Clone the project
@@ -116,14 +104,15 @@ Start the server
 ```bash
   npm run dev
 ```
+
 To install a new package
 
 ```bash
   npm i <package_name>
 ```
+
 To remove a package
 
 ```bash
   npm uninstall <package_name>
 ```
-

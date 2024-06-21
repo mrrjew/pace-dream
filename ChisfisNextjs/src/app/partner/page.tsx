@@ -11,8 +11,17 @@ import notificationSvg from "@/images/notification-icon.svg";
 import mapSvg from "@/images/map.svg";
 import __partners from "../../data/jsons/__partners.json";
 import PartnerList from "@/components/Partner/PartnerList";
+import SectionSubscribe from "@/components/SectionSubscribe";
+import RoomMate_Bg from "@/images/room-mate-filter-image.png";
 
-const page = () => {
+const buttonClassTop =
+  "h-[46px] border-[1px] rounded-full w-fit px-5 text-[#757575] hover:bg-[#632DF8] hover:text-white";
+const buttonClass =
+  "h-[46px] border-[1px] rounded-full text-base w-fit px-5 text-black hover:bg-[#632DF8] hover:text-white";
+const searchButtonClass =
+  "bg-[#632DF8] w-full h-[46px] lg:w-[46px] rounded-full flex justify-center items-center";
+
+const Page = () => {
   const [searchKey, setSearchKey] = useState<string>("");
 
   const handleSearchKeyChange = debounce((value) => {
@@ -21,6 +30,71 @@ const page = () => {
 
   return (
     <div className="looking-partner-page">
+      {/* Search Bar */}
+      <div className="relative flex justify-center lg:w-full sm:w-screen items-center">
+        <div className="lg:w-full w-screen">
+          <Image
+            src={RoomMate_Bg}
+            alt="roommate-bg"
+            className="lg:w-full w:340px lg:h-44 h-[454px]  object-cover"
+          />
+        </div>
+        <div className="lg:flex gap-6 p-8 z-10 absolute h-[411px] w-[320px] lg:h-[139px] lg:w-fit rounded-3xl bg-white ">
+          <div className="flex flex-col gap-2  ">
+            <p>Where</p>
+            <input
+              type="text"
+              placeholder="Minamiuonuma, Niigata"
+              className="block  border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 h-[46px] px-4 py-3 lg:w-[444px] w:[288px] rounded-3xl "
+            />
+          </div>
+          <div className="flex flex-col gap-2 lg:mt-0 mt-6">
+            <p>Budget</p>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Minimum"
+                className="block border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 h-[46px] px-4 py-3 w-[110px] rounded-3xl"
+              />
+              <input
+                type="text"
+                placeholder="Maximum"
+                className="block border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:border-neutral-700 dark:focus:ring-primary-6000 dark:focus:ring-opacity-25 dark:bg-neutral-900 h-[46px] px-4 py-3 w-[112px] rounded-3xl"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2 lg:mt-0 mt-6">
+            <p>Gender</p>
+            <div className="flex gap-2">
+              <button className={buttonClassTop}>Male</button>
+              <button className={buttonClassTop}>Female</button>
+            </div>
+          </div>
+          <div className="flex lg:justify-end pt-8">
+            <button className={searchButtonClass}>
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 text-white hidden lg:block"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                  />
+                </svg>
+                <div className="lg:hidden">
+                  <p className="text-[17px] text-white">Search</p>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="filter-wrapper">
         <div className="flex items-center justify-center gap-2 flex-wrap">
           <div className="filter-wrapper__price">
@@ -99,32 +173,12 @@ const page = () => {
           <Image src={notificationSvg} width={24} height={24} alt="menu" />
         </div>
       </div>
-
       <div className="content-wrapper mt- lg:mt-0">
         <PartnerList partners={__partners} searchKey={searchKey} />
-
-        <div className="mt-16 bg-[#574EFA] font-[Inter] hidden lg:block">
-          <div className="py-16 px-[116px] lg:container">
-            <p className="uppercase text-[14px] text-white font-semibold">
-              1% OF THE INDUSTRY
-            </p>
-            <p className="mt-2 text-[32px] text-white font-semibold leading-10">
-              Welcome to your room sharing platform that which You can find
-              places and stay with hotels and home-stays ranked by travellers.
-              What fun could we have more than having roommate with similar
-              interest.
-            </p>
-            <button
-              type="button"
-              className="mt-8 w-[119px] h-[46px] bg-white text-purple-600 text-[15px] rounded-full font-semibold hover:bg-purple-600 hover:text-white transition duration-300"
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
       </div>
+      <SectionSubscribe className="mt-16 mb-16" />
     </div>
   );
 };
 
-export default page;
+export default Page;
