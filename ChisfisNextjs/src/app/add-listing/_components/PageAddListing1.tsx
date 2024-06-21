@@ -101,7 +101,6 @@ const PageAddListing1 = (
         { (Number(propertyTypes?.options?.length) + Number(roomTypes.options.length)) >0 && <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
            {Number(propertyTypes?.options?.length)> 0 && <FormItem label={propertyTypes.title}>
               <Select
-
                 defaultValue={data?.details?.property_type}
                 onChange={(e)=>{
                    // if selected is undefined

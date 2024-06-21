@@ -10,13 +10,14 @@ const PRICING_FREQUENCY = {
     ONCE: "once",
   } as const;
   
-  const RENTABLE_ITEM_TYPE = {
+   const RENTABLE_ITEM_TYPE = {
     // add new items as you need.
     // please do inform the backend team when a new type is added
     // because there is a strict item_type check present in the backend.
     ROOM: "room",
     PROPERTY: "property",
     ROOMMATE_AD: "roommate_ad",
+    EXPERIENCE: "experience",
     PARKING: "parking",
     EV_PARKING: "ev_parking",
     REST_ROOM: "rest_room",

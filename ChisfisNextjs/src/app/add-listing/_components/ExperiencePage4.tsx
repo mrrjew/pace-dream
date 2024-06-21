@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import {DragDrop} from "./media/dag-drop-file";
+import {DragDrop} from "./media/drag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
 
 const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}) => {

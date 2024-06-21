@@ -69,7 +69,7 @@ const GuestForm: FC<GuestsInputProps> = ({
     >
       {({ open }) => (
         <>
-          <Popover.Button
+          <Popover.Panel
             className={`flex pr-[1rem] z-10 h-[100%]  flex-col md:flex-row relative flex-shrink-0  cursor-pointer focus:outline-none text-left`}
           >
             <div className="">
@@ -113,7 +113,7 @@ const GuestForm: FC<GuestsInputProps> = ({
               </span> */}
               <div className="flex flex-row items-center text-[.7rem] h-[1rem] leadding-[.5rem] ">
                 <button onClick={decrementGuestCount}>- &nbsp; </button>
-                <span>
+                  <span>
                   {guestCount} &nbsp;
                   <button onClick={incrementGuestCount}>+</button>
                 </span>
@@ -125,7 +125,7 @@ const GuestForm: FC<GuestsInputProps> = ({
                 <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref} />
               </div>
             )} */}
-          </Popover.Button>
+          </Popover.Panel>
           {/* Simple number counter */}
 
           {open && (

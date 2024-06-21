@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import FormItem from "../room-stays/FormItem";
 import Input from "@/shared/Input";
 import RoomCounter from "@/components/ListingComponents/RoomCounter";
-import {DragDrop} from "./media/dag-drop-file";
+import {DragDrop} from "./media/drag-drop-file";
 import { Price, RentableItem } from "@/types/rentalItems";
 
 const ExperiencePag3 = (

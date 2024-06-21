@@ -163,7 +163,7 @@ export default function AddListingMainLayoutWrapper(
            // handle submit
           // console.log("submit : ",_data);
            mutate.mutateAsync().then((res)=>{
-            console.log("response : ",res);
+            // console.log("response : ",res);
             onNext();
           }).catch((error)=>{
             console.log("error : ",error);

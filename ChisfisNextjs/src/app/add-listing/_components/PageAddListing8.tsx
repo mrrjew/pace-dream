@@ -136,7 +136,7 @@ const PageAddListing8 = (
           </div>
           <hr className="bg-gray-400 w-full" />
           {/* price, bed,bath */}
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-2xl font-semibold">$300</span>
               <span className="text-neutral-600">/night</span>
@@ -152,7 +152,7 @@ const PageAddListing8 = (
               <span className="text-neutral-600">1 Bath</span>
             </div>
           </div>
-          <hr className="bg-gray-400 w-full" />
+          <hr className="bg-gray-400 w-full" /> */}
           {/* location and map link */}
           <div className="flex items-center justify-between">
             <div>
