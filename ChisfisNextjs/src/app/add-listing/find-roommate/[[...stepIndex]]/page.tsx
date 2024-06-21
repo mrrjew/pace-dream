@@ -46,7 +46,7 @@ const initialData: Partial<RentableItem> = {
      videos: [],
    },
    attachments: [],
-   item_type:'room',
+   item_type:'roommate_ad',
    price: [],
    rules: {},
    rating:0,

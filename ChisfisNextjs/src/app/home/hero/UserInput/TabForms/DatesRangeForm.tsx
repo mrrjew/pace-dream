@@ -9,7 +9,7 @@ import ClearDataButton from "@/app/(client-components)/(HeroSearchForm)/ClearDat
 import Image from "next/image";
 import { CalendarImage } from "public/assetsManager";
 
-export interface StayDatesRangeInputProps {
+interface StayDatesRangeInputProps {
   className?: string;
   fieldClassName?: string;
   dates?: string;
@@ -183,6 +183,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
+              as="div"
               className={`flex-1 z-10 flex relative ${fieldClassName}  items-center   focus:outline-none`}
             >
               {<RenderInput />}
@@ -204,7 +205,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-50 w-screen max-w-sm mt-3 transform bg-white rounded-3xl left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
+              <Popover.Button as={"div"} className="absolute z-50 w-screen max-w-sm mt-3 transform bg-white rounded-3xl left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
                 <div className="p-2 overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black sm:p-4 ring-opacity-5">
                   <DatePicker
                     onChange={handleChange}
@@ -222,7 +223,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
                     )}
                   />
                 </div>
-              </Popover.Panel>
+              </Popover.Button>
             </Transition>
           </>
         )}
@@ -233,6 +234,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
         {({ open }) => (
           <>
             <Popover.Button
+              as="div"
               className={`flex-1 z-10 flex relative ${fieldClassName}  items-center space-x-1 focus:outline-none`}
             >
               {renderOutput()}
@@ -254,7 +256,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-50 w-screen max-w-sm mt-3 transform left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
+              <Popover.Button as="div" className="absolute z-50 w-screen max-w-sm mt-3 transform left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
                 <div className="p-2 overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black sm:p-4 ring-opacity-5">
                   <DatePicker
                     onChange={handleChange}
@@ -272,7 +274,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
                     )}
                   />
                 </div>
-              </Popover.Panel>
+              </Popover.Button>
             </Transition>
           </>
         )}
