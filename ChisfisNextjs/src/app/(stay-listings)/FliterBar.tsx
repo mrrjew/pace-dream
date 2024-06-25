@@ -7,6 +7,7 @@ import { useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import { FaUsers } from "react-icons/fa";
 import { usePathname, useRouter } from "next/navigation";
+import axios from "axios";
 
 const FilterBar = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -65,13 +66,50 @@ const FilterBar = () => {
   const date1 = new Date(selectedRange[0] ?? "");
   const date2 = new Date(selectedRange[1] ?? "");
 
+  const formatDate = (date: Date): string => {
+    if (isNaN(date.getTime())) {
+      return "";
+    }
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const formattedDate1 = formatDate(date1);
+  const formattedDate2 = formatDate(date2);
+
   const diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
   const diffInMonths = diffInMilliseconds / (1000 * 60 * 60 * 24 * 30);
 
   const query = `guests=${guests}&location=${location}&term=${diffInMonths > 6 ? "long" : "short"}`;
 
-  const search = () => {
-    push(`/listing-stay-map/:id?${query}`);
+  const search = async () => {
+    try {
+      const queryParamsObj = {
+        guests,
+        location,
+        checkInDate: formattedDate1,
+        checkOutDate: formattedDate2,
+      };
+
+      const queryParams = Object.entries(queryParamsObj)
+        .filter(([key, value]) => value)
+        .map(
+          ([key, value]) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
+        )
+        .join("&");
+
+      const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/home?${queryParams}`;
+
+      const res = await axios.get(url);
+      console.log("Response:", res.data.data);
+
+      // push(`/listing-stay-map/:id?${query}`);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   return (
