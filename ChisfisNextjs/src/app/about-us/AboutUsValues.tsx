@@ -33,7 +33,7 @@ const AboutUsValues = () => {
       <div className="bg-white  sm:py-20 py-12 lg:px-36 px-4 mb-5">
         <div className="sm:mb-5 pb-8 lg:mt-20 text-center">
           <p className="font-semibold text-4xl mt-3">
-            We {'\''}re a distributed team
+            We {"'"}re a distributed team
           </p>
           <p className="mt-6">We have offices and teams all around the world</p>
           <div className="relative">
@@ -45,7 +45,10 @@ const AboutUsValues = () => {
           </div>
           <div className="grid lg:grid-cols-3 grid-cols-1 mt-12 lg:gap-6 gap-4 ">
             {contacts.map((contact) => (
-              <div key={contact.title} className="bg-slate-50 p-4 rounded-xl flex items-center">
+              <div
+                key={contact.title}
+                className="bg-slate-50 p-4 rounded-xl flex items-center"
+              >
                 <div className="w-[100px] h-[100px] p-3 mr-4 bg-[#632DF8] rounded-lg text-white">
                   {contact.icon}
                 </div>

@@ -106,7 +106,7 @@ const page = () => {
           <div className="hidden w-2/4 sm:flex flex-col p-8 rounded-md shadow-sm ring-1 ring-inset ring-gray-400/70">
             {PERSONAL_SETTINGS_CARD_DATA.map((card: any, i: any) => (
               <div
-              key={card.title}
+                key={card.title}
                 className={`space-y-4 ${i != PERSONAL_SETTINGS_CARD_DATA.length - 1 && "border-b-[1px]"} border-gray-400/70 p-2 py-10`}
               >
                 <i className="text-6xl text-violet mb-4">{<card.icon />}</i>

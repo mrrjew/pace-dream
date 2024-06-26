@@ -16,9 +16,7 @@ interface RentalCarDatesRangeInputProps {
 export const RentalCarDatesRangeInput: FC<RentalCarDatesRangeInputProps> = ({
   className = "",
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date(),
-  );
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
 
   const onChangeDate = (dates: [Date | null, Date | null]) => {

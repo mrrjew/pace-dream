@@ -113,7 +113,7 @@ const GuestForm: FC<GuestsInputProps> = ({
               </span> */}
               <div className="flex flex-row items-center text-[.7rem] h-[1rem] leadding-[.5rem] ">
                 <button onClick={decrementGuestCount}>- &nbsp; </button>
-                  <span>
+                <span>
                   {guestCount} &nbsp;
                   <button onClick={incrementGuestCount}>+</button>
                 </span>

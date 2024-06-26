@@ -1,15 +1,18 @@
-'use client';
+"use client";
 import React, { useEffect } from "react";
 import FormItem from "../room-stays/FormItem";
 // import { ListingDataType } from "@/types/types";
 import Input from "@/shared/Input";
-import {GoogleMapLayout} from "@/components/GoogleMap";
+import { GoogleMapLayout } from "@/components/GoogleMap";
 import { RentableItem } from "@/types/rentalItems";
 
-
-const PageAddListing2 = (
-  {data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}
-) => {
+const PageAddListing2 = ({
+  data,
+  updateData,
+}: {
+  updateData: (data: Partial<RentableItem>) => void;
+  data: Partial<RentableItem>;
+}) => {
   // const [address, setAddress] = React.useState<{
   //   country: string;
   //   street: string;
@@ -44,43 +47,93 @@ const PageAddListing2 = (
           <h2 className="text-xl font-semibold">Location Details</h2>
           <div className="grid grid-cols-1 gap-4 sm:gap-6">
             <FormItem label="">
-
-              <Input 
+              <Input
                 defaultValue={data?.location?.country}
-                onChange={(e)=>
-                  updateData({...data,location:{...data?.location,country:e?.currentTarget?.value}} as RentableItem
-                )}
-              name="country" type="text" placeholder="Country" />
+                onChange={(e) =>
+                  updateData({
+                    ...data,
+                    location: {
+                      ...data?.location,
+                      country: e?.currentTarget?.value,
+                    },
+                  } as RentableItem)
+                }
+                name="country"
+                type="text"
+                placeholder="Country"
+              />
             </FormItem>
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             <FormItem label="">
-
-              <Input 
+              <Input
                 defaultValue={data?.location?.street_address}
-                onChange={(e)=>updateData({...data,location:{...data?.location,street_address:e?.currentTarget?.value}} as RentableItem)}
-                name="street" type="text" placeholder="Street" />
+                onChange={(e) =>
+                  updateData({
+                    ...data,
+                    location: {
+                      ...data?.location,
+                      street_address: e?.currentTarget?.value,
+                    },
+                  } as RentableItem)
+                }
+                name="street"
+                type="text"
+                placeholder="Street"
+              />
             </FormItem>
             <FormItem label="">
               <Input
                 defaultValue={data?.location?.city}
-                onChange={(e)=>updateData({...data,location:{...data?.location,city:e?.currentTarget?.value}} as RentableItem)}
-              name="city" type="text" placeholder="City" />
+                onChange={(e) =>
+                  updateData({
+                    ...data,
+                    location: {
+                      ...data?.location,
+                      city: e?.currentTarget?.value,
+                    },
+                  } as RentableItem)
+                }
+                name="city"
+                type="text"
+                placeholder="City"
+              />
             </FormItem>
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             <FormItem label="">
-
-              <Input 
+              <Input
                 defaultValue={data?.location?.state}
-                onChange={(e)=>updateData({...data,location:{...data.location,state:e?.currentTarget?.value}} as RentableItem)}
-              name="state" type="text" placeholder="State" />
+                onChange={(e) =>
+                  updateData({
+                    ...data,
+                    location: {
+                      ...data.location,
+                      state: e?.currentTarget?.value,
+                    },
+                  } as RentableItem)
+                }
+                name="state"
+                type="text"
+                placeholder="State"
+              />
             </FormItem>
             <FormItem label="">
-              <Input 
+              <Input
                 defaultValue={data?.location?.zipcode}
-                onChange={(e)=>updateData({...data,location:{...data.location,zipcode:e?.currentTarget?.value}} as RentableItem)}
-              name="zipcode" type="text" placeholder="Zip Code" />
+                onChange={(e) =>
+                  updateData({
+                    ...data,
+                    location: {
+                      ...data.location,
+                      zipcode: e?.currentTarget?.value,
+                    },
+                  } as RentableItem)
+                }
+                name="zipcode"
+                type="text"
+                placeholder="Zip Code"
+              />
             </FormItem>
           </div>
           {/* <div className="grid grid-cols-1 gap-4 sm:gap-6">
@@ -104,13 +157,25 @@ const PageAddListing2 = (
             </FormItem>
           </div> */}
           <div className="w-full h-[260px] rounded-lg">
-            <GoogleMapLayout 
+            <GoogleMapLayout
               init={{
-                center:{lat:data?.location?.latitude || 0,lng:data?.location?.longitude || 0},
+                center: {
+                  lat: data?.location?.latitude || 0,
+                  lng: data?.location?.longitude || 0,
+                },
                 place: data.location?.address || "",
               }}
-              onChange={(lat,lng,link,address)=>{
-                updateData({...data,location:{...data?.location,latitude:lat,longitude:lng,googlemap_link:link,address:address}} as RentableItem)
+              onChange={(lat, lng, link, address) => {
+                updateData({
+                  ...data,
+                  location: {
+                    ...data?.location,
+                    latitude: lat,
+                    longitude: lng,
+                    googlemap_link: link,
+                    address: address,
+                  },
+                } as RentableItem);
               }}
             />
           </div>

@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-
 import { ResetPasswordForm } from "@/components/AuthComponents/ResetPassword";
 import { Loader } from "@/shared/Loader";
 import axios from "axios";
 
 import { useSearchParams } from "next/navigation";
-import {  Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-function VerifyPage(){
+function VerifyPage() {
   const query = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -46,12 +45,11 @@ function VerifyPage(){
     verifyToken(token);
   }, [query]);
 
-
   return (
     <div className="container mb-24 mt-24 lg:mb-32">
       <div className="max-w-md mx-auto space-y-6">
         {loading ? (
-            <Loader /> 
+          <Loader />
         ) : error ? (
           <span className="block text-center text-neutral-300">{error}</span>
         ) : (
@@ -64,8 +62,6 @@ function VerifyPage(){
 
 export default function Page() {
   <Suspense>
-    <VerifyPage/>
-  </Suspense>
+    <VerifyPage />
+  </Suspense>;
 }
-
-

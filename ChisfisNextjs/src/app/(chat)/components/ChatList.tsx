@@ -78,7 +78,7 @@ export const ChatList: React.FC<IChatListProps> = ({
       pusherClient.unbind("conversation:update", updateHandler);
       pusherClient.unbind("conversation:new", newHandler);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const sortedConversations = useMemo(() => {
@@ -89,7 +89,6 @@ export const ChatList: React.FC<IChatListProps> = ({
         new Date(a.latestMessage.createdAt).getTime()
       );
     });
-    
   }, [conversations]);
 
   return (

@@ -51,7 +51,10 @@ const AboutUsWork = () => {
       </div>
       <div className="lg:grid grid-cols-3 gap-3 m-auto mt-3 p-4 sm:grid-col-2 text-center px-[50px]">
         {services.slice(0, 3).map((service) => (
-          <div key={service.title} className="bg-white h-[380px] w-[300px] text-center p-5 rounded-xl mt-2">
+          <div
+            key={service.title}
+            className="bg-white h-[380px] w-[300px] text-center p-5 rounded-xl mt-2"
+          >
             <h3 className="text-left text-2xl ml-5 h-5 font-bold">
               {service.id}
             </h3>
@@ -73,7 +76,10 @@ const AboutUsWork = () => {
       </div>
       <div className="lg:flex gap-56 ms-48 mt-3 p-4 sm:grid-col-2 text-center px-[50px]">
         {services.slice(3).map((service) => (
-          <div key={service.title} className="bg-white h-[380px] w-[300px] text-center p-5 rounded-xl mt-2">
+          <div
+            key={service.title}
+            className="bg-white h-[380px] w-[300px] text-center p-5 rounded-xl mt-2"
+          >
             <h3 className="text-left text-2xl h-5 font-bold">{service.id}</h3>
             {/* <div className={`absolute w-6 h-6 rounded-full ${service.circleColor} -top-2 -left-2 flex justify-center items-center`}>
                             <span className="text-black font-bold">{service.id}</span>
