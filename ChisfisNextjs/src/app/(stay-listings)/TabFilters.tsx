@@ -61,7 +61,7 @@ const RenderRadioBtn = () => {
       {tabs.map((tab) => {
         return (
           <div
-          key={tab}
+            key={tab}
             className={`py-2.5 xl:mr-3 min-[1035px]:px-2.5 md:px-1 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-1 ${
               dropOffLocationType === tab
                 ? "bg-violet shadow-black/10 shadow-lg text-white "
@@ -687,8 +687,8 @@ const TabFilters: React.FC<TabFiltersProps> = ({ setMap }) => {
         <div className="py-5 pl-4 flex flex-row flex-wrap">
           {moreFilter1.map((tab, index) => {
             return (
-              <div 
-              key="filter"
+              <div
+                key="filter"
                 className={`py-2.5 mx-1 xl:pr-5 px-2.5 md:px-2 flex items-center rounded-full font-medium text-xs cursor-pointer my-1 md:mr-2 ${
                   tab.defaultChecked === true
                     ? "bg-violet shadow-black/10 shadow-lg text-white "

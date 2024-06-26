@@ -1,4 +1,3 @@
-
 import { Poppins } from "next/font/google";
 import SiteHeader from "@/app/(client-components)/(Header)/SiteHeader";
 import Footer from "@/components/Footer";
@@ -31,9 +30,7 @@ export default function RootLayout({
     <html lang="en" className={poppins.className}>
       {/* pt-[64px] */}
       <body className="bg-[#F6F4F6] text-base text-neutral-900 overflow-x-hidden max-w-screen flex flex-col">
-        <LayoutWrapper>
-          {children}
-        </LayoutWrapper>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

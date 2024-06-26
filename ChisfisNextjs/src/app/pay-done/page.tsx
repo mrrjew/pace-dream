@@ -7,7 +7,6 @@ import Image from "next/image";
 import converSelectedDateToString from "@/utils/converSelectedDateToString";
 import { getLocalStorageItem } from "@/utils/localStorageUtil";
 
-
 const PayPage: FC<{}> = () => {
   const selectedStartDate = getLocalStorageItem("startedDate");
   const initialStartDate = selectedStartDate

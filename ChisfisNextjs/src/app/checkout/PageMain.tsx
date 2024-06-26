@@ -18,7 +18,7 @@ import Image from "next/image";
 import { GuestsObject } from "../(client-components)/type";
 import { getLocalStorageItem } from "@/utils/localStorageUtil";
 
- interface CheckOutPagePageMainProps {
+interface CheckOutPagePageMainProps {
   className?: string;
 }
 

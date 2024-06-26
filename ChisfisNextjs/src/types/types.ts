@@ -43,8 +43,6 @@ export type PageAddingListing = {
   setPageNumber?: React.Dispatch<React.SetStateAction<number>>;
 };
 
-
-
 // export type ListingDataType = {
 //   propertyType: string;
 //   roomType: string;
@@ -103,52 +101,69 @@ export type PageAddingListing = {
 // }
 
 export type ListingDataType = {
-    propertyId?:string,
-    propertyName?:string,
-    propertyDescription?:string,
-    propertyType?:'apartment'|'house'|'studio'|'tech gear'|'music gear' | 'photography' |'fashion'|'cooking class'|'guided hike'|'photography tour',
-    rooms?:{
-      numberOfBedrooms?:number,
-      numberofBathrooms?:number,
-      roomType?:'Any type'|'hostel'|'guesthouse'|'long term'|'short term'|'d70 camera'|'camping tent'|'mi foldable electric bike',
-    },
-    location?:{
-      address?:string,
-      country?:string,
-      street?:string,
-      city?:string,
-      state?:string,
-      latitude?:number,
-      longitude?:number,
-      link?:string,
-      place?:string,
-    },
-    pricing?:{
-      //  longTermPrice:number,
-      //  shortTermPrice:number,
-      //  hourlyPrice:number,
-      hourlyPrice?:number,
-      dailyPrice?:number,
-      weeklyPrice?:number,
-      monthlyPrice?:number,
-      cleaningFeeDaily?:number,
-    },
-    availability?:Array<{
-      startDate?:Date,
-      endDate?:Date,
-    }>,
-    amenities?:Array<string>,
-    houseRules?:string,
-    termsFile?:string,
-    images?:Array<string>,
-    videos?:string,
-    contactInfo?:{
-      phoneNumber?:string,
-      email?:string,
-    },
-    status?:'draft'|'published'
-}
-
+  propertyId?: string;
+  propertyName?: string;
+  propertyDescription?: string;
+  propertyType?:
+    | "apartment"
+    | "house"
+    | "studio"
+    | "tech gear"
+    | "music gear"
+    | "photography"
+    | "fashion"
+    | "cooking class"
+    | "guided hike"
+    | "photography tour";
+  rooms?: {
+    numberOfBedrooms?: number;
+    numberofBathrooms?: number;
+    roomType?:
+      | "Any type"
+      | "hostel"
+      | "guesthouse"
+      | "long term"
+      | "short term"
+      | "d70 camera"
+      | "camping tent"
+      | "mi foldable electric bike";
+  };
+  location?: {
+    address?: string;
+    country?: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    latitude?: number;
+    longitude?: number;
+    link?: string;
+    place?: string;
+  };
+  pricing?: {
+    //  longTermPrice:number,
+    //  shortTermPrice:number,
+    //  hourlyPrice:number,
+    hourlyPrice?: number;
+    dailyPrice?: number;
+    weeklyPrice?: number;
+    monthlyPrice?: number;
+    cleaningFeeDaily?: number;
+  };
+  availability?: Array<{
+    startDate?: Date;
+    endDate?: Date;
+  }>;
+  amenities?: Array<string>;
+  houseRules?: string;
+  termsFile?: string;
+  images?: Array<string>;
+  videos?: string;
+  contactInfo?: {
+    phoneNumber?: string;
+    email?: string;
+  };
+  status?: "draft" | "published";
+};
 
 export type ListingOption = {
   href: any;

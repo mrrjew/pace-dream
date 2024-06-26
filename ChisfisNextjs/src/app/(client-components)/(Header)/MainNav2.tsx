@@ -1,4 +1,3 @@
-
 import { Route } from "@/routers/types";
 import Logo from "@/shared/Logo";
 import MenuBar from "@/shared/MenuBar";
@@ -27,7 +26,7 @@ export interface MainNav2Props {
 const btnStyle =
   "group self-center w-10 h-10 sm:w-12 sm:h-12 hover:bg-gray-100 dark:hover:bg-neutral-800 rounded-full inline-flex items-center justify-center text-base font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative";
 
-const MainNav2: FC<MainNav2Props> = ({ className = "",hideLogo }) => {
+const MainNav2: FC<MainNav2Props> = ({ className = "", hideLogo }) => {
   const [isModalOpenCurrency, setIsModalOpenCurrency] = useState(false);
   const [isModalOpenCountry, setIsModalOpenCountry] = useState(false);
 
@@ -61,10 +60,10 @@ const MainNav2: FC<MainNav2Props> = ({ className = "",hideLogo }) => {
     window.location.reload();
   };
   return (
-    <header className={cn(`MainNav2 relative z-10`,className)}>
+    <header className={cn(`MainNav2 relative z-10`, className)}>
       <section className="flex justify-between h-16 px-4 lg:container">
         <article className="justify-start flex-1 hidden space-x-3 md:flex sm:space-x-8 lg:space-x-10 gap-14">
-         {!hideLogo && <Logo className="self-center w-34 ml-6" />}
+          {!hideLogo && <Logo className="self-center w-34 ml-6" />}
           {/* <div className='self-center hidden h-10 border-l lg:block border-neutral-300 dark:border-neutral-500'> */}
           <div className="items-center justify-end hidden lg:flex ">
             <ol className="flex items-center gap-4 ml-48">
@@ -121,4 +120,3 @@ const MainNav2: FC<MainNav2Props> = ({ className = "",hideLogo }) => {
 };
 
 export default MainNav2;
-

@@ -19,9 +19,9 @@ const ParkingSpot = () => {
             </p>
             <p className="lg:text-left text-center  text-[#666666] text-[.7rem] font-[400] ">
               Are you looking for the ultimate parking spot tailored for your
-              beloved electric vehicle (EV)? We{'\''}ve got you covered! Finding the
-              best parking spot for your favorite EV involves more than just any
-              ordinary space.
+              beloved electric vehicle (EV)? We{"'"}ve got you covered! Finding
+              the best parking spot for your favorite EV involves more than just
+              any ordinary space.
             </p>
           </div>
           <div className="flex justify-center mx-auto lg:mx-0 lg:justify-start w-fit ">

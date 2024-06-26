@@ -118,4 +118,3 @@ export const GuestsInput: FC<GuestsInputProps> = ({ className = "flex-1" }) => {
     </Popover>
   );
 };
-

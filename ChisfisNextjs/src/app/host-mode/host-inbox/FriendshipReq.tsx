@@ -83,7 +83,10 @@ const FriendshipReq = () => {
         >
           {incomingRequests.length > 0 ? (
             incomingRequests?.map((request) => (
-              <div key={request.first_name} className="flex items-center justify-center flex-col md:flex-row gap-3 bg-slate-300 py-1 border-collapse rounded-xl">
+              <div
+                key={request.first_name}
+                className="flex items-center justify-center flex-col md:flex-row gap-3 bg-slate-300 py-1 border-collapse rounded-xl"
+              >
                 <div
                   className={`rounded-full wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold w-8 h-8 sm:w-12 sm:h-12`}
                 >
@@ -121,7 +124,10 @@ const FriendshipReq = () => {
         >
           {outgoingRequests.length > 0 ? (
             outgoingRequests?.map((request) => (
-              <div key={request.first_name} className="flex items-center justify-center flex-col md:flex-row gap-3 bg-slate-300 py-1 border-collapse rounded-xl">
+              <div
+                key={request.first_name}
+                className="flex items-center justify-center flex-col md:flex-row gap-3 bg-slate-300 py-1 border-collapse rounded-xl"
+              >
                 <div
                   className={`rounded-full wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold w-8 h-8 sm:w-12 sm:h-12`}
                 >

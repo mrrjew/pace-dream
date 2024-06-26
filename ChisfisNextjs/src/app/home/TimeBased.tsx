@@ -63,13 +63,17 @@ const cardData = [
 ];
 
 const TimeBased = () => {
-  const [activeCategory, setActiveCategory] = useState<RentableItemType>("room");
-  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties/${activeCategory}`,queryKey:["properties-by-category",activeCategory]})
+  const [activeCategory, setActiveCategory] =
+    useState<RentableItemType>("room");
+  const { data } = useFetchData<Array<RentableItem>>({
+    endpoint: `/property/get-all-properties/${activeCategory}`,
+    queryKey: ["properties-by-category", activeCategory],
+  });
 
   useEffect(() => {
     console.log(data);
   }, [data]);
- 
+
   const handleCategoryClick = (category: RentableItemType) => {
     setActiveCategory(category);
   };
@@ -227,9 +231,14 @@ const TimeBased = () => {
           <div className=" w-[100%] h-[293px]">
             <Slider ref={sliderRef} {...settings}>
               {/* render empty data */}
-              {data?.length === 0 &&  <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
-                      <p>No data found in <strong>{activeCategory.replaceAll('_',' ')}</strong></p>
-                </div>}
+              {data?.length === 0 && (
+                <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
+                  <p>
+                    No data found in{" "}
+                    <strong>{activeCategory.replaceAll("_", " ")}</strong>
+                  </p>
+                </div>
+              )}
               {data?.map((card) => (
                 <div
                   key={card._id}
@@ -237,7 +246,10 @@ const TimeBased = () => {
                 >
                   <div className="relative ">
                     <Image
-                      src={card?.gallery?.thumbnail ?? 'https://via.placeholder.com/150'}
+                      src={
+                        card?.gallery?.thumbnail ??
+                        "https://via.placeholder.com/150"
+                      }
                       className="rounded-xl h-[159px] w-full object-cover"
                       alt="london"
                       width={90}
@@ -269,13 +281,13 @@ const TimeBased = () => {
                   </div>
                   <div className="flex items-center justify-between mt-3">
                     <p>
-                      <span className="text-xl font-bold">{
-                        card.price?.at(0)?.amount
-                        }</span>
+                      <span className="text-xl font-bold">
+                        {card.price?.at(0)?.amount}
+                      </span>
                       / {card.price?.at(0)?.frequency}
                     </p>
                     <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#E8F2EC] ">
-                      {card.available ?  "Available" : "Not Available"}
+                      {card.available ? "Available" : "Not Available"}
                     </button>
                   </div>
                 </div>

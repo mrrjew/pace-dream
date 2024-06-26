@@ -1,4 +1,3 @@
-
 import Hero from "./hero/Hero";
 import BrowseByCategories from "./BrowseByCategories";
 import BrowseByDestination from "./BrowseByDestination";

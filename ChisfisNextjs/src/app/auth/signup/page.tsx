@@ -17,8 +17,7 @@ import { SignupMethod } from "@/types/SignupMethod";
 import { MobileInput } from "@/components/MobileInput";
 import { SignupForm } from "@/components/AuthComponents/SignupForm";
 
-
-export default function Page(){
+export default function Page() {
   const { googleLogin, isLoading: googleLoggingin } = useGoogleLogin();
   const { appleLogin, isLoading: appleLoading } = useAppleLogin();
   const { facebookLogin, isLoading: facebookLoading } = useFacebookLogin();
@@ -300,5 +299,4 @@ export default function Page(){
       </div>
     </div>
   );
-};
-
+}
