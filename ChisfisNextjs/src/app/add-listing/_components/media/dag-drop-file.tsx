@@ -34,8 +34,8 @@ export function DragDrop({
     document: [MIME_TYPES.pdf],
   };
   const maxSize = {
-    //  limit image size to 5 mb
-    image: 5 * 1024 * 1024,
+    //  limit image size to 1 mb
+    image: 1 * 1024 * 1024,
     video: 100 * 1024 * 1024,
     document: 50 * 1024 * 1024,
   };
@@ -96,7 +96,7 @@ export function DragDrop({
           maxFiles={maxFileList[type]}
           disabled={isLoading || localMedia?.length >= maxFileList[type]}
           onReject={(files) => {
-            // console.log("Rejected files",files[0].errors[0].message);
+            console.log("Rejected files", files[0].errors[0].message);
             createToast(
               files[0]?.errors[0]?.message || "File type not supported",
               "error",
@@ -139,7 +139,7 @@ export function DragDrop({
                   <div className="h-20 justify-center flex items-center gap-4">
                     <CloudArrowUpIcon className="w-12 h-12 text-primary-500" />
                     <p className="text-gray-400">
-                      Upload a file or drag and drop PNG, JPG, GIF up to 5MB
+                      Upload a file or drag and drop PNG, JPG, GIF up to 1MB
                     </p>
                   </div>
                 )}

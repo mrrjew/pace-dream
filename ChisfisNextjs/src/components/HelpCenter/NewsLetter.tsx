@@ -8,7 +8,7 @@ const NewsLetter = () => {
         Join our newsletter
       </h1>
       <p className="sm:w-1/3 text-sm md:text-md p-2 text-center">
-        Read and share new perspectives on just about any topics. Everyone{'\''}s
+        Read and share new perspectives on just about any topics. Everyone{"'"}s
         welcome.
       </p>
 

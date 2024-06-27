@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +12,6 @@
 .slick-slider button::before {
   color: black;
 }
-
 
 .lr {
   writing-mode: vertical-lr;
@@ -31,7 +29,6 @@
 .panel-open {
   overflow: hidden;
 }
-
 
 .bg-overlay {
   background: rgba(0, 0, 0, 0.2);
@@ -63,14 +60,13 @@
   }
 }
 
-
 /* arrow in number input field */
-.remove-arrow::-webkit-inner-spin-button, 
-.remove-arrow::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-} 
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-.remove-arrow { 
-    -moz-appearance: textfield; 
-} 
+.remove-arrow {
+  -moz-appearance: textfield;
+}

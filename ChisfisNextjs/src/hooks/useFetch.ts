@@ -173,4 +173,3 @@ export const useFetchData = <T>({
     data: result?.data?.data ? result.data.data : null,
   };
 };
-

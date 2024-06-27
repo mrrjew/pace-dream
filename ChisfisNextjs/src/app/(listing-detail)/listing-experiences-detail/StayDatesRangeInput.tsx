@@ -105,4 +105,3 @@ export const StayDatesRangeInput: FC<StayDatesRangeInputProps> = ({
     </Popover>
   );
 };
-

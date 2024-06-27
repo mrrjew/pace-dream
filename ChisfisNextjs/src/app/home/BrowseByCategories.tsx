@@ -3,6 +3,12 @@
 import React from "react";
 import { GoDotFill } from "react-icons/go";
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import restRoom from "@/images/categories/1.png";
+import evPack from "@/images/categories/2.png";
+import storage from "@/images/categories/3.png";
+import spot from "@/images/categories/4.png";
 import {
   RestRoomIcon,
   RestRoomNotActive,
@@ -19,27 +25,55 @@ const BrowseByCategories = () => {
   const catData = [
     {
       id: 1,
-      icon: <RestRoomIcon />,
+      icon: (
+        <>
+          {" "}
+          <Image src={restRoom} width={80} height={80} alt="cat" />{" "}
+        </>
+      ),
       notActive: <RestRoomNotActive />,
       title: "Restroom",
+      color: "text-blue-300",
+      tintColor: "bg-[#e4f8ff]",
     },
     {
       id: 2,
-      icon: <EvParkingIcon />,
+      icon: (
+        <>
+          {" "}
+          <Image src={evPack} width={80} height={80} alt="cat" />{" "}
+        </>
+      ),
       notActive: <EvParkingIconNotActive />,
       title: "EV parking spot",
+      color: "text-purple-300",
+      tintColor: "bg-[#fbefff]",
     },
     {
       id: 3,
-      icon: <StorageIconRoom />,
+      icon: (
+        <>
+          {" "}
+          <Image src={storage} width={80} height={80} alt="cat" />{" "}
+        </>
+      ),
       notActive: <StorageIconRoomNotActive />,
       title: "Storage Room",
+      color: "text-purple-300",
+      tintColor: "bg-[#ecf5ff]",
     },
     {
       id: 4,
-      icon: <ParkingSpotIcon />,
+      icon: (
+        <>
+          {" "}
+          <Image src={spot} width={80} height={80} alt="cat" />{" "}
+        </>
+      ),
       notActive: <ParkingSpotIconNotActive />,
       title: "Parking Spot",
+      color: "text-blue-400",
+      tintColor: "bg-[#ecf5ff]",
     },
   ];
   return (
@@ -61,86 +95,28 @@ const BrowseByCategories = () => {
         </div>
 
         {/* Categories web */}
-        <div className=" md:flex hidden items-center justify-center py-4 mx-auto mt-[3rem] ">
-          {/* RestRoom Web */}
-          <div className="flex flex-col items-center justify-center">
-            <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
-              <RestRoomIcon />
-            </div>
-            <p className="mt-2 text-base font-semibold">Restroom</p>
-          </div>
-
-          {/* Dot Fill */}
-          <div className="flex items-center mt-[-1.4rem] ">
-            <GoDotFill className="text-[#5527D7]" />
-            <div className="text-[#5527D7]">---------</div>
-            <GoDotFill className="text-[#5527D7]" />
-          </div>
-
-          {/* EV Parking Spot */}
-          <div className="flex flex-col items-center justify-center">
-            <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
-              <EvParkingIcon />
-            </div>
-            <p className="mt-2 text-base font-semibold">EV parking spot</p>
-          </div>
-
-          {/* Dot Fill */}
-          <div className="flex items-center mt-[-1.4rem] ">
-            <GoDotFill className="text-[#5527D7]" />
-            <div className="text-[#5527D7]">---------</div>
-            <GoDotFill className="text-[#5527D7]" />
-          </div>
-
-          {/* Storage Room */}
-          <div className="flex flex-col items-center justify-center">
-            <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
-              <StorageIconRoom />
-            </div>
-            <p className="mt-2 text-base font-semibold">Storage Room</p>
-          </div>
-
-          {/* Dot Fill */}
-          <div className="flex items-center mt-[-1.4rem] ">
-            <GoDotFill className="text-[#5527D7]" />
-            <div className="text-[#5527D7]">---------</div>
-            <GoDotFill className="text-[#5527D7]" />
-          </div>
-
-          {/* Parking Spot */}
-          <div className="flex flex-col items-center justify-center">
-            <div className=" flex items-center justify-center size-[62px] bg-[#5527D7] rounded-lg">
-              <ParkingSpotIcon />
-            </div>
-            <p className="mt-2 text-base font-semibold">Parking Spot</p>
-          </div>
+        <div className=" md:flex gap-8 hidden items-center justify-center px-24 py-4 mx-auto mt-[3rem] ">
+          {catData.map((cat: any) => {
+            return (
+              <Link
+                href="#"
+                key={cat.title}
+                className={`${cat.tintColor} py-8 w-1/4 h-max space-y-2 rounded-md flex flex-col items-center`}
+              >
+                <p className={`text-4xl ${cat.color} text-blue-200`}>
+                  {cat.icon}
+                </p>
+                <p className="font-bold text-xl text-gray-900">{cat.title}</p>
+              </Link>
+            );
+          })}
         </div>
+        <Link href="#" className="text-xl underline text-right">
+          Browse All
+        </Link>
 
         {/* mobile view */}
-        <div className=" w-[100vw] md:hidden flex mt-[2rem]   ">
-          <div className="  overflow-x-auto ml-[1.5rem] flex mx-auto gap-[2rem] ">
-            {catData.map((data, index) => {
-              let id = data.id;
-              return (
-                <div
-                  onClick={() => setCatActive(data.id)}
-                  className={`flex flex-col gap-[.5rem] p-[1rem] px-[2rem] items-center border-2 font-rubik shrink-0 ${
-                    id == catActive
-                      ? "bg-[#5527D7] border-transparent text-white "
-                      : " border-[#D9D9D9] text-[#939393] "
-                  }   rounded-lg justify-center`}
-                  key={index}
-                >
-                  <div className={` mt-[.8rem]  `}>
-                    {id == catActive ? data.icon : data.notActive}
-                  </div>
-                  <p className=" text-[.65rem] font-[400]">{data.title}</p>
-                </div>
-              );
-            })}
-            <div className=" w-[1rem] bg-transparent "></div>
-          </div>
-        </div>
+        <div className=" w-[100vw] md:hidden flex mt-[2rem]   "></div>
       </div>
     </>
   );

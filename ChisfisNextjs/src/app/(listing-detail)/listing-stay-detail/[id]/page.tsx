@@ -54,7 +54,9 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const {data} = useFetchData<RentableItem>({endpoint:`/property/get/${id}`,queryKey:['property']});
   const {data:owner} = useFetchData<User>({endpoint:`/user/get/${data?.owner}`,queryKey:['owner']});
   const filteredData = DEMO_STAY_LISTINGS.filter((item) => item.id === id);
-  const priceDayNumber = parseFloat(filteredData[0]?.priceDay?.replace("$", ""));
+  const priceDayNumber = parseFloat(
+    filteredData[0]?.priceDay?.replace("$", ""),
+  );
   const priceHourNumber = parseFloat(
     filteredData[0]?.priceHour?.replace("$", ""),
   );
@@ -838,7 +840,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   </ButtonPrimary>
 
                   <p className="mt-4 text-[#9DA1AB] text-sm text-center">
-                    You won{'\''}t be charged yet
+                    You won{"'"}t be charged yet
                   </p>
 
                   <div className="flex justify-between items-center mt-4">

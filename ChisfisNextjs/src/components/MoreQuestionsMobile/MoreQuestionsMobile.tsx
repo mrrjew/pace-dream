@@ -15,8 +15,8 @@ const MoreQuestionsMobile = () => {
           <p className="mt-2 text-xl font-bold">Do you have more questions?</p>
           <p className="text-[#666666] text-[13px]">
             An all-encompassing and user-friendly platform that seamlessly
-            connects you with precisely what you{'\''}re looking for, streamlining
-            your search process effortlessly.
+            connects you with precisely what you{"'"}re looking for,
+            streamlining your search process effortlessly.
           </p>
         </div>
         <div className="flex justify-center mt-4">

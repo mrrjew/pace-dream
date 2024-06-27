@@ -52,24 +52,28 @@ const options = [
 const ListingCategoriesPage = () => {
   return (
     <>
-        <div className="flex-col text-center">
-                <h1 className="font-[1000] leading-6 text-center mb-4">
-                    <span className="text-sm md:text-xl decoration-2 decoration-[#192946]">
-                        What Type of Place will guests have?
-                    </span>
-                </h1>
-                <hr  className=" w-full  border-[#192946] border-opacity-20"/>
-                <h2 className="font-[700] text-[16px] text-opacity-80 text-center  text-slate-400 my-4  ">
-                    Choose what you are like to offer.
-                </h2>
-            {/* <div className="container flex justify-center flex-col"> */}
-                <div className="grid grid-cols-2 md:grid-cols-3 col-auto gap-4 w-fit py-6 h-fit md:w-[520px] m-0 md:m-auto">
-                    {options?.map((option) => (
-                        <ListingOption key={option.href} {...option} className="px-1 text-center text-[8px] md:text-sm" />
-                    ))}
-                {/* </div> */}
-            </div>
+      <div className="flex-col text-center">
+        <h1 className="font-[1000] leading-6 text-center mb-4">
+          <span className="text-sm md:text-xl decoration-2 decoration-[#192946]">
+            What Type of Place will guests have?
+          </span>
+        </h1>
+        <hr className=" w-full  border-[#192946] border-opacity-20" />
+        <h2 className="font-[700] text-[16px] text-opacity-80 text-center  text-slate-400 my-4  ">
+          Choose what you are like to offer.
+        </h2>
+        {/* <div className="container flex justify-center flex-col"> */}
+        <div className="grid grid-cols-2 md:grid-cols-3 col-auto gap-4 w-fit py-6 h-fit md:w-[520px] m-0 md:m-auto">
+          {options?.map((option) => (
+            <ListingOption
+              key={option.href}
+              {...option}
+              className="px-1 text-center text-[8px] md:text-sm"
+            />
+          ))}
+          {/* </div> */}
         </div>
+      </div>
       {/* <div className={`nc-PageAddListing1 max-w-screen pb-4 mt-24`}>
         <div className="listingSection">
           <div className="bg-gray-100 min-h-screen">

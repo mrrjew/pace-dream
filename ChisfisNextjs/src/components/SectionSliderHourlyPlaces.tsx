@@ -145,7 +145,7 @@ const SectionSliderHourlyPlaces: FC<SectionSliderHourlyPlaces> = ({
             if (i === 0) {
               return (
                 <div
-                key={tab}
+                  key={tab}
                   className={` md:w-[100px] w-[75px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}
@@ -154,7 +154,7 @@ const SectionSliderHourlyPlaces: FC<SectionSliderHourlyPlaces> = ({
             } else if (i === 1) {
               return (
                 <div
-                key={tab}
+                  key={tab}
                   className={` md:w-[85px] w-[50px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}
@@ -163,7 +163,7 @@ const SectionSliderHourlyPlaces: FC<SectionSliderHourlyPlaces> = ({
             } else if (i === 2) {
               return (
                 <div
-                key={tab}
+                  key={tab}
                   className={` md:w-[140px] w-[70px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}
@@ -172,7 +172,7 @@ const SectionSliderHourlyPlaces: FC<SectionSliderHourlyPlaces> = ({
             } else if (i === 3) {
               return (
                 <div
-                key={tab}
+                  key={tab}
                   className={` md:w-[140px] w-[70px] h-0.5 ${
                     active ? "bg-[#632DF8] " : "bg-[#EAEBF0]"
                   }`}

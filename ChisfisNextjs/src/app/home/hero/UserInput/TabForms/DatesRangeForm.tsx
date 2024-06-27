@@ -215,7 +215,10 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Button as={"div"} className="absolute z-50 w-screen max-w-sm mt-3 transform bg-white rounded-3xl left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
+              <Popover.Button
+                as={"div"}
+                className="absolute z-50 w-screen max-w-sm mt-3 transform bg-white rounded-3xl left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl"
+              >
                 <div className="p-2 overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black sm:p-4 ring-opacity-5">
                   <DatePicker
                     onChange={handleChange}
@@ -266,7 +269,10 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Button as="div" className="absolute z-50 w-screen max-w-sm mt-3 transform left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
+              <Popover.Button
+                as="div"
+                className="absolute z-50 w-screen max-w-sm mt-3 transform left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl"
+              >
                 <div className="p-2 overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black sm:p-4 ring-opacity-5">
                   <DatePicker
                     onChange={(dates,e)=>{

@@ -12,12 +12,10 @@ import ExperiencePag3 from "../../_components/ExperiencePage3";
 import ExperiencePage4 from "../../_components/ExperiencePage4";
 import { RentableItem } from "@/types/rentalItems";
 
-
-
 const initialData: Partial<RentableItem> = {
-   title: "",
-   summary: "",
-   details: {
+  title: "",
+  summary: "",
+  details: {
     amenities: [],
     rules: [],
     room_type: "any type",
@@ -28,31 +26,31 @@ const initialData: Partial<RentableItem> = {
       startTime: "",
       endTime: "",
     },
-    },
-    location: {
-      address: "",
-      longitude: 0,
-      latitude: 0,
-      zipcode: "",
-      city: "",
-      state: "",
-      country: "",
-      street_address: "",
-      googlemap_link: "",
-    },
-    gallery: {
-      thumbnail: "",
-      images: [],
-      videos: [],
-    },
-    attachments: [],
-    item_type:'experience',
-    price: [],
-    rules: {},
-    rating:0,
-    owner:"",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+  },
+  location: {
+    address: "",
+    longitude: 0,
+    latitude: 0,
+    zipcode: "",
+    city: "",
+    state: "",
+    country: "",
+    street_address: "",
+    googlemap_link: "",
+  },
+  gallery: {
+    thumbnail: "",
+    images: [],
+    videos: [],
+  },
+  attachments: [],
+  item_type: "experience",
+  price: [],
+  rules: {},
+  rating: 0,
+  owner: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 const Page = () => {
@@ -72,15 +70,32 @@ const Page = () => {
     isFirstStep,
     isLastStep,
   } = useMultiStepForm([
-
-    <PageAddListing1 key="page"  data={data} updateData={updateData} />,
-    <PageAddListing2 key="page"  data={data} updateData={updateData} />,
-    <ExperiencePag3  key="page" data={data} updateData={updateData} />, //change page 3
+    <PageAddListing1 key="page" data={data} updateData={updateData} />,
+    <PageAddListing2 key="page" data={data} updateData={updateData} />,
+    <ExperiencePag3 key="page" data={data} updateData={updateData} />, //change page 3
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <ExperiencePage4 key="page"  data={data} updateData={updateData}/>, // change page 4
-    <PageAddListing6 key="page"  data={data} onPreview={()=>{next()}} />,
-    <PageAddListing7 key="page"  data={data} onBackToHost={()=>{back()}}/>,
-    <PageAddListing8 key="page"  data={data} onBackToHost={()=>{back()}}/>
+    <ExperiencePage4 key="page" data={data} updateData={updateData} />, // change page 4
+    <PageAddListing6
+      key="page"
+      data={data}
+      onPreview={() => {
+        next();
+      }}
+    />,
+    <PageAddListing7
+      key="page"
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
+    <PageAddListing8
+      key="page"
+      data={data}
+      onBackToHost={() => {
+        back();
+      }}
+    />,
   ]);
 
   return (

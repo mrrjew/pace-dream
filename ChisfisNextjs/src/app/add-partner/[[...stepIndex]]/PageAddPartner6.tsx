@@ -10,7 +10,9 @@ const pageAddPartner6: FC<pageAddPartner6Props> = () => {
   return (
     <>
       <div>
-        <h2 className="text-2xl font-semibold">Where{'\''}s your place located?</h2>
+        <h2 className="text-2xl font-semibold">
+          Where{"'"}s your place located?
+        </h2>
         <p className="mt-4">
           Your address is only shared with guests after they’ve made a
           reservation.

@@ -11,7 +11,7 @@ const PageAddPartner8: FC<PageAddPartner8Props> = () => {
           What are the amenities that room have have?
         </h2>
         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-          You{'\''}ll add more details later, such as bed types.
+          You{"'"}ll add more details later, such as bed types.
         </span>
       </div>
       <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
