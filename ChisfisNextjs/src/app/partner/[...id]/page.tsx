@@ -356,7 +356,7 @@ const Page = ({ params }: any) => {
           </div>
 
           <div className="location">
-            <h3 className="title">Where he{'\''}s looking for the partner?</h3>
+            <h3 className="title">Where he{"'"}s looking for the partner?</h3>
 
             <div className="btn-wrapper">
               {looking_for_partner_location.map((item: any) => (

@@ -1,9 +1,15 @@
 "use client";
 import React from "react";
-import {DragDrop} from "./media/dag-drop-file";
+import { DragDrop } from "./media/drag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
 
-const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}) => {
+const ExperiencePage4 = ({
+  data,
+  updateData,
+}: {
+  updateData: (data: Partial<RentableItem>) => void;
+  data: Partial<RentableItem>;
+}) => {
   // const [rentalRules, setRentalRules] = useState<string>("");
   // const [terms, setTerms] = useState<string>("");
   // const [rentalImages, setRentalImages] = useState<File[]>([]);
@@ -25,7 +31,6 @@ const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableIte
   //   setRentalVideo(file);
   // };
 
-
   // update data with rental rules, images and video
   // const updateDataWithRentalDetails = () => {
   //   updateData({...data,additionalRules:[rentalRules],placeImages:rentalImages.map((f)=>f?.webkitRelativePath),placeVideo:rentalVideo?.webkitRelativePath})
@@ -38,23 +43,21 @@ const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableIte
 
   return (
     <>
-        {/* FORM */}
-        <div className="bg-white w-screen sm:w-full rounded-lg p-2 md:p-6">
-          <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">
-              Describe the experience in details
-            </label>
-            {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
-            <textarea
-              className="border border-gray-300 rounded-md p-2 w-full"
-              placeholder="EG., Any restrictions"
-              value={data?.summary}
-              onChange={
-                (e) => updateData({...data, summary:e.target.value})
-              }
-            />
-          </div>
-          {/* <div className="mb-6">
+      {/* FORM */}
+      <div className="bg-white w-screen sm:w-full rounded-lg p-2 md:p-6">
+        <div className="mb-6">
+          <label className="block text-gray-700 font-medium mb-2">
+            Describe the experience in details
+          </label>
+          {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
+          <textarea
+            className="border border-gray-300 rounded-md p-2 w-full"
+            placeholder="EG., Any restrictions"
+            value={data?.summary}
+            onChange={(e) => updateData({ ...data, summary: e.target.value })}
+          />
+        </div>
+        {/* <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">
             List any requirements for participants
             </label>
@@ -67,7 +70,7 @@ const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableIte
             />
           </div> */}
 
-          {/* <div className="mb-6">
+        {/* <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">
             Any specific rules for rental gear product?
             </label>
@@ -79,18 +82,29 @@ const ExperiencePage4 = ({data,updateData}:{updateData:(data:Partial<RentableIte
               onChange={(e) => setTerms(e.target.value)}
             />
           </div> */}
-          <div className="mb-6">
-            <label className="block text-gray-700 font-medium mb-2">
+        <div className="mb-6">
+          <label className="block text-gray-700 font-medium mb-2">
             Can you upload the terms?
-            </label>
-            {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
-            <DragDrop  type="document" isMultiple={false} maxFiles={1} media={data?.attachments?.map((val)=>val?.link) || []} onUploaded={(urls)=>{
-              updateData({...data,attachments:urls.map((url)=>({link:url,description:"",mime_type:"application/pdf"}))})
-            }}/>
-          </div>
-
-
+          </label>
+          {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
+          <DragDrop
+            type="document"
+            isMultiple={false}
+            maxFiles={1}
+            media={data?.attachments?.map((val) => val?.link) || []}
+            onUploaded={(urls) => {
+              updateData({
+                ...data,
+                attachments: urls.map((url) => ({
+                  link: url,
+                  description: "",
+                  mime_type: "application/pdf",
+                })),
+              });
+            }}
+          />
         </div>
+      </div>
     </>
   );
 };

@@ -36,7 +36,7 @@ export const useGoogleLogin = () => {
       // console.log("Google Auth Response",response);
       return response.data;
     } catch (error: any) {
-      console.log("Google local error: ",error);
+      console.log("Google local error: ", error);
       // console.log(error.response.data.data.error);
     }
   };
@@ -44,7 +44,7 @@ export const useGoogleLogin = () => {
   const { mutate: googleLogin, isLoading } = useMutation({
     mutationFn: authWithGoogle,
     onSuccess: (result) => {
-      console.log("authWithGoogle",result);
+      console.log("authWithGoogle", result);
       const { data } = result;
       console.log(data, result);
       setSession(data.token, data, data.user_id);

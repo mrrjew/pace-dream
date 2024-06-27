@@ -1,5 +1,4 @@
 "use client";
-
 import React, { FC, Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Squares2X2Icon } from "@heroicons/react/24/outline";
@@ -34,8 +33,13 @@ import { DEMO_STAY_LISTINGS } from "@/data/listings";
 import { DEMO_AUTHORS } from "@/data/authors";
 import StayCard2 from "@/components/StayCard2";
 import Link from "next/link";
+import { useFetchData } from "@/hooks/useFetch";
+import { RentableItem } from "@/types/rentalItems";
+import { AMENITIES_DATA } from "@/data/amenities";
+import { User } from "@/types/user";
+import { GoogleMapLayout } from "@/components/GoogleMap";
 
-const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 4);
+// const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 4);
 
 export interface ListingStayDetailPageProps {}
 
@@ -47,11 +51,16 @@ export type TimeSlot = {
 const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   // time slot state
   const { id } = useParams();
+  const {data} = useFetchData<RentableItem>({endpoint:`/property/get/${id}`,queryKey:['property']});
+  const {data:owner} = useFetchData<User>({endpoint:`/user/get/${data?.owner}`,queryKey:['owner']});
   const filteredData = DEMO_STAY_LISTINGS.filter((item) => item.id === id);
-  const priceDayNumber = parseFloat(filteredData[0]?.priceDay?.replace("$", ""));
+  const priceDayNumber = parseFloat(
+    filteredData[0]?.priceDay?.replace("$", ""),
+  );
   const priceHourNumber = parseFloat(
     filteredData[0]?.priceHour?.replace("$", ""),
   );
+  
   const filteredAuthors = DEMO_AUTHORS.filter(
     (item) => item.id === filteredData[0]?.authorId,
   );
@@ -88,7 +97,6 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   };
 
   //  Date value state
-  const [currentHoverID, setCurrentHoverID] = useState<string | number>(-1);
   const [startDate, setStartDate] = useState<Date | any>(new Date());
   const [endDate, setEndDate] = useState<Date | any>(new Date());
 
@@ -97,7 +105,6 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   setLocalStorageItem("bookedDay", numberOfDays.toString() || "");
 
   // Guest value state
-
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(0);
   const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(0);
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(0);
@@ -392,14 +399,14 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           </Link>
         </div>
         <div className="max-sm:pt-4 pt-4 flex justify-between items-center ml-4 sm:ml-20">
-          <Badge name="Wooden house" />
+          <Badge className="capitalize" name={data?.item_type?.replaceAll("_"," ")} />
         </div>
         <div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold ml-4 sm:ml-20">
-            {filteredData[0]?.title}
+            {data?.title}
           </h2>
           <div className="flex items-center space-x-4 mt-2 mx-4 sm:mx-20 justify-between  mb-8">
-            <span className="text-gray-500"> Tokyo, Jappan</span>
+            <span className="text-gray-500">{data?.location?.city || data?.location?.street_address || data?.location?.city}</span>
             <LikeSaveBtns />
           </div>
         </div>
@@ -413,13 +420,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <h2 className="text-2xl font-semibold">Description</h2>
         <div className="text-gray-500 dark:text-neutral-300 mt-4">
           <span>
-            Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
-            accommodation, an outdoor swimming pool, a bar, a shared lounge, a
-            garden and barbecue facilities. Complimentary WiFi is provided.
-            There is a private bathroom with bidet in all units, along with a
-            hairdryer and free toiletries. The Symphony 9 Tam Coc offers a
-            terrace. Both a bicycle rental service and a car rental service are
-            available at the accommodation, while cycling can be enjoyed nearby.
+            {data?.details?.description || "No description available"}
           </span>
         </div>
         <button className="mt-4 border rounded-full border-gray-200 px-4 py-2">
@@ -434,12 +435,16 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       <div>
         <h2 className="text-2xl font-semibold">Offered Amenities </h2>
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-neutral-700">
-          {Amenities_demos.filter((_, i) => i < 10).map((item) => (
-            <div key={item.name} className="flex items-center space-x-3">
-              <i className={`text-3xl las ${item.icon}`}></i>
-              <span className="font-semibold">{item.name}</span>
-            </div>
-          ))}
+          {data?.details?.amenities?.map((id:string) => {
+            const item = AMENITIES_DATA.find((a) => a.id === id);
+            if(!item) return null;
+            return (
+              <div key={item?.id} className="flex items-center space-x-3">
+                {item?.icon}
+                <span className="font-semibold">{item?.label}</span>
+              </div>
+            )
+          })}
         </div>
         <div className="mt-4">
           <ButtonSecondary onClick={openModalAmenities}>
@@ -502,17 +507,20 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     </span>
                   </div>
                   <div className="px-8 overflow-auto text-neutral-700 dark:text-neutral-300 divide-y divide-neutral-200">
-                    {Amenities_demos.filter((_, i) => i < 1212).map((item) => (
-                      <div
-                        key={item.name}
-                        className="flex items-center py-2.5 sm:py-4 lg:py-5 space-x-5 lg:space-x-8"
-                      >
-                        <i
-                          className={`text-4xl text-neutral-6000 las ${item.icon}`}
-                        ></i>
-                        <span>{item.name}</span>
-                      </div>
-                    ))}
+                    {data?.details?.amenities?.map((item:string) => {
+                      const amenity = AMENITIES_DATA.find((a) => a.id === item);
+                      if(!amenity) return null;
+                      return (
+                        <div
+                          key={amenity.id}
+                          className="flex items-center py-2.5 sm:py-4 lg:py-5 space-x-5 lg:space-x-8"
+                        >
+                          {amenity?.icon}
+                          <span>{amenity?.label}</span>
+                        </div>
+                      );
+                    }
+                    )}
                   </div>
                 </div>
               </div>
@@ -540,10 +548,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                 <h2>Identify Verified</h2>
               </div>
               <a className="block text-xl font-black ml-4" href="/author">
-                Hosted By{" "}
-                {filteredAuthors[0]?.firstName +
-                  " " +
-                  filteredAuthors[0]?.lastName}
+                Hosted By {" "}
+                {(owner?.first_name || '')  + " " + (owner?.last_name || '')}
               </a>
             </div>
           </div>
@@ -556,8 +562,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <div className="flex min-sm:w-[40vw] w-[90vw]">
           <Image src={Protect} alt="Protect" width={24}></Image>
           <h2 className="mt-4 ml-4">
-            To protect your payment, never transfer money or communicate outside
-            of the Airbnb website or app
+            {/* limit to one line */}
+             {Number(data?.summary?.length) > 200 ? data?.summary?.substring(0, 100) + "..." : data?.summary}
           </h2>
         </div>
       </div>
@@ -569,10 +575,12 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       <div>
         <div className="flex items-center">
           <StarIcon className={`text-yellow-500 w-6 h-6`} />
-          <h2 className="text-2xl font-bold">5.0</h2>
-          <div className="ml-2 mb-1 flex">
-            <Image src={Dot} alt="dot" width={4}></Image>
-            <h2 className="text-lg font-semibold ml-1">12 Reviews</h2>
+          <h2 className="text-2xl font-bold">
+            {data?.rating || 0}
+          </h2>
+          <div className="ml-2 flex">
+            {/* <Image src={Dot} alt="dot" width={4}></Image> */}
+            <h2 className="text-lg font-semibold ml-1">Reviews</h2>
           </div>
         </div>
         <div className="grid sm:grid-cols-3 sm:gap-8">
@@ -593,23 +601,20 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <h2 className="text-2xl font-semibold">Where you’ll be</h2>
         <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3 ring-1 ring-black/10 rounded-xl z-0 mt-6">
           <div className="rounded-xl overflow-hidden z-0">
-            <iframe
-              width="100%"
-              height="100%"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999781829875!2d2.2920969260003203!3d48.85821455071963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sin!4v1708333221439!5m2!1sen!2sin"
-            ></iframe>
+            <GoogleMapLayout init={{
+              center: {
+                lat: data?.location?.latitude || 0,
+                lng: data?.location?.longitude || 0
+              },
+              zoom: 16,
+              allowDefaults: true,
+              place: data?.location?.address || "",
+            }} isMapOnly  className="h-full w-full"/>
           </div>
         </div>
         <div className="mt-6">
           <h2>
-            Very dynamic and appreciated district by the people of Bordeaux
-            thanks to rue St James and place Fernand Lafargue. Home to many
-            historical monuments such as the Grosse Cloche, the Porte de
-            Bourgogne and the Porte Cailhau, and cultural sites such as the
-            Aquitaine Museum.
+            {data?.location.city}
           </h2>
           <button className="my-4 border rounded-full border-gray-200 px-4 py-2">
             Show more
@@ -835,7 +840,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   </ButtonPrimary>
 
                   <p className="mt-4 text-[#9DA1AB] text-sm text-center">
-                    You won{'\''}t be charged yet
+                    You won{"'"}t be charged yet
                   </p>
 
                   <div className="flex justify-between items-center mt-4">
@@ -1138,15 +1143,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             <Image
               fill
               className="object-cover rounded-md sm:rounded-xl"
-              src={filteredData[0]?.featuredImage}
+              src={data?.gallery?.images?.at(0) || "https://placehold.co/600x400?text=No+Photo"}
               alt=""
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
             />
             <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
           </div>
-          {filteredData[0]?.galleryImgs
-            .filter((_, i) => i >= 0 && i < 4)
-            .map((item, index) => (
+          {data?.gallery?.images?.map((item, index) => {
+            if(index === 0) return null;
+            return (
               <div
                 key={index}
                 className={`relative rounded-md sm:rounded-xl overflow-hidden ${
@@ -1160,6 +1165,10 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     src={item || ""}
                     alt=""
                     sizes="400px"
+                    onError={(e) => {
+                      // set text image placeholder url
+                      e.currentTarget.src = "https://placehold.co/600x400?text=No+Photo";
+                    }}
                   />
                 </div>
 
@@ -1169,7 +1178,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   onClick={handleOpenModalImageGallery}
                 />
               </div>
-            ))}
+            )
+          })}
           <button
             className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-neutral-100 text-neutral-500 hover:bg-neutral-200 z-10"
             onClick={handleOpenModalImageGallery}
@@ -1219,30 +1229,30 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
               </Link>
             </div>
           </div>
-          <div
-            className={`hidden sm:mx-20 mx-4 sm:grid sm:grid-cols-4 gap-x-8 2xl:gap-x-6 gap-y-8 `}
-          >
-            {DEMO_STAYS.map((item) => (
-              <div
-                key={item.id}
-                onMouseEnter={() => setCurrentHoverID((_) => item.id)}
-                onMouseLeave={() => setCurrentHoverID((_) => -1)}
-                className="p-1 bg-white rounded-xl"
-              >
-                <StayCard2 data={item} />
-              </div>
-            ))}
-          </div>
-          <div className={`grid grid-cols-1 sm:mx-20 mx-4 sm:grid-cols-4`}>
-            <div
-              key={DEMO_STAYS[0].id}
-              onMouseEnter={() => setCurrentHoverID((_) => DEMO_STAYS[0].id)}
-              onMouseLeave={() => setCurrentHoverID((_) => -1)}
-              className="bg-white rounded-xl"
+            {/* <div
+              className={`hidden sm:mx-20 mx-4 sm:grid sm:grid-cols-4 gap-x-8 2xl:gap-x-6 gap-y-8 `}
             >
-              <StayCard2 data={DEMO_STAYS[0]} />
+                  {DEMO_STAYS?.map((item) => (
+                    <div
+                      key={item.id}
+                      onMouseEnter={() => setCurrentHoverID((_) => item.id)}
+                      onMouseLeave={() => setCurrentHoverID((_) => -1)}
+                      className="p-1 bg-white rounded-xl"
+                    >
+                      <StayCard2 data={item} />
+                    </div>
+                  ))}
             </div>
-          </div>
+            <div className={`grid grid-cols-1 sm:mx-20 mx-4 sm:grid-cols-4`}>
+              <div
+                key={DEMO_STAYS[0].id}
+                onMouseEnter={() => setCurrentHoverID((_) => DEMO_STAYS[0].id)}
+                onMouseLeave={() => setCurrentHoverID((_) => -1)}
+                className="bg-white rounded-xl"
+              >
+                <StayCard2 data={DEMO_STAYS[0]} />
+              </div>
+            </div> */}
         </div>
       </div>
     </div>

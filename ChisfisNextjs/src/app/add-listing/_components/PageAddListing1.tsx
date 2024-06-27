@@ -50,7 +50,7 @@ const PageAddListing1 = (
   // set property types and room types based on the current path
   useEffect(() => {
     const _path = (window?.location?.pathname.split('/').pop() || 'Room Stays').replaceAll('-', ' ').toLowerCase().replace(/\b\w/g, l => l.toLowerCase());
-    console.log('path', _path," (absolute: ", path);
+    // console.log('path', _path," (absolute: ", path);
     if(['room stays','time based','find roommate'].includes(_path)){
       setPropertyTypes({
         title: 'Select Property Type',
@@ -101,7 +101,6 @@ const PageAddListing1 = (
         { (Number(propertyTypes?.options?.length) + Number(roomTypes.options.length)) >0 && <div className="grid grid-cols-1 gap-4 sm:gap-6 bg-white rounded-2xl p-6">
            {Number(propertyTypes?.options?.length)> 0 && <FormItem label={propertyTypes.title}>
               <Select
-
                 defaultValue={data?.details?.property_type}
                 onChange={(e)=>{
                    // if selected is undefined

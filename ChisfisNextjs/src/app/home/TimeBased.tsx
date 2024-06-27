@@ -1,75 +1,82 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import blob from "@/images/blobPattern.png";
-import londonImg from "@/images/browseByDestination/london.jpg";
+// import londonImg from "@/images/browseByDestination/london.jpg";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { HotelDemo1, HotelDemo2, HotelDemo3 } from "public/assetsManager";
 import { MdBookmark } from "react-icons/md";
+import { useFetchData } from "@/hooks/useFetch";
+import { RentableItem, RentableItemType } from "@/types/rentalItems";
 
-const cardData = [
-  {
-    id: 1,
-    img: HotelDemo1,
-    title: "Best Western Cedars",
-    address: "1 Anzinger Court",
-    price: "$250",
-    buttonText: "Stock",
-  },
-  {
-    id: 2,
-    img: HotelDemo2,
-    title: "White Horse Hotel",
-    address: "35 Sherman Park",
-    price: "$500",
-    buttonText: "Stock",
-  },
-  {
-    id: 3,
-    img: HotelDemo3,
-    title: "Bell By Greene King",
-    address: "6 Chive Avenue",
-    price: "$150",
-    buttonText: "Stock",
-  },
-  {
-    id: 4,
-    img: HotelDemo1,
-    title: "Best Western Cedars",
-    address: "1 Anzinger Court",
-    price: "$250",
-    buttonText: "Stock",
-  },
-  {
-    id: 5,
-    img: HotelDemo2,
-    title: "White Horse Hotel",
-    address: "35 Sherman Park",
-    price: "$500",
-    buttonText: "Stock",
-  },
-  {
-    id: 6,
-    img: HotelDemo3,
-    title: "Bell By Greene King",
-    address: "6 Chive Avenue",
-    price: "$150",
-    buttonText: "Stock",
-  },
-];
+// const cardData = [
+//   {
+//     id: 1,
+//     img: HotelDemo1,
+//     title: "Best Western Cedars",
+//     address: "1 Anzinger Court",
+//     price: "$250",
+//     buttonText: "Stock",
+//   },
+//   {
+//     id: 2,
+//     img: HotelDemo2,
+//     title: "White Horse Hotel",
+//     address: "35 Sherman Park",
+//     price: "$500",
+//     buttonText: "Stock",
+//   },
+//   {
+//     id: 3,
+//     img: HotelDemo3,
+//     title: "Bell By Greene King",
+//     address: "6 Chive Avenue",
+//     price: "$150",
+//     buttonText: "Stock",
+//   },
+//   {
+//     id: 4,
+//     img: HotelDemo1,
+//     title: "Best Western Cedars",
+//     address: "1 Anzinger Court",
+//     price: "$250",
+//     buttonText: "Stock",
+//   },
+//   {
+//     id: 5,
+//     img: HotelDemo2,
+//     title: "White Horse Hotel",
+//     address: "35 Sherman Park",
+//     price: "$500",
+//     buttonText: "Stock",
+//   },
+//   {
+//     id: 6,
+//     img: HotelDemo3,
+//     title: "Bell By Greene King",
+//     address: "6 Chive Avenue",
+//     price: "$150",
+//     buttonText: "Stock",
+//   },
+// ];
 
 const TimeBased = () => {
-  const [activeCategory, setActiveCategory] = useState("Room");
+  const [activeCategory, setActiveCategory] = useState<RentableItemType>("room");
+  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-item-type/${activeCategory}`,queryKey:["properties-by-timebased-category",activeCategory]})
 
-  const handleCategoryClick = (category: string) => {
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
+ 
+  const handleCategoryClick = (category: RentableItemType) => {
     setActiveCategory(category);
   };
 
-  const renderBlobImage = (category: string) => {
+  const renderBlobImage = (category: RentableItemType) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" />;
+      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={50} height={50} />;
     } else {
       return null;
     }
@@ -119,7 +126,7 @@ const TimeBased = () => {
   };
 
   return (
-    <div className="w-screen mx-auto my-[4rem] h-fit font-rubik ">
+    <div className="w-screen my-[4rem] h-fit font-rubik ">
       <div className="sm:w-[80%] w-[85%] mx-auto">
         <div className=" flex flex-col gap-[.5rem] mx-2 mb-[2rem]">
           <div className="flex items-center justify-between">
@@ -156,60 +163,60 @@ const TimeBased = () => {
             <div className="flex flex-col -ml-1 gap-4 w-[35px] text-[#666666] text-sm font-semibold">
               <div
                 className={`flex items-center h-fit ${
-                  activeCategory !== "Room" && "ml-4"
+                  activeCategory !== "room" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Room")}
+                {renderBlobImage("room")}
                 <p
                   className={`lr -rotate-180 cursor-pointer ${
-                    activeCategory === "Room" && "font-bold"
+                    activeCategory === "room" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Room")}
+                  onClick={() => handleCategoryClick("room")}
                 >
                   Room
                 </p>
               </div>
               <div
                 className={`flex items-center ${
-                  activeCategory !== "Restroom" && "ml-4"
+                  activeCategory !== "rest_room" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Restroom")}
+                {renderBlobImage("rest_room")}
                 <p
                   className={`lr -rotate-180 cursor-pointer  ${
-                    activeCategory === "Restroom" && "font-bold"
+                    activeCategory === "rest_room" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Restroom")}
+                  onClick={() => handleCategoryClick("rest_room")}
                 >
                   Restroom
                 </p>
               </div>
               <div
                 className={`flex items-center cursor-pointer ${
-                  activeCategory !== "EV Parking" && "ml-4"
+                  activeCategory !== "ev_parking" && "ml-4"
                 }`}
               >
-                {renderBlobImage("EV Parking")}
+                {renderBlobImage("ev_parking")}
                 <p
                   className={`lr -rotate-180 ${
-                    activeCategory === "EV Parking" && "font-bold"
+                    activeCategory === "ev_parking" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("EV Parking")}
+                  onClick={() => handleCategoryClick("ev_parking")}
                 >
                   EV Parking
                 </p>
               </div>
               <div
                 className={`flex items-center cursor-pointer ${
-                  activeCategory !== "Parking" && "ml-4"
+                  activeCategory !== "parking" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Parking")}
+                {renderBlobImage("parking")}
                 <p
                   className={`lr -rotate-180 ${
-                    activeCategory === "Parking" && "font-bold"
+                    activeCategory === "parking" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Parking")}
+                  onClick={() => handleCategoryClick("parking")}
                 >
                   Parking
                 </p>
@@ -217,18 +224,27 @@ const TimeBased = () => {
             </div>
           </div>
           {/* Card */}
-          <div className="  w-[100%] h-[293px]">
+          <div className=" w-[100%] h-[293px]">
             <Slider ref={sliderRef} {...settings}>
-              {cardData?.map((card) => (
+              {/* render empty data */}
+              {data?.length === 0 &&  <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
+                      <p>No data found in <strong>{activeCategory.replaceAll('_',' ')}</strong></p>
+                </div>}
+              {data?.map((card) => (
                 <div
-                  key={card.id}
-                  className="h-fit  w-[20rem] p-[1.1rem] bg-white rounded-2xl relative"
+                  key={card._id}
+                  className="h-fit w-[20rem] p-[1.1rem] bg-white rounded-2xl relative"
                 >
                   <div className="relative ">
                     <Image
-                      src={card.img}
-                      className="rounded-xl h-[159px] object-cover"
+                      src={card?.gallery?.thumbnail ?? ''}
+                      onError={(e) => {
+                        e.currentTarget.src = `https://placehold.co/600x400?text=no+image`;
+                      }}
+                      className="rounded-xl h-[159px] w-full object-cover"
                       alt="london"
+                      width={90}
+                      height={90}
                     />
                     <div className=" absolute size-[2rem] flex justify-center items-center right-[.7rem] bottom-[-.6rem] bg-white rounded-full  ">
                       <div className="flex justify-center items-center size-[1.8rem] bg-[#5527D7] rounded-full ">
@@ -250,17 +266,19 @@ const TimeBased = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <p className="text-[15px] text-[#666666] font-medium">
-                      {card.address}
+                    <p className="text-xs text-[#666666] font-thin">
+                      {card?.location?.city ?? "No Address"}
                     </p>
                   </div>
                   <div className="flex items-center justify-between mt-3">
                     <p>
-                      <span className="text-xl font-bold">{card.price}</span>
-                      /hour
+                      <span className="text-xl font-bold">{
+                        card.price?.at(0)?.amount
+                        }</span>
+                      / {card.price?.at(0)?.frequency}
                     </p>
                     <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#E8F2EC] ">
-                      {card.buttonText}
+                      {card.available ?  "Available" : "Not Available"}
                     </button>
                   </div>
                 </div>

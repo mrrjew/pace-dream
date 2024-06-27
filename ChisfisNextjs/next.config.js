@@ -1,11 +1,9 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
     typedRoutes: true,
     // serverActions: true,
-    
   },
   images: {
     remotePatterns: [
@@ -49,7 +47,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "totel-images.s3.us-east-2.amazonaws.com",
         port: "",
-        pathname: "/**"
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -76,11 +74,11 @@ const nextConfig = {
         pathname: "/**",
       },
       {
-        protocol: 'https',
+        protocol: "https",
         hostname: "placehold.co",
         port: "",
         pathname: "/**",
-      }
+      },
     ],
   },
   // webpack: (

@@ -8,7 +8,7 @@ const PageAddPartner10: FC<PageAddPartner10Props> = () => {
     <>
       <div>
         <h2 className="text-2xl font-semibold">
-          Let{'\''}s give a note for the roommate!
+          Let{"'"}s give a note for the roommate!
         </h2>
         <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
           Short titles work best. Have fun with it – you can always change it

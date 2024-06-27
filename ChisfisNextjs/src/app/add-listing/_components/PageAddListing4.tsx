@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-'use client'
+"use client";
 // import { ListingDataType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 import {
@@ -19,7 +19,6 @@ interface Amenity {
   id: string;
 }
 
-
 const safetyAmenities: Amenity[] = [
   { icon: <MdSmokeFree />, label: "Smoke Alarm", id: "smoke-alarm" },
   { icon: <GrAidOption />, label: "First Aid Kit", id: "first-aid-kit" },
@@ -31,11 +30,13 @@ const safetyAmenities: Amenity[] = [
   { icon: <FaSwimmingPool />, label: "Swimming Pool", id: "swimming-pool" },
 ];
 
-
-const AmenityGrid: React.FC<{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}> = (
-  {updateData, data}
-) => {
-  const [selectedAmenities, setSelectedAmenities] = useState<string[]>(data?.details?.amenities || []);
+const AmenityGrid: React.FC<{
+  updateData: (data: Partial<RentableItem>) => void;
+  data: Partial<RentableItem>;
+}> = ({ updateData, data }) => {
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>(
+    data?.details?.amenities || [],
+  );
 
   const handleAmenityClick = (amenityId: string) => {
     const _copySelectedAmenities = [...selectedAmenities];
@@ -52,9 +53,11 @@ const AmenityGrid: React.FC<{updateData:(data:Partial<RentableItem>)=>void, data
 
   // update data with amenities
   const updateDataWithAmenities = () => {
-
-    updateData({...data,details:{...data?.details,amenities:selectedAmenities}})
-  }
+    updateData({
+      ...data,
+      details: { ...data?.details, amenities: selectedAmenities },
+    });
+  };
 
   // use callback to update data with amenities
   useEffect(() => {

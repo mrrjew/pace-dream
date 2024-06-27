@@ -13,49 +13,46 @@ import AddListingHourlyRentalGearWrapper from "../HourlyRentalGearWrapper";
 import PageAddListingToHourlyRentalGear3 from "../../_components/PageAddListingHourlyRentalGear3";
 import { RentableItem } from "@/types/rentalItems";
 
-
-
 const initialData: Partial<RentableItem> = {
   title: "",
   summary: "",
   details: {
-   amenities: [],
-   rules: [],
-   room_type: "any type",
-   property_type: "",
-   hourly_rental_time: {
-     startDate: undefined,
-     endDate: undefined,
-     startTime: "",
-     endTime: "",
-   },
-   },
-   location: {
-     address: "",
-     longitude: 0,
-     latitude: 0,
-     zipcode: "",
-     city: "",
-     state: "",
-     country: "",
-     street_address: "",
-     googlemap_link: "",
-   },
-   gallery: {
-     thumbnail: "",
-     images: [],
-     videos: [],
-   },
-   attachments: [],
-   item_type:'room',
-   price: [],
-   rules: {},
-   rating:0,
-   owner:"",
-   createdAt: new Date(),
-   updatedAt: new Date(),
+    amenities: [],
+    rules: [],
+    room_type: "any type",
+    property_type: "",
+    hourly_rental_time: {
+      startDate: undefined,
+      endDate: undefined,
+      startTime: "",
+      endTime: "",
+    },
+  },
+  location: {
+    address: "",
+    longitude: 0,
+    latitude: 0,
+    zipcode: "",
+    city: "",
+    state: "",
+    country: "",
+    street_address: "",
+    googlemap_link: "",
+  },
+  gallery: {
+    thumbnail: "",
+    images: [],
+    videos: [],
+  },
+  attachments: [],
+  item_type: "gear",
+  price: [],
+  rules: {},
+  rating: 0,
+  owner: "",
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
-
 
 const Page = () => {
   const [data, setData] = useState<typeof initialData>(initialData);
@@ -74,27 +71,34 @@ const Page = () => {
     isFirstStep,
     isLastStep,
   } = useMultiStepForm([
-    <PageAddListing1  key="page"data={data} updateData={updateData} />,
-    <PageAddListing2  key="page"data={data} updateData={updateData} />,
+    <PageAddListing1 key="page" data={data} updateData={updateData} />,
+    <PageAddListing2 key="page" data={data} updateData={updateData} />,
     // <PageAddListing3 data={data} updateData={updateData} />,
-    <PageAddListingToHourlyRentalGear3  key="page"data={data} updateData={updateData} />,
+    <PageAddListingToHourlyRentalGear3
+      key="page"
+      data={data}
+      updateData={updateData}
+    />,
     // <h2>Part 4 is here...</h2>,
     // <PageAddListing4 data={data} updateData={updateData} />,
-    <PageAddListing5  key="page"data={data} updateData={updateData} />,
+    <PageAddListing5 key="page" data={data} updateData={updateData} />,
     <PageAddListing6
-      data={data} key="page"
+      data={data}
+      key="page"
       onPreview={() => {
         next();
       }}
     />,
     <PageAddListing7
-      data={data} key="page"
+      data={data}
+      key="page"
       onBackToHost={() => {
         back();
       }}
     />,
     <PageAddListing8
-      data={data} key="page"
+      data={data}
+      key="page"
       onBackToHost={() => {
         back();
       }}
@@ -108,6 +112,7 @@ const Page = () => {
       isFirstStep={isFirstStep}
       isLastStep={isLastStep}
       currentStep={currentStepIndex}
+      data={data as RentableItem}
     >
       {step}
     </AddListingHourlyRentalGearWrapper>

@@ -7,12 +7,13 @@ import {
   RecyclingRounded,
   VideoCallOutlined,
 } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Dropzone, FileWithPath, MIME_TYPES } from "@mantine/dropzone";
 import { useMutation } from "@tanstack/react-query";
 import { Group, MantineProvider } from "@mantine/core";
 import { DocumentArrowDownIcon, DocumentIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { createToast } from "@/utils/createToast";
 
 export function DragDrop({
   type,
@@ -33,7 +34,8 @@ export function DragDrop({
     document: [MIME_TYPES.pdf],
   };
   const maxSize = {
-    image: 10 * 1024 * 1024,
+    //  limit image size to 5 mb
+    image: 5 * 1024 * 1024,
     video: 100 * 1024 * 1024,
     document: 50 * 1024 * 1024,
   };
@@ -42,29 +44,34 @@ export function DragDrop({
     video: isMultiple ? maxFiles ?? 1 : 1,
     document: isMultiple ? maxFiles ?? 1 : 1,
   };
+
   const [localMedia, setLocalMedia] = React.useState<string[]>(media || []);
 
-  async function uploadDocuments(
-    url: string,
-    { arg }: { arg: { files: FileWithPath[] } },
-  ): Promise<{ result?: string[] }> {
+  useEffect(() => {
+    setLocalMedia(media || [""]);
+  }, [media]);
+
+  async function uploadDocuments({
+    arg,
+  }: {
+    arg: { files: FileWithPath[] };
+  }): Promise<{ result?: string[] }> {
     const body = new FormData();
     arg.files.forEach((file) => {
       body.append("file", file, file.name);
     });
-
-    const response = await fetch(url, { method: "POST", body });
-    return await response.json();
+    const response = fetch("/api/media", { method: "POST", body }).then((res) =>
+      res.json(),
+    );
+    // console.log("Response",await response);
+    return await response;
   }
 
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (filePaths: FileWithPath[]) => {
       // generate urls from the local files
-      setLocalMedia([
-        ...localMedia,
-        ...filePaths.map((file) => URL.createObjectURL(file)),
-      ]);
-      return uploadDocuments("/api/media", { arg: { files: filePaths } });
+      // setLocalMedia([...localMedia, ...filePaths.map((file)=>URL.createObjectURL(file))]);
+      return uploadDocuments({ arg: { files: filePaths } });
     },
     onSuccess: (res: { result?: string[] }) => {
       // wait for few seconds before updating the state
@@ -88,6 +95,13 @@ export function DragDrop({
           maxSize={maxSize[type]}
           maxFiles={maxFileList[type]}
           disabled={isLoading || localMedia?.length >= maxFileList[type]}
+          onReject={(files) => {
+            // console.log("Rejected files",files[0].errors[0].message);
+            createToast(
+              files[0]?.errors[0]?.message || "File type not supported",
+              "error",
+            );
+          }}
           onDrop={(files) => {
             // check sum of files and local media is less than max files
             if (files.length + localMedia.length > maxFileList[type]) {
@@ -125,7 +139,7 @@ export function DragDrop({
                   <div className="h-20 justify-center flex items-center gap-4">
                     <CloudArrowUpIcon className="w-12 h-12 text-primary-500" />
                     <p className="text-gray-400">
-                      Upload a file or drag and drop PNG, JPG, GIF up to 10MB
+                      Upload a file or drag and drop PNG, JPG, GIF up to 5MB
                     </p>
                   </div>
                 )}
@@ -182,43 +196,52 @@ export function DragDrop({
       {/* list uploaded files */}
       {type == "image" && (
         <div className="flex gap-4 flex-wrap items-center p-4">
-          {localMedia?.map((url) => (
-            <div key={url} className="relative w-20 h-20 rounded-md p-0 ring-1">
-              {/* check if it's document */}
-              {type == "image" && (
-                <Image
-                  key={url}
-                  priority
-                  src={url}
-                  alt={"image"}
-                  width={360}
-                  height={360}
-                  className="w-full h-full object-cover rounded-md"
-                />
-              )}
-              {/* delete button */}
-              <div className="absolute -top-2 -right-1 p-1 bg-red-400 hover:bg-red-500 rounded-xl">
-                <button
-                  title="Delete file"
-                  className="p-0 rounded-md flex items-center justify-center w-4 h-4"
-                  onClick={() => {
-                    setLocalMedia(localMedia.filter((media) => media !== url));
-                    // remove the file from remote media
-                    const _copyRemoteMedia = [...(media || [])];
-                    // remove url in this index from the remote media
-                    const index = _copyRemoteMedia.indexOf(url);
-                    if (index > -1) {
-                      _copyRemoteMedia.splice(index, 1);
-                    }
-                    // update the remote media
-                    onUploaded(_copyRemoteMedia);
-                  }}
+          {Number(localMedia?.length) > 0 &&
+            localMedia?.map((url, index) => {
+              if (!url) return null;
+              return (
+                <div
+                  key={index}
+                  className="relative w-20 h-20 rounded-md p-0 ring-1"
                 >
-                  <Delete className="w-4 h-4 text-white" />
-                </button>
-              </div>
-            </div>
-          ))}
+                  {/* check if it's document */}
+                  <Image
+                    // priority={index < 3}
+                    src={url}
+                    fill
+                    sizes="100vw"
+                    alt={"image"}
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII="
+                    objectFit="cover"
+                    className="rounded-md"
+                  />
+                  {/* delete button */}
+
+                  <div className="absolute -top-2 -right-1 p-1 bg-red-400 hover:bg-red-500 rounded-xl">
+                    <button
+                      title="Delete file"
+                      className="p-0 rounded-md flex items-center justify-center w-4 h-4"
+                      onClick={() => {
+                        setLocalMedia(
+                          localMedia.filter((media) => media !== url),
+                        );
+                        // remove the file from remote media
+                        const _copyRemoteMedia = [...(media || [])];
+                        // remove url in this index from the remote media
+                        const index = _copyRemoteMedia.indexOf(url);
+                        if (index > -1) {
+                          _copyRemoteMedia.splice(index, 1);
+                        }
+                        // update the remote media
+                        onUploaded(_copyRemoteMedia);
+                      }}
+                    >
+                      <Delete className="w-4 h-4 text-white" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       )}
     </MantineProvider>

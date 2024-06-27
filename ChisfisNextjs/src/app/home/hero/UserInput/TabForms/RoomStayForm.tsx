@@ -18,7 +18,7 @@ const RoomStayForm: FC<{}> = ({}) => {
             <GuestForm className="border border-[#D9D9D9]" />
             <DatesRangeForm />
             <div className="">
-              <ButtonSubmit href="/listing-stay-map/[room]" />
+              <ButtonSubmit  href="/listing-stay-map/[room]" />
             </div>
           </div>
         </form>

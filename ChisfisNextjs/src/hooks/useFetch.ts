@@ -122,6 +122,14 @@ export const useFetchData = <T>({
       let query = "";
       // add query params to the endpoint
       if (queryParams) {
+        // remove empty values
+        Object.keys(queryParams).forEach(
+          (key) => {
+            if([null,undefined,'','null','undefined'].includes(queryParams[key])){
+              delete queryParams[key]
+            }
+          }
+        );
         query = "?" + new URLSearchParams(queryParams).toString();
         url += query;
       }
@@ -165,4 +173,3 @@ export const useFetchData = <T>({
     data: result?.data?.data ? result.data.data : null,
   };
 };
-

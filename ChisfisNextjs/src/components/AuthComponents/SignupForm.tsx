@@ -1,14 +1,13 @@
-
-'use client';
-import { SignupMethod } from '@/types/SignupMethod';
-import { useSession } from '@/hooks/useSession';
-import ButtonPrimary from '@/shared/ButtonPrimary';
-import Input from '@/shared/Input';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useMutateData } from '@/hooks/useMutate';
-import { createToast } from '@/utils/createToast';
-import { User } from '@/types/user';
+"use client";
+import { SignupMethod } from "@/types/SignupMethod";
+import { useSession } from "@/hooks/useSession";
+import ButtonPrimary from "@/shared/ButtonPrimary";
+import Input from "@/shared/Input";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useMutateData } from "@/hooks/useMutate";
+import { createToast } from "@/utils/createToast";
+import { User } from "@/types/user";
 
 export const PasswordMatchText = (props: {
   password: string;
@@ -64,10 +63,10 @@ export const SignupForm: React.FC<{
   const router = useRouter();
 
   const mutate = useMutateData<User>({
-    queryKey: ['signup'],
-    endpoint: '/auth/signup',
+    queryKey: ["signup"],
+    endpoint: "/auth/signup",
     body: {
-      user: userDetails
+      user: userDetails,
     },
   });
 
@@ -78,14 +77,13 @@ export const SignupForm: React.FC<{
 
     if (props.signupMethod === SignupMethod.EMAIL) {
       if (userDetails.password !== userDetails.confirmPassword) {
-
-        alert('Passwords do not match');
+        alert("Passwords do not match");
         // setLoading(false);
         return;
       }
       if (userDetails.password.length < 6) {
         // setLoading(false);
-        alert('Password must be at least 8 characters');
+        alert("Password must be at least 8 characters");
         return;
       }
     }
@@ -114,20 +112,22 @@ export const SignupForm: React.FC<{
       // );
       // const newUser = response.data.data;
       // setSession(newUser.token, newUser, newUser.user_id);
-      mutate.mutateAsync().then((response) => {
-        if(response?.status) {
-          createToast('Account created successfully', 'success');
-          setTimeout(() => {
-            router.push('/auth/login');
-          }, 500);
-        }else{
-          createToast(response?.message || 'Error creating account', 'error');
-        }
-      }).catch((error) => {
-        console.log(error);
-        createToast('Error creating account', 'error');
-      });
-  
+      mutate
+        .mutateAsync()
+        .then((response) => {
+          if (response?.status) {
+            createToast("Account created successfully", "success");
+            setTimeout(() => {
+              router.push("/auth/login");
+            }, 500);
+          } else {
+            createToast(response?.message || "Error creating account", "error");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          createToast("Error creating account", "error");
+        });
     } catch (error) {
       console.log(error);
     }
@@ -242,8 +242,12 @@ export const SignupForm: React.FC<{
           </label>
         </>
       )}
-      <ButtonPrimary onClick={createAccount} type="button" loading={mutate.isLoading}>
-         {mutate.isLoading ? 'Creating Account...' : 'Continue'}
+      <ButtonPrimary
+        onClick={createAccount}
+        type="button"
+        loading={mutate.isLoading}
+      >
+        {mutate.isLoading ? "Creating Account..." : "Continue"}
       </ButtonPrimary>
     </form>
   );

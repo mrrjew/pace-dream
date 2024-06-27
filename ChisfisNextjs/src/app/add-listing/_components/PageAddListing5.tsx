@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 // import { ListingDataType } from "@/types/types";
-import {DragDrop} from "./media/dag-drop-file";
+import {DragDrop} from "./media/drag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
-import { CheckboxGroup } from "@nextui-org/react";
+// import { CheckboxGroup } from "@nextui-org/react";
 
 
 const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}) => {
@@ -20,7 +20,7 @@ const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableIte
             {/* <p className="text-gray-500 mb-2">E.G. No Smoking, Pets Allowed</p> */}
             <textarea
               className="border border-gray-300 rounded-md p-2 w-full"
-              placeholder="E.G. No Smoking, Pets Allowed"
+              placeholder={'E.G. No Smoking Pets Allowed'}
               value={data?.details?.rule_description}
               onChange={(e) => updateData({...data,details:{...data?.details,rule_description:e.target.value}})
               }

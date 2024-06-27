@@ -1,16 +1,10 @@
 'use client';
-import { RoomImg, TimeImg, HourlyImg, FindImg, ExperiencesImg, LastminutesImg } from "@/images";
 // import Sidebar from "../SideBar";
-import { Filter, Home, Timer, Watch } from "@mui/icons-material";
-import { BriefcaseIcon, UsersIcon } from "@heroicons/react/24/solid";
 // import { Route } from "@/routers/types";
-import { ListingOption } from "@/types/types";
-import Sidebar from "./SideBar";
 import { RentableItem } from "@/types/rentalItems";
 import { useSession } from "@/hooks/useSession";
-import { useMutateData } from "@/hooks/useMutate";
+import { useMutateData, useSubmitMutateData } from "@/hooks/useMutate";
 import { useRouter } from "next/navigation";
-import Logo from "@/shared/Logo";
 import { useEffect, useState } from "react";
 
 
@@ -139,9 +133,7 @@ export default function AddListingMainLayoutWrapper(
       const route = useRouter();
       const {getSession} = useSession();
       const {userId} = getSession();
-      const mutate = useMutateData<typeof data>({endpoint:'/property/add',queryKey:['publishProperty'],body:{
-        data: {...data,owner:userId,status:'published'}
-      }});
+      const mutate = useSubmitMutateData<typeof data>({endpoint:'/property/add',queryKey:[]});
       const [steps, setSteps] = useState<Array<number>>([]);
 
       useEffect(() => {
@@ -162,14 +154,19 @@ export default function AddListingMainLayoutWrapper(
           // const _data = {...data,owner:userId,}
            // handle submit
           // console.log("submit : ",_data);
-           mutate.mutateAsync().then((res)=>{
-            console.log("response : ",res);
-            onNext();
+           mutate.mutateAsync({
+             data:{...data,owner:userId,status:'published'}
+           }).then((res)=>{
+            // console.log("response : ",res);
+            if(res?.status === true){
+              onNext();
+            }
           }).catch((error)=>{
             console.log("error : ",error);
           } );
           return;
         }
+
         if(isLastStep){
           route.replace('/add-listing')
         }
