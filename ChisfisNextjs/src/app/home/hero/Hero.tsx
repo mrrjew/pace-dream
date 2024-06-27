@@ -22,7 +22,6 @@ const Hero = () => {
       <div className="relative hidden md:flex h-full" >
         <Image
           src={HeroBgMaskImage}
-
           alt="Hero Imagge Bg -mask"
           className=" w-[100%] object-cover md:h-[82vh] h-[100%] select-none  absolute z-[1] opacity-50"
           width={1920}
