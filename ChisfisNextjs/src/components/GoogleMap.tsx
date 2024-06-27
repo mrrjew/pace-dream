@@ -19,11 +19,10 @@ function useLoadGoogleMapScript(){
 
 
 export function PlacesAutocompleteInput( 
-    {val,onSelect,className}:{val:string,onSelect:(address: string, placeID: string)=>void,className?:string}
+    {val,onSelect,className,onClear}:{val:string,onSelect:(address: string, placeID: string)=>void,className?:string,onClear?:()=>void}
 ){
     const [value, setValue] = React.useState<string>(val);
     const { isLoaded, loadError } = useLoadGoogleMapScript();
-
     const handleSelect = async (address: string, placeID: string) => {
         onSelect(address, placeID);
         setValue(address);
@@ -40,12 +39,15 @@ export function PlacesAutocompleteInput(
         <PlacesAutocomplete
             debounce={300}
             value={value}
-            onChange={setValue}
+            onChange={(_val)=>{
+                setValue(_val);
+                if(!_val && onClear) onClear();
+            }}
             onSelect={handleSelect}>
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                <div className="relative mb-2" key={"all-suggestions.."}>
+                <div className={cn(['relative mb-2',className])} key={"all-suggestions.."}>
                     {/* <input {...getInputProps({ placeholder: "Search for a Places ..." })} /> */}
-                    <FormItem label="" key={'input-field'}>
+                    <FormItem label="" key={'input-field'} className={cn([className])}>
                         <Input
                            {...getInputProps({ placeholder: "Search for a Places ..." })}
                            className={cn("w-full",className)}
@@ -77,7 +79,7 @@ export function PlacesAutocompleteInput(
 
 
 export function GoogleMapLayout(
-    {className,onChange,init,isMapOnly}:{isMapOnly?:boolean, className?:string, onChange?:(lat:number,lng:number,link:string,place:string)=>void,init:{center:{lat:number,lng:number},place:string}}
+    {className,onChange,init,isMapOnly}:{isMapOnly?:boolean, className?:string, onChange?:(lat:number,lng:number,link:string,place:string)=>void,init:{center:{lat:number,lng:number},place:string,zoom?:number,allowDefaults?:boolean}}
 ){
  const [center, setCenter] = React.useState(init?.center);
  const [isDragging, setIsDragging] = React.useState(false);
@@ -182,9 +184,9 @@ export function GoogleMapLayout(
        }}/>}
       <GoogleMap
         id="google-map"
-        zoom={4}
+        zoom={Number(init?.zoom) || 10}
         options={{
-            disableDefaultUI:isMapOnly,
+            disableDefaultUI:init?.allowDefaults ? false : (isMapOnly ? true : false),
         }}
         onLoad={(mp)=>{
             map = mp;
@@ -193,7 +195,7 @@ export function GoogleMapLayout(
             if(isMapOnly) return;
             // set max zoom level to 15
             if(Number(map?.getZoom()) > 12){
-                console.log('zoomed in too much');
+                // console.log('zoomed in too much');
                 map?.setZoom(12);
             }
         }}

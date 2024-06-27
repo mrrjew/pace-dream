@@ -133,6 +133,8 @@ const PRICING_FREQUENCY = {
     room_mate?: Roommate;
     hourly_rental_time?: HourRentalDateTime;
   };
+
+  export type PropertyCategory = 'room_stays' | 'time_based' | 'hourly_rental_gear' | 'find_roommate' |'last_minutes' | 'experience'
   
   export type RentableItem = {
     _id: string;
@@ -145,7 +147,7 @@ const PRICING_FREQUENCY = {
     item_type: RentableItemType;
     /** The actual shape depends on `item_type`. For example, a room will have different details than a DSLR */
     details: Record<string, any> | PropertyDetails;
-    category: 'room_stays' | 'time_based' | 'hourly_rental_gear' | 'find_roommate' |'last_minutes' | 'experience'
+    category: PropertyCategory;
     /**
      * Prices for the rentable item. An item can have multiple pricing schema for example monthly, weekly, or hourly.
      * Each pricing can have different discounts. For example, yearly pricing can have a 20% discount while monthly pricing can have 5% discount.

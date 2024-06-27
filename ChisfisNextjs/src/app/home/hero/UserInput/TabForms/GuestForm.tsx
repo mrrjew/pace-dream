@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import NcInputNumber from "@/components/NcInputNumber";
 import { FC } from "react";
@@ -16,19 +16,32 @@ export interface GuestsInputProps {
   buttonSubmitHref?: PathName | string;
   hasButtonSubmit?: boolean;
   inputs?: string;
+  onChange?: (value: GuestsObject & {totalGuests:number}) => void;
 }
 
 const GuestForm: FC<GuestsInputProps> = ({
   currentTab = "Room Stays",
   className = "[ nc-flex-1 ]",
-  buttonSubmitHref = "/listing-stay-map/1",
-  hasButtonSubmit = true,
-  inputs = "",
+  // buttonSubmitHref = "/listing-stay-map/1",
+  // hasButtonSubmit = true,
+  // inputs = "",
+  onChange,
 }) => {
-  const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(2);
-  const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(1);
+  const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(1);
+  const [guestChildrenInputValue, setGuestChildrenInputValue] = useState(0);
   const [guestInfantsInputValue, setGuestInfantsInputValue] = useState(1);
   const [guestCount, setGuestCount] = useState(1);
+
+  useEffect(() => {
+    onChange &&
+      onChange({
+        guestAdults: guestAdultsInputValue,
+        guestChildren: guestChildrenInputValue,
+        guestInfants: guestInfantsInputValue,
+        totalGuests: guestCount,
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [guestAdultsInputValue, guestChildrenInputValue, guestInfantsInputValue, guestCount]);
 
   const incrementGuestCount = () => {
     setGuestCount((prevCount) => prevCount + 1);
@@ -69,7 +82,8 @@ const GuestForm: FC<GuestsInputProps> = ({
     >
       {({ open }) => (
         <>
-          <Popover.Panel
+          <Popover.Button
+            as="div"
             className={`flex pr-[1rem] z-10 h-[100%]  flex-col md:flex-row relative flex-shrink-0  cursor-pointer focus:outline-none text-left`}
           >
             <div className="">
@@ -86,13 +100,16 @@ const GuestForm: FC<GuestsInputProps> = ({
                     src={AddGuestIconImage}
                     alt="Add guest"
                     className="shrink-0 size-5 flex items-center "
+                    width={24}
+                    height={24}
                   />
                   {/* <UserPlusIcon className=" w-[1.2rem] " /> */}
                 </div>
-                {!!totalGuests && open && (
+                {open && (
                   <div className=" absolute right-[.5rem] top-[1rem] ">
                     <ClearDataButton
-                      onClick={() => {
+                      onClick={(e) => {
+                        e?.stopPropagation();
                         setGuestAdultsInputValue(0);
                         setGuestChildrenInputValue(0);
                         setGuestInfantsInputValue(0);
@@ -112,10 +129,16 @@ const GuestForm: FC<GuestsInputProps> = ({
                 <UserPlusIcon className="w-6 h-6 mr-5 text-gray-500 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex" />
               </span> */}
               <div className="flex flex-row items-center text-[.7rem] h-[1rem] leadding-[.5rem] ">
-                <button onClick={decrementGuestCount}>- &nbsp; </button>
+                <button onClick={(e)=>{
+                  e.stopPropagation();
+                  decrementGuestCount();
+                }}>- &nbsp; </button>
                   <span>
                   {guestCount} &nbsp;
-                  <button onClick={incrementGuestCount}>+</button>
+                  <button onClick={(e)=>{
+                    e.stopPropagation();
+                    incrementGuestCount();
+                  }}>+</button>
                 </span>
               </div>
             </div>
@@ -125,7 +148,7 @@ const GuestForm: FC<GuestsInputProps> = ({
                 <ButtonSubmit href='/listing-stay-map/[room]' as={buttonSubmitHref} />
               </div>
             )} */}
-          </Popover.Panel>
+          </Popover.Button>
           {/* Simple number counter */}
 
           {open && (
@@ -140,7 +163,9 @@ const GuestForm: FC<GuestsInputProps> = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute mt-3 right-0 z-10 w-full border border-gray-200 sm:min-w-[340px] max-w-sm bg-white top-full py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
+            <Popover.Button 
+             as="div"
+             className="absolute mt-3 right-0 z-10 w-full border border-gray-200 sm:min-w-[340px] max-w-sm bg-white top-full py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
               <NcInputNumber
                 className="w-full"
                 defaultValue={guestAdultsInputValue}
@@ -167,7 +192,7 @@ const GuestForm: FC<GuestsInputProps> = ({
                 label="Infants"
                 desc="Ages 0–2"
               />
-            </Popover.Panel>
+            </Popover.Button>
           </Transition>
         </>
       )}

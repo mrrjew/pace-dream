@@ -50,7 +50,7 @@ const PageAddListing1 = (
   // set property types and room types based on the current path
   useEffect(() => {
     const _path = (window?.location?.pathname.split('/').pop() || 'Room Stays').replaceAll('-', ' ').toLowerCase().replace(/\b\w/g, l => l.toLowerCase());
-    console.log('path', _path," (absolute: ", path);
+    // console.log('path', _path," (absolute: ", path);
     if(['room stays','time based','find roommate'].includes(_path)){
       setPropertyTypes({
         title: 'Select Property Type',

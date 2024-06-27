@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState, FC } from "react";
+import React, { Fragment, useState, FC, useEffect } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import DatePickerCustomHeaderTwoMonth from "@/components/DatePickerCustomHeaderTwoMonth";
 import DatePickerCustomDay from "@/components/DatePickerCustomDay";
@@ -14,6 +14,7 @@ interface StayDatesRangeInputProps {
   fieldClassName?: string;
   dates?: string;
   inputs?: string;
+  onChange?: (dates: [Date | null, Date | null]) => void;
 }
 
 const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
@@ -21,6 +22,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
   fieldClassName = "",
   dates = "",
   inputs = "",
+  onChange,
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -35,19 +37,27 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
     return tomorrow;
   });
 
+  // set date on change
+  useEffect(() => {
+    onChange && onChange(selectedRange);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedRange]);
+
   const handleChange = (
     date: [Date | null, Date | null],
     event: React.SyntheticEvent<any, Event> | undefined,
   ) => {
+    event?.stopPropagation();
     setSelectedRange(date);
-    console.log(selectedRange);
-    const [startDate, endDate] = date;
+    // console.log(selectedRange);
+    // const [startDate, endDate] = date;
   };
 
   const onChangeDate = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
+    // onChange && onChange([start, end]);
   };
 
   const handleCurrentDateChange = (action: "prev" | "next"): void => {
@@ -259,7 +269,10 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
               <Popover.Button as="div" className="absolute z-50 w-screen max-w-sm mt-3 transform left-full top-full -translate-x-96 md:-translate-x-1/2 lg:max-w-3xl">
                 <div className="p-2 overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black sm:p-4 ring-opacity-5">
                   <DatePicker
-                    onChange={handleChange}
+                    onChange={(dates,e)=>{
+                      e?.stopPropagation();
+                      handleChange(dates,e);
+                    }}
                     startDate={selectedRange[0]}
                     endDate={selectedRange[1]}
                     selectsRange

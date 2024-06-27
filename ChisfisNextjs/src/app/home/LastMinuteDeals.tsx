@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import blob from "@/images/blobPattern.png";
-import londonImg from "@/images/browseByDestination/london.jpg";
+// import londonImg from "@/images/browseByDestination/london.jpg";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { HotelDemo1, HotelDemo2, HotelDemo3 } from "public/assetsManager";

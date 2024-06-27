@@ -3,7 +3,7 @@ import React from "react";
 // import { ListingDataType } from "@/types/types";
 import {DragDrop} from "./media/drag-drop-file";
 import { RentableItem } from "@/types/rentalItems";
-import { CheckboxGroup } from "@nextui-org/react";
+// import { CheckboxGroup } from "@nextui-org/react";
 
 
 const PageAddListing5 = ({data,updateData}:{updateData:(data:Partial<RentableItem>)=>void, data:Partial<RentableItem>}) => {

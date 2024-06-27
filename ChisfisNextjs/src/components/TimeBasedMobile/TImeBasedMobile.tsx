@@ -4,6 +4,8 @@ import Image from "next/image";
 import Slider from "react-slick";
 import blob from "@/images/blobPattern.png";
 import londonImg from "@/images/browseByDestination/london.jpg";
+import { RentableItem, RentableItemType } from "@/types/rentalItems";
+import { useFetchData } from "@/hooks/useFetch";
 
 const cardData = {
   Room: [
@@ -177,15 +179,16 @@ const cardData = {
 };
 
 const TImeBasedMobile = () => {
-  const [activeCategory, setActiveCategory] = useState("Room");
+  const [activeCategory, setActiveCategory] = useState<RentableItemType>("room");
+  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-item-type/${activeCategory}`,queryKey:["properties-by-timebased-category",activeCategory]})
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (category: RentableItemType) => {
     setActiveCategory(category);
   };
 
   const renderBlobImage = (category: string) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" />;
+      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={50} height={50} />;
     } else {
       return null;
     }
@@ -220,60 +223,60 @@ const TImeBasedMobile = () => {
           <div className="flex flex-col -ml-1 gap-4 w-[35px] text-[#666666] text-sm font-semibold">
             <div
               className={`flex items-center h-fit ${
-                activeCategory !== "Room" && "ml-4"
+                activeCategory !== "room" && "ml-4"
               }`}
             >
               {renderBlobImage("Room")}
               <p
                 className={`lr -rotate-180 ${
-                  activeCategory === "Room" && "font-bold"
+                  activeCategory === "room" && "font-bold"
                 }`}
-                onClick={() => handleCategoryClick("Room")}
+                onClick={() => handleCategoryClick("room")}
               >
                 Room
               </p>
             </div>
             <div
               className={`flex items-center ${
-                activeCategory !== "Restroom" && "ml-4"
+                activeCategory !== "rest_room" && "ml-4"
               }`}
             >
               {renderBlobImage("Restroom")}
               <p
                 className={`lr -rotate-180  ${
-                  activeCategory === "Restroom" && "font-bold"
+                  activeCategory === "rest_room" && "font-bold"
                 }`}
-                onClick={() => handleCategoryClick("Restroom")}
+                onClick={() => handleCategoryClick("rest_room")}
               >
                 Restroom
               </p>
             </div>
             <div
               className={`flex items-center ${
-                activeCategory !== "EV Parking" && "ml-4"
+                activeCategory !== "ev_parking" && "ml-4"
               }`}
             >
               {renderBlobImage("EV Parking")}
               <p
                 className={`lr -rotate-180 ${
-                  activeCategory === "EV Parking" && "font-bold"
+                  activeCategory === "ev_parking" && "font-bold"
                 }`}
-                onClick={() => handleCategoryClick("EV Parking")}
+                onClick={() => handleCategoryClick("ev_parking")}
               >
                 EV Parking
               </p>
             </div>
             <div
               className={`flex items-center ${
-                activeCategory !== "Parking" && "ml-4"
+                activeCategory !== "parking" && "ml-4"
               }`}
             >
               {renderBlobImage("Parking")}
               <p
                 className={`lr -rotate-180 ${
-                  activeCategory === "Parking" && "font-bold"
+                  activeCategory === "parking" && "font-bold"
                 }`}
-                onClick={() => handleCategoryClick("Parking")}
+                onClick={() => handleCategoryClick("parking")}
               >
                 Parking
               </p>
@@ -283,15 +286,20 @@ const TImeBasedMobile = () => {
         {/* Card */}
         <div className="w-4/5 h-[293px]">
           <Slider {...settings}>
-            {cardData[activeCategory as keyof typeof cardData]?.map((card) => (
+            {data?.map((card) => (
               <div
-                key={card.id}
+                key={card._id}
                 className="h-[293px] w-[310px] p-3 bg-white rounded-2xl relative"
               >
                 <Image
-                  src={card.img}
+                  src={card?.gallery?.thumbnail || ""}
                   className="rounded-lg h-[159px] object-cover"
-                  alt="london"
+                  alt={card.title}
+                  width={310}
+                  height={159}
+                  onError={(e) => {
+                    e.currentTarget.src = "https://placehold.co/600x400?text=no+image";
+                  }}
                 />
                 <p className="mt-2 text-lg font-semibold">{card.title}</p>
                 <div className="flex items-center gap-1 mt-2">
@@ -308,15 +316,17 @@ const TImeBasedMobile = () => {
                     />
                   </svg>
                   <p className="text-[15px] text-[#666666] font-medium">
-                    {card.address}
+                    {card?.location?.city}
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-3">
                   <p>
-                    <span className="text-xl font-bold">{card.price}</span>/hour
+                    <span className="text-xl font-bold">{
+                      card?.price?.at(0)?.amount || 0
+                      }</span>/ {card?.price?.at(0)?.frequency}
                   </p>
                   <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">
-                    {card.buttonText}
+                    {card?.status}
                   </button>
                 </div>
               </div>
