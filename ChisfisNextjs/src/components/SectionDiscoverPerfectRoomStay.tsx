@@ -116,7 +116,7 @@ const SectionDiscoverPerfectRoomStay: FC<
               initial={false}
               className="relative whitespace-nowrap -mx-2 xl:-mx-4"
             >
-              <AnimatePresence initial={false} custom={direction}>
+              {/* <AnimatePresence initial={false} custom={direction}>
                 {stayListings.map((item, indx) => (
                   <motion.li
                     className={`relative md:inline-block px-4 xl:px-4 truncate`}
@@ -140,7 +140,7 @@ const SectionDiscoverPerfectRoomStay: FC<
                     />
                   </motion.li>
                 ))}
-              </AnimatePresence>
+              </AnimatePresence> */}
             </motion.ul>
           </div>
         </div>

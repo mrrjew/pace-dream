@@ -15,11 +15,17 @@ import React, { FC, Fragment, useState } from "react";
 import Avatar from "@/shared/Avatar";
 import ButtonSecondary from "@/shared/ButtonSecondary";
 import SocialsList from "@/shared/SocialsList";
+import { RentableItem } from "@/types/rentalItems";
+import { useFetchData } from "@/hooks/useFetch";
+import { useSession } from "@/hooks/useSession";
 
 export interface AuthorPageProps {}
 
 const AuthorPage: FC<AuthorPageProps> = ({}) => {
+  const { getSession } = useSession();
+  const session = getSession();
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
+  const { data, isLoading } = useFetchData<Array<RentableItem>>({ endpoint: `/property/get-all-by-user/${session?.userId}`, queryKey: ["properties"], queryParams: {} });
 
   const renderSidebar = () => {
     return (
@@ -150,8 +156,8 @@ const AuthorPage: FC<AuthorPageProps> = ({}) => {
             <Tab.Panels>
               <Tab.Panel className="">
                 <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
-                  {DEMO_STAY_LISTINGS.filter((_, i) => i < 4).map((stay) => (
-                    <StayCard key={stay.id} data={stay} />
+                  {data?.map((stay) => (
+                    <StayCard key={stay?._id} data={stay} />
                   ))}
                 </div>
                 <div className="flex mt-11 justify-center items-center">

@@ -13,6 +13,7 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
+import { RentableItem } from "@/types/rentalItems";
 
 // OTHER DEMO WILL PASS PROPS
 const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
@@ -20,7 +21,7 @@ const DEMO_DATA: StayDataType[] = DEMO_STAY_LISTINGS.filter((_, i) => i < 8);
 //
 export interface SectionGridFeaturePlacesProps {
   className?: string;
-  stayListings?: StayDataType[];
+  stayListings?: RentableItem[];
   gridClass?: string;
   itemPerRow?: number;
   heading?: ReactNode;
@@ -31,7 +32,7 @@ export interface SectionGridFeaturePlacesProps {
 
 const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   className = "",
-  stayListings = DEMO_DATA,
+  stayListings,
   gridClass = "",
   itemPerRow = 4,
   heading = "Time Based",
@@ -39,7 +40,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
   tabs = ["Room", "Parking", "EV Parking", "Restroom"],
   cardType = "card2",
 }) => {
-  const renderCard = (stay: StayDataType) => {
+  const renderCard = (stay: RentableItem) => {
     let CardName = StayCard;
     switch (cardType) {
       case "card1":
@@ -56,7 +57,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
     return (
       <CardName
         className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border"
-        key={stay.id}
+        key={stay?._id}
         data={stay}
       />
     );
@@ -94,7 +95,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      if (currentIndex < stayListings?.length - 1) {
+      if (currentIndex < Number(stayListings?.length) - 1) {
         changeItemId(currentIndex + 1);
       }
     },
@@ -105,9 +106,9 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
     },
     trackMouse: true,
   });
-  const sortedStayListings = stayListings
+  const sortedStayListings = stayListings && stayListings
     .slice()
-    .sort((a, b) => b.reviewStart - a.reviewStart);
+    .sort((a, b) => b?.rating - a?.rating);
   return (
     <div className={`nc-SectionGridFeaturePlaces md:px-24  ${className}`}>
       <HeaderFilterDiscover
@@ -132,7 +133,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
             ) : (
               <PrevBtn className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]" />
             )}
-            {sortedStayListings.length > currentIndex + numberOfItems ? (
+            {Number(sortedStayListings?.length) > currentIndex + numberOfItems ? (
               <NextBtn
                 onClick={() => changeItemId(currentIndex + 1)}
                 className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"
@@ -147,7 +148,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
               className="relative whitespace-nowrap -mx-2 xl:-mx-4"
             >
               <AnimatePresence initial={false} custom={direction}>
-                {sortedStayListings.map((item, indx) => (
+                {sortedStayListings?.map((item, indx) => (
                   <motion.li
                     className={`relative md:inline-block px-4 xl:px-4 truncate`}
                     custom={direction}
@@ -165,7 +166,7 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
                   >
                     <StayCard2
                       className="py-2 px-3 rounded-[8px] bg-[#f9f5f5] border "
-                      key={item.id}
+                      key={item?._id}
                       data={item}
                     />
                   </motion.li>

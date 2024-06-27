@@ -112,6 +112,7 @@ const Page = () => {
       isFirstStep={isFirstStep}
       isLastStep={isLastStep}
       currentStep={currentStepIndex}
+      data={data as RentableItem}
     >
       {step}
     </AddListingHourlyRentalGearWrapper>

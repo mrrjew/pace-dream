@@ -1,54 +1,40 @@
 import React, { FC } from "react";
-import { DEMO_STAY_LISTINGS } from "@/data/listings";
-import { StayDataType } from "@/data/types";
+// import { DEMO_STAY_LISTINGS } from "@/data/listings";
+// import { StayDataType } from "@/data/types";
 import StartRating from "@/components/StartRating";
 import BtnLikeIcon from "@/components/BtnLikeIcon";
 import SaleOffBadge from "@/components/SaleOffBadge";
 import Badge from "@/shared/Badge";
 import Link from "next/link";
 import GallerySlider from "./GallerySlider";
+import { RentableItem } from "@/types/rentalItems";
 
 export interface StayCardProps {
   className?: string;
-  data?: StayDataType;
+  data?: RentableItem;
   size?: "default" | "small";
 }
 
-const DEMO_DATA = DEMO_STAY_LISTINGS[0];
+// const DEMO_DATA = DEMO_STAY_LISTINGS[0];
 
 const StayCard: FC<StayCardProps> = ({
   size = "default",
   className = "",
-  data = DEMO_DATA,
+  data,
 }) => {
-  const {
-    galleryImgs,
-    listingCategory,
-    address,
-    title,
-    bedrooms,
-    href,
-    like,
-    saleOff,
-    isAds,
-    price,
-    reviewStart,
-    reviewCount,
-    id,
-  } = data;
 
   const renderSliderGallery = () => {
     return (
       <div className="relative w-full">
         <GallerySlider
-          uniqueID={`StayCard_${id}`}
+          uniqueID={`StayCard_${data?._id}`}
           ratioClass="aspect-w-4 aspect-h-3 "
-          galleryImgs={galleryImgs}
-          href={href}
+          galleryImgs={data?.gallery?.images || []}
+          href={'/listing-stay-detail/' + data?._id}
           galleryClass={size === "default" ? undefined : ""}
         />
-        <BtnLikeIcon isLiked={like} className="absolute right-3 top-3 z-[1]" />
-        {saleOff && <SaleOffBadge className="absolute left-3 top-3" />}
+        <BtnLikeIcon isLiked={false} className="absolute right-3 top-3 z-[1]" />
+        <SaleOffBadge className="absolute left-3 top-3"  desc="10%"/>
       </div>
     );
   };
@@ -57,17 +43,17 @@ const StayCard: FC<StayCardProps> = ({
     return (
       <div className={size === "default" ? "p-4 space-y-4" : "p-3 space-y-1"}>
         <div className={size === "default" ? "space-y-2" : "space-y-1"}>
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">
-            {listingCategory.name} · {bedrooms} beds
+          <span className="text-sm text-neutral-500 dark:text-neutral-400 capitalize">
+            {data?.details?.property_type}  {data?.details.bathroom_count} {data?.details.bathroom_count > 0 ?'Beds':""}
           </span>
           <div className="flex items-center space-x-2">
-            {isAds && <Badge name="ADS" color="green" />}
+            <Badge name="ADS" color="green" />
             <h2
               className={`font-semibold capitalize text-neutral-900 dark:text-white ${
                 size === "default" ? "text-base" : "text-base"
               }`}
             >
-              <span className="line-clamp-1">{title}</span>
+              <span className="line-clamp-1">{data?.title}</span>
             </h2>
           </div>
           <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-sm space-x-1.5">
@@ -92,23 +78,19 @@ const StayCard: FC<StayCardProps> = ({
                 />
               </svg>
             )}
-            <span className="">{address}</span>
+            <span className="">{data?.location?.city}</span>
           </div>
         </div>
         <div className="border-b w-14 border-neutral-100 dark:border-neutral-800"></div>
         <div className="flex items-center justify-between">
           <span className="text-base font-semibold">
-            {price}
+            {data?.price?.at(0)?.currency || "USD"} {' '} {data?.price?.at(0)?.amount || 0}
             {` `}
-            {size === "default" && (
               <span className="text-sm font-normal text-neutral-500 dark:text-neutral-400">
-                /night
+                / {data?.price?.at(0)?.frequency || "hour"}
               </span>
-            )}
           </span>
-          {!!reviewStart && (
-            <StartRating reviewCount={reviewCount} point={reviewStart} />
-          )}
+            <StartRating reviewCount={data?.rating || 0} point={data?.rating||0} />
         </div>
       </div>
     );
@@ -124,7 +106,7 @@ const StayCard: FC<StayCardProps> = ({
       data-nc-id="StayCard"
     >
       {renderSliderGallery()}
-      <Link href={href}>{renderContent()}</Link>
+      <Link  href={'/listing-stay-detail/' + data?._id as any}>{renderContent()}</Link>
     </div>
   );
 };

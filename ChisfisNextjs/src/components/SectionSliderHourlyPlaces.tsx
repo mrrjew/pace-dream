@@ -106,7 +106,8 @@ const SectionSliderHourlyPlaces: FC<SectionSliderHourlyPlaces> = ({
       default:
         CardName = StayCard2;
     }
-    return <CardName key={item.id} data={item} />;
+    // return <CardName key={item.id} data={item} />;
+    return <></>
   };
 
   if (!numberOfItems) return null;

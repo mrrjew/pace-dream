@@ -17,16 +17,18 @@ const Hero = () => {
   return (
     // using this as bg
     <div
-      className={` ${rubik.variable} md:my-[2.3rem] md:pt-0 pt-[1rem]  md:rounded-[1.1rem] md:w-[90%] w-[100%] mx-auto md:h-[82vh] md:bg-[#5527D7]   relative `}
+      className={` ${rubik.variable} md:my-[2.3rem] md:pt-0 pt-[1rem]  md:rounded-[1.1rem] md:w-[90%] w-[100%] mx-auto md:h-[82vh] md:bg-[#5527D7] relative `}
     >
-      <div className="relative hidden md:flex ">
+      <div className="relative hidden md:flex h-full" >
         <Image
           src={HeroBgMaskImage}
-          alt="Hero Image Bg -mask"
-          className=" w-[100%] object-cover md:h-[82vh] md:h-inherit h-[100%] select-none  absolute z-[1] opacity-50  "
+          alt="Hero Imagge Bg -mask"
+          className=" w-[100%] object-cover md:h-[82vh] h-[100%] select-none  absolute z-[1] opacity-50"
+          width={1920}
+          height={1080}
         />
         <div className=" relative w-full flex justify-between px-[1rem] py-[1rem] z-[5] ">
-          <div className=" flex flex-col justify-end lg:w-[48%] w-[50%]  h-[54vh] xl:ml-[2.5rem] ml-[.7rem] py-[.5rem]   ">
+          <div className=" flex flex-col justify-end lg:w-[48%] w-[50%]  h-[54vh] xl:ml-[2.5rem] ml-[.7rem] pb-[4.7rem] ">
             <div className=" text-white flex flex-col gap-[1.9rem] py-[1rem] mb-[1rem] ">
               <h3 className=" font-rubik lg:text-[2.8rem] text-[2.2rem] font-[400] leading-[3rem] ">
                 Find your ideal stay,
@@ -39,13 +41,16 @@ const Hero = () => {
               </p>
             </div>
             <div className="relative">
-              <SearchForm />
+              <SearchForm  />
             </div>
           </div>
+
           <Image
             src={HeroImage}
             alt="Hero Image"
-            className=" z-[10]  xl:w-[36rem] lg:w-[30rem] w-[50%] h-auto shrink-0 select-none "
+            className=" xl:w-[36rem] lg:w-[30rem] w-[50%] h-[86%] shrink-0 select-none "
+            width={400}
+            height={320}
           />
         </div>
       </div>
@@ -165,7 +170,9 @@ const Hero = () => {
               <Image
                 src={HeroImage}
                 alt="adventure"
-                className="relative w-full h-auto select none "
+                className="relative w-full h-auto select none"
+                width={1920}
+                height={1080}
               />
             </div>
           </div>

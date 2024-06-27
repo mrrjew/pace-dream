@@ -6,10 +6,11 @@ import SaleOffBadge from "@/components/SaleOffBadge";
 // import use from ""
 import Link from "next/link";
 import Image from "next/image";
+import { RentableItem } from "@/types/rentalItems";
 
 export interface StayCard2Props {
   className?: string;
-  data?: StayDataType;
+  data?: RentableItem;
   size?: "default" | "small";
   term?: string;
 }
@@ -29,25 +30,25 @@ const DEMO_DATA = DEMO_RENTAL_LISTING[0];
 const StayCard3: FC<StayCard2Props> = ({
   size = "default",
   className = "",
-  data = DEMO_DATA,
+  data,
   term = "",
 }) => {
-  const {
-    image,
-    listingCategory,
-    address,
-    title,
-    bedrooms,
-    shared,
-    href,
-    like,
-    saleOff,
-    isAds,
-    price,
-    stock,
-    deposit,
-    id,
-  } = data;
+  // const {
+  //   image,
+  //   listingCategory,
+  //   address,
+  //   title,
+  //   bedrooms,
+  //   shared,
+  //   href,
+  //   like,
+  //   saleOff,
+  //   isAds,
+  //   price,
+  //   stock,
+  //   deposit,
+  //   id,
+  // } = data;
 
   const renderSliderGallery = () => {
     const randomGradientIndex = Math.floor(
@@ -60,7 +61,7 @@ const StayCard3: FC<StayCard2Props> = ({
       // <p>sjhbdvjvdh</p>
       // </>
       <div className="relative md:w-full w-[82vw]">
-        <Link href={`/listing-stay-detail/${id}?term=${term}`}>
+        <Link href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}>
           {/* <GallerySlider
             uniqueID={`StayCard2_${id}`}
             ratioClass="aspect-w-12 aspect-h-11"
@@ -70,11 +71,14 @@ const StayCard3: FC<StayCard2Props> = ({
           <div className="border border-white rounded-[8px] relative">
             <div className="w-48 h-44 relative z-10">
               <Image
-                src={image}
+                src={data?.gallery?.images?.at(0) || ""}
                 alt="img1"
                 className="w-full h-full object-contain"
                 width={100}
                 height={100}
+                onError={(e) => {
+                  e.currentTarget.src = "https://placehold.co/600x400?text=No+Image";
+                }}
               />
             </div>
             <div
@@ -89,31 +93,31 @@ const StayCard3: FC<StayCard2Props> = ({
 
           <div>
             <BtnLikeIcon
-              isLiked={like}
+              isLiked={false}
               className="absolute right-1 bottom-1 z-[1]"
             />
           </div>
-          {saleOff && (
+           (
             <SaleOffBadge
-              desc={saleOff}
+              desc={"0%"}
               className="absolute right-1 top-1 bg-orange-500"
             />
-          )}
+          )
         </Link>
       </div>
     );
   };
 
   const renderContent = () => {
-    let priceNum;
-    let sharedNum;
-    if (term === "long" || term === "short") {
-      if (shared !== undefined && price !== undefined) {
-        priceNum = parseInt(price.replace("$", ""), 10);
-        sharedNum = parseInt(shared, 10);
-        sharedNum = sharedNum + 1;
-      }
-    }
+    // let priceNum;
+    // let sharedNum;
+    // if (term === "long" || term === "short") {
+    //   if (shared !== undefined && price !== undefined) {
+    //     priceNum = parseInt(price.replace("$", ""), 10);
+    //     sharedNum = parseInt(shared, 10);
+    //     sharedNum = sharedNum + 1;
+    //   }
+    // }
     return (
       // <>
 
@@ -125,15 +129,15 @@ const StayCard3: FC<StayCard2Props> = ({
           {term === "long" || term === "short" ? (
             <div>
               <span className="text-base font-semibold line-through">
-                {price}
+                {data?.price?.at(0)?.amount || 0}
                 {` `}
                 {size === "default" && (
                   <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                    /hour
+                    / {data?.price?.at(0)?.frequency || "hour"}
                   </span>
                 )}
               </span>
-              {priceNum && sharedNum ? (
+              {/* {priceNum && sharedNum ? (
                 <span className="text-base font-semibold">
                   {" "}
                   ${Math.round(priceNum / sharedNum)}
@@ -144,15 +148,15 @@ const StayCard3: FC<StayCard2Props> = ({
                 </span>
               ) : (
                 ""
-              )}
+              )} */}
             </div>
           ) : (
             <span className="text-base font-semibold text-[#5527D7]">
-              {price}
+              { data?.price?.at(0)?.amount || 0}
               {` `}
               {size === "default" && (
                 <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                  /hour
+                  / {data?.price?.at(0)?.frequency || "hour"}
                 </span>
               )}
             </span>
@@ -161,7 +165,7 @@ const StayCard3: FC<StayCard2Props> = ({
             <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
               <p className="text-[14px] font-[600]">Stock</p>
               <div
-                className={`w-3 h-3 rounded-full ${stock === 0 ? "bg-red-800" : "bg-green-700"}`}
+                className={`w-3 h-3 rounded-full ${!data?.available ? "bg-red-800" : "bg-green-700"}`}
               ></div>
             </div>
           }
@@ -174,11 +178,11 @@ const StayCard3: FC<StayCard2Props> = ({
                 size === "default" && "text-base"
               }`}
             >
-              <span className="line-clamp-1 truncate">{title}</span>
+              <span className="line-clamp-1 truncate">{data?.title}</span>
             </h2>
           </div>
           <span className="text-xs text-neutral-400">
-            {deposit} Refundable Deposit
+            {0} Refundable Deposit
           </span>
           {/* <div className="flex items-center text-neutral-500 text-sm space-x-1.5">
             {size === "default" && (
@@ -216,7 +220,7 @@ const StayCard3: FC<StayCard2Props> = ({
   return (
     <div className={`nc-StayCard2 group relative ${className}`}>
       {renderSliderGallery()}
-      <Link href={`/listing-stay-detail/${id}?term=${term}`}>
+      <Link href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}>
         {renderContent()}
       </Link>
     </div>
