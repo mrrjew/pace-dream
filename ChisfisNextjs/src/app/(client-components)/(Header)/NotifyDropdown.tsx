@@ -89,7 +89,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
                 <div className="overflow-hidden shadow-lg rounded-2xl ring-1 ring-black ring-opacity-5">
                   <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-7">
                     <h3 className="text-xl font-semibold">Notifications</h3>
-                    {notifications_.map((item, index) => (
+                    {notifications_?.map((item, index) => (
                       <a
                         key={index}
                         href={item?.href}
