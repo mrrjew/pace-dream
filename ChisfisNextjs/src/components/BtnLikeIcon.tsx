@@ -23,7 +23,7 @@ const BtnLikeIcon: FC<BtnLikeIconProps> = ({
       data-nc-id="BtnLikeIcon"
       title="Save"
       onClick={(e) => {
-        e.preventDefault();
+        e.stopPropagation();
         setLikedState(!likedState);
       }}
     >

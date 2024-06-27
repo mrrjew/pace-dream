@@ -97,7 +97,8 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
       default:
         CardName = StayCard2;
     }
-    return <CardName key={item.id} data={item} />;
+    return CardName;
+    // return <CardName key={item.id} data={item} />;
   };
 
   if (!numberOfItems) return null;
@@ -188,7 +189,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
               className="relative whitespace-nowrap -mx-2 xl:-mx-4 w-max-[630px] w-[90vw]"
             >
               <AnimatePresence initial={false} custom={direction}>
-                {categories.map((item, indx) => (
+                {/* {categories.map((item, indx) => (
                   <motion.li
                     className={`relative mr-[1px] inline-block px-2 xl:px-4 ${itemClassName} `}
                     custom={direction}
@@ -206,7 +207,7 @@ const SectionSliderFeaturePlaces: FC<SectionSliderFeaturePlacesProps> = ({
                   >
                     {renderCard(item)}
                   </motion.li>
-                ))}
+                ))} */}
                 <div className="w-[95vw] mt-8 flex justify-center">
                   {currentIndex ? (
                     <PrevBtn

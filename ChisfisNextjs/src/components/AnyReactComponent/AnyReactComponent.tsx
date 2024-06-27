@@ -7,10 +7,11 @@ import StayCard from "@/components/StayCard";
 import { CarDataType, ExperiencesDataType, StayDataType } from "@/data/types";
 import React, { FC, Fragment } from "react";
 import { useState } from "react";
+import { RentableItem } from "@/types/rentalItems";
 
 export interface AnyReactComponentProps {
   className?: string;
-  listing?: StayDataType;
+  listing?: RentableItem;
   experiences?: ExperiencesDataType;
   car?: CarDataType;
   isSelected?: boolean;
@@ -38,7 +39,8 @@ const AnyReactComponent: FC<AnyReactComponentProps> = ({
           isSelected ? "bg-neutral-900 text-white" : ""
         }`}
       >
-        {listing?.price || experiences?.price || car?.price}
+        {listing?.price?.at(0)?.currency || "USD"} {" "}
+        {listing?.price?.at(0)?.amount || 0}
       </span>
       <Transition
         show={isOpen}

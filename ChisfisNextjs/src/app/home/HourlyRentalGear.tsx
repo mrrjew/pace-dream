@@ -15,6 +15,8 @@ import {
   GearDemo3,
 } from "public/assetsManager";
 import { MdBookmark } from "react-icons/md";
+import { RentableItem, RentableItemType } from "@/types/rentalItems";
+import { useFetchData } from "@/hooks/useFetch";
 
 const cardData = [
   {
@@ -67,16 +69,30 @@ const cardData = [
   },
 ];
 
+const property_types =  {
+    // {id: 'tech gear', name: 'Tech Gear'},
+  // {id:"music gear", name: "Music Gear"},
+  // {id:"photography", name: "photography"},
+  // {id:"fashion", name: "Fashion"},
+  tech_gear: "Tech Gear",
+  music_gear: "Music Gear",
+  photography: "Photography",
+  fashion: "Fashion",
+}
 const HourlyRentalGear = () => {
-  const [activeCategory, setActiveCategory] = useState("Tech Gear");
+  const [activeCategory, setActiveCategory] = useState<keyof typeof property_types>("tech_gear");
+  // room_type
+ // property_type
 
-  const handleCategoryClick = (category: string) => {
+  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-property-type/${activeCategory?.replaceAll('_'," ")}`,queryKey:["properties-by-gear-category",activeCategory],})
+
+  const handleCategoryClick = (category:keyof typeof property_types ) => {
     setActiveCategory(category);
   };
 
-  const renderBlobImage = (category: string) => {
+  const renderBlobImage = (category: keyof typeof property_types) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" />;
+      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={50} height={50} />;
     } else {
       return null;
     }
@@ -163,60 +179,60 @@ const HourlyRentalGear = () => {
             <div className="flex flex-col -ml-1 gap-4 w-[35px] text-[#666666] text-sm font-semibold">
               <div
                 className={`flex items-center h-fit ${
-                  activeCategory !== "Tech Gear" && "ml-4"
+                  activeCategory !== "tech_gear" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Tech Gear")}
+                {renderBlobImage("tech_gear")}
                 <p
                   className={`lr -rotate-180 cursor-pointer ${
-                    activeCategory === "Tech Gear" && "font-bold"
+                    activeCategory === "tech_gear" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Tech Gear")}
+                  onClick={() => handleCategoryClick("tech_gear")}
                 >
                   Tech Gear
                 </p>
               </div>
               <div
                 className={`flex items-center ${
-                  activeCategory !== "Music Gear" && "ml-4"
+                  activeCategory !== "music_gear" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Music Gear")}
+                {renderBlobImage("music_gear")}
                 <p
                   className={`lr -rotate-180 cursor-pointer  ${
-                    activeCategory === "Music Gear" && "font-bold"
+                    activeCategory === "music_gear" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Music Gear")}
+                  onClick={() => handleCategoryClick("music_gear")}
                 >
                   Music Gear
                 </p>
               </div>
               <div
                 className={`flex items-center cursor-pointer ${
-                  activeCategory !== "Photography" && "ml-4"
+                  activeCategory !== "photography" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Photography")}
+                {renderBlobImage("photography")}
                 <p
                   className={`lr -rotate-180 ${
-                    activeCategory === "Photography" && "font-bold"
+                    activeCategory === "photography" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Photography")}
+                  onClick={() => handleCategoryClick("photography")}
                 >
                   Photography
                 </p>
               </div>
               <div
                 className={`flex items-center cursor-pointer ${
-                  activeCategory !== "Fashion" && "ml-4"
+                  activeCategory !== "fashion" && "ml-4"
                 }`}
               >
-                {renderBlobImage("Fashion")}
+                {renderBlobImage("fashion")}
                 <p
                   className={`lr -rotate-180 ${
-                    activeCategory === "Fashion" && "font-bold"
+                    activeCategory === "fashion" && "font-bold"
                   }`}
-                  onClick={() => handleCategoryClick("Fashion")}
+                  onClick={() => handleCategoryClick("fashion")}
                 >
                   Fashion
                 </p>
@@ -224,18 +240,28 @@ const HourlyRentalGear = () => {
             </div>
           </div>
           {/* Card */}
-          <div className=" font-rubik  w-[100%] h-[293px]">
+          <div className="font-rubik  w-full h-[293px]">
+           
             <Slider ref={sliderRef} {...settings}>
-              {cardData?.map((card) => (
+                 {/* empty data */}
+                 {data?.length === 0 &&  <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
+                      <p>No data found in <strong className="capitalize">{activeCategory.replaceAll('_',' ')}</strong></p>
+                </div>}
+              {data?.map((card) => (
                 <div
-                  key={card.id}
+                  key={card._id}
                   className="h-fit  w-[20rem] p-[1.1rem] bg-white rounded-2xl relative"
                 >
                   <div className="relative ">
                     <Image
-                      src={card.img}
+                      src={card?.gallery?.thumbnail ?? ''}
                       className="rounded-xl h-[159px] object-cover"
-                      alt="london"
+                      alt={card.title}
+                      width={310}
+                      height={159}
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://placehold.co/600x400?text=no+image'
+                      }}
                     />
                     <div className=" absolute size-[2rem] flex justify-center items-center right-[.7rem] bottom-[-.6rem] bg-white rounded-full  ">
                       <div className="flex justify-center items-center size-[1.8rem] bg-[#5527D7] hover-bg-[#5508d9] rounded-full ">
@@ -246,22 +272,22 @@ const HourlyRentalGear = () => {
                   <p className="mt-2 text-lg font-semibold">{card.title}</p>
                   <div className="flex items-center gap-1 mt-2">
                     <p className="text-[15px] text-[#353646] opacity-[.4] font-medium">
-                      {card.desc}
+                      {card?.location?.city}
                     </p>
                   </div>
                   <div className="flex items-center justify-between mt-3">
                     <p>
                       <span className="text-xl font-bold font-rubik">
-                        {card.price}
+                         {card?.price?.at(0)?.amount}
                       </span>
-                      /hour
+                      / {card?.price?.at(0)?.frequency}
                     </p>
                     <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#E8F2EC] ">
-                      {card.buttonText}
+                      {card?.status}
                     </button>
                   </div>
                   <button className=" mt-[1rem] rounded-full w-[100%] h-[2.5rem] flex justify-center items-center  font-semibold text-sm px-4 py-1 text-[#fff] font-rubik bg-[#5527D7] ">
-                    Rent Now
+                    Rent Now 
                   </button>
                 </div>
               ))}

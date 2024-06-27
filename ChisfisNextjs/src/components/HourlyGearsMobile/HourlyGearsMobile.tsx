@@ -4,6 +4,8 @@ import Image from "next/image";
 import Slider from "react-slick";
 import blob from "@/images/blobPattern.png";
 import londonImg from "@/images/browseByDestination/london.jpg";
+import { RentableItem } from "@/types/rentalItems";
+import { useFetchData } from "@/hooks/useFetch";
 
 const cardData = {
   TechGear: [
@@ -176,16 +178,32 @@ const cardData = {
   ],
 };
 
-const HourlyGearsMobile = () => {
-  const [activeCategory, setActiveCategory] = useState("TechGear");
+const property_types =  {
+  // {id: 'tech gear', name: 'Tech Gear'},
+// {id:"music gear", name: "Music Gear"},
+// {id:"photography", name: "photography"},
+// {id:"fashion", name: "Fashion"},
+tech_gear: "Tech Gear",
+music_gear: "Music Gear",
+photography: "Photography",
+fashion: "Fashion",
+}
 
-  const handleCategoryClick = (category: string) => {
+const HourlyGearsMobile = () => {
+  const [activeCategory, setActiveCategory] = useState<keyof typeof property_types>("tech_gear");
+  // room_type
+ // property_type
+
+  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-property-type/${activeCategory?.replaceAll('_'," ")}`,queryKey:["properties-by-gear-category",activeCategory],})
+
+  const handleCategoryClick = (category:keyof typeof property_types ) => {
     setActiveCategory(category);
   };
 
+
   const renderBlobImage = (category: string) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" />;
+      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={20} height={50} />;
     } else {
       return null;
     }
@@ -219,45 +237,45 @@ const HourlyGearsMobile = () => {
         <div className="-mt-1">
           <div className="flex flex-col -ml-1 gap-4 w-[35px] text-[#666666] text-sm font-semibold">
             <div
-              className={`flex items-center h-fit ${activeCategory !== "TechGear" && "ml-4"}`}
+              className={`flex items-center h-fit ${activeCategory !== "tech_gear" && "ml-4"}`}
             >
               {renderBlobImage("TechGear")}
               <p
-                className={`lr -rotate-180 ${activeCategory === "TechGear" && "font-bold"}`}
-                onClick={() => handleCategoryClick("TechGear")}
+                className={`lr -rotate-180 ${activeCategory === "tech_gear" && "font-bold"}`}
+                onClick={() => handleCategoryClick("tech_gear")}
               >
                 TechGear
               </p>
             </div>
             <div
-              className={`flex items-center ${activeCategory !== "Music" && "ml-4"}`}
+              className={`flex items-center ${activeCategory !== "music_gear" && "ml-4"}`}
             >
               {renderBlobImage("Music")}
               <p
-                className={`lr -rotate-180  ${activeCategory === "Music" && "font-bold"}`}
-                onClick={() => handleCategoryClick("Music")}
+                className={`lr -rotate-180  ${activeCategory === "music_gear" && "font-bold"}`}
+                onClick={() => handleCategoryClick("music_gear")}
               >
                 Music
               </p>
             </div>
             <div
-              className={`flex items-center ${activeCategory !== "Photography" && "ml-4"}`}
+              className={`flex items-center ${activeCategory !== "photography" && "ml-4"}`}
             >
               {renderBlobImage("Photography")}
               <p
-                className={`lr -rotate-180 ${activeCategory === "Photography" && "font-bold"}`}
-                onClick={() => handleCategoryClick("Photography")}
+                className={`lr -rotate-180 ${activeCategory === "photography" && "font-bold"}`}
+                onClick={() => handleCategoryClick("photography")}
               >
                 Photography
               </p>
             </div>
             <div
-              className={`flex items-center ${activeCategory !== "Fashion" && "ml-4"}`}
+              className={`flex items-center ${activeCategory !== "fashion" && "ml-4"}`}
             >
               {renderBlobImage("Fashion")}
               <p
-                className={`lr -rotate-180 ${activeCategory === "Fashion" && "font-bold"}`}
-                onClick={() => handleCategoryClick("Fashion")}
+                className={`lr -rotate-180 ${activeCategory === "fashion" && "font-bold"}`}
+                onClick={() => handleCategoryClick("fashion")}
               >
                 Fashion
               </p>
@@ -267,15 +285,21 @@ const HourlyGearsMobile = () => {
         {/* Card */}
         <div className="w-4/5 h-[293px]">
           <Slider {...settings}>
-            {cardData[activeCategory as keyof typeof cardData]?.map((card) => (
+
+            {data?.map((card) => (
               <div
-                key={card.id}
+                key={card._id}
                 className="h-[293px] w-[310px] p-3 bg-white rounded-2xl relative"
               >
                 <Image
-                  src={card.img}
+                  src={card.gallery.thumbnail || ""}
                   className="rounded-lg h-[159px] object-cover"
                   alt="london"
+                  width={310}
+                  height={159}
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://placehold.co/600x400?text=no+image'
+                  }}
                 />
                 <p className="text-lg font-semibold mt-2">{card.title}</p>
                 <div className="flex mt-2 gap-1 items-center">
@@ -292,15 +316,17 @@ const HourlyGearsMobile = () => {
                     />
                   </svg>
                   <p className="text-[15px] text-[#666666] font-medium">
-                    {card.address}
+                    {card.location?.city}
                   </p>
                 </div>
                 <div className="flex mt-3 justify-between items-center">
                   <p>
-                    <span className="text-xl font-bold">{card.price}</span>/hour
+                    <span className="text-xl font-bold">{
+                      card.price?.at(0)?.amount || 0
+                      }</span>/ {card.price?.at(0)?.frequency}
                   </p>
                   <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">
-                    {card.buttonText}
+                    Rent Now
                   </button>
                 </div>
               </div>
