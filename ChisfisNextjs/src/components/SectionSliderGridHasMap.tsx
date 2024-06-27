@@ -10,11 +10,12 @@ import PrevBtn from "./PrevBtn";
 import NextBtn from "./NextBtn";
 import { variants } from "@/utils/animationVariants";
 import { useWindowSize } from "react-use";
+import { RentableItem } from "@/types/rentalItems";
 
 export interface SectionSliderGridHasMapProps {
   className?: string;
   itemClassName?: string;
-  categories?: StayDataType[];
+  data?: RentableItem[];
   categoryCardType?: "card1";
   itemPerRow?: 1;
   sliderStyle?: "style1" | "style2";
@@ -25,7 +26,7 @@ const DEMO_STAYS = DEMO_STAY_LISTINGS.filter((_, i) => i < 12);
 const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
   className = "",
   itemClassName = "",
-  categories = DEMO_STAYS,
+  data,
   itemPerRow = 1,
   categoryCardType = "card3",
   sliderStyle = "style1",
@@ -62,7 +63,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      if (currentIndex < categories?.length - 1) {
+      if (currentIndex < (Number(data?.length) - 1)) {
         changeItemId(currentIndex + 1);
       }
     },
@@ -74,7 +75,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
     trackMouse: true,
   });
 
-  const renderCard = (item: StayDataType) => {
+  const renderCard = (item:RentableItem) => {
     switch (categoryCardType) {
       case "card1":
         <StayCard2 data={item} />;
@@ -100,7 +101,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
               className="relative whitespace-nowrap -mx-2 xl:-mx-4"
             >
               <AnimatePresence initial={false} custom={direction}>
-                {categories.map((item, indx) => (
+                {data?.map((item, indx) => (
                   <motion.li
                     className={`relative mr-[1px] md:mr-0px inline-block px-2 xl:px-4 ${itemClassName} `}
                     custom={direction}
@@ -117,6 +118,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
                     }}
                   >
                     {renderCard(item)}
+                    <h1 className="text-white p-24">no data to start</h1>
                   </motion.li>
                 ))}
                 <div className="w-[95vw] mt-8 flex justify-center">
@@ -128,7 +130,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
                   ) : (
                     <PrevBtn className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
                   )}
-                  {categories.length > currentIndex + numberOfItems ? (
+                  {Number(data?.length)> currentIndex + numberOfItems ? (
                     <NextBtn
                       onClick={() => changeItemId(currentIndex + 1)}
                       className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"

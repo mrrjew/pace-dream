@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AddListingMainLayoutWrapper from "../AddListingMainLayoutWrapper";
+import { RentableItem } from "@/types/rentalItems";
 
 export default function AddListingLastMinuteWrapper({
   children,
@@ -9,6 +10,7 @@ export default function AddListingLastMinuteWrapper({
   isFirstStep,
   isLastStep,
   currentStep,
+  data,
 }: {
   children: React.ReactNode;
   onNext: () => void;
@@ -16,6 +18,7 @@ export default function AddListingLastMinuteWrapper({
   isFirstStep: boolean;
   isLastStep: boolean;
   currentStep: number;
+  data:RentableItem
 }) {
   const [submitBtnText, setSubmitBtnText] = useState<string>("Next");
   const [hidBackBtn, setHideBackBtn] = useState<boolean>(false);
@@ -43,6 +46,7 @@ export default function AddListingLastMinuteWrapper({
       currentStep={currentStep}
       submitBtnText={submitBtnText}
       hideBackBtn={hidBackBtn}
+      data={data}
     >
       {children}
     </AddListingMainLayoutWrapper>
