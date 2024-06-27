@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className}>
       {/* pt-[64px] */}
-      <body className="bg-[#F6F4F6] text-base text-neutral-900 overflow-x-hidden max-w-screen flex flex-col">
+      <body className="bg-[#FFFFFF] text-base text-neutral-900 overflow-x-hidden max-w-screen flex flex-col">
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

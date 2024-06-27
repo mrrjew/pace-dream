@@ -95,28 +95,51 @@ const BrowseByCategories = () => {
         </div>
 
         {/* Categories web */}
-        <div className=" md:flex gap-8 hidden items-center justify-center px-24 py-4 mx-auto mt-[3rem] ">
+        <div className=" md:flex grid-cols-2 md:grid-cols-4 gap-8 space-x-4 hidden items-center justify-center px-28 py-4 mx-auto mt-[3rem] ">
           {catData.map((cat: any) => {
             return (
               <Link
                 href="#"
                 key={cat.title}
-                className={`${cat.tintColor} py-8 w-1/4 h-max space-y-2 rounded-md flex flex-col items-center`}
+                className={`${cat.tintColor} py-12 w-1/4  cursor-pointer h-max space-y-2 m-4 rounded-md flex flex-col items-center`}
               >
                 <p className={`text-4xl ${cat.color} text-blue-200`}>
                   {cat.icon}
                 </p>
-                <p className="font-bold text-xl text-gray-900">{cat.title}</p>
+                <p className="font-bold text-sm lg:text-xl text-gray-900">{cat.title}</p>
               </Link>
             );
           })}
         </div>
-        <Link href="#" className="text-xl underline text-right">
+        <div className="w-full hidden md:flex items-right my-4 -ml-28">
+        <Link href="/categories" className=" text-xl underline text-right w-full mt-8">
           Browse All
         </Link>
+        </div>
+
 
         {/* mobile view */}
-        <div className=" w-[100vw] md:hidden flex mt-[2rem]   "></div>
+        <div className=" w-full md:hidden grid place-items-center mt-[2rem] gap-6 p-4 grid-cols-2 justify-center items-center">
+        {catData.map((cat: any,i) => {
+            return (
+              <Link
+                href="#"
+                key={cat.title}
+                className={`${cat.tintColor} py-8  cursor-pointer w-full ${i > 1 && '-mt-6'} h-max m-4 rounded-lg flex flex-col items-center`}
+              >
+                <p className={`text-4xl ${cat.color} text-blue-200`}>
+                  {cat.icon}
+                </p>
+                <p className="font-bold text-sm lg:text-xl text-center text-gray-900">{cat.title}</p>
+              </Link>
+            );
+          })}
+        </div>
+        <div className="w-full md:hidden flex items-right -ml-8">
+        <Link href="/categories" className=" text-xl underline text-right w-full ">
+          Browse All
+        </Link>
+        </div>
       </div>
     </>
   );

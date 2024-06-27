@@ -22,8 +22,8 @@ const Hero = () => {
       <div className="relative hidden md:flex ">
         <Image
           src={HeroBgMaskImage}
-          alt="Hero Imagge Bg -mask"
-          className=" w-[100%] object-cover md:h-[82vh] h-[100%] select-none  absolute z-[1] opacity-50  "
+          alt="Hero Image Bg -mask"
+          className=" w-[100%] object-cover md:h-[82vh] md:h-inherit h-[100%] select-none  absolute z-[1] opacity-50  "
         />
         <div className=" relative w-full flex justify-between px-[1rem] py-[1rem] z-[5] ">
           <div className=" flex flex-col justify-end lg:w-[48%] w-[50%]  h-[54vh] xl:ml-[2.5rem] ml-[.7rem] py-[.5rem]   ">
