@@ -66,7 +66,7 @@ export function PlacesAutocompleteInput(
                         })}
                           {loading ?<div key={'loading'} className="flex items-center gap-2 p-4 ps-0">
                             <div 
-                            className="w-2 h-2 p-2 animate-spin border-r-2 border-r-transparent border-t-2 border-l-2 rounded-full border-b-2 border-primary-500 text-center"
+                            className="w-2 h-2 ml-4 p-2 animate-spin border-r-2 border-r-transparent border-t-2 border-l-2 rounded-full border-b-2 border-primary-500 text-center"
                           ></div>
                             loading...
                           </div> : null}
