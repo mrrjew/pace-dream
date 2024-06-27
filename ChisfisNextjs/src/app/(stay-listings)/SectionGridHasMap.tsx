@@ -165,11 +165,14 @@ const SectionGridHasMap: FC<{params?:SectionGridHasMapProps}> = ({params}) => {
                     defaultZoom={12}
                     defaultCenter={{
                       // get the first none 0 lat and lng from the data
-
                       // lng: Number(data?.at(0)?.location?.longitude || 0) ||  -101.40066541876617,
                       // lat: Number(data?.at(0)?.location?.latitude || 0) || 39.771147263483414
                       lng: data?.find((item) => item?.location?.longitude !== 0)?.location?.longitude || -101.40066541876617,
                       lat: data?.find((item) => item?.location?.latitude !== 0)?.location?.latitude || 39.771147263483414 
+                    }}
+                    center={{
+                        lat : data?.find((item) => item?.location?.latitude !== 0)?.location?.latitude || 39.771147263483414,
+                        lng : data?.find((item) => item?.location?.longitude !== 0)?.location?.longitude || -101.40066541876617
                     }}
                     bootstrapURLKeys={{
                       key: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
@@ -181,7 +184,7 @@ const SectionGridHasMap: FC<{params?:SectionGridHasMapProps}> = ({params}) => {
                       borderRadius: "5rem",
                     }}
                   >
-                    {data?.map((item) => (
+                    {!isLoading && data?.map((item) => (
                       <AnyReactComponent
                         isSelected={currentHoverID === item?._id}
                         key={item?._id}
