@@ -179,8 +179,12 @@ const cardData = {
 };
 
 const TImeBasedMobile = () => {
-  const [activeCategory, setActiveCategory] = useState<RentableItemType>("room");
-  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-item-type/${activeCategory}`,queryKey:["properties-by-timebased-category",activeCategory]})
+  const [activeCategory, setActiveCategory] =
+    useState<RentableItemType>("room");
+  const { data } = useFetchData<Array<RentableItem>>({
+    endpoint: `/property/get-all-properties-by-item-type/${activeCategory}`,
+    queryKey: ["properties-by-timebased-category", activeCategory],
+  });
 
   const handleCategoryClick = (category: RentableItemType) => {
     setActiveCategory(category);
@@ -188,7 +192,15 @@ const TImeBasedMobile = () => {
 
   const renderBlobImage = (category: string) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={50} height={50} />;
+      return (
+        <Image
+          src={blob}
+          alt="blob"
+          className="h-[50px] w-[20px]"
+          width={50}
+          height={50}
+        />
+      );
     } else {
       return null;
     }
@@ -298,7 +310,8 @@ const TImeBasedMobile = () => {
                   width={310}
                   height={159}
                   onError={(e) => {
-                    e.currentTarget.src = "https://placehold.co/600x400?text=no+image";
+                    e.currentTarget.src =
+                      "https://placehold.co/600x400?text=no+image";
                   }}
                 />
                 <p className="mt-2 text-lg font-semibold">{card.title}</p>
@@ -321,9 +334,10 @@ const TImeBasedMobile = () => {
                 </div>
                 <div className="flex items-center justify-between mt-3">
                   <p>
-                    <span className="text-xl font-bold">{
-                      card?.price?.at(0)?.amount || 0
-                      }</span>/ {card?.price?.at(0)?.frequency}
+                    <span className="text-xl font-bold">
+                      {card?.price?.at(0)?.amount || 0}
+                    </span>
+                    / {card?.price?.at(0)?.frequency}
                   </p>
                   <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">
                     {card?.status}

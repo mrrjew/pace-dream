@@ -63,20 +63,32 @@ import { RentableItem, RentableItemType } from "@/types/rentalItems";
 // ];
 
 const TimeBased = () => {
-  const [activeCategory, setActiveCategory] = useState<RentableItemType>("room");
-  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-item-type/${activeCategory}`,queryKey:["properties-by-timebased-category",activeCategory]})
+  const [activeCategory, setActiveCategory] =
+    useState<RentableItemType>("room");
+  const { data } = useFetchData<Array<RentableItem>>({
+    endpoint: `/property/get-all-properties-by-item-type/${activeCategory}`,
+    queryKey: ["properties-by-timebased-category", activeCategory],
+  });
 
   // useEffect(() => {
   //   console.log(data);
   // }, [data]);
- 
+
   const handleCategoryClick = (category: RentableItemType) => {
     setActiveCategory(category);
   };
 
   const renderBlobImage = (category: RentableItemType) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={50} height={50} />;
+      return (
+        <Image
+          src={blob}
+          alt="blob"
+          className="h-[50px] w-[20px]"
+          width={50}
+          height={50}
+        />
+      );
     } else {
       return null;
     }
@@ -227,9 +239,14 @@ const TimeBased = () => {
           <div className=" w-[100%] h-[293px]">
             <Slider ref={sliderRef} {...settings}>
               {/* render empty data */}
-              {data?.length === 0 &&  <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
-                      <p>No data found in <strong>{activeCategory.replaceAll('_',' ')}</strong></p>
-                </div>}
+              {data?.length === 0 && (
+                <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
+                  <p>
+                    No data found in{" "}
+                    <strong>{activeCategory.replaceAll("_", " ")}</strong>
+                  </p>
+                </div>
+              )}
               {data?.map((card) => (
                 <div
                   key={card._id}
@@ -237,7 +254,7 @@ const TimeBased = () => {
                 >
                   <div className="relative ">
                     <Image
-                      src={card?.gallery?.thumbnail ?? ''}
+                      src={card?.gallery?.thumbnail ?? ""}
                       onError={(e) => {
                         e.currentTarget.src = `https://placehold.co/600x400?text=no+image`;
                       }}
@@ -272,13 +289,13 @@ const TimeBased = () => {
                   </div>
                   <div className="flex items-center justify-between mt-3">
                     <p>
-                      <span className="text-xl font-bold">{
-                        card.price?.at(0)?.amount
-                        }</span>
+                      <span className="text-xl font-bold">
+                        {card.price?.at(0)?.amount}
+                      </span>
                       / {card.price?.at(0)?.frequency}
                     </p>
                     <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#E8F2EC] ">
-                      {card.available ?  "Available" : "Not Available"}
+                      {card.available ? "Available" : "Not Available"}
                     </button>
                   </div>
                 </div>

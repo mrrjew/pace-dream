@@ -25,7 +25,11 @@ const AuthorPage: FC<AuthorPageProps> = ({}) => {
   const { getSession } = useSession();
   const session = getSession();
   let [categories] = useState(["Stays", "Experiences", "Car for rent"]);
-  const { data, isLoading } = useFetchData<Array<RentableItem>>({ endpoint: `/property/get-all-by-user/${session?.userId}`, queryKey: ["properties"], queryParams: {} });
+  const { data, isLoading } = useFetchData<Array<RentableItem>>({
+    endpoint: `/property/get-all-by-user/${session?.userId}`,
+    queryKey: ["properties"],
+    queryParams: {},
+  });
 
   const renderSidebar = () => {
     return (

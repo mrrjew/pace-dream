@@ -106,9 +106,8 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
     },
     trackMouse: true,
   });
-  const sortedStayListings = stayListings && stayListings
-    .slice()
-    .sort((a, b) => b?.rating - a?.rating);
+  const sortedStayListings =
+    stayListings && stayListings.slice().sort((a, b) => b?.rating - a?.rating);
   return (
     <div className={`nc-SectionGridFeaturePlaces md:px-24  ${className}`}>
       <HeaderFilterDiscover
@@ -133,7 +132,8 @@ const SectionGridFeaturePlaces: FC<SectionGridFeaturePlacesProps> = ({
             ) : (
               <PrevBtn className="bg-neutral-100 text-neutral-100 xl:ml-[90%] md:ml-[87%] text-xl -translate-y-1/2 z-[1]" />
             )}
-            {Number(sortedStayListings?.length) > currentIndex + numberOfItems ? (
+            {Number(sortedStayListings?.length) >
+            currentIndex + numberOfItems ? (
               <NextBtn
                 onClick={() => changeItemId(currentIndex + 1)}
                 className="ml-8 order-first font-black text-black text-xl -translate-y-1/2 z-[1]"

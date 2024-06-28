@@ -10,7 +10,7 @@ export default function AddListingFindRoomateGearWrapper({
   isFirstStep,
   isLastStep,
   currentStep,
-  data
+  data,
 }: {
   children: React.ReactNode;
   onNext: () => void;
@@ -18,7 +18,7 @@ export default function AddListingFindRoomateGearWrapper({
   isFirstStep: boolean;
   isLastStep: boolean;
   currentStep: number;
-  data:RentableItem
+  data: RentableItem;
 }) {
   const [submitBtnText, setSubmitBtnText] = useState<string>("Next");
   const [hidBackBtn, setHideBackBtn] = useState<boolean>(false);

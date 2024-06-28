@@ -51,8 +51,14 @@ export type TimeSlot = {
 const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   // time slot state
   const { id } = useParams();
-  const {data} = useFetchData<RentableItem>({endpoint:`/property/get/${id}`,queryKey:['property']});
-  const {data:owner} = useFetchData<User>({endpoint:`/user/get/${data?.owner}`,queryKey:['owner']});
+  const { data } = useFetchData<RentableItem>({
+    endpoint: `/property/get/${id}`,
+    queryKey: ["property"],
+  });
+  const { data: owner } = useFetchData<User>({
+    endpoint: `/user/get/${data?.owner}`,
+    queryKey: ["owner"],
+  });
   const filteredData = DEMO_STAY_LISTINGS.filter((item) => item.id === id);
   const priceDayNumber = parseFloat(
     filteredData[0]?.priceDay?.replace("$", ""),
@@ -60,7 +66,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
   const priceHourNumber = parseFloat(
     filteredData[0]?.priceHour?.replace("$", ""),
   );
-  
+
   const filteredAuthors = DEMO_AUTHORS.filter(
     (item) => item.id === filteredData[0]?.authorId,
   );
@@ -399,14 +405,21 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           </Link>
         </div>
         <div className="max-sm:pt-4 pt-4 flex justify-between items-center ml-4 sm:ml-20">
-          <Badge className="capitalize" name={data?.item_type?.replaceAll("_"," ")} />
+          <Badge
+            className="capitalize"
+            name={data?.item_type?.replaceAll("_", " ")}
+          />
         </div>
         <div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold ml-4 sm:ml-20">
             {data?.title}
           </h2>
           <div className="flex items-center space-x-4 mt-2 mx-4 sm:mx-20 justify-between  mb-8">
-            <span className="text-gray-500">{data?.location?.city || data?.location?.street_address || data?.location?.city}</span>
+            <span className="text-gray-500">
+              {data?.location?.city ||
+                data?.location?.street_address ||
+                data?.location?.city}
+            </span>
             <LikeSaveBtns />
           </div>
         </div>
@@ -435,15 +448,15 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       <div>
         <h2 className="text-2xl font-semibold">Offered Amenities </h2>
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-neutral-700">
-          {data?.details?.amenities?.map((id:string) => {
+          {data?.details?.amenities?.map((id: string) => {
             const item = AMENITIES_DATA.find((a) => a.id === id);
-            if(!item) return null;
+            if (!item) return null;
             return (
               <div key={item?.id} className="flex items-center space-x-3">
                 {item?.icon}
                 <span className="font-semibold">{item?.label}</span>
               </div>
-            )
+            );
           })}
         </div>
         <div className="mt-4">
@@ -507,9 +520,9 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     </span>
                   </div>
                   <div className="px-8 overflow-auto text-neutral-700 dark:text-neutral-300 divide-y divide-neutral-200">
-                    {data?.details?.amenities?.map((item:string) => {
+                    {data?.details?.amenities?.map((item: string) => {
                       const amenity = AMENITIES_DATA.find((a) => a.id === item);
-                      if(!amenity) return null;
+                      if (!amenity) return null;
                       return (
                         <div
                           key={amenity.id}
@@ -519,8 +532,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                           <span>{amenity?.label}</span>
                         </div>
                       );
-                    }
-                    )}
+                    })}
                   </div>
                 </div>
               </div>
@@ -548,8 +560,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                 <h2>Identify Verified</h2>
               </div>
               <a className="block text-xl font-black ml-4" href="/author">
-                Hosted By {" "}
-                {(owner?.first_name || '')  + " " + (owner?.last_name || '')}
+                Hosted By{" "}
+                {(owner?.first_name || "") + " " + (owner?.last_name || "")}
               </a>
             </div>
           </div>
@@ -563,7 +575,9 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
           <Image src={Protect} alt="Protect" width={24}></Image>
           <h2 className="mt-4 ml-4">
             {/* limit to one line */}
-             {Number(data?.summary?.length) > 200 ? data?.summary?.substring(0, 100) + "..." : data?.summary}
+            {Number(data?.summary?.length) > 200
+              ? data?.summary?.substring(0, 100) + "..."
+              : data?.summary}
           </h2>
         </div>
       </div>
@@ -575,9 +589,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
       <div>
         <div className="flex items-center">
           <StarIcon className={`text-yellow-500 w-6 h-6`} />
-          <h2 className="text-2xl font-bold">
-            {data?.rating || 0}
-          </h2>
+          <h2 className="text-2xl font-bold">{data?.rating || 0}</h2>
           <div className="ml-2 flex">
             {/* <Image src={Dot} alt="dot" width={4}></Image> */}
             <h2 className="text-lg font-semibold ml-1">Reviews</h2>
@@ -601,21 +613,23 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
         <h2 className="text-2xl font-semibold">Where you’ll be</h2>
         <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3 ring-1 ring-black/10 rounded-xl z-0 mt-6">
           <div className="rounded-xl overflow-hidden z-0">
-            <GoogleMapLayout init={{
-              center: {
-                lat: data?.location?.latitude || 0,
-                lng: data?.location?.longitude || 0
-              },
-              zoom: 16,
-              allowDefaults: true,
-              place: data?.location?.address || "",
-            }} isMapOnly  className="h-full w-full"/>
+            <GoogleMapLayout
+              init={{
+                center: {
+                  lat: data?.location?.latitude || 0,
+                  lng: data?.location?.longitude || 0,
+                },
+                zoom: 16,
+                allowDefaults: true,
+                place: data?.location?.address || "",
+              }}
+              isMapOnly
+              className="h-full w-full"
+            />
           </div>
         </div>
         <div className="mt-6">
-          <h2>
-            {data?.location.city}
-          </h2>
+          <h2>{data?.location.city}</h2>
           <button className="my-4 border rounded-full border-gray-200 px-4 py-2">
             Show more
           </button>
@@ -1143,14 +1157,17 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
             <Image
               fill
               className="object-cover rounded-md sm:rounded-xl"
-              src={data?.gallery?.images?.at(0) || "https://placehold.co/600x400?text=No+Photo"}
+              src={
+                data?.gallery?.images?.at(0) ||
+                "https://placehold.co/600x400?text=No+Photo"
+              }
               alt=""
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
             />
             <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
           </div>
           {data?.gallery?.images?.map((item, index) => {
-            if(index === 0) return null;
+            if (index === 0) return null;
             return (
               <div
                 key={index}
@@ -1167,7 +1184,8 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                     sizes="400px"
                     onError={(e) => {
                       // set text image placeholder url
-                      e.currentTarget.src = "https://placehold.co/600x400?text=No+Photo";
+                      e.currentTarget.src =
+                        "https://placehold.co/600x400?text=No+Photo";
                     }}
                   />
                 </div>
@@ -1178,7 +1196,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
                   onClick={handleOpenModalImageGallery}
                 />
               </div>
-            )
+            );
           })}
           <button
             className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-neutral-100 text-neutral-500 hover:bg-neutral-200 z-10"
@@ -1229,7 +1247,7 @@ const ListingStayDetailPage: FC<ListingStayDetailPageProps> = ({}) => {
               </Link>
             </div>
           </div>
-            {/* <div
+          {/* <div
               className={`hidden sm:mx-20 mx-4 sm:grid sm:grid-cols-4 gap-x-8 2xl:gap-x-6 gap-y-8 `}
             >
                   {DEMO_STAYS?.map((item) => (

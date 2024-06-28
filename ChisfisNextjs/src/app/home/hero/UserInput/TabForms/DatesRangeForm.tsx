@@ -40,7 +40,7 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
   // set date on change
   useEffect(() => {
     onChange && onChange(selectedRange);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRange]);
 
   const handleChange = (
@@ -275,9 +275,9 @@ const DatesRangeForm: FC<StayDatesRangeInputProps> = ({
               >
                 <div className="p-2 overflow-hidden bg-white shadow-lg rounded-3xl ring-1 ring-black sm:p-4 ring-opacity-5">
                   <DatePicker
-                    onChange={(dates,e)=>{
+                    onChange={(dates, e) => {
                       e?.stopPropagation();
-                      handleChange(dates,e);
+                      handleChange(dates, e);
                     }}
                     startDate={selectedRange[0]}
                     endDate={selectedRange[1]}

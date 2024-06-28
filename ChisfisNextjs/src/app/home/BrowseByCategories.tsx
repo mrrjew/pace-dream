@@ -105,39 +105,48 @@ const BrowseByCategories = () => {
                 <p className={`text-4xl ${cat.color} text-blue-200`}>
                   {cat.icon}
                 </p>
-                <p className="font-bold text-sm lg:text-xl text-gray-900">{cat.title}</p>
+                <p className="font-bold text-sm lg:text-xl text-gray-900">
+                  {cat.title}
+                </p>
               </Link>
             );
           })}
         </div>
         <div className="w-full hidden md:flex items-right my-4 -ml-28">
-        <Link href="/categories" className=" text-xl underline text-right w-full mt-8">
-          Browse All
-        </Link>
+          <Link
+            href="/categories"
+            className=" text-xl underline text-right w-full mt-8"
+          >
+            Browse All
+          </Link>
         </div>
-
 
         {/* mobile view */}
         <div className=" w-full md:hidden grid place-items-center mt-[2rem] gap-6 p-4 grid-cols-2 justify-center items-center">
-        {catData.map((cat: any,i) => {
+          {catData.map((cat: any, i) => {
             return (
               <Link
                 href="#"
                 key={cat.title}
-                className={`${cat.tintColor} py-8  cursor-pointer w-full ${i > 1 && '-mt-6'} h-max m-4 rounded-lg flex flex-col items-center`}
+                className={`${cat.tintColor} py-8  cursor-pointer w-full ${i > 1 && "-mt-6"} h-max m-4 rounded-lg flex flex-col items-center`}
               >
                 <p className={`text-4xl ${cat.color} text-blue-200`}>
                   {cat.icon}
                 </p>
-                <p className="font-bold text-sm lg:text-xl text-center text-gray-900">{cat.title}</p>
+                <p className="font-bold text-sm lg:text-xl text-center text-gray-900">
+                  {cat.title}
+                </p>
               </Link>
             );
           })}
         </div>
         <div className="w-full md:hidden flex items-right -ml-8">
-        <Link href="/categories" className=" text-xl underline text-right w-full ">
-          Browse All
-        </Link>
+          <Link
+            href="/categories"
+            className=" text-xl underline text-right w-full "
+          >
+            Browse All
+          </Link>
         </div>
       </div>
     </>

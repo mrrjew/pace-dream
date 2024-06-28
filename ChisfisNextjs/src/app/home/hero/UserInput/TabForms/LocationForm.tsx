@@ -15,9 +15,7 @@ export interface LocationInputProps {
   onSelect?: (address: string, placeId: string) => void;
 }
 
-const LocationForm: FC<LocationInputProps> = ({
-  onSelect,
-}) => {
+const LocationForm: FC<LocationInputProps> = ({ onSelect }) => {
   // const containerRef = useRef<HTMLDivElement>(null);
   // const inputRef = useRef<HTMLInputElement>(null);
   // const [value, setValue] = useState("");
@@ -309,8 +307,8 @@ const LocationForm: FC<LocationInputProps> = ({
     <div className="relative gap-1 pr-3 items-center w-[15.2rem] flex ring-1 ring-gray-200 rounded-lg">
       <PlacesAutocompleteInput
         className={`flex-1 h-24 border-none focus:ring-0`}
-        onSelect={(address,placeId)=>{
-          onSelect && onSelect(address,placeId)
+        onSelect={(address, placeId) => {
+          onSelect && onSelect(address, placeId);
         }}
         val=""
       />
@@ -323,7 +321,7 @@ const LocationForm: FC<LocationInputProps> = ({
           height={24}
         />
       </div>
-  </div>
+    </div>
   );
 };
 

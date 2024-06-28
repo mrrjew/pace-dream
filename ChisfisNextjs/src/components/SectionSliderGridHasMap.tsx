@@ -63,7 +63,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      if (currentIndex < (Number(data?.length) - 1)) {
+      if (currentIndex < Number(data?.length) - 1) {
         changeItemId(currentIndex + 1);
       }
     },
@@ -75,7 +75,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
     trackMouse: true,
   });
 
-  const renderCard = (item:RentableItem) => {
+  const renderCard = (item: RentableItem) => {
     switch (categoryCardType) {
       case "card1":
         <StayCard2 data={item} />;
@@ -130,7 +130,7 @@ const SectionSliderGridHasMap: FC<SectionSliderGridHasMapProps> = ({
                   ) : (
                     <PrevBtn className="bg-neutral-100 mr-8 text-neutral-100 text-xl -translate-y-1/2 z-[1]" />
                   )}
-                  {Number(data?.length)> currentIndex + numberOfItems ? (
+                  {Number(data?.length) > currentIndex + numberOfItems ? (
                     <NextBtn
                       onClick={() => changeItemId(currentIndex + 1)}
                       className="ml-8 font-black text-black text-xl -translate-y-1/2 z-[1]"

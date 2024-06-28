@@ -123,13 +123,15 @@ export const useFetchData = <T>({
       // add query params to the endpoint
       if (queryParams) {
         // remove empty values
-        Object.keys(queryParams).forEach(
-          (key) => {
-            if([null,undefined,'','null','undefined'].includes(queryParams[key])){
-              delete queryParams[key]
-            }
+        Object.keys(queryParams).forEach((key) => {
+          if (
+            [null, undefined, "", "null", "undefined"].includes(
+              queryParams[key],
+            )
+          ) {
+            delete queryParams[key];
           }
-        );
+        });
         query = "?" + new URLSearchParams(queryParams).toString();
         url += query;
       }

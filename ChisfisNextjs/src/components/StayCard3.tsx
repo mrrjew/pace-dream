@@ -61,7 +61,9 @@ const StayCard3: FC<StayCard2Props> = ({
       // <p>sjhbdvjvdh</p>
       // </>
       <div className="relative md:w-full w-[82vw]">
-        <Link href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}>
+        <Link
+          href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}
+        >
           {/* <GallerySlider
             uniqueID={`StayCard2_${id}`}
             ratioClass="aspect-w-12 aspect-h-11"
@@ -77,7 +79,8 @@ const StayCard3: FC<StayCard2Props> = ({
                 width={100}
                 height={100}
                 onError={(e) => {
-                  e.currentTarget.src = "https://placehold.co/600x400?text=No+Image";
+                  e.currentTarget.src =
+                    "https://placehold.co/600x400?text=No+Image";
                 }}
               />
             </div>
@@ -90,18 +93,17 @@ const StayCard3: FC<StayCard2Props> = ({
               }}
             />
           </div>
-
           <div>
             <BtnLikeIcon
               isLiked={false}
               className="absolute right-1 bottom-1 z-[1]"
             />
           </div>
-           (
-            <SaleOffBadge
-              desc={"0%"}
-              className="absolute right-1 top-1 bg-orange-500"
-            />
+          (
+          <SaleOffBadge
+            desc={"0%"}
+            className="absolute right-1 top-1 bg-orange-500"
+          />
           )
         </Link>
       </div>
@@ -152,7 +154,7 @@ const StayCard3: FC<StayCard2Props> = ({
             </div>
           ) : (
             <span className="text-base font-semibold text-[#5527D7]">
-              { data?.price?.at(0)?.amount || 0}
+              {data?.price?.at(0)?.amount || 0}
               {` `}
               {size === "default" && (
                 <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
@@ -220,7 +222,9 @@ const StayCard3: FC<StayCard2Props> = ({
   return (
     <div className={`nc-StayCard2 group relative ${className}`}>
       {renderSliderGallery()}
-      <Link href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}>
+      <Link
+        href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}
+      >
         {renderContent()}
       </Link>
     </div>

@@ -178,32 +178,43 @@ const cardData = {
   ],
 };
 
-const property_types =  {
+const property_types = {
   // {id: 'tech gear', name: 'Tech Gear'},
-// {id:"music gear", name: "Music Gear"},
-// {id:"photography", name: "photography"},
-// {id:"fashion", name: "Fashion"},
-tech_gear: "Tech Gear",
-music_gear: "Music Gear",
-photography: "Photography",
-fashion: "Fashion",
-}
+  // {id:"music gear", name: "Music Gear"},
+  // {id:"photography", name: "photography"},
+  // {id:"fashion", name: "Fashion"},
+  tech_gear: "Tech Gear",
+  music_gear: "Music Gear",
+  photography: "Photography",
+  fashion: "Fashion",
+};
 
 const HourlyGearsMobile = () => {
-  const [activeCategory, setActiveCategory] = useState<keyof typeof property_types>("tech_gear");
+  const [activeCategory, setActiveCategory] =
+    useState<keyof typeof property_types>("tech_gear");
   // room_type
- // property_type
+  // property_type
 
-  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-property-type/${activeCategory?.replaceAll('_'," ")}`,queryKey:["properties-by-gear-category",activeCategory],})
+  const { data } = useFetchData<Array<RentableItem>>({
+    endpoint: `/property/get-all-properties-by-property-type/${activeCategory?.replaceAll("_", " ")}`,
+    queryKey: ["properties-by-gear-category", activeCategory],
+  });
 
-  const handleCategoryClick = (category:keyof typeof property_types ) => {
+  const handleCategoryClick = (category: keyof typeof property_types) => {
     setActiveCategory(category);
   };
 
-
   const renderBlobImage = (category: string) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={20} height={50} />;
+      return (
+        <Image
+          src={blob}
+          alt="blob"
+          className="h-[50px] w-[20px]"
+          width={20}
+          height={50}
+        />
+      );
     } else {
       return null;
     }
@@ -285,7 +296,6 @@ const HourlyGearsMobile = () => {
         {/* Card */}
         <div className="w-4/5 h-[293px]">
           <Slider {...settings}>
-
             {data?.map((card) => (
               <div
                 key={card._id}
@@ -298,7 +308,8 @@ const HourlyGearsMobile = () => {
                   width={310}
                   height={159}
                   onError={(e) => {
-                    e.currentTarget.src = 'https://placehold.co/600x400?text=no+image'
+                    e.currentTarget.src =
+                      "https://placehold.co/600x400?text=no+image";
                   }}
                 />
                 <p className="text-lg font-semibold mt-2">{card.title}</p>
@@ -321,9 +332,10 @@ const HourlyGearsMobile = () => {
                 </div>
                 <div className="flex mt-3 justify-between items-center">
                   <p>
-                    <span className="text-xl font-bold">{
-                      card.price?.at(0)?.amount || 0
-                      }</span>/ {card.price?.at(0)?.frequency}
+                    <span className="text-xl font-bold">
+                      {card.price?.at(0)?.amount || 0}
+                    </span>
+                    / {card.price?.at(0)?.frequency}
                   </p>
                   <button className="rounded-full font-semibold text-sm px-4 py-1 text-[#15813C] bg-[#87DDA6]">
                     Rent Now

@@ -43,16 +43,16 @@ export interface SearchFormPropsType {
 }
 
 const SearchForm: FC<SearchFormPropsType> = ({ currentTab = "room_stays" }) => {
-  const tabs:Array<{value:PropertyCategory,label:SearchTab}> = [
-    {value:'room_stays',label:"Room Stays"},
-    {value:'time_based',label:"Time-Based"},
-    {value:'hourly_rental_gear',label:"Hourly Rental Gear"},
-    {value:'find_roommate',label:"Find Roommate"},
-    {value:'last_minutes',label:"Last Minutes"},
-    {value:'experience',label:"Experiences"},
+  const tabs: Array<{ value: PropertyCategory; label: SearchTab }> = [
+    { value: "room_stays", label: "Room Stays" },
+    { value: "time_based", label: "Time-Based" },
+    { value: "hourly_rental_gear", label: "Hourly Rental Gear" },
+    { value: "find_roommate", label: "Find Roommate" },
+    { value: "last_minutes", label: "Last Minutes" },
+    { value: "experience", label: "Experiences" },
   ];
   const [tabActive, setTabActive] = useState<PropertyCategory>(currentTab);
-  const [city,setCity] = useState<string>("");
+  const [city, setCity] = useState<string>("");
   const [guestCount, setGuestCount] = useState<number>(1);
   const [checkIn, setCheckIn] = useState<Date | null>();
   const [checkOut, setCheckOut] = useState<Date | null>();
@@ -80,7 +80,6 @@ const SearchForm: FC<SearchFormPropsType> = ({ currentTab = "room_stays" }) => {
     }
     // set query parameters
     setQueryParameters(parameters.length ? `?${parameters.join("&")}` : "");
-
   }, [city, guestCount, checkIn, checkOut]);
 
   const RenderTab = () => {
@@ -152,46 +151,51 @@ const SearchForm: FC<SearchFormPropsType> = ({ currentTab = "room_stays" }) => {
     <div className="grid grid-cols-1 w-full md:w-[72dvw] gap-0 absolute z-10 flex-wrap">
       <RenderTab />
       <div className="flex items-center gap-4 bg-white rounded-b-lg p-2">
-              <LocationForm className="border border-[#D9D9D9] " onSelect={(address,placeId)=>{
-                setCity(address);
-              }} />
-              <GuestForm className="border border-[#D9D9D9]" 
-                onChange={(value) => {
-                   setGuestCount(value.totalGuests);
-                }}
-              />
-              <DatesRangeForm className="flex-1"
-                onChange={(val) => {
-                  const [start, end]= val;
-                  setCheckIn(start);
-                  setCheckOut(end);
-                  console.log({start,end});
-                }}
-              />
-              {/* <ButtonSubmit  href="/listing-stay-map/[room]/hello" /> */}
-              <Link
-                  href={`/listing-stay-map/${tabActive}${queryParameters}`}
-                  type="button"
-                  className="flex flex-col  justify-center px-[1.5rem] py-[1.5rem] xl:ml-[2rem] ml-[1rem] rounded-[.6rem]  w-[8.5rem] bg-primary-6000 hover:bg-primary-700 text-neutral-50 focus:outline-none"
-                >
-                  <div className="">Search</div>
+        <LocationForm
+          className="border border-[#D9D9D9] "
+          onSelect={(address, placeId) => {
+            setCity(address);
+          }}
+        />
+        <GuestForm
+          className="border border-[#D9D9D9]"
+          onChange={(value) => {
+            setGuestCount(value.totalGuests);
+          }}
+        />
+        <DatesRangeForm
+          className="flex-1"
+          onChange={(val) => {
+            const [start, end] = val;
+            setCheckIn(start);
+            setCheckOut(end);
+            console.log({ start, end });
+          }}
+        />
+        {/* <ButtonSubmit  href="/listing-stay-map/[room]/hello" /> */}
+        <Link
+          href={`/listing-stay-map/${tabActive}${queryParameters}`}
+          type="button"
+          className="flex flex-col  justify-center px-[1.5rem] py-[1.5rem] xl:ml-[2rem] ml-[1rem] rounded-[.6rem]  w-[8.5rem] bg-primary-6000 hover:bg-primary-700 text-neutral-50 focus:outline-none"
+        >
+          <div className="">Search</div>
 
-                  <div className=" w-[100%] ">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="75"
-                      height="15"
-                      viewBox="0 0 75 15"
-                      fill="none"
-                    >
-                      <path
-                        d="M74.5629 7.95752C74.9256 7.59481 74.9256 7.00675 74.5629 6.64404L68.6523 0.733359C68.2895 0.37065 67.7015 0.37065 67.3388 0.733359C66.9761 1.09607 66.9761 1.68413 67.3388 2.04684L72.5927 7.30078L67.3388 12.5547C66.9761 12.9174 66.9761 13.5055 67.3388 13.8682C67.7015 14.2309 68.2895 14.2309 68.6523 13.8682L74.5629 7.95752ZM0.727539 8.22956H73.9062V6.37201H0.727539V8.22956Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
-                </Link>
+          <div className=" w-[100%] ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="75"
+              height="15"
+              viewBox="0 0 75 15"
+              fill="none"
+            >
+              <path
+                d="M74.5629 7.95752C74.9256 7.59481 74.9256 7.00675 74.5629 6.64404L68.6523 0.733359C68.2895 0.37065 67.7015 0.37065 67.3388 0.733359C66.9761 1.09607 66.9761 1.68413 67.3388 2.04684L72.5927 7.30078L67.3388 12.5547C66.9761 12.9174 66.9761 13.5055 67.3388 13.8682C67.7015 14.2309 68.2895 14.2309 68.6523 13.8682L74.5629 7.95752ZM0.727539 8.22956H73.9062V6.37201H0.727539V8.22956Z"
+                fill="white"
+              />
+            </svg>
           </div>
+        </Link>
+      </div>
     </div>
   );
 };

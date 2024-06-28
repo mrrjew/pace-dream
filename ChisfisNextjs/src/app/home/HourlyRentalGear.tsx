@@ -69,8 +69,8 @@ const cardData = [
   },
 ];
 
-const property_types =  {
-    // {id: 'tech gear', name: 'Tech Gear'},
+const property_types = {
+  // {id: 'tech gear', name: 'Tech Gear'},
   // {id:"music gear", name: "Music Gear"},
   // {id:"photography", name: "photography"},
   // {id:"fashion", name: "Fashion"},
@@ -78,21 +78,33 @@ const property_types =  {
   music_gear: "Music Gear",
   photography: "Photography",
   fashion: "Fashion",
-}
+};
 const HourlyRentalGear = () => {
-  const [activeCategory, setActiveCategory] = useState<keyof typeof property_types>("tech_gear");
+  const [activeCategory, setActiveCategory] =
+    useState<keyof typeof property_types>("tech_gear");
   // room_type
- // property_type
+  // property_type
 
-  const {data} = useFetchData<Array<RentableItem>>({endpoint:`/property/get-all-properties-by-property-type/${activeCategory?.replaceAll('_'," ")}`,queryKey:["properties-by-gear-category",activeCategory],})
+  const { data } = useFetchData<Array<RentableItem>>({
+    endpoint: `/property/get-all-properties-by-property-type/${activeCategory?.replaceAll("_", " ")}`,
+    queryKey: ["properties-by-gear-category", activeCategory],
+  });
 
-  const handleCategoryClick = (category:keyof typeof property_types ) => {
+  const handleCategoryClick = (category: keyof typeof property_types) => {
     setActiveCategory(category);
   };
 
   const renderBlobImage = (category: keyof typeof property_types) => {
     if (category === activeCategory) {
-      return <Image src={blob} alt="blob" className="h-[50px] w-[20px]" width={50} height={50} />;
+      return (
+        <Image
+          src={blob}
+          alt="blob"
+          className="h-[50px] w-[20px]"
+          width={50}
+          height={50}
+        />
+      );
     } else {
       return null;
     }
@@ -241,12 +253,18 @@ const HourlyRentalGear = () => {
           </div>
           {/* Card */}
           <div className="font-rubik  w-full h-[293px]">
-           
             <Slider ref={sliderRef} {...settings}>
-                 {/* empty data */}
-                 {data?.length === 0 &&  <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
-                      <p>No data found in <strong className="capitalize">{activeCategory.replaceAll('_',' ')}</strong></p>
-                </div>}
+              {/* empty data */}
+              {data?.length === 0 && (
+                <div className="h-72 grid place-content-center w-[20rem] text-gray-500 p-[1.1rem] rounded-2xl relative">
+                  <p>
+                    No data found in{" "}
+                    <strong className="capitalize">
+                      {activeCategory.replaceAll("_", " ")}
+                    </strong>
+                  </p>
+                </div>
+              )}
               {data?.map((card) => (
                 <div
                   key={card._id}
@@ -254,13 +272,14 @@ const HourlyRentalGear = () => {
                 >
                   <div className="relative ">
                     <Image
-                      src={card?.gallery?.thumbnail ?? ''}
+                      src={card?.gallery?.thumbnail ?? ""}
                       className="rounded-xl h-[159px] object-cover"
                       alt={card.title}
                       width={310}
                       height={159}
                       onError={(e) => {
-                        e.currentTarget.src = 'https://placehold.co/600x400?text=no+image'
+                        e.currentTarget.src =
+                          "https://placehold.co/600x400?text=no+image";
                       }}
                     />
                     <div className=" absolute size-[2rem] flex justify-center items-center right-[.7rem] bottom-[-.6rem] bg-white rounded-full  ">
@@ -278,7 +297,7 @@ const HourlyRentalGear = () => {
                   <div className="flex items-center justify-between mt-3">
                     <p>
                       <span className="text-xl font-bold font-rubik">
-                         {card?.price?.at(0)?.amount}
+                        {card?.price?.at(0)?.amount}
                       </span>
                       / {card?.price?.at(0)?.frequency}
                     </p>
@@ -287,7 +306,7 @@ const HourlyRentalGear = () => {
                     </button>
                   </div>
                   <button className=" mt-[1rem] rounded-full w-[100%] h-[2.5rem] flex justify-center items-center  font-semibold text-sm px-4 py-1 text-[#fff] font-rubik bg-[#5527D7] ">
-                    Rent Now 
+                    Rent Now
                   </button>
                 </div>
               ))}

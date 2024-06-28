@@ -16,7 +16,7 @@ export interface GuestsInputProps {
   buttonSubmitHref?: PathName | string;
   hasButtonSubmit?: boolean;
   inputs?: string;
-  onChange?: (value: GuestsObject & {totalGuests:number}) => void;
+  onChange?: (value: GuestsObject & { totalGuests: number }) => void;
 }
 
 const GuestForm: FC<GuestsInputProps> = ({
@@ -40,8 +40,13 @@ const GuestForm: FC<GuestsInputProps> = ({
         guestInfants: guestInfantsInputValue,
         totalGuests: guestCount,
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guestAdultsInputValue, guestChildrenInputValue, guestInfantsInputValue, guestCount]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    guestAdultsInputValue,
+    guestChildrenInputValue,
+    guestInfantsInputValue,
+    guestCount,
+  ]);
 
   const incrementGuestCount = () => {
     setGuestCount((prevCount) => prevCount + 1);
@@ -129,16 +134,24 @@ const GuestForm: FC<GuestsInputProps> = ({
                 <UserPlusIcon className="w-6 h-6 mr-5 text-gray-500 lg:w-6 lg:h-6 xl:w-6 xl:h-6 md:flex" />
               </span> */}
               <div className="flex flex-row items-center text-[.7rem] h-[1rem] leadding-[.5rem] ">
-                <button onClick={(e)=>{
-                  e.stopPropagation();
-                  decrementGuestCount();
-                }}>- &nbsp; </button>
-                  <span>
-                  {guestCount} &nbsp;
-                  <button onClick={(e)=>{
+                <button
+                  onClick={(e) => {
                     e.stopPropagation();
-                    incrementGuestCount();
-                  }}>+</button>
+                    decrementGuestCount();
+                  }}
+                >
+                  - &nbsp;{" "}
+                </button>
+                <span>
+                  {guestCount} &nbsp;
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      incrementGuestCount();
+                    }}
+                  >
+                    +
+                  </button>
                 </span>
               </div>
             </div>
@@ -163,9 +176,10 @@ const GuestForm: FC<GuestsInputProps> = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Button 
-             as="div"
-             className="absolute mt-3 right-0 z-10 w-full border border-gray-200 sm:min-w-[340px] max-w-sm bg-white top-full py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl">
+            <Popover.Button
+              as="div"
+              className="absolute mt-3 right-0 z-10 w-full border border-gray-200 sm:min-w-[340px] max-w-sm bg-white top-full py-5 sm:py-6 px-4 sm:px-8 rounded-3xl shadow-xl"
+            >
               <NcInputNumber
                 className="w-full"
                 defaultValue={guestAdultsInputValue}

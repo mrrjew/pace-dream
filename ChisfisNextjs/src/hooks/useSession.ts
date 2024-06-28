@@ -36,19 +36,15 @@ export const useSession = () => {
     const auth = getAuth(app);
     await auth.signOut();
     try {
-      await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${getSession()?.token}`,
-          },
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/logout`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${getSession()?.token}`,
         },
-      );
-    }catch (error) {
+      });
+    } catch (error) {
       console.error("Error signing out", error);
-    
-    }finally {
+    } finally {
       clearSession();
       clearUser();
       setTimeout(() => {

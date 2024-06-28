@@ -84,7 +84,6 @@ export default function GallerySlider({
                 animate="center"
                 exit="exit"
                 className="absolute inset-0"
-
               >
                 <Image
                   src={currentImage || ""}
@@ -95,8 +94,9 @@ export default function GallerySlider({
                   // sizes="(max-width: 1025px) 100vw, 300px"
                   // width={300}
                   // height={400}
-                  onError={(e)=>{
-                     e.currentTarget.src = "https://placehold.co/600x400?text=No+Image"
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      "https://placehold.co/600x400?text=No+Image";
                   }}
                 />
               </motion.div>
@@ -108,14 +108,17 @@ export default function GallerySlider({
         <>
           {/* Buttons */}
           {loaded && navigation && (
-            <div  onClick={(e) => e.stopPropagation()} className="opacity-0 group-hover/cardGallerySlider:opacity-100 transition-opacity ">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="opacity-0 group-hover/cardGallerySlider:opacity-100 transition-opacity "
+            >
               {index > 0 && (
                 <button
                   className="absolute w-8 h-8 left-3 top-[calc(50%-16px)] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-6000 dark:hover:border-neutral-500 rounded-full flex items-center justify-center hover:border-neutral-300 focus:outline-none"
                   style={{ transform: "translate3d(0, 0, 0)" }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    changePhotoId(index - 1)
+                    changePhotoId(index - 1);
                   }}
                 >
                   <ChevronLeftIcon className="h-4 w-4" />
@@ -137,10 +140,14 @@ export default function GallerySlider({
           )}
 
           {/* Bottom Nav bar */}
-          <div  onClick={(e) => e.stopPropagation()} className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-neutral-900 opacity-50 rounded-b-lg"></div>
-          <div 
+          <div
             onClick={(e) => e.stopPropagation()}
-            className="flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5">
+            className="absolute bottom-0 inset-x-0 h-6 bg-gradient-to-t from-neutral-900 opacity-50 rounded-b-lg"
+          ></div>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center justify-center absolute bottom-2 left-1/2 transform -translate-x-1/2 space-x-1.5"
+          >
             {images.map((_, i) => (
               <button
                 className={`w-1.5 h-1.5 rounded-full ${

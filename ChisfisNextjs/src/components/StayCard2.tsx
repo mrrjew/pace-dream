@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { FC } from "react";
 import GallerySlider from "@/components/GallerySlider";
 // import { DEMO_STAY_LISTINGS } from "@/data/listings";
@@ -23,11 +23,11 @@ const StayCard2: FC<StayCard2Props> = ({
   className = "",
   data,
 }) => {
-
   const router = useRouter();
   const _prices = data?.price || [];
   // console.log('prices: ',_prices);
-  const hasDiscount =_prices?.findIndex((item) => Number(item?.discounts?.length || 0) > 0) > -1;
+  const hasDiscount =
+    _prices?.findIndex((item) => Number(item?.discounts?.length || 0) > 0) > -1;
 
   const renderSliderGallery = () => {
     return (
@@ -36,12 +36,14 @@ const StayCard2: FC<StayCard2Props> = ({
       // <p>sjhbdvjvdh</p>
       // </>
       <div className="relative md:w-full w-full">
-        <div 
-        onClick={(e) => {
-          // e.stopPropagation();
-          router.push(`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`);
-        }}
-        // href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}
+        <div
+          onClick={(e) => {
+            // e.stopPropagation();
+            router.push(
+              `/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`,
+            );
+          }}
+          // href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}
         >
           <div className="cursor-pointer">
             <GallerySlider
@@ -51,11 +53,10 @@ const StayCard2: FC<StayCard2Props> = ({
               imageClass="rounded-lg"
             />
             <BtnLikeIcon
-              
               isLiked={false}
               className="absolute right-3 top-3 z-[1]"
             />
-              <SaleOffBadge desc={"10%"} className="absolute left-3 top-3" />
+            <SaleOffBadge desc={"10%"} className="absolute left-3 top-3" />
           </div>
         </div>
       </div>
@@ -73,21 +74,23 @@ const StayCard2: FC<StayCard2Props> = ({
     //   }
     // }
     // const isPriceArray = Array.isArray(data?.price);
- 
 
     return (
       <div className={size === "default" ? "mt-3 space-y-3" : "mt-2 space-y-2"}>
         <div className="flex justify-between items-center">
-          <span className={`text-base font-semibold ${hasDiscount ? 'line-through' :''}`}>
-              {data?.price?.at(0)?.currency || 'USD'} {data?.price?.at(0)?.amount || 0}
-              {` `}
-              {size === "default" && (
-                <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
-                  / {data?.price?.at(0)?.frequency || "hour"}
-                </span>
-              )}
-            </span>
-           
+          <span
+            className={`text-base font-semibold ${hasDiscount ? "line-through" : ""}`}
+          >
+            {data?.price?.at(0)?.currency || "USD"}{" "}
+            {data?.price?.at(0)?.amount || 0}
+            {` `}
+            {size === "default" && (
+              <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                / {data?.price?.at(0)?.frequency || "hour"}
+              </span>
+            )}
+          </span>
+
           {
             <div className=" items-center p-2 bg-[#E8E8E8] flex justify-between w-24 rounded-[8px]">
               <p className="text-[14px] font-[600]">Stock</p>
@@ -98,13 +101,15 @@ const StayCard2: FC<StayCard2Props> = ({
 
         <div className="space-y-2">
           <span className="text-sm text-neutral-500 capitalize">
-             {data?.details?.property_type?.replaceAll('_',' ')} · {data?.details?.bedroom_count} {data?.details?.bedroom_count > 0 ? "Beds" :""}
+            {data?.details?.property_type?.replaceAll("_", " ")} ·{" "}
+            {data?.details?.bedroom_count}{" "}
+            {data?.details?.bedroom_count > 0 ? "Beds" : ""}
             {/* {data?.details?.room_type === "long term" || data?.details?.room_type === "short term"
               ? "· " + shared + " beds occupied"
               : ""} */}
           </span>
           <div className="flex items-center  space-x-2 w-[280px] sm:w-full">
-           <Badge name="ADS" color="green" />
+            <Badge name="ADS" color="green" />
             <h2
               className={`font-semibold capitalize text-neutral-900 dark:text-white overflow-hidden ${
                 size === "default" && "text-base"
@@ -138,7 +143,7 @@ const StayCard2: FC<StayCard2Props> = ({
             <span className="">{data?.location?.city}</span>
           </div>
         </div>
-          <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
+        <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
         <button className=" bg-[#5527D7] text-white text-[16px] font-[400] rounded-[8px] flex justify-center items-center w-full py-2 px-4">
           Rent Now
         </button>
@@ -147,9 +152,13 @@ const StayCard2: FC<StayCard2Props> = ({
   };
 
   return (
-    <div className={`nc-StayCard2 group w-full bg-white p-2 rounded-lg relative ${className} hover:shadow-2xl`}>
+    <div
+      className={`nc-StayCard2 group w-full bg-white p-2 rounded-lg relative ${className} hover:shadow-2xl`}
+    >
       {renderSliderGallery()}
-      <Link href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}>
+      <Link
+        href={`/listing-stay-detail/${data?._id}?term=${data?.details?.room_type}`}
+      >
         {renderContent()}
       </Link>
     </div>

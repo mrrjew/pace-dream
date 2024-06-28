@@ -34,7 +34,7 @@ const NotifyDropdown: FC<Props> = ({ className = "" }) => {
   const getNotifications = async () => {
     const {
       data: { data },
-    } = (await services?.list());
+    } = await services?.list();
     setNotifications(data?.notifications);
   };
 

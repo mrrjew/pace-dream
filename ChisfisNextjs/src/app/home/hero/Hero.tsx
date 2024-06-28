@@ -19,7 +19,7 @@ const Hero = () => {
     <div
       className={` ${rubik.variable} md:my-[2.3rem] md:pt-0 pt-[1rem]  md:rounded-[1.1rem] md:w-[90%] w-[100%] mx-auto md:h-[82vh] md:bg-[#5527D7] relative `}
     >
-      <div className="relative hidden md:flex h-full" >
+      <div className="relative hidden md:flex h-full">
         <Image
           src={HeroBgMaskImage}
           alt="Hero Imagge Bg -mask"
@@ -41,7 +41,7 @@ const Hero = () => {
               </p>
             </div>
             <div className="relative">
-              <SearchForm  />
+              <SearchForm />
             </div>
           </div>
 

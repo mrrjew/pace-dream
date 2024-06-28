@@ -13,7 +13,7 @@ type SearchParamType = {
   checkIn?: string;
   checkOut?: string;
   city?: string;
-}
+};
 
 const ListingStayMapPage = () => {
   const router = useRouter();
@@ -21,11 +21,11 @@ const ListingStayMapPage = () => {
   const search = useSearchParams();
   // const categories:Array<PropertyCategory> = ['room_stays','time_based','hourly_rental_gear','find_roommate','last_minutes','experience']
   const [searchParams, setSearchParams] = useState<Partial<SearchParamType>>({
-    guests: Number(search.get('guests')) || 1,
-    checkIn: search.get('checkIn') || "",
-    checkOut: search.get('checkOut') || "",
-    city: search.get('city') || "",
-  })
+    guests: Number(search.get("guests")) || 1,
+    checkIn: search.get("checkIn") || "",
+    checkOut: search.get("checkOut") || "",
+    city: search.get("city") || "",
+  });
   // console.log(id);
   // let room:
   //   | "Room Stays"
@@ -62,29 +62,37 @@ const ListingStayMapPage = () => {
   return (
     <>
       <div className="w-full bg-slate-600 py-16">
-      <FilterBar 
+        <FilterBar
           params={{
             guests: searchParams.guests || 1,
             city: searchParams.city || "",
-            startDate: searchParams.checkIn ? new Date(searchParams.checkIn) : null,
-            endDate: searchParams.checkOut ? new Date(searchParams.checkOut) : null
+            startDate: searchParams.checkIn
+              ? new Date(searchParams.checkIn)
+              : null,
+            endDate: searchParams.checkOut
+              ? new Date(searchParams.checkOut)
+              : null,
           }}
-          onParamChanges={(params)=>{
+          onParamChanges={(params) => {
             setSearchParams({
               guests: Number(params?.guests),
               city: params?.city || "",
-              checkIn: params?.startDate ?  (params?.startDate?.toISOString().split('T')[0] || "") : "",
-              checkOut: params?.endDate ?  (params?.endDate?.toISOString().split('T')[0] || "") : ""
-            })
+              checkIn: params?.startDate
+                ? params?.startDate?.toISOString().split("T")[0] || ""
+                : "",
+              checkOut: params?.endDate
+                ? params?.endDate?.toISOString().split("T")[0] || ""
+                : "",
+            });
           }}
         />
       </div>
       <div className="container px-2">
-         <SectionGridHasMap 
-            params={{
-              ...searchParams,
-            }}
-         />
+        <SectionGridHasMap
+          params={{
+            ...searchParams,
+          }}
+        />
       </div>
     </>
   );

@@ -39,7 +39,7 @@ const AnyReactComponent: FC<AnyReactComponentProps> = ({
           isSelected ? "bg-neutral-900 text-white" : ""
         }`}
       >
-        {listing?.price?.at(0)?.currency || "USD"} {" "}
+        {listing?.price?.at(0)?.currency || "USD"}{" "}
         {listing?.price?.at(0)?.amount || 0}
       </span>
       <Transition

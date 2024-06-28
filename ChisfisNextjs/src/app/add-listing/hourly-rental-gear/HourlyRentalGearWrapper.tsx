@@ -18,7 +18,7 @@ export default function AddListingHourlyRentalGearWrapper({
   isFirstStep: boolean;
   isLastStep: boolean;
   currentStep: number;
-  data: RentableItem
+  data: RentableItem;
 }) {
   const [submitBtnText, setSubmitBtnText] = useState<string>("Next");
   const [hidBackBtn, setHideBackBtn] = useState<boolean>(false);
