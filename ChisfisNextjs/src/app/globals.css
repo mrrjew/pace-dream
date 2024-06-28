@@ -70,3 +70,12 @@
 .remove-arrow {
   -moz-appearance: textfield;
 }
+/* Increase saturation */
+.saturation-150 {
+  filter: saturate(1.2);
+}
+
+/* Increase sharpness */
+.sharpness-150 {
+  filter: contrast(1) brightness(1);
+}

@@ -1,14 +1,13 @@
 "use client";
 
 import React from "react";
-import { GoDotFill } from "react-icons/go";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import restRoom from "@/images/categories/1.png";
-import evPack from "@/images/categories/2.png";
-import storage from "@/images/categories/3.png";
-import spot from "@/images/categories/4.png";
+import restRoom from "@/images/categories/rest room.png";
+import evPack from "@/images/categories/EV parking.png";
+import storage from "@/images/categories/storage.png";
+import spot from "@/images/categories/parking spot.png";
 import {
   RestRoomIcon,
   RestRoomNotActive,

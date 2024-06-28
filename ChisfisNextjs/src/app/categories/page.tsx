@@ -4,14 +4,14 @@ import Image from "next/image"
 import { Disclosure } from "@headlessui/react";
 import { faq } from "@/data/faq";
 import { HeroBgMaskImage, HeroImage } from "public/assetsManager";
-import restRoom from "@/images/categories/1.png";
-import evPack from "@/images/categories/2.png";
-import storage from "@/images/categories/3.png";
-import spot from "@/images/categories/4.png";
-import workspace from "@/images/categories/5.png";
-import es from "@/images/categories/6.png";
-import hrg from "@/images/categories/7.png";
-import leisure from "@/images/categories/8.png";
+import restRoom from "@/images/categories/rest room.png";
+import evPack from "@/images/categories/EV parking.png";
+import storage from "@/images/categories/storage.png";
+import spot from "@/images/categories/parking spot.png";
+import workspace from "@/images/categories/worksapces.png";
+import es from "@/images/categories/event and space.png";
+import hrg from "@/images/categories/hourly rental gear.png";
+import leisure from "@/images/categories/leisure spaces.png";
 import mail from "@/images/categories/mail.png";
 
 import Link from "next/link";
